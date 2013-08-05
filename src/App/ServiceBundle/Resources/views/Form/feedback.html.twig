@@ -1,0 +1,36 @@
+<form action="{{ path('app_service_feedback') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    <table>
+        <tr>
+            <td></td>
+            <td class="form-feedback title"><label for="person">Ваше имя:</label></td>
+            <td class="form-feedback data">{{ form_widget(form.name) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-feedback title"><label for="phone">Контактный телефон:</label> <span class="phone-prefix-country">+7</span></td>
+            <td class="form-feedback data">{{ form_widget(form.phone) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-feedback title"><label for="email">Электронная почта:</label></td>
+            <td class="form-feedback data">{{ form_widget(form.email) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-feedback title"></td>
+            <td class="form-feedback warning"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-feedback title">
+                <div>
+                    <input type="submit" value="Попросить связаться">
+                </div>
+            </td>
+            <td class="form-feedback submit">
+            </td>
+        </tr>
+    </table>
+    {{ form_rest(form) }}
+</form>

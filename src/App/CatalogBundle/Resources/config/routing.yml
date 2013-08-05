@@ -1,0 +1,24 @@
+#app_catalog_sandbox:
+#    pattern: /sandbox/
+#    defaults: { _controller: AppCatalogBundle:Default:sandbox }
+
+app_product:
+    pattern:  /product/{productId}/
+    defaults: { _controller: AppCatalogBundle:Catalog:product, productId: '' }
+
+app_catalog_homepage:
+    pattern:  /
+    defaults: { _controller: AppCatalogBundle:Catalog:allcategories }
+
+category_show:
+     path:      /category/{categoryId}
+     defaults:  { _controller: AppCatalogBundle:Catalog:category }
+trademark_show:
+     path:      /device/{deviceId}
+     defaults:  { _controller: AppCatalogBundle:Catalog:device }
+create_new:
+     path:      /create/category
+     defaults:  { _controller: AppCatalogBundle:Catalog:create }
+app_search:
+    pattern:  /search/
+    defaults: { _controller: AppCatalogBundle:Catalog:searchShow }

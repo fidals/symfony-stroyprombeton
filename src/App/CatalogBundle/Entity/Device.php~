@@ -1,0 +1,69 @@
+<?php
+
+namespace App\CatalogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use App\CatalogBundle\Extension\Transliteration;
+
+/**
+ * Device
+ *
+ * @ORM\Table(name="devices")
+ * @ORM\Entity
+ */
+class Device
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="alias", type="string", length=200, nullable=false)
+     */
+    private $name;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="series_id", type="integer", nullable=false)
+     */
+    private $seriesId;
+    /**
+     * @ORM\ManyToOne(targetEntity="Series", inversedBy="device")
+     * @ORM\JoinColumn(name="series_id", referencedColumnName="id")
+     */
+    protected $series;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="device_type_id", type="integer", nullable=false)
+     */
+    private $deviceTypeId;
+    /**
+     * @ORM\ManyToOne(targetEntity="DeviceType", inversedBy="devices")
+     * @ORM\JoinColumn(name="device_type_id", referencedColumnName="id")
+     */
+    protected $deviceType;
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="devices")
+     */
+    protected $products;
+    public function getSitemapData()
+    {
+        return array(
+            'locData' => array(
+                'route' => 'app_catalog_explore',
+                'parameters' => array(
+                    'catalogUnitName' => Transliteration::get($this->getName())
+                )
+            ),
+            'priority'   => 0.8,
+            'changefreq' => 'weekly'
+        );
+    }
+}

@@ -1,0 +1,23 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+   Beston
+{% endblock %}
+
+{% block description %}
+{% endblock %}
+
+
+{% block content %}
+
+        {% for news in allnews %}
+        <div class="main-info">
+            <p class="info-header">{{ news.header }}</p><p>{{ news.date|date('d-m-Y') }}</p>
+           <p> {{ news.content }}</p>
+        </div>
+
+{% endfor %}
+
+
+
+{% endblock %}

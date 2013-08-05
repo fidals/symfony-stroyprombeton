@@ -1,0 +1,18 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+    Amtok
+{% endblock %}
+
+{% block description %}
+{% endblock %}
+
+
+{% block content %}
+    <table>
+       <tr>
+            <td><a href="/news/{{news.alias}}">{{ news.title }}</a></td> <td>{{ news.date|date('Y-m-d') }}</td></tr>
+            <tr><td colspan="2">{{ news.description }}</td></tr>
+        <tr><td colspan="2">{{ news.content }}</td></tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+    Оптовые продажи батареек, аккумуляторов, элементов питания всех типоразмеров | Магазин &laquo;ShopElectro&raquo;
+{% endblock %}
+
+{% block description %}
+    аккумуляторы оптом, купить батарейки, купить аккумуляторы
+{% endblock %}
+
+
+{% block content %}
+
+    {# Macros for nested tree rendering #}
+
+    {% macro cat_nesting(category) %}
+        {% if category.__children %}
+            <ul class="rcs">
+                {% for category in category.__children %}
+                <li>
+                    <a href="/catalog/{{ translit(category.name) }}" class="rcs">
+                        {{ category.name }}
+                    </a>
+                    {{ _self.cat_nesting(category) }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endmacro %}
+
+    {# end of nested tree rendering macros #}
+
+    <h1>Каталог продукции интернет-магазина ShopElectro</h1>
+    <div class="categories-list">
+        {% for category in categoriesTree() %}
+            <div class="category rcs">
+                <a href="/catalog/{{ translit(category.name) }}" class="rcs">{{ category.name }}</a>
+                {{ _self.cat_nesting(category) }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

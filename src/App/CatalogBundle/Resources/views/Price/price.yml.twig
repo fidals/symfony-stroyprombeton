@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf8"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="{{ "now"|date("Y-m-d H:i") }}">
+    <shop>
+        <name>Shopelectro</name>
+        <company>Shopelectro</company>
+        <url>{{ urlIndex }}</url>
+        <platform>Symfony</platform>
+        <version>2.2</version>
+        <agency>Agency</agency>
+        <email>info@shopelectro.ru</email>
+
+        <currencies>
+            <currency id="RUR" rate="1"/>
+        </currencies>
+
+        <categories>
+            {% for category in categoryList %}
+            <category id="{{ category.id }}" {% if category.parent %}parentId="{{ category.parent.id }}"{% endif %}>{{ category.title }}</category>
+            {% endfor %}
+        </categories>
+        <offers>
+            {% for product in productList %}
+            <offer id="{{ product.id }}" available="true">
+                <url>{{ urlIndex }}/catalog/{{ translit(product.name) }}</url>
+                <price>{{ product.price1 }}</price>
+                <currencyId>RUR</currencyId>
+                <categoryId>{{ product.category.id }}</categoryId>
+                <picture>{% if product.photo %}{{ urlIndex }}/bundles/main/images/photos/{{ product.category.id }}/{{ product.id }}.jpg{% else %}{{ urlIndex}}/bundles/main/images/empty.png{% endif %}</picture>
+                <name>{{ product.name }}</name>
+            </offer>
+            {% endfor %}
+        </offers>
+    </shop>
+</yml_catalog>

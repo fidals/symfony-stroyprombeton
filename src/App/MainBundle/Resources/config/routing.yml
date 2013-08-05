@@ -1,0 +1,13 @@
+#app_main_migrate:
+#    pattern:  /migrate
+#    defaults: { _controller: AppMainBundle:Default:migrate }
+
+app_main_dbpage:
+    pattern:  /{alias}
+    defaults: { _controller: AppMainBundle:Default:dbPage }
+    requirements:
+      alias: ".+"
+
+app_main_homepage:
+    pattern:  /
+    defaults: { _controller: AppMainBundle:Default:index }

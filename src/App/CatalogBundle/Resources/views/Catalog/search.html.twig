@@ -1,0 +1,52 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+    Результаты поиска {
+{% endblock %}
+
+{% block description %}
+    Результаты поиска
+{% endblock %}
+{% block search %}
+    <form action="{{ path('app_search') }}" method="GET" {{ form_enctype(form) }}>
+        {{ form_widget(form.name,{'attr': {'placeholder': 'Поиск по каталогу'} }) }}
+    </form>
+{% endblock %}
+{% block content %}
+
+
+        <h1 class="info-header">
+       результаты поиска
+        </h1>
+        <div class="breadcrumb"> тут крошки</div>
+
+
+
+        <table class="product-wrapper product-list">
+            {% for product in products %}
+            {% if loop.first %}
+            <tr>
+                {% endif %}
+                <td>
+                    <a href="{{ path('app_product',{'productId':product.id} ) }}">
+                        <div>
+                            <span>{{ product.name }}</span>
+                            <img src="/{{ product.filepath }}" alt=""/>
+                        </div>
+                        <div class="price product-medium-price">
+                            <p>{{ product.price }}.-</p>
+                        </div>
+                    </a>
+                </td>
+                {% if loop.index%6==0 and loop.last==false %}
+            </tr>
+            <tr>
+                {% endif %}
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+
+
+
+{% endblock %}

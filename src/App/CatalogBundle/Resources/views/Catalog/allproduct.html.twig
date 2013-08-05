@@ -1,0 +1,48 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+    Amtok
+{% endblock %}
+
+{% block description %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="top-5-content">
+
+        {% for product in products %}
+
+            <div class="top-5-item">
+                <div class="product-spacer-top"></div>
+                <div class="product-header">
+                    <div class="product-name"><a href="/catalog/products/{{product.id}}">{{ product.name}}</a>  <span class="product_mark">{{ product.unit }}</span> </div>
+                    <div class="product-price">{{ product.price}}</div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="product-photo">
+                        <img src="/{{ product.filepath }}" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-info-main">
+                            Вольтаж:<br>
+                            Разъем:<br>
+                            Производитель:    <br>
+                        </div>
+                        <div class="product-info-info">
+                            {{ product.voltage }}<br>
+                            {{ product.dcConnector }} <br>
+                            {% for trademark in trademarks(product) %}
+                                {{ trademark.alias }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>Нет товаров в данной категории</p>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

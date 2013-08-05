@@ -1,0 +1,3 @@
+app_service_feedback:
+    pattern: /
+    defaults: { _controller: AppServiceBundle:Feedback:index }

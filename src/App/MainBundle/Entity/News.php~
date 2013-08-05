@@ -1,0 +1,54 @@
+<?php
+namespace App\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use App\CatalogBundle\Extension\Transliteration;
+
+/**
+ * News
+ *
+ * @ORM\Table(name="news")
+ * @ORM\Entity
+ */
+
+class News
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="header", type="string", length=200, nullable=false)
+     */
+    private $header;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="alias", type="string", length=255, nullable=true)
+     */
+    private $alias;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="introtext", type="text", nullable=true)
+     */
+    private $introtext;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=true)
+     */
+    private $content;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date;
+}

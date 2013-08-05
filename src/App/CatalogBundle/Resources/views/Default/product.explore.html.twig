@@ -1,0 +1,48 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block description %}
+    {{ product.description }}
+{% endblock %}
+
+{% block content %}
+
+        <p class="info-header">
+            {{ product.name }}
+        </p>
+        <div class="breadcrumb"><a href="/">Home</a>
+            {% for category in categories %}
+                {% if loop.first!=true %}
+                    ->
+            <a href="{{ path('category_show', {'categoryId':category.id} ) }}">{{ category.name }}</a>
+                    {% endif %}
+            {% endfor %}
+            ->
+            <a href="{{ path('app_product',{'productId':product.id}) }}">{{ product.name }}</a>
+        </div>
+
+
+        <div class="product-div">
+
+        <div class="product-container">
+
+            <div class="main-info">
+                <div class="photo-div">
+                    <img src="/{{ product.filepath }}">
+                </div>
+                <div >{{ product.description }}</div>
+            </div>
+            <div class="price full-product-price">
+                <p>Цена: <span>{{ product.price }}.-</span></p>
+            </div>
+
+
+        </div>
+            </div>
+
+    </div>
+
+{% endblock %}

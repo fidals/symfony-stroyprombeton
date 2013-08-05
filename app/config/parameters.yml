@@ -1,0 +1,17 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: shopelectro2
+    database_user: user
+    database_password: 'An5W21Lin9'
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: c6505da5edfc9f8f4ffe4519ae3eb4f02af0c182
+    base_url: 'http://www.shopelectro.ru'
+    database_path: null
+
+    shop_mail_address: 'info@shopelectro.ru'

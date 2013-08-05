@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    #<IfModule mod_vhost_alias.c>
+    #    RewriteBase /
+    #</IfModule>
+
+    RewriteCond %{HTTP_HOST} ^avtospecservis\.ru
+    RewriteRule ^(.*)$ http://www.avtospecservis.ru/$1 [R=permanent,L]
+	
+	#№RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !(.*)/$
+	RewriteRule ^(.*[^/])$ $1/ [L,R=301]
+	
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule !\.(js|css|ico|jpg|png|bmp|xml|json|xml|xls|xlsx)$ app.php [QSA,L]
+	
+</IfModule>

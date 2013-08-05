@@ -1,0 +1,11 @@
+services:
+    sonata.admin.feedback:
+        class: App\ServiceBundle\Admin\FeedbackAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: feedbck, label: "Feedback" }
+        arguments:
+            - ~
+            - App\ServiceBundle\Entity\Feedback
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppServicessBundle]]
