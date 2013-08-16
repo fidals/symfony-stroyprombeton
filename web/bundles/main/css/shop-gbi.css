@@ -1,0 +1,258 @@
+table.basket-wrapper {
+	position: relative;
+	width: 100%;
+	margin: 140px 0 0 0;
+}
+table.basket-wrapper td.empty {
+	width: 100%;
+}
+table.basket-wrapper td.wrapper {
+	padding: 0 10px 0 0;
+}
+
+div.basket {
+	width: 180px;
+	height: 62px;
+	padding: 5px;
+
+	background-image: url("../images/icon-order.png");
+	background-repeat: no-repeat;
+	background-position: 10px 8px;
+	background-color: #ffffff;
+	font-size: 0.9em;
+	
+	border: 1px solid #c90000;
+
+	border-radius: 10px;
+	box-shadow: 0 0 2px 2px #c90000;
+}
+
+div.basket-content {
+	padding: 5px 5px 5px 55px;
+}
+div.basket-content span {
+	padding: 1px 5px 1px 5px;
+	background-color: #c90000;
+	color: #ffffff;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+div.basket-actions {
+}
+div.basket-actions ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+div.basket-actions ul li {
+	display: inline-block;
+	width: 49%;
+	color: #999999;
+	font-size: 0.9em;
+	text-align: center;
+}
+div.basket-actions ul li a {
+	display: block;
+	padding: 2px;
+	text-align: center;
+	border-radius: 5px;
+}
+div.basket-actions ul li a:hover {
+	background-color: #c90000;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.basket-sticky {
+	z-index: 10000;
+}
+.basket-sticky div.basket {
+}
+.basket-sticky-wrapper {
+	width: 150px;
+	padding: 5px;
+	height: 62px;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+div.basket-add-goods-intro {
+	margin: 10px 0 0 0;
+	text-align: right;
+	font-weight: bold;
+}
+div.basket-add-goods-intro ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+div.basket-add-goods-intro ul li {
+	display: inline-block;
+	padding: 5px;
+}
+.rest-container {
+	padding: 5px 15px 5px 5px !important;
+}
+
+input.basket-rest, input.order-rest {
+	width: 50px;
+	height: 17px;
+	padding: 0;
+	text-align: center;
+}
+
+a.add-basket {
+
+}
+/* -------------------------------------------------------------------------------- */
+
+div.self-order {
+	display: none;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+div.order-basket {
+	margin: 0 0 20px 0;
+	padding: 0 10px 10px 10px;
+	background-color: #e1e1e1;
+	border: 1px solid #999999;
+	border-radius: 10px;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+div.form-order {
+	padding: 10px 0 0 0;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+div.obligat-mess {
+	margin: 0 auto 5px auto;
+	padding: 5px;
+	background-color: #cccccc;
+	font-size: 0.9em;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 10px;
+}
+
+span.obligat {
+	padding: 3px;
+	background-color: #c90000;
+	color: #ffffff;
+	font-size: 1.2em;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+div.form-order table {
+	width: 100%;
+}
+div.form-order table td {
+	padding: 5px;
+	vertical-align: top;
+}
+div.form-order table td.title {
+	white-space: nowrap;
+	text-align: right;
+}
+div.form-order table td.data {
+	width: 100%;
+}
+div.form-order table td.data input, div.form-order table td.data select, div.form-order table td.data textarea {
+	width: 100%;
+	padding: 2px;
+	border: 1px solid #999999;
+	border-radius: 5px;
+}
+div.form-order table td.data textarea {
+	padding: 2px;
+	font-family: Arial;
+	font-size: 0.9em;
+	border: 1px solid #999999;
+}
+
+div.form-order table td.data input:focus, div.form-order table td.data select:focus, div.form-order table td.data textarea:focus {
+	box-shadow: 0 0 3px 3px #cccccc;
+}
+
+div.form-order table td.submit {
+	width: 100%;
+	text-align: center;
+}
+div.form-order table td.submit div {
+	padding: 5px;
+	background-color: #cccccc;
+	border-radius: 10px;
+}
+div.form-order table td.submit input {
+	width: 150px;
+	padding: 2px;
+	background-color: #c90000;
+	color: #ffffff;
+	border: 3px solid #999999;
+	border-radius: 5px;
+}
+
+div.form-order table td.order-warning {
+	width: 100%;+
+	font-weight: bold;
+}
+
+div.form-order table td.warning {
+	width: 100%;
+}
+div.form-order table td.warning div {
+	padding: 10px;
+	color: #c90000;
+	font-weight: bold;
+	border: 1px solid #c90000;
+	border-radius: 10px;
+}
+
+span.phone-prefix-country {
+	color: #c90000;
+	font-weight: bold;
+}
+
+.error-input {
+	color: #c90000 !important;
+	border: 1px solid #c90000 !important;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+div.order-number {
+	width: 200px;
+	margin: 10px auto 20px auto;
+	padding: 10px;
+	background-color: #c90000;
+	color: #ffffff;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 0 0 3px 3px #999999;
+}
+div.order-number span {
+	padding: 5px;
+	background-color: #ffffff;
+	color: #c90000;
+	border-radius: 5px;
+}
+
+div.order-report {
+	margin: 10px 0 10px 0;
+	padding: 20px;
+	background-color: #cccccc;
+	font-size: 0.9em;
+	border-radius: 10px;
+}
+
+/* -------------------------------------------------------------------------------- */
