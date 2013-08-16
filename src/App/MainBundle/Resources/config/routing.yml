@@ -1,0 +1,13 @@
+app_main_gbi:
+  pattern: /gbi/
+  defaults: { _controller: AppMainBundle:StaticPage:gbiRedirect }
+
+app_main_staticpage:
+    pattern:  /{alias}/
+    defaults: { _controller: AppMainBundle:StaticPage:show }
+    requirements:
+            alias: ".+"
+
+app_main_index:
+  pattern: /
+  defaults: { _controller: AppMainBundle:StaticPage:showIndex }
