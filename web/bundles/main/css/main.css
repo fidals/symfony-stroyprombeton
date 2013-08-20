@@ -310,3 +310,22 @@ td.product-desc-left-col{text-align: right;}
 td.product-desc-right-col{text-align: left; color:black; font-weight: bold;}
 
 table.product-info-table tr:first-child td{border:none;}
+
+
+table.m-contacts{
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 20px 0;
+}
+
+table.m-contacts tr td p{
+    color: #6c6c6c;
+    margin: 0;
+}
+table.m-contacts tr td p.tel{
+    font-weight: bold;
+    color:#000;
+}
+
+table.m-contacts tr td p.tel span{color:#6c6c6c;}
+table.m-contacts tr td p.adr{color: #000;font-weight: bold}
