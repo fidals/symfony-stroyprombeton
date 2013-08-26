@@ -47,40 +47,52 @@ class CatalogController extends Controller
     public function exploreCategoryAction($catUrl, $sectionId)
     {
         // search category ID
-        $catId = array_search($catUrl, $this->baseCats);
 
+        $catId = array_search($catUrl, $this->baseCats);
         $catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
         $category = $catRp->find(!empty($sectionId) ? $sectionId : $catId);
-
-        $hierarchyOptions = array(
-            'childSort' => array(
-                'field' => 'title',
-                'dir'   => 'asc'
-            )
-        );
-
         $parents = $catRp->getPath($category);
-        $childs = $catRp->buildTreeArray($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
-
-        if(!empty($childs)) {
-            return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
-                'parents'   => $parents,
-                'childs'    => $childs,
-                'catUrl'    => $this->baseCats[$catId],
-                'category'  => $category
-            ));
-        } else {
-            $prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
-            $products = $prodRp->findBy(
-                array('sectionId' => $sectionId),
-                array('nomen' => 'ASC')
+        if($this->isParent($category,$catUrl)){
+            $hierarchyOptions = array(
+                'childSort' => array(
+                    'field' => 'title',
+                    'dir'   => 'asc'
+                )
             );
-            return $this->render('AppCatalogBundle:Catalog:section.explore.html.twig', array(
-                'parents'  => $parents,
-                'catUrl'   => $this->baseCats[$catId],
-                'section'  => $category,
-                'products' => $products
-            ));
+
+            $childs = $catRp->buildTreeArray($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
+
+            if(!empty($childs)) {
+                return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
+                    'parents'   => $parents,
+                    'childs'    => $childs,
+                    'catUrl'    => $this->baseCats[$catId],
+                    'category'  => $category
+                ));
+            } else {
+                $prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+                $products = $prodRp->findBy(
+                    array('sectionId' => $sectionId),
+                    array('nomen' => 'ASC')
+                );
+                return $this->render('AppCatalogBundle:Catalog:section.explore.html.twig', array(
+                    'parents'  => $parents,
+                    'catUrl'   => $this->baseCats[$catId],
+                    'section'  => $category,
+                    'products' => $products
+                ));
+            }
+        }
+        else{
+            foreach($parents as $parent){
+                foreach($this->baseCats as $bc){
+                    if($parent->getAlias() == $bc){
+                       echo($bc);
+
+                    }
+                }
+            }
+            return $this->render("AppMainBundle:StaticPage:404.html.twig");
         }
     }
 
@@ -144,6 +156,19 @@ class CatalogController extends Controller
         }
         return new Response();
     }
+
+    private  function isParent($category,$catUrl){
+
+        $catRp = $this->getDoctrine()->getRepository("AppCatalogBundle:Category");
+        $parents = $catRp->getPath($category);
+        foreach($parents as $parent){
+            if($parent->getAlias() == $catUrl)
+                return true;
+        }
+        return false;
+    }
+
+
 /*
     public function migrate1Action()
     {
