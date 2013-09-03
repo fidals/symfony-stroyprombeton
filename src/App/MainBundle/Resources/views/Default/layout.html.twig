@@ -25,11 +25,11 @@
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
+    {#<script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>#}
     <script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    {#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
 
 {% block body %}
@@ -50,6 +50,7 @@
                     <tr>
                         <td rowspan="2">
                             <p>телефоны отдела продаж:</p>
+                            <p class="tel">(812) 648-13-80</p>
                             <p class="tel"><span>(812)</span> 449-53-38</p>
                             <p class="tel"><span>(812)</span> 642-47-09</p>
                             <p style="margin-top: 15px;">звонок по России бесплатный</p>
@@ -64,9 +65,11 @@
                     </tr>
                     <tr>
                         <td>
+                            <div style="position: relative;top:28px;">
                             <p style="margin-top: 15px;">адрес офиса продаж:</p>
                             <p class="adr"><span class="locality">Санкт-Петербург</span>,<br />
                            <span class="street-address"> пр. Елезарова 38А, офис 218</span></p>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -238,13 +241,6 @@
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
-    </script>
-
-    <script type="text/javascript">
-        Shadowbox.init({
-            handleOversize: "drag",
-            animSequence: "hw"
-        });
     </script>
 
     <script type="text/javascript">

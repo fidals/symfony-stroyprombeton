@@ -84,14 +84,7 @@ class CatalogController extends Controller
             }
         }
         else{
-            foreach($parents as $parent){
-                foreach($this->baseCats as $bc){
-                    if($parent->getAlias() == $bc){
-                       echo($bc);
-
-                    }
-                }
-            }
+          //TODO:сделать редиректы
             return $this->render("AppMainBundle:StaticPage:404.html.twig");
         }
     }
