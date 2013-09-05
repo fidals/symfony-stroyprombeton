@@ -25,11 +25,11 @@
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
+    {#<script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>#}
     <script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    {#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
 
 {% block body %}
@@ -44,37 +44,35 @@
                             <div class="logo-image"><img src="/bundles/main/images/logo.png" /></div>
                             <div class="logo-text">завод железобетонных изделий</div>
                         </a></div>
-                    <div class="iso">
-                        <a href="/bundles/main/images/iso-9001-2008-big.jpg" rel="shadowbox[iso]" title="Сертификат соответствия ISO 9001:2008">
-                            <img src="/bundles/main/images/iso-9001-2008.jpg" title="ISO 9001:2008" /></a>
-                    </div>
+
                 </div>
-                <table><tr><td>
-                            <div class="phones">
-                                <ul>
-                                    <li class="phones-title">телефоны отдела продаж:</li>
-                                    <li><span>(812)</span> 449-53-38</li>
-                                    <li><span>(812)</span> 642-47-09</li>
-                                    <li><span>(812)</span> 648-13-80</li>
-                                    <li class="phones-prime">
-                                        8-800-700-50-98
-                                    </li>
-                                </ul>
-                            </div></td>
-                        <td> <div class="email">
-                                <ul>
-                                    <li class="email-title">электронная почта:</li>
-                                    <li><a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a></li>
-                                </ul>
+                <table class="m-contacts vcard">
+                    <tr>
+                        <td rowspan="2">
+                            <p>телефоны отдела продаж:</p>
+                            <p class="tel">(812) 648-13-80</p>
+                            <p class="tel"><span>(812)</span> 449-53-38</p>
+                            <p class="tel"><span>(812)</span> 642-47-09</p>
+                            <p style="margin-top: 15px;">звонок по России бесплатный</p>
+                            <p class="tel">8-800-700-50-98</p>
+
+                        </td>
+                        <td>
+                            <p style="display: none" class="fn org url">www.stroyprombeton.ru</p>
+                            <p>электронная почта:</p>
+                            <a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="position: relative;top:28px;">
+                            <p style="margin-top: 15px;">адрес офиса продаж:</p>
+                            <p class="adr"><span class="locality">Санкт-Петербург</span>,<br />
+                           <span class="street-address"> пр. Елезарова 38А, офис 218</span></p>
                             </div>
                         </td>
-                    </tr> </table>
-                <div class="address">
-                    <ul>
-                        <li class="address-title">адрес офиса продаж:</li>
-                        <li>Санкт-Петербург,<br />пр. Елизарова 38А, офис 218</li>
-                    </ul>
-                </div>
+                    </tr>
+                </table>
             </div>
 
             <div class="page-header-right-colon-container">
@@ -131,29 +129,17 @@
                         <li><a href="/gbi/energy-stroy/">Строительство энергетических объектов</a></li>
                         <li><a href="/gbi/blag-territory/">Благоустройство территорий</a></li>
                         <li><a href="/gbi/neftegaz-stroy/">Нефтегазовое строительство</a></li>
-
-                        <li class="special-section">
-                            <div class="special-section-asterisk"></div>
-                            <a href="/izgotovlenie-gbi-po-chertezham/">Изготовление ЖБИ<br />по чертежам заказчика</a>
-                        </li>
                     </ul>
 
                 </div>
             </div>
 
             <div class="menu-v-bottom"></div>
-
-            <div class="dostavka-gbi">
-                <p>
-                    Варианты поставки ЖБИ изделий
-                </p>
-
-                <ul>
-                    <li>Доставка ЖБИ изделий автотранспортом компании</li>
-                    <li>Доставка железобетонных и других изделий по железной дороге</li>
-                    <li>Самовывоз со склада в Ленинградской области</li>
-                </ul>
-            </div>
+            <a href="/izgotovlenie-gbi-po-chertezham/"">
+               <div class="m-izg">
+                   <p>изготовление по чертежам</p>
+               </div>
+            </a>
 
 			<script>
 				$(".partners-table").click(function() {
@@ -252,13 +238,6 @@
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
-    </script>
-
-    <script type="text/javascript">
-        Shadowbox.init({
-            handleOversize: "drag",
-            animSequence: "hw"
-        });
     </script>
 
     <script type="text/javascript">
