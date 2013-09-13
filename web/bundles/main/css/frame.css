@@ -472,12 +472,13 @@ div.content {
 /* -------------------------------------------------------------------------------- */
 
 div.partners-table{
-    width: 217px;
-    float:left;
-    border: 5px solid #C7C8CB;
-    border-radius: 15px;
-    padding:0px 7px 0px 7px;
-    margin-left: 15px;
+  width: 217px;
+  float:left;
+  border: 5px solid #C7C8CB;
+  border-radius: 15px;
+  padding:0px 7px 0px 7px;
+  margin-left: 15px;
+  cursor: pointer;
 }
 
 div.partners-table-header p{
