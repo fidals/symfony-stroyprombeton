@@ -1,0 +1,35 @@
+#app_catalog_migrate1:
+#    pattern: /migrate1/
+#    defaults: { _controller: AppCatalogBundle:Catalog:migrate1 }
+
+#app_catalog_migrate2:
+#    pattern: /migrate2/
+#    defaults: { _controller: AppCatalogBundle:Catalog:migrate2 }
+
+#app_catalog_migrate3:
+#    pattern: /migrate3/
+#    defaults: { _controller: AppCatalogBundle:Catalog:migrate3 }
+
+app_catalog:
+    resource: "@AppCatalogBundle/Resources/config/routing.yml"
+    prefix:   /gbi/
+
+app_catalog_suggest:
+    pattern: /suggest/
+    defaults: { _controller: AppCatalogBundle:Catalog:suggest }
+
+app_catalog_search:
+    pattern: /search/
+    defaults: { _controller: AppCatalogBundle:Catalog:search }
+
+app_catalog_basket:
+    pattern: /basket/
+    defaults: { _controller: AppCatalogBundle:Cart:index }
+
+app_catalog_order:
+    pattern: /order/
+    defaults: { _controller: AppCatalogBundle:Cart:order }
+
+app_main:
+    resource: "@AppMainBundle/Resources/config/routing.yml"
+    prefix:   /
