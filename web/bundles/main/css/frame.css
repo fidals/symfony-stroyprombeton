@@ -1610,5 +1610,8 @@ div.external-section table td.logo {
 	z-index: 999 !important;
 	font-size: 0.8em !important;
 }
-
+div.object-card img{border-radius: 15px;}
+div.object-card{
+    border-bottom: 1px solid #CAC6C3;
+}
 /* -------------------------------------------------------------------------------- */

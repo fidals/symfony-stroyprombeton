@@ -85,3 +85,8 @@ swiftmailer:
     delivery_address:  info@stroyprombeton.ru
     disable_delivery:  false
 
+services:
+    template.from.database.twig.extension.loader:
+        class:        Twig_Extension_StringLoader
+        tags:
+             - { name: 'twig.extension' }

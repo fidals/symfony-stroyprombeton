@@ -11,6 +11,6 @@
 
 {% block content %}
     {% autoescape false %}
-        {{ staticPage.content }}
+    {{ include(template_from_string(staticPage.content)) }}
     {% endautoescape %}
 {% endblock %}

@@ -29,6 +29,14 @@ class StaticPageController extends Controller
         $spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
         $staticPage = $spRepository->findOneByAlias($alias);
         if(!empty($staticPage)) {
+            if($alias == 'obekty'){
+                $goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
+                $objects = $goRp->findAll();
+                return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', array(
+                    'staticPage' => $staticPage,
+                    'objects' => $objects
+                ));
+            }
             return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', array(
                 'staticPage' => $staticPage
             ));
@@ -54,5 +62,17 @@ class StaticPageController extends Controller
             'randomProducts' => $randomProducts
         ));
     }
+
+    public function gbiObjectShow($alias){
+        $goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
+        $go = $goRp->findOneByAlias($alias);
+        if($go){
+            return $this->render("AppMainBundle:StaticPage:gbiObject.html.twig",array(
+                'gbiObject' => $go
+            ));
+        }
+        return $this->render('AppMainBundle:StaticPage:404.html.twig');
+    }
+
 
 }
