@@ -59,7 +59,7 @@ class Product
     /**
      * @var integer
      *
-     * @ORM\Column(name="section_id", type="bigint", nullable=true)
+     * @ORM\Column(name="section_id", type="integer", nullable=true)
      */
     private $sectionId;
 
