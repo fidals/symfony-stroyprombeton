@@ -84,12 +84,8 @@ swiftmailer:
     spool:     { type: memory }
     delivery_address:  info@stroyprombeton.ru
     disable_delivery:  false
-
-<<<<<<< HEAD
-=======
 services:
     template.from.database.twig.extension.loader:
         class:        Twig_Extension_StringLoader
         tags:
              - { name: 'twig.extension' }
->>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
