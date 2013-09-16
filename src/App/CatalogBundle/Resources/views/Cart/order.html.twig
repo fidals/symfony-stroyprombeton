@@ -1,0 +1,84 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+    Оформление заказа на ЖБИ продукцию
+{% endblock %}
+
+{% block description %}
+{% endblock %}
+
+{% block content %}
+    <div class="location">
+        <span class="location section"><a href="/">СТК-ПромБетон</a></span>
+        <span class="location separate">/</span>
+        <span class="location section"><a href="/order/">Оформление заказа на ЖБИ продукцию</a></span>
+    </div>
+    <h1>
+        Оформление заказа на ЖБИ продукцию
+    </h1>
+    <div class="order">
+        <div class="showcase-title">Содержание заказа</div>
+        <div class="order-basket">
+            <div class="self-order">{% for product in order.products %}{{ product.model.id }}:{{ product.count }}-{% endfor %}</div>
+            <div class="gbi-list">
+                <table>
+                    <tr>
+                        <td colspan="2">Код</td>
+                        <th>Наименование</th>
+                        <th>Цена</th>
+                        <th colspan="2">Количество</th>
+                    </tr>
+                    {% for product in order.products %}
+                    <tr>
+                        <td class="gbi-list photo">
+                            <a href="/bundles/main/images/gbi-photos/323/763.jpg" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
+                                <img src="/bundles/main/images/icon-photo.png">
+                            </a>
+                        </td>
+                        <td class="gbi-list code">
+                            {{ product.model.id }}
+                        </td>
+                        <td class="gbi-list name">
+                            <a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}" class="gbi-link">
+                                <span class="gbi-link name">
+                                    {{ product.model.name }}
+                                </span>
+                                <span class="gbi-link mark">
+                                    {{ product.model.mark }}
+                                </span>
+                            </a>
+                        </td>
+                        <td class="gbi-list price">
+                            {% if product.model.price %}
+                                {{ product.model.price }} руб.
+                            {% else %}
+                                По запросу
+                            {% endif %}
+                        </td>
+                        <td class="gbi-list rest rest-container">
+                            <input type="number" min="1" max="999999" code="{{ product.model.id }}" value="{{ product.count }}" class="order-rest" style="margin-right: 0px; padding-right: 0px;">
+                        </td>
+                        <td class="positions-list delete">
+                            <a href="javascript:void(0);" class="order-delete" title="Удалить из заказа">
+                                <img src="/bundles/main/images/icon-delete.png">
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="gbi-list-header">
+                        <td colspan="2"></td>
+                        <th class="clear-basket"><a href="javascript:void(0);" class="clear-basket">Удалить все заказы</a></th>
+                        <th>ЖБИ</th>
+                        <th colspan="2" class="cnt-goods">{{ order.totalProductsCount }}</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="showcase-title">Контактные данные</div>
+        <div class="order-basket">
+            <div class="form-order">
+                {% include "AppCatalogBundle:Form:order.html.twig" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

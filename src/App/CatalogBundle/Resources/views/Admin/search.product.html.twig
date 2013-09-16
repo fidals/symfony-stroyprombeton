@@ -1,0 +1,12 @@
+<ul class="sortable-product nav nav-tabs nav-stacked">
+    {% for product in products %}
+        <li class="product-list-unit" product-id="{{ product.id }}" title="{{ product.name }} {{ product.mark }}">
+            <a href="javascript:void(0)">
+                <span class="badge badge-info">
+                    <strong>{{ product.id }}</strong>
+                </span>
+                {{ product.name }} {{ product.mark }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
