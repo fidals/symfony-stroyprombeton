@@ -11,6 +11,10 @@
 
 {% block content %}
     {% autoescape false %}
+<<<<<<< HEAD
         {{ staticPage.content }}
+=======
+    {{ include(template_from_string(staticPage.content)) }}
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
     {% endautoescape %}
 {% endblock %}

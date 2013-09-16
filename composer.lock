@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "hash": "e2adf40d1914b719b24f8ec0ab1a026d",
+=======
+    "hash": "a7664c099f816a7dcd71da3f1046b410",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1178,6 +1182,7 @@
         },
         {
             "name": "phpexcel/phpexcel",
+<<<<<<< HEAD
             "version": "v1.7.6",
             "source": {
                 "type": "git",
@@ -1188,6 +1193,18 @@
                 "type": "zip",
                 "url": "https://github.com/ddeboer/phpexcel/zipball/v1.7.6",
                 "reference": "v1.7.6",
+=======
+            "version": "v1.7.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ddeboer/phpexcel",
+                "reference": "v1.7.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ddeboer/phpexcel/zipball/v1.7.7",
+                "reference": "v1.7.7",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
                 "shasum": ""
             },
             "require": {
@@ -1209,7 +1226,11 @@
                 "excel",
                 "xls"
             ],
+<<<<<<< HEAD
             "time": "2012-05-07 12:05:46"
+=======
+            "time": "2012-09-04 11:29:37"
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
         },
         {
             "name": "phpoption/phpoption",
@@ -1300,7 +1321,11 @@
         },
         {
             "name": "sensio/distribution-bundle",
+<<<<<<< HEAD
             "version": "v2.2.3",
+=======
+            "version": "v2.2.2",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
@@ -1346,17 +1371,30 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
+<<<<<<< HEAD
             "version": "v2.2.3",
+=======
+            "version": "v2.2.2",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
+<<<<<<< HEAD
                 "reference": "v2.2.3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/v2.2.3",
                 "reference": "v2.2.3",
+=======
+                "reference": "v2.2.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/v2.2.2",
+                "reference": "v2.2.2",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
                 "shasum": ""
             },
             "require": {
@@ -1393,17 +1431,30 @@
         },
         {
             "name": "sensio/generator-bundle",
+<<<<<<< HEAD
             "version": "v2.2.3",
+=======
+            "version": "v2.2.2",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
+<<<<<<< HEAD
                 "reference": "v2.2.3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/v2.2.3",
                 "reference": "v2.2.3",
+=======
+                "reference": "v2.2.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/v2.2.2",
+                "reference": "v2.2.2",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
                 "shasum": ""
             },
             "require": {
@@ -1611,17 +1662,30 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
+<<<<<<< HEAD
             "version": "v2.2.3",
+=======
+            "version": "v2.2.2",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
             "target-dir": "Symfony/Bundle/SwiftmailerBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/SwiftmailerBundle.git",
+<<<<<<< HEAD
                 "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/v2.3.1",
                 "reference": "v2.3.1",
+=======
+                "reference": "v2.3.0-RC1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/v2.3.0-RC1",
+                "reference": "v2.3.0-RC1",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
                 "shasum": ""
             },
             "require": {
@@ -1666,6 +1730,7 @@
         },
         {
             "name": "symfony/symfony",
+<<<<<<< HEAD
             "version": "v2.2.3",
             "source": {
                 "type": "git",
@@ -1676,6 +1741,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.2.3",
                 "reference": "v2.2.3",
+=======
+            "version": "v2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/symfony.git",
+                "reference": "v2.2.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.2.2",
+                "reference": "v2.2.2",
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
                 "shasum": ""
             },
             "require": {
@@ -1761,7 +1838,11 @@
             "keywords": [
                 "framework"
             ],
+<<<<<<< HEAD
             "time": "2013-06-19 12:09:49"
+=======
+            "time": "2013-06-02 13:03:09"
+>>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
         },
         {
             "name": "twig/extensions",
