@@ -28,7 +28,7 @@ class Category
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Id
      */
     private $id;
@@ -42,7 +42,7 @@ class Category
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
      */
     private $parent;
