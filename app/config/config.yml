@@ -92,9 +92,6 @@ sonata_block:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
-ewz_search:
-    analyzer: Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum\CaseInsensitive
-    path:     %kernel.root_dir%/cache/%kernel.environment%/lucene/index
 
 services:
     template.from.database.twig.extension.loader:
