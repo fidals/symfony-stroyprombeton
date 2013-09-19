@@ -447,6 +447,11 @@ class Product
         return $this->category;
     }
 
+    public function __toString()
+    {
+        return (string)$this->getName();
+    }
+
     public function getSitemapData()
     {
         return array(
