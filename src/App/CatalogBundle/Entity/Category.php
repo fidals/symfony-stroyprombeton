@@ -18,11 +18,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class Category
 {
-
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        $metadata->addPropertyConstraint('id', new NotBlank());
-    }
+//    Из-за этой ботвы не работает добавление категорий в Сонате !!!!!!!!!!!!!!!!
+//    public static function loadValidatorMetadata(ClassMetadata $metadata)
+//    {
+//        $metadata->addPropertyConstraint('id', new NotBlank());
+//    }
 
     /**
      * @var integer
@@ -352,6 +352,6 @@ class Category
     }
     public function __toString()
     {
-        return (string)$this->getName();
+        return (string)$this->getTitle();
     }
 }

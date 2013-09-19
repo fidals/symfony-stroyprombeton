@@ -14,10 +14,12 @@ class ProductAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', null, array('required' => true))
+            ->add('name', null, array('label' => 'название'))
+            ->add('mark', null, array('label' => 'марка'))
+            ->add('nomen', null, array('label'=>'номенклатурный номер', 'required' => false))
             ->add('category', 'sonata_type_model', array('label' => 'Родитель'))
-            ->add('isActive', null)
-            ->add('newPrice', null)
+            ->add('isActive', null, array('label' => 'используется'))
+            ->add('newPrice', null, array('label' => 'акутуальная цена'))
             ->add('mark', null, array('required' => true))
 
         ;
@@ -26,9 +28,11 @@ class ProductAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('name', null, array('required' => true))
-
+            ->add('name', null, array('label' => 'название'))
+            ->add('mark', null, array('label' => 'марка'))
+            ->add('nomen', null, array('label'=>'номенклатурный номер'))
+            ->add('isActive', null, array('label' => 'используется'))
+            ->add('newPrice', null, array('label' => 'акутуальная цена'))
             ->add('category', null, array('label' => 'Родитель'))
         ;
     }
@@ -36,11 +40,14 @@ class ProductAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
-            ->add('name', null, array('required' => false))
-
+            ->add('id')
+            ->addIdentifier('nomen', null, array('label'=>'номенклатурный номер'))
+            ->addIdentifier('name', null, array('label' => 'название'))
+            ->add('mark', null, array('label' => 'марка'))
+            ->add('isActive', null, array('label' => 'используется'))
+            ->add('newPrice', null, array('label' => 'акутуальная цена'))
 	        ->add('category', null, array('label' => 'Родитель'))
-//            ->add('category', null, array('required' => false))
+
         ;
     }
 
