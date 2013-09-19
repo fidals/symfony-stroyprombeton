@@ -84,6 +84,15 @@ swiftmailer:
     spool:     { type: memory }
     delivery_address:  info@stroyprombeton.ru
     disable_delivery:  false
+sonata_admin:
+    title: Stroyprombeton-Admin
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
 services:
     template.from.database.twig.extension.loader:
         class:        Twig_Extension_StringLoader
