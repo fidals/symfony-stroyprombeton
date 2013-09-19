@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: doctrine_extensions.yml }
+    - { resource: @AppCatalogBundle/Resources/config/admin.yml }
 
 
 framework:
@@ -92,6 +93,8 @@ sonata_block:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
+        sonata.block.service.text:
+        sonata.block.service.rss:
 
 services:
     template.from.database.twig.extension.loader:

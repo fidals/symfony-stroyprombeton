@@ -96,6 +96,7 @@ class Category
      */
     private $isActive;
 
+
     /**
      * @var integer
      *
@@ -348,5 +349,9 @@ class Category
             'priority'   => 0.9,
             'changefreq' => 'weekly'
         );
+    }
+    public function __toString()
+    {
+        return (string)$this->getName();
     }
 }

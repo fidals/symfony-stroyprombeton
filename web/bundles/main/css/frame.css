@@ -165,11 +165,12 @@ div.logo-praim {
  }
 div.logo-prom {
     display:inline;
+    cursor: pointer;
 }
-div.logo a div.logo-image {
+div.logo div.logo-image {
     display:inline;
 }
-div.logo a div.logo-text {
+div.logo  div.logo-text {
 
     color: #000000;
 	font-size: 17px;
@@ -178,6 +179,7 @@ div.logo-text{
     margin:-18px 0 0 105px;
     width:250px;
 }
+div.logo-text a,div.logo-text a:hover{color:#000000}
 div.iso {
     margin:-50px 0 0 350px;
     opacity: 0.3;
@@ -1610,12 +1612,17 @@ div.external-section table td.logo {
 	z-index: 999 !important;
 	font-size: 0.8em !important;
 }
-<<<<<<< HEAD
 
-=======
-div.object-card img{border-radius: 15px;}
+table.object-cards{
+    width: 95%;
+    margin: auto;
+}
+table.object-cards tr td{padding: 7px; text-align: center;width: 33%;vertical-align: top;}
+table.object-cards tr td a{font-size: 11px; color:#555555; line-height: 15px; }
+div.object-card img{border-radius: 15px; height: 200px; width: 200px;}
 div.object-card{
     border-bottom: 1px solid #CAC6C3;
+    padding-bottom: 10px;
 }
->>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
+
 /* -------------------------------------------------------------------------------- */

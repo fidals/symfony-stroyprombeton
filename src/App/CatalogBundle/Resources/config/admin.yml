@@ -1,0 +1,23 @@
+services:
+    sonata.admin.category:
+        class: App\CatalogBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: category, label: "Category" }
+        arguments:
+            - ~
+            - App\CatalogBundle\Entity\Category
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppCatalogBundle]]
+
+    sonata.admin.product:
+        class: App\CatalogBundle\Admin\ProductAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: category, label: "Product" }
+        arguments:
+            - ~
+            - App\CatalogBundle\Entity\Product
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppCatalogBundle]]
+

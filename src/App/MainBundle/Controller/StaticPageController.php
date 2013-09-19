@@ -63,7 +63,7 @@ class StaticPageController extends Controller
         ));
     }
 
-    public function gbiObjectShow($alias){
+    public function gbiObjeсtShowAction($alias){
         $goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
         $go = $goRp->findOneByAlias($alias);
         if($go){
