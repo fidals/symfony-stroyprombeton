@@ -25,6 +25,14 @@ app_catalog_search:
 app_catalog_basket:
     pattern: /basket/
     defaults: { _controller: AppCatalogBundle:Cart:index }
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
 
 app_catalog_order:
     pattern: /order/

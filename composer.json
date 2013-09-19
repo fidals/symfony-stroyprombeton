@@ -18,14 +18,9 @@
         "sensio/generator-bundle": "2.2.*",
         "jms/security-extra-bundle": "1.4.*",
         "jms/di-extra-bundle": "1.3.*",
-<<<<<<< HEAD
-        "phpexcel/phpexcel": "1.7.6",
-        "gedmo/doctrine-extensions": "dev-master"
-
-=======
         "phpexcel/phpexcel": "1.7.*",
-        "gedmo/doctrine-extensions": "dev-master"
->>>>>>> b8b5de59cb413c9c8d72dcc53f0b44dd95e6d75d
+        "gedmo/doctrine-extensions": "dev-master",
+        "sonata-project/admin-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
