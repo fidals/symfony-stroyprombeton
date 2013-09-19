@@ -13,9 +13,9 @@ class CategoryAdmin extends Admin
         $formMapper
             ->add('name', null, array('label' => 'Название','required' => true))
             ->add('title', null, array('required' => false))
-            ->add('coefficient',null, array('label' => 'коэфициент','required' => true))
-            ->add('parent', 'sonata_type_model', array('label' => 'Родитель','required' => false))
-            ->add('description', null, array('required' => false))
+            ->add('coefficient',null, array('label' => 'коэффициент','required' => true))
+            ->add('parent', 'sonata_type_model', array('label' => 'Категория','required' => false))
+            ->add('description', null, array('label' => 'описание'))
         ;
     }
 
@@ -23,9 +23,11 @@ class CategoryAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
-            ->add('name', null, array('required' => true))
-            ->add('parent', null, array('label' => 'Родитель'))
-            ->add('isActive', null, array('required' => false))
+            ->add('name', null, array('label' => 'Название'))
+            ->add('title', null, array('required' => false))
+            ->add('coefficient',null, array('label' => 'коэффициент'))
+            ->add('parent', null, array('label' => 'Категория'))
+
         ;
     }
 
@@ -33,10 +35,11 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->addIdentifier('name', null, array('required' => false))
-            ->add('title')
-            ->add('parent', null, array('label' => 'Родитель'))
-            ->add('isActive', null, array('required' => false))
+            ->add('name', null, array('label' => 'Название'))
+            ->add('title', null, array('required' => false))
+            ->add('coefficient',null, array('label' => 'коэффициент'))
+            ->add('parent', null, array('label' => 'Категория'))
+
         ;
     }
 
