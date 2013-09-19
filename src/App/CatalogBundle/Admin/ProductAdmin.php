@@ -40,7 +40,7 @@ class ProductAdmin extends Admin
             ->add('name', null, array('required' => false))
 
 	        ->add('category', null, array('label' => 'Родитель'))
-//            ->add('category', null, array('required' => false))
+
         ;
     }
 

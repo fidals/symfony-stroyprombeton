@@ -27,12 +27,12 @@ app_catalog_basket:
     defaults: { _controller: AppCatalogBundle:Cart:index }
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
+    prefix: /adminka
 
 _sonata_admin:
     resource: .
     type: sonata_admin
-    prefix: /admin
+    prefix: /adminka
 
 app_catalog_order:
     pattern: /order/
