@@ -8,6 +8,7 @@ composer.phar
 web/webstat
 .idea
 app/config/parameters.yml
+app/indexation
 
 web/bundles/*.jpg
 web/bundles/*/*.jpg
