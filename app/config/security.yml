@@ -28,6 +28,7 @@ security:
 
         secured_area:
             pattern:    ^/gbi/admin/
+            pattern:    ^/adminka
             #form_login:
             #    check_path: _security_check
             #    login_path: _demo_login
@@ -40,4 +41,5 @@ security:
 
     access_control:
         - { path: ^/gbi/admin, roles: ROLE_ADMIN }
+        - { path: ^/adminka, roles: ROLE_ADMIN }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
