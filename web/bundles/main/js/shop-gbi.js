@@ -1,11 +1,10 @@
 $(function () {
-	TryHideBasket();
+    /* TryHideBasket();
 
 	$("div.basket").sticky({
-		topSpacing: 20,
 		className: 'basket-sticky',
 		wrapperClassName: 'basket-sticky-wrapper'
-	});
+	});*/
 
 	$('input#phone').mask('(999) 999-99-99');
 
@@ -138,7 +137,7 @@ function AddGoodsToBasket () {
 	});
 
 	var $basket = $("div.basket-content");
-	$basket.html('Добавление<br />ЖБИ в заказ ...');
+	$basket.html('<p>Добавление ЖБИ в заказ ...</p>');
 
 	$.ajax({
 		type: "GET",
@@ -183,7 +182,7 @@ function RecalcBasketContent (data) {
 	}
     */
     // var html = 'Добавлено<br /><span>' + cnt_goods + '</span> ЖБИ';
-	var html = 'Добавлено<br /><span>' + data + '</span> ЖБИ';
+	var html = '<p>Добавлено ' + data + ' ЖБИ</p>';
 	$basket.html(html);
 
 	var $basket_actions = $("div.basket-actions");
@@ -233,7 +232,7 @@ function ClearBasket (from_basket) {
 	return false;
 }
 
-function TryHideBasket () {
+/*function TryHideBasket () {
 	var uri = location.pathname;
 	for (;;) {
 		if (uri.indexOf("/") == -1) {
@@ -249,7 +248,7 @@ function TryHideBasket () {
 	$(".basket").hide();
 	$(".basket-sticky-wrapper").hide();
 }
-
+*/
 // --------------------------------------------------------------------------------
 
 function EngineOrder () {
