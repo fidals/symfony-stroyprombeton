@@ -25,10 +25,12 @@
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
-    {#<script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
+    {#<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>#}
+
     {#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
 
@@ -77,7 +79,7 @@
            <div class="page-header-right-colon-container">
                 <div class="page-header-right-colon">
 
-                   <!--  <table class="basket-wrapper">
+                  <!-- <table class="basket-wrapper">
                         <tr>
                             <td class="basket-wrapper empty">
                             </td>
@@ -113,12 +115,24 @@
                 <li><a href="/obekty/">Наши объекты</a></li>
                 <li><a href="/contacts/">Контактная информация</a></li>
                 <li>
-                    <div class="menu-basket">
-                        <img src="/bundles/main/images/razdelitel.png">
-                        <p>Корзина пуста</p>
-                        <div class="menu-basket-img">
-                            <img src="/bundles/main/images/basket-empty.png">
-                        </div>
+                    <div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" >
+                    <div class="basket basket-sticky" >
+                        <div class="menu-basket">
+                            <img src="/bundles/main/images/razdelitel.png">
+                            <div class="basket-content">
+                                <p>Корзина пуста</p>
+                            </div>
+                            <div class="menu-basket-img">
+                                <img src="/bundles/main/images/basket-empty.png">
+                            </div>
+                        <!--<div class="basket-actions">
+                            <ul>
+                                <li>Оформить</li>
+                                <li>Удалить</li>
+                            </ul>
+                        </div>-->
+                    </div>
+                    </div>
                     </div>
                 </li>
             </ul>
