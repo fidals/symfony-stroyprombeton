@@ -1653,9 +1653,11 @@ div.object-card{
 
 div.object-card div{
     padding:10px;
+    border-radius: 15px;
+    border: 1px solid #cdcdcd;
 }
 div.object-card div:hover{
     background-color: #cdcdcd;
-border-radius: 15px; height: 200px; width: 200px;
+
 }
 /* -------------------------------------------------------------------------------- */
