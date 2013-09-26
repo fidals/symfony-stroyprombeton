@@ -236,11 +236,12 @@ class StaticPage
             'locData' => array(
                 'route' => 'app_main_staticpage',
                 'parameters' => array(
-                    'alias' => $this->getAlias()
+                    'alias' => $this->getAlias(),
                 )
             ),
             'priority'   => 0.9,
-            'changefreq' => 'weekly'
-        );
+            'changefreq' => 'weekly',
+			'entityType' => 'staticPage',
+		);
     }
 }
