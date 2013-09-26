@@ -1,5 +1,5 @@
 <?php
-namespace App\MainBundle\Command;
+namespace App\CatalogBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SitemapCommand extends ContainerAwareCommand
 {
-    const FILE_SITEMAP = '/var/www/stroyprombeton.ru/www/web/sitemap.xml';
+    const FILE_SITEMAP = '/../web/sitemap.xml';
     const URL_INDEX = 'http://www.stroyprombeton.ru';
 
     // you can modify this $repositories array for include some entities in sitemap
@@ -44,7 +44,8 @@ class SitemapCommand extends ContainerAwareCommand
             'entityList' => $entityList,
             'urlIndex'   => self::URL_INDEX
         ));
-        if(file_put_contents(self::FILE_SITEMAP, $sitemap)) {
+		if(file_put_contents($this->getContainer()->get('kernel')->getRootDir() . self::FILE_SITEMAP, $sitemap))
+		{
             die('sitemap successfully generated');
         } else {
             die('sorry, server error occured');
@@ -96,7 +97,32 @@ class SitemapCommand extends ContainerAwareCommand
         return $entityList;
     }
 
-    public function assemble($entityData)
+	public function assemble($entityData)
+	{
+		//Постфикс. Нужен для генерации url. У продуктов, например, подставляем id с вопросиками
+		$urlPostfix = '';
+		if($entityData['entityType'] == 'product')
+			$urlPostfix = '?section='.$entityData['section'].'&gbi='.$entityData['gbi'];
+		elseif($entityData['entityType'] == 'category')
+			$urlPostfix = '?section='.$entityData['section'];
+		else{
+			//TODO: Бросаем Exception. Скорее всего есть симфониевый
+		}
+		$urlPostfix = str_replace("&amp;", "&", $urlPostfix);
+
+		return array(
+			'loc'        => (empty($entityData['loc'])) ?
+				$this->getContainer()->get('router')
+					->generate($entityData['locData']['route'], $entityData['locData']['parameters'], false).$urlPostfix
+				: $entityData['loc'],
+			'lastmod'    => (empty($entityData['lastmod'])) ? date("Y-m-d H:i:s") : $entityData['lastmod'],
+			'changefreq' => (empty($entityData['changefreq'])) ? 'weekly' : $entityData['changefreq'],
+			'priority'   => (empty($entityData['priority'])) ? '1' : $entityData['priority'],
+			'name'   => (empty($entityData['name'])) ? '1' : $entityData['name'],
+		);
+	}
+
+	public function assemble1($entityData)
     {
         return array(
             'loc'        => (empty($entityData['loc'])) ? $this->getContainer()->get('router')->generate($entityData['locData']['route'], $entityData['locData']['parameters'], false) : $entityData['loc'],

@@ -340,15 +340,16 @@ class Category
     public function getSitemapData()
     {
         return array(
+			'section' => $this->getId(),
             'locData' => array(
                 'route' => 'app_catalog_explore_category',
                 'parameters' => array(
-                    'section' => $this->getId()
                 )
             ),
             'priority'   => 0.9,
-            'changefreq' => 'weekly'
-        );
+            'changefreq' => 'weekly',
+			'entityType' => 'category',
+		);
     }
     public function __toString()
     {
