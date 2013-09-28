@@ -22,6 +22,7 @@ class CategoryAdmin extends Admin
             ->add('isActive', null, array('label' => 'is_active','required' => false))
             ->add('description', null, array('required' => false))
             ->add('file', 'file', array('label' => 'фото','required'=>false))
+
         ;
     }
 
