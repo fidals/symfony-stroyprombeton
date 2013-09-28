@@ -3,6 +3,7 @@
 namespace App\CatalogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\CatalogBundle\Extension\Utils;
 
 /**
  * Products

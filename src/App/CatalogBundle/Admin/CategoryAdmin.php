@@ -11,11 +11,17 @@ class CategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('nomen', null, array('required' => false))
+            ->add('parent', 'sonata_type_model', array('label' => 'parent_id','required' => false))
             ->add('name', null, array('label' => 'Название','required' => true))
             ->add('title', null, array('required' => false))
-            ->add('coefficient',null, array('label' => 'коэффициент','required' => true))
-            ->add('parent', 'sonata_type_model', array('label' => 'Категория','required' => false))
-            ->add('description', null, array('label' => 'описание'))
+            ->add('alias', null, array('required' => false))
+            ->add('mark', null, array('required' => false))
+            ->add('order', null, array('label' => 'ord','required' => false))
+            ->add('coefficient',null, array('required' => true,'data'=>'1.1'))
+            ->add('isActive', null, array('label' => 'is_active','required' => false))
+            ->add('description', null, array('required' => false))
+            ->add('file', 'file', array('label' => 'фото','required'=>false))
         ;
     }
 
@@ -23,10 +29,16 @@ class CategoryAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
-            ->add('name', null, array('label' => 'Название'))
+            ->add('nomen', null, array('required' => false))
+            ->add('parent', null, array('label' => 'parent_id','required' => false))
+            ->add('name', null, array('label' => 'Название','required' => true))
             ->add('title', null, array('required' => false))
-            ->add('coefficient',null, array('label' => 'коэффициент'))
-            ->add('parent', null, array('label' => 'Категория'))
+            ->add('alias', null, array('required' => false))
+            ->add('mark', null, array('required' => false))
+            ->add('order', null, array('label' => 'ord','required' => false))
+            ->add('coefficient',null, array('required' => true))
+            ->add('isActive', null, array('label' => 'is_active','required' => false))
+            ->add('description', null, array('required' => false))
 
         ;
     }
@@ -35,12 +47,33 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->add('name', null, array('label' => 'Название'))
+            ->addIdentifier('nomen', null, array('required' => false))
+            ->add('parent', null, array('label' => 'parent_id','required' => false))
+            ->addIdentifier('name', null, array('label' => 'Название','required' => true))
             ->add('title', null, array('required' => false))
-            ->add('coefficient',null, array('label' => 'коэффициент'))
-            ->add('parent', null, array('label' => 'Категория'))
+            ->add('alias', null, array('required' => false))
+            ->add('mark', null, array('required' => false))
+            ->add('order', null, array('label' => 'ord','required' => false))
+            ->add('coefficient',null, array('required' => true))
+            ->add('isActive', null, array('label' => 'is_active','required' => false))
+            ->add('description', null, array('required' => false))
 
         ;
     }
+    public function postPersist($category) {
 
+        $this->saveFile($category);
+    }
+
+    public function preUpdate($category) {
+        $this->saveFile($category);
+    }
+
+    public function saveFile($category) {
+        $basepath = $this->getRequest()->getBasePath();
+        $category->upload($basepath);
+    }
+    public function preRemove($category){
+        $category->rmUploaded();
+    }
 }
