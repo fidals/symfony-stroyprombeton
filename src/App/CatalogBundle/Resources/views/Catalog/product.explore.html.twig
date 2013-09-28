@@ -130,7 +130,8 @@
     <div class="product-price-wrapper">
             <div class="product-price"><span>Цена:</span>{% if product.price %} {{ product.price + product.price // ((1.1 - 1)*100)  }} руб. {% else %} По запросу {% endif %}</div>
             <div class="product-bottom-box">
-                <a href="/gbi/{{ catUrl }}/?section={{ product.category.id }}&gbi={{ product.id }}&buy=true" section="{{ product.category.id }}" code="{{ product.id }}" price="{{ product.price }}" class="btn btn-primary add-basket"><i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
+                <a href="/gbi/{{ catUrl }}/?section={{ product.category.id }}&gbi={{ product.id }}&buy=true" section="{{ product.category.id }}" code="{{ product.id }}" price="{{ product.price }}" class="btn btn-primary add-basket">
+                    <i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
             </div>
         </div>
 {% endblock %}

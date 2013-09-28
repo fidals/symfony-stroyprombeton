@@ -456,15 +456,16 @@ class Product
     public function getSitemapData()
     {
         return array(
-            'locData' => array(
-                'route' => 'app_catalog_explore_category',
-                'parameters' => array(
-                    'section' => $this->getSectionId(),
-                    'gbi'     => $this->getId()
+			'section' => $this->getSectionId(),
+			'gbi'     => $this->getId(),
+			'locData' => array(
+				'route' => 'app_catalog_explore_category',
+				'parameters' => array(
                 )
             ),
             'priority'   => 0.9,
-            'changefreq' => 'weekly'
+            'changefreq' => 'weekly',
+			'entityType' => 'product',
         );
     }
 }

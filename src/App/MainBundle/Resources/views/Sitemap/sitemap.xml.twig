@@ -7,7 +7,7 @@
     </url>
     {% for entitySitemapData in entityList %}
     <url>
-        <loc>{{ urlIndex }}{{ entitySitemapData.loc }}</loc>
+        <loc>{% autoescape false %}{{ urlIndex }}{{ entitySitemapData.loc }}{% endautoescape %}</loc>
         <changefreq>{{ entitySitemapData.changefreq }}</changefreq>
         <priority>{{ entitySitemapData.priority }}</priority>
     </url>

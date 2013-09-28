@@ -1,4 +1,4 @@
-table.basket-wrapper {
+/*table.basket-wrapper {
 	position: relative;
 	width: 100%;
 	margin: 140px 0 0 0;
@@ -10,7 +10,7 @@ table.basket-wrapper td.wrapper {
 	padding: 0 10px 0 0;
 }
 
-div.basket {
+/*div.basket {
 	width: 180px;
 	height: 62px;
 	padding: 5px;
@@ -26,10 +26,11 @@ div.basket {
 	border-radius: 10px;
 	box-shadow: 0 0 2px 2px #c90000;
 }
-
+*/
 div.basket-content {
-	padding: 5px 5px 5px 55px;
+	display: inline-block;
 }
+/*
 div.basket-content span {
 	padding: 1px 5px 1px 5px;
 	background-color: #c90000;
@@ -63,10 +64,10 @@ div.basket-actions ul li a:hover {
 	color: #ffffff;
 	text-decoration: none;
 }
-
+*/
 /* -------------------------------------------------------------------------------- */
 
-.basket-sticky {
+/*.basket-sticky {
 	z-index: 10000;
 }
 .basket-sticky div.basket {
@@ -109,13 +110,13 @@ a.add-basket {
 }
 /* -------------------------------------------------------------------------------- */
 
-div.self-order {
+/*div.self-order {
 	display: none;
 }
 
 /* -------------------------------------------------------------------------------- */
 
-div.order-basket {
+/*div.order-basket {
 	margin: 0 0 20px 0;
 	padding: 0 10px 10px 10px;
 	background-color: #e1e1e1;

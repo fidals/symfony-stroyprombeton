@@ -287,7 +287,7 @@ div.menu-h ul {
     background-repeat: repeat-x;
     background-image: url('../images/polosa.png');
     background-position: center center;;
-    margin: -80px 0 -10px 0px;
+    margin: -70px 0 -10px 0px;
     width: 100%;
     padding: 0;
     display:table;
@@ -297,6 +297,7 @@ div.menu-h ul li {
     display: table-cell;
     margin: 0 auto;
     padding: 0;
+    vertical-align: middle;
 }
 
 div.menu-h ul li.menu-h-s a {
@@ -311,9 +312,8 @@ div.menu-h ul li.menu-h-s a:hover {
 }
 div.menu-h ul li a {
     display: block;
-    padding: 20px 0 0 0;
+    padding: 0 0 0 0;
     margin: 0 20px;
-    height: 40px;
     color: #c90000;
     font-weight: bold;
     font-size: 0.90em;
@@ -325,8 +325,34 @@ div.menu-h ul li a:hover {
     color: #000000;
     text-decoration: none;
 }
-
-
+div.menu-basket{
+    width:175px;
+    float:right;
+}
+div.menu-basket img{
+    float: left;
+    display: inline-block;
+    margin: 2px 20px 0 0;
+}
+div.menu-basket p{
+    color:#b3b3b3;
+    font-size: 13px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 15px 0 0 0;
+    padding: 0;
+    width: 50px;
+    line-height: 0.85em;
+}
+div.menu-basket-img{
+    display: inline-block;
+    float: right;
+}
+div.menu-basket-img img{
+    display: inline-block;
+    float: right;
+    margin: 10px 30px 0 0;
+}
 /* -------------------------------------------------------------------------------- */
 
 div.page-content {
@@ -1619,10 +1645,19 @@ table.object-cards{
 }
 table.object-cards tr td{padding: 7px; text-align: center;width: 33%;vertical-align: top;}
 table.object-cards tr td a{font-size: 11px; color:#555555; line-height: 15px; }
-div.object-card img{border-radius: 15px; height: 200px; width: 200px;}
+
 div.object-card{
     border-bottom: 1px solid #CAC6C3;
     padding-bottom: 10px;
 }
 
+div.object-card div{
+    padding:10px;
+    border-radius: 15px;
+    border: 1px solid #cdcdcd;
+}
+div.object-card div:hover{
+    background-color: #cdcdcd;
+
+}
 /* -------------------------------------------------------------------------------- */
