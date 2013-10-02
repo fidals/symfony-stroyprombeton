@@ -1640,8 +1640,7 @@ div.external-section table td.logo {
 }
 
 table.object-cards{
-    margin: auto;
-    float: left;
+    margin: 0 auto;
 }
 table.object-cards tr td{padding: 7px; text-align: center;width: 220px; vertical-align: top;}
 table.object-cards tr td a{font-size: 11px; color:#555555; line-height: 15px;}
@@ -1659,5 +1658,8 @@ div.object-card div{
 div.object-card div:hover{
     background-color: #cdcdcd;
 
+}
+ymaps{
+    margin: 0 auto;
 }
 /* -------------------------------------------------------------------------------- */
