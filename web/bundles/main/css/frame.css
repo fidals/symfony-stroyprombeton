@@ -1640,7 +1640,7 @@ div.external-section table td.logo {
 }
 
 table.object-cards{
-    margin: 0 auto;
+    margin: 30px auto;
 }
 table.object-cards tr td{padding: 7px; text-align: center;width: 220px; vertical-align: top;}
 table.object-cards tr td a{font-size: 11px; color:#555555; line-height: 15px;}
