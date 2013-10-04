@@ -1296,8 +1296,8 @@ div.page-showcase {
 
 	border-radius: 5px;
 }
-div.page-showcase ul {
-	margin: 0;
+div.page-showcase ul li {
+	margin-left: 20px;
 }
 div.page-showcase ul li {
 }
