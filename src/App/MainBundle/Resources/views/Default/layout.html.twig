@@ -115,16 +115,30 @@
                 <li><a href="/obekty/">Наши объекты</a></li>
                 <li><a href="/contacts/">Контактная информация</a></li>
                 <li>
+                    {% set cartLayout = app.session.get('cart') %}
                     <div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" >
-                    <div class="basket basket-sticky" >
-                        <div class="menu-basket">
-                            <img src="/bundles/main/images/razdelitel.png">
+                        <div class="basket basket-sticky" >
+                            <div class="menu-basket">
+                                <img src="/bundles/main/images/razdelitel.png">
+                                {% if cartLayout and cartLayout.products and (cartLayout.totalProductsCount != 0) %}
+                    <div class="basket-content">
+                        <p>Товаров в корзине: {{ cartLayout.totalProductsCount }}</p>
+                    </div>
+                    <div class="cart-actions">
+                        <a href="/basket/">Оформить</a>
+                        <a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">Очистить</a>
+                    </div>
+                    {% else %}
+
+
                             <div class="basket-content">
                                 <p>Корзина пуста</p>
                             </div>
+                                {% endif %}
                             <div class="menu-basket-img">
                                 <img src="/bundles/main/images/basket-empty.png">
                             </div>
+
                         <!--<div class="basket-actions">
                             <ul>
                                 <li>Оформить</li>

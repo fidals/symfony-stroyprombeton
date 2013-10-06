@@ -182,7 +182,11 @@ function RecalcBasketContent (data) {
 	}
     */
     // var html = 'Добавлено<br /><span>' + cnt_goods + '</span> ЖБИ';
-	var html = '<p>Добавлено ' + data + ' ЖБИ</p>';
+	var html = '<p>Товаров в корзине:' + data +'</p> ';
+        html += '<div class="cart-actions">';
+        html += '<a href="/order/">Оформить</a>';
+    html += '<a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">Очистить</a>';
+    html += '</div>';
 	$basket.html(html);
 
 	var $basket_actions = $("div.basket-actions");
@@ -214,7 +218,7 @@ function ClearBasket (from_basket) {
 		cache: false,
 		success: function (data) {
 
-			var html = 'Нет<br />заказов';
+			var html = '<p>Корзина пуста</p>';
 			$("div.basket-content").html(html);
 
 			var html = '<ul>';
