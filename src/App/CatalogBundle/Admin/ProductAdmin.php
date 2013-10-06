@@ -9,31 +9,55 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+
 class ProductAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', null, array('label' => 'название'))
-            ->add('mark', null, array('label' => 'марка'))
-            ->add('nomen', null, array('label'=>'номенклатурный номер', 'required' => false))
-            ->add('category', 'sonata_type_model', array('label' => 'Родитель'))
-            ->add('isActive', null, array('label' => 'используется'))
-            ->add('newPrice', null, array('label' => 'акутуальная цена'))
-            ->add('mark', null, array('required' => true))
-
+            ->add('isActive', null, array('label' => 'is_active','required' => false))
+            ->add('newPrice', null, array('required' => false))
+            ->add('nomen', null, array('required' => false))
+            ->add('mark', null, array('required' => false))
+            ->add('name', null, array('required' => false))
+            ->add('sectionId', null, array('label' => 'section_id','required' => false))
+            ->add('category', 'sonata_type_model', array('required' => false))
+            ->add('length', null, array('required' => false))
+            ->add('width', null, array('required' => false))
+            ->add('height', null, array('required' => false))
+            ->add('weight', null, array('required' => false))
+            ->add('volume', null, array('required' => false))
+            ->add('diameterOut', null, array('label' => 'diameter_out','required' => false))
+            ->add('diameterIn', null, array('label' => 'diameter_in','required' => false))
+            ->add('price', null, array('required' => false))
+            ->add('description', null, array('required' => false))
+            ->add('isHavePhoto', null, array('label' => 'is_have_photo','required' => false))
+            ->add('comments', null, array('required' => false))
         ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name', null, array('label' => 'название'))
-            ->add('mark', null, array('label' => 'марка'))
-            ->add('nomen', null, array('label'=>'номенклатурный номер'))
-            ->add('isActive', null, array('label' => 'используется'))
-            ->add('newPrice', null, array('label' => 'акутуальная цена'))
-            ->add('category', null, array('label' => 'Родитель'))
+            ->add('id')
+            ->add('isActive', null, array('label' => 'is_active','required' => false))
+            ->add('newPrice', null, array('required' => false))
+            ->add('nomen', null, array('required' => false))
+            ->add('mark', null, array('required' => false))
+            ->add('name', null, array('required' => false))
+            ->add('sectionId', null, array('label' => 'section_id','required' => false))
+            ->add('category', null, array('required' => false))
+            ->add('length', null, array('required' => false))
+            ->add('width', null, array('required' => false))
+            ->add('height', null, array('required' => false))
+            ->add('weight', null, array('required' => false))
+            ->add('volume', null, array('required' => false))
+            ->add('diameterOut', null, array('label' => 'diameter_out','required' => false))
+            ->add('diameterIn', null, array('label' => 'diameter_in','required' => false))
+            ->add('price', null, array('required' => false))
+            ->add('description', null, array('required' => false))
+            ->add('isHavePhoto', null, array('label' => 'is_have_photo','required' => false))
+            ->add('comments', null, array('required' => false))
         ;
     }
 
@@ -41,12 +65,24 @@ class ProductAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->addIdentifier('nomen', null, array('label'=>'номенклатурный номер'))
-            ->addIdentifier('name', null, array('label' => 'название'))
-            ->add('mark', null, array('label' => 'марка'))
-            ->add('isActive', null, array('label' => 'используется'))
-            ->add('newPrice', null, array('label' => 'акутуальная цена'))
-	        ->add('category', null, array('label' => 'Родитель'))
+            ->add('isActive', null, array('label' => 'is_active','required' => false))
+            ->add('newPrice', null, array('required' => false))
+            ->addIdentifier('nomen', null, array('required' => false))
+            ->add('mark', null, array('required' => false))
+            ->addIdentifier('name', null, array('required' => false))
+            ->add('sectionId', null, array('label' => 'section_id','required' => false))
+            ->add('category', null, array('required' => false))
+            ->add('length', null, array('required' => false))
+            ->add('width', null, array('required' => false))
+            ->add('height', null, array('required' => false))
+            ->add('weight', null, array('required' => false))
+            ->add('volume', null, array('required' => false))
+            ->add('diameterOut', null, array('label' => 'diameter_out','required' => false))
+            ->add('diameterIn', null, array('label' => 'diameter_in','required' => false))
+            ->add('price', null, array('required' => false))
+            ->add('description', null, array('required' => false))
+            ->add('isHavePhoto', null, array('label' => 'is_have_photo','required' => false))
+            ->add('comments', null, array('required' => false))
 
         ;
     }

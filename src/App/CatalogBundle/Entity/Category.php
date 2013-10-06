@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use App\CatalogBundle\Extension\Utils;
 
 /**
  * Category
@@ -18,12 +19,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class Category
 {
-//    Из-за этой ботвы не работает добавление категорий в Сонате !!!!!!!!!!!!!!!!
-//    public static function loadValidatorMetadata(ClassMetadata $metadata)
-//    {
-//        $metadata->addPropertyConstraint('id', new NotBlank());
-//    }
-
     /**
      * @var integer
      *
@@ -340,18 +335,115 @@ class Category
     public function getSitemapData()
     {
         return array(
+			'section' => $this->getId(),
             'locData' => array(
                 'route' => 'app_catalog_explore_category',
                 'parameters' => array(
-                    'section' => $this->getId()
                 )
             ),
             'priority'   => 0.9,
-            'changefreq' => 'weekly'
-        );
+            'changefreq' => 'weekly',
+			'entityType' => 'category',
+		);
     }
     public function __toString()
     {
-        return (string)$this->getTitle();
+        return (string)$this->getId().".".(string)$this->getTitle();
     }
+    /* ----------- Блок кода для файла. Нужен для админки. Очень понавательный. -------------- */
+    private $file;
+    /**
+     * @var string
+     * Папка для изображений. Почему она static написано в матчасти.
+     * Без переднего слэша, чтобы бэкэнду была понятна папка.
+     * На фронте прямо в твиге сандалим слешик.
+     */
+    public static $defaultDirForImg = 'bundles/catalog/img/categories/';
+
+    public static $imgExtensions = array('png', 'jpg', 'jpeg', 'bmp', 'gif', 'tiff');
+
+    public function getAbsolutePath()
+    {
+        return null === $this->imageName ? null : '/'.$this->getUploadDir().'/'.$this->getId().'/'.$this->imageName;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->imageName ? null : $this->getUploadDir().'/'.$this->getId().'/'.$this->imageName;
+    }
+
+    protected function getUploadDir()
+    {
+        return Category::$defaultDirForImg;
+    }
+    protected function getFileDir()
+    {
+        return Category::$defaultDirForImg;
+    }
+    protected function getUploadRootDir($basePath)
+    {
+        return $basePath.$this->getUploadDir();
+    }
+    public function upload($basePath)
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->file) {
+            return;
+        }
+
+        if (null === $basePath) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        /*-------- проверяем на наличие других файлов main в папке и удаляем если есть ------*/
+        $nameFile = $this->getFileDir().$this->getId().".";
+        foreach(Category::$imgExtensions as $extension){
+            if (file_exists($nameFile.$extension))
+                unlink($nameFile.$extension);
+        }
+        /*-------- двигаем файл ------*/
+        $this->file->move($this->getUploadRootDir($basePath), $this->getId().".".$this->getFile()->guessExtension());
+        $this->file = null;
+    }
+
+    public function rmUploaded(){
+        Utils::categoryRemove($this);
+    }
+
+    public function getFilePath()
+    {
+        $nameFile = $this->getFileDir().$this->getId().".";
+        foreach(Category::$imgExtensions as $extension){
+            if (file_exists($nameFile.$extension))
+                return $nameFile.$extension;
+        }
+
+        return 'bundles/catalog/empty.png';
+    }
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Product
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    /* ----------- Код для файла кончился -------------- */
 }

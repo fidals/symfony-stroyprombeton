@@ -1296,8 +1296,8 @@ div.page-showcase {
 
 	border-radius: 5px;
 }
-div.page-showcase ul {
-	margin: 0;
+div.page-showcase ul li {
+	margin-left: 20px;
 }
 div.page-showcase ul li {
 }
@@ -1640,15 +1640,24 @@ div.external-section table td.logo {
 }
 
 table.object-cards{
-    width: 95%;
-    margin: auto;
+    margin: 30px auto;
 }
-table.object-cards tr td{padding: 7px; text-align: center;width: 33%;vertical-align: top;}
-table.object-cards tr td a{font-size: 11px; color:#555555; line-height: 15px; }
-div.object-card img{border-radius: 15px; height: 200px; width: 200px;}
+table.object-cards tr td{padding: 7px; text-align: center;width: 220px; vertical-align: top;}
+table.object-cards tr td a{font-size: 11px; color:#555555; line-height: 15px;}
+
 div.object-card{
     border-bottom: 1px solid #CAC6C3;
     padding-bottom: 10px;
+}
+
+div.object-card div{
+    padding:10px;
+    border-radius: 15px;
+    border: 1px solid #cdcdcd;
+}
+div.object-card div:hover{
+    background-color: #cdcdcd;
+
 }
 
 /* -------------------------------------------------------------------------------- */
