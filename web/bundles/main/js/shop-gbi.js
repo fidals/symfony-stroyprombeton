@@ -131,13 +131,7 @@ function AddGoodsToBasket () {
 		rest = 1;
 	}
 
-	$("a.add-basket").each(function () {
-		$(this).text("...");
-		$(this).addClass("disabled");
-	});
 
-	var $basket = $("div.basket-content");
-	$basket.html('<p>Добавление ЖБИ в заказ ...</p>');
 
 	$.ajax({
 		type: "GET",

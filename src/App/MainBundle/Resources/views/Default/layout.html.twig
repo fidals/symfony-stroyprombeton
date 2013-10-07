@@ -129,7 +129,7 @@
                     </div>
                     <div class="cart-actions">
                         <ul>
-                            <li><a href="/basket/"> <img src="/bundles/main/images/ok.png"></a></li>
+                            <li><a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order"> <img src="/bundles/main/images/ok.png"></a></li>
                             <li><a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket"> <img src="/bundles/main/images/clear.png"></a></li>
                         </ul>
                     </div>
@@ -141,6 +141,9 @@
                             <div class="menu-basket-img">
                                 <img src="/bundles/main/images/basket-empty.png">
                             </div>
+                        <div class="cart-actions">
+
+                        </div>
                     {% endif %}
                     </div>
                     </div>
@@ -261,7 +264,10 @@
             $("#accordion3").accordion({autoHeight:false,collapsible:true});
         });
     </script>
-
+    <script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
+    <script type="text/javascript">
+    $().tooltip(options)
+    </script>
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-27310520-1']);
