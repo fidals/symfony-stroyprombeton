@@ -51,6 +51,7 @@ class CatalogController extends Controller
         $catId = array_search($catUrl, $this->baseCats);
         $catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
         $category = $catRp->find(!empty($sectionId) ? $sectionId : $catId);
+        if (empty($category)){throw $this->createNotFoundException();}
         $parents = $catRp->getPath($category);
         if($this->isParent($category,$catUrl)){
             $hierarchyOptions = array(

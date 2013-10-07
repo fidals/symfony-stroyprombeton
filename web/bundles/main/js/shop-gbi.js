@@ -168,34 +168,16 @@ function AddGoodsToBasket () {
 function RecalcBasketContent (data) {
 
 	var $basket = $("div.basket-content");
-    /*
-	var arr_data = data.split("\n");
-
-	var arr_order = arr_data[0].split("-");
-	//var sum = arr_data[1];
-
-	var cnt_goods = 0;
-	for (var i = 0; i < arr_order.length; i++) {
-		var arr_elem = arr_order[i].split(":");
-		var rest = parseInt(arr_elem[1]);
-		cnt_goods += rest;
-	}
-    */
-    // var html = 'Добавлено<br /><span>' + cnt_goods + '</span> ЖБИ';
-	var html = '<p>Товаров в корзине:' + data +'</p> ';
-        html += '<div class="cart-actions">';
-        html += '<a href="/order/">Оформить</a>';
-    html += '<a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">Очистить</a>';
-    html += '</div>';
+	var html = '<p>Товаров <br>в корзине:' + data +'</p> ';
 	$basket.html(html);
-
-	var $basket_actions = $("div.basket-actions");
-
+    var $basket_img = $("div.menu-basket-img");
+    var html = '<img src="/bundles/main/images/busket-full.png">';
+    $basket_img.html(html);
+	var $basket_actions = $("div.cart-actions");
 	var html = '<ul>';
-	html += '<li><a href="/order/">Заказать</a></li>';
-	html += '<li><a href="javascript:void(0);" class="clear-basket from-basket" onclick="ClearBasket(true);">Удалить</a></li>';
+	html += '<li><a href="/order/"> <img src="/bundles/main/images/ok.png"></a></li>';
+	html += '<li><a href="javascript:void(0);" class="clear-basket from-basket" onclick="ClearBasket(true);"><img src="/bundles/main/images/clear.png"></a></li>';
 	html += '</ul>';
-
 	$basket_actions.html(html);
 }
 
@@ -220,13 +202,11 @@ function ClearBasket (from_basket) {
 
 			var html = '<p>Корзина пуста</p>';
 			$("div.basket-content").html(html);
-
-			var html = '<ul>';
-			html += '<li>Заказать</li>';
-			html += '<li>Удалить</li>';
-			html += '</ul>';
-			$("div.basket-actions").html(html);
-
+            var $basket_img = $("div.menu-basket-img");
+            var html = '<img src="/bundles/main/images/basket-empty.png">';
+            $basket_img.html(html);
+			var html = ' ';
+			$("div.cart-actions").html(html);
 			if (!is_from_basket) {
 				location.href = "/";
 			}

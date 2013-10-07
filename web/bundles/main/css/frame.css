@@ -326,32 +326,46 @@ div.menu-h ul li a:hover {
     text-decoration: none;
 }
 div.menu-basket{
-    width:175px;
+    width:195px;
     float:right;
 }
 div.menu-basket img{
     float: left;
     display: inline-block;
-    margin: 2px 20px 0 0;
+    margin: 2px 10px 0 0;
 }
 div.menu-basket p{
     color:#b3b3b3;
     font-size: 13px;
     font-weight: bold;
     display: inline-block;
-    margin: 15px 0 0 0;
+    margin: 0 10px 0 0;
     padding: 0;
-    width: 50px;
+    width: 70px;
     line-height: 0.85em;
 }
 div.menu-basket-img{
     display: inline-block;
-    float: right;
 }
 div.menu-basket-img img{
     display: inline-block;
+    margin: 5px 10px 0 0;
+}
+div.cart-actions{
+    display: inline-block;
     float: right;
-    margin: 10px 30px 0 0;
+    margin-right: 5px;
+    margin-top: -40px;
+}
+div.cart-actions ul{
+    display: block;
+    margin: 0 0 0 0;
+}
+div.cart-actions ul li{
+    display: block;
+}
+div.cart-actions ul li:last-child img{
+    margin-top: 10px;
 }
 /* -------------------------------------------------------------------------------- */
 

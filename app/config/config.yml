@@ -102,3 +102,5 @@ services:
         class:        Twig_Extension_StringLoader
         tags:
              - { name: 'twig.extension' }
+twig:
+    exception_controller:  AppMainBundle:StaticPage:exeption

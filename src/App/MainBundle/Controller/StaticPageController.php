@@ -41,7 +41,7 @@ class StaticPageController extends Controller
                 'staticPage' => $staticPage
             ));
         } else {
-            return $this->render('AppMainBundle:StaticPage:404.html.twig');
+             throw $this->createNotFoundException();
         }
     }
 
@@ -73,6 +73,9 @@ class StaticPageController extends Controller
         }
         return $this->render('AppMainBundle:StaticPage:404.html.twig');
     }
-
+    public function exeptionAction()
+    {
+        return $this->render('AppMainBundle:StaticPage:404.html.twig');
+    }
 
 }
