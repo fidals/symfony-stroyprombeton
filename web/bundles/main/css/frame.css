@@ -1025,6 +1025,10 @@ td.no-white-space {
 div.gbi-list table td.photo {
 	text-align: center !important;
 }
+div.gbi-list table td.photo img{
+    width: 20px;
+    max-width: 20px;
+}
 div.gbi-list table td.code {
 	font-size: 0.7em;
 }
@@ -1062,7 +1066,6 @@ div.gbi-list table td.buy a {
 	width: 60px;
 	padding: 2px;
 
-	box-shadow: 0 0 2px 2px #999999;
 }
 div.gbi-list table td.buy a:hover {
 	box-shadow: 0 0 2px 2px #c90000;

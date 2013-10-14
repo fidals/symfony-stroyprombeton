@@ -17,9 +17,7 @@
         Оформление заказа на ЖБИ продукцию
     </h1>
     <div class="order">
-        <div class="showcase-title">Содержание заказа</div>
         <div class="order-basket">
-            <div class="self-order">{% for product in order.products %}{{ product.model.id }}:{{ product.count }}-{% endfor %}</div>
             <div class="gbi-list">
                 <table>
                     <tr>
@@ -36,7 +34,7 @@
                             </a>
                         </td>
                         <td class="gbi-list code">
-                            {{ product.model.id }}
+                            {{ product.model.nomen }}
                         </td>
                         <td class="gbi-list name">
                             <a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}" class="gbi-link">
