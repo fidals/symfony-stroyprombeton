@@ -40,9 +40,9 @@
         <div class="page-header">
             <div class="page-header-left-colon">
                 <div class="logo">
-                    <div class="logo-praim"><a href="/praimgroup"><img src="/bundles/main/images/tel-logo-praim.png"/></a></div>
+                    <div class="logo-praim"><a href="/praimgroup"><img src="/assets/main/images/tel-logo-praim.png"/></a></div>
                     <div class="logo-prom" onclick="location.href='/'">
-                            <div class="logo-image"><img src="/bundles/main/images/logo.png" /></div>
+                            <div class="logo-image"><img src="/assets/main/images/logo.png" /></div>
                             <div class="logo-text"> <a href="/">завод железобетонных изделий </a></div>
                     </div>
 
@@ -119,18 +119,18 @@
                     <div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" >
                         <div class="basket basket-sticky" >
                             <div class="menu-basket">
-                                <img src="/bundles/main/images/razdelitel.png">
+                                <img src="/assets/main/images/razdelitel.png">
                                 {% if cartLayout and cartLayout.products and (cartLayout.totalProductsCount != 0) %}
                     <div class="basket-content">
                         <p>Товаров <br>в корзине: {{ cartLayout.totalProductsCount }}</p>
                     </div>
                     <div class="menu-basket-img">
-                        <img src="/bundles/main/images/busket-full.png">
+                        <img src="/assets/main/images/busket-full.png">
                     </div>
                     <div class="cart-actions">
                         <ul>
-                            <li><a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order"> <img src="/bundles/main/images/ok.png"></a></li>
-                            <li><a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket"> <img src="/bundles/main/images/clear.png"></a></li>
+                            <li><a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order"> <img src="/assets/main/images/ok.png"></a></li>
+                            <li><a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket"> <img src="/assets/main/images/clear.png"></a></li>
                         </ul>
                     </div>
                     {% else %}
@@ -139,7 +139,7 @@
                             </div>
 
                             <div class="menu-basket-img">
-                                <img src="/bundles/main/images/basket-empty.png">
+                                <img src="/assets/main/images/basket-empty.png">
                             </div>
                         <div class="cart-actions">
 
@@ -186,27 +186,27 @@
             <div class="partners-table" onclick="window.open('/praimgroup'); return false;">
                 <div class="partners-table-header">
                     <p>Группа</p>
-                    <img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
+                    <img src="{{ asset('assets/main/images/partners-table-header.png') }}">
                 </div>
                 <table class="partners-table">
                     <tr>
                         <td>
-							<img src="{{ asset('bundles/main/images/metall.png')}}" alt="stk-metal.ru" class="logo"/>
+							<img src="{{ asset('assets/main/images/metall.png')}}" alt="stk-metal.ru" class="logo"/>
 							<p style="color:#005CC7;">СТК-МЕТАЛЛ</p>
 							<p class="partner-desc" style="color:#005CC7;">завод металлоконструкций</p>
                         </td>
                         <td>
-							<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo"style="margin-top: 5px;"/>
+							<img src="{{ asset('assets/main/images/sk78.png') }}" alt="sk78.ru" class="logo"style="margin-top: 5px;"/>
 							<p style="color:#747675;">Строй<span style="color: #FFA700;">К</span>омплект</p>
 							<p class="partner-desc"  style="color:#747675;">проектирование и строительство</p>
                         </td>
                         <td>
-							<img src="{{ asset('bundles/main/images/modul.png') }}" alt="stk-modul.ru" class="logo"/>
+							<img src="{{ asset('assets/main/images/modul.png') }}" alt="stk-modul.ru" class="logo"/>
 							<p style="color: #C20000;">СТК-Модуль</p>
 							<p class="partner-desc" style="color: #C20000;">поставка нерудных материалов</p>
                         </td>
                         <td>
-							<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru" class="logo"  />
+							<img src="{{ asset('assets/main/images/auto.png') }}" alt="avtospecservis.ru" class="logo"  />
 							<p style="color:#0757a1">АвтоСпецСервис</p>
 							<p class="partner-desc" style="color:#0757a1">ремонт грузовых автомобилей</p>
                         </td>

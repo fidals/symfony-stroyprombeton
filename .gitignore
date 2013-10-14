@@ -11,6 +11,8 @@ web/favicon.ico
 app/config/parameters.yml
 app/indexation
 web/webstat/
+web/assets
+
 web/bundles/*.yml
 web/bundles/*/*.yml
 web/bundles/*/*/*.yml
