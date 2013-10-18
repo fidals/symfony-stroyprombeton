@@ -12,3 +12,5 @@ app/config/parameters.yml
 app/indexation
 web/webstat/
 web/assets
+web/robots.txt
+web/*.xml
