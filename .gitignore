@@ -14,3 +14,4 @@ web/webstat/
 web/assets
 web/robots.txt
 web/*.xml
+web/sitemap*
