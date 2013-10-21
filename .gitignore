@@ -15,3 +15,6 @@ web/assets
 web/robots.txt
 web/*.xml
 web/sitemap*
+web/.htaccess
+web/*.html
+web/*.xls
