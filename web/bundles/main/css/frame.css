@@ -1680,3 +1680,32 @@ div.object-card div:hover{
 }
 
 /* -------------------------------------------------------------------------------- */
+.group-table{
+    width: 70%;
+    margin: auto;
+
+    border-collapse: separate;
+    border-spacing: 20px 30px;
+}
+.group-table tr td{
+    border-right: 1px solid #CFCFCF;
+}
+.group-table tr td div img{
+    display: inline;
+    float: left;
+}
+.group-table tr td div{
+    width: 100%;
+    min-height: 60px;
+}
+.group-table tr td div p{
+    display: inline;
+    margin-left: 10px;
+}
+.group-table tr td div p.name{
+    font-size: 18px;
+    font-weight: bold;
+}
+.group-table tr td div p:last-child{
+    color:#cdcdcd;
+}
