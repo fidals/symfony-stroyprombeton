@@ -1693,6 +1693,7 @@ div.object-card div:hover{
 .group-table tr td div img{
     display: inline;
     float: left;
+    margin-right: 10px;
 }
 .group-table tr td div{
     width: 100%;
@@ -1702,7 +1703,7 @@ div.object-card div:hover{
     display: inline;
     margin-left: 10px;
 }
-.group-table tr td div p.name{
+.group-table tr td div .name{
     font-size: 18px;
     font-weight: bold;
 }
