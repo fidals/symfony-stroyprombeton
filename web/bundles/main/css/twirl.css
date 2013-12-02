@@ -184,7 +184,6 @@ div.showcase ul li a:hover {
 	width: 70px;
 	height: 70px;
 	cursor: pointer;
-	/*background: transparent url('../images/carousel-button-up.png') no-repeat 0 0;*/
 }
 
 .jcarousel-skin-tango .jcarousel-next-vertical:hover {
@@ -209,7 +208,6 @@ div.showcase ul li a:hover {
 	width: 70px;
 	height: 70px;
 	cursor: pointer;
-	/*background: transparent url('../images/carousel-button-down.png') no-repeat 0 0;*/
 }
 
 .jcarousel-skin-tango .jcarousel-prev-vertical:hover {
