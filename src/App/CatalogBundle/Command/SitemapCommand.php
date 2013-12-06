@@ -54,47 +54,63 @@ class SitemapCommand extends ContainerAwareCommand
 
     public function generate($entityRepositories)
     {
-        $entityList = array();
-        $catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
-        foreach($entityRepositories as $repositoryName) {
-            $rep = $this->getContainer()->get('doctrine')->getRepository($repositoryName);
-            $entities = $rep->findAll();
-            if($repositoryName == 'AppCatalogBundle:Category') {
-                foreach($entities as $entity) {
-                    $path = $catRp->getPath($entity);
-                    if(!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
-                        $catUrl = $this->baseCats[$path[0]->getId()];
-                    } else {
-                        $catUrl = $this->baseCats[537];
-                    }
-                    $entityData = $entity->getSitemapData();
-                    $entityData['locData']['parameters']['catUrl'] = $catUrl;
-                    $entityList[] = $this->assemble($entityData);
-                }
-            } elseif($repositoryName == 'AppCatalogBundle:Product') {
-                foreach($entities as $entity) {
-                    $sectionId = $entity->getSectionId();
-                    if(!empty($sectionId)) {
-                        $path = $catRp->getPath($catRp->find($sectionId));
+        try{
+            $entityList = array();
+            $catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+            foreach($entityRepositories as $repositoryName) {
+                $rep = $this->getContainer()->get('doctrine')->getRepository($repositoryName);
+                $entities = $rep->findAll();
+                if($repositoryName == 'AppCatalogBundle:Category') {
+                    foreach($entities as $entity) {
+                        $path = $catRp->getPath($entity);
                         if(!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
                             $catUrl = $this->baseCats[$path[0]->getId()];
                         } else {
                             $catUrl = $this->baseCats[537];
                         }
-                    } else {
-                        $catUrl = $this->baseCats[537];
+                        $entityData = $entity->getSitemapData();
+                        $entityData['locData']['parameters']['catUrl'] = $catUrl;
+                        $entityList[] = $this->assemble($entityData);
                     }
-                    $entityData = $entity->getSitemapData();
-                    $entityData['locData']['parameters']['catUrl'] = $catUrl;
-                    $entityList[] = $this->assemble($entityData);
-                }
-            } else {
-                foreach($entities as $entity) {
-                    $entityList[] = $this->assemble($entity->getSitemapData());
+                } elseif($repositoryName == 'AppCatalogBundle:Product') {
+                    foreach($entities as $entity) {
+                        $sectionId = $entity->getSectionId();
+                        if(!empty($sectionId)) {
+                            $path = $catRp->getPath($catRp->find($sectionId));
+                            if(!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
+                                $catUrl = $this->baseCats[$path[0]->getId()];
+                            } else {
+                                $catUrl = $this->baseCats[537];
+                            }
+                        } else {
+                            $catUrl = $this->baseCats[537];
+                        }
+                        $entityData = $entity->getSitemapData();
+                        $entityData['locData']['parameters']['catUrl'] = $catUrl;
+                        $entityList[] = $this->assemble($entityData);
+                    }
+                } else {
+                    foreach($entities as $entity) {
+                        $entityList[] = $this->assemble($entity->getSitemapData());
+                    }
                 }
             }
+            return $entityList;
         }
-        return $entityList;
+        catch (\Exception $e) {
+            $mailer = $this->getContainer()->get('mailer');
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Ошибка выполнения команды на сайте '.$this->getContainer()->getParameter('shop_mail_address'))
+                ->addTo('support@fidals.ru')
+                ->setFrom('error@stroyprombeton.ru')
+                ->setContentType("text/html")
+                ->setBody('при генерации sitemap выброшено исключение: '.  $e->getMessage(), "\n");
+            $mailer->send($message);
+            $spool = $mailer->getTransport()->getSpool();
+            $transport = $this->getContainer()->get('swiftmailer.transport.real');
+            $spool->flushQueue($transport);
+        }
+
     }
 
 	public function assemble($entityData)
