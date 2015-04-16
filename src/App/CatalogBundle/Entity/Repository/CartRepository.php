@@ -51,21 +51,22 @@ class CartRepository
 
     // cart methods
     /**
-     * @param bool $fillModels
-     * @return Cart|mixed
+     * @param bool $with_products - корзина с продуктами, или нет
+     * @return Cart
      */
-    public function loadCart($fillModels = false)
+    public function loadCart($with_products = false)
     {
         $cart = $this->session->get('cart', false);
 
-        if($fillModels && $cart) {
+        if($with_products && $cart) {
             $cart = clone $cart;
             $prodRp = $this->doctrine->getRepository('AppCatalogBundle:Product');
             $products = $cart->getProducts();
-            foreach($products as $productId => $count) {
-                $filledProducts[$productId] = array('count' => $count, 'model' => $prodRp->find($productId));
+            $cart_products = array();
+            foreach($products as $id => $count) {
+                $cart_products[$id] = array('count' => $count, 'model' => $prodRp->find($id));
             }
-            $cart->setProducts($filledProducts);
+            $cart->setProducts($cart_products);
         }
         return ($cart) ? clone $cart : new Cart();
     }

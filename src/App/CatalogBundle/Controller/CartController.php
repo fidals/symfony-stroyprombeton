@@ -50,7 +50,6 @@ class CartController extends Controller
     public function orderAction()
     {
         $order = new Order();
-
         $form = $this->createForm(new OrderType(), $order);
 
         if ($this->getRequest()->getMethod() == 'POST') {
@@ -61,11 +60,11 @@ class CartController extends Controller
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Stroyprombeton | New order')
                     ->setTo('info@stroyprombeton.ru')
-                    ->setFrom('send@example.com')
+                    ->setFrom('order@stroyprombeton.ru')
                     ->setContentType("text/html")
                     ->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
-                        'form' => $form->createView(),
-                        'cart' => CartRepository::getInstance($this)->loadCart(true)
+                            'form' => $form->createView(),
+                            'cart' => CartRepository::getInstance($this)->loadCart(true)
                         ))
                     );
                 $mailer->send($message);
