@@ -136,19 +136,24 @@ class CatalogController extends Controller
         return new Response();
     }
 
+    /**
+     * Обрабатывает поисковые запросы с автокомплита
+     * @return Response
+     */
     public function suggestAction()
     {
         $term = $this->getRequest()->query->get('term');
 
-        if(!empty($term)) {
-            $prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
-            $jsonSrv = new JsonEncoder();
-            $result = $prodRp->searchAutocomplete($term);
-
-            $json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
-            return new Response($json);
+        if (empty($term)) {
+            return new Response();
         }
-        return new Response();
+
+        $prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+        $jsonSrv = new JsonEncoder();
+        $result = $prodRp->searchAutocomplete($term);
+        $json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
+
+        return new Response($json);
     }
 
     private  function isParent($category,$catUrl){

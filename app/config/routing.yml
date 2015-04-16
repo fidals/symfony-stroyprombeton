@@ -14,6 +14,7 @@ app_catalog:
     resource: "@AppCatalogBundle/Resources/config/routing.yml"
     prefix:   /gbi/
 
+#Обрабатывает поисковые запросы с автокомплита
 app_catalog_suggest:
     pattern: /suggest/
     defaults: { _controller: AppCatalogBundle:Catalog:suggest }

@@ -19,20 +19,20 @@ class ProductRepository extends EntityRepository
     /**
      * Метод поиска для автодополнения
      *
-     * @param $column
      * @param $term
-     * @param bool $returnObjAsArray
      * @return array
      */
     public function searchAutocomplete($term)
     {
-        return $this->getEntityManager()->getConnection()->query("SELECT DISTINCT CONCAT(name, ' ', mark) as value FROM products WHERE section_id IS NOT NULL HAVING value LIKE ('%" . $term . "%') LIMIT 0, " . self::LIMIT)->fetchAll();
+        return $this->getEntityManager()->getConnection()->query(
+            "SELECT DISTINCT CONCAT(name, ' ', mark) as value FROM products
+                WHERE section_id IS NOT NULL
+                  HAVING value LIKE ('%" . $term . "%') LIMIT 0, " . self::LIMIT)->fetchAll();
     }
 
     /**
      * Метод поиска
      *
-     * @param $column
      * @param $term
      * @param int $page
      * @param bool $returnObjAsArray
