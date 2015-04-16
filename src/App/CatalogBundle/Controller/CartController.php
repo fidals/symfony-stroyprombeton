@@ -17,6 +17,7 @@ class CartController extends Controller
         $query = $this->getRequest()->query;
         $mode = $query->get('mode');
         $cartRp = CartRepository::getInstance($this);
+        $res = new Response();
 
         if($mode == 'add') {
             $code = (int) $query->get('code');
@@ -26,23 +27,24 @@ class CartController extends Controller
             $cart->addProduct($code, $rest);
             $cartRp->saveCart($cart);
 
-            return new Response($cart->getTotalProductsCount());
+            $res = new Response($cart->getTotalProductsCount());
         } elseif($mode == 'edit') {
             $order = $query->get('order_basket');
-            $cart = new Cart();
+            $cart = $cartRp->loadCart();
             if(!empty($order)) {
                 $parts = explode('-', $order);
                 foreach($parts as $part) {
                     $props = explode(':', $part);
-                    $cart->addProduct((int) $props[0], (int) $props[1]);
+                    $cart->addProduct((int)$props[0], (int)$props[1]);
                 }
                 $cartRp->saveCart($cart);
             }
-            return new Response($cart->serialize());
+            $res = new Response($cart->serialize());
         } elseif($mode == 'clear') {
             $cartRp->cleanCart();
-            return new Response();
         }
+
+        return $res;
     }
 
     public function orderAction()
