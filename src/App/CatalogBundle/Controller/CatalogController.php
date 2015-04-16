@@ -116,24 +116,25 @@ class CatalogController extends Controller
         $condition = $this->getRequest()->query->get('condition');
         $page = $this->getRequest()->query->get('page', 1);
 
-        if(!empty($condition)) {
-            $prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
-            $catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
-
-            $products = $prodRp->search($condition, $page);
-            foreach($products as &$product) {
-                $category = $catRp->find($product->getSectionId());
-                $path = $catRp->getPath($category);
-                $product->catUrl = $this->baseCats[$path[0]->getId()];
-                $product->section = $category;
-                $product->path = $path;
-            }
-
-            return $this->render('AppCatalogBundle:Catalog:search.html.twig', array(
-                'products' => $products
-            ));
+        if (empty($condition)) {
+            return new Response();
         }
-        return new Response();
+
+        $prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+        $catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+
+        $products = $prodRp->search($condition, $page);
+        foreach($products as &$product) {
+            $category = $catRp->find($product->getSectionId());
+            $path = $catRp->getPath($category);
+            $product->catUrl = $this->baseCats[$path[0]->getId()];
+            $product->section = $category;
+            $product->path = $path;
+        }
+
+        return $this->render('AppCatalogBundle:Catalog:search.html.twig', array(
+            'products' => $products
+        ));
     }
 
     /**
