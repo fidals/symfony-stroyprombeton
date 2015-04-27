@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
+    /**
+     * CRUD корзины
+     * @return Response
+     */
     public function indexAction()
     {
         $query = $this->getRequest()->query;
@@ -47,6 +51,10 @@ class CartController extends Controller
         return $res;
     }
 
+    /**
+     * Форма заказа
+     * @return mixed - html-формы или редирект на страницу обработки формы
+     */
     public function orderAction()
     {
         $order = new Order();
