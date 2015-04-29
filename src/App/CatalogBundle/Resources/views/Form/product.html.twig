@@ -1,29 +1,33 @@
 <tr {% if form.vars.value.id %} product-id="{{ form.vars.value.id }}" {% endif %}>
-    <form action="{{ path('app_catalog_admin_saveProduct') }}" onsubmit="CatalogAdmin.saveProduct(this); return false;" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
-        <td>{{ form_widget(form.id) }}</td>
-        <td>{{ form_widget(form.description, { 'id': 'product_description_' ~ form.vars.value.id, 'attr': {'class': 'product_description'} }) }}</td>
-        <td>{{ form_widget(form.isActive) }}</td>
-        <td>{{ form_widget(form.newPrice) }}</td>
-        <td>{{ form_widget(form.nomen) }}</td>
-        <td>{{ form_widget(form.mark) }}</td>
-        <td>{{ form_widget(form.name) }}</td>
-        <td>{{ form_widget(form.length) }}</td>
-        <td>{{ form_widget(form.width) }}</td>
-        <td>{{ form_widget(form.height) }}</td>
-        <td>{{ form_widget(form.weight) }}</td>
-        <td>{{ form_widget(form.volume) }}</td>
-        <td>{{ form_widget(form.diameterOut) }}</td>
-        <td>{{ form_widget(form.diameterIn) }}</td>s
-        <td>{{ form_widget(form.price) }}</td>
-        <td>{{ form_widget(form.comments) }}</td>
-        <td>
-            <div class="btn-group">
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i></button>
-                <button onclick="CatalogAdmin.deleteProduct($(this).parents('tr').attr('product-id'), $(this).parents('tr')); return false;" class="btn btn-danger"><i class="icon-trash icon-white"></i></button>
-                <button onclick="CatalogAdmin.view.removeProductFromEditor($(this).parents('tr')); return false;" class="btn btn-info"><i class="icon-remove icon-white"></i></button>
-            </div>
-        </td>
-        {{ form_rest(form) }}
-    </form>
+	<form action="{{ path('app_catalog_admin_saveProduct') }}" onsubmit="CatalogAdmin.saveProduct(this); return false;"
+		  method="post" {{ form_enctype(form) }}>
+		{{ form_errors(form) }}
+		<td>{{ form_widget(form.id) }}</td>
+		<td>{{ form_widget(form.description, { 'id': 'product_description_' ~ form.vars.value.id, 'attr': {'class': 'product_description'} }) }}</td>
+		<td>{{ form_widget(form.isActive) }}</td>
+		<td>{{ form_widget(form.newPrice) }}</td>
+		<td>{{ form_widget(form.nomen) }}</td>
+		<td>{{ form_widget(form.mark) }}</td>
+		<td>{{ form_widget(form.name) }}</td>
+		<td>{{ form_widget(form.length) }}</td>
+		<td>{{ form_widget(form.width) }}</td>
+		<td>{{ form_widget(form.height) }}</td>
+		<td>{{ form_widget(form.weight) }}</td>
+		<td>{{ form_widget(form.volume) }}</td>
+		<td>{{ form_widget(form.diameterOut) }}</td>
+		<td>{{ form_widget(form.diameterIn) }}</td>
+		s
+		<td>{{ form_widget(form.price) }}</td>
+		<td>{{ form_widget(form.comments) }}</td>
+		<td>
+			<div class="btn-group">
+				<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i></button>
+				<button onclick="CatalogAdmin.deleteProduct($(this).parents('tr').attr('product-id'), $(this).parents('tr')); return false;"
+						class="btn btn-danger"><i class="icon-trash icon-white"></i></button>
+				<button onclick="CatalogAdmin.view.removeProductFromEditor($(this).parents('tr')); return false;"
+						class="btn btn-info"><i class="icon-remove icon-white"></i></button>
+			</div>
+		</td>
+		{{ form_rest(form) }}
+	</form>
 </tr>

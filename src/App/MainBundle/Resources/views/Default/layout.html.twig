@@ -1,345 +1,383 @@
 {% extends "AppMainBundle:Default:base.layout.html.twig" %}
 
 {% block csslinks %}
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/font-awesome.min.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/bootstrap.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/twirl.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/visual-gbi.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/shop-gbi.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/plugins/shadowbox/shadowbox.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/jquery-ui.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/font-awesome.min.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/bootstrap.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/twirl.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/visual-gbi.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/shop-gbi.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/plugins/shadowbox/shadowbox.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery-ui.css') }}"/>
 {% endblock %}
 
 {% block jslinks %}
-    <script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-    {#<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>#}
+	<script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
+	{#<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>#}
 
-    {#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
+	{#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
 
 {% block body %}
-    <div class="redline"></div>
-    <div class="page-all">
-        <div class="page-header">
-            <div class="page-header-left-colon">
-                <div class="logo">
-                    <div class="logo-praim"><a href="/praimgroup"><img src="/bundles/main/images/tel-logo-praim.png"/></a></div>
-                    <div class="logo-prom" onclick="location.href='/'">
-                            <div class="logo-image"><img src="/bundles/main/images/logo.png" /></div>
-                            <div class="logo-text"> <a href="/">завод железобетонных изделий </a></div>
-                    </div>
+	<div class="redline"></div>
+	<div class="page-all">
+	<div class="page-header">
+		<div class="page-header-left-colon">
+			<div class="logo">
+				<div class="logo-praim"><a href="/praimgroup"><img src="/bundles/main/images/tel-logo-praim.png"/></a>
+				</div>
+				<div class="logo-prom" onclick="location.href='/'">
+					<div class="logo-image"><img src="/bundles/main/images/logo.png"/></div>
+					<div class="logo-text"><a href="/">завод железобетонных изделий </a></div>
+				</div>
 
-                </div>
-                <table class="m-contacts vcard">
-                    <tr>
-                        <td rowspan="2">
-                            <p>телефоны отдела продаж:</p>
-                            <p class="tel"><span>(812)</span> 648-13-80</p>
-                            <p class="tel"><span>(812)</span> 449-53-38</p>
-                            <p class="tel"><span>(812)</span> 642-47-09</p>
-                            <p style="margin-top: 15px;">звонок по России бесплатный</p>
-                            <p class="tel">8-800-700-50-98</p>
+			</div>
+			<table class="m-contacts vcard">
+				<tr>
+					<td rowspan="2">
+						<p>телефоны отдела продаж:</p>
 
-                        </td>
-                        <td>
-                            <p style="display: none" class="fn org url">www.stroyprombeton.ru</p>
-                            <p>электронная почта:</p>
-                            <a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div style="position: relative;top:28px;">
-                            <p style="margin-top: 15px;">адрес офиса продаж:</p>
-                            <p class="adr"><span class="locality">Санкт-Петербург</span>,<br />
-                           <span class="street-address"> пр. Елизарова 38А, офис 218</span></p>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+						<p class="tel"><span>(812)</span> 648-13-80</p>
 
-           <div class="page-header-right-colon-container">
-                <div class="page-header-right-colon">
+						<p class="tel"><span>(812)</span> 449-53-38</p>
 
-                  <!-- <table class="basket-wrapper">
-                        <tr>
-                            <td class="basket-wrapper empty">
-                            </td>
-                            <td class="basket-wrapper wrapper">
-                                <div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" style="height: 74px;">
-                                    <div class="basket basket-sticky" style="position: fixed; top: 20px;">
-                                        <div class="basket-content">
-                                            Нет<br>заказов
-                                        </div>
-                                        <div class="basket-actions">
-                                            <ul>
-                                                <li>Оформить</li>
-                                                <li>Удалить</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>-->
-                </div>
-            </div></div>
+						<p class="tel"><span>(812)</span> 642-47-09</p>
+
+						<p style="margin-top: 15px;">звонок по России бесплатный</p>
+
+						<p class="tel">8-800-700-50-98</p>
+
+					</td>
+					<td>
+						<p style="display: none" class="fn org url">www.stroyprombeton.ru</p>
+
+						<p>электронная почта:</p>
+						<a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div style="position: relative;top:28px;">
+							<p style="margin-top: 15px;">адрес офиса продаж:</p>
+
+							<p class="adr"><span class="locality">Санкт-Петербург</span>,<br/>
+								<span class="street-address"> пр. Елизарова 38А, офис 218</span></p>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="page-header-right-colon-container">
+			<div class="page-header-right-colon">
+
+				<!-- <table class="basket-wrapper">
+					  <tr>
+						  <td class="basket-wrapper empty">
+						  </td>
+						  <td class="basket-wrapper wrapper">
+							  <div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" style="height: 74px;">
+								  <div class="basket basket-sticky" style="position: fixed; top: 20px;">
+									  <div class="basket-content">
+										  Нет<br>заказов
+									  </div>
+									  <div class="basket-actions">
+										  <ul>
+											  <li>Оформить</li>
+											  <li>Удалить</li>
+										  </ul>
+									  </div>
+								  </div>
+							  </div>
+						  </td>
+					  </tr>
+				  </table>-->
+			</div>
+		</div>
+	</div>
 
 
+	<div class="clearing"></div>
+	<div class="menu-h">
+		<ul>
+			<li><a href="/">Завод ЖБИ</a></li>
+			<li><a href="/about/">О компании &laquo;СТК-ПромБетон&raquo;</a></li>
+			<li><a href="/proizvodstvo-gbi/">Производство ЖБИ изделий</a></li>
+			<li><a href="/gbi-visual/">Каталог ЖБИ продукции</a></li>
+			<li><a href="/obekty/">Наши объекты</a></li>
+			<li><a href="/contacts/">Контактная информация</a></li>
+			<li>
+				{% set cartLayout = app.session.get('cart') %}
+				<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
+					<div class="basket basket-sticky">
+						<div class="menu-basket">
+							<img src="/bundles/main/images/razdelitel.png">
+							{% if cartLayout and cartLayout.products and (cartLayout.totalProductsCount != 0) %}
+								<div class="basket-content">
+									<p>Товаров <br>в корзине: {{ cartLayout.totalProductsCount }}</p>
+								</div>
+								<div class="menu-basket-img">
+									<img src="/bundles/main/images/busket-full.png">
+								</div>
+								<div class="cart-actions">
+									<ul>
+										<li><a href="/order/" data-toggle="tooltip" data-placement="top"
+											   title="Оформить" id="order"> <img src="/bundles/main/images/ok.png"></a>
+										</li>
+										<li><a onclick="Cart.clean(); return false;" href="javscript:void(0);"
+											   class="clear-basket from-basket"> <img
+														src="/bundles/main/images/clear.png"></a></li>
+									</ul>
+								</div>
+							{% else %}
+								<div class="basket-content">
+									<p>Корзина пуста</p>
+								</div>
 
-        <div class="clearing"></div>
-        <div class="menu-h">
-            <ul>
-                <li><a href="/">Завод ЖБИ</a></li>
-                <li><a href="/about/">О компании &laquo;СТК-ПромБетон&raquo;</a></li>
-                <li><a href="/proizvodstvo-gbi/">Производство ЖБИ изделий</a></li>
-                <li><a href="/gbi-visual/">Каталог ЖБИ продукции</a></li>
-                <li><a href="/obekty/">Наши объекты</a></li>
-                <li><a href="/contacts/">Контактная информация</a></li>
-                <li>
-                    {% set cartLayout = app.session.get('cart') %}
-                    <div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" >
-                        <div class="basket basket-sticky" >
-                            <div class="menu-basket">
-                                <img src="/bundles/main/images/razdelitel.png">
-                                {% if cartLayout and cartLayout.products and (cartLayout.totalProductsCount != 0) %}
-                    <div class="basket-content">
-                        <p>Товаров <br>в корзине: {{ cartLayout.totalProductsCount }}</p>
-                    </div>
-                    <div class="menu-basket-img">
-                        <img src="/bundles/main/images/busket-full.png">
-                    </div>
-                    <div class="cart-actions">
-                        <ul>
-                            <li><a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order"> <img src="/bundles/main/images/ok.png"></a></li>
-                            <li><a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket"> <img src="/bundles/main/images/clear.png"></a></li>
-                        </ul>
-                    </div>
-                    {% else %}
-                            <div class="basket-content">
-                                <p>Корзина пуста</p>
-                            </div>
+								<div class="menu-basket-img">
+									<img src="/bundles/main/images/basket-empty.png">
+								</div>
+								<div class="cart-actions">
 
-                            <div class="menu-basket-img">
-                                <img src="/bundles/main/images/basket-empty.png">
-                            </div>
-                        <div class="cart-actions">
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="page-content">
+		<div class="menu-v">
+			<div class="menu-v-top"></div>
 
-                        </div>
-                    {% endif %}
-                    </div>
-                    </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    <div class="page-content">
-        <div class="menu-v">
-            <div class="menu-v-top"></div>
+			<div class="menu-v-content-wrapper">
+				<div class="menu-v-content">
 
-            <div class="menu-v-content-wrapper">
-                <div class="menu-v-content">
+					<ul>
+						<li><a href="/gbi/prom-stroy/">Общегражданское и промышленное строительство</a></li>
+						<li><a href="/gbi/dor-stroy/">Дорожное строительство</a></li>
+						<li><a href="/gbi/ingener-stroy/">Строительство инженерных сетей</a></li>
+						<li><a href="/gbi/energy-stroy/">Строительство энергетических объектов</a></li>
+						<li><a href="/gbi/blag-territory/">Благоустройство территорий</a></li>
+						<li><a href="/gbi/neftegaz-stroy/">Нефтегазовое строительство</a></li>
+					</ul>
 
-                    <ul>
-                        <li><a href="/gbi/prom-stroy/">Общегражданское и промышленное строительство</a></li>
-                        <li><a href="/gbi/dor-stroy/">Дорожное строительство</a></li>
-                        <li><a href="/gbi/ingener-stroy/">Строительство инженерных сетей</a></li>
-                        <li><a href="/gbi/energy-stroy/">Строительство энергетических объектов</a></li>
-                        <li><a href="/gbi/blag-territory/">Благоустройство территорий</a></li>
-                        <li><a href="/gbi/neftegaz-stroy/">Нефтегазовое строительство</a></li>
-                    </ul>
+				</div>
+			</div>
 
-                </div>
-            </div>
-
-            <div class="menu-v-bottom"></div>
-               <div class="m-izg" onclick="location.href='/izgotovlenie-gbi-po-chertezham/'">
-                   <a href="/izgotovlenie-gbi-po-chertezham/">изготовление по чертежам</a>
-               </div>
+			<div class="menu-v-bottom"></div>
+			<div class="m-izg" onclick="location.href='/izgotovlenie-gbi-po-chertezham/'">
+				<a href="/izgotovlenie-gbi-po-chertezham/">изготовление по чертежам</a>
+			</div>
 
 
 			<script>
-				$(".partners-table").click(function() {
+				$(".partners-table").click(function () {
 					window.location.href = "http://stroyprombeton.ru/praimgroup";
 
 				});
 			</script>
-            {#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
-            <div class="partners-table" onclick="window.open('/praimgroup'); return false;">
-                <div class="partners-table-header">
-                    <p>Группа</p>
-                    <img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
-                </div>
-                <table class="partners-table">
-                    <tr>
-                        <td>
-							<img src="{{ asset('bundles/main/images/metall.png')}}" alt="stk-metal.ru" class="logo"/>
+			{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
+			<div class="partners-table" onclick="window.open('/praimgroup'); return false;">
+				<div class="partners-table-header">
+					<p>Группа</p>
+					<img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
+				</div>
+				<table class="partners-table">
+					<tr>
+						<td>
+							<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo"/>
+
 							<p style="color:#005CC7;">СТК-МЕТАЛЛ</p>
+
 							<p class="partner-desc" style="color:#005CC7;">завод металлоконструкций</p>
-                        </td>
-                        <td>
-							<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo"style="margin-top: 5px;"/>
+						</td>
+						<td>
+							<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo"
+								 style="margin-top: 5px;"/>
+
 							<p style="color:#747675;">Строй<span style="color: #FFA700;">К</span>омплект</p>
-							<p class="partner-desc"  style="color:#747675;">проектирование и строительство</p>
-                        </td>
-                        <td>
+
+							<p class="partner-desc" style="color:#747675;">проектирование и строительство</p>
+						</td>
+						<td>
 							<img src="{{ asset('bundles/main/images/modul.png') }}" alt="stk-modul.ru" class="logo"/>
+
 							<p style="color: #C20000;">СТК-Модуль</p>
+
 							<p class="partner-desc" style="color: #C20000;">поставка нерудных материалов</p>
-                        </td>
-                        <td>
-							<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru" class="logo"  />
+						</td>
+						<td>
+							<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru"
+								 class="logo"/>
+
 							<p style="color:#0757a1">АвтоСпецСервис</p>
+
 							<p class="partner-desc" style="color:#0757a1">ремонт грузовых автомобилей</p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+						</td>
+					</tr>
+				</table>
+			</div>
 
 
+		</div>
 
-        </div>
 
+		<div class="content-container">
+			<div class="content">
+				<div class="search-form">
+					<table>
+						<tr>
+							<td class="search-form-title">Поиск в каталоге ЖБИ продукции</td>
+							<td class="search-form-input"><input id="search_condition" type="text"
+																 value="введите условия поиска ..."/></td>
+							<td class="search-form-submit"><input type="button" value="Найти"/></td>
+						</tr>
+					</table>
+				</div>
 
-        <div class="content-container">
-            <div class="content">
-                <div class="search-form">
-                    <table>
-                        <tr>
-                            <td class="search-form-title">Поиск в каталоге ЖБИ продукции</td>
-                            <td class="search-form-input"><input id="search_condition" type="text" value="введите условия поиска ..." /></td>
-                            <td class="search-form-submit"><input type="button" value="Найти" /></td>
-                        </tr>
-                    </table>
-                </div>
+				<div class="primary-content">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
 
-                <div class="primary-content">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="clearing"></div>
 
-    <div class="clearing"></div>
+	<div class="last-adds">
+		<!--[!last-adds-tmp!]-->
+	</div>
 
-    <div class="last-adds">
-        <!--[!last-adds-tmp!]-->
-    </div>
+	<div class="footer-empty">&nbsp;</div>
+	<div class="footer rcs">
+		<div>Copyright &copy; 2009&#151;2013 ООО &laquo;СТК-ПромБетон&raquo; (Санкт-Петербург)</div>
+		<div><a href="/">Завод ЖБИ</a>: продажа и производство ЖБИ</div>
+	</div>
+	</div>
 
-    <div class="footer-empty">&nbsp;</div>
-    <div class="footer rcs">
-        <div>Copyright &copy; 2009&#151;2013 ООО &laquo;СТК-ПромБетон&raquo; (Санкт-Петербург)</div>
-        <div><a href="/">Завод ЖБИ</a>: продажа и производство ЖБИ</div>
-    </div>
-    </div>
-
-    <div class="redline"></div>
+	<div class="redline"></div>
 {% endblock %}
 
 {% block js %}
 
-    <script type="text/javascript">
-        $(document).ready(function() {
+	<script type="text/javascript">
+		$(document).ready(function () {
 
-            $("#accordion1").accordion({autoHeight:false,collapsible:true});
-            $("#accordion2").accordion({autoHeight:false,collapsible:true});
-            $("#accordion3").accordion({autoHeight:false,collapsible:true});
-        });
-    </script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-    <script type="text/javascript">
-    $().tooltip(options)
-    </script>
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-27310520-1']);
-        _gaq.push(['_trackPageview']);
+			$("#accordion1").accordion({autoHeight: false, collapsible: true});
+			$("#accordion2").accordion({autoHeight: false, collapsible: true});
+			$("#accordion3").accordion({autoHeight: false, collapsible: true});
+		});
+	</script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
+	<script type="text/javascript">
+		$().tooltip(options)
+	</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27310520-1']);
+		_gaq.push(['_trackPageview']);
 
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+		(function () {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-27310520-1']);
-        _gaq.push(['_trackPageview']);
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27310520-1']);
+		_gaq.push(['_trackPageview']);
 
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+		(function () {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
-    <script type="text/javascript">
-        Shadowbox.init({
-            handleOversize: "drag",
-            animSequence: "hw"
-        });
-    </script>
+	<script type="text/javascript">
+		Shadowbox.init({
+			handleOversize: "drag",
+			animSequence: "hw"
+		});
+	</script>
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function (d, w, c) {
-            (w[c] = w[c] || []).push(function() {
-                try {
-                    w.yaCounter20644051 = new Ya.Metrika({id:20644051,
-                        webvisor:true,
-                        clickmap:true,
-                        trackLinks:true,
-                        accurateTrackBounce:true});
-                } catch(e) { }
-            });
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+		(function (d, w, c) {
+			(w[c] = w[c] || []).push(function () {
+				try {
+					w.yaCounter20644051 = new Ya.Metrika({id: 20644051,
+						webvisor: true,
+						clickmap: true,
+						trackLinks: true,
+						accurateTrackBounce: true});
+				} catch (e) {
+				}
+			});
 
-            var n = d.getElementsByTagName("script")[0],
-                    s = d.createElement("script"),
-                    f = function () { n.parentNode.insertBefore(s, n); };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+			var n = d.getElementsByTagName("script")[0],
+					s = d.createElement("script"),
+					f = function () {
+						n.parentNode.insertBefore(s, n);
+					};
+			s.type = "text/javascript";
+			s.async = true;
+			s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
 
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else { f(); }
-        })(document, window, "yandex_metrika_callbacks");
-    </script>
-	
-    <noscript><div><img src="//mc.yandex.ru/watch/20644051" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-	
-	<!-- Google analitics -->	
-<script type="text/javascript">
+			if (w.opera == "[object Opera]") {
+				d.addEventListener("DOMContentLoaded", f, false);
+			} else {
+				f();
+			}
+		})(document, window, "yandex_metrika_callbacks");
+	</script>
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-42242414-1']);
-  _gaq.push(['_trackPageview']);
+	<noscript>
+		<div><img src="//mc.yandex.ru/watch/20644051" style="position:absolute; left:-9999px;" alt=""/></div>
+	</noscript>
+	<!-- /Yandex.Metrika counter -->
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	<!-- Google analitics -->
+	<script type="text/javascript">
 
-</script>	
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-42242414-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function () {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+
+	</script>
 {% endblock %}

@@ -1,62 +1,6 @@
-app_catalog_admin:
-    pattern: /admin/
-    defaults: { _controller: AppCatalogBundle:Admin:index }
-
-app_catalog_admin_categoryChilds:
-    pattern: /admin/categoryChilds
-    defaults: { _controller: AppCatalogBundle:Admin:categoryChilds }
-
-app_catalog_admin_categoryProducts:
-    pattern: /admin/categoryProducts
-    defaults: { _controller: AppCatalogBundle:Admin:categoryProducts }
-
-app_catalog_admin_categoryParent:
-    pattern: /admin/categoryParent
-    defaults: { _controller: AppCatalogBundle:Admin:categoryParent }
-
-app_catalog_admin_getCategory:
-    pattern: /admin/getCategory
-    defaults: { _controller: AppCatalogBundle:Admin:getCategory }
-
-app_catalog_admin_saveCategory:
-    pattern: /admin/saveCategory
-    defaults: { _controller: AppCatalogBundle:Admin:saveCategory }
-
-app_catalog_admin_deleteCategory:
-    pattern: /admin/deleteCategory
-    defaults: { _controller: AppCatalogBundle:Admin:deleteCategory }
-
-app_catalog_admin_deleteProduct:
-    pattern: /admin/deleteProduct
-    defaults: { _controller: AppCatalogBundle:Admin:deleteProduct }
-
-app_catalog_admin_getBlankCategory:
-    pattern: /admin/getBlankCategory
-    defaults: { _controller: AppCatalogBundle:Admin:getBlankCategory }
-
-app_catalog_admin_getBlankProduct:
-    pattern: /admin/getBlankProduct
-    defaults: { _controller: AppCatalogBundle:Admin:getBlankProduct }
-
 app_catalog_explore_category:
     pattern: /{catUrl}/
     defaults: { _controller: AppCatalogBundle:Catalog:exploreRoute, section: 0, gbi: 0 }
-
-app_catalog_admin_getProduct:
-    pattern: /admin/getProduct
-    defaults: { _controller: AppCatalogBundle:Admin:getProduct }
-
-app_catalog_admin_saveProduct:
-    pattern: /admin/saveProduct
-    defaults: { _controller: AppCatalogBundle:Admin:saveProduct }
-
-app_catalog_admin_searchUncatProduct:
-    pattern: /admin/searchUncatProduct
-    defaults: { _controller: AppCatalogBundle:Admin:searchUncatProduct }
-
-app_catalog_admin_productCategory:
-    pattern: /admin/productCategory
-    defaults: { _controller: AppCatalogBundle:Admin:productCategory }
 
 app_catalog_homepage:
     pattern:  /

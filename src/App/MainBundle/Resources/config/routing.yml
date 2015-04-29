@@ -1,7 +1,3 @@
-app_main_gbi:
-  pattern: /gbi/
-  defaults: { _controller: AppMainBundle:StaticPage:gbiRedirect }
-
 app_main_object:
   pattern: /obekty/{alias}/
   defaults: { _controller: AppMainBundle:StaticPage:gbiObjeсtShow }

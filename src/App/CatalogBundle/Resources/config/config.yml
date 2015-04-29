@@ -1,0 +1,7 @@
+parameters:
+    app_catalog:
+        order_mail:
+            from:
+                - order@stroyprombeton.ru
+            to:
+                - info@stroyprombeton.ru

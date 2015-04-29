@@ -7,6 +7,6 @@ Email: {{ form.vars.value.email }}<br>
 --- Содержимое заказа --- <br>
 {% set i = 1 %}
 {% for product in cart.products %}
-    {{ i }}.)   {{ product.count }}  *  {{ product.model.id }} - {{ product.model.name }} - {{ product.model.mark }}<br>
-    {% set i = i + 1 %}
+	{{ i }}.)   {{ product.count }}  *  {{ product.model.id }} - {{ product.model.name }} - {{ product.model.mark }}<br>
+	{% set i = i + 1 %}
 {% endfor %}
