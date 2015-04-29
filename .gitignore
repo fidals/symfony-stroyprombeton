@@ -16,3 +16,8 @@ web/price.yml
 web/.htaccess
 web/*.html
 web/*.xls
+web/bundles/*
+!web/bundles/main/
+!web/bundles/main/*
+!web/bundles/catalog/
+!web/bundles/catalog/*
