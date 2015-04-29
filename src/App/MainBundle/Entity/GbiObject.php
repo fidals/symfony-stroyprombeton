@@ -5,7 +5,8 @@ namespace App\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * GbiObject
+ * Объекты, на которые мы поставляли ЖБИ.
+ * Есть раздел на сайте
  *
  * @ORM\Table(name="gbi_objects")
  * @ORM\Entity

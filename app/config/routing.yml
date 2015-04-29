@@ -1,19 +1,8 @@
-#app_catalog_migrate1:
-#    pattern: /migrate1/
-#    defaults: { _controller: AppCatalogBundle:Catalog:migrate1 }
-
-#app_catalog_migrate2:
-#    pattern: /migrate2/
-#    defaults: { _controller: AppCatalogBundle:Catalog:migrate2 }
-
-#app_catalog_migrate3:
-#    pattern: /migrate3/
-#    defaults: { _controller: AppCatalogBundle:Catalog:migrate3 }
-
 app_catalog:
     resource: "@AppCatalogBundle/Resources/config/routing.yml"
     prefix:   /gbi/
 
+#Обрабатывает поисковые запросы с автокомплита
 app_catalog_suggest:
     pattern: /suggest/
     defaults: { _controller: AppCatalogBundle:Catalog:suggest }
@@ -25,10 +14,12 @@ app_catalog_search:
 app_catalog_basket:
     pattern: /basket/
     defaults: { _controller: AppCatalogBundle:Cart:index }
+
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /adminka
 
+#TODO: Сомнительный код. Попробуй удалить и потестить. Исследуй доки SonataAdmin
 _sonata_admin:
     resource: .
     type: sonata_admin

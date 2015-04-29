@@ -12,11 +12,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
+    /**
+     * CRUD корзины
+     * @return Response
+     */
     public function indexAction()
     {
         $query = $this->getRequest()->query;
         $mode = $query->get('mode');
         $cartRp = CartRepository::getInstance($this);
+        $res = new Response();
 
         if($mode == 'add') {
             $code = (int) $query->get('code');
@@ -26,29 +31,33 @@ class CartController extends Controller
             $cart->addProduct($code, $rest);
             $cartRp->saveCart($cart);
 
-            return new Response($cart->getTotalProductsCount());
+            $res = new Response($cart->getTotalProductsCount());
         } elseif($mode == 'edit') {
             $order = $query->get('order_basket');
-            $cart = new Cart();
+            $cart = $cartRp->loadCart();
             if(!empty($order)) {
                 $parts = explode('-', $order);
                 foreach($parts as $part) {
                     $props = explode(':', $part);
-                    $cart->addProduct((int) $props[0], (int) $props[1]);
+                    $cart->addProduct((int)$props[0], (int)$props[1]);
                 }
                 $cartRp->saveCart($cart);
             }
-            return new Response($cart->serialize());
+            $res = new Response($cart->serialize());
         } elseif($mode == 'clear') {
             $cartRp->cleanCart();
-            return new Response();
         }
+
+        return $res;
     }
 
+    /**
+     * Форма заказа
+     * @return mixed - html-формы или редирект на страницу обработки формы
+     */
     public function orderAction()
     {
         $order = new Order();
-
         $form = $this->createForm(new OrderType(), $order);
 
         if ($this->getRequest()->getMethod() == 'POST') {
@@ -59,11 +68,11 @@ class CartController extends Controller
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Stroyprombeton | New order')
                     ->setTo('info@stroyprombeton.ru')
-                    ->setFrom('send@example.com')
+                    ->setFrom('order@stroyprombeton.ru')
                     ->setContentType("text/html")
                     ->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
-                        'form' => $form->createView(),
-                        'cart' => CartRepository::getInstance($this)->loadCart(true)
+                            'form' => $form->createView(),
+                            'cart' => CartRepository::getInstance($this)->loadCart(true)
                         ))
                     );
                 $mailer->send($message);

@@ -13,9 +13,7 @@
         <span class="location separate">/</span>
         <span class="location section"><a href="/order/">Оформление заказа на ЖБИ продукцию</a></span>
     </div>
-    <h1>
-        Оформление заказа на ЖБИ продукцию
-    </h1>
+    <h1>Оформление заказа на ЖБИ продукцию</h1>
     <div class="order">
         <div class="order-basket">
             <div class="gbi-list">
@@ -27,41 +25,41 @@
                         <th colspan="2">Количество</th>
                     </tr>
                     {% for product in order.products %}
-                    <tr>
-                        <td class="gbi-list photo">
-                            <a href="/assets/main/images/gbi-photos/323/763.jpg" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
-                                <img src="/assets/main/images/icon-photo.png">
-                            </a>
-                        </td>
-                        <td class="gbi-list code">
-                            {{ product.model.nomen }}
-                        </td>
-                        <td class="gbi-list name">
-                            <a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}" class="gbi-link">
-                                <span class="gbi-link name">
-                                    {{ product.model.name }}
-                                </span>
-                                <span class="gbi-link mark">
-                                    {{ product.model.mark }}
-                                </span>
-                            </a>
-                        </td>
-                        <td class="gbi-list price">
-                            {% if product.model.price %}
-                                {{ product.model.price }} руб.
-                            {% else %}
-                                По запросу
-                            {% endif %}
-                        </td>
-                        <td class="gbi-list rest rest-container">
-                            <input type="number" min="1" max="999999" code="{{ product.model.id }}" value="{{ product.count }}" class="order-rest" style="margin-right: 0px; padding-right: 0px;">
-                        </td>
-                        <td class="positions-list delete">
-                            <a href="javascript:void(0);" class="order-delete" title="Удалить из заказа">
-                                <img src="/assets/main/images/icon-delete.png">
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td class="gbi-list photo">
+                                <a href="/assets/main/images/gbi-photos/323/763.jpg" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
+                                    <img src="/assets/main/images/icon-photo.png">
+                                </a>
+                            </td>
+                            <td class="gbi-list code">
+                                {{ product.model.nomen }}
+                            </td>
+                            <td class="gbi-list name">
+                                <a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}" class="gbi-link">
+                                    <span class="gbi-link name">
+                                        {{ product.model.name }}
+                                    </span>
+                                    <span class="gbi-link mark">
+                                        {{ product.model.mark }}
+                                    </span>
+                                </a>
+                            </td>
+                            <td class="gbi-list price">
+                                {% if product.model.price %}
+                                    {{ product.model.price }} руб.
+                                {% else %}
+                                    По запросу
+                                {% endif %}
+                            </td>
+                            <td class="gbi-list rest rest-container">
+                                <input type="number" min="1" max="999999" code="{{ product.model.id }}" value="{{ product.count }}" class="order-rest" style="margin-right: 0px; padding-right: 0px;">
+                            </td>
+                            <td class="positions-list delete">
+                                <a href="javascript:void(0);" class="order-delete" title="Удалить из заказа">
+                                    <img src="/assets/main/images/icon-delete.png">
+                                </a>
+                            </td>
+                        </tr>
                     {% endfor %}
                     <tr class="gbi-list-header">
                         <td colspan="2"></td>
