@@ -55,7 +55,7 @@ class CatalogController extends Controller
 			throw $this->createNotFoundException();
 		}
 		$parents = $catRp->getPath($category);
-		if ($this->isParent($category, $catUrl)) {
+		if ($catRp->isParent($category, $catUrl)) {
 			$hierarchyOptions = array(
 				'childSort' => array(
 					'field' => 'title',
@@ -162,15 +162,8 @@ class CatalogController extends Controller
 		return new Response($json);
 	}
 
-	private function isParent($category, $catUrl)
+	public function indexAction()
 	{
-
-		$catRp = $this->getDoctrine()->getRepository("AppCatalogBundle:Category");
-		$parents = $catRp->getPath($category);
-		foreach ($parents as $parent) {
-			if ($parent->getAlias() == $catUrl)
-				return true;
-		}
-		return false;
+		return $this->redirect($this->generateUrl('app_main_index'), 301);
 	}
 }

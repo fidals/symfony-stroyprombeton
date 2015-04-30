@@ -4,4 +4,4 @@ app_catalog_explore_category:
 
 app_catalog_homepage:
     pattern:  /
-    defaults: { _controller: AppCatalogBundle:Default:index }
+    defaults: { _controller: AppCatalogBundle:Catalog:index }

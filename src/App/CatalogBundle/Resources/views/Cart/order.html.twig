@@ -27,10 +27,17 @@
 					{% for product in order.products %}
 						<tr>
 							<td class="gbi-list photo">
-								<a href="/assets/main/images/gbi-photos/323/763.jpg" rel="shadowbox[gbi-photos]"
-								   title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
-									<img src="/assets/main/images/icon-photo.png">
-								</a>
+								{% if product.model.isHavePhoto %}
+									<a href="/assets/main/images/gbi-photos/{{product.model.sectionId}}/{{product.model.id}}.jpg" rel="shadowbox[gbi-photos]"
+									   title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
+										<img src="/assets/main/images/icon-photo.png">
+									</a>
+								{% else %}
+									<a href="#" rel="shadowbox[gbi-photos]"
+									   title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
+										<img src="/assets/main/images/icon-photo.png">
+									</a>
+								{% endif %}
 							</td>
 							<td class="gbi-list code">
 								{{ product.model.nomen }}

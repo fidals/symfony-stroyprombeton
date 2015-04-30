@@ -56,12 +56,6 @@ class StaticPageController extends Controller
 	 */
 	public function showIndexAction()
 	{
-		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
-
-		$randomProducts = $this->getDoctrine()
-			->getRepository('AppCatalogBundle:Product')
-			->getRandomProducts();
-
 		return $this->render('AppMainBundle:StaticPage:indexPage.html.twig');
 	}
 

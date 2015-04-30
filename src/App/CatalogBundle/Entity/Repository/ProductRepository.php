@@ -3,6 +3,7 @@
 namespace App\CatalogBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Class ProductRepository
@@ -76,23 +77,17 @@ class ProductRepository extends EntityRepository
 
 	public function getRandomProducts($count = self::LIMIT)
 	{
-		$max = $this->getEntityManager()
-			->createQueryBuilder()
-			->select('MAX(p.id)')
-			->from(self::getClassName(), 'p')
-			->getQuery()
-			->getSingleScalarResult();
+		$rsm = new ResultSetMapping();
+		$rsm->addEntityResult(self::getClassName(), 'p');
+		$classMetadata = $this->getClassMetadata();
 
-		return $this->getEntityManager()
-			->createQueryBuilder()
-			->select('p')
-			->from(self::getClassName(), 'p')
-			->where('p.id >= :rand')
-			->andWhere('p.isHavePhoto = 1')
-			->orderBy('p.id')
-			->setMaxResults($count)
-			->setParameter('rand', rand(0, $max - 10000))
-			->getQuery()
-			->getResult();
+		foreach ($classMetadata->fieldMappings as $id => $obj) {
+			$rsm->addFieldResult('p', $obj["columnName"], $obj["fieldName"]);
+		}
+
+		$query = $this->getEntityManager()
+			->createNativeQuery('SELECT * FROM ' . $classMetadata->table['name'] .  ' WHERE ' . $classMetadata->columnNames['isHavePhoto'] . ' = ? ORDER BY RAND() ASC LIMIT ?', $rsm);
+		$query->setParameters(array(1, $count));
+		return $query->getResult();
 	}
 }
