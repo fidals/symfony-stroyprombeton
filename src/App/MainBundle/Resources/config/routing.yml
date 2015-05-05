@@ -1,7 +1,14 @@
+# Отображает статическую страницу с динамическим наполнением (objects)
+app_main_object_root:
+  pattern: /obekty/
+  defaults: { _controller: AppMainBundle:StaticPage:showObjects }
+
 app_main_object:
   pattern: /obekty/{alias}/
   defaults: { _controller: AppMainBundle:StaticPage:gbiObjeсtShow }
 
+# Этот роут отрабатывает все url, которые не подошли предыдущим роутам
+# TODO: исправить
 app_main_staticpage:
     pattern:  /{alias}/
     defaults: { _controller: AppMainBundle:StaticPage:show }

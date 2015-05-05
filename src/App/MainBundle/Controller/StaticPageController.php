@@ -24,6 +24,25 @@ class StaticPageController extends Controller
 	);
 
 	/**
+	 * Отображает статичную страницу с алиасом "obekty", наполняет ее объектами из базы
+	 * @return Response
+	 */
+	public function showObjectsAction()
+	{
+		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
+		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
+
+		$staticPage = $spRepository->findOneByAlias('obekty');
+		$objects = $goRp->findAll();
+
+		$twigArgs = array();
+		$twigArgs['staticPage'] = $staticPage;
+		$twigArgs['objects'] = $objects;
+
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
+	}
+
+	/**
 	 * Показывает статичные страницы напрямую из базы
 	 * @param $alias - по факту полный урл. Т.е. может содержать символ "/"
 	 * @return Response
@@ -41,13 +60,7 @@ class StaticPageController extends Controller
 			throw $this->createNotFoundException();
 		}
 
-		$twigArgs = array('staticPage' => $staticPage);
-		if ($alias == 'obekty') {
-			$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-			$objects = $goRp->findAll();
-			$twigArgs['objects'] = $objects;
-		}
-		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', array('staticPage' => $staticPage));
 	}
 
 	/**
