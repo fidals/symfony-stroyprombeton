@@ -67,8 +67,8 @@ class CartController extends Controller
 
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
-					->setTo($this->container->getParameter('parameters.app_catalog.order_mail.to'))
-					->setFrom($this->container->getParameter('parameters.app_catalog.order_mail.from'))
+					->setTo($this->container->getParameter('app_catalog')['order_mail']['to'])
+					->setFrom($this->container->getParameter('app_catalog')['order_mail']['from'])
 					->setContentType("text/html")
 					->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
 							'form' => $form->createView(),
