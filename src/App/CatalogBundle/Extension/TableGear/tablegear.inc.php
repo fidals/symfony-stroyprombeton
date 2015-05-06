@@ -1,7 +1,7 @@
 <?php
 include($modx->config['base_path']."assets/modules/tablegear/TableGear1.6.1.php");
 
-
+// --> Эти options нужны для конигурации TableGear
 $options = array();
 $options["database"] = array();
 $options["pagination"] = array();
@@ -27,6 +27,7 @@ while($row = $modx->db->getRow($result)) {
 	$options["headers"]["tv_".strtolower($row["name"])]=$row["caption"];
 }
 
+// --> Предполагаю, что этот класс юзаем "из коробки" и вообще не трогаем в нём код
 $table = new TableGear($options);
 
 $cookie_ff=array();
@@ -34,6 +35,7 @@ if( isset($_COOKIE['tg_filterf']) ){
 	$cookie_ff=unserialize($_COOKIE['tg_filterf']);
 }
 
+// --> Здесь через $_POST и $_COOKIE формируется список полей. Вроде менять ничего не надо
 $ff="";
 $sort_ff="";
 foreach($options["headers"] as $ind => $val){
@@ -77,6 +79,7 @@ if( count($_POST["ff"])>0 ){
 <body>
   <div>
 <script type="text/javascript">
+// --> Скрипты со стилями-событями. Менять ничего не надо.
 function enableParentSelectionTG() {
     parent.tree.ca = "parent_tg";
 	$(".choose_razd").css('opacity', '0.3');
@@ -123,9 +126,9 @@ $(function() {
 <input type="hidden" name="parent_tg_id" value="<?php if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ) echo intval($_POST['parent_tg_id']); ?>">
 <input type="hidden" name="parent_tg_name" value="">
 <table>
-  <tr><td colspan="3"><span style="cursor: pointer; color: #EF1D1D; font-weight: bold;" onclick="enableParentSelectionTG();" class="choose_razd">Выберите раздел</span></td></tr>
-  <tr><td colspan="3" style="padding-top: 5px;">(<a class="hide_sort" href="javascript:;"><?php if( isset($_COOKIE['hide_sort']) && $_COOKIE['hide_sort']==0){ echo 'показать</a>)<tr>';}else{ echo 'скрыть</a>)<tr>'; } ?></td></tr>
-  
+	<tr><td colspan="3"><span style="cursor: pointer; color: #EF1D1D; font-weight: bold;" onclick="enableParentSelectionTG();" class="choose_razd">Выберите раздел</span></td></tr>
+	<tr><td colspan="3" style="padding-top: 5px;">(<a class="hide_sort" href="javascript:;"><?php if( isset($_COOKIE['hide_sort']) && $_COOKIE['hide_sort']==0){ echo 'показать</a>)<tr>';}else{ echo 'скрыть</a>)<tr>'; } ?></td></tr>
+<!--  Здесь показывается список полей-->
 	<td valign="top" colspan="2" style="padding-bottom: 10px;<?php if( isset($_COOKIE['hide_sort']) && $_COOKIE['hide_sort']==0){ echo ' display: none;'; } ?>" class="trhide">Фильтр полей:<br/>
 		<!--<select name="ff[]" multiple size="7"><?php echo $ff; ?></select>-->
 		<div style="overflow-y: scroll; width: 365px; height: 130px; border: 1px solid #cacaca; padding: 2px 5px;"><?php echo $ff; ?></div>
@@ -142,11 +145,12 @@ $(function() {
   	<td style="width: 10px;">
 		<select name="type_search" style="width: 150px;" onchange="if( $(this).val()==2 ){ $('.range_search').show(); $('.text_search').hide(); }else{ $('.range_search').hide(); $('.text_search').show(); }">
 			<option value="0">Точное соответствие</option>
-			<option value="1" <?php if(isset($_POST['type_search']) && $_POST['type_search']==1 ) echo 'selected'; ?>>Не точное соответствие</option>
+			<option value="1" <?php if(isset($_POST['type_search']) && $_POST['type_search']==1 ) echo 'selected'; ?>>Неточное соответствие</option>
 			<option value="2" <?php if(isset($_POST['type_search']) && $_POST['type_search']==2 ) echo 'selected'; ?>>Числовой диапазон</option>
 		</select>
 	</td>
 	<td style="width: 250px; white-space: nowrap;">
+<!-- Здесь заканчивается код, нужный для задачи 1-->
 	Поиск по:&nbsp;
 	<select name="field_search" style="width: 150px;">
 		<option value="pagetitle" <?php if(isset($_POST['field_search']) && $_POST['field_search']=="pagetitle" ) echo 'selected'; ?>>Заголовок</option>
@@ -154,6 +158,7 @@ $(function() {
 		<option value="description" <?php if(isset($_POST['field_search']) && $_POST['field_search']=="description" ) echo 'selected'; ?>>Описание</option>
 		<option value="introtext" <?php if(isset($_POST['field_search']) && $_POST['field_search']=="introtext" ) echo 'selected'; ?>>Аннотация</option>
 <?php
+// --> Это просто список свойств. Тот самый, что у нас хардкодом
 $result = $modx->db->query("SELECT * FROM ". $modx->getFullTableName('site_tmplvars')." WHERE `id` > 4" );
 
 while($row = $modx->db->getRow($result)) {
@@ -191,6 +196,7 @@ if( isset($_REQUEST['ff']) && count($_REQUEST['ff'])>0 ){
 
 if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
 
+// --> Вот это вот всё с $isfolder - хитрожопая проверка. Она нужна только на модХ хитрожопой базе. Убери её
 	$isfolder=false;
 	$res = $modx->db->query("SELECT * FROM modx_site_content WHERE modx_site_content.parent = ".intval($_POST['parent_tg_id']));
 	while($row = $modx->db->getRow($res)) {
@@ -202,6 +208,7 @@ if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
 	if( $isfolder ){
 		echo '<table><tr><td style="color: red;">Ошибка: Дочерние ресурсы выбранного раздела не являются конечными</td></tr></table>';
 	}else{
+	// --> Здесь нужен просто запрос по формированию списка товаров с выделенными полями. Запрос будет совсем другого вида, не как здесь
 $table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1 
 WHERE tb1.parent = ".intval($_POST['parent_tg_id'])." ORDER BY tb1.id ASC" );
 
@@ -215,6 +222,7 @@ WHERE tb1.parent = ".intval($_POST['parent_tg_id'])." ORDER BY tb1.id ASC" );
 <?php
 	}
 }elseif( isset($_POST['type_search']) && $_POST['type_search']!="" ){
+// --> Обработка выбранных условий. Нужно будет переписать каждый запрос. Будет весело =)
 	if( preg_match("/tv_/i", $_POST['field_search']) ){
 	  if( intval($_POST['type_search'])==2 && $_POST['from_query']!="" ){
 		  $field_search="tb2.tmplvarid = ".preg_replace("/tv_/i", "", $_POST['field_search'])." AND tb2.value >= '".$_POST['from_query']."' AND tb2.value <= '".$_POST['to_query']."'";
@@ -233,6 +241,7 @@ WHERE tb1.parent = ".intval($_POST['parent_tg_id'])." ORDER BY tb1.id ASC" );
 	  }
 	}
 
+// --> Запрос с условиями у нас будет только по одной таблице products. Поэтому будет гораздо проще.
 $table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1 
 LEFT JOIN modx_site_tmplvar_contentvalues as tb2 ON (tb2.contentid = tb1.id)
 WHERE ".$field_search." GROUP BY tb1.id" );
