@@ -28,13 +28,11 @@
 						<tr>
 							<td class="gbi-list photo">
 								{% if product.model.isHavePhoto %}
-									<a href="/assets/main/images/gbi-photos/{{product.model.sectionId}}/{{product.model.id}}.jpg" rel="shadowbox[gbi-photos]"
-									   title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
+									<a href="/assets/main/images/gbi-photos/{{ product.model.sectionId }}/{{ product.model.id }}.jpg" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
 										<img src="/assets/main/images/icon-photo.png">
 									</a>
 								{% else %}
-									<a href="#" rel="shadowbox[gbi-photos]"
-									   title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
+									<a href="#" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
 										<img src="/assets/main/images/icon-photo.png">
 									</a>
 								{% endif %}
@@ -61,9 +59,7 @@
 								{% endif %}
 							</td>
 							<td class="gbi-list rest rest-container">
-								<input type="number" min="1" max="999999" code="{{ product.model.id }}"
-									   value="{{ product.count }}" class="order-rest"
-									   style="margin-right: 0px; padding-right: 0px;">
+								<input type="number" min="1" max="999999" code="{{ product.model.id }}" value="{{ product.count }}" class="order-rest" style="margin-right: 0px; padding-right: 0px;">
 							</td>
 							<td class="positions-list delete">
 								<a href="javascript:void(0);" class="order-delete" title="Удалить из заказа">
@@ -74,8 +70,7 @@
 					{% endfor %}
 					<tr class="gbi-list-header">
 						<td colspan="2"></td>
-						<th class="clear-basket"><a href="javascript:void(0);" class="clear-basket">Удалить все
-								заказы</a></th>
+						<th class="clear-basket"><a href="javascript:void(0);" class="clear-basket">Удалить все заказы</a></th>
 						<th>ЖБИ</th>
 						<th colspan="2" class="cnt-goods">{{ order.totalProductsCount }}</th>
 					</tr>

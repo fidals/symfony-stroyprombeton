@@ -69,7 +69,7 @@ class CartController extends Controller
 					->setSubject('Stroyprombeton | New order')
 					->setTo($this->container->getParameter('app_catalog')['order_mail']['to'])
 					->setFrom($this->container->getParameter('app_catalog')['order_mail']['from'])
-					->setContentType("text/html")
+					->setContentType('text/html')
 					->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
 							'form' => $form->createView(),
 							'cart' => CartRepository::getInstance($this)->loadCart(true)

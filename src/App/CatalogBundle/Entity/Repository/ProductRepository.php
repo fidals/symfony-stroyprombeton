@@ -70,8 +70,6 @@ class ProductRepository extends EntityRepository
 
 		$query = $expr
 			->setParameter('term', '%' . $term . '%');
-		//$qts =$query->__toString();
-		//die();
 		return ($returnObjAsArray) ? $query->getQuery()->getArrayResult() : $query->getQuery()->getResult();
 	}
 
@@ -82,11 +80,17 @@ class ProductRepository extends EntityRepository
 		$classMetadata = $this->getClassMetadata();
 
 		foreach ($classMetadata->fieldMappings as $id => $obj) {
-			$rsm->addFieldResult('p', $obj["columnName"], $obj["fieldName"]);
+			$rsm->addFieldResult('p', $obj['columnName'], $obj['fieldName']);
 		}
 
+		$queryString = 'SELECT * FROM '
+			. $classMetadata->table['name']
+			. ' WHERE '
+			. $classMetadata->columnNames['isHavePhoto']
+			. ' = ? ORDER BY RAND() ASC LIMIT ?';
+
 		$query = $this->getEntityManager()
-			->createNativeQuery('SELECT * FROM ' . $classMetadata->table['name'] .  ' WHERE ' . $classMetadata->columnNames['isHavePhoto'] . ' = ? ORDER BY RAND() ASC LIMIT ?', $rsm);
+			->createNativeQuery($queryString, $rsm);
 		$query->setParameters(array(1, $count));
 		return $query->getResult();
 	}

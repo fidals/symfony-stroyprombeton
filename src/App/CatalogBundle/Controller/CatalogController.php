@@ -87,7 +87,7 @@ class CatalogController extends Controller
 			}
 		} else {
 			//TODO:сделать редиректы
-			return $this->render("AppMainBundle:StaticPage:404.html.twig");
+			return $this->render('AppMainBundle:StaticPage:404.html.twig');
 		}
 	}
 
