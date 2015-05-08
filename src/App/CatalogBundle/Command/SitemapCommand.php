@@ -115,10 +115,11 @@ class SitemapCommand extends ContainerAwareCommand
 	{
 		//Постфикс. Нужен для генерации url. У продуктов, например, подставляем id с вопросиками
 		$urlPostfix = '';
-		if ($entityData['entityType'] == 'product')
+		if ($entityData['entityType'] == 'product') {
 			$urlPostfix = '?section=' . $entityData['section'] . '&gbi=' . $entityData['gbi'];
-		elseif ($entityData['entityType'] == 'category')
-			$urlPostfix = '?section=' . $entityData['section']; else {
+		} elseif ($entityData['entityType'] == 'category') {
+			$urlPostfix = '?section=' . $entityData['section'];
+		} else {
 			//TODO: Бросаем Exception. Скорее всего есть симфониевый
 		}
 		$urlPostfix = str_replace("&amp;", "&", $urlPostfix);

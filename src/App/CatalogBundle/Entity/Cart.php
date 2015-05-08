@@ -2,6 +2,13 @@
 
 namespace App\CatalogBundle\Entity;
 
+
+/**
+ * Класс корзины
+ * Не содержит аннотаций, не сязан с БД
+ * Class Cart
+ * @package App\CatalogBundle\Entity
+ */
 class Cart
 {
 	/**

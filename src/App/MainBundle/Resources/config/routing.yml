@@ -8,12 +8,12 @@ app_main_object:
   defaults: { _controller: AppMainBundle:StaticPage:gbiObjeсtShow }
 
 # Этот роут отрабатывает все url, которые не подошли предыдущим роутам
-# TODO: исправить
+# TODO: Сделай свою таблицу для каждого типа статичных страниц
 app_main_staticpage:
-    pattern:  /{alias}/
-    defaults: { _controller: AppMainBundle:StaticPage:show }
-    requirements:
-            alias: ".+"
+  pattern:  /{alias}/
+  defaults: { _controller: AppMainBundle:StaticPage:show }
+  requirements:
+    alias: ".+"
 
 app_main_index:
   pattern: /

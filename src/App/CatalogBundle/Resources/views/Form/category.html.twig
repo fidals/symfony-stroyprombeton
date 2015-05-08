@@ -1,6 +1,5 @@
 <tr {% if form.vars.value.id %} category-id="{{ form.vars.value.id }}" {% endif %}>
-	<form action="{{ path('app_catalog_admin_saveCategory') }}"
-		  onsubmit="CatalogAdmin.saveCategory(this); return false;" method="post" {{ form_enctype(form) }}>
+	<form action="{{ path('app_catalog_admin_saveCategory') }}" onsubmit="CatalogAdmin.saveCategory(this); return false;" method="post" {{ form_enctype(form) }}>
 		{{ form_errors(form) }}
 		<td>{{ form_widget(form.id) }}</td>
 		<td>{{ form_widget(form.description, { 'id': 'category_description_' ~ form.vars.value.id, 'attr': {'class': 'category_description' } }) }}</td>

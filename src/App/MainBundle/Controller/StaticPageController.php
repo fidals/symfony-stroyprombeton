@@ -35,9 +35,10 @@ class StaticPageController extends Controller
 		$staticPage = $spRepository->findOneByAlias('obekty');
 		$objects = $goRp->findAll();
 
-		$twigArgs = array();
-		$twigArgs['staticPage'] = $staticPage;
-		$twigArgs['objects'] = $objects;
+		$twigArgs = array(
+			'staticPage' => $staticPage,
+			'objects'    => $objects
+		);
 
 		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
 	}

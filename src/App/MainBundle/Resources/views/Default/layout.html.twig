@@ -137,12 +137,16 @@
 								</div>
 								<div class="cart-actions">
 									<ul>
-										<li><a href="/order/" data-toggle="tooltip" data-placement="top"
-											   title="Оформить" id="order"> <img src="/bundles/main/images/ok.png"></a>
+										<li>
+											<a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order">
+												<img src="/bundles/main/images/ok.png">
+											</a>
 										</li>
-										<li><a onclick="Cart.clean(); return false;" href="javscript:void(0);"
-											   class="clear-basket from-basket"> <img
-														src="/bundles/main/images/clear.png"></a></li>
+										<li>
+											<a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">
+												<img src="/bundles/main/images/clear.png">
+											</a>
+										</li>
 									</ul>
 								</div>
 							{% else %}
@@ -342,8 +346,8 @@
 			});
 
 			var n = d.getElementsByTagName("script")[0],
-					s = d.createElement("script"),
-					f = function () {
+				s = d.createElement("script"),
+				f = function () {
 						n.parentNode.insertBefore(s, n);
 					};
 			s.type = "text/javascript";

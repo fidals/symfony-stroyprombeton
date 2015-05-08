@@ -1,6 +1,5 @@
 <tr {% if form.vars.value.id %} product-id="{{ form.vars.value.id }}" {% endif %}>
-	<form action="{{ path('app_catalog_admin_saveProduct') }}" onsubmit="CatalogAdmin.saveProduct(this); return false;"
-		  method="post" {{ form_enctype(form) }}>
+	<form action="{{ path('app_catalog_admin_saveProduct') }}" onsubmit="CatalogAdmin.saveProduct(this); return false;" method="post" {{ form_enctype(form) }}>
 		{{ form_errors(form) }}
 		<td>{{ form_widget(form.id) }}</td>
 		<td>{{ form_widget(form.description, { 'id': 'product_description_' ~ form.vars.value.id, 'attr': {'class': 'product_description'} }) }}</td>
@@ -16,7 +15,6 @@
 		<td>{{ form_widget(form.volume) }}</td>
 		<td>{{ form_widget(form.diameterOut) }}</td>
 		<td>{{ form_widget(form.diameterIn) }}</td>
-		s
 		<td>{{ form_widget(form.price) }}</td>
 		<td>{{ form_widget(form.comments) }}</td>
 		<td>

@@ -12,15 +12,17 @@
 			{# start nesting macro #}
 			{% macro nesting(category) %}
 				{% for categoryChildren in category.__children %}
-					<category id="{{ categoryChildren.id }}"
-							  parentId="{{ category.id }}">{% if categoryChildren.name %}{{ categoryChildren.name }}{% else %}{{ categoryChildren.title }}{% endif %}</category>
+					<category id="{{ categoryChildren.id }}" parentId="{{ category.id }}">
+						{% if categoryChildren.name %}{{ categoryChildren.name }}{% else %}{{ categoryChildren.title }}{% endif %}
+					</category>
 					{{ _self.nesting(categoryChildren) }}
 				{% endfor %}
 			{% endmacro %}
 			{# end nesting macro #}
 			{% for category in tree %}
-				<category
-						id="{{ category.id }}">{% if category.name %}{{ category.name }}{% else %}{{ category.title }}{% endif %}</category>
+				<category id="{{ category.id }}">
+					{% if category.name %}{{ category.name }}{% else %}{{ category.title }}{% endif %}
+				</category>
 				{{ _self.nesting(category) }}
 			{% endfor %}
 		</categories>

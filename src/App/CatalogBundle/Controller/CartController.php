@@ -53,7 +53,8 @@ class CartController extends Controller
 
 	/**
 	 * Форма заказа
-	 * @return mixed - html-формы или редирект на страницу обработки формы
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
 	 */
 	public function orderAction(Request $request)
 	{

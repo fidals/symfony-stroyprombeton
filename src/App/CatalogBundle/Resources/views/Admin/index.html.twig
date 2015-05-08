@@ -99,8 +99,10 @@
 			<div class="tabbable">
 				<ul class="nav nav-tabs">
 					{% for category in rootCategories %}
-						<li title="{{ category.title }}"><a href="#categoryTab{{ loop.index0 }}"
-															data-toggle="tab">{{ category.title|slice(0, 15) }}...</a>
+						<li title="{{ category.title }}">
+							<a href="#categoryTab{{ loop.index0 }}" data-toggle="tab">
+								{{ category.title|slice(0, 15) }}...
+							</a>
 						</li>
 					{% endfor %}
 				</ul>
@@ -116,13 +118,14 @@
 	</div>
 	<div id="uncat-products">
 		<div class="header">
-			<p><b>Продукты без категории</b> <a style="font-size: 10px" onclick="$('#uncat-products-content').toggle()">(свернуть)</a>
+			<p>
+				<b>Продукты без категории</b>
+				<a style="font-size: 10px" onclick="$('#uncat-products-content').toggle()">(свернуть)</a>
 			</p>
 		</div>
 		<div id="uncat-products-content">
 			<div class="form-search">
-				<form class="input-append"
-					  onsubmit="CatalogAdmin.searchUncatProduct($(this).find('input').val()); return false;">
+				<form class="input-append" onsubmit="CatalogAdmin.searchUncatProduct($(this).find('input').val()); return false;">
 					<input type="text" class="span2 search-query" style="width: 160px">
 					<button type="submit" class="btn"><span class="icon-search"></span></button>
 				</form>
