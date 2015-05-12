@@ -233,7 +233,7 @@ class AdminController extends Controller
             $product->setName('Название продукта');
             $product->setMark('Марка');
             $product->setIsActive(true);
-            $product->setNewPrice(true);
+            $product->setIsNewPrice(true);
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($product);
             $em->flush();

@@ -26,7 +26,7 @@ class GbiObject
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="menuTitle", type="string", length=255)
+	 * @ORM\Column(name="menu_title", type="string", length=255)
 	 */
 	private $menuTitle;
 
@@ -70,7 +70,6 @@ class GbiObject
 	public function setTitle($title)
 	{
 		$this->title = $title;
-
 		return $this;
 	}
 
@@ -93,7 +92,6 @@ class GbiObject
 	public function setMenuTitle($menuTitle)
 	{
 		$this->menuTitle = $menuTitle;
-
 		return $this;
 	}
 
@@ -116,7 +114,6 @@ class GbiObject
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
-
 		return $this;
 	}
 
@@ -139,7 +136,6 @@ class GbiObject
 	public function setOrd($ord)
 	{
 		$this->ord = $ord;
-
 		return $this;
 	}
 
@@ -162,7 +158,6 @@ class GbiObject
 	public function setContent($content)
 	{
 		$this->content = $content;
-
 		return $this;
 	}
 
@@ -175,5 +170,4 @@ class GbiObject
 	{
 		return $this->content;
 	}
-
 }

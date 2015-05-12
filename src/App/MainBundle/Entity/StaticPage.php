@@ -31,18 +31,11 @@ class StaticPage
 	private $alias;
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="published", type="integer", nullable=false)
-	 */
-	private $published;
-
-	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="introtext", type="text", nullable=true)
+	 * @ORM\Column(name="intro_text", type="text", nullable=true)
 	 */
-	private $introtext;
+	private $introText;
 
 	/**
 	 * @var string
@@ -52,6 +45,7 @@ class StaticPage
 	private $content;
 
 	/**
+	 * Id шаблона
 	 * @var integer
 	 *
 	 * @ORM\Column(name="template", type="integer", nullable=false)
@@ -61,12 +55,13 @@ class StaticPage
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="menutitle", type="string", length=255, nullable=false)
+	 * @ORM\Column(name="menu_title", type="string", length=255, nullable=false)
 	 */
-	private $menutitle;
+	private $menuTitle;
 
 	/**
-	 * @param string $alias
+	 * @param $alias
+	 * @return $this
 	 */
 	public function setAlias($alias)
 	{
@@ -83,7 +78,8 @@ class StaticPage
 	}
 
 	/**
-	 * @param string $content
+	 * @param $content
+	 * @return $this
 	 */
 	public function setContent($content)
 	{
@@ -100,7 +96,8 @@ class StaticPage
 	}
 
 	/**
-	 * @param int $id
+	 * @param $id
+	 * @return $this
 	 */
 	public function setId($id)
 	{
@@ -117,58 +114,44 @@ class StaticPage
 	}
 
 	/**
-	 * @param string $introtext
+	 * @param $introText
+	 * @return $this
 	 */
-	public function setIntrotext($introtext)
+	public function setIntroText($introText)
 	{
-		$this->introtext = $introtext;
+		$this->introText = $introText;
 		return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getIntrotext()
+	public function getIntroText()
 	{
-		return $this->introtext;
+		return $this->introText;
 	}
 
 	/**
-	 * @param string $menutitle
+	 * @param $menuTitle
+	 * @return $this
 	 */
-	public function setMenutitle($menutitle)
+	public function setMenuTitle($menuTitle)
 	{
-		$this->menutitle = $menutitle;
+		$this->menuTitle = $menuTitle;
 		return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getMenutitle()
+	public function getMenuTitle()
 	{
-		return $this->menutitle;
+		return $this->menuTitle;
 	}
 
 	/**
-	 * @param int $published
-	 */
-	public function setPublished($published)
-	{
-		$this->published = $published;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getPublished()
-	{
-		return $this->published;
-	}
-
-	/**
-	 * @param int $template
+	 * @param $template
+	 * @return $this
 	 */
 	public function setTemplate($template)
 	{
@@ -184,6 +167,10 @@ class StaticPage
 		return $this->template;
 	}
 
+	/**
+	 * Для генерации sitemap
+	 * @return array
+	 */
 	public function getSitemapData()
 	{
 		return array(

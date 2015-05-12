@@ -6,8 +6,6 @@ use App\MainBundle\Entity\PageTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use App\CatalogBundle\Extension\Utils;
 
 /**
@@ -92,7 +90,8 @@ class Category
 	}
 
 	/**
-	 * @param string $alias
+	 * @param $alias
+	 * @return $this
 	 */
 	public function setAlias($alias)
 	{
@@ -109,7 +108,8 @@ class Category
 	}
 
 	/**
-	 * @param int $id
+	 * @param $id
+	 * @return $this
 	 */
 	public function setId($id)
 	{
@@ -126,7 +126,8 @@ class Category
 	}
 
 	/**
-	 * @param int $id
+	 * @param $nomen
+	 * @return $this
 	 */
 	public function setNomen($nomen)
 	{
@@ -142,13 +143,14 @@ class Category
 		return $this->nomen;
 	}
 
-	/*
-	 * Object relations methods
+	/**
+	 * @param $products
+	 * @return $this
 	 */
-
 	public function setProducts($products)
 	{
 		$this->products = $products;
+		return $this;
 	}
 
 	public function getProducts()
@@ -157,7 +159,8 @@ class Category
 	}
 
 	/**
-	 * @param string $mark
+	 * @param $mark
+	 * @return $this
 	 */
 	public function setMark($mark)
 	{
@@ -174,7 +177,8 @@ class Category
 	}
 
 	/**
-	 * @param int $order
+	 * @param $order
+	 * @return $this
 	 */
 	public function setOrder($order)
 	{
@@ -191,7 +195,8 @@ class Category
 	}
 
 	/**
-	 * @param float $coefficient
+	 * @param $coefficient
+	 * @return $this
 	 */
 	public function setCoefficient($coefficient)
 	{
@@ -207,6 +212,10 @@ class Category
 		return $this->coefficient;
 	}
 
+	/**
+	 * @param Category $parent
+	 * @return $this
+	 */
 	public function setParent(Category $parent = null)
 	{
 		$this->parent = $parent;
@@ -219,7 +228,8 @@ class Category
 	}
 
 	/**
-	 * @param int $photoId
+	 * @param $photoId
+	 * @return $this
 	 */
 	public function setPhotoId($photoId)
 	{
@@ -240,6 +250,10 @@ class Category
 		$this->closures[] = $closure;
 	}
 
+	/**
+	 * Для генерации sitemap
+	 * @return array
+	 */
 	public function getSitemapData()
 	{
 		return array(
@@ -254,6 +268,9 @@ class Category
 		);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function __toString()
 	{
 		return (string)$this->getId() . "." . (string)$this->getTitle();

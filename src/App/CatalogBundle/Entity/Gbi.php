@@ -90,9 +90,9 @@ class Gbi
 	/**
 	 * @var boolean
 	 *
-	 * @ORM\Column(name="place_main_page", type="boolean", nullable=true)
+	 * @ORM\Column(name="is_on_main_page", type="boolean", nullable=true)
 	 */
-	private $placeMainPage;
+	private $isOnMainPage;
 
 	/**
 	 * @var integer
@@ -104,16 +104,18 @@ class Gbi
 	/**
 	 * @var float
 	 *
-	 * @ORM\Column(name="koef_price", type="float", nullable=false)
+	 * @ORM\Column(name="price_coefficient", type="float", nullable=false)
 	 */
-	private $koefPrice;
+	private $priceCoefficient;
 
 	/**
-	 * @param string $alias
+	 * @param $alias
+	 * @return $this
 	 */
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
+		return $this;
 	}
 
 	/**
@@ -125,11 +127,13 @@ class Gbi
 	}
 
 	/**
-	 * @param string $desc
+	 * @param $desc
+	 * @return $this
 	 */
 	public function setDesc($desc)
 	{
 		$this->desc = $desc;
+		return $this;
 	}
 
 	/**
@@ -141,11 +145,13 @@ class Gbi
 	}
 
 	/**
-	 * @param int $externalSection
+	 * @param $externalSection
+	 * @return $this
 	 */
 	public function setExternalSection($externalSection)
 	{
 		$this->externalSection = $externalSection;
+		return $this;
 	}
 
 	/**
@@ -157,11 +163,13 @@ class Gbi
 	}
 
 	/**
-	 * @param int $id
+	 * @param $id
+	 * @return $this
 	 */
 	public function setId($id)
 	{
 		$this->id = $id;
+		return $this;
 	}
 
 	/**
@@ -173,11 +181,13 @@ class Gbi
 	}
 
 	/**
-	 * @param boolean $isHavePhoto
+	 * @param $isHavePhoto
+	 * @return $this
 	 */
 	public function setIsHavePhoto($isHavePhoto)
 	{
 		$this->isHavePhoto = $isHavePhoto;
+		return $this;
 	}
 
 	/**
@@ -189,11 +199,13 @@ class Gbi
 	}
 
 	/**
-	 * @param boolean $isHeaderChilds
+	 * @param $isHeaderChilds
+	 * @return $this
 	 */
 	public function setIsHeaderChilds($isHeaderChilds)
 	{
 		$this->isHeaderChilds = $isHeaderChilds;
+		return $this;
 	}
 
 	/**
@@ -205,11 +217,13 @@ class Gbi
 	}
 
 	/**
-	 * @param string $nameContent
+	 * @param $nameContent
+	 * @return $this
 	 */
 	public function setNameContent($nameContent)
 	{
 		$this->nameContent = $nameContent;
+		return $this;
 	}
 
 	/**
@@ -221,11 +235,13 @@ class Gbi
 	}
 
 	/**
-	 * @param int $order
+	 * @param $order
+	 * @return $this
 	 */
 	public function setOrder($order)
 	{
 		$this->order = $order;
+		return $this;
 	}
 
 	/**
@@ -237,11 +253,13 @@ class Gbi
 	}
 
 	/**
-	 * @param int $parentId
+	 * @param $parentId
+	 * @return $this
 	 */
 	public function setParentId($parentId)
 	{
 		$this->parentId = $parentId;
+		return $this;
 	}
 
 	/**
@@ -253,27 +271,31 @@ class Gbi
 	}
 
 	/**
-	 * @param boolean $placeMainPage
+	 * @param $isOnMainPage
+	 * @return $this
 	 */
-	public function setPlaceMainPage($placeMainPage)
+	public function setIsOnMainPage($isOnMainPage)
 	{
-		$this->placeMainPage = $placeMainPage;
+		$this->isOnMainPage = $isOnMainPage;
+		return $this;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getPlaceMainPage()
+	public function getIsOnMainPage()
 	{
-		return $this->placeMainPage;
+		return $this->isOnMainPage;
 	}
 
 	/**
-	 * @param string $uriParent
+	 * @param $uriParent
+	 * @return $this
 	 */
 	public function setUriParent($uriParent)
 	{
 		$this->uriParent = $uriParent;
+		return $this;
 	}
 
 	/**
@@ -285,11 +307,13 @@ class Gbi
 	}
 
 	/**
-	 * @param string $workDocs
+	 * @param $workDocs
+	 * @return $this
 	 */
 	public function setWorkDocs($workDocs)
 	{
 		$this->workDocs = $workDocs;
+		return $this;
 	}
 
 	/**
@@ -301,18 +325,20 @@ class Gbi
 	}
 
 	/**
-	 * @param float $koefPrice
+	 * @param $priceCoefficient
+	 * @return $this
 	 */
-	public function setKoefPrice($koefPrice)
+	public function setPriceCoefficient($priceCoefficient)
 	{
-		$this->koefPrice = $koefPrice;
+		$this->priceCoefficient = $priceCoefficient;
+		return $this;
 	}
 
 	/**
 	 * @return float
 	 */
-	public function getKoefPrice()
+	public function getPriceCoefficient()
 	{
-		return $this->koefPrice;
+		return $this->priceCoefficient;
 	}
 }

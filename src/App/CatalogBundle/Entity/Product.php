@@ -4,7 +4,6 @@ namespace App\CatalogBundle\Entity;
 
 use App\MainBundle\Entity\PageTrait;
 use Doctrine\ORM\Mapping as ORM;
-use App\CatalogBundle\Extension\Utils;
 
 /**
  * Products
@@ -28,9 +27,9 @@ class Product
 	/**
 	 * @var boolean
 	 *
-	 * @ORM\Column(name="new_price", type="boolean", nullable=true)
+	 * @ORM\Column(name="is_new_price", type="boolean", nullable=true)
 	 */
-	private $newPrice;
+	private $isNewPrice;
 
 	/**
 	 * @var integer
@@ -130,11 +129,13 @@ class Product
 	protected $category;
 
 	/**
-	 * @param string $comments
+	 * @param $comments
+	 * @return $this
 	 */
 	public function setComments($comments)
 	{
 		$this->comments = $comments;
+		return $this;
 	}
 
 	/**
@@ -146,11 +147,13 @@ class Product
 	}
 
 	/**
-	 * @param int $diameterIn
+	 * @param $diameterIn
+	 * @return $this
 	 */
 	public function setDiameterIn($diameterIn)
 	{
 		$this->diameterIn = $diameterIn;
+		return $this;
 	}
 
 	/**
@@ -162,11 +165,13 @@ class Product
 	}
 
 	/**
-	 * @param int $diameterOut
+	 * @param $diameterOut
+	 * @return $this
 	 */
 	public function setDiameterOut($diameterOut)
 	{
 		$this->diameterOut = $diameterOut;
+		return $this;
 	}
 
 	/**
@@ -179,11 +184,13 @@ class Product
 
 
 	/**
-	 * @param int $height
+	 * @param $height
+	 * @return $this
 	 */
 	public function setHeight($height)
 	{
 		$this->height = $height;
+		return $this;
 	}
 
 	/**
@@ -195,11 +202,13 @@ class Product
 	}
 
 	/**
-	 * @param int $id
+	 * @param $id
+	 * @return $this
 	 */
 	public function setId($id)
 	{
 		$this->id = $id;
+		return $this;
 	}
 
 	/**
@@ -211,11 +220,13 @@ class Product
 	}
 
 	/**
-	 * @param boolean $isHavePhoto
+	 * @param $isHavePhoto
+	 * @return $this
 	 */
 	public function setIsHavePhoto($isHavePhoto)
 	{
 		$this->isHavePhoto = $isHavePhoto;
+		return $this;
 	}
 
 	/**
@@ -227,11 +238,13 @@ class Product
 	}
 
 	/**
-	 * @param int $length
+	 * @param $length
+	 * @return $this
 	 */
 	public function setLength($length)
 	{
 		$this->length = $length;
+		return $this;
 	}
 
 	/**
@@ -243,11 +256,13 @@ class Product
 	}
 
 	/**
-	 * @param string $mark
+	 * @param $mark
+	 * @return $this
 	 */
 	public function setMark($mark)
 	{
 		$this->mark = $mark;
+		return $this;
 	}
 
 	/**
@@ -259,27 +274,31 @@ class Product
 	}
 
 	/**
-	 * @param boolean $newPrice
+	 * @param $isNewPrice
+	 * @return $this
 	 */
-	public function setNewPrice($newPrice)
+	public function setIsNewPrice($isNewPrice)
 	{
-		$this->newPrice = $newPrice;
+		$this->isNewPrice = $isNewPrice;
+		return $this;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getNewPrice()
+	public function getIsNewPrice()
 	{
-		return $this->newPrice;
+		return $this->isNewPrice;
 	}
 
 	/**
-	 * @param int $nomen
+	 * @param $nomen
+	 * @return $this
 	 */
 	public function setNomen($nomen)
 	{
 		$this->nomen = $nomen;
+		return $this;
 	}
 
 	/**
@@ -291,11 +310,13 @@ class Product
 	}
 
 	/**
-	 * @param int $price
+	 * @param $price
+	 * @return $this
 	 */
 	public function setPrice($price)
 	{
 		$this->price = $price;
+		return $this;
 	}
 
 	/**
@@ -307,11 +328,13 @@ class Product
 	}
 
 	/**
-	 * @param int $sectionId
+	 * @param $sectionId
+	 * @return $this
 	 */
 	public function setSectionId($sectionId)
 	{
 		$this->sectionId = $sectionId;
+		return $this;
 	}
 
 	/**
@@ -323,11 +346,13 @@ class Product
 	}
 
 	/**
-	 * @param float $volume
+	 * @param $volume
+	 * @return $this
 	 */
 	public function setVolume($volume)
 	{
 		$this->volume = $volume;
+		return $this;
 	}
 
 	/**
@@ -339,11 +364,13 @@ class Product
 	}
 
 	/**
-	 * @param float $weight
+	 * @param $weight
+	 * @return $this
 	 */
 	public function setWeight($weight)
 	{
 		$this->weight = $weight;
+		return $this;
 	}
 
 	/**
@@ -355,11 +382,13 @@ class Product
 	}
 
 	/**
-	 * @param int $width
+	 * @param $width
+	 * @return $this
 	 */
 	public function setWidth($width)
 	{
 		$this->width = $width;
+		return $this;
 	}
 
 	/**
@@ -370,21 +399,36 @@ class Product
 		return $this->width;
 	}
 
+	/**
+	 * @param $category
+	 * @return $this
+	 */
 	public function setCategory($category)
 	{
 		$this->category = $category;
+		return $this;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getCategory()
 	{
 		return $this->category;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function __toString()
 	{
 		return (string)$this->getName();
 	}
 
+	/**
+	 * Для генерации sitemap
+	 * @return array
+	 */
 	public function getSitemapData()
 	{
 		return array(
