@@ -45,14 +45,6 @@ class StaticPage
 	private $content;
 
 	/**
-	 * Id шаблона
-	 * @var integer
-	 *
-	 * @ORM\Column(name="template", type="integer", nullable=false)
-	 */
-	private $template;
-
-	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="menu_title", type="string", length=255, nullable=false)
@@ -147,24 +139,6 @@ class StaticPage
 	public function getMenuTitle()
 	{
 		return $this->menuTitle;
-	}
-
-	/**
-	 * @param $template
-	 * @return $this
-	 */
-	public function setTemplate($template)
-	{
-		$this->template = $template;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getTemplate()
-	{
-		return $this->template;
 	}
 
 	/**
