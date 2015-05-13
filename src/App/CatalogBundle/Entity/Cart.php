@@ -30,7 +30,6 @@ class Cart
 
     public function setProducts($products) {
         $this->products = $products;
-        return $this;
     }
 
     public function getProducts() {
@@ -39,7 +38,6 @@ class Cart
 
     public function setTotalProductsCount($total_products_count) {
         $this->total_products_count = $total_products_count;
-        return $this;
     }
 
     public function getTotalProductsCount() {

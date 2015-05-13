@@ -52,13 +52,11 @@ class StaticPage
 	private $menuTitle;
 
 	/**
-	 * @param $alias
-	 * @return $this
+	 * @param string $alias
 	 */
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
-		return $this;
 	}
 
 	/**
@@ -70,13 +68,11 @@ class StaticPage
 	}
 
 	/**
-	 * @param $content
-	 * @return $this
+	 * @param string $content
 	 */
 	public function setContent($content)
 	{
 		$this->content = $content;
-		return $this;
 	}
 
 	/**
@@ -88,13 +84,11 @@ class StaticPage
 	}
 
 	/**
-	 * @param $id
-	 * @return $this
+	 * @param int $id
 	 */
 	public function setId($id)
 	{
 		$this->id = $id;
-		return $this;
 	}
 
 	/**
@@ -106,13 +100,11 @@ class StaticPage
 	}
 
 	/**
-	 * @param $introText
-	 * @return $this
+	 * @param string $introText
 	 */
 	public function setIntroText($introText)
 	{
 		$this->introText = $introText;
-		return $this;
 	}
 
 	/**
@@ -124,13 +116,11 @@ class StaticPage
 	}
 
 	/**
-	 * @param $menuTitle
-	 * @return $this
+	 * @param string $menuTitle
 	 */
 	public function setMenuTitle($menuTitle)
 	{
 		$this->menuTitle = $menuTitle;
-		return $this;
 	}
 
 	/**

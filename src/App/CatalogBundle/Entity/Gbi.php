@@ -109,13 +109,11 @@ class Gbi
 	private $priceCoefficient;
 
 	/**
-	 * @param $alias
-	 * @return $this
+	 * @param string $alias
 	 */
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
-		return $this;
 	}
 
 	/**
@@ -127,13 +125,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $desc
-	 * @return $this
+	 * @param string $desc
 	 */
 	public function setDesc($desc)
 	{
 		$this->desc = $desc;
-		return $this;
 	}
 
 	/**
@@ -145,13 +141,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $externalSection
-	 * @return $this
+	 * @param string $externalSection
 	 */
 	public function setExternalSection($externalSection)
 	{
 		$this->externalSection = $externalSection;
-		return $this;
 	}
 
 	/**
@@ -163,13 +157,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $id
-	 * @return $this
+	 * @param int $id
 	 */
 	public function setId($id)
 	{
 		$this->id = $id;
-		return $this;
 	}
 
 	/**
@@ -181,13 +173,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $isHavePhoto
-	 * @return $this
+	 * @param boolean $isHavePhoto
 	 */
 	public function setIsHavePhoto($isHavePhoto)
 	{
 		$this->isHavePhoto = $isHavePhoto;
-		return $this;
 	}
 
 	/**
@@ -199,13 +189,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $isHeaderChilds
-	 * @return $this
+	 * @param boolean $isHeaderChilds
 	 */
 	public function setIsHeaderChilds($isHeaderChilds)
 	{
 		$this->isHeaderChilds = $isHeaderChilds;
-		return $this;
 	}
 
 	/**
@@ -217,13 +205,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $nameContent
-	 * @return $this
+	 * @param string $nameContent
 	 */
 	public function setNameContent($nameContent)
 	{
 		$this->nameContent = $nameContent;
-		return $this;
 	}
 
 	/**
@@ -235,13 +221,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $order
-	 * @return $this
+	 * @param int $order
 	 */
 	public function setOrder($order)
 	{
 		$this->order = $order;
-		return $this;
 	}
 
 	/**
@@ -253,13 +237,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $parentId
-	 * @return $this
+	 * @param int $parentId
 	 */
 	public function setParentId($parentId)
 	{
 		$this->parentId = $parentId;
-		return $this;
 	}
 
 	/**
@@ -271,13 +253,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $isOnMainPage
-	 * @return $this
+	 * @param boolean $isOnMainPage
 	 */
 	public function setIsOnMainPage($isOnMainPage)
 	{
 		$this->isOnMainPage = $isOnMainPage;
-		return $this;
 	}
 
 	/**
@@ -289,13 +269,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $uriParent
-	 * @return $this
+	 * @param string $uriParent
 	 */
 	public function setUriParent($uriParent)
 	{
 		$this->uriParent = $uriParent;
-		return $this;
 	}
 
 	/**
@@ -307,13 +285,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $workDocs
-	 * @return $this
+	 * @param string $workDocs
 	 */
 	public function setWorkDocs($workDocs)
 	{
 		$this->workDocs = $workDocs;
-		return $this;
 	}
 
 	/**
@@ -325,13 +301,11 @@ class Gbi
 	}
 
 	/**
-	 * @param $priceCoefficient
-	 * @return $this
+	 * @param float $priceCoefficient
 	 */
 	public function setPriceCoefficient($priceCoefficient)
 	{
 		$this->priceCoefficient = $priceCoefficient;
-		return $this;
 	}
 
 	/**

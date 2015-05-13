@@ -91,12 +91,10 @@ class Category
 
 	/**
 	 * @param $alias
-	 * @return $this
 	 */
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
-		return $this;
 	}
 
 	/**
@@ -108,13 +106,11 @@ class Category
 	}
 
 	/**
-	 * @param $id
-	 * @return $this
+	 * @param int $id
 	 */
 	public function setId($id)
 	{
 		$this->id = $id;
-		return $this;
 	}
 
 	/**
@@ -126,13 +122,11 @@ class Category
 	}
 
 	/**
-	 * @param $nomen
-	 * @return $this
+	 * @param int $nomen
 	 */
 	public function setNomen($nomen)
 	{
 		$this->nomen = $nomen;
-		return $this;
 	}
 
 	/**
@@ -145,12 +139,10 @@ class Category
 
 	/**
 	 * @param $products
-	 * @return $this
 	 */
 	public function setProducts($products)
 	{
 		$this->products = $products;
-		return $this;
 	}
 
 	public function getProducts()
@@ -159,13 +151,11 @@ class Category
 	}
 
 	/**
-	 * @param $mark
-	 * @return $this
+	 * @param string $mark
 	 */
 	public function setMark($mark)
 	{
 		$this->mark = $mark;
-		return $this;
 	}
 
 	/**
@@ -177,13 +167,11 @@ class Category
 	}
 
 	/**
-	 * @param $order
-	 * @return $this
+	 * @param string $order
 	 */
 	public function setOrder($order)
 	{
 		$this->order = $order;
-		return $this;
 	}
 
 	/**
@@ -196,12 +184,10 @@ class Category
 
 	/**
 	 * @param $coefficient
-	 * @return $this
 	 */
 	public function setCoefficient($coefficient)
 	{
 		$this->coefficient = $coefficient;
-		return $this;
 	}
 
 	/**
@@ -214,12 +200,10 @@ class Category
 
 	/**
 	 * @param Category $parent
-	 * @return $this
 	 */
 	public function setParent(Category $parent = null)
 	{
 		$this->parent = $parent;
-		return $this;
 	}
 
 	public function getParent()
@@ -228,13 +212,11 @@ class Category
 	}
 
 	/**
-	 * @param $photoId
-	 * @return $this
+	 * @param int $photoId
 	 */
 	public function setPhotoId($photoId)
 	{
 		$this->photoId = $photoId;
-		return $this;
 	}
 
 	/**
@@ -363,8 +345,6 @@ class Category
 	public function setFile($file)
 	{
 		$this->file = $file;
-
-		return $this;
 	}
 
 	/**

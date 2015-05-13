@@ -32,6 +32,8 @@ class Product
 	private $isNewPrice;
 
 	/**
+	 * Это номер товара, который вбивают руками. Он состоит из кучи цифр, у каждой свой смысл в зависимости от позиции
+	 *
 	 * @var integer
 	 *
 	 * @ORM\Column(name="nomen", type="bigint", nullable=true)
@@ -129,13 +131,11 @@ class Product
 	protected $category;
 
 	/**
-	 * @param $comments
-	 * @return $this
+	 * @param string $comments
 	 */
 	public function setComments($comments)
 	{
 		$this->comments = $comments;
-		return $this;
 	}
 
 	/**
@@ -147,13 +147,11 @@ class Product
 	}
 
 	/**
-	 * @param $diameterIn
-	 * @return $this
+	 * @param int $diameterIn
 	 */
 	public function setDiameterIn($diameterIn)
 	{
 		$this->diameterIn = $diameterIn;
-		return $this;
 	}
 
 	/**
@@ -165,13 +163,11 @@ class Product
 	}
 
 	/**
-	 * @param $diameterOut
-	 * @return $this
+	 * @param int $diameterOut
 	 */
 	public function setDiameterOut($diameterOut)
 	{
 		$this->diameterOut = $diameterOut;
-		return $this;
 	}
 
 	/**
@@ -184,13 +180,11 @@ class Product
 
 
 	/**
-	 * @param $height
-	 * @return $this
+	 * @param int $height
 	 */
 	public function setHeight($height)
 	{
 		$this->height = $height;
-		return $this;
 	}
 
 	/**
@@ -202,13 +196,11 @@ class Product
 	}
 
 	/**
-	 * @param $id
-	 * @return $this
+	 * @param int $id
 	 */
 	public function setId($id)
 	{
 		$this->id = $id;
-		return $this;
 	}
 
 	/**
@@ -220,13 +212,11 @@ class Product
 	}
 
 	/**
-	 * @param $isHavePhoto
-	 * @return $this
+	 * @param boolean $isHavePhoto
 	 */
 	public function setIsHavePhoto($isHavePhoto)
 	{
 		$this->isHavePhoto = $isHavePhoto;
-		return $this;
 	}
 
 	/**
@@ -238,13 +228,11 @@ class Product
 	}
 
 	/**
-	 * @param $length
-	 * @return $this
+	 * @param int $length
 	 */
 	public function setLength($length)
 	{
 		$this->length = $length;
-		return $this;
 	}
 
 	/**
@@ -256,13 +244,11 @@ class Product
 	}
 
 	/**
-	 * @param $mark
-	 * @return $this
+	 * @param string $mark
 	 */
 	public function setMark($mark)
 	{
 		$this->mark = $mark;
-		return $this;
 	}
 
 	/**
@@ -274,13 +260,11 @@ class Product
 	}
 
 	/**
-	 * @param $isNewPrice
-	 * @return $this
+	 * @param boolean $isNewPrice
 	 */
 	public function setIsNewPrice($isNewPrice)
 	{
 		$this->isNewPrice = $isNewPrice;
-		return $this;
 	}
 
 	/**
@@ -292,13 +276,11 @@ class Product
 	}
 
 	/**
-	 * @param $nomen
-	 * @return $this
+	 * @param int $nomen
 	 */
 	public function setNomen($nomen)
 	{
 		$this->nomen = $nomen;
-		return $this;
 	}
 
 	/**
@@ -310,13 +292,11 @@ class Product
 	}
 
 	/**
-	 * @param $price
-	 * @return $this
+	 * @param int $price
 	 */
 	public function setPrice($price)
 	{
 		$this->price = $price;
-		return $this;
 	}
 
 	/**
@@ -328,13 +308,11 @@ class Product
 	}
 
 	/**
-	 * @param $sectionId
-	 * @return $this
+	 * @param int $sectionId
 	 */
 	public function setSectionId($sectionId)
 	{
 		$this->sectionId = $sectionId;
-		return $this;
 	}
 
 	/**
@@ -346,13 +324,11 @@ class Product
 	}
 
 	/**
-	 * @param $volume
-	 * @return $this
+	 * @param float $volume
 	 */
 	public function setVolume($volume)
 	{
 		$this->volume = $volume;
-		return $this;
 	}
 
 	/**
@@ -364,13 +340,11 @@ class Product
 	}
 
 	/**
-	 * @param $weight
-	 * @return $this
+	 * @param float $weight
 	 */
 	public function setWeight($weight)
 	{
 		$this->weight = $weight;
-		return $this;
 	}
 
 	/**
@@ -382,13 +356,11 @@ class Product
 	}
 
 	/**
-	 * @param $width
-	 * @return $this
+	 * @param int $width
 	 */
 	public function setWidth($width)
 	{
 		$this->width = $width;
-		return $this;
 	}
 
 	/**
@@ -400,13 +372,11 @@ class Product
 	}
 
 	/**
-	 * @param $category
-	 * @return $this
+	 * @param mixed $category
 	 */
 	public function setCategory($category)
 	{
 		$this->category = $category;
-		return $this;
 	}
 
 	/**

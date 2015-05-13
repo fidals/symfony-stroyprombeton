@@ -62,15 +62,11 @@ class GbiObject
 	}
 
 	/**
-	 * Set title
-	 *
 	 * @param string $title
-	 * @return GbiObject
 	 */
 	public function setTitle($title)
 	{
 		$this->title = $title;
-		return $this;
 	}
 
 	/**
@@ -84,10 +80,8 @@ class GbiObject
 	}
 
 	/**
-	 * Set menuTitle
-	 *
 	 * @param string $menuTitle
-	 * @return GbiObject
+	 * @return $this
 	 */
 	public function setMenuTitle($menuTitle)
 	{
@@ -106,15 +100,11 @@ class GbiObject
 	}
 
 	/**
-	 * Set alias
-	 *
 	 * @param string $alias
-	 * @return GbiObject
 	 */
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
-		return $this;
 	}
 
 	/**
@@ -131,12 +121,10 @@ class GbiObject
 	 * Set ord
 	 *
 	 * @param integer $ord
-	 * @return GbiObject
 	 */
 	public function setOrd($ord)
 	{
 		$this->ord = $ord;
-		return $this;
 	}
 
 	/**
@@ -153,12 +141,10 @@ class GbiObject
 	 * Set content
 	 *
 	 * @param string $content
-	 * @return GbiObject
 	 */
 	public function setContent($content)
 	{
 		$this->content = $content;
-		return $this;
 	}
 
 	/**
