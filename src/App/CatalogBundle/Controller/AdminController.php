@@ -6,11 +6,14 @@ use App\CatalogBundle\Entity\Category;
 use App\CatalogBundle\Entity\Product;
 use App\CatalogBundle\Extension\AjaxError;
 use App\CatalogBundle\Extension\AjaxSuccess;
+use App\CatalogBundle\Extension\TableGear;
 use App\CatalogBundle\Form\CategoryType;
 use App\CatalogBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+
 
 class AdminController extends Controller
 {
@@ -436,4 +439,13 @@ class AdminController extends Controller
             }
         }
     }
+
+	public function editProductsAction()
+	{
+		$tableGear = new TableGear($this->container);
+		return $this->render('AppCatalogBundle:Admin:edit_products.html.twig', array(
+			'tablegear_content' => $tableGear->getContent(),
+			'admin_pool'        => $this->container->get('sonata.admin.pool')
+		));
+	}
 }

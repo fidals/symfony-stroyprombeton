@@ -1,31 +1,36 @@
 <?php
-include($modx->config['base_path']."assets/modules/tablegear/TableGear1.6.1.php");
+
+// Необходимо для вывода этого файла в переменную и отрисовку в фрейме sonata admin
+ob_start();
+
+require_once $libPath;
 
 // --> Эти options нужны для конигурации TableGear
 $options = array();
 $options["database"] = array();
 $options["pagination"] = array();
 
-$options["database"]["name"]        = 'shopelecru_pb';
-$options["database"]["username"]    = $modx->db->config['user'];
-$options["database"]["password"]    = $modx->db->config['pass'];
-$options["database"]["table"]       = 'tmc';
-$options["database"]["table1"]       = 'modx_site_content';
-$options["database"]["table2"]       = 'modx_site_tmplvar_contentvalues';
+$options["database"]["name"]     = $container->getParameter('database_name');
+$options["database"]["username"] = $container->getParameter('database_user');
+$options["database"]["password"] = $container->getParameter('database_password');
+$options["database"]["table"]    = 'tmc';
+$options["database"]["table1"]   = 'modx_site_content';
+$options["database"]["table2"]   = 'modx_site_tmplvar_contentvalues';
 
 $options["pagination"]["perPage"] = 300;  // rows per page.
 $options["pagination"]["prev"] = "prev"; // "prev" link will be shown.
 $options["pagination"]["next"] = "next"; // "next" link will be shown.
 
-$options["headers"]["pagetitle"]="Заголовок";
-$options["headers"]["longtitle"]="Расширенный заголовок";
-$options["headers"]["description"]="Описание";
-$options["headers"]["introtext"]="Аннотация";
+//$options["headers"]["pagetitle"]="Заголовок";
+//$options["headers"]["longtitle"]="Расширенный заголовок";
+//$options["headers"]["description"]="Описание";
+//$options["headers"]["introtext"]="Аннотация";
+$options["headers"] = $productRepository::$tableGearProperties;
 
-$result = $modx->db->query("SELECT * FROM ". $modx->getFullTableName('site_tmplvars')." WHERE `id` > 4" );
-while($row = $modx->db->getRow($result)) {
-	$options["headers"]["tv_".strtolower($row["name"])]=$row["caption"];
-}
+//$result = $modx->db->query("SELECT * FROM ". $modx->getFullTableName('site_tmplvars')." WHERE `id` > 4" );
+//while($row = $modx->db->getRow($result)) {
+//	$options["headers"]["tv_".strtolower($row["name"])]=$row["caption"];
+//}
 
 // --> Предполагаю, что этот класс юзаем "из коробки" и вообще не трогаем в нём код
 $table = new TableGear($options);
@@ -40,8 +45,8 @@ $ff="";
 $sort_ff="";
 foreach($options["headers"] as $ind => $val){
 	$ff.="<div style=\"float: left; clear: both;\"><label for=\"ff_".$ind."\" id=\"fs_".$ind."\">".$val."</label></div><div style=\"float: right;\"><input type=\"checkbox\"";
-	if( in_array($ind, $_POST["ff"]) || (!$_POST["ff"] && in_array($ind, $cookie_ff)) ){ 
-		$ff.=" checked "; 
+	if( in_array($ind, $_POST["ff"]) || (!$_POST["ff"] && in_array($ind, $cookie_ff)) ){
+		$ff.=" checked ";
 		$sort_ff.='<li class="ui-state-default sortf_'.$ind.'"><input type="hidden" name="sortff[]" value="'.$ind.'">'.$val.'</li>';
 	}
 	$ff.="name=\"ff[]\" value=\"".$ind."\" id=\"ff_".$ind."\"></div>";
@@ -56,7 +61,7 @@ if( isset($_REQUEST['sortff']) && count($_REQUEST['sortff'])>0 ){
 }elseif( isset($_COOKIE['tg_filterf_s']) ){
 	$sort_ff="";
 	$cookie_fs=unserialize($_COOKIE['tg_filterf_s']);
-	
+
 	foreach($cookie_fs as $ind=>$val){
 		$sort_ff.='<li class="ui-state-default sortf_'.$val.'"><input type="hidden" name="sortff[]" value="'.$val.'">'.$options["headers"][$val].'</li>';
 	}
@@ -153,18 +158,16 @@ $(function() {
 <!-- Здесь заканчивается код, нужный для задачи 1-->
 	Поиск по:&nbsp;
 	<select name="field_search" style="width: 150px;">
-		<option value="pagetitle" <?php if(isset($_POST['field_search']) && $_POST['field_search']=="pagetitle" ) echo 'selected'; ?>>Заголовок</option>
-		<option value="longtitle" <?php if(isset($_POST['field_search']) && $_POST['field_search']=="longtitle" ) echo 'selected'; ?>>Расширенный заголовок</option>
-		<option value="description" <?php if(isset($_POST['field_search']) && $_POST['field_search']=="description" ) echo 'selected'; ?>>Описание</option>
-		<option value="introtext" <?php if(isset($_POST['field_search']) && $_POST['field_search']=="introtext" ) echo 'selected'; ?>>Аннотация</option>
+<!--		<option value="pagetitle" --><?php //if(isset($_POST['field_search']) && $_POST['field_search']=="pagetitle" ) echo 'selected'; ?><!-->Заголовок</option>-->
+<!--		<option value="longtitle" --><?php //if(isset($_POST['field_search']) && $_POST['field_search']=="longtitle" ) echo 'selected'; ?><!-->Расширенный заголовок</option>-->
+<!--		<option value="description" --><?php //if(isset($_POST['field_search']) && $_POST['field_search']=="description" ) echo 'selected'; ?><!-->Описание</option>-->
+<!--		<option value="introtext" --><?php //if(isset($_POST['field_search']) && $_POST['field_search']=="introtext" ) echo 'selected'; ?><!-->Аннотация</option>-->
 <?php
 // --> Это просто список свойств. Тот самый, что у нас хардкодом
-$result = $modx->db->query("SELECT * FROM ". $modx->getFullTableName('site_tmplvars')." WHERE `id` > 4" );
-
-while($row = $modx->db->getRow($result)) {
-	echo "<option value=\"tv_".$row['id']."\" ";
-	if(isset($_POST['field_search']) && $_POST['field_search']=="tv_".$row['id'] ){ echo 'selected'; }
-	echo ">&nbsp;&nbsp;&nbsp;".$row['caption']."</option>";
+foreach($productRepository::$tableGearProperties as $id => $title) {
+	echo "<option value=\"tv_".$id."\" ";
+	if(isset($_POST['field_search']) && $_POST['field_search']=="tv_".$id ){ echo 'selected'; }
+	echo ">&nbsp;&nbsp;&nbsp;".$title."</option>";
 }
 ?>
 	</select>
@@ -183,6 +186,7 @@ while($row = $modx->db->getRow($result)) {
 </form>
 
 <?php
+// вот этот fields надо переделать в массив того что выбрано и засунуть в qb
 $fileds="";
 if( isset($_REQUEST['ff']) && count($_REQUEST['ff'])>0 ){
   foreach($_REQUEST['ff'] as $ind=>$val){
@@ -197,19 +201,19 @@ if( isset($_REQUEST['ff']) && count($_REQUEST['ff'])>0 ){
 if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
 
 // --> Вот это вот всё с $isfolder - хитрожопая проверка. Она нужна только на модХ хитрожопой базе. Убери её
-	$isfolder=false;
-	$res = $modx->db->query("SELECT * FROM modx_site_content WHERE modx_site_content.parent = ".intval($_POST['parent_tg_id']));
-	while($row = $modx->db->getRow($res)) {
-		if( $row['isfolder']==1 ){
-			$isfolder=true;
-			break;
-		}
-	}
-	if( $isfolder ){
-		echo '<table><tr><td style="color: red;">Ошибка: Дочерние ресурсы выбранного раздела не являются конечными</td></tr></table>';
-	}else{
+//	$isfolder=false;
+//	$res = $modx->db->query("SELECT * FROM modx_site_content WHERE modx_site_content.parent = ".intval($_POST['parent_tg_id']));
+//	while($row = $modx->db->getRow($res)) {
+//		if( $row['isfolder']==1 ){
+//			$isfolder=true;
+//			break;
+//		}
+//	}
+//	if( $isfolder ){
+//		echo '<table><tr><td style="color: red;">Ошибка: Дочерние ресурсы выбранного раздела не являются конечными</td></tr></table>';
+//	}else{
 	// --> Здесь нужен просто запрос по формированию списка товаров с выделенными полями. Запрос будет совсем другого вида, не как здесь
-$table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1 
+$table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1
 WHERE tb1.parent = ".intval($_POST['parent_tg_id'])." ORDER BY tb1.id ASC" );
 
 ?>
@@ -218,9 +222,9 @@ WHERE tb1.parent = ".intval($_POST['parent_tg_id'])." ORDER BY tb1.id ASC" );
 <?= $table->getTable() ?>
   </div>
 <?= $table->getJavascript("jquery") ?>
-	 
+
 <?php
-	}
+//	}
 }elseif( isset($_POST['type_search']) && $_POST['type_search']!="" ){
 // --> Обработка выбранных условий. Нужно будет переписать каждый запрос. Будет весело =)
 	if( preg_match("/tv_/i", $_POST['field_search']) ){
@@ -242,7 +246,7 @@ WHERE tb1.parent = ".intval($_POST['parent_tg_id'])." ORDER BY tb1.id ASC" );
 	}
 
 // --> Запрос с условиями у нас будет только по одной таблице products. Поэтому будет гораздо проще.
-$table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1 
+$table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1
 LEFT JOIN modx_site_tmplvar_contentvalues as tb2 ON (tb2.contentid = tb1.id)
 WHERE ".$field_search." GROUP BY tb1.id" );
 
@@ -260,3 +264,8 @@ WHERE ".$field_search." GROUP BY tb1.id" );
   </div>
 </body>
 </html>
+
+<?php
+	return $data = ob_get_clean();
+	ob_end_clean();
+?>

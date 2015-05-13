@@ -16,6 +16,27 @@ class ProductRepository extends EntityRepository
     const LIMIT = 20,
         UNCAT_PRODUCT_SEARCH_LIMIT = 100;
 
+	/**
+	 * Массив свойств для TableGear
+	 *
+	 * @var array
+	 */
+	public static $tableGearProperties = [
+		'name'                      => 'Заголовок',
+		'mark'                      => 'mark',
+		'coefficient'               => 'Коэффициент цены',
+		'price'                     => 'Цена',
+		'nomen'                     => 'Код',
+		'length'                    => 'Длина (мм)',
+		'width'                     => 'Ширина (мм)',
+		'heigth'                    => 'Высота (мм)',
+		'weight'                    => 'Масса (кг)',
+		'volume'                    => 'Объем (м3)',
+		'diameter_in'               => 'Внутренний диаметр (мм)',
+		'diamenter_out'             => 'Внешний диаметр (мм)',
+		'link_to_stkmetal_category' => 'Ссылка на соответствующую категорию на stk-metal'
+	];
+
     /**
      * Метод поиска для автодополнения
      *

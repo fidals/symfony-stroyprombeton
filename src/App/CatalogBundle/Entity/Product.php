@@ -113,8 +113,6 @@ class Product
      */
     private $diameterIn;
 
-
-
     /**
      * @var integer
      *
@@ -142,6 +140,20 @@ class Product
      * @ORM\Column(name="comments", type="string", length=250, nullable=true)
      */
     private $comments;
+
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="coefficient", type="string", nullable=true)
+	 */
+	private $coefficient;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="link_to_stkmetal_category", type="string", length=250, nullable=true)
+	 */
+	private $linkToStkMetalCategory;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
@@ -437,6 +449,38 @@ class Product
     {
         return $this->width;
     }
+
+	/**
+	 * @param float $coefficient
+	 */
+	public function setCoefficient($coefficient)
+	{
+		$this->coefficient = $coefficient;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getCoefficient()
+	{
+		return $this->coefficient;
+	}
+
+	/**
+	 * @param string $linkToStkMetalCategory
+	 */
+	public function setLinkToStkMetalCategory($linkToStkMetalCategory)
+	{
+		$this->linkToStkMetalCategory = $linkToStkMetalCategory;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLinkToStkMetalCategory()
+	{
+		return $this->linkToStkMetalCategory;
+	}
 
     public function setCategory($category)
     {
