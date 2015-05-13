@@ -9,85 +9,83 @@ use Symfony\Component\HttpFoundation\Response;
 class StaticPageController extends Controller
 {
 
-    /**
-     * Эти урлы как первая часть путей до каталога. Когда-нить снесём
-     * Пока обрабатываем их хардкодом
-     * @var array
-     */
-    public $baseCats = array(
-        537 => 'prom-stroy',
-        538 => 'dor-stroy',
-        539 => 'ingener-stroy',
-        540 => 'energy-stroy',
-        541 => 'blag-territory',
-        542 => 'neftegaz-stroy'
-    );
+	/**
+	 * Эти урлы как первая часть путей до каталога. Когда-нить снесём
+	 * Пока обрабатываем их хардкодом
+	 * @var array
+	 */
+	public $baseCats = array(
+		537 => 'prom-stroy',
+		538 => 'dor-stroy',
+		539 => 'ingener-stroy',
+		540 => 'energy-stroy',
+		541 => 'blag-territory',
+		542 => 'neftegaz-stroy'
+	);
 
-    /**
-     * Показывает статичные страницы напрямую из базы
-     * @param $alias - по факту полный урл. Т.е. может содержать символ "/"
-     * @return Response
-     */
-    public function showAction($alias)
-    {
-        // prepare alias
-        $alias = trim($alias, ' /');
+	/**
+	 * Отображает статичную страницу с алиасом 'obekty', наполняет ее объектами из базы
+	 * @return Response
+	 */
+	public function showObjectsAction()
+	{
+		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
+		$goRp = $this->getDoctrine()->getRepository('AppMainBundle:GbiObject');
 
-        // search in repository
-        $spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
-        $staticPage = $spRepository->findOneByAlias($alias);
+		$staticPage = $spRepository->findOneByAlias('obekty');
+		$objects = $goRp->findAll();
 
-        if(empty($staticPage)) { throw $this->createNotFoundException(); }
+		$twigArgs = array(
+			'staticPage' => $staticPage,
+			'objects'    => $objects
+		);
 
-        $twigArgs = array('staticPage' => $staticPage);
-        if($alias == 'obekty'){
-            $goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-            $objects = $goRp->findAll();
-            $twigArgs['objects'] = $objects;
-        }
-        return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
-    }
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
+	}
 
-    /**
-     * Главная страница
-     * @return Response
-     */
-    public function showIndexAction()
-    {
-        $catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+	/**
+	 * Показывает статичные страницы напрямую из базы
+	 * @param $alias - по факту полный урл. Т.е. может содержать символ '/'
+	 * @return Response
+	 */
+	public function showAction($alias)
+	{
+		// prepare alias
+		$alias = trim($alias, ' /');
 
-        $randomProducts = $this->getDoctrine()
-            ->getRepository('AppCatalogBundle:Product')
-            ->getRandomProducts();
+		// search in repository
+		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
+		$staticPage = $spRepository->findOneByAlias($alias);
 
-        foreach($randomProducts as &$product) {
-            $path = $catRp->getPath($product->getCategory());
-            $product->catUrl = $this->baseCats[$path[0]->getId()];
-        }
+		if (empty($staticPage)) {
+			throw $this->createNotFoundException();
+		}
 
-        return $this->render('AppMainBundle:StaticPage:indexPage.html.twig', array(
-            'randomProducts' => $randomProducts
-        ));
-    }
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', array('staticPage' => $staticPage));
+	}
 
-    /**
-     * Страница "Наши объекты"
-     * @param $alias
-     * @return Response
-     */
-    public function gbiObjeсtShowAction($alias){
-        $repo = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-        if($gbi_object = $repo->findOneByAlias($alias)){
-            return $this->render("AppMainBundle:StaticPage:gbiObject.html.twig",array(
-                'gbiObject' => $gbi_object
-            ));
-        }
-        return $this->render('AppMainBundle:StaticPage:404.html.twig');
-    }
+	/**
+	 * Главная страница
+	 * @return Response
+	 */
+	public function showIndexAction()
+	{
+		return $this->render('AppMainBundle:StaticPage:indexPage.html.twig');
+	}
 
-    public function exeptionAction()
-    {
-        return $this->render('AppMainBundle:StaticPage:404.html.twig');
-    }
-
+	/**
+	 * Страница 'Наши объекты'
+	 * @param $alias
+	 * @return Response
+	 */
+	public function gbiObjeсtShowAction($alias)
+	{
+		$repo = $this->getDoctrine()->getRepository('AppMainBundle:GbiObject');
+		if ($gbi_object = $repo->findOneByAlias($alias)) {
+			return $this->render('AppMainBundle:StaticPage:gbiObject.html.twig', array(
+				'gbiObject' => $gbi_object
+			));
+		}
+		return $this->render('AppMainBundle:StaticPage:404.html.twig');
+	}
 }

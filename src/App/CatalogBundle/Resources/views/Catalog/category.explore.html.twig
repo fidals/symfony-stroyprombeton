@@ -1,53 +1,57 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-    {{ category.title }}
+	{{ category.title }}
 {% endblock %}
 
 {% block description %}
-    {{ category.description }}
+	{{ category.description }}
 {% endblock %}
 
 
 {% block content %}
-    <div class="location">
-        {% for item in parents %}
-            <span class="location section">
+	<div class="location">
+		{% for item in parents %}
+			<span class="location section">
                 <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
             </span>
-            <span class="location separate">/</span>
-        {% endfor %}
-    </div>
+			<span class="location separate">/</span>
+		{% endfor %}
+	</div>
 
-  <div class="gbi-showcase">
-    <table>
-      {% for item in childs if item.isActive %}
-        {% if loop.index is odd %}<tr>{% endif %}
-          <td>
-            <span>{{ item.id }}</span>
-            <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">
-              <h2>{% if item.name %}{{ item.name }}{% else %}{{ item.title }}{% endif %}</h2>
-              <div class="gbi-showcase-top-line">
-                  {% if item.photoId %}
-										<img src="/assets/main/images/sections/{{ item.id }}.png" />
-				  				{% else %}
-                  	<img src="/assets/main/images/sections/logo-prozr.png"/>
-									{% endif %}
-                    <div class="cat-info">
-                        <h3>{% if item.mark %}{{ item.mark }}{% endif %}</h3><br />
-                        <p>{{ item.title }}</p>
-                        <div class="link-detailed">подробнее&nbsp&raquo</div>
-                    </div>
-              </div>
-            </a>
-           </td>
-        {% if loop.index is even %}
-          </tr><tr style="height:20px"></tr>
-        {% endif %}
-      {% endfor %}
-    </table>
-  </div>
-    {% autoescape false %}
-    {{ category.description }}
-    {% endautoescape %}
+	<div class="gbi-showcase">
+		<table>
+			{% for item in childs if item.isActive %}
+				{% if loop.index is odd %}<tr>{% endif %}
+				<td>
+					<span>{{ item.id }}</span>
+					<a href="/gbi/{{ catUrl }}/?section={{ item.id }}">
+						<h2>{% if item.name %}{{ item.name }}{% else %}{{ item.title }}{% endif %}</h2>
+
+						<div class="gbi-showcase-top-line">
+							{% if item.photoId %}
+								<img src="/assets/main/images/sections/{{ item.id }}.png"/>
+							{% else %}
+								<img src="/assets/main/images/sections/logo-prozr.png"/>
+							{% endif %}
+							<div class="cat-info">
+								<h3>{% if item.mark %}{{ item.mark }}{% endif %}</h3><br/>
+
+								<p>{{ item.title }}</p>
+
+								<div class="link-detailed">подробнее&nbsp&raquo</div>
+							</div>
+						</div>
+					</a>
+				</td>
+				{% if loop.index is even %}
+					</tr>
+					<tr style="height:20px"></tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+	{% autoescape false %}
+	{{ category.description }}
+	{% endautoescape %}
 {% endblock %}
