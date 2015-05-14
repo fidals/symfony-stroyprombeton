@@ -372,7 +372,7 @@ class Product
 	}
 
 	/**
-	 * @param mixed $category
+	 * @param Category $category
 	 */
 	public function setCategory($category)
 	{
@@ -380,7 +380,7 @@ class Product
 	}
 
 	/**
-	 * @return mixed
+	 * @return Category
 	 */
 	public function getCategory()
 	{
