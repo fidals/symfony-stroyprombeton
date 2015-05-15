@@ -2,8 +2,8 @@
 
 namespace App\CatalogBundle\Entity;
 
+use App\MainBundle\Entity\PageTrait;
 use Doctrine\ORM\Mapping as ORM;
-use App\CatalogBundle\Extension\Utils;
 
 /**
  * Products
@@ -13,6 +13,8 @@ use App\CatalogBundle\Extension\Utils;
  */
 class Product
 {
+	use PageTrait;	
+	
     /**
      * @var integer
      *
@@ -22,40 +24,28 @@ class Product
      */
     private $id;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_active", type="boolean", nullable=true)
-     */
-    private $isActive;
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="is_new_price", type="boolean", nullable=true)
+	 */
+	private $isNewPrice;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="new_price", type="boolean", nullable=true)
-     */
-    private $newPrice;
+	/**
+	 * Это номер товара, который вбивают руками. Он состоит из кучи цифр, у каждой свой смысл в зависимости от позиции
+	 *
+	 * @var integer
+	 *
+	 * @ORM\Column(name="nomen", type="bigint", nullable=true)
+	 */
+	private $nomen;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nomen", type="bigint", nullable=true)
-     */
-    private $nomen;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mark", type="string", length=100, nullable=false)
-     */
-    private $mark;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
-     */
-    private $name;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="mark", type="string", length=100, nullable=false)
+	 */
+	private $mark;
 
     /**
      * @var integer
@@ -121,13 +111,6 @@ class Product
     private $price;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="is_have_photo", type="boolean", nullable=true)
@@ -140,20 +123,6 @@ class Product
      * @ORM\Column(name="comments", type="string", length=250, nullable=true)
      */
     private $comments;
-
-	/**
-	 * @var float
-	 *
-	 * @ORM\Column(name="coefficient", type="string", nullable=true)
-	 */
-	private $coefficient;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="link_to_stkmetal_category", type="string", length=250, nullable=true)
-	 */
-	private $linkToStkMetalCategory;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
@@ -175,22 +144,6 @@ class Product
     public function getComments()
     {
         return $this->comments;
-    }
-
-    /**
-     * @param string $desc
-     */
-    public function setDescription($desc)
-    {
-        $this->description = $desc;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
@@ -224,7 +177,6 @@ class Product
     {
         return $this->diameterOut;
     }
-
 
     /**
      * @param int $height
@@ -322,37 +274,21 @@ class Product
         return $this->mark;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
+	/**
+	 * @param boolean $isNewPrice
+	 */
+	public function setIsNewPrice($isNewPrice)
+	{
+		$this->isNewPrice = $isNewPrice;
+	}
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param boolean $newPrice
-     */
-    public function setNewPrice($newPrice)
-    {
-        $this->newPrice = $newPrice;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getNewPrice()
-    {
-        return $this->newPrice;
-    }
+	/**
+	 * @return boolean
+	 */
+	public function getIsNewPrice()
+	{
+		return $this->isNewPrice;
+	}
 
     /**
      * @param int $nomen
@@ -450,38 +386,6 @@ class Product
         return $this->width;
     }
 
-	/**
-	 * @param float $coefficient
-	 */
-	public function setCoefficient($coefficient)
-	{
-		$this->coefficient = $coefficient;
-	}
-
-	/**
-	 * @return float
-	 */
-	public function getCoefficient()
-	{
-		return $this->coefficient;
-	}
-
-	/**
-	 * @param string $linkToStkMetalCategory
-	 */
-	public function setLinkToStkMetalCategory($linkToStkMetalCategory)
-	{
-		$this->linkToStkMetalCategory = $linkToStkMetalCategory;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLinkToStkMetalCategory()
-	{
-		return $this->linkToStkMetalCategory;
-	}
-
     public function setCategory($category)
     {
         $this->category = $category;
@@ -494,7 +398,7 @@ class Product
 
     public function __toString()
     {
-        return (string)$this->getName();
+        return (string) $this->getName();
     }
 
     public function getSitemapData()
@@ -504,8 +408,7 @@ class Product
 			'gbi'     => $this->getId(),
 			'locData' => array(
 				'route' => 'app_catalog_explore_category',
-				'parameters' => array(
-                )
+				'parameters' => array()
             ),
             'priority'   => 0.9,
             'changefreq' => 'weekly',
