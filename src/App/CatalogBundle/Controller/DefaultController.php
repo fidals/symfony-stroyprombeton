@@ -13,8 +13,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
-    {
-        return $this->redirect($this->generateUrl('app_main_index'), 301);
-    }
+	public function indexAction()
+	{
+		return $this->redirect($this->generateUrl('app_main_index'), 301);
+	}
 }

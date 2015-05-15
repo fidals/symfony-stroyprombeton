@@ -5,6 +5,7 @@ div.gbi-visual {
 
 	box-shadow: 0 0 5px 5px #cccccc;
 }
+
 div.gbi-visual ul {
 	margin: 0;
 	padding: 0;
@@ -12,16 +13,19 @@ div.gbi-visual ul {
 	list-style-position: outside;
 	line-height: auto;
 }
+
 div.gbi-visual li {
 	padding: 0px;
 	text-align: center;
 }
+
 div.gbi-visual ul li a {
 	display: block;
 	padding: 7px;
 	font-size: 0.9em;
 	text-decoration: underline;
 }
+
 div.gbi-visual ul li a:hover {
 	background-color: #cccccc;
 	color: #000000;
@@ -35,6 +39,7 @@ div.showcase {
 	padding: 5px;
 	border: 1px solid #999999;
 }
+
 div.showcase ul {
 	margin: 0;
 	padding: 0;
@@ -42,17 +47,20 @@ div.showcase ul {
 	list-style-position: outside;
 	line-height: auto;
 }
+
 div.showcase li {
 	padding: 0px;
 	width: 214px;
 	text-align: center;
 }
+
 div.showcase ul li a {
 	display: block;
 	padding: 7px;
 	font-size: 0.9em;
 	text-decoration: underline;
 }
+
 div.showcase ul li a:hover {
 	background-color: #cccccc;
 	color: #000000;
@@ -77,16 +85,28 @@ div.showcase ul li a:hover {
 }
 
 .jcarousel-skin-tango .jcarousel-container-vertical {
-..}
+
+..
+
+	}
 
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
-.}
+
+.
+
+	}
 
 .jcarousel-skin-tango .jcarousel-clip-vertical {
-.}
+
+.
+
+	}
 
 .jcarousel-skin-tango .jcarousel-item {
-.}
+
+.
+
+	}
 
 .jcarousel-skin-tango .jcarousel-clip-vertical .jcarousel-item {
 	float: none !important;

@@ -1,307 +1,304 @@
 {% extends "AppMainBundle:Default:base.layout.html.twig" %}
 
 {% block csslinks %}
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/twirl.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/visual-gbi.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/shop-gbi.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('bundles/main/plugins/shadowbox/shadowbox.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('bundles/catalog/css/catalog.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="http://yandex.st/jquery-ui/1.8.23/themes/base/jquery.ui.all.min.css"/>
-    <link rel="stylesheet" type="text/css" href="http://yandex.st/jquery-ui/1.8.23/themes/base/jquery.ui.all.min.css"/>
-    <link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/twirl.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/visual-gbi.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/shop-gbi.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/plugins/shadowbox/shadowbox.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}"/>
+	<link rel="stylesheet" href="{{ asset('bundles/catalog/css/catalog.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="http://yandex.st/jquery-ui/1.8.23/themes/base/jquery.ui.all.min.css"/>
+	<link rel="stylesheet" type="text/css" href="http://yandex.st/jquery-ui/1.8.23/themes/base/jquery.ui.all.min.css"/>
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}"/>
 
 {% endblock %}
 
 {% block jslinks %}
-    <script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
-    <script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
+	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
 
 
 {% endblock %}
 
 {% block body %}
-    <div class="redline"></div>
-    <div class="page-all">
-    <div class="page-header">
-        <div class="page-header-left-colon">
-            <div class="logo">
-                <a href="/">
-                    <div class="logo-image"><img src="{{ asset('/assets/main/images/logo.png') }}"/></div>
-                    <div class="logo-text">завод железобетонных изделий</div>
-                </a>
+	<div class="redline"></div>
+	<div class="page-all">
+	<div class="page-header">
+		<div class="page-header-left-colon">
+			<div class="logo">
+				<a href="/">
+					<div class="logo-image"><img src="{{ asset('/assets/main/images/logo.png') }}"/></div>
+					<div class="logo-text">завод железобетонных изделий</div>
+				</a>
 
-                <div class="iso">
-                    <a href="{{ asset('/assets/main/images/iso-9001-2008-big.jpg') }}" rel="shadowbox[iso]"
-                       title="Сертификат соответствия ISO 9001:2008"><img
-                                src="{{ asset('/assets/main/images/iso-9001-2008.jpg') }}" title="ISO 9001:2008"/></a>
-                </div>
-            </div>
+				<div class="iso">
+					<a href="{{ asset('/assets/main/images/iso-9001-2008-big.jpg') }}" rel="shadowbox[iso]"
+							title="Сертификат соответствия ISO 9001:2008"><img
+								src="{{ asset('/assets/main/images/iso-9001-2008.jpg') }}" title="ISO 9001:2008"/></a>
+				</div>
+			</div>
 
-            <div class="phones">
-                <ul>
-                    <li class="phones-title">телефоны отдела продаж:</li>
-                    <li>(812) 449-53-38</li>
-                    <li>(812) 642-47-09</li>
-                </ul>
-            </div>
+			<div class="phones">
+				<ul>
+					<li class="phones-title">телефоны отдела продаж:</li>
+					<li>(812) 449-53-38</li>
+					<li>(812) 642-47-09</li>
+				</ul>
+			</div>
 
-            <div class="email">
-                <ul>
-                    <li class="email-title">электронная почта:</li>
-                    <li><a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a></li>
-                </ul>
-            </div>
+			<div class="email">
+				<ul>
+					<li class="email-title">электронная почта:</li>
+					<li><a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a></li>
+				</ul>
+			</div>
 
-            <div class="address">
-                <ul>
-                    <li class="address-title">адрес офиса продаж:</li>
-                    <li>Санкт-Петербург,<br/>пр. Елизарова 38А, офис 414</li>
-                </ul>
-            </div>
-        </div>
+			<div class="address">
+				<ul>
+					<li class="address-title">адрес офиса продаж:</li>
+					<li>Санкт-Петербург,<br/>пр. Елизарова 38А, офис 414</li>
+				</ul>
+			</div>
+		</div>
 
-        <div class="page-header-right-colon-container">
-            <div class="page-header-right-colon">
+		<div class="page-header-right-colon-container">
+			<div class="page-header-right-colon">
 
-                <table class="basket-wrapper">
-                    <tr>
-                        <td class="basket-wrapper empty">
-                        </td>
-                        <td class="basket-wrapper wrapper">
-                            [!basket!]
-                        </td>
-                    </tr>
-                </table>
+				<table class="basket-wrapper">
+					<tr>
+						<td class="basket-wrapper empty">
+						</td>
+						<td class="basket-wrapper wrapper">
+							[!basket!]
+						</td>
+					</tr>
+				</table>
 
-                <div class="menu-h">
-                    <ul>
-                        <li><a href="/">Завод<br/>ЖБИ</a></li>
-                        <li><a href="/about/">О компании<br/>&laquo;СТК-ПромБетон&raquo;</a></li>
-                        <li><a href="/proizvodstvo-gbi/">Производство<br/>ЖБИ изделий</a></li>
-                        <li class="menu-h-h"><a href="/gbi/">Железобетонные изделия</a></li>
-                        <li class="menu-h-s"><a href="/gbi-visual/">Каталог<br/>ЖБИ продукции</a></li>
-                        <li><a href="/obekty/">Наши<br/>объекты</a></li>
-                        <li><a href="/contacts/">Контактная<br/>информация</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="menu-h">
+					<ul>
+						<li><a href="/">Завод<br/>ЖБИ</a></li>
+						<li><a href="/about/">О компании<br/>&laquo;СТК-ПромБетон&raquo;</a></li>
+						<li><a href="/proizvodstvo-gbi/">Производство<br/>ЖБИ изделий</a></li>
+						<li class="menu-h-h"><a href="/gbi/">Железобетонные изделия</a></li>
+						<li class="menu-h-s"><a href="/gbi-visual/">Каталог<br/>ЖБИ продукции</a></li>
+						<li><a href="/obekty/">Наши<br/>объекты</a></li>
+						<li><a href="/contacts/">Контактная<br/>информация</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="clearing"></div>
+	<div class="clearing"></div>
 
-    <div class="page-content">
-        <div class="menu-v">
-            <div class="menu-v-top"></div>
+	<div class="page-content">
+		<div class="menu-v">
+			<div class="menu-v-top"></div>
 
-            <div class="menu-v-content-wrapper">
-                <div class="menu-v-content">
+			<div class="menu-v-content-wrapper">
+				<div class="menu-v-content">
 
-                    <ul>
-                        <li class="menu-v-exc">
-                            <a href="/gbi/"><strong>Железобетонные изделия</strong></a>
-                        </li>
-                        <li>
-                            <a href="/gbi-visual/" class="show-v-dropdown"><strong>ЖБИ</strong><br/>(железобетонные
-                                изделия)</a>
+					<ul>
+						<li class="menu-v-exc">
+							<a href="/gbi/"><strong>Железобетонные изделия</strong></a>
+						</li>
+						<li>
+							<a href="/gbi-visual/" class="show-v-dropdown"><strong>ЖБИ</strong><br/>(железобетонные изделия)</a>
 
-                            <div class="menu-v-dropdown">
-                                <ul>
-                                    <li><a href="/gbi/prom-stroy/">Общегражданское и промышленное строительство</a></li>
-                                    <li><a href="/gbi/dor-stroy/">Дорожное строительство</a></li>
-                                    <li><a href="/gbi/ingener-stroy/">Строительство инженерных сетей</a></li>
-                                    <li><a href="/gbi/energy-stroy/">Строительство энергетических объектов</a></li>
-                                    <li><a href="/gbi/blag-territory/">Благоустройство территорий</a></li>
-                                    <li><a href="/gbi/neftegaz-stroy/">Нефтегазовое строительство</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="special-section">
-                            <div class="special-section-asterisk"></div>
-                            <a href="/izgotovlenie-gbi-po-chertezham/">Изготовление ЖБИ<br/>по чертежам заказчика</a>
-                        </li>
-                        <li>
-                            [!menu-main-sections!]
-                        </li>
-                        <li class="special-section menu-v-exc">
-                            <div class="special-section-asterisk"></div>
-                            <a href="/beton-cena/">Цены на бетон<br/>и бетонные смеси</a>
-                        </li>
-                        <li class="menu-v-exc">
-                            <a href="/beton-tovarniy/" class="show-v-dropdown show-v-dropdown-close"><strong>Бетон
-                                    товарный</strong></a>
+							<div class="menu-v-dropdown">
+								<ul>
+									<li><a href="/gbi/prom-stroy/">Общегражданское и промышленное строительство</a></li>
+									<li><a href="/gbi/dor-stroy/">Дорожное строительство</a></li>
+									<li><a href="/gbi/ingener-stroy/">Строительство инженерных сетей</a></li>
+									<li><a href="/gbi/energy-stroy/">Строительство энергетических объектов</a></li>
+									<li><a href="/gbi/blag-territory/">Благоустройство территорий</a></li>
+									<li><a href="/gbi/neftegaz-stroy/">Нефтегазовое строительство</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="special-section">
+							<div class="special-section-asterisk"></div>
+							<a href="/izgotovlenie-gbi-po-chertezham/">Изготовление ЖБИ<br/>по чертежам заказчика</a>
+						</li>
+						<li>
+							[!menu-main-sections!]
+						</li>
+						<li class="special-section menu-v-exc">
+							<div class="special-section-asterisk"></div>
+							<a href="/beton-cena/">Цены на бетон<br/>и бетонные смеси</a>
+						</li>
+						<li class="menu-v-exc">
+							<a href="/beton-tovarniy/" class="show-v-dropdown show-v-dropdown-close"><strong>Бетон товарный</strong></a>
 
-                            <div class="menu-v-dropdown menu-v-dropdown-part">
-                                <ul>
-                                    <li><a href="/beton-tovarniy/b-7.5-m-100-p3/">БСГ В 7,5 П3 F50 W2 (М-100)</a></li>
-                                    <li><a href="/beton-tovarniy/b-10-m-150-p3/">БСГ В 10 П3 F50 W2 (М-150)</a></li>
-                                    <li><a href="/beton-tovarniy/b-12.5-m-150-p3/">БСГ В 12,5 П3 F100 W2 (М-150)</a>
-                                    </li>
-                                    <li><a href="/beton-tovarniy/b-15-m-200-p3/">БСГ В 15 П3 F100 W4 (М-200)</a></li>
-                                    <li><a href="/beton-tovarniy/b-20-m-250-p3/">БСГ В 20 П3 F150 W4 (М-250)</a></li>
-                                    <li><a href="/beton-tovarniy/b-22.5-m-300-p3/">БСГ В 22,5 П3 F150 W6 (М-300)</a>
-                                    </li>
-                                    <li><a href="/beton-tovarniy/b-25-m-350-p3/">БСГ В 25 П3 F200 W8 (М-350)</a></li>
-                                    <li><a href="/beton-tovarniy/b-30-m-400-p3/">БСГ В 30 П3 F200 W8 (М-400)</a></li>
-                                    <li><a href="/beton-tovarniy/b-35-m-400-p3/">БСГ В 35 П3 F200 W10 (М-400)</a></li>
-                                    <li><a href="/beton-tovarniy/b-40-m-500-p3/">БСГ В 40 П3 F250 W12 (М-500)</a></li>
-                                    <li><a href="/beton-tovarniy/b-12.5-m-150-p4/">БСГ В 12,5 П4 F100 W2 (М-150)</a>
-                                    </li>
-                                    <li><a href="/beton-tovarniy/b-15-m-200-p4/">БСГ В 15 П4 F150 W4 (М-200)</a></li>
-                                    <li><a href="/beton-tovarniy/b-20-m-250-p4/">БСГ В 20 П4 F200 W4 (М-250)</a></li>
-                                    <li><a href="/beton-tovarniy/b-22.5-m-300-p4/">БСГ В 22,5 П4 F200 W6 (М-300)</a>
-                                    </li>
-                                    <li><a href="/beton-tovarniy/b-25-m-350-p4/">БСГ В 25 П4 F200 W6 (М-350)</a></li>
-                                    <li><a href="/beton-tovarniy/b-30-m-400-p4/">БСГ В 30 П4 F200 W8 (М-400)</a></li>
-                                    <li><a href="/beton-tovarniy/b-35-m-400-p4/">БСГ В 35 П4 F200 W10 (М-400)</a></li>
-                                    <li><a href="/beton-tovarniy/b-40-m-450-p4/">БСГ В 40 П4 F250 W12 (М-500)</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu-v-exc">
-                            <a href="/betonnaya-smes/" class="show-v-dropdown show-v-dropdown-close"><strong>Бетонная
-                                    смесь</strong><br/>(монтажный бетонный раствор)</a>
+							<div class="menu-v-dropdown menu-v-dropdown-part">
+								<ul>
+									<li><a href="/beton-tovarniy/b-7.5-m-100-p3/">БСГ В 7,5 П3 F50 W2 (М-100)</a></li>
+									<li><a href="/beton-tovarniy/b-10-m-150-p3/">БСГ В 10 П3 F50 W2 (М-150)</a></li>
+									<li><a href="/beton-tovarniy/b-12.5-m-150-p3/">БСГ В 12,5 П3 F100 W2 (М-150)</a>
+									</li>
+									<li><a href="/beton-tovarniy/b-15-m-200-p3/">БСГ В 15 П3 F100 W4 (М-200)</a></li>
+									<li><a href="/beton-tovarniy/b-20-m-250-p3/">БСГ В 20 П3 F150 W4 (М-250)</a></li>
+									<li><a href="/beton-tovarniy/b-22.5-m-300-p3/">БСГ В 22,5 П3 F150 W6 (М-300)</a>
+									</li>
+									<li><a href="/beton-tovarniy/b-25-m-350-p3/">БСГ В 25 П3 F200 W8 (М-350)</a></li>
+									<li><a href="/beton-tovarniy/b-30-m-400-p3/">БСГ В 30 П3 F200 W8 (М-400)</a></li>
+									<li><a href="/beton-tovarniy/b-35-m-400-p3/">БСГ В 35 П3 F200 W10 (М-400)</a></li>
+									<li><a href="/beton-tovarniy/b-40-m-500-p3/">БСГ В 40 П3 F250 W12 (М-500)</a></li>
+									<li><a href="/beton-tovarniy/b-12.5-m-150-p4/">БСГ В 12,5 П4 F100 W2 (М-150)</a>
+									</li>
+									<li><a href="/beton-tovarniy/b-15-m-200-p4/">БСГ В 15 П4 F150 W4 (М-200)</a></li>
+									<li><a href="/beton-tovarniy/b-20-m-250-p4/">БСГ В 20 П4 F200 W4 (М-250)</a></li>
+									<li><a href="/beton-tovarniy/b-22.5-m-300-p4/">БСГ В 22,5 П4 F200 W6 (М-300)</a>
+									</li>
+									<li><a href="/beton-tovarniy/b-25-m-350-p4/">БСГ В 25 П4 F200 W6 (М-350)</a></li>
+									<li><a href="/beton-tovarniy/b-30-m-400-p4/">БСГ В 30 П4 F200 W8 (М-400)</a></li>
+									<li><a href="/beton-tovarniy/b-35-m-400-p4/">БСГ В 35 П4 F200 W10 (М-400)</a></li>
+									<li><a href="/beton-tovarniy/b-40-m-450-p4/">БСГ В 40 П4 F250 W12 (М-500)</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="menu-v-exc">
+							<a href="/betonnaya-smes/" class="show-v-dropdown show-v-dropdown-close"><strong>Бетонная смесь</strong><br/>(монтажный бетонный раствор)</a>
 
-                            <div class="menu-v-dropdown menu-v-dropdown-part">
-                                <ul>
-                                    <li><a href="/betonnaya-smes/m-100/">РМ 100</a></li>
-                                    <li><a href="/betonnaya-smes/m-150/">РМ 150</a></li>
-                                    <li><a href="/betonnaya-smes/m-200/">РМ 200</a></li>
-                                    <li><a href="/betonnaya-smes/m-250/">РМ 250</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+							<div class="menu-v-dropdown menu-v-dropdown-part">
+								<ul>
+									<li><a href="/betonnaya-smes/m-100/">РМ 100</a></li>
+									<li><a href="/betonnaya-smes/m-150/">РМ 150</a></li>
+									<li><a href="/betonnaya-smes/m-200/">РМ 200</a></li>
+									<li><a href="/betonnaya-smes/m-250/">РМ 250</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
 
-                </div>
-            </div>
+				</div>
+			</div>
 
-            <div class="menu-v-bottom"></div>
+			<div class="menu-v-bottom"></div>
 
-            <div class="dostavka-gbi">
-                <p>
-                    Варианты поставки ЖБИ изделий
-                </p>
+			<div class="dostavka-gbi">
+				<p>
+					Варианты поставки ЖБИ изделий
+				</p>
 
-                <ul>
-                    <li>Доставка ЖБИ изделий автотранспортом компании</li>
-                    <li>Доставка железобетонных и других изделий по железной дороге</li>
-                    <li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>
-                </ul>
-            </div>
+				<ul>
+					<li>Доставка ЖБИ изделий автотранспортом компании</li>
+					<li>Доставка железобетонных и других изделий по железной дороге</li>
+					<li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>
+				</ul>
+			</div>
 
-            <div class="dostavka-gbi">
-                <p>
-                    Стоимость доставки ЖБИ изделий
-                </p>
+			<div class="dostavka-gbi">
+				<p>
+					Стоимость доставки ЖБИ изделий
+				</p>
 
-                <ul>
-                    <li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>
-                    <li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>
-                    <li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>
-                </ul>
-            </div>
+				<ul>
+					<li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>
+					<li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>
+					<li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>
+				</ul>
+			</div>
 
-            <div class="link-articles">
-                <a href="/statyi-o-betone/">Статьи ЖБИ ,бетоне<br/>и бетонных смесях</a>
-            </div>
-        </div>
+			<div class="link-articles">
+				<a href="/statyi-o-betone/">Статьи ЖБИ ,бетоне<br/>и бетонных смесях</a>
+			</div>
+		</div>
 
-        <div class="content-container">
-            <div class="content">
-                <div class="search-form">
-                    <table>
-                        <tr>
-                            <td class="search-form-title">Поиск в каталоге ЖБИ продукции</td>
-                            <td class="search-form-input"><input id="search_condition" type="text"
-                                                                 value="введите условия поиска ..."/></td>
-                            <td class="search-form-submit"><input type="button" value="Найти"/></td>
-                        </tr>
-                    </table>
-                </div>
+		<div class="content-container">
+			<div class="content">
+				<div class="search-form">
+					<table>
+						<tr>
+							<td class="search-form-title">Поиск в каталоге ЖБИ продукции</td>
+							<td class="search-form-input"><input id="search_condition" type="text"
+										value="введите условия поиска ..."/></td>
+							<td class="search-form-submit"><input type="button" value="Найти"/></td>
+						</tr>
+					</table>
+				</div>
 
-                <div class="primary-content">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="primary-content">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="clearing"></div>
+	<div class="clearing"></div>
 
-    <div class="last-adds">
-        [!last-adds-tmp!]
-    </div>
+	<div class="last-adds">
+		[!last-adds-tmp!]
+	</div>
 
-    <div class="footer-empty">&nbsp;</div>
-    <div class="footer rcs">
-        <div>Copyright &copy; 2009&#151;2013 ООО &laquo;СтройПромБетон&raquo; (Санкт-Петербург)</div>
-        <div><a href="/">Завод ЖБИ</a>: продажа и производство ЖБИ</div>
-        <div>Наши партнеры предлагают: <a href="http://www.stk-modul.ru/">доставка песка</a>, узнать <a
-                    href="http://www.stk-modul.ru/price/">цены на песок</a>, предлагают <a
-                    href="http://www.stk-modul.ru/stroitelniy-pesok/">песок строительный цена</a> которого ниже средне
-            рыночной, услуги по <a href="http://www.stk-modul.ru/crushed-granite/">доставка щебня</a>, узнать <a
-                    href="http://www.stk-modul.ru/price/">цены на щебень</a>, услуги по <a
-                    href="http://www.avtospecservis.ru/">ремонту грузовиков</a> в Санкт-Петербурге, <a
-                    href="http://www.stk-metal.ru/">завод металлоконструкций</a></div>
-    </div>
-    </div>
+	<div class="footer-empty">&nbsp;</div>
+	<div class="footer rcs">
+		<div>Copyright &copy; 2009&#151;2013 ООО &laquo;СтройПромБетон&raquo; (Санкт-Петербург)</div>
+		<div><a href="/">Завод ЖБИ</a>: продажа и производство ЖБИ</div>
+		<div>Наши партнеры предлагают: <a href="http://www.stk-modul.ru/">доставка песка</a>, узнать <a
+					href="http://www.stk-modul.ru/price/">цены на песок</a>, предлагают <a
+					href="http://www.stk-modul.ru/stroitelniy-pesok/">песок строительный цена</a> которого ниже средне рыночной, услуги по
+			<a href="http://www.stk-modul.ru/crushed-granite/">доставка щебня</a>, узнать <a
+					href="http://www.stk-modul.ru/price/">цены на щебень</a>, услуги по <a
+					href="http://www.avtospecservis.ru/">ремонту грузовиков</a> в Санкт-Петербурге, <a
+					href="http://www.stk-metal.ru/">завод металлоконструкций</a></div>
+	</div>
+	</div>
 
-    <div class="redline"></div>
+	<div class="redline"></div>
 {% endblock %}
 
 {% block js %}
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function (w, c) {
-            (w[c] = w[c] || []).push(function () {
-                try {
-                    w.yaCounter4775983 = new Ya.Metrika(4775983);
-                    yaCounter4775983.clickmap(true);
-                    yaCounter4775983.trackLinks(true);
-                } catch (e) {
-                }
-            });
-        })(window, 'yandex_metrika_callbacks');
-    </script>
-    <script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
-    <noscript><img src="//mc.yandex.ru/watch/4775983" style="position:absolute; left:-9999px;" alt=""/></noscript>
-    <!-- /Yandex.Metrika counter -->
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+		(function (w, c) {
+			(w[c] = w[c] || []).push(function () {
+				try {
+					w.yaCounter4775983 = new Ya.Metrika(4775983);
+					yaCounter4775983.clickmap(true);
+					yaCounter4775983.trackLinks(true);
+				} catch (e) {
+				}
+			});
+		})(window, 'yandex_metrika_callbacks');
+	</script>
+	<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+	<noscript><img src="//mc.yandex.ru/watch/4775983" style="position:absolute; left:-9999px;" alt=""/></noscript>
+	<!-- /Yandex.Metrika counter -->
 
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-27310520-1']);
-        _gaq.push(['_trackPageview']);
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27310520-1']);
+		_gaq.push(['_trackPageview']);
 
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+		(function () {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
-    <script type="text/javascript">
-        Shadowbox.init({
-            handleOversize: "drag",
-            animSequence: "hw"
-        });
-    </script>
+	<script type="text/javascript">
+		Shadowbox.init({
+			handleOversize: "drag",
+			animSequence: "hw"
+		});
+	</script>
 {% endblock %}

@@ -1,13 +1,14 @@
 <ul category-id="{{ category.id }}" class="sortable-category nav nav-tabs nav-stacked">
-    {% for category in categoryChilds %}
-        <li class="category-list-unit" category-id="{{ category.id }}" title="{{ category.title }} {{ category.mark }}" onclick="CatalogAdmin.loadCategoryChilds(this, {{ category.id }})">
-            <a href="javascript:void(0)">
-                <span class="badge">
-                    <strong>{{ category.id }}</strong>
-                </span>
-                {% if category.name %}{{ category.name }}{% else %}{{ category.title }}{% endif %} {{ category.mark }}
-            </a>
-        </li>
-    {% endfor %}
-    <button onclick="CatalogAdmin.getBlankCategory($(this).parents('ul.sortable-category').attr('category-id'))" class="btn pull-right" style="width: 100%"><i class="icon-plus"></i></button>
+	{% for category in categoryChilds %}
+		<li class="category-list-unit" category-id="{{ category.id }}" title="{{ category.title }} {{ category.mark }}" onclick="CatalogAdmin.loadCategoryChilds(this, {{ category.id }})">
+			<a href="javascript:void(0)">
+				<span class="badge">
+					<strong>{{ category.id }}</strong>
+				</span>
+				{% if category.name %}{{ category.name }}{% else %}{{ category.title }}{% endif %} {{ category.mark }}
+			</a>
+		</li>
+	{% endfor %}
+	<button onclick="CatalogAdmin.getBlankCategory($(this).parents('ul.sortable-category').attr('category-id'))" class="btn pull-right" style="width: 100%">
+		<i class="icon-plus"></i></button>
 </ul>
