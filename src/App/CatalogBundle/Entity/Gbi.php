@@ -48,13 +48,6 @@ class Gbi
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="name", type="string", length=255, nullable=false)
-	 */
-	private $name;
-
-	/**
-	 * @var string
-	 *
 	 * @ORM\Column(name="name_content", type="string", length=255, nullable=true)
 	 */
 	private $nameContent;
