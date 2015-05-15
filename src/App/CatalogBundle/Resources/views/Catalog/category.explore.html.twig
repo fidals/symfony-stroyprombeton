@@ -24,8 +24,7 @@
 			{% for item in childs if item.isActive %}
 				{% if loop.index is odd %}<tr>{% endif %}
 				<td>
-					<span>{{ item.id }}</span>
-					<a href="/gbi/{{ catUrl }}/?section={{ item.id }}">
+					<span>{{ item.id }}</span> <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">
 						<h2>{% if item.name %}{{ item.name }}{% else %}{{ item.title }}{% endif %}</h2>
 
 						<div class="gbi-showcase-top-line">

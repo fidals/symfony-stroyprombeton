@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GbiObject
 {
+	use PageTrait;
+
 	/**
 	 * @var integer
 	 * @ORM\Column(name="id", type="integer")
@@ -24,37 +26,9 @@ class GbiObject
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="title", type="string", length=255)
-	 */
-	private $title;
-
-	/**
-	 * @var string
-	 *
 	 * @ORM\Column(name="menuTitle", type="string", length=255)
 	 */
 	private $menuTitle;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="h1", type="string", length=255)
-	 */
-	private $h1;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="keywords", type="string", length=255)
-	 */
-	private $keywords;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="description", type="string", length=255)
-	 */
-	private $description;
 
 	/**
 	 * @var string
@@ -88,29 +62,6 @@ class GbiObject
 	}
 
 	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 * @return GbiObject
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
-
-		return $this;
-	}
-
-	/**
-	 * Get title
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
-
-	/**
 	 * Set menuTitle
 	 *
 	 * @param string $menuTitle
@@ -119,7 +70,6 @@ class GbiObject
 	public function setMenuTitle($menuTitle)
 	{
 		$this->menuTitle = $menuTitle;
-
 		return $this;
 	}
 
@@ -131,52 +81,6 @@ class GbiObject
 	public function getMenuTitle()
 	{
 		return $this->menuTitle;
-	}
-
-	/**
-	 * Set h1
-	 *
-	 * @param string $h1
-	 * @return GbiObject
-	 */
-	public function setH1($h1)
-	{
-		$this->h1 = $h1;
-
-		return $this;
-	}
-
-	/**
-	 * Get h1
-	 *
-	 * @return string
-	 */
-	public function getH1()
-	{
-		return $this->h1;
-	}
-
-	/**
-	 * Set keywords
-	 *
-	 * @param string $keywords
-	 * @return GbiObject
-	 */
-	public function setKeywords($keywords)
-	{
-		$this->keywords = $keywords;
-
-		return $this;
-	}
-
-	/**
-	 * Get keywords
-	 *
-	 * @return string
-	 */
-	public function getKeywords()
-	{
-		return $this->keywords;
 	}
 
 	/**
@@ -246,28 +150,5 @@ class GbiObject
 	public function getContent()
 	{
 		return $this->content;
-	}
-
-	/**
-	 * Set description
-	 *
-	 * @param string $description
-	 * @return GbiObject
-	 */
-	public function setDescription($description)
-	{
-		$this->description = $description;
-
-		return $this;
-	}
-
-	/**
-	 * Get description
-	 *
-	 * @return string
-	 */
-	public function getDescription()
-	{
-		return $this->description;
 	}
 }

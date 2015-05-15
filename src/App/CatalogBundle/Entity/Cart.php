@@ -2,13 +2,6 @@
 
 namespace App\CatalogBundle\Entity;
 
-
-/**
- * Класс корзины
- * Не содержит аннотаций, не сязан с БД
- * Class Cart
- * @package App\CatalogBundle\Entity
- */
 class Cart
 {
 	/**
@@ -32,12 +25,13 @@ class Cart
 	{
 		$this->products[$id] = (isset($this->products[$id])) ? $this->products[$id] + $count : $count;
 		$this->total_products_count += $count;
+		// TODO - зачем здесь такое интересное echo ? Протести и снеси, если тест ок
+		echo '';
 	}
 
 	public function setProducts($products)
 	{
 		$this->products = $products;
-		return $this;
 	}
 
 	public function getProducts()
@@ -48,7 +42,6 @@ class Cart
 	public function setTotalProductsCount($total_products_count)
 	{
 		$this->total_products_count = $total_products_count;
-		return $this;
 	}
 
 	public function getTotalProductsCount()

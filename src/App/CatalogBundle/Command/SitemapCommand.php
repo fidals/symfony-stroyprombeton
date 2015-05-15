@@ -108,30 +108,27 @@ class SitemapCommand extends ContainerAwareCommand
 			$transport = $this->getContainer()->get('swiftmailer.transport.real');
 			$spool->flushQueue($transport);
 		}
+
 	}
 
 	public function assemble($entityData)
 	{
 		//Постфикс. Нужен для генерации url. У продуктов, например, подставляем id с вопросиками
 		$urlPostfix = '';
-		if ($entityData['entityType'] == 'product') {
+		if ($entityData['entityType'] == 'product')
 			$urlPostfix = '?section=' . $entityData['section'] . '&gbi=' . $entityData['gbi'];
-		} elseif ($entityData['entityType'] == 'category') {
-			$urlPostfix = '?section=' . $entityData['section'];
-		} else {
+		elseif ($entityData['entityType'] == 'category')
+			$urlPostfix = '?section=' . $entityData['section']; else {
 			//TODO: Бросаем Exception. Скорее всего есть симфониевый
 		}
-		$urlPostfix = str_replace('&amp;', '&', $urlPostfix);
-
-		$loc = $entityData['loc'];
-		if (empty($loc)) {
-			$loc = $this->getContainer()->get('router')
-				->generate($entityData['locData']['route'], $entityData['locData']['parameters'], false) . $urlPostfix;
-		}
+		$urlPostfix = str_replace("&amp;", "&", $urlPostfix);
 
 		return array(
-			'loc' => $loc,
-			'lastmod' => (empty($entityData['lastmod'])) ? date('Y-m-d H:i:s') : $entityData['lastmod'],
+			'loc' => (empty($entityData['loc'])) ?
+				$this->getContainer()->get('router')
+					->generate($entityData['locData']['route'], $entityData['locData']['parameters'], false) . $urlPostfix
+				: $entityData['loc'],
+			'lastmod' => (empty($entityData['lastmod'])) ? date("Y-m-d H:i:s") : $entityData['lastmod'],
 			'changefreq' => (empty($entityData['changefreq'])) ? 'weekly' : $entityData['changefreq'],
 			'priority' => (empty($entityData['priority'])) ? '1' : $entityData['priority'],
 			'name' => (empty($entityData['name'])) ? '1' : $entityData['name'],
@@ -142,7 +139,7 @@ class SitemapCommand extends ContainerAwareCommand
 	{
 		return array(
 			'loc' => (empty($entityData['loc'])) ? $this->getContainer()->get('router')->generate($entityData['locData']['route'], $entityData['locData']['parameters'], false) : $entityData['loc'],
-			'lastmod' => (empty($entityData['lastmod'])) ? date('Y-m-d H:i:s') : $entityData['lastmod'],
+			'lastmod' => (empty($entityData['lastmod'])) ? date("Y-m-d H:i:s") : $entityData['lastmod'],
 			'changefreq' => (empty($entityData['changefreq'])) ? 'weekly' : $entityData['changefreq'],
 			'priority' => (empty($entityData['priority'])) ? '1' : $entityData['priority'],
 		);

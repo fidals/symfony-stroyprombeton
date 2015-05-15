@@ -88,26 +88,26 @@
 			<div class="page-header-right-colon">
 
 				<!-- <table class="basket-wrapper">
-					  <tr>
-						  <td class="basket-wrapper empty">
-						  </td>
-						  <td class="basket-wrapper wrapper">
-							  <div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" style="height: 74px;">
-								  <div class="basket basket-sticky" style="position: fixed; top: 20px;">
-									  <div class="basket-content">
-										  Нет<br>заказов
-									  </div>
-									  <div class="basket-actions">
-										  <ul>
-											  <li>Оформить</li>
-											  <li>Удалить</li>
-										  </ul>
-									  </div>
-								  </div>
-							  </div>
-						  </td>
-					  </tr>
-				  </table>-->
+						<tr>
+							<td class="basket-wrapper empty">
+							</td>
+							<td class="basket-wrapper wrapper">
+								<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" style="height: 74px;">
+									<div class="basket basket-sticky" style="position: fixed; top: 20px;">
+										<div class="basket-content">
+											Нет<br>заказов
+										</div>
+										<div class="basket-actions">
+											<ul>
+												<li>Оформить</li>
+												<li>Удалить</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>-->
 			</div>
 		</div>
 	</div>
@@ -139,14 +139,10 @@
 									<ul>
 										<li>
 											<a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order">
-												<img src="/bundles/main/images/ok.png">
-											</a>
-										</li>
+												<img src="/bundles/main/images/ok.png"></a></li>
 										<li>
 											<a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">
-												<img src="/bundles/main/images/clear.png">
-											</a>
-										</li>
+												<img src="/bundles/main/images/clear.png"></a></li>
 									</ul>
 								</div>
 							{% else %}
@@ -214,8 +210,7 @@
 							<p class="partner-desc" style="color:#005CC7;">завод металлоконструкций</p>
 						</td>
 						<td>
-							<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo"
-								 style="margin-top: 5px;"/>
+							<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo" style="margin-top: 5px;"/>
 
 							<p style="color:#747675;">Строй<span style="color: #FFA700;">К</span>омплект</p>
 
@@ -229,8 +224,7 @@
 							<p class="partner-desc" style="color: #C20000;">поставка нерудных материалов</p>
 						</td>
 						<td>
-							<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru"
-								 class="logo"/>
+							<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru" class="logo"/>
 
 							<p style="color:#0757a1">АвтоСпецСервис</p>
 
@@ -250,8 +244,8 @@
 					<table>
 						<tr>
 							<td class="search-form-title">Поиск в каталоге ЖБИ продукции</td>
-							<td class="search-form-input"><input id="search_condition" type="text"
-																 value="введите условия поиска ..."/></td>
+							<td class="search-form-input">
+								<input id="search_condition" type="text" value="введите условия поиска ..."/></td>
 							<td class="search-form-submit"><input type="button" value="Найти"/></td>
 						</tr>
 					</table>
@@ -346,8 +340,8 @@
 			});
 
 			var n = d.getElementsByTagName("script")[0],
-				s = d.createElement("script"),
-				f = function () {
+					s = d.createElement("script"),
+					f = function () {
 						n.parentNode.insertBefore(s, n);
 					};
 			s.type = "text/javascript";

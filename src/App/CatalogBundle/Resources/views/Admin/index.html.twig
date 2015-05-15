@@ -100,9 +100,7 @@
 				<ul class="nav nav-tabs">
 					{% for category in rootCategories %}
 						<li title="{{ category.title }}">
-							<a href="#categoryTab{{ loop.index0 }}" data-toggle="tab">
-								{{ category.title|slice(0, 15) }}...
-							</a>
+							<a href="#categoryTab{{ loop.index0 }}" data-toggle="tab">{{ category.title|slice(0, 15) }}...</a>
 						</li>
 					{% endfor %}
 				</ul>
@@ -118,10 +116,8 @@
 	</div>
 	<div id="uncat-products">
 		<div class="header">
-			<p>
-				<b>Продукты без категории</b>
-				<a style="font-size: 10px" onclick="$('#uncat-products-content').toggle()">(свернуть)</a>
-			</p>
+			<p><b>Продукты без категории</b>
+				<a style="font-size: 10px" onclick="$('#uncat-products-content').toggle()">(свернуть)</a></p>
 		</div>
 		<div id="uncat-products-content">
 			<div class="form-search">
@@ -160,7 +156,7 @@
 				<td>id</td>
 				<td style="min-width: 500px">desc</td>
 				<td>isActive</td>
-				<td>newPrice</td>
+				<td>isNewPrice</td>
 				<td>nomen</td>
 				<td>mark</td>
 				<td>name</td>

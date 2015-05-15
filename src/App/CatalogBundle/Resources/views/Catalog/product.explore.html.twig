@@ -12,8 +12,8 @@
 	<div class="location">
 		{% for item in parents %}
 			<span class="location section">
-			<a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
-		</span>
+            <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
+        </span>
 			<span class="location separate">/</span>
 		{% endfor %}
 	</div>
@@ -117,12 +117,13 @@
 				</div>
 				<div class="tab-pane" id="tab2">
 					{% autoescape false %}
-						{{ product.description }}
+					{{ product.description }}
 					{% endautoescape %}
 				</div>
 			</div>
 			<div class="product-for-nds">
 				<p>Цена указана с учетом НДС</p>
+
 				<p>Не является публичной офертой</p>
 			</div>
 		</div>
@@ -133,9 +134,7 @@
 		</div>
 		<div class="product-bottom-box">
 			<a href="/gbi/{{ catUrl }}/?section={{ product.category.id }}&gbi={{ product.id }}&buy=true" section="{{ product.category.id }}" code="{{ product.id }}" price="{{ product.price }}" class="btn btn-primary add-basket">
-				<i class="icon-shopping-cart" style="margin-right: 7px;"></i>
-				В корзину
-			</a>
+				<i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
 		</div>
 	</div>
 {% endblock %}

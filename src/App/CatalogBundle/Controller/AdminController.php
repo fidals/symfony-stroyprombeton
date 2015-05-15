@@ -1,4 +1,5 @@
 <?php
+// some comments
 namespace App\CatalogBundle\Controller;
 
 use App\CatalogBundle\Entity\Category;
@@ -232,7 +233,7 @@ class AdminController extends Controller
 			$product->setName('Название продукта');
 			$product->setMark('Марка');
 			$product->setIsActive(true);
-			$product->setNewPrice(true);
+			$product->setIsNewPrice(true);
 			$em = $this->getDoctrine()->getEntityManager();
 			$em->persist($product);
 			$em->flush();
@@ -305,6 +306,98 @@ class AdminController extends Controller
 			return new AjaxSuccess();
 		}
 		return new AjaxError();
+	}
+
+	public function sandboxAction()
+	{
+		/*
+				// delete cats 537 and 540
+
+				$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+				$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+				$em = $this->getDoctrine()->getEntityManager();
+
+				$categories = array(537, 540);
+				foreach($categories as $categoryId) {
+					$category = $catRp->find($categoryId);
+					$tree = $catRp->buildTreeArray($catRp->getNodesHierarchy($category, false));
+
+					foreach($tree as $node) {
+						$this->recursiveDelete($node, $catRp, $prodRp, $em);
+					}
+				}
+				$em->flush();
+				die('success dProds = ' . $this->dProds . ' dCats = ' . $this->dCats);*/
+
+
+		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+		$em = $this->getDoctrine()->getEntityManager();
+
+		$obj = \PHPExcel_IOFactory::load('/var/www/mtl.xls');
+		$sc = $obj->getSheetCount();
+		// loop all sheets
+		for ($i = 1; $i < $sc; $i++) {
+			$obj->setActiveSheetIndex($i);
+			$aSheet = $obj->getActiveSheet();
+
+			$rcid = 537;
+			$baseCatNum = 1;
+			$subCat1Num = 0;
+			$subCat2Num = 0;
+			$baseCatNomen = 0;
+			$subCat1Nomen = 0;
+			$subCat2Nomen = 0;
+
+			$prodNum = 0;
+
+			foreach ($aSheet->getRowIterator() as $row) {
+				$cellIterator = $row->getCellIterator();
+				foreach ($cellIterator as $cell) {
+					$rowArr[] = $cell->getCalculatedValue();
+				}
+				$nomen = (int)$rowArr[0];
+				$baseCatNum = floor($nomen / 10000000);
+				$subCat1Num = floor(($nomen % 10000000) / 100000);
+				$subCat2Num = floor(($nomen % 100000) / 1000);
+				$prodNum = $nomen % 1000;
+
+				if ($prodNum == 0) {
+					if ($subCat2Num == 0) {
+
+						// create subcat1
+						$cat = new Category();
+						$cat->setTitle(substr($rowArr[1], 2));
+						$cat->setNomen($nomen);
+						$cat->setParent($catRp->find($rcid));
+
+						$subCat1Nomen = $nomen;
+						$em->persist($cat);
+						$em->flush();
+					} else {
+
+						// create subcat2
+						$cat = new Category();
+						$cat->setTitle(substr($rowArr[1], 5));
+						$cat->setNomen($nomen);
+						$cat->setParent($catRp->findByNomen($subCat1Nomen));
+
+						$subCat2Nomen = $nomen;
+						$em->persist($cat);
+						$em->flush();
+					}
+				} else {
+
+					// insert product
+					$product = new Product();
+					$product->setNomen($nomen);
+					$product->setCategory($catRp->findByNomen($subCat2Nomen));
+
+				}
+
+				die();
+			}
+		}
 	}
 
 	public function recursiveDelete($catArr, $catRp, $prodRp, $em)

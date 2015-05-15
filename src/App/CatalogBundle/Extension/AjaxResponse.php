@@ -3,6 +3,8 @@
 namespace App\CatalogBundle\Extension;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+;
+
 class AjaxResponse extends JsonResponse
 {
 	public function __construct($data = array(), $success = true, $status = 200, $headers = array())

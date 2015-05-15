@@ -16,7 +16,7 @@ class ProductAdmin extends Admin
 	{
 		$formMapper
 			->add('isActive', null, array('label' => 'is_active', 'required' => false))
-			->add('newPrice', null, array('required' => false))
+			->add('isNewPrice', null, array('required' => false))
 			->add('nomen', null, array('required' => false))
 			->add('mark', null, array('required' => false))
 			->add('name', null, array('required' => false))
@@ -40,7 +40,7 @@ class ProductAdmin extends Admin
 		$datagridMapper
 			->add('id')
 			->add('isActive', null, array('label' => 'is_active', 'required' => false))
-			->add('newPrice', null, array('required' => false))
+			->add('isNewPrice', null, array('required' => false))
 			->add('nomen', null, array('required' => false))
 			->add('mark', null, array('required' => false))
 			->add('name', null, array('required' => false))
@@ -64,7 +64,7 @@ class ProductAdmin extends Admin
 		$listMapper
 			->add('id')
 			->add('isActive', null, array('label' => 'is_active', 'required' => false))
-			->add('newPrice', null, array('required' => false))
+			->add('isNewPrice', null, array('required' => false))
 			->addIdentifier('nomen', null, array('required' => false))
 			->add('mark', null, array('required' => false))
 			->addIdentifier('name', null, array('required' => false))

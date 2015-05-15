@@ -53,35 +53,28 @@ class CartController extends Controller
 
 	/**
 	 * Форма заказа
-	 * @param Request $request
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 * @return mixed - html-формы или редирект на страницу обработки формы
 	 */
-	public function orderAction(Request $request)
+	public function orderAction()
 	{
 		$order = new Order();
 		$form = $this->createForm(new OrderType(), $order);
 
-		if ($request->getMethod() == 'POST') {
-			$form->handleRequest($request);
+		if ($this->getRequest()->getMethod() == 'POST') {
+			$form->bindRequest($this->getRequest());
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
 
-				// Аргументы для формирования сообщения
-				$to = $this->container->getParameter('app_catalog')['order_mail']['to'];
-				$from = $this->container->getParameter('app_catalog')['order_mail']['from'];
-				$body = $this->renderView('AppCatalogBundle:Cart:email.order.html.twig',
-					array(
-						'form' => $form->createView(),
-						'cart' => CartRepository::getInstance($this)->loadCart(true)
-					)
-				);
-
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
-					->setTo($to)
-					->setFrom($from)
-					->setContentType('text/html')
-					->setBody($body);
+					->setTo('info@stroyprombeton.ru')
+					->setFrom('order@stroyprombeton.ru')
+					->setContentType("text/html")
+					->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
+							'form' => $form->createView(),
+							'cart' => CartRepository::getInstance($this)->loadCart(true)
+						))
+					);
 				$mailer->send($message);
 				CartRepository::getInstance($this)->cleanCart();
 				return $this->redirect($this->generateUrl('app_main_index'));

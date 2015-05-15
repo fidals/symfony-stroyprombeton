@@ -9,8 +9,7 @@
 
 {% block content %}
 	<div class="location">
-		<span class="location section"><a href="/">СТК-ПромБетон</a></span>
-		<span class="location separate">/</span>
+		<span class="location section"><a href="/">СТК-ПромБетон</a></span> <span class="location separate">/</span>
 		<span class="location section"><a href="/order/">Оформление заказа на ЖБИ продукцию</a></span>
 	</div>
 	<h1>Оформление заказа на ЖБИ продукцию</h1>
@@ -27,22 +26,14 @@
 					{% for product in order.products %}
 						<tr>
 							<td class="gbi-list photo">
-								{% if product.model.isHavePhoto %}
-									<a href="/assets/main/images/gbi-photos/{{ product.model.sectionId }}/{{ product.model.id }}.jpg" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
-										<img src="/assets/main/images/icon-photo.png">
-									</a>
-								{% else %}
-									<a href="#" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
-										<img src="/assets/main/images/icon-photo.png">
-									</a>
-								{% endif %}
+								<a href="/assets/main/images/gbi-photos/323/763.jpg" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
+									<img src="/assets/main/images/icon-photo.png"> </a>
 							</td>
 							<td class="gbi-list code">
 								{{ product.model.nomen }}
 							</td>
 							<td class="gbi-list name">
-								<a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}"
-								   class="gbi-link">
+								<a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}" class="gbi-link">
 									<span class="gbi-link name">
 										{{ product.model.name }}
 									</span>
@@ -63,14 +54,14 @@
 							</td>
 							<td class="positions-list delete">
 								<a href="javascript:void(0);" class="order-delete" title="Удалить из заказа">
-									<img src="/assets/main/images/icon-delete.png">
-								</a>
+									<img src="/assets/main/images/icon-delete.png"> </a>
 							</td>
 						</tr>
 					{% endfor %}
 					<tr class="gbi-list-header">
 						<td colspan="2"></td>
-						<th class="clear-basket"><a href="javascript:void(0);" class="clear-basket">Удалить все заказы</a></th>
+						<th class="clear-basket">
+							<a href="javascript:void(0);" class="clear-basket">Удалить все заказы</a></th>
 						<th>ЖБИ</th>
 						<th colspan="2" class="cnt-goods">{{ order.totalProductsCount }}</th>
 					</tr>

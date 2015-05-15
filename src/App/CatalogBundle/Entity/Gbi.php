@@ -2,6 +2,7 @@
 
 namespace App\CatalogBundle\Entity;
 
+use App\MainBundle\Entity\PageTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Gbi
 {
+	use PageTrait;
+
 	/**
 	 * @var integer
 	 *
@@ -94,9 +97,9 @@ class Gbi
 	/**
 	 * @var boolean
 	 *
-	 * @ORM\Column(name="place_main_page", type="boolean", nullable=true)
+	 * @ORM\Column(name="is_on_main_page", type="boolean", nullable=true)
 	 */
-	private $placeMainPage;
+	private $isOnMainPage;
 
 	/**
 	 * @var integer
@@ -108,9 +111,9 @@ class Gbi
 	/**
 	 * @var float
 	 *
-	 * @ORM\Column(name="koef_price", type="float", nullable=false)
+	 * @ORM\Column(name="price_coefficient", type="float", nullable=false)
 	 */
-	private $koefPrice;
+	private $priceCoefficient;
 
 	/**
 	 * @param string $alias
@@ -209,22 +212,6 @@ class Gbi
 	}
 
 	/**
-	 * @param string $name
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	/**
 	 * @param string $nameContent
 	 */
 	public function setNameContent($nameContent)
@@ -273,19 +260,19 @@ class Gbi
 	}
 
 	/**
-	 * @param boolean $placeMainPage
+	 * @param boolean $isOnMainPage
 	 */
-	public function setPlaceMainPage($placeMainPage)
+	public function setIsOnMainPage($isOnMainPage)
 	{
-		$this->placeMainPage = $placeMainPage;
+		$this->isOnMainPage = $isOnMainPage;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getPlaceMainPage()
+	public function getIsOnMainPage()
 	{
-		return $this->placeMainPage;
+		return $this->isOnMainPage;
 	}
 
 	/**
@@ -321,18 +308,18 @@ class Gbi
 	}
 
 	/**
-	 * @param float $koefPrice
+	 * @param float $priceCoefficient
 	 */
-	public function setKoefPrice($koefPrice)
+	public function setPriceCoefficient($priceCoefficient)
 	{
-		$this->koefPrice = $koefPrice;
+		$this->priceCoefficient = $priceCoefficient;
 	}
 
 	/**
 	 * @return float
 	 */
-	public function getKoefPrice()
+	public function getPriceCoefficient()
 	{
-		return $this->koefPrice;
+		return $this->priceCoefficient;
 	}
 }

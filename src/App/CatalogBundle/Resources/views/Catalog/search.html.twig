@@ -17,8 +17,7 @@
 					<td class="gbi-list code">{{ product.nomen }}</td>
 					<td class="gbi-list name">
 						<a href="/gbi/{{ product.catUrl }}/?section={{ product.sectionId }}&amp;gbi={{ product.id }}">{{ product.name }}</a>
-						<b>{{ product.mark }}</b>
-						<br>
+						<b>{{ product.mark }}</b> <br>
 
 						<div class="search-work-docs">
 							Рабочая документация: <b>{{ product.section.mark }}</b>
@@ -31,13 +30,7 @@
 							{% endfor %}
 						</div>
 					</td>
-					<td class="gbi-list price">
-						{% if product.price %}
-							{{ product.price + product.price // ((1.1 - 1)*100) }} руб.
-						{% else %}
-							По запросу
-						{% endif %}
-					</td>
+					<td class="gbi-list price">{% if product.price %} {{ product.price + product.price // ((1.1 - 1)*100) }} руб. {% else %} По запросу {% endif %}</td>
 					<td class="gbi-list rest rest-container">
 						<input class="basket-rest" type="number" min="1" max="999999" code="{{ product.id }}" value="1">
 					</td>

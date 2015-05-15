@@ -2,8 +2,8 @@
 
 namespace App\CatalogBundle\Entity;
 
+use App\MainBundle\Entity\PageTrait;
 use Doctrine\ORM\Mapping as ORM;
-use App\CatalogBundle\Extension\Utils;
 
 /**
  * Products
@@ -13,6 +13,8 @@ use App\CatalogBundle\Extension\Utils;
  */
 class Product
 {
+	use PageTrait;
+
 	/**
 	 * @var integer
 	 *
@@ -25,18 +27,13 @@ class Product
 	/**
 	 * @var boolean
 	 *
-	 * @ORM\Column(name="is_active", type="boolean", nullable=true)
+	 * @ORM\Column(name="is_new_price", type="boolean", nullable=true)
 	 */
-	private $isActive;
+	private $isNewPrice;
 
 	/**
-	 * @var boolean
+	 * Это номер товара, который вбивают руками. Он состоит из кучи цифр, у каждой свой смысл в зависимости от позиции
 	 *
-	 * @ORM\Column(name="new_price", type="boolean", nullable=true)
-	 */
-	private $newPrice;
-
-	/**
 	 * @var integer
 	 *
 	 * @ORM\Column(name="nomen", type="bigint", nullable=true)
@@ -49,13 +46,6 @@ class Product
 	 * @ORM\Column(name="mark", type="string", length=100, nullable=false)
 	 */
 	private $mark;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="name", type="string", length=255, nullable=false)
-	 */
-	private $name;
 
 	/**
 	 * @var integer
@@ -113,20 +103,12 @@ class Product
 	 */
 	private $diameterIn;
 
-
 	/**
 	 * @var integer
 	 *
 	 * @ORM\Column(name="price", type="integer", nullable=true)
 	 */
 	private $price;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="description", type="text", nullable=true)
-	 */
-	private $description;
 
 	/**
 	 * @var boolean
@@ -162,22 +144,6 @@ class Product
 	public function getComments()
 	{
 		return $this->comments;
-	}
-
-	/**
-	 * @param string $desc
-	 */
-	public function setDescription($desc)
-	{
-		$this->description = $desc;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getDescription()
-	{
-		return $this->description;
 	}
 
 	/**
@@ -246,22 +212,6 @@ class Product
 	}
 
 	/**
-	 * @param boolean $isActive
-	 */
-	public function setIsActive($isActive)
-	{
-		$this->isActive = $isActive;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getIsActive()
-	{
-		return $this->isActive;
-	}
-
-	/**
 	 * @param boolean $isHavePhoto
 	 */
 	public function setIsHavePhoto($isHavePhoto)
@@ -310,35 +260,19 @@ class Product
 	}
 
 	/**
-	 * @param string $name
+	 * @param boolean $isNewPrice
 	 */
-	public function setName($name)
+	public function setIsNewPrice($isNewPrice)
 	{
-		$this->name = $name;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	/**
-	 * @param boolean $newPrice
-	 */
-	public function setNewPrice($newPrice)
-	{
-		$this->newPrice = $newPrice;
+		$this->isNewPrice = $isNewPrice;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getNewPrice()
+	public function getIsNewPrice()
 	{
-		return $this->newPrice;
+		return $this->isNewPrice;
 	}
 
 	/**

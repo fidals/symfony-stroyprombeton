@@ -55,7 +55,7 @@ class CatalogController extends Controller
 			throw $this->createNotFoundException();
 		}
 		$parents = $catRp->getPath($category);
-		if ($catRp->isParent($category, $catUrl)) {
+		if ($this->isParent($category, $catUrl)) {
 			$hierarchyOptions = array(
 				'childSort' => array(
 					'field' => 'title',
@@ -87,7 +87,7 @@ class CatalogController extends Controller
 			}
 		} else {
 			//TODO:сделать редиректы
-			return $this->render('AppMainBundle:StaticPage:404.html.twig');
+			return $this->render("AppMainBundle:StaticPage:404.html.twig");
 		}
 	}
 
@@ -162,8 +162,15 @@ class CatalogController extends Controller
 		return new Response($json);
 	}
 
-	public function indexAction()
+	private function isParent($category, $catUrl)
 	{
-		return $this->redirect($this->generateUrl('app_main_index'), 301);
+
+		$catRp = $this->getDoctrine()->getRepository("AppCatalogBundle:Category");
+		$parents = $catRp->getPath($category);
+		foreach ($parents as $parent) {
+			if ($parent->getAlias() == $catUrl)
+				return true;
+		}
+		return false;
 	}
 }

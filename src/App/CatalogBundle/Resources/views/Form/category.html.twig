@@ -14,10 +14,10 @@
 		<td>
 			<div class="btn-group">
 				<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i></button>
-				<button onclick="CatalogAdmin.deleteCategory($(this).parents('tr').attr('category-id'), $(this).parents('tr')); return false;"
-						class="btn btn-danger"><i class="icon-trash icon-white"></i></button>
-				<button onclick="CatalogAdmin.view.removeCategoryFromEditor($(this).parents('tr')); return false;"
-						class="btn btn-info"><i class="icon-remove icon-white"></i></button>
+				<button onclick="CatalogAdmin.deleteCategory($(this).parents('tr').attr('category-id'), $(this).parents('tr')); return false;" class="btn btn-danger">
+					<i class="icon-trash icon-white"></i></button>
+				<button onclick="CatalogAdmin.view.removeCategoryFromEditor($(this).parents('tr')); return false;" class="btn btn-info">
+					<i class="icon-remove icon-white"></i></button>
 			</div>
 		</td>
 		{{ form_rest(form) }}

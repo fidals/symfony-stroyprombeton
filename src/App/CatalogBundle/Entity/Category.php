@@ -2,11 +2,10 @@
 
 namespace App\CatalogBundle\Entity;
 
+use App\MainBundle\Entity\PageTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use App\CatalogBundle\Extension\Utils;
 
 /**
@@ -19,6 +18,8 @@ use App\CatalogBundle\Extension\Utils;
  */
 class Category
 {
+	use PageTrait;
+
 	/**
 	 * @var integer
 	 *
@@ -41,20 +42,6 @@ class Category
 	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
 	 */
 	private $parent;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="name", type="string", length=1000, nullable=true)
-	 */
-	private $name;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="title", type="string", length=1000, nullable=true)
-	 */
-	private $title;
 
 	/**
 	 * @var string
@@ -83,21 +70,6 @@ class Category
 	 * @ORM\Column(name="coefficient", type="float", nullable=false)
 	 */
 	private $coefficient;
-
-	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="is_active", type="boolean", nullable=true)
-	 */
-	private $isActive;
-
-
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="description", type="string", length=1000, nullable=true)
-	 */
-	private $description;
 
 	/**
 	 * @var integer
@@ -134,23 +106,6 @@ class Category
 	}
 
 	/**
-	 * @param int $description
-	 */
-	public function setDescription($description)
-	{
-		$this->description = $description;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getDescription()
-	{
-		return $this->description;
-	}
-
-	/**
 	 * @param int $id
 	 */
 	public function setId($id)
@@ -184,10 +139,6 @@ class Category
 		return $this->nomen;
 	}
 
-	/*
-	 * Object relations methods
-	 */
-
 	public function setProducts($products)
 	{
 		$this->products = $products;
@@ -213,23 +164,6 @@ class Category
 	public function getMark()
 	{
 		return $this->mark;
-	}
-
-	/**
-	 * @param string $name
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
 	}
 
 	/**
@@ -266,23 +200,6 @@ class Category
 		return $this->coefficient;
 	}
 
-	/**
-	 * @param boolean $isActive
-	 */
-	public function setIsActive($isActive)
-	{
-		$this->isActive = $isActive;
-		return $this;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getIsActive()
-	{
-		return $this->isActive;
-	}
-
 	public function setParent(Category $parent = null)
 	{
 		$this->parent = $parent;
@@ -309,23 +226,6 @@ class Category
 	public function getPhotoId()
 	{
 		return $this->photoId;
-	}
-
-	/**
-	 * @param string $title
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
 	}
 
 	public function addClosure(CategoryClosure $closure)

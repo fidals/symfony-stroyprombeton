@@ -3,7 +3,6 @@
 namespace App\CatalogBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Class ProductRepository
@@ -26,9 +25,9 @@ class ProductRepository extends EntityRepository
 	public function searchAutocomplete($term)
 	{
 		return $this->getEntityManager()->getConnection()->query(
-			'SELECT DISTINCT CONCAT(name, \' \', mark) as value FROM products
+			"SELECT DISTINCT CONCAT(name, ' ', mark) as value FROM products
 				WHERE section_id IS NOT NULL
-				  HAVING value LIKE (\'%' . $term . '%\') LIMIT 0, ' . self::LIMIT)->fetchAll();
+				  HAVING value LIKE ('%" . $term . "%') LIMIT 0, " . self::LIMIT)->fetchAll();
 	}
 
 	/**
@@ -70,28 +69,30 @@ class ProductRepository extends EntityRepository
 
 		$query = $expr
 			->setParameter('term', '%' . $term . '%');
+		//$qts =$query->__toString();
+		//die();
 		return ($returnObjAsArray) ? $query->getQuery()->getArrayResult() : $query->getQuery()->getResult();
 	}
 
 	public function getRandomProducts($count = self::LIMIT)
 	{
-		$rsm = new ResultSetMapping();
-		$rsm->addEntityResult(self::getClassName(), 'p');
-		$classMetadata = $this->getClassMetadata();
+		$max = $this->getEntityManager()
+			->createQueryBuilder()
+			->select('MAX(p.id)')
+			->from(self::getClassName(), 'p')
+			->getQuery()
+			->getSingleScalarResult();
 
-		foreach ($classMetadata->fieldMappings as $id => $obj) {
-			$rsm->addFieldResult('p', $obj['columnName'], $obj['fieldName']);
-		}
-
-		$queryString = 'SELECT * FROM '
-			. $classMetadata->table['name']
-			. ' WHERE '
-			. $classMetadata->columnNames['isHavePhoto']
-			. ' = ? ORDER BY RAND() ASC LIMIT ?';
-
-		$query = $this->getEntityManager()
-			->createNativeQuery($queryString, $rsm);
-		$query->setParameters(array(1, $count));
-		return $query->getResult();
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->select('p')
+			->from(self::getClassName(), 'p')
+			->where('p.id >= :rand')
+			->andWhere('p.isHavePhoto = 1')
+			->orderBy('p.id')
+			->setMaxResults($count)
+			->setParameter('rand', rand(0, $max - 10000))
+			->getQuery()
+			->getResult();
 	}
 }
