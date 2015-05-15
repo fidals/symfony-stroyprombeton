@@ -212,22 +212,6 @@ class Product
     }
 
     /**
-     * @param boolean $isActive
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
      * @param boolean $isHavePhoto
      */
     public function setIsHavePhoto($isHavePhoto)
@@ -273,22 +257,6 @@ class Product
     public function getMark()
     {
         return $this->mark;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
 	/**
