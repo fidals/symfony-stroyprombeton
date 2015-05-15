@@ -11,54 +11,59 @@ class CategoryAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('nomen', null, array('required' => false))
-			->add('parent', 'sonata_type_model', array('label' => 'parent_id', 'required' => false))
-			->add('name', null, array('label' => 'Название', 'required' => true))
-			->add('title', null, array('required' => false))
-			->add('alias', null, array('required' => false))
-			->add('mark', null, array('required' => false))
-			->add('order', null, array('label' => 'ord', 'required' => false))
-			->add('coefficient', null, array('required' => true, 'data' => '1.1'))
-			->add('isActive', null, array('label' => 'is_active', 'required' => false))
-			->add('description', null, array('required' => false))
-			->add('file', 'file', array('label' => 'фото', 'required' => false));
+			->with('Основные свойства')
+				->add('nomen', null, array('required' => false))
+				->add('parent', 'sonata_type_model', array('label' => 'Родительская категория', 'required' => false))
+				->add('name', null, array('label' => 'Название', 'required' => false))
+				->add('alias', null, array('required' => false))
+				->add('mark', null, array('required' => false))
+				->add('order', null, array('label' => 'ord', 'required' => false))
+				->add('coefficient', null, array('required' => true, 'data' => '1.1'))
+				->add('isActive', null, array('label' => 'is_active', 'required' => true))
+				->add('file', 'file', array('label' => 'фото', 'required' => false))
+			->end()
+			->with('SEO')
+				->add('title', null, array('required' => false))
+				->add('h1', null, array('required' => false))
+				->add('keywords', null, array('required' => false))
+				->add('description', 'textarea', array('required' => false))
+			->end();
 	}
 
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 		$datagridMapper
 			->add('id')
-			->add('nomen', null, array('required' => false))
-			->add('parent', null, array('label' => 'parent_id', 'required' => false))
-			->add('name', null, array('label' => 'Название', 'required' => true))
-			->add('title', null, array('required' => false))
-			->add('alias', null, array('required' => false))
-			->add('mark', null, array('required' => false))
-			->add('order', null, array('label' => 'ord', 'required' => false))
-			->add('coefficient', null, array('required' => true))
-			->add('isActive', null, array('label' => 'is_active', 'required' => false))
-			->add('description', null, array('required' => false));
+			->add('nomen')
+			->add('parent', null, array('label' => 'Родительская категория'))
+			->add('name', null, array('label' => 'Название'))
+			->add('title')
+			->add('alias')
+			->add('mark')
+			->add('order', null, array('label' => 'ord'))
+			->add('coefficient')
+			->add('isActive', null, array('label' => 'is_active'))
+			->add('description');
 	}
 
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->add('id')
-			->addIdentifier('nomen', null, array('required' => false))
-			->add('parent', null, array('label' => 'parent_id', 'required' => false))
-			->addIdentifier('name', null, array('label' => 'Название', 'required' => true))
-			->add('title', null, array('required' => false))
-			->add('alias', null, array('required' => false))
-			->add('mark', null, array('required' => false))
-			->add('order', null, array('label' => 'ord', 'required' => false))
-			->add('coefficient', null, array('required' => true))
-			->add('isActive', null, array('label' => 'is_active', 'required' => false))
-			->add('description', null, array('required' => false));
+			->addIdentifier('id')
+			->addIdentifier('nomen')
+			->add('parent', null, array('label' => 'parent_id'))
+			->addIdentifier('name', null, array('label' => 'Название'))
+			->add('title')
+			->add('alias')
+			->add('mark')
+			->add('order', null, array('label' => 'ord'))
+			->add('coefficient')
+			->add('isActive', null, array('label' => 'is_active'))
+			->add('description');
 	}
 
 	public function postPersist($category)
 	{
-
 		$this->saveFile($category);
 	}
 
