@@ -12,143 +12,143 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 class GbiObject
-{	
+{
 	use PageTrait;
-	
-    /**
-     * @var integer
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="menuTitle", type="string", length=255)
-     */
-    private $menuTitle;
+	/**
+	 * @var integer
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="alias", type="string", length=255)
-     */
-    private $alias;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="menuTitle", type="string", length=255)
+	 */
+	private $menuTitle;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ord", type="integer")
-     */
-    private $ord;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="alias", type="string", length=255)
+	 */
+	private $alias;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="content", type="text", nullable=true)
-     */
-    private $content;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="ord", type="integer")
+	 */
+	private $ord;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="content", type="text", nullable=true)
+	 */
+	private $content;
 
-    /**
-     * Set menuTitle
-     *
-     * @param string $menuTitle
-     * @return GbiObject
-     */
-    public function setMenuTitle($menuTitle)
-    {
-        $this->menuTitle = $menuTitle;
-        return $this;
-    }
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Get menuTitle
-     *
-     * @return string 
-     */
-    public function getMenuTitle()
-    {
-        return $this->menuTitle;
-    }
+	/**
+	 * Set menuTitle
+	 *
+	 * @param string $menuTitle
+	 * @return GbiObject
+	 */
+	public function setMenuTitle($menuTitle)
+	{
+		$this->menuTitle = $menuTitle;
+		return $this;
+	}
 
-    /**
-     * Set alias
-     *
-     * @param string $alias
-     * @return GbiObject
-     */
-    public function setAlias($alias)
-    {
-        $this->alias = $alias;
+	/**
+	 * Get menuTitle
+	 *
+	 * @return string
+	 */
+	public function getMenuTitle()
+	{
+		return $this->menuTitle;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set alias
+	 *
+	 * @param string $alias
+	 * @return GbiObject
+	 */
+	public function setAlias($alias)
+	{
+		$this->alias = $alias;
 
-    /**
-     * Get alias
-     *
-     * @return string 
-     */
-    public function getAlias()
-    {
-        return $this->alias;
-    }
+		return $this;
+	}
 
-    /**
-     * Set ord
-     *
-     * @param integer $ord
-     * @return GbiObject
-     */
-    public function setOrd($ord)
-    {
-        $this->ord = $ord;
+	/**
+	 * Get alias
+	 *
+	 * @return string
+	 */
+	public function getAlias()
+	{
+		return $this->alias;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set ord
+	 *
+	 * @param integer $ord
+	 * @return GbiObject
+	 */
+	public function setOrd($ord)
+	{
+		$this->ord = $ord;
 
-    /**
-     * Get ord
-     *
-     * @return integer 
-     */
-    public function getOrd()
-    {
-        return $this->ord;
-    }
+		return $this;
+	}
 
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return GbiObject
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
+	/**
+	 * Get ord
+	 *
+	 * @return integer
+	 */
+	public function getOrd()
+	{
+		return $this->ord;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set content
+	 *
+	 * @param string $content
+	 * @return GbiObject
+	 */
+	public function setContent($content)
+	{
+		$this->content = $content;
 
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
+		return $this;
+	}
+
+	/**
+	 * Get content
+	 *
+	 * @return string
+	 */
+	public function getContent()
+	{
+		return $this->content;
+	}
 }

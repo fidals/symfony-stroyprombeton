@@ -9,17 +9,17 @@ use Acme\DemoBundle\Twig\Extension\DemoExtension;
 
 class ControllerListener
 {
-    protected $extension;
+	protected $extension;
 
-    public function __construct(DemoExtension $extension)
-    {
-        $this->extension = $extension;
-    }
+	public function __construct(DemoExtension $extension)
+	{
+		$this->extension = $extension;
+	}
 
-    public function onKernelController(FilterControllerEvent $event)
-    {
-        if (HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
-            $this->extension->setController($event->getController());
-        }
-    }
+	public function onKernelController(FilterControllerEvent $event)
+	{
+		if (HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
+			$this->extension->setController($event->getController());
+		}
+	}
 }

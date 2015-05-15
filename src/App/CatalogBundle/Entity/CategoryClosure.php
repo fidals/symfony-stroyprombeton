@@ -9,4 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="category_closures")
  * @ORM\Entity
  */
-class CategoryClosure extends AbstractClosure {}
+class CategoryClosure extends AbstractClosure
+{
+}
