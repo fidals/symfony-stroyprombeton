@@ -3,6 +3,7 @@
 namespace App\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * StaticPages
@@ -148,5 +149,17 @@ class StaticPage
 			'changefreq' => 'weekly',
 			'entityType' => 'staticPage',
 		);
+	}
+
+	/**
+	 * Метод валидации для админки
+	 * @param ExecutionContext $context
+	 */
+	public function validate(ExecutionContext $context)
+	{
+		$alias = $this->getAlias();
+		if(preg_match("/[^a-z0-9_\/-]/", $alias)) {
+			$context->addViolation('Недопустимые для ссылки символы');
+		}
 	}
 }

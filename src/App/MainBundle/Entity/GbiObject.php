@@ -3,6 +3,7 @@
 namespace App\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * Объекты, на которые мы поставляли ЖБИ.
@@ -151,4 +152,17 @@ class GbiObject
 	{
 		return $this->content;
 	}
+
+	/**
+	 * Метод валидации для админки
+	 * @param ExecutionContext $context
+	 */
+	public function validate(ExecutionContext $context)
+	{
+		$alias = $this->getAlias();
+		if(preg_match("/[^a-z0-9_\/-]/", $alias)) {
+			$context->addViolation('Недопустимые для ссылки символы');
+		}
+	}
+
 }

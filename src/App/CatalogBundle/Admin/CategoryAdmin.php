@@ -5,6 +5,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 class CategoryAdmin extends Admin
 {
@@ -19,7 +20,7 @@ class CategoryAdmin extends Admin
 				->add('mark', null, array('required' => false))
 				->add('order', null, array('label' => 'ord', 'required' => false))
 				->add('coefficient', null, array('required' => true, 'data' => '1.1'))
-				->add('isActive', null, array('label' => 'is_active', 'required' => true))
+				->add('isActive', null, array('label' => 'is_active', 'required' => false))
 				->add('file', 'file', array('label' => 'фото', 'required' => false))
 			->end()
 			->with('SEO')
@@ -53,7 +54,7 @@ class CategoryAdmin extends Admin
 			->addIdentifier('nomen')
 			->add('parent', null, array('label' => 'parent_id'))
 			->addIdentifier('name', null, array('label' => 'Название'))
-			->add('title')
+			->addIdentifier('title')
 			->add('alias')
 			->add('mark')
 			->add('order', null, array('label' => 'ord'))
@@ -81,5 +82,11 @@ class CategoryAdmin extends Admin
 	public function preRemove($category)
 	{
 		$category->rmUploaded();
+	}
+
+	// Валидация происходит в "validate" методе модели
+	public function validate(ErrorElement $errorElement, $object)
+	{
+		$errorElement->assertCallback(array('validate'));
 	}
 }
