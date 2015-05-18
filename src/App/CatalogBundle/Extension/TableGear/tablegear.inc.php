@@ -44,7 +44,7 @@ if( isset($_COOKIE['tg_filterf']) ){
 $ff="";
 $sort_ff="";
 foreach($options["headers"] as $ind => $val){
-	$ff.="<div style=\"float: left; clear: both;\"><label for=\"ff_".$ind."\" id=\"fs_".$ind."\">".$val."</label></div><div style=\"float: right;\"><input type=\"checkbox\"";
+	$ff.="<div style=\"float: left; clear: both;\"><label style=\"font-weight: 100\" for=\"ff_".$ind."\" id=\"fs_".$ind."\">".$val."</label></div><div style=\"float: right;\"><input type=\"checkbox\"";
 	if( in_array($ind, $_POST["ff"]) || (!$_POST["ff"] && in_array($ind, $cookie_ff)) ){
 		$ff.=" checked ";
 		$sort_ff.='<li class="ui-state-default sortf_'.$ind.'"><input type="hidden" name="sortff[]" value="'.$ind.'">'.$val.'</li>';
