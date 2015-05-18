@@ -164,5 +164,4 @@ class GbiObject
 			$context->addViolation('Недопустимые для ссылки символы');
 		}
 	}
-
 }
