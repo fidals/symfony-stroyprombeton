@@ -22,7 +22,11 @@ class ProductRepository extends EntityRepository
 	 * @var array
 	 */
 	public static $tableGearProperties = [
+
 		'name'                      => 'Заголовок',
+		'title'                     => 'Расширенный заголовок',
+		'description'               => 'Описание',
+		'annotation'                => 'Аннотация',
 		'mark'                      => 'mark',
 		'coefficient'               => 'Коэффициент цены',
 		'price'                     => 'Цена',
@@ -34,7 +38,7 @@ class ProductRepository extends EntityRepository
 		'volume'                    => 'Объем (м3)',
 		'diameter_in'               => 'Внутренний диаметр (мм)',
 		'diamenter_out'             => 'Внешний диаметр (мм)',
-		'link_to_stkmetal_category' => 'Ссылка на соответствующую категорию на stk-metal'
+		'link_to_stkmetal_category' => 'Ссылка на соответствующую категорию на stk-metal',
 	];	
 	
 	/**

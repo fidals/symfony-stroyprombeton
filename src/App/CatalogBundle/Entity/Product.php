@@ -124,6 +124,20 @@ class Product
      */
     private $comments;
 
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="annotation", type="string", length=250, nullable=true)
+	 */
+	private $annotation;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="link_to_stkmetal_category", type="string", length=250, nullable=true)
+	 */
+	private $linkToStkMetalCategory;
+
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
@@ -395,6 +409,38 @@ class Product
     {
         return $this->category;
     }
+
+	/**
+	 * @param string $annotation
+	 */
+	public function setAnnotation($annotation)
+	{
+		$this->annotation = $annotation;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAnnotation()
+	{
+		return $this->annotation;
+	}
+
+	/**
+	 * @param string $linkToStkMetalCategory
+	 */
+	public function setLinkToStkMetalCategory($linkToStkMetalCategory)
+	{
+		$this->linkToStkMetalCategory = $linkToStkMetalCategory;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLinkToStkMetalCategory()
+	{
+		return $this->linkToStkMetalCategory;
+	}
 
     public function __toString()
     {

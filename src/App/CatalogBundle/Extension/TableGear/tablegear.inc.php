@@ -77,9 +77,9 @@ if( count($_POST["ff"])>0 ){
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>TableGear for jQuery</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/assets/modules/tablegear/javascripts/TableGear1.6.1-jQuery.js"></script>
+  <script type="text/javascript" src="/bundles/catalog/plugins/tablegear/javascripts/TableGear1.6.1-jQuery.js"></script>
   <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-  <link type="text/css" rel="stylesheet" href="/assets/modules/tablegear/stylesheets/tablegear.css" />
+  <link type="text/css" rel="stylesheet" href="/bundles/catalog/plugins/tablegear/stylesheets/tablegear.css" />
 </head>
 <body>
   <div>
