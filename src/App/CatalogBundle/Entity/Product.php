@@ -339,17 +339,9 @@ class Product
 	}
 
 	/**
-	 * @param int $sectionId
-	 */
-	public function setSectionId($sectionId)
-	{
-		$this->sectionId = $sectionId;
-	}
-
-	/**
 	 * @return int
 	 */
-	public function getSectionId()
+	public function getCategoryId()
 	{
 		return $this->sectionId;
 	}
@@ -474,7 +466,7 @@ class Product
 	public function getSitemapData()
 	{
 		return array(
-			'section' => $this->getSectionId(),
+			'section' => $this->getCategoryId(),
 			'gbi' => $this->getId(),
 			'locData' => array(
 				'route' => 'app_catalog_explore_category',
