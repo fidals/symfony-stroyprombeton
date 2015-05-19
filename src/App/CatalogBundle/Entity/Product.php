@@ -48,15 +48,6 @@ class Product
 	private $mark;
 
 	/**
-	 * Назначение см в $category
-	 *
-	 * @var integer
-	 *
-	 * @ORM\Column(name="section_id", type="integer", nullable=true)
-	 */
-	private $sectionId;
-
-	/**
 	 * @var integer
 	 *
 	 * @ORM\Column(name="length", type="integer", nullable=true)
@@ -339,14 +330,6 @@ class Product
 	}
 
 	/**
-	 * @return int
-	 */
-	public function getCategoryId()
-	{
-		return $this->sectionId;
-	}
-
-	/**
 	 * @param float $volume
 	 */
 	public function setVolume($volume)
@@ -466,7 +449,7 @@ class Product
 	public function getSitemapData()
 	{
 		return array(
-			'section' => $this->getCategoryId(),
+			'section' => $this->getCategory()->getId(),
 			'gbi' => $this->getId(),
 			'locData' => array(
 				'route' => 'app_catalog_explore_category',
