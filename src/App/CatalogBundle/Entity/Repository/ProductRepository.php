@@ -13,34 +13,9 @@ class ProductRepository extends EntityRepository
 	/**
 	 * Константа - лимит позиций на одной странице (для пагинации)
 	 */
-	const LIMIT = 20,
-		UNCAT_PRODUCT_SEARCH_LIMIT = 100;
+	const LIMIT = 20;
+	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
 
-	/**
-	 * Массив свойств для TableGear
-	 *
-	 * @var array
-	 */
-	public static $tableGearProperties = [
-
-		'name'                      => 'Заголовок',
-		'title'                     => 'Расширенный заголовок',
-		'description'               => 'Описание',
-		'annotation'                => 'Аннотация',
-		'mark'                      => 'mark',
-		'coefficient'               => 'Коэффициент цены',
-		'price'                     => 'Цена',
-		'nomen'                     => 'Код',
-		'length'                    => 'Длина (мм)',
-		'width'                     => 'Ширина (мм)',
-		'heigth'                    => 'Высота (мм)',
-		'weight'                    => 'Масса (кг)',
-		'volume'                    => 'Объем (м3)',
-		'diameter_in'               => 'Внутренний диаметр (мм)',
-		'diamenter_out'             => 'Внешний диаметр (мм)',
-		'link_to_stkmetal_category' => 'Ссылка на соответствующую категорию на stk-metal',
-	];	
-	
 	/**
 	 * Метод поиска для автодополнения
 	 *
@@ -50,9 +25,9 @@ class ProductRepository extends EntityRepository
 	public function searchAutocomplete($term)
 	{
 		return $this->getEntityManager()->getConnection()->query(
-			"SELECT DISTINCT CONCAT(name, ' ', mark) as value FROM products
+			'SELECT DISTINCT CONCAT(name, \' \', mark) as value FROM products
 				WHERE section_id IS NOT NULL
-				  HAVING value LIKE ('%" . $term . "%') LIMIT 0, " . self::LIMIT)->fetchAll();
+				  HAVING value LIKE (\'%' . $term . '%\') LIMIT 0, ' . self::LIMIT)->fetchAll();
 	}
 
 	/**
@@ -94,8 +69,6 @@ class ProductRepository extends EntityRepository
 
 		$query = $expr
 			->setParameter('term', '%' . $term . '%');
-		//$qts =$query->__toString();
-		//die();
 		return ($returnObjAsArray) ? $query->getQuery()->getArrayResult() : $query->getQuery()->getResult();
 	}
 
@@ -119,5 +92,32 @@ class ProductRepository extends EntityRepository
 			->setParameter('rand', rand(0, $max - 10000))
 			->getQuery()
 			->getResult();
+	}
+
+	/**
+	 * Возвращает массив свойств для TableGear
+	 *
+	 * @return array
+	 */
+	public function getTableGearProperties()
+	{
+		return [
+			'name'                      => 'Заголовок',
+			'title'                     => 'Расширенный заголовок',
+			'description'               => 'Описание',
+			'annotation'                => 'Аннотация',
+			'mark'                      => 'mark',
+			'price_coefficient'         => 'Коэффициент цены',
+			'price'                     => 'Цена',
+			'nomen'                     => 'Код',
+			'length'                    => 'Длина (мм)',
+			'width'                     => 'Ширина (мм)',
+			'heigth'                    => 'Высота (мм)',
+			'weight'                    => 'Масса (кг)',
+			'volume'                    => 'Объем (м3)',
+			'diameter_in'               => 'Внутренний диаметр (мм)',
+			'diamenter_out'             => 'Внешний диаметр (мм)',
+			'link_to_stkmetal_category' => 'Ссылка на соответствующую категорию на stk-metal'
+		];
 	}
 }

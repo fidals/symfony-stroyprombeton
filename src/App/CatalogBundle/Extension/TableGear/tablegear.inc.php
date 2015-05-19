@@ -25,7 +25,7 @@ $options["pagination"]["next"] = "next"; // "next" link will be shown.
 //$options["headers"]["longtitle"]="Расширенный заголовок";
 //$options["headers"]["description"]="Описание";
 //$options["headers"]["introtext"]="Аннотация";
-$options["headers"] = $productRepository::$tableGearProperties;
+$options["headers"] = $productRepository->getTableGearProperties();
 
 //$result = $modx->db->query("SELECT * FROM ". $modx->getFullTableName('site_tmplvars')." WHERE `id` > 4" );
 //while($row = $modx->db->getRow($result)) {

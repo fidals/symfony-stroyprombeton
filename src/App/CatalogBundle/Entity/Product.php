@@ -13,16 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
-	use PageTrait;	
-	
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+	use PageTrait;
+
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="id", type="bigint", nullable=false)
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+	private $id;
 
 	/**
 	 * @var boolean
@@ -47,82 +47,84 @@ class Product
 	 */
 	private $mark;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="section_id", type="integer", nullable=true)
-     */
-    private $sectionId;
+	/**
+	 * Назначение см в $category
+	 *
+	 * @var integer
+	 *
+	 * @ORM\Column(name="section_id", type="integer", nullable=true)
+	 */
+	private $sectionId;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="length", type="integer", nullable=true)
-     */
-    private $length;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="length", type="integer", nullable=true)
+	 */
+	private $length;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="width", type="integer", nullable=true)
-     */
-    private $width;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="width", type="integer", nullable=true)
+	 */
+	private $width;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="height", type="integer", nullable=true)
-     */
-    private $height;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="height", type="integer", nullable=true)
+	 */
+	private $height;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="weight", type="float", nullable=true)
-     */
-    private $weight;
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="weight", type="float", nullable=true)
+	 */
+	private $weight;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="volume", type="float", nullable=true)
-     */
-    private $volume;
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="volume", type="float", nullable=true)
+	 */
+	private $volume;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="diameter_out", type="integer", nullable=true)
-     */
-    private $diameterOut;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="diameter_out", type="integer", nullable=true)
+	 */
+	private $diameterOut;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="diameter_in", type="integer", nullable=true)
-     */
-    private $diameterIn;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="diameter_in", type="integer", nullable=true)
+	 */
+	private $diameterIn;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="price", type="integer", nullable=true)
-     */
-    private $price;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="price", type="float", nullable=true)
+	 */
+	private $price;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_have_photo", type="boolean", nullable=true)
-     */
-    private $isHavePhoto;
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="has_photo", type="boolean", nullable=true)
+	 */
+	private $hasPhoto;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="comments", type="string", length=250, nullable=true)
-     */
-    private $comments;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="comments", type="string", length=250, nullable=true)
+	 */
+	private $comments;
 
 	/**
 	 * @var string
@@ -138,155 +140,155 @@ class Product
 	 */
 	private $linkToStkMetalCategory;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
-     */
-    protected $category;
 
-    /**
-     * @param string $comments
-     */
-    public function setComments($comments)
-    {
-        $this->comments = $comments;
-    }
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="price_coefficient", type="string", length=250, nullable=true)
+	 */
+	private $priceCoefficient;
 
-    /**
-     * @return string
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
+	/**
+	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+	 */
+	protected $category;
 
-    /**
-     * @param int $diameterIn
-     */
-    public function setDiameterIn($diameterIn)
-    {
-        $this->diameterIn = $diameterIn;
-    }
+	/**
+	 * @param string $comments
+	 */
+	public function setComments($comments)
+	{
+		$this->comments = $comments;
+	}
 
-    /**
-     * @return int
-     */
-    public function getDiameterIn()
-    {
-        return $this->diameterIn;
-    }
+	/**
+	 * @return string
+	 */
+	public function getComments()
+	{
+		return $this->comments;
+	}
 
-    /**
-     * @param int $diameterOut
-     */
-    public function setDiameterOut($diameterOut)
-    {
-        $this->diameterOut = $diameterOut;
-    }
+	/**
+	 * @param int $diameterIn
+	 */
+	public function setDiameterIn($diameterIn)
+	{
+		$this->diameterIn = $diameterIn;
+	}
 
-    /**
-     * @return int
-     */
-    public function getDiameterOut()
-    {
-        return $this->diameterOut;
-    }
+	/**
+	 * @return int
+	 */
+	public function getDiameterIn()
+	{
+		return $this->diameterIn;
+	}
 
-    /**
-     * @param int $height
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-    }
+	/**
+	 * @param int $diameterOut
+	 */
+	public function setDiameterOut($diameterOut)
+	{
+		$this->diameterOut = $diameterOut;
+	}
 
-    /**
-     * @return int
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
+	/**
+	 * @return int
+	 */
+	public function getDiameterOut()
+	{
+		return $this->diameterOut;
+	}
 
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
+	/**
+	 * @param int $height
+	 */
+	public function setHeight($height)
+	{
+		$this->height = $height;
+	}
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @return int
+	 */
+	public function getHeight()
+	{
+		return $this->height;
+	}
 
-    /**
-     * @param boolean $isActive
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-    }
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
+	/**
+	 * @param boolean $isActive
+	 */
+	public function setIsActive($isActive)
+	{
+		$this->isActive = $isActive;
+	}
 
-    /**
-     * @param boolean $isHavePhoto
-     */
-    public function setIsHavePhoto($isHavePhoto)
-    {
-        $this->isHavePhoto = $isHavePhoto;
-    }
+	/**
+	 * @return boolean
+	 */
+	public function getIsActive()
+	{
+		return $this->isActive;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function getIsHavePhoto()
-    {
-        return $this->isHavePhoto;
-    }
+	/**
+	 * @param boolean $hasPhoto
+	 */
+	public function setHasPhoto($hasPhoto)
+	{
+		$this->hasPhoto = $hasPhoto;
+	}
 
-    /**
-     * @param int $length
-     */
-    public function setLength($length)
-    {
-        $this->length = $length;
-    }
+	/**
+	 * @return boolean
+	 */
+	public function getHasPhoto()
+	{
+		return $this->hasPhoto;
+	}
 
-    /**
-     * @return int
-     */
-    public function getLength()
-    {
-        return $this->length;
-    }
+	/**
+	 * @param int $length
+	 */
+	public function setLength($length)
+	{
+		$this->length = $length;
+	}
 
-    /**
-     * @param string $mark
-     */
-    public function setMark($mark)
-    {
-        $this->mark = $mark;
-    }
+	/**
+	 * @return int
+	 */
+	public function getLength()
+	{
+		return $this->length;
+	}
 
-    /**
-     * @return string
-     */
-    public function getMark()
-    {
-        return $this->mark;
-    }
+	/**
+	 * @param string $mark
+	 */
+	public function setMark($mark)
+	{
+		$this->mark = $mark;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMark()
+	{
+		return $this->mark;
+	}
 
 	/**
 	 * @param boolean $isNewPrice
@@ -304,111 +306,117 @@ class Product
 		return $this->isNewPrice;
 	}
 
-    /**
-     * @param int $nomen
-     */
-    public function setNomen($nomen)
-    {
-        $this->nomen = $nomen;
-    }
+	/**
+	 * @param int $nomen
+	 */
+	public function setNomen($nomen)
+	{
+		$this->nomen = $nomen;
+	}
 
-    /**
-     * @return int
-     */
-    public function getNomen()
-    {
-        return $this->nomen;
-    }
+	/**
+	 * @return int
+	 */
+	public function getNomen()
+	{
+		return $this->nomen;
+	}
 
-    /**
-     * @param int $price
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-    }
+	/**
+	 * @param int $price
+	 */
+	public function setPrice($price)
+	{
+		$this->price = $price;
+	}
 
-    /**
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
+	/**
+	 * @return int
+	 */
+	public function getPrice()
+	{
+		return $this->price;
+	}
 
-    /**
-     * @param int $sectionId
-     */
-    public function setSectionId($sectionId)
-    {
-        $this->sectionId = $sectionId;
-    }
+	/**
+	 * @param int $sectionId
+	 */
+	public function setSectionId($sectionId)
+	{
+		$this->sectionId = $sectionId;
+	}
 
-    /**
-     * @return int
-     */
-    public function getSectionId()
-    {
-        return $this->sectionId;
-    }
+	/**
+	 * @return int
+	 */
+	public function getSectionId()
+	{
+		return $this->sectionId;
+	}
 
-    /**
-     * @param float $volume
-     */
-    public function setVolume($volume)
-    {
-        $this->volume = $volume;
-    }
+	/**
+	 * @param float $volume
+	 */
+	public function setVolume($volume)
+	{
+		$this->volume = $volume;
+	}
 
-    /**
-     * @return float
-     */
-    public function getVolume()
-    {
-        return $this->volume;
-    }
+	/**
+	 * @return float
+	 */
+	public function getVolume()
+	{
+		return $this->volume;
+	}
 
-    /**
-     * @param float $weight
-     */
-    public function setWeight($weight)
-    {
-        $this->weight = $weight;
-    }
+	/**
+	 * @param float $weight
+	 */
+	public function setWeight($weight)
+	{
+		$this->weight = $weight;
+	}
 
-    /**
-     * @return float
-     */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
+	/**
+	 * @return float
+	 */
+	public function getWeight()
+	{
+		return $this->weight;
+	}
 
-    /**
-     * @param int $width
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-    }
+	/**
+	 * @param int $width
+	 */
+	public function setWidth($width)
+	{
+		$this->width = $width;
+	}
 
-    /**
-     * @return int
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
+	/**
+	 * @return int
+	 */
+	public function getWidth()
+	{
+		return $this->width;
+	}
 
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
+	/**
+	 * @param Category $category
+	 */
+	public function setCategory($category)
+	{
+		$this->category = $category;
+	}
 
-    public function getCategory()
-    {
-        return $this->category;
-    }
+	/**
+	 * @return Category
+	 */
+	public function getCategory()
+	{
+		return $this->category;
+	}
 
 	/**
 	 * @param string $annotation
@@ -442,23 +450,39 @@ class Product
 		return $this->linkToStkMetalCategory;
 	}
 
-    public function __toString()
-    {
-        return (string) $this->getName();
-    }
+	/**
+	 * @param float $priceCoefficient
+	 */
+	public function setPriceCoefficient($priceCoefficient)
+	{
+		$this->priceCoefficient = $priceCoefficient;
+	}
 
-    public function getSitemapData()
-    {
-        return array(
+	/**
+	 * @return float
+	 */
+	public function getPriceCoefficient()
+	{
+		return $this->priceCoefficient;
+	}
+
+	public function __toString()
+	{
+		return (string)$this->getName();
+	}
+
+	public function getSitemapData()
+	{
+		return array(
 			'section' => $this->getSectionId(),
-			'gbi'     => $this->getId(),
+			'gbi' => $this->getId(),
 			'locData' => array(
 				'route' => 'app_catalog_explore_category',
 				'parameters' => array()
-            ),
-            'priority'   => 0.9,
-            'changefreq' => 'weekly',
+			),
+			'priority' => 0.9,
+			'changefreq' => 'weekly',
 			'entityType' => 'product',
-        );
-    }
+		);
+	}
 }
