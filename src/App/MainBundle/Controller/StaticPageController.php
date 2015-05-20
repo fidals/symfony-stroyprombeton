@@ -42,11 +42,19 @@ class StaticPageController extends Controller
 		}
 
 		$twigArgs = array('staticPage' => $staticPage);
-		if ($alias == 'obekty') {
-			$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-			$objects = $goRp->findAll();
-			$twigArgs['objects'] = $objects;
-		}
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
+	}
+
+	public function showObjectsAction()
+	{
+		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
+		$staticPage = $spRepository->findOneByAlias('obekty');
+		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
+		$objects = $goRp->findAll();
+		$twigArgs = [
+			'staticPage' => $staticPage,
+			'objects'    => $objects
+		];
 		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
 	}
 

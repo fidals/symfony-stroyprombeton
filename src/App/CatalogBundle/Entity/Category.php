@@ -39,7 +39,7 @@ class Category
 	/**
 	 * @Gedmo\TreeParent
 	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+	 * @ORM\ManyToOne(targetEntity="Category")
 	 */
 	private $parent;
 
