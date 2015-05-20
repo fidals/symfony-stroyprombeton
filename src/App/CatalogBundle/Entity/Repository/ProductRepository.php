@@ -86,7 +86,7 @@ class ProductRepository extends EntityRepository
 			->select('p')
 			->from(self::getClassName(), 'p')
 			->where('p.id >= :rand')
-			->andWhere('p.isHavePhoto = 1')
+			->andWhere('p.has_photo = 1')
 			->orderBy('p.id')
 			->setMaxResults($count)
 			->setParameter('rand', rand(0, $max - 10000))
