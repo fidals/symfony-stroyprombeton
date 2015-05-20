@@ -28,6 +28,7 @@ class ProductAdmin extends Admin
 				->add('diameterOut', null, array('label' => 'diameter_out', 'required' => false))
 				->add('diameterIn', null, array('label' => 'diameter_in', 'required' => false))
 				->add('price', null, array('required' => false))
+				->add('text', null, array('required' => false))
 				->add('isHavePhoto', null, array('label' => 'is_have_photo', 'required' => false))
 				->add('isActive', null, array('label' => 'is_active', 'required' => false))
 			->end()

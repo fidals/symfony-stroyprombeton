@@ -8,10 +8,13 @@
 	{{ staticPage.description }}
 {% endblock %}
 
+{% block keywords %}
+	{{ staticPage.keywords }}
+{% endblock %}
 
 {% block content %}
 	{% autoescape false %}
-	{{ include(template_from_string(staticPage.content)) }}
+	{{ include(template_from_string(staticPage.text)) }}
 	{% endautoescape %}
 
 {% endblock %}

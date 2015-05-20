@@ -17,7 +17,7 @@ class StaticPageAdmin extends Admin
 				->add('introText', null, array('required' => false))
 				->add('menuTitle', null, array('required' => true))
 				->add('alias', null, array('required' => false))
-				->add('content', null, array('required' => false))
+				->add('text', null, array('required' => false))
 				->add('name', null, array('required' => false))
 				->add('isActive', null, array('label' => 'is_active', 'required' => false))
 			->end()

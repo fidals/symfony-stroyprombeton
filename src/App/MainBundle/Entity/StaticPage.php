@@ -41,13 +41,6 @@ class StaticPage
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="content", type="text", nullable=true)
-	 */
-	private $content;
-
-	/**
-	 * @var string
-	 *
 	 * @ORM\Column(name="menu_title", type="string", length=255, nullable=false)
 	 */
 	private $menuTitle;
@@ -66,22 +59,6 @@ class StaticPage
 	public function getAlias()
 	{
 		return $this->alias;
-	}
-
-	/**
-	 * @param string $content
-	 */
-	public function setContent($content)
-	{
-		$this->content = $content;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getContent()
-	{
-		return $this->content;
 	}
 
 	/**

@@ -8,6 +8,10 @@
 	{{ section.description }}
 {% endblock %}
 
+{% block keywords %}
+	{{ section.keywords }}
+{% endblock %}
+
 {% block content %}
 	<div class="location">
 		{% for item in parents %}
@@ -18,10 +22,10 @@
 		{% endfor %}
 	</div>
 	<h1 class="gbi-section">
-		{{ section.title }}
+		{{ section.h1 }}
 	</h1>
 	{% autoescape false %}
-	{{ section.description }}
+	{{ section.text }}
 	{% endautoescape %}
 	<div class="gbi-list">
 		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>

@@ -8,6 +8,10 @@
 	{{ product.description }}
 {% endblock %}
 
+{% block keywords %}
+	{{ product.keywords }}
+{% endblock %}
+
 {% block content %}
 	<div class="location">
 		{% for item in parents %}
@@ -19,7 +23,7 @@
 	</div>
 	<div class="product-header">
 		<h1 style="color:#333333">
-			{{ product.name }}
+			{{ product.h1 }}
 			<span class="product-number">{{ product.mark }}</span>
 			{% if product.nomen %}
 				<span class="nomen" style="float: right">{{ product.nomen }}</span>
@@ -117,7 +121,7 @@
 				</div>
 				<div class="tab-pane" id="tab2">
 					{% autoescape false %}
-					{{ product.description }}
+					{{ product.text }}
 					{% endautoescape %}
 				</div>
 			</div>

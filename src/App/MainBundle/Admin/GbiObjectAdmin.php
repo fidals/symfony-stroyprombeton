@@ -19,6 +19,7 @@ class GbiObjectAdmin extends Admin
 				->add('ord', null, array('required' => false))
 				->add('content', null, array('required' => false))
 				->add('name', null, array('required' => false))
+				->add('text', null, array('required' => false))
 				->add('isActive', null, array('label' => 'is_active', 'required' => false))
 			->end()
 			->with('SEO')

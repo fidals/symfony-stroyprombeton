@@ -46,13 +46,6 @@ class GbiObject
 	private $ord;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="content", type="text", nullable=true)
-	 */
-	private $content;
-
-	/**
 	 * Get id
 	 *
 	 * @return integer
@@ -128,29 +121,6 @@ class GbiObject
 	public function getOrd()
 	{
 		return $this->ord;
-	}
-
-	/**
-	 * Set content
-	 *
-	 * @param string $content
-	 * @return GbiObject
-	 */
-	public function setContent($content)
-	{
-		$this->content = $content;
-
-		return $this;
-	}
-
-	/**
-	 * Get content
-	 *
-	 * @return string
-	 */
-	public function getContent()
-	{
-		return $this->content;
 	}
 
 	/**

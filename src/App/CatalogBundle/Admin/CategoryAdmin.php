@@ -20,6 +20,7 @@ class CategoryAdmin extends Admin
 				->add('mark', null, array('required' => false))
 				->add('order', null, array('label' => 'ord', 'required' => false))
 				->add('coefficient', null, array('required' => true, 'data' => '1.1'))
+				->add('text', null, array('required' => false))
 				->add('isActive', null, array('label' => 'is_active', 'required' => false))
 				->add('file', 'file', array('label' => 'фото', 'required' => false))
 			->end()
