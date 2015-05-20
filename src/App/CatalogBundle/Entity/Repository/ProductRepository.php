@@ -27,7 +27,7 @@ class ProductRepository extends EntityRepository
 		return $this->getEntityManager()->getConnection()->query(
 			'SELECT DISTINCT CONCAT(name, \' \', mark) as value FROM products
 				WHERE section_id IS NOT NULL
-				  HAVING value LIKE (\'%' . $term . '%\') LIMIT 0, ' . self::LIMIT)->fetchAll();
+					HAVING value LIKE (\'%' . $term . '%\') LIMIT 0, ' . self::LIMIT)->fetchAll();
 	}
 
 	/**

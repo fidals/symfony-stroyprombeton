@@ -99,7 +99,7 @@ class Product
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="price", type="float", nullable=true)
+	 * @ORM\Column(name="price", type="integer", nullable=false, options={"default" = 0})
 	 */
 	private $price;
 
@@ -127,10 +127,9 @@ class Product
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="link_to_stkmetal_category", type="string", length=250, nullable=true)
+	 * @ORM\Column(name="link_to_stkmetal_category", type="string", length=500, nullable=true)
 	 */
 	private $linkToStkMetalCategory;
-
 
 	/**
 	 * @var float

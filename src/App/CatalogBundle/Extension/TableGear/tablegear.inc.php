@@ -164,7 +164,7 @@ $(function() {
 <!--		<option value="introtext" --><?php //if(isset($_POST['field_search']) && $_POST['field_search']=="introtext" ) echo 'selected'; ?><!-->Аннотация</option>-->
 <?php
 // --> Это просто список свойств. Тот самый, что у нас хардкодом
-foreach($productRepository::$tableGearProperties as $id => $title) {
+foreach($productRepository->getTableGearProperties() as $id => $title) {
 	echo "<option value=\"tv_".$id."\" ";
 	if(isset($_POST['field_search']) && $_POST['field_search']=="tv_".$id ){ echo 'selected'; }
 	echo ">&nbsp;&nbsp;&nbsp;".$title."</option>";
