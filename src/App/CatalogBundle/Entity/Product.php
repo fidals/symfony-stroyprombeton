@@ -25,6 +25,13 @@ class Product
 	private $id;
 
 	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="section_id", type="integer", nullable=true)
+	 */
+	private $sectionId;
+
+	/**
 	 * @var boolean
 	 *
 	 * @ORM\Column(name="is_new_price", type="boolean", nullable=true)
@@ -143,6 +150,22 @@ class Product
 	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
 	 */
 	protected $category;
+
+	/**
+	 * @param int $sectionId
+	 */
+	public function setSectionId($sectionId)
+	{
+		$this->sectionId = $sectionId;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSectionId()
+	{
+		return $this->sectionId;
+	}
 
 	/**
 	 * @param string $comments
