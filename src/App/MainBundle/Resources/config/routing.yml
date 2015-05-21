@@ -1,16 +1,19 @@
-app_main_gbi:
-  pattern: /gbi/
-  defaults: { _controller: AppMainBundle:StaticPage:gbiRedirect }
+# Отображает статическую страницу с динамическим наполнением (objects)
+app_main_object_root:
+  pattern: /obekty/
+  defaults: { _controller: AppMainBundle:StaticPage:showObjects }
 
 app_main_object:
   pattern: /obekty/{alias}/
   defaults: { _controller: AppMainBundle:StaticPage:gbiObjeсtShow }
 
+# Этот роут отрабатывает все url, которые не подошли предыдущим роутам
+# TODO: Сделай свою таблицу для каждого типа статичных страниц
 app_main_staticpage:
-    pattern:  /{alias}/
-    defaults: { _controller: AppMainBundle:StaticPage:show }
-    requirements:
-            alias: ".+"
+  pattern:  /{alias}/
+  defaults: { _controller: AppMainBundle:StaticPage:show }
+  requirements:
+    alias: ".+"
 
 app_main_index:
   pattern: /

@@ -19,6 +19,10 @@ admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /adminka
 
+sonata_admin_edit_products:
+    pattern:  /adminka/editproducts
+    defaults: { _controller: AppCatalogBundle:Admin:editProducts }
+
 #TODO: Сомнительный код. Попробуй удалить и потестить. Исследуй доки SonataAdmin
 _sonata_admin:
     resource: .

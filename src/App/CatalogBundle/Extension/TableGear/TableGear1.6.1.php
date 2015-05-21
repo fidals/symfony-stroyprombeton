@@ -184,7 +184,7 @@ class TableGear
 
 	if($show_tv){
 	  for($i=0; $i<count($data); $i++){
-		$q=mysql_query("SELECT tb1.name, IFNULL( tb2.value, '' ) as value FROM modx_site_tmplvars AS tb1 
+		$q=mysql_query("SELECT tb1.name, IFNULL( tb2.value, '' ) as value FROM modx_site_tmplvars AS tb1
 		LEFT JOIN ".$this->database["table2"]." AS tb2 ON ( tb1.id = tb2.tmplvarid AND tb2.contentid ='".$data[$i]['id']."')
 		WHERE tb1.id > 4".$fileds_tv);
 		while($row = mysql_fetch_assoc($q)){
@@ -464,7 +464,7 @@ class TableGear
 
   function _fetchFooters()
   {
-    $footers = array();  
+    $footers = array();
     if($this->form && $this->editable) array_push($footers, $this->footers["EDIT"]);
     if(count($this->data) > 0){
       $firstRow = reset($this->data);
@@ -581,7 +581,7 @@ class TableGear
     $this->_openTag("tbody");
  /*   if(!$this->data){
       $emptyDataRow = array();
-	
+
 	  $arr=array("id"=>"");
 	  foreach($_REQUEST['ff'] as $ind=>$val){
 		$arr[$val]="";
@@ -1356,7 +1356,7 @@ $arr=array('key'=>2024, 'data' => array( 'id' => 2024, 'pagetitle' => 'Утяж�
 			mysql_query("INSERT INTO `modx_site_tmplvar_contentvalues` (`tmplvarid`, `contentid`, `value`) VALUES ('7', '".$doc_id."', '/assets/images/gbi-photos/prod-alt-image.png')");
 		}
 		//$query = "INSERT INTO $table (".implode(",", $fields).") VALUES (".implode(",", $values).")";
-		
+
 		if($data !== false){
 		  $this->_json["affected"] = $this->_affectedRows; // Timing requires this to be here.
 		  //$this->_json["key"] = $this->_getPrimaryKeyValuesAfterInsertion($this->_httpArray["data"]);
@@ -1415,7 +1415,7 @@ $arr=array('key'=>2024, 'data' => array( 'id' => 2024, 'pagetitle' => 'Утяж�
 		if( preg_match("/tv_/i", $ind) ){
 			$ind=preg_replace("/tv_/i", "", $ind);
 			$myval[]="tb2.name='".$ind."'";
-			
+
 			$q=mysql_query("SELECT tb1.* FROM ".$this->database["table2"]." as tb1 INNER JOIN `modx_site_tmplvars` as tb2 ON (tb1.tmplvarid = tb2.id AND tb2.name = '".$ind."') WHERE tb1.contentid = ".$cKey);
 			if(mysql_num_rows($q)>0){
 				$query="UPDATE ".$this->database["table2"]." as tb1 INNER JOIN modx_site_tmplvars as tb2 ON (tb1.tmplvarid = tb2.id AND tb2.name='".$ind."') SET tb1.value = '".$val."' WHERE tb1.contentid = ".$cKey;
