@@ -25,6 +25,9 @@ class Product
 	private $id;
 
 	/**
+	 * Связывает продукт с категорией, см $category
+	 * TODO: переименовать в category_id либо везде избавиться от этого свойства модели
+	 *
 	 * @var integer
 	 *
 	 * @ORM\Column(name="section_id", type="integer", nullable=true)
