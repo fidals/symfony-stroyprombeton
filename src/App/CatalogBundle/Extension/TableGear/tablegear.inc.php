@@ -232,7 +232,7 @@ WHERE tb1.section_id = " . intval($_POST['parent_tg_id']) . " ORDER BY tb1.id AS
 	  if( intval($_POST['type_search']) == 2 && $_POST['from_query'] != "" ){
 		  $field_search="tb1." . $field . " >= '" . $_POST['from_query']."' AND tb1." . $field . " <= '".$_POST['to_query']."'";
 	  }elseif( intval($_POST['type_search'])==1 ){
-		  $field_search="tb1." . $field . " LIKE '".$_POST['query']."%'";
+		  $field_search="tb1." . $field . " LIKE '%".$_POST['query']."%'";
 	  }else{
 		  $field_search="tb1.". $field . "LIKE '".$_POST['query']."'";
 	  }
