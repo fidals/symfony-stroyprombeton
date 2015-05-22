@@ -8,8 +8,18 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Команда для переноса БД из modx в symfony2
+ * Class MigrateCommand
+ * @package App\MainBundle\Command
+ */
 class MigrateCommand extends ContainerAwareCommand
 {
+	/**
+	 * Имя базы данных на modx
+	 */
+	const MODX_DB_NAME = 'shopelecru_pb';
+
 	protected function configure()
 	{
 		$this->setName('db:migrate')
@@ -18,16 +28,20 @@ class MigrateCommand extends ContainerAwareCommand
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$dbName = $this->getContainer()->getParameter('database_name');
-		$dbHost = $this->getContainer()->getParameter('database_name');
-		$dsn = 'mysql:dbname=' . $dbName . ';host=' . $dbHost;
+		$spRp = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:StaticPage');
+
+		$dbHost = $this->getContainer()->getParameter('database_host');
+		$dsn = 'mysql:dbname=' . self::MODX_DB_NAME . ';host=' . $dbHost;
+
 		$pdo = new \PDO(
 			$dsn,
 			$this->getContainer()->getParameter('database_user'),
 			$this->getContainer()->getParameter('database_password')
 		);
+		$pdo->exec('SET NAMES utf8');
 
-		$res = $pdo->query('SELECT * from stroyprombeton.static_pages')->fetchAll();
-		var_dump($res);
+		$res1 = $pdo->query('SELECT * from modx_categories')->fetchAll();
+		$res2 = $spRp->findAll();
+		var_dump($res2[0], $res1[0]);
 	}
 }
