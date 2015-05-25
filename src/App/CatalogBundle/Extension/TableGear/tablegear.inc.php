@@ -234,7 +234,7 @@ WHERE tb1.section_id = " . intval($_POST['parent_tg_id']) . " ORDER BY tb1.id AS
 	  }elseif( intval($_POST['type_search'])==1 ){
 		  $field_search="tb1." . $field . " LIKE '%".$_POST['query']."%'";
 	  }else{
-		  $field_search="tb1.". $field . "LIKE '".$_POST['query']."'";
+		  $field_search="tb1.". $field . " LIKE '".$_POST['query']."'";
 	  }
 	}
 //	else{
