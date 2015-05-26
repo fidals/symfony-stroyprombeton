@@ -137,7 +137,7 @@
 			<span>Цена:</span>{% if product.getPrice() %} {{ product.getPrice() + product.getPrice() // ((1.1 - 1)*100) }} руб. {% else %} По запросу {% endif %}
 		</div>
 		<div class="product-bottom-box">
-			<a href="/gbi/{{ catUrl }}/?section={{ product.category.getId() }}&gbi={{ product.getId() }}&buy=true" section="{{ product.category.getId() }}" code="{{ product.getId() }}" price="{{ product.getPrice() }}" class="btn btn-primary add-basket">
+			<a href="/gbi/{{ catUrl }}/?section={{ product.getCategory().getId() }}&gbi={{ product.getId() }}&buy=true" section="{{ product.getCategory().getId() }}" code="{{ product.getId() }}" price="{{ product.getPrice() }}" class="btn btn-primary add-basket">
 				<i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
 		</div>
 	</div>
