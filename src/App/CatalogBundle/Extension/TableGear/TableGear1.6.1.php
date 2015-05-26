@@ -164,7 +164,7 @@ class TableGear
       $perPage = $this->pagination["perPage"];
       $query .= " LIMIT $min, $perPage";
     }
-    $data = $this->query($query);
+    $data = ($auto_query) ? array() : $this->query($query);
 
 	$fileds_tv="";
 	$fileds_tv_arr=array();

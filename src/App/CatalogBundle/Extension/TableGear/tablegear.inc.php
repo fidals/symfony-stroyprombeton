@@ -213,15 +213,15 @@ if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
 //		echo '<table><tr><td style="color: red;">Ошибка: Дочерние ресурсы выбранного раздела не являются конечными</td></tr></table>';
 //	}else{
 	// --> Здесь нужен просто запрос по формированию списка товаров с выделенными полями. Запрос будет совсем другого вида, не как здесь
-$table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1
-WHERE tb1.section_id = " . intval($_POST['parent_tg_id']) . " ORDER BY tb1.id ASC" );
-
-?>
-
-  <div>
-<?= $table->getTable() ?>
-  </div>
-<?= $table->getJavascript("jquery") ?>
+//$table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1
+//WHERE tb1.section_id = " . intval($_POST['parent_tg_id']) . " ORDER BY tb1.id ASC" );
+//
+//?>
+<!---->
+<!--  <div>-->
+<?//= $table->getTable() ?>
+<!--  </div>-->
+<?//= $table->getJavascript("jquery") ?>
 
 <?php
 //	}
@@ -234,7 +234,7 @@ WHERE tb1.section_id = " . intval($_POST['parent_tg_id']) . " ORDER BY tb1.id AS
 	  }elseif( intval($_POST['type_search'])==1 ){
 		  $field_search="tb1." . $field . " LIKE '%".$_POST['query']."%'";
 	  }else{
-		  $field_search="tb1.". $field . " LIKE '".$_POST['query']."'";
+		  $field_search="tb1.". $field . " LIKE '" . $_POST['query'] . "'";
 	  }
 	}
 //	else{
