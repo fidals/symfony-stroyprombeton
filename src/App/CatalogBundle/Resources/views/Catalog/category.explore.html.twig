@@ -1,22 +1,22 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ category.title }}
+	{{ category.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{{ category.description }}
+	{{ category.getDescription() }}
 {% endblock %}
 
 {% block keywords %}
-	{{ category.keywords }}
+	{{ category.getKeywords() }}
 {% endblock %}
 
 {% block content %}
 	<div class="location">
 		{% for item in parents %}
 			<span class="location section">
-                <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
+                <a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
             </span>
 			<span class="location separate">/</span>
 		{% endfor %}
@@ -54,6 +54,6 @@
 		</table>
 	</div>
 	{% autoescape false %}
-	{{ category.text }}
+	{{ category.getText() }}
 	{% endautoescape %}
 {% endblock %}

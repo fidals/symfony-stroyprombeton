@@ -1,31 +1,31 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ gbiObject.title }}
+	{{ gbiObject.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{% if gbiObject.description is empty %}
-		{{ gbiObject.title }}
+	{% if gbiObject.getDescription() is empty %}
+		{{ gbiObject.getTitle() }}
 	{% else %}
-		{{ gbiObject.description }}
+		{{ gbiObject.getDescription() }}
 	{% endif %}
 {% endblock %}
 
 {% block  keywords %}
-	{{ gbiObject.keywords }}
+	{{ gbiObject.getKeywords() }}
 {% endblock %}
 
 {% block content %}
 	<h1>
-		{% if gbiObject.h1 is empty %}
-			{{ gbiObject.title }}
+		{% if gbiObject.getH1() is empty %}
+			{{ gbiObject.getTitle() }}
 		{% else %}
-			{{ gbiObject.h1 }}
+			{{ gbiObject.getH1() }}
 		{% endif %}
 	</h1>
 	{% autoescape false %}
-	{{ gbiObject.text }}
+	{{ gbiObject.getText() }}
 	{% endautoescape %}
 
 

@@ -1,20 +1,19 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ staticPage.title }}
+	{{ staticPage.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{{ staticPage.description }}
+	{{ staticPage.getDescription() }}
 {% endblock %}
 
 {% block keywords %}
-	{{ staticPage.keywords }}
+	{{ staticPage.getKeywords() }}
 {% endblock %}
 
 {% block content %}
 	{% autoescape false %}
-	{{ include(template_from_string(staticPage.text)) }}
+	{{ include(template_from_string(staticPage.getText())) }}
 	{% endautoescape %}
-
 {% endblock %}
