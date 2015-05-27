@@ -17,7 +17,6 @@ class GbiObjectAdmin extends Admin
 				->add('menuTitle', null, array('required' => false))
 				->add('alias', null, array('required' => false))
 				->add('ord', null, array('required' => false))
-				->add('content', null, array('required' => false))
 				->add('name', null, array('required' => false))
 				->add('text', null, array('required' => false))
 				->add('isActive', null, array('label' => 'is_active', 'required' => false))
@@ -34,30 +33,18 @@ class GbiObjectAdmin extends Admin
 	{
 		$datagridMapper
 			->add('id')
-			->add('menuTitle')
 			->add('alias')
-			->add('ord')
 			->add('name')
-			->add('isActive')
-			->add('title')
-			->add('h1')
-			->add('description')
-			->add('keywords');
+			->add('isActive');
 	}
 
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
 			->addIdentifier('id')
-			->add('menuTitle')
-			->addIdentifier('alias')
-			->add('ord')
 			->add('name')
-			->add('isActive')
-			->add('title')
-			->add('h1')
-			->add('description')
-			->add('keywords');
+			->add('ord')
+			->add('isActive');
 	}
 
 	// Валидация происходит в "validate" методе модели

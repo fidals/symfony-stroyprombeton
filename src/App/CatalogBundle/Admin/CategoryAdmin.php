@@ -13,9 +13,10 @@ class CategoryAdmin extends Admin
 	{
 		$formMapper
 			->with('Основные свойства')
+				->add('id', null, array('read_only' => true, 'required' => false))
 				->add('nomen', null, array('required' => false))
 				->add('parent', 'sonata_type_model', array('label' => 'Родительская категория', 'required' => false))
-				->add('name', null, array('label' => 'Название', 'required' => false))
+				->add('name', null, array('label' => 'Название', 'required' => true))
 				->add('alias', null, array('required' => false))
 				->add('mark', null, array('required' => false))
 				->add('order', null, array('label' => 'ord', 'required' => false))
@@ -39,13 +40,9 @@ class CategoryAdmin extends Admin
 			->add('nomen')
 			->add('parent', null, array('label' => 'Родительская категория'))
 			->add('name', null, array('label' => 'Название'))
-			->add('title')
-			->add('alias')
 			->add('mark')
 			->add('order', null, array('label' => 'ord'))
-			->add('coefficient')
-			->add('isActive', null, array('label' => 'is_active'))
-			->add('description');
+			->add('isActive', null, array('label' => 'is_active'));
 	}
 
 	protected function configureListFields(ListMapper $listMapper)

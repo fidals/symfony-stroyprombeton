@@ -16,8 +16,8 @@
 	<div class="location">
 		{% for item in parents %}
 			<span class="location section">
-                <a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
-            </span>
+				<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+			</span>
 			<span class="location separate">/</span>
 		{% endfor %}
 	</div>
@@ -38,9 +38,7 @@
 							{% endif %}
 							<div class="cat-info">
 								<h3>{% if item.mark %}{{ item.mark }}{% endif %}</h3><br/>
-
 								<p>{{ item.title }}</p>
-
 								<div class="link-detailed">подробнее&nbsp&raquo</div>
 							</div>
 						</div>
