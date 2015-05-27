@@ -40,7 +40,8 @@ class MigrateCommand extends ContainerAwareCommand
 		);
 		$pdo->exec('SET NAMES utf8');
 
-		$res1 = $pdo->query('SELECT * from modx_categories')->fetchAll();
+		$testQuery = 'SELECT * from `modx_categories`';
+		$res1 = $pdo->query($testQuery)->fetchAll();
 		$res2 = $spRp->findAll();
 		var_dump($res2[0], $res1[0]);
 	}
