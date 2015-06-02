@@ -164,7 +164,7 @@ class TableGear
       $perPage = $this->pagination["perPage"];
       $query .= " LIMIT $min, $perPage";
     }
-    $data = $this->query($query);
+    $data = ($auto_query) ? array() : $this->query($query);
 
 	$fileds_tv="";
 	$fileds_tv_arr=array();
@@ -1407,61 +1407,61 @@ $arr=array('key'=>2024, 'data' => array( 'id' => 2024, 'pagetitle' => 'Утяж�
      }
     $values = $this->_constructQueryValues($this->_httpArray["data"][$cKey], true);
     if($this->errors) return;
-    //$query = $this->_limitQueryByPrimaryKey("UPDATE $table SET ".implode(",", $values), $cKey);
+    $query = $this->_limitQueryByPrimaryKey("UPDATE $table SET ".implode(",", $values), $cKey);
 
-	/**************************** modx ****************************/
-	$myval=array();
-	foreach($this->_httpArray["data"][$cKey] as $ind => $val){
-		if( preg_match("/tv_/i", $ind) ){
-			$ind=preg_replace("/tv_/i", "", $ind);
-			$myval[]="tb2.name='".$ind."'";
-
-			$q=mysql_query("SELECT tb1.* FROM ".$this->database["table2"]." as tb1 INNER JOIN `modx_site_tmplvars` as tb2 ON (tb1.tmplvarid = tb2.id AND tb2.name = '".$ind."') WHERE tb1.contentid = ".$cKey);
-			if(mysql_num_rows($q)>0){
-				$query="UPDATE ".$this->database["table2"]." as tb1 INNER JOIN modx_site_tmplvars as tb2 ON (tb1.tmplvarid = tb2.id AND tb2.name='".$ind."') SET tb1.value = '".$val."' WHERE tb1.contentid = ".$cKey;
-			}else{
-				$query="INSERT INTO ".$this->database["table2"]." (`tmplvarid`, `contentid`, `value`) SELECT `id`, '".$cKey."', '".$val."' FROM `modx_site_tmplvars` WHERE modx_site_tmplvars.name='".$ind."'";
-			}
-			if( $ind=="mark" || $ind=="nomen" ){
-//				$q=mysql_query("SELECT `introtext` FROM ".$this->database["table1"]." WHERE `id` = '".intval($cKey)."' LIMIT 1");
-				$q=mysql_query("SELECT tb1.*, tb2.`name`  FROM `modx_site_tmplvar_contentvalues` as tb1 INNER JOIN `modx_site_tmplvars` as tb2 ON (tb1.tmplvarid = tb2.id) WHERE `contentid` = '".intval($cKey)."' AND `tb2`.`name` IN('mark', 'nomen')");
-				$introtext="";
-				while($row = mysql_fetch_assoc($q)){
-					if($ind=="nomen" && $row['name']=="mark" && $row['value']!=""){
-
-
-					   $introtext=$row['value'].", ".$val;
-
-					}elseif($ind=="mark" && $row['name']=="nomen" && $row['value']!=""){
-					  $introtext=$val.", ".$row['value'];
-					}
-				}
-				if($introtext=="") $introtext=$val;
-
-				$pagetitle="";
-				if( $ind=="mark" ){
-					$q2=mysql_query("SELECT `longtitle` FROM ".$this->database["table1"]." WHERE `id` = '".intval($cKey)."' LIMIT 1");
-					if( mysql_num_rows($q2)>0 ){
-						$row2=mysql_fetch_assoc($q2);
-						if($row2['longtitle']!="") $pagetitle=", `pagetitle` = '".addslashes($row2['longtitle']." ".$val)."'";
-						else $pagetitle=", `pagetitle` = '".addslashes($val)."'";
-					}
-				}
-				mysql_query("UPDATE ".$this->database["table1"]." SET `introtext` = '".addslashes($introtext)."' ".$pagetitle." WHERE `id` = '".intval($cKey)."' LIMIT 1");
-			}
-		}else{
-			if($ind=="longtitle"){
-				$q=mysql_query("SELECT tb1.* FROM `modx_site_tmplvar_contentvalues` as tb1 INNER JOIN `modx_site_tmplvars` as tb2 ON (tb1.tmplvarid = tb2.id) WHERE `contentid` = '".intval($cKey)."' AND `tb2`.`name` IN('mark')");
-				if( mysql_num_rows($q)>0 ){
-					$row=mysql_fetch_assoc($q);
-					if( $row['value']!="" ) $val.=" ".$row['value'];
-				}
-				$values[]="pagetitle='".$val."'";
-			}
-			$query = $this->_limitQueryByPrimaryKey("UPDATE ".$this->database["table1"]." SET ".implode(",", $values), $cKey);
-		}
-	}
-	/**************************************************************/
+//	/**************************** modx ****************************/
+//	$myval=array();
+//	foreach($this->_httpArray["data"][$cKey] as $ind => $val){
+//		if( preg_match("/tv_/i", $ind) ){
+//			$ind=preg_replace("/tv_/i", "", $ind);
+//			$myval[]="tb2.name='".$ind."'";
+//
+//			$q=mysql_query("SELECT tb1.* FROM ".$table." as tb1 WHERE tb1." . $ind . " = ".$cKey);
+//			if(mysql_num_rows($q)>0){
+//				$query="UPDATE " . $table . " as tb1 SET tb1." . $ind . " = '".$val."' WHERE tb1.id = ".$cKey;
+//			}else{
+//				$query="INSERT INTO ".$table." (`tmplvarid`, `contentid`, `value`) SELECT `id`, '".$cKey."', '".$val."' FROM `modx_site_tmplvars` WHERE modx_site_tmplvars.name='".$ind."'";
+//			}
+//			if( $ind=="mark" || $ind=="nomen" ){
+////				$q=mysql_query("SELECT `introtext` FROM ".$this->database["table1"]." WHERE `id` = '".intval($cKey)."' LIMIT 1");
+//				$q=mysql_query("SELECT tb1.*, tb2.`name`  FROM `modx_site_tmplvar_contentvalues` as tb1 INNER JOIN `modx_site_tmplvars` as tb2 ON (tb1.tmplvarid = tb2.id) WHERE `contentid` = '".intval($cKey)."' AND `tb2`.`name` IN('mark', 'nomen')");
+//				$introtext="";
+//				while($row = mysql_fetch_assoc($q)){
+//					if($ind=="nomen" && $row['name']=="mark" && $row['value']!=""){
+//
+//
+//					   $introtext=$row['value'].", ".$val;
+//
+//					}elseif($ind=="mark" && $row['name']=="nomen" && $row['value']!=""){
+//					  $introtext=$val.", ".$row['value'];
+//					}
+//				}
+//				if($introtext=="") $introtext=$val;
+//
+//				$pagetitle="";
+//				if( $ind=="mark" ){
+//					$q2=mysql_query("SELECT `longtitle` FROM ".$this->database["table1"]." WHERE `id` = '".intval($cKey)."' LIMIT 1");
+//					if( mysql_num_rows($q2)>0 ){
+//						$row2=mysql_fetch_assoc($q2);
+//						if($row2['longtitle']!="") $pagetitle=", `pagetitle` = '".addslashes($row2['longtitle']." ".$val)."'";
+//						else $pagetitle=", `pagetitle` = '".addslashes($val)."'";
+//					}
+//				}
+//				mysql_query("UPDATE ".$this->database["table1"]." SET `introtext` = '".addslashes($introtext)."' ".$pagetitle." WHERE `id` = '".intval($cKey)."' LIMIT 1");
+//			}
+//		}else{
+//			if($ind=="longtitle"){
+//				$q=mysql_query("SELECT tb1.* FROM `modx_site_tmplvar_contentvalues` as tb1 INNER JOIN `modx_site_tmplvars` as tb2 ON (tb1.tmplvarid = tb2.id) WHERE `contentid` = '".intval($cKey)."' AND `tb2`.`name` IN('mark')");
+//				if( mysql_num_rows($q)>0 ){
+//					$row=mysql_fetch_assoc($q);
+//					if( $row['value']!="" ) $val.=" ".$row['value'];
+//				}
+//				$values[]="pagetitle='".$val."'";
+//			}
+//			$query = $this->_limitQueryByPrimaryKey("UPDATE ".$this->database["table1"]." SET ".implode(",", $values), $cKey);
+//		}
+//	}
+//	/**************************************************************/
 
     $result = $this->query($query);
     if($result){

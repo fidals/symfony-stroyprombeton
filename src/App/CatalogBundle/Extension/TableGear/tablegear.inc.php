@@ -13,9 +13,10 @@ $options["pagination"] = array();
 $options["database"]["name"]     = $container->getParameter('database_name');
 $options["database"]["username"] = $container->getParameter('database_user');
 $options["database"]["password"] = $container->getParameter('database_password');
-$options["database"]["table"]    = 'tmc';
-$options["database"]["table1"]   = 'modx_site_content';
-$options["database"]["table2"]   = 'modx_site_tmplvar_contentvalues';
+$options["database"]["table"]    = 'products';
+$options["database"]["utf8"] = true;
+//$options["database"]["table1"]   = 'modx_site_content';
+//$options["database"]["table2"]   = 'modx_site_tmplvar_contentvalues';
 
 $options["pagination"]["perPage"] = 300;  // rows per page.
 $options["pagination"]["prev"] = "prev"; // "prev" link will be shown.
@@ -72,12 +73,13 @@ if( count($_POST["ff"])>0 ){
 }
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
   <title>TableGear for jQuery</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript" src="/bundles/catalog/plugins/tablegear/javascripts/TableGear1.6.1-jQuery.js"></script>
+	<script type="text/javascript" src="/bundles/catalog/plugins/tablegear/javascripts/tablegear-jquery_bootstrap.js"></script>
   <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
   <link type="text/css" rel="stylesheet" href="/bundles/catalog/plugins/tablegear/stylesheets/tablegear.css" />
 </head>
@@ -191,11 +193,9 @@ $fileds="";
 if( isset($_REQUEST['ff']) && count($_REQUEST['ff'])>0 ){
   foreach($_REQUEST['ff'] as $ind=>$val){
 	if( !preg_match("/tv_/i", $val) ){
-		$fileds.=", tb1.".$val;
+		$fileds .= ", tb1.". $val;
 	}
   }
-}else{
-	$fileds=", tb1.pagetitle, tb1.longtitle, tb1.description, tb1.introtext";
 }
 
 if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
@@ -213,42 +213,42 @@ if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
 //		echo '<table><tr><td style="color: red;">Ошибка: Дочерние ресурсы выбранного раздела не являются конечными</td></tr></table>';
 //	}else{
 	// --> Здесь нужен просто запрос по формированию списка товаров с выделенными полями. Запрос будет совсем другого вида, не как здесь
-$table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1
-WHERE tb1.parent = ".intval($_POST['parent_tg_id'])." ORDER BY tb1.id ASC" );
-
-?>
-
-  <div>
-<?= $table->getTable() ?>
-  </div>
-<?= $table->getJavascript("jquery") ?>
+//$table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1
+//WHERE tb1.section_id = " . intval($_POST['parent_tg_id']) . " ORDER BY tb1.id ASC" );
+//
+//?>
+<!---->
+<!--  <div>-->
+<?//= $table->getTable() ?>
+<!--  </div>-->
+<?//= $table->getJavascript("jquery") ?>
 
 <?php
 //	}
 }elseif( isset($_POST['type_search']) && $_POST['type_search']!="" ){
 // --> Обработка выбранных условий. Нужно будет переписать каждый запрос. Будет весело =)
 	if( preg_match("/tv_/i", $_POST['field_search']) ){
-	  if( intval($_POST['type_search'])==2 && $_POST['from_query']!="" ){
-		  $field_search="tb2.tmplvarid = ".preg_replace("/tv_/i", "", $_POST['field_search'])." AND tb2.value >= '".$_POST['from_query']."' AND tb2.value <= '".$_POST['to_query']."'";
+		$field = preg_replace("/tv_/i", "", $_POST['field_search']);
+	  if( intval($_POST['type_search']) == 2 && $_POST['from_query'] != "" ){
+		  $field_search="tb1." . $field . " >= '" . $_POST['from_query']."' AND tb1." . $field . " <= '".$_POST['to_query']."'";
 	  }elseif( intval($_POST['type_search'])==1 ){
-		  $field_search="tb2.tmplvarid = ".preg_replace("/tv_/i", "", $_POST['field_search'])." AND tb2.value LIKE '".$_POST['query']."%'";
+		  $field_search="tb1." . $field . " LIKE '%".$_POST['query']."%'";
 	  }else{
-		  $field_search="tb2.tmplvarid = ".preg_replace("/tv_/i", "", $_POST['field_search'])." AND tb2.value LIKE '".$_POST['query']."'";
-	  }
-	}else{
-	  if( intval($_POST['type_search'])==2 && $_POST['from_query']!="" ){
-		  $field_search="tb1.".$_POST['field_search']." >= '".$_POST['from_query']."' AND tb1.".$_POST['field_search']." <= '".$_POST['to_query']."'";
-	  }elseif( intval($_POST['type_search'])==1 ){
-		  $field_search="tb1.".$_POST['field_search']." LIKE '".$_POST['query']."%'";
-	  }else{
-		  $field_search="tb1.".$_POST['field_search']." LIKE '".$_POST['query']."'";
+		  $field_search="tb1.". $field . " LIKE '" . $_POST['query'] . "'";
 	  }
 	}
+//	else{
+//	  if( intval($_POST['type_search'])==2 && $_POST['from_query']!="" ){
+//		  $field_search="tb1.".$_POST['field_search']." >= '".$_POST['from_query']."' AND tb1.".$_POST['field_search']." <= '".$_POST['to_query']."'";
+//	  }elseif( intval($_POST['type_search'])==1 ){
+//		  $field_search="tb1.".$_POST['field_search']." LIKE '".$_POST['query']."%'";
+//	  }else{
+//		  $field_search="tb1.".$_POST['field_search']." LIKE '".$_POST['query']."'";
+//	  }
+//	}
 
 // --> Запрос с условиями у нас будет только по одной таблице products. Поэтому будет гораздо проще.
-$table->fetchData("SELECT tb1.id ".$fileds." FROM modx_site_content as tb1
-LEFT JOIN modx_site_tmplvar_contentvalues as tb2 ON (tb2.contentid = tb1.id)
-WHERE ".$field_search." GROUP BY tb1.id" );
+$table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1 WHERE " . $field_search . " GROUP BY tb1.id");
 
 ?>
 
