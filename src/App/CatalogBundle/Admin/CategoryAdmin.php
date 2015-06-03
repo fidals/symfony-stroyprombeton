@@ -52,13 +52,9 @@ class CategoryAdmin extends Admin
 			->addIdentifier('nomen')
 			->add('parent', null, array('label' => 'parent_id'))
 			->addIdentifier('name', null, array('label' => 'Название'))
-			->addIdentifier('title')
-			->add('alias')
 			->add('mark')
 			->add('order', null, array('label' => 'ord'))
-			->add('coefficient')
-			->add('isActive', null, array('label' => 'is_active'))
-			->add('description');
+			->add('isActive', null, array('label' => 'is_active'));
 	}
 
 	public function postPersist($category)
