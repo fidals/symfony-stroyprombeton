@@ -59,6 +59,13 @@ trait PageTrait
 	protected $date;
 
 	/**
+	 *
+	 * @var string
+	 * @ORM\Column(name="text", type="text", length=5000, nullable=true)
+	 */
+	protected $text;
+
+	/**
 	 * @return string
 	 */
 	public function getName()
@@ -168,5 +175,21 @@ trait PageTrait
 	public function setDate($date)
 	{
 		$this->date = $date;
+	}
+
+	/**
+	 * @param string $text
+	 */
+	public function setText($text)
+	{
+		$this->text = $text;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getText()
+	{
+		return $this->text;
 	}
 }

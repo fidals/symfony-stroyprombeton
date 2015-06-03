@@ -21,22 +21,18 @@
 
 	<div class="gbi-showcase">
 		<table>
-			{% for item in childs if item.isActive %}
+			{% for item in childs if item.model.getIsActive() %}
 				{% if loop.index is odd %}<tr>{% endif %}
 				<td>
-					<span>{{ item.id }}</span> <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">
-						<h2>{% if item.name %}{{ item.name }}{% else %}{{ item.title }}{% endif %}</h2>
+					<span>{{ item.model.getId() }}</span> <a href="/gbi/{{ catUrl }}/?section={{ item.model.getId() }}">
+						<h2>{% if item.model.getName() %}{{ item.model.getName() }}{% else %}{{ item.model.getTitle() }}{% endif %}</h2>
 
 						<div class="gbi-showcase-top-line">
-							{% if item.photoId %}
-								<img src="/assets/main/images/sections/{{ item.id }}.png"/>
-							{% else %}
-								<img src="/assets/main/images/sections/logo-prozr.png"/>
-							{% endif %}
+							<img src="{{ item.model.getPicturePath() }}"/>
 							<div class="cat-info">
-								<h3>{% if item.mark %}{{ item.mark }}{% endif %}</h3><br/>
+								{#<h3>{% if item.model.getMark() %}{{ item.model.getMark() }}{% endif %}</h3><br/>#}
 
-								<p>{{ item.title }}</p>
+								<p>{{ item.model.getTitle() }}</p>
 
 								<div class="link-detailed">подробнее&nbsp&raquo</div>
 							</div>

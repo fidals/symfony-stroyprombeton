@@ -1,6 +1,7 @@
 <?php
 namespace App\MainBundle\Command;
 
+use App\CatalogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +19,21 @@ class MigrateCommand extends ContainerAwareCommand
 	/**
 	 * Имя базы данных на modx
 	 */
-	const MODX_DB_NAME = 'shopelecru_pb';
+	const MODX_DB = 'shopelecru_pb';
+
+	/**
+	 * Названия таблиц modx
+	 */
+	const MODX_SITE_CONTENT = 'modx_site_content';
+	const MODX_SITE_TMPLVARS = 'modx_site_tmplvars';
+	const MODX_SITE_TMPLVAR_CONTENTVALUES = 'modx_site_tmplvar_contentvalues';
+
+	/**
+	 * Идентификатор корня дерева категорий
+	 */
+	const ROOT_CATEGORY_ID = 10;
+
+	public $pdo = null;
 
 	protected function configure()
 	{
@@ -26,23 +41,98 @@ class MigrateCommand extends ContainerAwareCommand
 			->setDescription('Migrate DB from modx to symfony2');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function initialize()
 	{
-		$spRp = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:StaticPage');
-
+		// connect to mysql
 		$dbHost = $this->getContainer()->getParameter('database_host');
-		$dsn = 'mysql:dbname=' . self::MODX_DB_NAME . ';host=' . $dbHost;
+		$dsn = 'mysql:dbname=' . self::MODX_DB . ';host=' . $dbHost;
 
-		$pdo = new \PDO(
+		$this->pdo = new \PDO(
 			$dsn,
 			$this->getContainer()->getParameter('database_user'),
 			$this->getContainer()->getParameter('database_password')
 		);
-		$pdo->exec('SET NAMES utf8');
+		$this->pdo->exec('SET NAMES utf8');
+		// end connect to mysql
+	}
 
-		$testQuery = 'SELECT * from `modx_categories`';
-		$res1 = $pdo->query($testQuery)->fetchAll();
-		$res2 = $spRp->findAll();
-		var_dump($res2[0], $res1[0]);
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
+		$connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+		$platform   = $connection->getDatabasePlatform();
+
+		$connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
+		$truncateSql = $platform->getTruncateTableSQL('categories');
+		$connection->executeUpdate($truncateSql);
+		$truncateSql = $platform->getTruncateTableSQL('category_closures');
+		$connection->executeUpdate($truncateSql);
+		$connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
+
+		$this->migrateCategories(self::ROOT_CATEGORY_ID);
+	}
+
+	private function migrateCategories($rootId, $parentCategory = null)
+	{
+		$childrens = $this->findChildrens($rootId);
+		if($childrens) {
+			$em = $this->getContainer()->get('doctrine')->getManager();
+
+			foreach($childrens as $row) {
+				$properties = $this->getCategoryProperties($row['id']);
+
+				$category = new Category();
+				$category->setAlias($row['alias']);
+				$category->setCoefficient($properties['coefficient']);
+				$category->setName($row['pagetitle']);
+			    $category->setTitle($row['longtitle']);
+				$category->setH1($row['pagetitle']);
+				$category->setDescription($row['description']);
+				$category->setLinkToStkMetal($properties['stk-metal1']);
+				$category->setIsActive($row['published']);
+				$category->setText($row['content']);
+				$category->setDate(date_create(date("Y-m-d H:i:s", $row['createdon'])));
+
+				if(isset($properties['xml_id'])) {
+					$category->setId((int) $properties['xml_id']);
+				} else {
+					$category->setId($row['id']);
+				}
+
+				if($parentCategory) {
+					$category->setParent($parentCategory);
+				}
+
+				$em->persist($category);
+				$em->flush();
+
+				$this->migrateCategories($row['id'], $category);
+			}
+		}
+	}
+
+	private function findChildrens($categoryId)
+	{
+		$query = 'SELECT * FROM ' . self::MODX_SITE_CONTENT . ' as a WHERE a.isfolder = 1 AND a.parent = ' . $categoryId;
+		return $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+	private function getCategoryProperties($categoryId)
+	{
+		$properties = array(
+			'coefficient' => 1.1,
+			'stk-metal1'  => ''
+		);
+
+		$query = 'SELECT name, value FROM ' . self::MODX_SITE_TMPLVAR_CONTENTVALUES . ' as a '
+			. 'LEFT JOIN ' . self::MODX_SITE_TMPLVARS . ' as b ON a.tmplvarid = b.id '
+			. 'WHERE a.contentid = ' . $categoryId;
+		$result = $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+
+		if($result) {
+			foreach($result as $property) {
+				$properties[$property['name']] = $property['value'];
+			}
+		}
+		return $properties;
 	}
 }

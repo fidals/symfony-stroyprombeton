@@ -30,13 +30,6 @@ class Category
 	private $id;
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="nomen", type="integer", nullable=true)
-	 */
-	private $nomen;
-
-	/**
 	 * @Gedmo\TreeParent
 	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
 	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
@@ -58,13 +51,6 @@ class Category
 	private $mark;
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="ord", type="integer", nullable=true)
-	 */
-	private $order;
-
-	/**
 	 * @var float
 	 *
 	 * @ORM\Column(name="coefficient", type="float", nullable=false)
@@ -72,16 +58,16 @@ class Category
 	private $coefficient;
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="photo_id", type="integer", nullable=true)
-	 */
-	private $photoId;
-
-	/**
 	 * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
 	 */
 	protected $products;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="link_to_stk_metal", type="string", length=500, nullable=true)
+	 */
+	private $linkToStkMetal;
 
 	public function __construct()
 	{
@@ -122,23 +108,6 @@ class Category
 		return $this->id;
 	}
 
-	/**
-	 * @param int $id
-	 */
-	public function setNomen($nomen)
-	{
-		$this->nomen = $nomen;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getNomen()
-	{
-		return $this->nomen;
-	}
-
 	public function setProducts($products)
 	{
 		$this->products = $products;
@@ -164,23 +133,6 @@ class Category
 	public function getMark()
 	{
 		return $this->mark;
-	}
-
-	/**
-	 * @param int $order
-	 */
-	public function setOrder($order)
-	{
-		$this->order = $order;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getOrder()
-	{
-		return $this->order;
 	}
 
 	/**
@@ -212,20 +164,19 @@ class Category
 	}
 
 	/**
-	 * @param int $photoId
+	 * @param string $linkToStkMetal
 	 */
-	public function setPhotoId($photoId)
+	public function setLinkToStkMetal($linkToStkMetal)
 	{
-		$this->photoId = $photoId;
-		return $this;
+		$this->linkToStkMetal = $linkToStkMetal;
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
-	public function getPhotoId()
+	public function getLinkToStkMetal()
 	{
-		return $this->photoId;
+		return $this->linkToStkMetal;
 	}
 
 	public function addClosure(CategoryClosure $closure)
@@ -245,6 +196,18 @@ class Category
 			'changefreq' => 'weekly',
 			'entityType' => 'category',
 		);
+	}
+
+	public function getPicturePath()
+	{
+		$webPath = __DIR__ . '../../../../web';
+		$webFilePath = '/assets/images/sections/' . $this->getId() . '.png';
+		$picturePath = $webPath . $webFilePath;
+		if(file_exists($picturePath)) {
+			return $webFilePath;
+		} else {
+			return '/assets/images/sections/logo_prozr.png';
+		}
 	}
 
 	public function __toString()
