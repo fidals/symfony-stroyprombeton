@@ -1,27 +1,31 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ section.title }}
+	{{ section.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{{ section.description }}
+	{{ section.getDescription() }}
+{% endblock %}
+
+{% block keywords %}
+	{{ section.getKeywords() }}
 {% endblock %}
 
 {% block content %}
 	<div class="location">
 		{% for item in parents %}
 			<span class="location section">
-                <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
-            </span>
+				<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+			</span>
 			<span class="location separate">/</span>
 		{% endfor %}
 	</div>
 	<h1 class="gbi-section">
-		{{ section.title }}
+		{{ section.getH1() }}
 	</h1>
 	{% autoescape false %}
-	{{ section.description }}
+	{{ section.getText() }}
 	{% endautoescape %}
 	<div class="gbi-list">
 		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
@@ -40,22 +44,22 @@
 					<td class="gbi-list photo">
 						<img src="/assets/main/images/bullet.png">
 					</td>
-					<td class="gbi-list code">{{ product.nomen }}</td>
+					<td class="gbi-list code">{{ product.getNomen() }}</td>
 					<td class="gbi-list name">
-						<a href="/gbi/{{ catUrl }}/?section={{ section.id }}&amp;gbi={{ product.id }}">
-							{{ product.name }}<span> {{ product.mark }}</span></a></td>
+						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}">
+							{{ product.getName() }}<span> {{ product.getMark() }}</span></a></td>
 					<td class="gbi-list price">
-						{% if product.price %}
-							{{ product.price + product.price // ((1.1 - 1)*100) }} руб.
+						{% if product.getPrice() %}
+							{{ product.getPrice() + product.getPrice() // ((1.1 - 1)*100) }} руб.
 						{% else %}
 							По запросу
 						{% endif %}
 					</td>
 					<td class="gbi-list rest rest-container">
-						<input class="basket-rest" type="number" min="1" max="999999" code="{{ product.id }}" value="1">
+						<input class="basket-rest" type="number" min="1" max="999999" code="{{ product.getId() }}" value="1">
 					</td>
 					<td class="gbi-list buy">
-						<a href="/gbi/{{ catUrl }}/?section={{ section.id }}&amp;gbi={{ product.id }}&amp;buy=true" section="{{ section.id }}" code="{{ product.id }}" price="{% if product.price %} {{ product.price }} {% endif %}" title="{{ product.name }}" class="add-basket">
+						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}&amp;buy=true" section="{{ section.getId() }}" code="{{ product.getId() }}" price="{% if product.getPrice() %} {{ product.getPrice() }} {% endif %}" title="{{ product.getName() }}" class="add-basket">
 							<i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
 					</td>
 				</tr>

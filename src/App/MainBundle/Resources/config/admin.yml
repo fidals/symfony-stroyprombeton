@@ -1,0 +1,22 @@
+services:
+    sonata.admin.gbi_object:
+        class: App\MainBundle\Admin\GbiObjectAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Другое, label: "Объекты ЖБИ" }
+        arguments:
+            - ~
+            - App\MainBundle\Entity\GbiObject
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppMainBundle]]
+
+    sonata.admin.static_page:
+        class: App\MainBundle\Admin\StaticPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Другое, label: "Страницы" }
+        arguments:
+            - ~
+            - App\MainBundle\Entity\StaticPage
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppMainBundle]]

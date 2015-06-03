@@ -2,7 +2,7 @@ services:
     sonata.admin.category:
         class: App\CatalogBundle\Admin\CategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: каталог, label: "Категории" }
+            - { name: sonata.admin, manager_type: orm, group: Каталог, label: "Категории" }
         arguments:
             - ~
             - App\CatalogBundle\Entity\Category
@@ -13,7 +13,7 @@ services:
     sonata.admin.product:
         class: App\CatalogBundle\Admin\ProductAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: каталог, label: "Изделия" }
+            - { name: sonata.admin, manager_type: orm, group: Каталог, label: "Изделия" }
         arguments:
             - ~
             - App\CatalogBundle\Entity\Product

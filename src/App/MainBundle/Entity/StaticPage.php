@@ -3,6 +3,7 @@
 namespace App\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * StaticPages
@@ -40,13 +41,6 @@ class StaticPage
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="content", type="text", nullable=true)
-	 */
-	private $content;
-
-	/**
-	 * @var string
-	 *
 	 * @ORM\Column(name="menu_title", type="string", length=255, nullable=false)
 	 */
 	private $menuTitle;
@@ -65,22 +59,6 @@ class StaticPage
 	public function getAlias()
 	{
 		return $this->alias;
-	}
-
-	/**
-	 * @param string $content
-	 */
-	public function setContent($content)
-	{
-		$this->content = $content;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getContent()
-	{
-		return $this->content;
 	}
 
 	/**
@@ -148,5 +126,17 @@ class StaticPage
 			'changefreq' => 'weekly',
 			'entityType' => 'staticPage',
 		);
+	}
+
+	/**
+	 * Метод валидации для админки
+	 * @param ExecutionContext $context
+	 */
+	public function validate(ExecutionContext $context)
+	{
+		$alias = $this->getAlias();
+		if(preg_match("/[^a-z0-9_\/-]/", $alias)) {
+			$context->addViolation('Недопустимые для ссылки символы');
+		}
 	}
 }
