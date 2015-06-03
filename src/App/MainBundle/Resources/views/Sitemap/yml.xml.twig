@@ -29,7 +29,7 @@
 				<currencyId>RUR</currencyId>
 				<categoryId>{{ product.sectionId }}</categoryId>
 				<picture>
-					{% if product.isHavePhoto %}
+					{% if product.hasPhoto %}
 						<img src="/bundles/main/images/gbi-photos/{{ product.id }}.jpg">
 					{% else %}
 						<img src="/bundles/main/images/gbi-photos/prod-alt-image.png">

@@ -25,6 +25,16 @@ class Product
 	private $id;
 
 	/**
+	 * Связывает продукт с категорией, см $category
+	 * TODO: переименовать в category_id либо везде избавиться от этого свойства модели
+	 *
+	 * @var integer
+	 *
+	 * @ORM\Column(name="section_id", type="integer", nullable=true)
+	 */
+	private $sectionId;
+
+	/**
 	 * @var boolean
 	 *
 	 * @ORM\Column(name="is_new_price", type="boolean", nullable=true)
@@ -46,13 +56,6 @@ class Product
 	 * @ORM\Column(name="mark", type="string", length=100, nullable=false)
 	 */
 	private $mark;
-
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="section_id", type="integer", nullable=true)
-	 */
-	private $sectionId;
 
 	/**
 	 * @var integer
@@ -106,16 +109,16 @@ class Product
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="price", type="integer", nullable=true)
+	 * @ORM\Column(name="price", type="integer", nullable=false, options={"default" = 0})
 	 */
 	private $price;
 
 	/**
 	 * @var boolean
 	 *
-	 * @ORM\Column(name="is_have_photo", type="boolean", nullable=true)
+	 * @ORM\Column(name="has_photo", type="boolean", nullable=true)
 	 */
-	private $isHavePhoto;
+	private $hasPhoto;
 
 	/**
 	 * @var string
@@ -125,10 +128,47 @@ class Product
 	private $comments;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="annotation", type="string", length=250, nullable=true)
+	 */
+	private $annotation;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="link_to_stkmetal_category", type="string", length=500, nullable=true)
+	 */
+	private $linkToStkMetalCategory;
+
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="price_coefficient", type="string", length=250, nullable=true)
+	 */
+	private $priceCoefficient;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
 	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
 	 */
 	protected $category;
+
+	/**
+	 * @param int $sectionId
+	 */
+	public function setSectionId($sectionId)
+	{
+		$this->sectionId = $sectionId;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSectionId()
+	{
+		return $this->sectionId;
+	}
 
 	/**
 	 * @param string $comments
@@ -178,7 +218,6 @@ class Product
 		return $this->diameterOut;
 	}
 
-
 	/**
 	 * @param int $height
 	 */
@@ -196,14 +235,6 @@ class Product
 	}
 
 	/**
-	 * @param int $id
-	 */
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getId()
@@ -212,19 +243,35 @@ class Product
 	}
 
 	/**
-	 * @param boolean $isHavePhoto
+	 * @param boolean $isActive
 	 */
-	public function setIsHavePhoto($isHavePhoto)
+	public function setIsActive($isActive)
 	{
-		$this->isHavePhoto = $isHavePhoto;
+		$this->isActive = $isActive;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getIsHavePhoto()
+	public function getIsActive()
 	{
-		return $this->isHavePhoto;
+		return $this->isActive;
+	}
+
+	/**
+	 * @param boolean $hasPhoto
+	 */
+	public function setHasPhoto($hasPhoto)
+	{
+		$this->hasPhoto = $hasPhoto;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getHasPhoto()
+	{
+		return $this->hasPhoto;
 	}
 
 	/**
@@ -308,22 +355,6 @@ class Product
 	}
 
 	/**
-	 * @param int $sectionId
-	 */
-	public function setSectionId($sectionId)
-	{
-		$this->sectionId = $sectionId;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getSectionId()
-	{
-		return $this->sectionId;
-	}
-
-	/**
 	 * @param float $volume
 	 */
 	public function setVolume($volume)
@@ -371,14 +402,68 @@ class Product
 		return $this->width;
 	}
 
+	/**
+	 * @param Category $category
+	 */
 	public function setCategory($category)
 	{
 		$this->category = $category;
 	}
 
+	/**
+	 * @return Category
+	 */
 	public function getCategory()
 	{
 		return $this->category;
+	}
+
+	/**
+	 * @param string $annotation
+	 */
+	public function setAnnotation($annotation)
+	{
+		$this->annotation = $annotation;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAnnotation()
+	{
+		return $this->annotation;
+	}
+
+	/**
+	 * @param string $linkToStkMetalCategory
+	 */
+	public function setLinkToStkMetalCategory($linkToStkMetalCategory)
+	{
+		$this->linkToStkMetalCategory = $linkToStkMetalCategory;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLinkToStkMetalCategory()
+	{
+		return $this->linkToStkMetalCategory;
+	}
+
+	/**
+	 * @param float $priceCoefficient
+	 */
+	public function setPriceCoefficient($priceCoefficient)
+	{
+		$this->priceCoefficient = $priceCoefficient;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getPriceCoefficient()
+	{
+		return $this->priceCoefficient;
 	}
 
 	public function __toString()
@@ -389,7 +474,7 @@ class Product
 	public function getSitemapData()
 	{
 		return array(
-			'section' => $this->getSectionId(),
+			'section' => $this->getCategory()->getId(),
 			'gbi' => $this->getId(),
 			'locData' => array(
 				'route' => 'app_catalog_explore_category',
