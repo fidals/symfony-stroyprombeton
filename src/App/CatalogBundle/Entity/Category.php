@@ -200,13 +200,13 @@ class Category
 
 	public function getPicturePath()
 	{
-		$webPath = __DIR__ . '../../../../web';
+		$webPath = __DIR__ . '/../../../../web';
 		$webFilePath = '/assets/images/sections/' . $this->getId() . '.png';
 		$picturePath = $webPath . $webFilePath;
 		if(file_exists($picturePath)) {
 			return $webFilePath;
 		} else {
-			return '/assets/images/sections/logo_prozr.png';
+			return '/assets/images/sections/logo-prozr.png';
 		}
 	}
 
