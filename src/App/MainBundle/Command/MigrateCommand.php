@@ -53,11 +53,8 @@ class MigrateCommand extends ContainerAwareCommand
 			$this->getContainer()->getParameter('database_password')
 		);
 		$this->pdo->exec('SET NAMES utf8');
-		// end connect to mysql
-	}
 
-	protected function execute(InputInterface $input, OutputInterface $output)
-	{
+		// clean db tables
 		$connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
 		$platform   = $connection->getDatabasePlatform();
 
@@ -67,7 +64,10 @@ class MigrateCommand extends ContainerAwareCommand
 		$truncateSql = $platform->getTruncateTableSQL('category_closures');
 		$connection->executeUpdate($truncateSql);
 		$connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
+	}
 
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
 		$this->migrateCategories(self::ROOT_CATEGORY_ID);
 	}
 
@@ -95,7 +95,7 @@ class MigrateCommand extends ContainerAwareCommand
 				if(isset($properties['xml_id'])) {
 					$category->setId((int) $properties['xml_id']);
 				} else {
-					$category->setId($row['id']);
+					$category->setId((int) $row['id']);
 				}
 
 				if($parentCategory) {

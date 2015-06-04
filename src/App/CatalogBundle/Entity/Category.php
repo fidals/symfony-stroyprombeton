@@ -21,10 +21,10 @@ class Category
 	use PageTrait;
 
 	/**
+	 * TODO Вернуть ORM\GeneratedValue(strategy="IDENTITY")
 	 * @var integer
 	 *
 	 * @ORM\Column(name="id", type="integer", nullable=false)
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 * @ORM\Id
 	 */
 	private $id;
