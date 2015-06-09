@@ -21,7 +21,7 @@
 
 	<div class="gbi-showcase">
 		<table>
-			{% for item in childs if item.model.getIsActive() %}
+			{% for item in children if item.model.getIsActive() %}
 				{% if loop.index is odd %}<tr>{% endif %}
 				<td>
 					<span>{{ item.model.getId() }}</span> <a href="/gbi/{{ catUrl }}/?section={{ item.model.getId() }}">

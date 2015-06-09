@@ -73,7 +73,7 @@ class MigrateCommand extends ContainerAwareCommand
 
 	private function migrateCategories($rootId, $parentCategory = null)
 	{
-		$childrens = $this->findChildrens($rootId);
+		$childrens = $this->findChildren($rootId);
 		if($childrens) {
 			$em = $this->getContainer()->get('doctrine')->getManager();
 
@@ -110,7 +110,7 @@ class MigrateCommand extends ContainerAwareCommand
 		}
 	}
 
-	private function findChildrens($categoryId)
+	private function findChildren($categoryId)
 	{
 		$query = 'SELECT * FROM ' . self::MODX_SITE_CONTENT . ' as a WHERE a.isfolder = 1 AND a.parent = ' . $categoryId;
 		return $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);

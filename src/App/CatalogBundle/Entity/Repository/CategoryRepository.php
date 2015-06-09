@@ -15,14 +15,14 @@ class CategoryRepository extends ClosureTreeRepository
 	private function buildTreeObjectsChilds($categories)
 	{
 		foreach ($categories as &$category) {
-		    $categoryModel = new Category();
+			$categoryModel = new Category();
 			$children = $category['__children'];
 			unset($category['__children']);
-		    foreach ($category as $property => $value) {
-		        $method = sprintf('set%s', ucwords($property));
+			foreach ($category as $property => $value) {
+				$method = sprintf('set%s', ucwords($property));
 				$categoryModel->$method($value);
-		    }
-			if(!empty($children)) {
+			}
+			if (!empty($children)) {
 				$category['__children'] = $this->buildTreeObjectsChilds($children, $categoryModel);
 			}
 			$category['model'] = $categoryModel;

@@ -20,6 +20,10 @@ class Category
 {
 	use PageTrait;
 
+    const WEB_DIR_PATH = '/../../../../web';
+	const IMG_DIR_PATH = '/assets/images/sections';
+	const IMG_GAP_NAME = 'logo-prozr.png';
+
 	/**
 	 * TODO Вернуть ORM\GeneratedValue(strategy="IDENTITY")
 	 * @var integer
@@ -200,13 +204,13 @@ class Category
 
 	public function getPicturePath()
 	{
-		$webPath = __DIR__ . '/../../../../web';
-		$webFilePath = '/assets/images/sections/' . $this->getId() . '.png';
+		$webPath = __DIR__ . self::WEB_DIR_PATH;
+		$webFilePath = self::IMG_DIR_PATH . '/' . $this->getId() . '.png';
 		$picturePath = $webPath . $webFilePath;
 		if(file_exists($picturePath)) {
 			return $webFilePath;
 		} else {
-			return '/assets/images/sections/logo-prozr.png';
+			return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
 		}
 	}
 
