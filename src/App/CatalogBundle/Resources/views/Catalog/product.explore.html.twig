@@ -30,11 +30,7 @@
 	<div class="product">
 	<div class="product-main">
 		<div class="product-photo">
-			{% if product.isHavePhoto %}
-				<img src="/assets/main/images/gbi-photos/{{ product.id }}.jpg">
-			{% else %}
-				<img src="/assets/main/images/gbi-photos/prod-alt-image.png">
-			{% endif %}
+			<img src="{{ product.getPicturePath() }}">
 		</div>
 
 		<div class="product-info">

@@ -15,12 +15,15 @@ class Product
 {
 	use PageTrait;
 
+	const WEB_DIR_PATH = '/../../../../web';
+	const IMG_DIR_PATH = '/assets/images/gbi-photos';
+	const IMG_GAP_NAME = 'prod-alt-image.png';
+
 	/**
 	 * @var integer
-	 *
+	 * TODO вернуть ORM\GeneratedValue(strategy="IDENTITY")
 	 * @ORM\Column(name="id", type="bigint", nullable=false)
 	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
 	private $id;
 
@@ -111,13 +114,6 @@ class Product
 	private $price;
 
 	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="is_have_photo", type="boolean", nullable=true)
-	 */
-	private $isHavePhoto;
-
-	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="comments", type="string", length=250, nullable=true)
@@ -129,6 +125,13 @@ class Product
 	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
 	 */
 	protected $category;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="introtext", type="text", nullable=true)
+	 */
+	private $introtext;
 
 	/**
 	 * @param string $comments
@@ -209,22 +212,6 @@ class Product
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * @param boolean $isHavePhoto
-	 */
-	public function setIsHavePhoto($isHavePhoto)
-	{
-		$this->isHavePhoto = $isHavePhoto;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getIsHavePhoto()
-	{
-		return $this->isHavePhoto;
 	}
 
 	/**
@@ -381,6 +368,22 @@ class Product
 		return $this->category;
 	}
 
+	/**
+	 * @param string $introtext
+	 */
+	public function setIntrotext($introtext)
+	{
+		$this->introtext = $introtext;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIntrotext()
+	{
+		return $this->introtext;
+	}
+
 	public function __toString()
 	{
 		return (string)$this->getName();
@@ -399,5 +402,17 @@ class Product
 			'changefreq' => 'weekly',
 			'entityType' => 'product',
 		);
+	}
+
+	public function getPicturePath()
+	{
+		$webPath = __DIR__ . self::WEB_DIR_PATH;
+		$webFilePath = self::IMG_DIR_PATH . '/' . $this->getId() . '.jpg';
+		$picturePath = $webPath . $webFilePath;
+		if(file_exists($picturePath)) {
+			return $webFilePath;
+		} else {
+			return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
+		}
 	}
 }
