@@ -73,18 +73,18 @@ class MigrateCommand extends ContainerAwareCommand
 
 	private function migrateCategories($rootId, $parentCategory = null)
 	{
-		$childrens = $this->findChildren($rootId);
-		if($childrens) {
+		$children = $this->findChildren($rootId);
+		if($children) {
 			$em = $this->getContainer()->get('doctrine')->getManager();
 
-			foreach($childrens as $row) {
+			foreach($children as $row) {
 				$properties = $this->getCategoryProperties($row['id']);
 
 				$category = new Category();
 				$category->setAlias($row['alias']);
 				$category->setCoefficient($properties['coefficient']);
 				$category->setName($row['pagetitle']);
-			    $category->setTitle($row['longtitle']);
+				$category->setTitle($row['longtitle']);
 				$category->setH1($row['pagetitle']);
 				$category->setDescription($row['description']);
 				$category->setLinkToStkMetal($properties['stk-metal1']);

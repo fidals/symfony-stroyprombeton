@@ -20,7 +20,7 @@ class Category
 {
 	use PageTrait;
 
-    const WEB_DIR_PATH = '/../../../../web';
+	const WEB_DIR_PATH = '/../../../../web';
 	const IMG_DIR_PATH = '/assets/images/sections';
 	const IMG_GAP_NAME = 'logo-prozr.png';
 
