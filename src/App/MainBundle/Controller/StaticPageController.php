@@ -42,11 +42,37 @@ class StaticPageController extends Controller
 		}
 
 		$twigArgs = array('staticPage' => $staticPage);
-		if ($alias == 'obekty') {
-			$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-			$objects = $goRp->findAll();
-			$twigArgs['objects'] = $objects;
-		}
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
+	}
+
+
+	/**
+	 * Отрисовывает страничку /obekty/
+	 * @return Response
+	 */
+	public function showObjectsAction()
+	{
+		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
+		$staticPage = $spRepository->findOneByAlias('obekty');
+		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
+		$objects = $goRp->findAll();
+		$twigArgs = array(
+			'staticPage' => $staticPage,
+			'objects' => $objects
+		);
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
+	}
+
+	/**
+	 * Отрисовывает страничку /obekty/{alias}
+	 * @param $alias
+	 * @return Response
+	 */
+	public function gbiObjectShowAction($alias)
+	{
+		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
+		$object = $goRp->findOneBy(array('alias' => $alias));
+		$twigArgs = array('gbiObject' => $object);
 		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
 	}
 

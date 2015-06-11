@@ -63,12 +63,12 @@ class CatalogController extends Controller
 				)
 			);
 
-			$childs = $catRp->buildTreeArray($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
+			$children = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
 
-			if (!empty($childs)) {
+			if (!empty($children)) {
 				return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
 					'parents' => $parents,
-					'childs' => $childs,
+					'children' => $children,
 					'catUrl' => $this->baseCats[$catId],
 					'category' => $category
 				));
