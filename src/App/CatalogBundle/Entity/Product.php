@@ -131,6 +131,14 @@ class Product
 	protected $category;
 
 	/**
+	 * Добавлен в dev248 и в dev244
+	 * @var string
+	 *
+	 * @ORM\Column(name="introtext", type="text", nullable=true)
+	 */
+	private $introtext;
+
+	/**
 	 * @param string $comments
 	 */
 	public function setComments($comments)
@@ -379,6 +387,24 @@ class Product
 	public function getCategory()
 	{
 		return $this->category;
+	}
+
+	/**
+	 * Добавлен в dev248 и в dev244
+	 * @param string $introtext
+	 */
+	public function setIntrotext($introtext)
+	{
+		$this->introtext = $introtext;
+	}
+
+	/**
+	 * Добавлен в dev248 и в dev244
+	 * @return string
+	 */
+	public function getIntrotext()
+	{
+		return $this->introtext;
 	}
 
 	public function __toString()
