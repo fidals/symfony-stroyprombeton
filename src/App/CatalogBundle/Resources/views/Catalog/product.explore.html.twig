@@ -128,11 +128,7 @@
 		<div class="product-price">
 			<span>Цена:</span>
 			{% if product.price %}
-				{% if (product.price % 5) == 0 %}
-					{{ product.price }} руб.
-				{% else %}
-					{{ (product.price | round(-1, 'ceil')) - 5 }} руб.
-				{% endif %}
+				{{ ((product.price / 5) | round(0, 'ceil')) * 5 }} руб.
 			{% else %}
 				По запросу
 			{% endif %}
