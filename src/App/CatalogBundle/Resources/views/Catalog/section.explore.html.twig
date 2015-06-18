@@ -46,7 +46,12 @@
 							{{ product.name }}<span> {{ product.mark }}</span></a></td>
 					<td class="gbi-list price">
 						{% if product.price %}
-							{{ ((product.price / 5) | round(0, 'ceil')) * 5 }} руб.
+							{% set price = ((product.price / 5) | round(0, 'ceil')) * 5 %}
+							{% if(price % 10) == 0 %}
+								{{ price + 5 }} руб.
+							{% else %}
+								{{ price }} руб.
+							{% endif %}
 						{% else %}
 							По запросу
 						{% endif %}
