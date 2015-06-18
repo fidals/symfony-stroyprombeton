@@ -295,6 +295,16 @@ class Product
 	}
 
 	/**
+	 * Округляет цену до большей 5 (1 -> 5 v 5 -> 5 v 6 -> 15)
+	 * @return int
+	 */
+	public function getPriceRounded()
+	{
+		$rounded = ceil($this->price / 5) * 5;
+		return ($rounded % 10) == 0 ? $rounded + 5 : $rounded;
+	}
+
+	/**
 	 * @param int $sectionId
 	 */
 	public function setSectionId($sectionId)
