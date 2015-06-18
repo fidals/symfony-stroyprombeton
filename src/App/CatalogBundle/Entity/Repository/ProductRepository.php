@@ -17,17 +17,16 @@ class ProductRepository extends EntityRepository
 	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
 
 	/**
-	 * Метод поиска для автодополнения
-	 *
 	 * @param $term
+	 * @param int $limit
 	 * @return array
 	 */
-	public function searchAutocomplete($term)
+	public function searchAutocomplete($term, $limit = self::LIMIT)
 	{
 		return $this->getEntityManager()->getConnection()->query(
 			'SELECT DISTINCT CONCAT(name, \' \', mark) as value FROM products
 				WHERE section_id IS NOT NULL
-					HAVING value LIKE (\'%' . $term . '%\') LIMIT 0, ' . self::LIMIT)->fetchAll();
+					HAVING value LIKE (\'%' . $term . '%\') LIMIT 0, ' . $limit)->fetchAll();
 	}
 
 	/**
@@ -38,17 +37,17 @@ class ProductRepository extends EntityRepository
 	 * @param bool $returnObjAsArray
 	 * @return array
 	 */
-	public function search($term, $page = 1, $returnObjAsArray = false)
+	public function search($term, $page = 1, $perPage = self::LIMIT, $returnObjAsArray = false)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
-		$offset = ($page - 1) * self::LIMIT;
+		$offset = ($page - 1) * $perPage;
 
 		$expr = $qb
 			->select('p')
 			->from(self::getClassName(), 'p')
 			->where($qb->expr()->concat('p.name', $qb->expr()->concat($qb->expr()->literal(' '), 'p.mark')) . ' LIKE :term')
 			->setFirstResult($offset)
-			->setMaxResults(self::LIMIT);
+			->setMaxResults($perPage);
 
 		$query = $expr
 			->setParameter('term', '%' . $term . '%');
@@ -56,7 +55,15 @@ class ProductRepository extends EntityRepository
 		return ($returnObjAsArray) ? $query->getQuery()->getArrayResult() : $query->getQuery()->getResult();
 	}
 
-	public function searchUncat($term, $returnObjAsArray = false)
+
+	/**
+	 * Ищет среди продуктов, которые без категории
+	 * @param $term
+	 * @param int $limit
+	 * @param bool $returnObjAsArray
+	 * @return array
+	 */
+	public function searchUncategorized($term, $limit = self::UNCAT_PRODUCT_SEARCH_LIMIT, $returnObjAsArray = false)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -65,7 +72,7 @@ class ProductRepository extends EntityRepository
 			->from(self::getClassName(), 'p')
 			->where('p.sectionId is NULL')
 			->andWhere($qb->expr()->concat('p.name', $qb->expr()->concat($qb->expr()->literal(' '), 'p.mark')) . ' LIKE :term')
-			->setMaxResults(self::UNCAT_PRODUCT_SEARCH_LIMIT);
+			->setMaxResults($limit);
 
 		$query = $expr
 			->setParameter('term', '%' . $term . '%');
