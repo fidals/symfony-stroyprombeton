@@ -61,7 +61,7 @@ class YmlCatalogCommand extends ContainerAwareCommand
 				if (!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
 					$product->catUrl = $this->baseCats[$path[0]->getId()];
 				} else {
-					$product->catUrl = $this->baseCats[537];
+					$product->catUrl = $this->baseCats[456];
 				}
 			}
 		}

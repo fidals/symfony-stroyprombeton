@@ -1,7 +1,10 @@
 <?php
 namespace App\MainBundle\Command;
 
+use App\CatalogBundle\AppCatalogBundle;
 use App\CatalogBundle\Entity\Category;
+use App\MainBundle\Entity\Territory;
+use App\MainBundle\Entity\Object;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,6 +36,11 @@ class MigrateCommand extends ContainerAwareCommand
 	 */
 	const ROOT_CATEGORY_ID = 10;
 
+	/**
+	 * Идентификатор корня всех территорий
+	 */
+	const ROOT_TERRITORY_ID = 12438;
+
 	public $pdo = null;
 
 	protected function configure()
@@ -63,15 +71,21 @@ class MigrateCommand extends ContainerAwareCommand
 		$connection->executeUpdate($truncateSql);
 		$truncateSql = $platform->getTruncateTableSQL('category_closures');
 		$connection->executeUpdate($truncateSql);
+		$truncateSql = $platform->getTruncateTableSQL('territories');
+		$connection->executeUpdate($truncateSql);
+		$truncateSql = $platform->getTruncateTableSQL('objects');
+		$connection->executeUpdate($truncateSql);
 		$connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$this->migrateCategories(self::ROOT_CATEGORY_ID);
+		$this->migrateCategories();
+		$this->migrateTerritories();
+		$this->migrateObjects();
 	}
 
-	private function migrateCategories($rootId, $parentCategory = null)
+	private function migrateCategories($rootId = self::ROOT_CATEGORY_ID, $parentCategory = null)
 	{
 		$children = $this->findChildren($rootId);
 		if($children) {
@@ -91,12 +105,7 @@ class MigrateCommand extends ContainerAwareCommand
 				$category->setIsActive($row['published']);
 				$category->setText($row['content']);
 				$category->setDate(date_create(date("Y-m-d H:i:s", $row['createdon'])));
-
-				if(isset($properties['xml_id'])) {
-					$category->setId((int) $properties['xml_id']);
-				} else {
-					$category->setId((int) $row['id']);
-				}
+				$category->setId((int) $row['id']);
 
 				if($parentCategory) {
 					$category->setParent($parentCategory);
@@ -107,6 +116,101 @@ class MigrateCommand extends ContainerAwareCommand
 
 				$this->migrateCategories($row['id'], $category);
 			}
+		}
+	}
+
+	private function migrateTerritories($rootTerritoryId = self::ROOT_TERRITORY_ID)
+	{
+		$em = $this->getContainer()->get('doctrine')->getManager();
+
+		$query = 'SELECT id, pagetitle, published, introtext, createdon FROM '
+			. self::MODX_SITE_CONTENT . ' WHERE parent = ' . $rootTerritoryId;
+
+		$territories = $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+		foreach($territories as $t) {
+			$territory = new Territory();
+			$territory->setId($t['id']);
+			$territory->setName($t['pagetitle']);
+			$territory->setTranslitName($t['introtext']);
+			$territory->setIsActive($t['published']);
+			$territory->setDate(date_create(date("Y-m-d H:i:s", $t['createdon'])));
+			$em->persist($territory);
+		}
+		$em->flush();
+	}
+
+	private function migrateObjects($rootTerritoryId = self::ROOT_TERRITORY_ID)
+	{
+		$em = $this->getContainer()->get('doctrine')->getManager();
+
+		$query = 'SELECT id, pagetitle, longtitle, parent, description, alias, content, published, createdon FROM '
+			. self::MODX_SITE_CONTENT . ' WHERE parent IN (SELECT id FROM '
+			. self::MODX_SITE_CONTENT . ' WHERE parent = ' . $rootTerritoryId . ')';
+
+		$objects = $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+		$territoryRp = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:Territory');
+		foreach($objects as $obj) {
+			$object = new Object();
+
+			$pregLinks = preg_replace_callback(
+				'/\[\~\d+\~\]/',
+				function($matches) {
+					$matchInt = (int) preg_replace('/\D+/', '', $matches[0]);
+					return $this->getPathExpression($matchInt);
+				},
+				$obj['content']
+			);
+
+			// меняем "assets/ на "/assets/
+			$pregAll = str_replace('"assets/', '"/assets/', $pregLinks);
+
+			$object->setText($pregAll);
+
+			$object->setId($obj['id']);
+			$object->setName($obj['pagetitle']);
+			$object->setTitle($obj['longtitle']);
+			$object->setDescription($obj['description']);
+			$object->setAlias($obj['alias']);
+			$object->setIsActive($obj['published']);
+			$object->setDate(date_create(date("Y-m-d H:i:s", $obj['createdon'])));
+			$object->setTerritory($territoryRp->find($obj['parent']));
+			$em->persist($object);
+		}
+		$em->flush();
+	}
+
+	private function getPathExpression($entityId)
+	{
+		$staticPages = array(3, 4, 7, 8, 9, 624, 12435);
+		$baseCats = array(
+			456 => 'prom-stroy',
+			457 => 'dor-stroy',
+			458 => 'ingener-stroy',
+			459 => 'energy-stroy',
+			460 => 'blag-territory',
+			461 => 'neftegaz-stroy'
+		);
+
+		if(array_search($entityId, $staticPages) !== false) {
+			$alias = $this->pdo->query('SELECT alias FROM ' . self::MODX_SITE_CONTENT . ' WHERE id = ' . $entityId)->fetchColumn();
+			$routeName = 'app_main_staticpage';
+			$args = array('alias' => $alias);
+		} else {
+			$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+			$category = $catRp->find($entityId);
+			if(!empty($category)) {
+				$rootCategoryUrl = $baseCats[$catRp->getPath($category)[0]->getId()];
+				$routeName = 'app_catalog_explore_category';
+				$args = array(
+					'catUrl' => $rootCategoryUrl,
+					'section' => $entityId
+				);
+			}
+		}
+		if(isset($routeName)) {
+			return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
+		} else {
+			throw new \Exception('Invalid link to entity');
 		}
 	}
 
@@ -122,12 +226,17 @@ class MigrateCommand extends ContainerAwareCommand
 			'coefficient' => 1.1,
 			'stk-metal1'  => ''
 		);
+		return array_merge($properties, $this->getContentProperties($categoryId));
+	}
 
+	private function getContentProperties($contentId)
+	{
 		$query = 'SELECT name, value FROM ' . self::MODX_SITE_TMPLVAR_CONTENTVALUES . ' as a '
 			. 'LEFT JOIN ' . self::MODX_SITE_TMPLVARS . ' as b ON a.tmplvarid = b.id '
-			. 'WHERE a.contentid = ' . $categoryId;
+			. 'WHERE a.contentid = ' . $contentId;
 		$result = $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 
+		$properties = array();
 		if($result) {
 			foreach($result as $property) {
 				$properties[$property['name']] = $property['value'];

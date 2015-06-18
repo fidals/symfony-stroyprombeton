@@ -23,12 +23,12 @@ class SitemapCommand extends ContainerAwareCommand
 
 	// ugly urls
 	public $baseCats = array(
-		537 => 'prom-stroy',
-		538 => 'dor-stroy',
-		539 => 'ingener-stroy',
-		540 => 'energy-stroy',
-		541 => 'blag-territory',
-		542 => 'neftegaz-stroy'
+		456 => 'prom-stroy',
+		457 => 'dor-stroy',
+		458 => 'ingener-stroy',
+		459 => 'energy-stroy',
+		460 => 'blag-territory',
+		461 => 'neftegaz-stroy'
 	);
 
 	protected function configure()
@@ -65,7 +65,7 @@ class SitemapCommand extends ContainerAwareCommand
 						if (!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
 							$catUrl = $this->baseCats[$path[0]->getId()];
 						} else {
-							$catUrl = $this->baseCats[537];
+							$catUrl = $this->baseCats[456];
 						}
 						$entityData = $entity->getSitemapData();
 						$entityData['locData']['parameters']['catUrl'] = $catUrl;
@@ -79,10 +79,10 @@ class SitemapCommand extends ContainerAwareCommand
 							if (!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
 								$catUrl = $this->baseCats[$path[0]->getId()];
 							} else {
-								$catUrl = $this->baseCats[537];
+								$catUrl = $this->baseCats[456];
 							}
 						} else {
-							$catUrl = $this->baseCats[537];
+							$catUrl = $this->baseCats[456];
 						}
 						$entityData = $entity->getSitemapData();
 						$entityData['locData']['parameters']['catUrl'] = $catUrl;

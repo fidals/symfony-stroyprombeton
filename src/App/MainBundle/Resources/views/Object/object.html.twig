@@ -1,0 +1,32 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+	{{ object.title }}
+{% endblock %}
+
+{% block description %}
+	{% if object.description is empty %}
+		{{ object.title }}
+	{% else %}
+		{{ object.description }}
+	{% endif %}
+{% endblock %}
+
+{% block  keywords %}
+	{{ object.keywords }}
+{% endblock %}
+
+{% block content %}
+	<h1>
+		{% if object.h1 is empty %}
+			{{ object.title }}
+		{% else %}
+			{{ object.h1 }}
+		{% endif %}
+	</h1>
+	{% autoescape false %}
+		{% include template_from_string(object.text) %}
+	{% endautoescape %}
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+	{{ territory.getTitle() }}
+{% endblock %}
+
+{% block description %}
+	{% if territory.getDescription() is empty %}
+		{{ territory.getTitle() }}
+	{% else %}
+		{{ territory.getDescription() }}
+	{% endif %}
+{% endblock %}
+
+{% block keywords %}
+	{{ territory.getKeywords() }}
+{% endblock %}
+
+{% block content %}
+	<h1>
+		Объекты, построенные с использованием продукции «СТК-ПромБетон».
+		<br>
+		{% if territory.getH1() is empty %}
+			{{ territory.getTitle() }}
+		{% else %}
+			{{ territory.getH1() }}
+		{% endif %}
+	</h1>
+	<ul>
+		{% for object in territory.getObjects() %}
+			<li>
+				<a href="{{ path('app_main_object', {id: object.getId()}) }}">{{ object.getTitle() }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}

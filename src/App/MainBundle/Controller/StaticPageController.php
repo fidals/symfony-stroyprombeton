@@ -45,37 +45,6 @@ class StaticPageController extends Controller
 		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
 	}
 
-
-	/**
-	 * Отрисовывает страничку /obekty/
-	 * @return Response
-	 */
-	public function showObjectsAction()
-	{
-		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
-		$staticPage = $spRepository->findOneByAlias('obekty');
-		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-		$objects = $goRp->findAll();
-		$twigArgs = array(
-			'staticPage' => $staticPage,
-			'objects' => $objects
-		);
-		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
-	}
-
-	/**
-	 * Отрисовывает страничку /obekty/{alias}
-	 * @param $alias
-	 * @return Response
-	 */
-	public function gbiObjectShowAction($alias)
-	{
-		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-		$object = $goRp->findOneBy(array('alias' => $alias));
-		$twigArgs = array('gbiObject' => $object);
-		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
-	}
-
 	/**
 	 * Главная страница
 	 * @return Response
@@ -96,22 +65,6 @@ class StaticPageController extends Controller
 		return $this->render('AppMainBundle:StaticPage:indexPage.html.twig', array(
 			'randomProducts' => $randomProducts
 		));
-	}
-
-	/**
-	 * Страница "Наши объекты"
-	 * @param $alias
-	 * @return Response
-	 */
-	public function gbiObjeсtShowAction($alias)
-	{
-		$repo = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-		if ($gbi_object = $repo->findOneByAlias($alias)) {
-			return $this->render("AppMainBundle:StaticPage:gbiObject.html.twig", array(
-				'gbiObject' => $gbi_object
-			));
-		}
-		return $this->render('AppMainBundle:StaticPage:404.html.twig');
 	}
 
 	public function exeptionAction()
