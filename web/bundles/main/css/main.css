@@ -439,3 +439,24 @@ div.m-izg a {
 div.map {
 	height: 100% !important;
 }
+
+#search-action-btn {
+	background: url(../images/grad.gif) repeat-x scroll center bottom #DFDFDF;
+	color: #FFFFFF;
+	float: right;
+	height: 27px;
+	margin: 0 0 0 10px;
+	padding: 0;
+	width: 100px;
+	outline: none;
+	border-radius: 5px;
+	border: 1px #AAAAAA solid;
+}
+
+#search-action-btn:hover {
+	background: url(../images/grad_red.gif) repeat-x scroll center bottom #DFDFDF;
+}
+
+#search_condition {
+	margin: 0px;
+}
