@@ -11,17 +11,16 @@ use Doctrine\ORM\EntityRepository;
 class ProductRepository extends EntityRepository
 {
 	/**
-	 * Константа - лимит позиций на одной странице (для пагинации)
+	 * Константа - лимит позиций по умолчанию на одной странице
 	 */
-	const LIMIT = 20;
-	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
+	const DEFAULT_LIMIT = 50;
 
 	/**
 	 * @param $term
 	 * @param int $limit
 	 * @return array
 	 */
-	public function searchAutocomplete($term, $limit = self::LIMIT)
+	public function searchAutocomplete($term, $limit = self::DEFAULT_LIMIT)
 	{
 		return $this->getEntityManager()->getConnection()->query(
 			'SELECT DISTINCT CONCAT(name, \' \', mark) as value FROM products
@@ -37,7 +36,7 @@ class ProductRepository extends EntityRepository
 	 * @param bool $returnObjAsArray
 	 * @return array
 	 */
-	public function search($term, $page = 1, $perPage = self::LIMIT, $returnObjAsArray = false)
+	public function search($term, $page = 1, $perPage = self::DEFAULT_LIMIT, $returnObjAsArray = false)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 		$offset = ($page - 1) * $perPage;
@@ -63,7 +62,7 @@ class ProductRepository extends EntityRepository
 	 * @param bool $returnObjAsArray
 	 * @return array
 	 */
-	public function searchUncategorized($term, $limit = self::UNCAT_PRODUCT_SEARCH_LIMIT, $returnObjAsArray = false)
+	public function searchUncategorized($term, $limit = self::DEFAULT_LIMIT, $returnObjAsArray = false)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -79,7 +78,7 @@ class ProductRepository extends EntityRepository
 		return ($returnObjAsArray) ? $query->getQuery()->getArrayResult() : $query->getQuery()->getResult();
 	}
 
-	public function getRandomProducts($count = self::LIMIT)
+	public function getRandomProducts($limit = self::DEFAULT_LIMIT)
 	{
 		$max = $this->getEntityManager()
 			->createQueryBuilder()
@@ -94,7 +93,7 @@ class ProductRepository extends EntityRepository
 			->from(self::getClassName(), 'p')
 			->where('p.id >= :rand')
 			->orderBy('p.id')
-			->setMaxResults($count)
+			->setMaxResults($limit)
 			->setParameter('rand', rand(0, $max - 10000))
 			->getQuery()
 			->getResult();
