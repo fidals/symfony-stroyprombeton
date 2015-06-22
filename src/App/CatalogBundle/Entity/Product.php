@@ -127,8 +127,9 @@ class Product
 	protected $category;
 
 	/**
-	 * @var string
+	 * Название унаследовано из modx
 	 *
+	 * @var string
 	 * @ORM\Column(name="introtext", type="text", nullable=true)
 	 */
 	private $introtext;
@@ -416,13 +417,19 @@ class Product
 
 	public function getPicturePath()
 	{
+		$fnames = [];
+
 		$webPath = __DIR__ . self::WEB_DIR_PATH;
-		$webFilePath = self::IMG_DIR_PATH . '/' . $this->getId() . '.jpg';
-		$picturePath = $webPath . $webFilePath;
-		if(file_exists($picturePath)) {
-			return $webFilePath;
-		} else {
-			return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
+		$absPicName = self::IMG_DIR_PATH . '/' . $this->getId();
+		foreach(glob($absPicName . '.*') as $fileName) {
+			$fnames[] = $fileName;
 		}
+		die();
+//		$picturePath = $webPath . $webFilePath;
+//		if(file_exists($picturePath)) {
+//			return $webFilePath;
+//		} else {
+//			return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
+//		}
 	}
 }
