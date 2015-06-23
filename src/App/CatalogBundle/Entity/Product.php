@@ -19,6 +19,13 @@ class Product
 	const IMG_DIR_PATH = '/assets/images/gbi-photos';
 	const IMG_GAP_NAME = 'prod-alt-image.png';
 
+	public static $imageTypes = array(
+		IMAGETYPE_JPEG,
+		IMAGETYPE_JPEG2000,
+		IMAGETYPE_PNG,
+		IMAGETYPE_GIF
+	);
+
 	/**
 	 * @var integer
 	 * TODO вернуть ORM\GeneratedValue(strategy="IDENTITY")
@@ -296,7 +303,7 @@ class Product
 	}
 
 	/**
-	 * Округляет цену до большей 5 (1 -> 5 v 5 -> 5 v 6 -> 15)
+	 * Округляет цену до большей с точностью 5
 	 * @return int
 	 */
 	public function getPriceRounded()
@@ -415,21 +422,25 @@ class Product
 		);
 	}
 
+	/**
+	 * Ищет все файлы с названием {id}.*
+	 * Определяет тип файла, и в случае если это картинка в одном из форматов указанных в self::$imageTypes - возвращает относительный путь
+	 *
+	 * @return string
+	 */
 	public function getPicturePath()
 	{
-		$fnames = [];
-
 		$webPath = __DIR__ . self::WEB_DIR_PATH;
-		$absPicName = self::IMG_DIR_PATH . '/' . $this->getId();
-		foreach(glob($absPicName . '.*') as $fileName) {
-			$fnames[] = $fileName;
+		$absPicName = $webPath . self::IMG_DIR_PATH . '/' . $this->getId();
+		$gres = glob($absPicName . '.*');
+		if(!empty($gres)) {
+			foreach($gres as $fileName) {
+				$searchResult = array_search(exif_imagetype($fileName), self::$imageTypes);
+				if($searchResult !== false) {
+					return self::IMG_DIR_PATH . '/' . basename($fileName);
+				}
+			}
 		}
-		die();
-//		$picturePath = $webPath . $webFilePath;
-//		if(file_exists($picturePath)) {
-//			return $webFilePath;
-//		} else {
-//			return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
-//		}
+		return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
 	}
 }
