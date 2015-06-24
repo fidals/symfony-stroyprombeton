@@ -1,0 +1,17 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+	{{ post.getName() }}
+{% endblock %}
+
+{% block description %}
+	{{ post.getDescription() }}
+{% endblock %}
+
+
+{% block content %}
+	{% autoescape false %}
+		{{ include(template_from_string(post.getText())) }}
+	{% endautoescape %}
+
+{% endblock %}

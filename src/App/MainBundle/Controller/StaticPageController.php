@@ -15,18 +15,19 @@ class StaticPageController extends Controller
 	 * @var array
 	 */
 	public $baseCats = array(
-		537 => 'prom-stroy',
-		538 => 'dor-stroy',
-		539 => 'ingener-stroy',
-		540 => 'energy-stroy',
-		541 => 'blag-territory',
-		542 => 'neftegaz-stroy'
+		456 => 'prom-stroy',
+		457 => 'dor-stroy',
+		458 => 'ingener-stroy',
+		459 => 'energy-stroy',
+		460 => 'blag-territory',
+		461 => 'neftegaz-stroy'
 	);
 
 	/**
 	 * Показывает статичные страницы напрямую из базы
 	 * @param $alias - по факту полный урл. Т.е. может содержать символ "/"
 	 * @return Response
+	 * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
 	 */
 	public function showAction($alias)
 	{
@@ -42,37 +43,6 @@ class StaticPageController extends Controller
 		}
 
 		$twigArgs = array('staticPage' => $staticPage);
-		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
-	}
-
-
-	/**
-	 * Отрисовывает страничку /obekty/
-	 * @return Response
-	 */
-	public function showObjectsAction()
-	{
-		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
-		$staticPage = $spRepository->findOneByAlias('obekty');
-		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-		$objects = $goRp->findAll();
-		$twigArgs = array(
-			'staticPage' => $staticPage,
-			'objects' => $objects
-		);
-		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
-	}
-
-	/**
-	 * Отрисовывает страничку /obekty/{alias}
-	 * @param $alias
-	 * @return Response
-	 */
-	public function gbiObjectShowAction($alias)
-	{
-		$goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-		$object = $goRp->findOneBy(array('alias' => $alias));
-		$twigArgs = array('gbiObject' => $object);
 		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
 	}
 
@@ -97,26 +67,4 @@ class StaticPageController extends Controller
 			'randomProducts' => $randomProducts
 		));
 	}
-
-	/**
-	 * Страница "Наши объекты"
-	 * @param $alias
-	 * @return Response
-	 */
-	public function gbiObjeсtShowAction($alias)
-	{
-		$repo = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-		if ($gbi_object = $repo->findOneByAlias($alias)) {
-			return $this->render("AppMainBundle:StaticPage:gbiObject.html.twig", array(
-				'gbiObject' => $gbi_object
-			));
-		}
-		return $this->render('AppMainBundle:StaticPage:404.html.twig');
-	}
-
-	public function exeptionAction()
-	{
-		return $this->render('AppMainBundle:StaticPage:404.html.twig');
-	}
-
 }
