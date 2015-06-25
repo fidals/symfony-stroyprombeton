@@ -199,8 +199,8 @@ class MigrateCommand extends ContainerAwareCommand
 
 			$content = str_replace('"images/', '"/assets/images/', $content);
 			$content = str_replace('"assets/', '"/assets/', $content);
-			$content = preg_replace('/href="[^\/]/', 'href="/', $content);
-			$content = preg_replace('/href="\/[A-z\/\-]+/', 'href="/', $content);
+			$content = preg_replace('/href="([^\/])/', 'href="/$1', $content);
+			$content = preg_replace('/href="\/([A-z1-9\/\-]+)\//', 'href="/page/$1', $content);
 
 			$staticPage = new StaticPage();
 			$staticPage->setId($pageRow['id']);
