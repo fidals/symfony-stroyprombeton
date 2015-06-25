@@ -163,12 +163,15 @@ class MigrateCommand extends ContainerAwareCommand
 				$p['content']
 			);
 
+			$content = str_replace('"images/', '"/assets/images/', $content);
+			$content = str_replace('"assets/', '"/assets/', $content);
+
 			$post = new Post();
 			$post->setId($p['id']);
 			$post->setName($p['pagetitle']);
 			$post->setDescription($p['introtext']);
 			$post->setIntroText($p['introtext']);
-			$post->setText(str_replace('"assets/', '"/assets/', $content));
+			$post->setText($content);
 			$post->setDate(date_create($postProperties['date']));
 			$em->persist($post);
 		}
@@ -194,13 +197,18 @@ class MigrateCommand extends ContainerAwareCommand
 				$pageRow['content']
 			);
 
+			$content = str_replace('"images/', '"/assets/images/', $content);
+			$content = str_replace('"assets/', '"/assets/', $content);
+			$content = preg_replace('/href="[^\/]/', 'href="/', $content);
+			$content = preg_replace('/href="\/[A-z\/\-]+/', 'href="/', $content);
+
 			$staticPage = new StaticPage();
 			$staticPage->setId($pageRow['id']);
 			$staticPage->setTitle($pageRow['longtitle']);
 			$staticPage->setName($pageRow['pagetitle']);
 			$staticPage->setDescription($pageRow['description']);
 			$staticPage->setAlias($pageRow['alias']);
-			$staticPage->setText(str_replace('"assets/', '"/assets/', $content));
+			$staticPage->setText($content);
 			$staticPage->setDate(date_create(date("Y-m-d H:i:s", $pageRow['createdon'])));
 			$em->persist($staticPage);
 		}
