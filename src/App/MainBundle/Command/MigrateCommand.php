@@ -49,17 +49,21 @@ class MigrateCommand extends ContainerAwareCommand
 
 
 	/**
-	 * Массив статических страниц
+	 * Массив id статических страниц
 	 * @var array
 	 */
 	public static $staticPages = array(3, 4, 7, 8, 9, 624, 12435);
 
 	public $pdo = null;
 
+	/**
+	 * Массив сущностей, которые будут очищены при импорте
+	 * @var array
+	 */
 	public static $truncateEntities = array(
-//		'AppCatalogBundle:Category',
-//		'AppCatalogBundle:CategoryClosure',
-//		'AppMainBundle:Post'
+		'AppCatalogBundle:Category',
+		'AppCatalogBundle:CategoryClosure',
+		'AppMainBundle:Post',
 		'AppMainBundle:StaticPage'
 	);
 
@@ -98,8 +102,8 @@ class MigrateCommand extends ContainerAwareCommand
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-//		$this->migrateCategories(self::ROOT_CATEGORY_ID);
-//		$this->migratePosts();
+		$this->migrateCategories(self::ROOT_CATEGORY_ID);
+		$this->migratePosts();
 		$this->migrateStaticPages();
 	}
 
@@ -199,8 +203,7 @@ class MigrateCommand extends ContainerAwareCommand
 
 			$content = str_replace('"images/', '"/assets/images/', $content);
 			$content = str_replace('"assets/', '"/assets/', $content);
-			$content = preg_replace('/href="([^\/])/', 'href="/$1', $content);
-			$content = preg_replace('/href="\/([A-z1-9\/\-]+)\//', 'href="/page/$1', $content);
+			$content = preg_replace('/href="[\/]*(?!assets)(?!http)([A-z1-9\/\-]+)\/"/', "href=\"{{path('app_main_staticpage', {'alias': '$1'})}}\"", $content);
 
 			$staticPage = new StaticPage();
 			$staticPage->setId($pageRow['id']);
@@ -215,7 +218,7 @@ class MigrateCommand extends ContainerAwareCommand
 		$em->flush();
 	}
 
-	// Этот метод полностью расширяет код того что в ветке branch-274
+	// Этот метод расширяет код того что в ветке branch-274
 	private function getPathExpression($entityId)
 	{
 		$staticPages = array(3, 4, 7, 8, 9, 624, 12435);
