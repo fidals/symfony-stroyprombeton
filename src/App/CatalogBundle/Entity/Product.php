@@ -17,7 +17,7 @@ class Product
 
 	const WEB_DIR_PATH = '/../../../../web';
 	const IMG_DIR_PATH = '/assets/images/gbi-photos';
-	const IMG_GAP_NAME = 'prod-alt-image.png';
+	const EMPTY_THUMB_NAME = 'prod-alt-image.png';
 
 	public static $imageTypes = array(
 		IMAGETYPE_JPEG,
@@ -441,6 +441,6 @@ class Product
 				}
 			}
 		}
-		return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
+		return self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
 	}
 }

@@ -178,7 +178,7 @@ class MigrateCommand extends ContainerAwareCommand
 			if (isset($productProperties['new_price'])) $product->setIsNewPrice($productProperties['new_price']);
 			if (isset($productProperties['price'])) $product->setPrice(ceil($productProperties['price'] * 1.1));
 			if (isset($productProperties['diameter_out'])) $product->setDiameterOut($productProperties['diameter_out']);
-			if (isset($productProperties['diameter_in'])) $product->setDiameterOut($productProperties['diameter_in']);
+			if (isset($productProperties['diameter_in'])) $product->setDiameterIn($productProperties['diameter_in']);
 			if (isset($productProperties['comments'])) $product->setComments($productProperties['comments']);
 			if (isset($productProperties['volume'])) $product->setVolume($productProperties['volume']);
 
