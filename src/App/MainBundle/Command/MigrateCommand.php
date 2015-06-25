@@ -2,6 +2,7 @@
 namespace App\MainBundle\Command;
 
 use App\CatalogBundle\AppCatalogBundle;
+use App\CatalogBundle\Command\SitemapCommand;
 use App\CatalogBundle\Entity\Category;
 use App\MainBundle\Entity\Territory;
 use App\MainBundle\Entity\Object;
@@ -182,15 +183,6 @@ class MigrateCommand extends ContainerAwareCommand
 	private function getPathExpression($entityId)
 	{
 		$staticPages = array(3, 4, 7, 8, 9, 624, 12435);
-		$baseCats = array(
-			456 => 'prom-stroy',
-			457 => 'dor-stroy',
-			458 => 'ingener-stroy',
-			459 => 'energy-stroy',
-			460 => 'blag-territory',
-			461 => 'neftegaz-stroy'
-		);
-
 		if(array_search($entityId, $staticPages) !== false) {
 			$alias = $this->pdo->query('SELECT alias FROM ' . self::MODX_SITE_CONTENT . ' WHERE id = ' . $entityId)->fetchColumn();
 			$routeName = 'app_main_staticpage';
@@ -199,7 +191,7 @@ class MigrateCommand extends ContainerAwareCommand
 			$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
 			$category = $catRp->find($entityId);
 			if(!empty($category)) {
-				$rootCategoryUrl = $baseCats[$catRp->getPath($category)[0]->getId()];
+				$rootCategoryUrl = SitemapCommand::$baseCats[$catRp->getPath($category)[0]->getId()];
 				$routeName = 'app_catalog_explore_category';
 				$args = array(
 					'catUrl' => $rootCategoryUrl,
