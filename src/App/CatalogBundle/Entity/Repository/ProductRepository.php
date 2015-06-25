@@ -13,7 +13,7 @@ class ProductRepository extends EntityRepository
 	/**
 	 * Константа - лимит позиций по умолчанию на одной странице
 	 */
-	const LIMIT = 20;
+	const DEFAULT_LIMIT = 20;
 	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
 
 	/**
