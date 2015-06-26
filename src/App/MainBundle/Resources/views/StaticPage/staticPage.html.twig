@@ -10,6 +10,7 @@
 
 
 {% block content %}
+	<h1>{{ staticPage.getH1() }}</h1>
 	{% autoescape false %}
 		{{ include(template_from_string(staticPage.getText())) }}
 	{% endautoescape %}
