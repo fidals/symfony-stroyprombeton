@@ -224,17 +224,7 @@ class MigrateCommand extends ContainerAwareCommand
 	// Этот метод расширяет код того что в ветке branch-274
 	private function getPathExpression($entityId)
 	{
-		$staticPages = array(3, 4, 7, 8, 9, 624, 12435);
-		$baseCats = array(
-			456 => 'prom-stroy',
-			457 => 'dor-stroy',
-			458 => 'ingener-stroy',
-			459 => 'energy-stroy',
-			460 => 'blag-territory',
-			461 => 'neftegaz-stroy'
-		);
-
-		if(array_search($entityId, $staticPages) !== false) {
+		if(array_search($entityId, self::$staticPages) !== false) {
 			$alias = $this->pdo->query('SELECT alias FROM ' . self::MODX_SITE_CONTENT . ' WHERE id = ' . $entityId)->fetchColumn();
 			$routeName = 'app_main_staticpage';
 			$args = array('alias' => $alias);
@@ -242,7 +232,7 @@ class MigrateCommand extends ContainerAwareCommand
 			$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
 			$category = $catRp->find($entityId);
 			if(!empty($category)) {
-				$rootCategoryUrl = $baseCats[$catRp->getPath($category)[0]->getId()];
+				$rootCategoryUrl = SitemapCommand::$baseCats[$catRp->getPath($category)[0]->getId()];
 				$routeName = 'app_catalog_explore_category';
 				$args = array(
 					'catUrl' => $rootCategoryUrl,
@@ -253,7 +243,7 @@ class MigrateCommand extends ContainerAwareCommand
 				$product = $prodRp->find($entityId);
 				if(!empty($product)) {
 					$productSection = $product->getCategory()->getId();
-					$productCatUrl = $baseCats[$catRp->getPath($product->getCategory())[0]->getId()];
+					$productCatUrl = SitemapCommand::$baseCats[$catRp->getPath($product->getCategory())[0]->getId()];
 					$routeName = 'app_catalog_explore_category';
 					$args = array(
 						'catUrl' => $productCatUrl,
@@ -330,32 +320,6 @@ class MigrateCommand extends ContainerAwareCommand
 			$em->persist($object);
 		}
 		$em->flush();
-	}
-
-	private function getPathExpression($entityId)
-	{
-		$staticPages = array(3, 4, 7, 8, 9, 624, 12435);
-		if(array_search($entityId, $staticPages) !== false) {
-			$alias = $this->pdo->query('SELECT alias FROM ' . self::MODX_SITE_CONTENT . ' WHERE id = ' . $entityId)->fetchColumn();
-			$routeName = 'app_main_staticpage';
-			$args = array('alias' => $alias);
-		} else {
-			$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
-			$category = $catRp->find($entityId);
-			if(!empty($category)) {
-				$rootCategoryUrl = SitemapCommand::$baseCats[$catRp->getPath($category)[0]->getId()];
-				$routeName = 'app_catalog_explore_category';
-				$args = array(
-					'catUrl' => $rootCategoryUrl,
-					'section' => $entityId
-				);
-			}
-		}
-		if(isset($routeName)) {
-			return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
-		} else {
-			throw new \Exception('Invalid link to entity');
-		}
 	}
 
 	private function findChildren($categoryId)
