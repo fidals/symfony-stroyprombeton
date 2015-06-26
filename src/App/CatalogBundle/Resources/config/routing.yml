@@ -1,6 +1,6 @@
 app_catalog_explore_category:
     pattern: /{catUrl}/
-    defaults: { _controller: AppCatalogBundle:Catalog:exploreRoute, section: 0, gbi: 0 }
+    defaults: { _controller: AppCatalogBundle:Catalog:exploreRoute }
 
 app_catalog_homepage:
     pattern:  /

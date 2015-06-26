@@ -2,26 +2,12 @@
 
 namespace App\MainBundle\Controller;
 
-use App\MainBundle\Entity\StaticPage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use App\CatalogBundle\Command\SitemapCommand;
 
 class StaticPageController extends Controller
 {
-
-	/**
-	 * Эти урлы как первая часть путей до каталога. Когда-нить снесём
-	 * Пока обрабатываем их хардкодом
-	 * @var array
-	 */
-	public $baseCats = array(
-		456 => 'prom-stroy',
-		457 => 'dor-stroy',
-		458 => 'ingener-stroy',
-		459 => 'energy-stroy',
-		460 => 'blag-territory',
-		461 => 'neftegaz-stroy'
-	);
 
 	/**
 	 * Показывает статичные страницы напрямую из базы
@@ -60,11 +46,17 @@ class StaticPageController extends Controller
 
 		foreach ($randomProducts as &$product) {
 			$path = $catRp->getPath($product->getCategory());
-			$product->catUrl = $this->baseCats[$path[0]->getId()];
+			$product->catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
 		}
 
 		return $this->render('AppMainBundle:StaticPage:indexPage.html.twig', array(
 			'randomProducts' => $randomProducts
 		));
 	}
+
+	public function exeptionAction()
+	{
+		return $this->render('AppMainBundle:StaticPage:404.html.twig');
+	}
+
 }

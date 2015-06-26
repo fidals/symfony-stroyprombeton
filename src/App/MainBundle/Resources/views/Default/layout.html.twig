@@ -275,19 +275,7 @@
 {% endblock %}
 
 {% block js %}
-
-	<script type="text/javascript">
-		$(document).ready(function () {
-
-			$("#accordion1").accordion({autoHeight: false, collapsible: true});
-			$("#accordion2").accordion({autoHeight: false, collapsible: true});
-			$("#accordion3").accordion({autoHeight: false, collapsible: true});
-		});
-	</script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-	<script type="text/javascript">
-		$().tooltip(options)
-	</script>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-27310520-1']);
@@ -302,6 +290,9 @@
 			s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
+	<script type="text/javascript" src="/bundles/main/js/jquery.tooltipster.min.js"></script>
+	<script type="text/javascript" src="/bundles/main/js/jquery.maphilight.min.js"></script>
+
 
 	<script type="text/javascript">
 		var _gaq = _gaq || [];

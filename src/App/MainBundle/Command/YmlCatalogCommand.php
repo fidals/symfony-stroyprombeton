@@ -1,6 +1,7 @@
 <?php
 namespace App\MainBundle\Command;
 
+use App\CatalogBundle\Command\SitemapCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,16 +19,6 @@ class YmlCatalogCommand extends ContainerAwareCommand
 	public $repositories = array(
 		'AppCatalogBundle:Category',
 		'AppCatalogBundle:Product'
-	);
-
-	// ugly urls
-	public $baseCats = array(
-		537 => 'prom-stroy',
-		538 => 'dor-stroy',
-		539 => 'ingener-stroy',
-		540 => 'energy-stroy',
-		541 => 'blag-territory',
-		542 => 'neftegaz-stroy'
 	);
 
 	protected function configure()
@@ -58,10 +49,10 @@ class YmlCatalogCommand extends ContainerAwareCommand
 			$productSectionId = $product->getSectionId();
 			if (!empty($productSectionId)) {
 				$path = $catRp->getPath($catRp->find($product->getSectionId()));
-				if (!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
-					$product->catUrl = $this->baseCats[$path[0]->getId()];
+				if (!empty($path[0]) && !empty(SitemapCommand::$baseCats[$path[0]->getId()])) {
+					$product->catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
 				} else {
-					$product->catUrl = $this->baseCats[537];
+					$product->catUrl = SitemapCommand::$baseCats[456];
 				}
 			}
 		}
