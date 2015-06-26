@@ -10,6 +10,10 @@
 
 
 {% block content %}
+	<strong>
+		<i>{{ post.getDate|date('m.d.Y') }}</i>
+	</strong>
+	<h1>{{ post.getH1() }}</h1>
 	{% autoescape false %}
 		{{ include(template_from_string(post.getText())) }}
 	{% endautoescape %}
