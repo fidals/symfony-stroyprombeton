@@ -157,7 +157,7 @@ class CatalogController extends Controller
 		$jsonSrv = new JsonEncoder();
 
 		// возвращает массив данных для автокомплита
-		$result = $this->get('catalog.autocomplete')->suggest($term, $this->baseCats);
+		$result = $this->get('catalog.autocomplete')->suggest($term);
 
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 
