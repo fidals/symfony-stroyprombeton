@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block description %}
-	{% if territory.getDescription() is empty %}
-		{{ territory.getTitle() }}
-	{% else %}
-		{{ territory.getDescription() }}
-	{% endif %}
+	{{ territory.getDescription() }}
 {% endblock %}
 
 {% block keywords %}

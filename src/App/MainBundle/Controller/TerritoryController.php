@@ -3,7 +3,6 @@
 namespace App\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 class TerritoryController extends Controller
 {

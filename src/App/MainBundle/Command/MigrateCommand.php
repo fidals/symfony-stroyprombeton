@@ -1,17 +1,13 @@
 <?php
 namespace App\MainBundle\Command;
 
-use App\CatalogBundle\AppCatalogBundle;
 use App\CatalogBundle\Command\SitemapCommand;
 use App\CatalogBundle\Entity\Category;
 use App\MainBundle\Entity\Territory;
 use App\MainBundle\Entity\Object;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Команда для переноса БД из modx в symfony2
