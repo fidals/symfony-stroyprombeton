@@ -439,3 +439,26 @@ div.m-izg a {
 div.map {
 	height: 100% !important;
 }
+
+table.m-contacts_new{
+	border-collapse: separate;
+	border-spacing: 0;
+	margin-top: 20px;
+}
+
+table.m-contacts_new td{
+	padding-right: 20px;
+	vertical-align: top;
+}
+
+table.m-contacts_new tr td p{
+	color: #6c6c6c;
+	margin: 0;
+}
+table.m-contacts_new tr td p.tel{
+	font-weight: bold;
+	color:#000;
+}
+
+table.m-contacts_new tr td p.tel span{color:#6c6c6c;}
+table.m-contacts_new tr td p.adr{color: #000;font-weight: bold}
