@@ -196,6 +196,7 @@ class Product
 	}
 
 	/**
+	 * TODO после переноса удалить сеттер
 	 * @param int $id
 	 */
 	public function setId($id)

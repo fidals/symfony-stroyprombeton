@@ -67,6 +67,7 @@ class MigrateCommand extends ContainerAwareCommand
 	public static $truncateEntities = array(
 		'AppCatalogBundle:Category',
 		'AppCatalogBundle:CategoryClosure',
+		'AppCatalogBundle:Product',
 		'AppMainBundle:Post',
 		'AppMainBundle:StaticPage',
         'AppMainBundle:Territory',

@@ -18,8 +18,6 @@ app_main_post:
   pattern: /news/{id}/
   defaults: { _controller: AppMainBundle:Post:post }
 
-# Этот роут отрабатывает все url, которые не подошли предыдущим роутам
-# TODO: Сделай свою таблицу для каждого типа статичных страниц
 app_main_staticpage:
   pattern:  /page/{alias}/
   defaults: { _controller: AppMainBundle:StaticPage:show }
