@@ -155,20 +155,12 @@ class Product
 	protected $category;
 
 	/**
-	 * @param int $sectionId
+	 * Имя переменной унаследовали из modx
+	 * @var string
+	 *
+	 * @ORM\Column(name="introtext", type="text", nullable=true)
 	 */
-	public function setSectionId($sectionId)
-	{
-		$this->sectionId = $sectionId;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getSectionId()
-	{
-		return $this->sectionId;
-	}
+	private $introtext;
 
 	/**
 	 * @param string $comments
@@ -419,51 +411,21 @@ class Product
 	}
 
 	/**
-	 * @param string $annotation
+	 * Имя переменной унаследовали из modx
+	 * @param string $introtext
 	 */
-	public function setAnnotation($annotation)
+	public function setIntrotext($introtext)
 	{
-		$this->annotation = $annotation;
+		$this->introtext = $introtext;
 	}
 
 	/**
+	 * Имя переменной унаследовали из modx
 	 * @return string
 	 */
-	public function getAnnotation()
+	public function getIntrotext()
 	{
-		return $this->annotation;
-	}
-
-	/**
-	 * @param string $linkToStkMetalCategory
-	 */
-	public function setLinkToStkMetalCategory($linkToStkMetalCategory)
-	{
-		$this->linkToStkMetalCategory = $linkToStkMetalCategory;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLinkToStkMetalCategory()
-	{
-		return $this->linkToStkMetalCategory;
-	}
-
-	/**
-	 * @param float $priceCoefficient
-	 */
-	public function setPriceCoefficient($priceCoefficient)
-	{
-		$this->priceCoefficient = $priceCoefficient;
-	}
-
-	/**
-	 * @return float
-	 */
-	public function getPriceCoefficient()
-	{
-		return $this->priceCoefficient;
+		return $this->introtext;
 	}
 
 	public function __toString()

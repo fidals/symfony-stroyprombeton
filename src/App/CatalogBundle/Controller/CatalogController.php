@@ -151,9 +151,11 @@ class CatalogController extends Controller
 			return new Response();
 		}
 
-		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
 		$jsonSrv = new JsonEncoder();
-		$result = $prodRp->searchAutocomplete($term);
+
+		// возвращает массив данных для автокомплита
+		$result = $this->get('catalog.autocomplete')->suggest($term);
+
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 
 		return new Response($json);
