@@ -15,12 +15,22 @@ class Product
 {
 	use PageTrait;
 
+	const WEB_DIR_PATH = '/../../../../web';
+	const IMG_DIR_PATH = '/assets/images/gbi-photos';
+	const EMPTY_THUMB_NAME = 'prod-alt-image.png';
+
+	public static $imageTypes = array(
+		IMAGETYPE_JPEG,
+		IMAGETYPE_JPEG2000,
+		IMAGETYPE_PNG,
+		IMAGETYPE_GIF
+	);
+
 	/**
 	 * @var integer
-	 *
+	 * TODO вернуть ORM\GeneratedValue(strategy="IDENTITY")
 	 * @ORM\Column(name="id", type="bigint", nullable=false)
 	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
 	private $id;
 
@@ -111,13 +121,6 @@ class Product
 	private $price;
 
 	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="is_have_photo", type="boolean", nullable=true)
-	 */
-	private $isHavePhoto;
-
-	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="comments", type="string", length=250, nullable=true)
@@ -129,6 +132,14 @@ class Product
 	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
 	 */
 	protected $category;
+
+	/**
+	 * Название унаследовано из modx
+	 *
+	 * @var string
+	 * @ORM\Column(name="introtext", type="text", nullable=true)
+	 */
+	private $introtext;
 
 	/**
 	 * @param string $comments
@@ -213,22 +224,6 @@ class Product
 	}
 
 	/**
-	 * @param boolean $isHavePhoto
-	 */
-	public function setIsHavePhoto($isHavePhoto)
-	{
-		$this->isHavePhoto = $isHavePhoto;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getIsHavePhoto()
-	{
-		return $this->isHavePhoto;
-	}
-
-	/**
 	 * @param int $length
 	 */
 	public function setLength($length)
@@ -309,6 +304,16 @@ class Product
 	}
 
 	/**
+	 * Округляет цену до большей с точностью 5
+	 * @return int
+	 */
+	public function getPriceRounded()
+	{
+		$rounded = ceil($this->price / 5) * 5;
+		return ($rounded % 10) == 0 ? $rounded + 5 : $rounded;
+	}
+
+	/**
 	 * @param int $sectionId
 	 */
 	public function setSectionId($sectionId)
@@ -382,6 +387,22 @@ class Product
 		return $this->category;
 	}
 
+	/**
+	 * @param string $introtext
+	 */
+	public function setIntrotext($introtext)
+	{
+		$this->introtext = $introtext;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIntrotext()
+	{
+		return $this->introtext;
+	}
+
 	public function __toString()
 	{
 		return (string)$this->getName();
@@ -400,5 +421,27 @@ class Product
 			'changefreq' => 'weekly',
 			'entityType' => 'product',
 		);
+	}
+
+	/**
+	 * Ищет все файлы с названием {id}.*
+	 * Определяет тип файла, и в случае если это картинка в одном из форматов указанных в self::$imageTypes - возвращает относительный путь
+	 *
+	 * @return string
+	 */
+	public function getPicturePath()
+	{
+		$webPath = __DIR__ . self::WEB_DIR_PATH;
+		$absPicName = $webPath . self::IMG_DIR_PATH . '/' . $this->getId();
+		$gres = glob($absPicName . '.*');
+		if(!empty($gres)) {
+			foreach($gres as $fileName) {
+				$searchResult = array_search(exif_imagetype($fileName), self::$imageTypes);
+				if($searchResult !== false) {
+					return self::IMG_DIR_PATH . '/' . basename($fileName);
+				}
+			}
+		}
+		return self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
 	}
 }

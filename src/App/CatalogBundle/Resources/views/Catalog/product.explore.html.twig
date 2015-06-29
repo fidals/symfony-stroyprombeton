@@ -30,11 +30,7 @@
 	<div class="product">
 	<div class="product-main">
 		<div class="product-photo">
-			{% if product.isHavePhoto %}
-				<img src="/assets/main/images/gbi-photos/{{ product.id }}.jpg">
-			{% else %}
-				<img src="/assets/main/images/gbi-photos/prod-alt-image.png">
-			{% endif %}
+			<img src="{{ product.getPicturePath() }}">
 		</div>
 
 		<div class="product-info">
@@ -130,7 +126,12 @@
 	</div>
 	<div class="product-price-wrapper">
 		<div class="product-price">
-			<span>Цена:</span>{% if product.price %} {{ product.price + product.price // ((1.1 - 1)*100) }} руб. {% else %} По запросу {% endif %}
+			<span>Цена:</span>
+			{% if product.price %}
+				{{ product.getPriceRounded() }} руб.
+			{% else %}
+				По запросу
+			{% endif %}
 		</div>
 		<div class="product-bottom-box">
 			<a href="/gbi/{{ catUrl }}/?section={{ product.category.id }}&gbi={{ product.id }}&buy=true" section="{{ product.category.id }}" code="{{ product.id }}" price="{{ product.price }}" class="btn btn-primary add-basket">
