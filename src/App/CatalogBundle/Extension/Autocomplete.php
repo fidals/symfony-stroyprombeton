@@ -43,11 +43,12 @@ class Autocomplete
 	{
 		$categoryResults = $this->suggestCategories($term, $limit);
 		$categoryResultsCount = count($categoryResults);
+		$productResults = array();
 		if($categoryResultsCount != $limit) {
 			$productResults = $this->suggestProducts($term, $limit - $categoryResultsCount);
 		}
 		// отдаем ранжированный массив, сначала категории, потом продукты
-		return (isset($productResults)) ? array_merge($categoryResults, $productResults) : $categoryResults;
+		return array_merge($categoryResults, $productResults);
 	}
 
 	/**
@@ -58,7 +59,8 @@ class Autocomplete
 	 */
 	private function suggestCategories($term, $limit = self::DEFAULT_LIMIT)
 	{
-		// native query запрос для категорий
+		// инициализация rsm
+		// rsm нужен для того чтобы получить массив сущностей из обычного sql запроса
 		$categoryRsm = new ResultSetMapping();
 		$categoryRsm->addEntityResult('AppCatalogBundle:Category', 'c');
 		$categoryRsm->addFieldResult('c', 'id', 'id');
@@ -66,6 +68,7 @@ class Autocomplete
 		$categoryRsm->addFieldResult('c', 'description', 'description');
 		$categoryRsm->addFieldResult('c', 'parentId', 'parent_id');
 
+		// native query запрос для категорий
 		$categoryNativeQuery = "
 			SELECT id, description, name, parent_id,
 				CASE WHEN name = :term THEN 0

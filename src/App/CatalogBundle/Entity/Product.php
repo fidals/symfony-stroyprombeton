@@ -131,7 +131,7 @@ class Product
 	protected $category;
 
 	/**
-	 * Добавлен в dev248 и в dev244
+	 * Имя переменной унаследовали из modx
 	 * @var string
 	 *
 	 * @ORM\Column(name="introtext", type="text", nullable=true)
@@ -390,7 +390,7 @@ class Product
 	}
 
 	/**
-	 * Добавлен в dev248 и в dev244
+	 * Имя переменной унаследовали из modx
 	 * @param string $introtext
 	 */
 	public function setIntrotext($introtext)
@@ -399,7 +399,7 @@ class Product
 	}
 
 	/**
-	 * Добавлен в dev248 и в dev244
+	 * Имя переменной унаследовали из modx
 	 * @return string
 	 */
 	public function getIntrotext()

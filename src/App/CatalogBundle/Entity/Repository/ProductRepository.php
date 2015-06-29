@@ -18,7 +18,8 @@ class ProductRepository extends EntityRepository
 
 	/**
 	 * Метод поиска для автодополнения
-	 * @deprecated Автокомплит сделан в Extension\Autocomplete
+	 * Используется в TableGear
+	 *
 	 * @param $term
 	 * @return array
 	 */
