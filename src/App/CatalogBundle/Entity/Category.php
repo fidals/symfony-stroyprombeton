@@ -84,7 +84,6 @@ class Category
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
-		return $this;
 	}
 
 	/**
@@ -102,7 +101,6 @@ class Category
 	public function setId($id)
 	{
 		$this->id = $id;
-		return $this;
 	}
 
 	/**
@@ -129,7 +127,6 @@ class Category
 	public function setMark($mark)
 	{
 		$this->mark = $mark;
-		return $this;
 	}
 
 	/**
@@ -146,7 +143,6 @@ class Category
 	public function setCoefficient($coefficient)
 	{
 		$this->coefficient = $coefficient;
-		return $this;
 	}
 
 	/**
@@ -160,7 +156,6 @@ class Category
 	public function setParent(Category $parent = null)
 	{
 		$this->parent = $parent;
-		return $this;
 	}
 
 	public function getParent()
@@ -307,8 +302,6 @@ class Category
 	public function setFile($file)
 	{
 		$this->file = $file;
-
-		return $this;
 	}
 
 	/**

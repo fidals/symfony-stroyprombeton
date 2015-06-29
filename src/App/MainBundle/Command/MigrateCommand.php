@@ -43,7 +43,7 @@ class MigrateCommand extends ContainerAwareCommand
 	/**
 	 * Идентификатор корня всех территорий
 	 */
-	const ROOT_TERRITORY_ID = 12438;	
+	const ROOT_TERRITORY_ID = 12438;
 
 	/**
 	 * Массив игнорируемых id при генерации url
@@ -70,7 +70,7 @@ class MigrateCommand extends ContainerAwareCommand
 		'AppCatalogBundle:Product',
 		'AppMainBundle:Post',
 		'AppMainBundle:StaticPage',
-        'AppMainBundle:Territory',
+		'AppMainBundle:Territory',
 		'AppMainBundle:Object'
 	);
 
@@ -109,7 +109,7 @@ class MigrateCommand extends ContainerAwareCommand
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$this->migrateCategories();		
+		$this->migrateCategories();
 		$this->migratePosts();
 		$this->migrateStaticPages();
 		$this->migrateTerritories();
@@ -258,7 +258,8 @@ class MigrateCommand extends ContainerAwareCommand
 			return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
 		} else {
 			if(array_search($entityId, self::$ignoreIds) === false) {
-				throw new \Exception('Invalid link to entity');
+				echo 'Не определена сущность для ' . $entityId . "\n";
+				return '';
 			};
 		}
 	}
