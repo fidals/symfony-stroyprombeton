@@ -3,6 +3,7 @@ namespace App\MainBundle\Command;
 
 use App\CatalogBundle\Command\SitemapCommand;
 use App\CatalogBundle\Entity\Category;
+use App\CatalogBundle\Entity\Product;
 use App\MainBundle\Entity\Territory;
 use App\MainBundle\Entity\Object;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -68,6 +69,8 @@ class MigrateCommand extends ContainerAwareCommand
 		$connection->executeUpdate($truncateSql);
 		$truncateSql = $platform->getTruncateTableSQL('category_closures');
 		$connection->executeUpdate($truncateSql);
+		$truncateSql = $platform->getTruncateTableSQL('products');
+		$connection->executeUpdate($truncateSql);
 		$truncateSql = $platform->getTruncateTableSQL('territories');
 		$connection->executeUpdate($truncateSql);
 		$truncateSql = $platform->getTruncateTableSQL('objects');
@@ -78,6 +81,7 @@ class MigrateCommand extends ContainerAwareCommand
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$this->migrateCategories();
+		$this->migrateProducts();
 		$this->migrateTerritories();
 		$this->migrateObjects();
 	}
@@ -114,6 +118,90 @@ class MigrateCommand extends ContainerAwareCommand
 				$this->migrateCategories($row['id'], $category);
 			}
 		}
+	}
+
+	private function migrateProducts()
+	{
+		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+		$em = $this->getContainer()->get('doctrine')->getManager();
+		$prodQuery = 'SELECT * FROM ' . self::MODX_SITE_CONTENT . ' as a WHERE a.isfolder = 0 AND a.template = 7';
+		$prods = $this->pdo->query($prodQuery)->fetchAll(\PDO::FETCH_ASSOC);
+		$prodsCount = count($prods);
+
+		$prodPropsQuery = 'SELECT * FROM ' . self::MODX_SITE_TMPLVAR_CONTENTVALUES . ' AS a
+			LEFT JOIN ' . self::MODX_SITE_TMPLVARS . ' AS b ON a.tmplvarid = b.id
+			WHERE a.contentid
+			IN (
+				SELECT id
+				FROM ' . self::MODX_SITE_CONTENT . ' AS c
+				WHERE c.isfolder = 0
+				AND c.template = 7
+			)';
+
+		$prodProps = $this->pdo->query($prodPropsQuery)->fetchAll(\PDO::FETCH_ASSOC);
+		foreach($prodProps as $productProperty) {
+			$prodPropsSrt[$productProperty['contentid']][$productProperty['name']] = $productProperty['value'];
+		}
+
+		// делаем массив contentid => xml_id (id на modx и id у нас)
+		$catIdMapQuery = 'SELECT contentid, value FROM ' . self::MODX_SITE_TMPLVAR_CONTENTVALUES . ' WHERE tmplvarid = 4';
+
+		$catIdMapArr = $this->pdo->query($catIdMapQuery)->fetchAll(\PDO::FETCH_ASSOC);
+		foreach($catIdMapArr as $rel) {
+			$catIdMap[$rel['contentid']] = (int) $rel['value'];
+		}
+
+		$done = 0;
+		foreach($prods as $productData) {
+			$product = new Product();
+			$productProperties = $prodPropsSrt[$productData['id']];
+
+			// получаем id категории
+			if(isset($catIdMap[$productData['parent']])) {
+				$parentCatId = $catIdMap[$productData['parent']];
+			} else {
+				$parentCatId = $productData['parent'];
+			}
+
+			$parentCat = $catRp->find($parentCatId);
+
+			$product->setCategory($parentCat);
+			$product->setId($productData['id']);
+			$product->setTitle($productData['longtitle']);
+			$product->setH1($productData['pagetitle']);
+			$product->setDescription($productData['description']);
+			$product->setText($productData['content']);
+			$product->setIsActive($productData['published']);
+			$product->setDate(date_create(date("Y-m-d H:i:s", $productData['createdon'])));
+			$product->setIntrotext($productData['introtext']);
+
+			if (isset($productProperties['width'])) $product->setWidth($productProperties['width']);
+			if (isset($productProperties['height'])) $product->setHeight($productProperties['height']);
+			if (isset($productProperties['nomen'])) $product->setNomen($productProperties['nomen']);
+			if (isset($productProperties['mark'])) $product->setMark($productProperties['mark']);
+			if (isset($productProperties['length'])) $product->setLength($productProperties['length']);
+			if (isset($productProperties['weight'])) $product->setWeight($productProperties['weight']);
+			if (isset($productProperties['new_price'])) $product->setIsNewPrice($productProperties['new_price']);
+			if (isset($productProperties['price'])) $product->setPrice(ceil($productProperties['price'] * 1.1));
+			if (isset($productProperties['diameter_out'])) $product->setDiameterOut($productProperties['diameter_out']);
+			if (isset($productProperties['diameter_in'])) $product->setDiameterIn($productProperties['diameter_in']);
+			if (isset($productProperties['comments'])) $product->setComments($productProperties['comments']);
+			if (isset($productProperties['volume'])) $product->setVolume($productProperties['volume']);
+
+			if(isset($productData['name'])) {
+				$product->setName($productData['name']);
+			} else {
+				$product->setName($productData['pagetitle']);
+			}
+
+			$em->persist($product);
+			$done++;
+			if($done % 500 === 0) {
+				$em->flush();
+				echo (int) ($done / $prodsCount * 100.0) . "%\r";
+			}
+		}
+		$em->flush();
 	}
 
 	private function migrateTerritories($rootTerritoryId = self::ROOT_TERRITORY_ID)

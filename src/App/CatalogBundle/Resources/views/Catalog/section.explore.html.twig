@@ -12,8 +12,8 @@
 	<div class="location">
 		{% for item in parents %}
 			<span class="location section">
-                <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
-            </span>
+            	<a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
+        	</span>
 			<span class="location separate">/</span>
 		{% endfor %}
 	</div>
@@ -46,7 +46,7 @@
 							{{ product.name }}<span> {{ product.mark }}</span></a></td>
 					<td class="gbi-list price">
 						{% if product.price %}
-							{{ product.price + product.price // ((1.1 - 1)*100) }} руб.
+							{{ product.getPriceRounded() }} руб.
 						{% else %}
 							По запросу
 						{% endif %}
