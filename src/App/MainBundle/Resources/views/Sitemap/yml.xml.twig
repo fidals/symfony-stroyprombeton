@@ -29,11 +29,7 @@
 				<currencyId>RUR</currencyId>
 				<categoryId>{{ product.sectionId }}</categoryId>
 				<picture>
-					{% if product.isHavePhoto %}
-						<img src="/bundles/main/images/gbi-photos/{{ product.id }}.jpg">
-					{% else %}
-						<img src="/bundles/main/images/gbi-photos/prod-alt-image.png">
-					{% endif %}
+					<img src="{{ product.getPicturePath() }}">
 				</picture>
 				<store>false</store>
 				<pickup>true</pickup>

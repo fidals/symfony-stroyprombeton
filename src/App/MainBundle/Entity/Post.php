@@ -5,12 +5,12 @@ namespace App\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * StaticPages
+ * Posts
  *
- * @ORM\Table(name="static_pages")
- * @ORM\Entity
+ * @ORM\Table(name="posts")
+ * @ORM\Entity(repositoryClass="App\MainBundle\Entity\Repository\PostRepository")
  */
-class StaticPage
+class Post
 {
 	use PageTrait;
 
@@ -26,9 +26,9 @@ class StaticPage
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="alias", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="intro_text", type="text", nullable=true)
 	 */
-	private $alias;
+	private $introText;
 
 	/**
 	 * TODO после переноса удалить сеттер
@@ -48,19 +48,19 @@ class StaticPage
 	}
 
 	/**
-	 * @param string $alias
+	 * @param string $introText
 	 */
-	public function setAlias($alias)
+	public function setIntroText($introText)
 	{
-		$this->alias = $alias;
+		$this->introText = $introText;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getAlias()
+	public function getIntroText()
 	{
-		return $this->alias;
+		return $this->introText;
 	}
 
 	/**

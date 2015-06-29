@@ -10,10 +10,16 @@ app_main_territory_map:
   pattern: /obekty/
   defaults: { _controller: AppMainBundle:Territory:map }
 
-# Этот роут отрабатывает все url, которые не подошли предыдущим роутам
-# TODO: Сделай свою таблицу для каждого типа статичных страниц
+app_main_post_all:
+  pattern: /news/
+  defaults: { _controller: AppMainBundle:Post:index }
+
+app_main_post:
+  pattern: /news/{id}/
+  defaults: { _controller: AppMainBundle:Post:post }
+
 app_main_staticpage:
-  pattern:  /{alias}/
+  pattern:  /page/{alias}/
   defaults: { _controller: AppMainBundle:StaticPage:show }
   requirements:
     alias: ".+"

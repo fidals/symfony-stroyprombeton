@@ -3,8 +3,11 @@ namespace App\MainBundle\Command;
 
 use App\CatalogBundle\Command\SitemapCommand;
 use App\CatalogBundle\Entity\Category;
+use App\CatalogBundle\Entity\Product;
 use App\MainBundle\Entity\Territory;
 use App\MainBundle\Entity\Object;
+use App\MainBundle\Entity\Post;
+use App\MainBundle\Entity\StaticPage;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,11 +37,43 @@ class MigrateCommand extends ContainerAwareCommand
 	const ROOT_CATEGORY_ID = 10;
 
 	/**
+	 * Идентификатор корня новостей
+	 */
+	const ROOT_POST_ID = 12526;
+
+	/**
 	 * Идентификатор корня всех территорий
 	 */
 	const ROOT_TERRITORY_ID = 12438;
 
+	/**
+	 * Массив игнорируемых id при генерации url
+	 * @var array
+	 */
+	public static $ignoreIds = array(12608);
+
+
+	/**
+	 * Массив id статических страниц
+	 * @var array
+	 */
+	public static $staticPages = array(3, 4, 7, 8, 9, 624, 12435);
+
 	public $pdo = null;
+
+	/**
+	 * Массив сущностей, которые будут очищены при импорте
+	 * @var array
+	 */
+	public static $truncateEntities = array(
+		'AppCatalogBundle:Category',
+		'AppCatalogBundle:CategoryClosure',
+		'AppCatalogBundle:Product',
+		'AppMainBundle:Post',
+		'AppMainBundle:StaticPage',
+		'AppMainBundle:Territory',
+		'AppMainBundle:Object'
+	);
 
 	protected function configure()
 	{
@@ -63,23 +98,24 @@ class MigrateCommand extends ContainerAwareCommand
 		$connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
 		$platform   = $connection->getDatabasePlatform();
 
+		$em = $this->getContainer()->get('doctrine')->getManager();
+
 		$connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
-		$truncateSql = $platform->getTruncateTableSQL('categories');
-		$connection->executeUpdate($truncateSql);
-		$truncateSql = $platform->getTruncateTableSQL('category_closures');
-		$connection->executeUpdate($truncateSql);
-		$truncateSql = $platform->getTruncateTableSQL('territories');
-		$connection->executeUpdate($truncateSql);
-		$truncateSql = $platform->getTruncateTableSQL('objects');
-		$connection->executeUpdate($truncateSql);
+		foreach(self::$truncateEntities as $entityName) {
+			$truncateSql = $platform->getTruncateTableSQL($em->getClassMetadata($entityName)->getTableName());
+			$connection->executeUpdate($truncateSql);
+		}
 		$connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$this->migrateCategories();
+		$this->migrateProducts();
 		$this->migrateTerritories();
 		$this->migrateObjects();
+		$this->migratePosts();
+		$this->migrateStaticPages();
 	}
 
 	private function migrateCategories($rootId = self::ROOT_CATEGORY_ID, $parentCategory = null)
@@ -113,6 +149,196 @@ class MigrateCommand extends ContainerAwareCommand
 
 				$this->migrateCategories($row['id'], $category);
 			}
+		}
+	}
+
+	private function migrateProducts()
+	{
+		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+		$em = $this->getContainer()->get('doctrine')->getManager();
+		$prodQuery = 'SELECT * FROM ' . self::MODX_SITE_CONTENT . ' as a WHERE a.isfolder = 0 AND a.template = 7';
+		$prods = $this->pdo->query($prodQuery)->fetchAll(\PDO::FETCH_ASSOC);
+		$prodsCount = count($prods);
+
+		$prodPropsQuery = 'SELECT * FROM ' . self::MODX_SITE_TMPLVAR_CONTENTVALUES . ' AS a
+			LEFT JOIN ' . self::MODX_SITE_TMPLVARS . ' AS b ON a.tmplvarid = b.id
+			WHERE a.contentid
+			IN (
+				SELECT id
+				FROM ' . self::MODX_SITE_CONTENT . ' AS c
+				WHERE c.isfolder = 0
+				AND c.template = 7
+			)';
+
+		$prodProps = $this->pdo->query($prodPropsQuery)->fetchAll(\PDO::FETCH_ASSOC);
+		foreach($prodProps as $productProperty) {
+			$prodPropsSrt[$productProperty['contentid']][$productProperty['name']] = $productProperty['value'];
+		}
+
+		// делаем массив contentid => xml_id (id на modx и id у нас)
+		$catIdMapQuery = 'SELECT contentid, value FROM ' . self::MODX_SITE_TMPLVAR_CONTENTVALUES . ' WHERE tmplvarid = 4';
+
+		$catIdMapArr = $this->pdo->query($catIdMapQuery)->fetchAll(\PDO::FETCH_ASSOC);
+		foreach($catIdMapArr as $rel) {
+			$catIdMap[$rel['contentid']] = (int) $rel['value'];
+		}
+
+		$done = 0;
+		foreach($prods as $productData) {
+			$product = new Product();
+			$productProperties = $prodPropsSrt[$productData['id']];
+
+			$parentCat = $catRp->find($productData['parent']);
+
+			$product->setCategory($parentCat);
+			$product->setId($productData['id']);
+			$product->setTitle($productData['longtitle']);
+			$product->setH1($productData['pagetitle']);
+			$product->setDescription($productData['description']);
+			$product->setText($productData['content']);
+			$product->setIsActive($productData['published']);
+			$product->setDate(date_create(date("Y-m-d H:i:s", $productData['createdon'])));
+			$product->setIntrotext($productData['introtext']);
+
+			if (isset($productProperties['width'])) $product->setWidth($productProperties['width']);
+			if (isset($productProperties['height'])) $product->setHeight($productProperties['height']);
+			if (isset($productProperties['nomen'])) $product->setNomen($productProperties['nomen']);
+			if (isset($productProperties['mark'])) $product->setMark($productProperties['mark']);
+			if (isset($productProperties['length'])) $product->setLength($productProperties['length']);
+			if (isset($productProperties['weight'])) $product->setWeight($productProperties['weight']);
+			if (isset($productProperties['new_price'])) $product->setIsNewPrice($productProperties['new_price']);
+			if (isset($productProperties['price'])) $product->setPrice(ceil($productProperties['price'] * 1.1));
+			if (isset($productProperties['diameter_out'])) $product->setDiameterOut($productProperties['diameter_out']);
+			if (isset($productProperties['diameter_in'])) $product->setDiameterIn($productProperties['diameter_in']);
+			if (isset($productProperties['comments'])) $product->setComments($productProperties['comments']);
+			if (isset($productProperties['volume'])) $product->setVolume($productProperties['volume']);
+
+			if(isset($productData['name'])) {
+				$product->setName($productData['name']);
+			} else {
+				$product->setName($productData['pagetitle']);
+			}
+
+			$em->persist($product);
+			$done++;
+			if($done % 500 === 0) {
+				$em->flush();
+				echo (int) ($done / $prodsCount * 100.0) . "%\r";
+			}
+		}
+		$em->flush();
+	}
+
+	private function migratePosts($rootPostId = self::ROOT_POST_ID)
+	{
+		$em = $this->getContainer()->get('doctrine')->getManager();
+
+		$query = 'SELECT id, pagetitle, introtext, content, createdon FROM '
+			. self::MODX_SITE_CONTENT . ' WHERE parent = ' . $rootPostId;
+
+		$posts = $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+		foreach($posts as $p) {
+
+			$postProperties = $this->getContentProperties($p['id']);
+
+			$content = preg_replace_callback(
+				'/\[\~\d+\~\]/',
+				function($matches) {
+					$matchInt = (int) preg_replace('/\D+/', '', $matches[0]);
+					return $this->getPathExpression($matchInt);
+				},
+				$p['content']
+			);
+
+			$content = str_replace('"images/', '"/assets/images/', $content);
+			$content = str_replace('"assets/', '"/assets/', $content);
+
+			$post = new Post();
+			$post->setId($p['id']);
+			$post->setName($p['pagetitle']);
+			$post->setDescription($p['introtext']);
+			$post->setIntroText($p['introtext']);
+			$post->setText($content);
+			$post->setDate(date_create($postProperties['date']));
+			$em->persist($post);
+		}
+		$em->flush();
+	}
+
+	private function migrateStaticPages()
+	{
+		$em = $this->getContainer()->get('doctrine')->getManager();
+
+		$query = 'SELECT id, pagetitle, longtitle, alias, description, content, createdon FROM '
+			. self::MODX_SITE_CONTENT . ' WHERE id IN (' . implode(',', self::$staticPages) . ')';
+
+		$pages = $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+		foreach($pages as $pageRow) {
+
+			$content = preg_replace_callback(
+				'/\[\~\d+\~\]/',
+				function($matches) {
+					$matchInt = (int) preg_replace('/\D+/', '', $matches[0]);
+					return $this->getPathExpression($matchInt);
+				},
+				$pageRow['content']
+			);
+
+			$content = str_replace('"images/', '"/assets/images/', $content);
+			$content = str_replace('"assets/', '"/assets/', $content);
+			$content = preg_replace('/href="[\/]*(?!assets)(?!http)([A-z1-9\/\-]+)\/"/', "href=\"{{path('app_main_staticpage', {'alias': '$1'})}}\"", $content);
+
+			$staticPage = new StaticPage();
+			$staticPage->setId($pageRow['id']);
+			$staticPage->setTitle($pageRow['longtitle']);
+			$staticPage->setName($pageRow['pagetitle']);
+			$staticPage->setDescription($pageRow['description']);
+			$staticPage->setAlias($pageRow['alias']);
+			$staticPage->setText($content);
+			$staticPage->setDate(date_create(date("Y-m-d H:i:s", $pageRow['createdon'])));
+			$em->persist($staticPage);
+		}
+		$em->flush();
+	}
+
+	// Этот метод расширяет код того что в ветке branch-274
+	private function getPathExpression($entityId)
+	{
+		if(array_search($entityId, self::$staticPages) !== false) {
+			$alias = $this->pdo->query('SELECT alias FROM ' . self::MODX_SITE_CONTENT . ' WHERE id = ' . $entityId)->fetchColumn();
+			$routeName = 'app_main_staticpage';
+			$args = array('alias' => $alias);
+		} else {
+			$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+			$category = $catRp->find($entityId);
+			if(!empty($category)) {
+				$rootCategoryUrl = SitemapCommand::$baseCats[$catRp->getPath($category)[0]->getId()];
+				$routeName = 'app_catalog_explore_category';
+				$args = array(
+					'catUrl' => $rootCategoryUrl,
+					'section' => $entityId
+				);
+			} else {
+				$prodRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Product');
+				$product = $prodRp->find($entityId);
+				if(!empty($product)) {
+					$productSection = $product->getCategory()->getId();
+					$productCatUrl = SitemapCommand::$baseCats[$catRp->getPath($product->getCategory())[0]->getId()];
+					$routeName = 'app_catalog_explore_category';
+					$args = array(
+						'catUrl' => $productCatUrl,
+						'section' => $productSection,
+						'gbi' => $entityId
+					);
+				}
+			}
+		}
+		if(isset($routeName)) {
+			return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
+		} else {
+			if(array_search($entityId, self::$ignoreIds) === false) {
+				throw new \Exception("Invalid link to entity " . $entityId);
+			};
 		}
 	}
 
@@ -174,32 +400,6 @@ class MigrateCommand extends ContainerAwareCommand
 			$em->persist($object);
 		}
 		$em->flush();
-	}
-
-	private function getPathExpression($entityId)
-	{
-		$staticPages = array(3, 4, 7, 8, 9, 624, 12435);
-		if(array_search($entityId, $staticPages) !== false) {
-			$alias = $this->pdo->query('SELECT alias FROM ' . self::MODX_SITE_CONTENT . ' WHERE id = ' . $entityId)->fetchColumn();
-			$routeName = 'app_main_staticpage';
-			$args = array('alias' => $alias);
-		} else {
-			$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
-			$category = $catRp->find($entityId);
-			if(!empty($category)) {
-				$rootCategoryUrl = SitemapCommand::$baseCats[$catRp->getPath($category)[0]->getId()];
-				$routeName = 'app_catalog_explore_category';
-				$args = array(
-					'catUrl' => $rootCategoryUrl,
-					'section' => $entityId
-				);
-			}
-		}
-		if(isset($routeName)) {
-			return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
-		} else {
-			throw new \Exception('Invalid link to entity');
-		}
 	}
 
 	private function findChildren($categoryId)

@@ -2,7 +2,6 @@
 
 namespace App\MainBundle\Controller;
 
-use App\MainBundle\Entity\StaticPage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\CatalogBundle\Command\SitemapCommand;
@@ -14,6 +13,7 @@ class StaticPageController extends Controller
 	 * Показывает статичные страницы напрямую из базы
 	 * @param $alias - по факту полный урл. Т.е. может содержать символ "/"
 	 * @return Response
+	 * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
 	 */
 	public function showAction($alias)
 	{
