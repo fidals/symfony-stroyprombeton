@@ -188,14 +188,7 @@ class MigrateCommand extends ContainerAwareCommand
 			$product = new Product();
 			$productProperties = $prodPropsSrt[$productData['id']];
 
-			// получаем id категории
-			if(isset($catIdMap[$productData['parent']])) {
-				$parentCatId = $catIdMap[$productData['parent']];
-			} else {
-				$parentCatId = $productData['parent'];
-			}
-
-			$parentCat = $catRp->find($parentCatId);
+			$parentCat = $catRp->find($productData['parent']);
 
 			$product->setCategory($parentCat);
 			$product->setId($productData['id']);
@@ -344,8 +337,7 @@ class MigrateCommand extends ContainerAwareCommand
 			return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
 		} else {
 			if(array_search($entityId, self::$ignoreIds) === false) {
-				echo 'Не определена сущность для ' . $entityId . "\n";
-				return '';
+				throw new \Exception("Invalid link to entity " . $entityId);
 			};
 		}
 	}
