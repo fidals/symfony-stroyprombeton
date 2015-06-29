@@ -55,9 +55,9 @@ class YmlCatalogCommand extends ContainerAwareCommand
 
 		$products = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Product')->findAll();
 		foreach ($products as &$product) {
-			$productSectionId = $product->getSectionId();
-			if (!empty($productSectionId)) {
-				$path = $catRp->getPath($catRp->find($product->getSectionId()));
+			$category = $product->getCategory();
+			if ($category) {
+				$path = $catRp->getPath($category);
 				if (!empty($path[0]) && !empty($this->baseCats[$path[0]->getId()])) {
 					$product->catUrl = $this->baseCats[$path[0]->getId()];
 				} else {

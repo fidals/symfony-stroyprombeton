@@ -73,7 +73,7 @@ class SitemapCommand extends ContainerAwareCommand
 					}
 				} elseif ($repositoryName == 'AppCatalogBundle:Product') {
 					foreach ($entities as $entity) {
-						$sectionId = $entity->getSectionId();
+						$sectionId = $entity->getCategory();
 						if (!empty($sectionId)) {
 							$path = $catRp->getPath($catRp->find($sectionId));
 							if (!empty($path[0]) && !empty(self::$baseCats[$path[0]->getId()])) {

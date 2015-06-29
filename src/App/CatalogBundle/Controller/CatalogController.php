@@ -98,14 +98,12 @@ class CatalogController extends Controller
 		$section = $catRp->find($sectionId);
 		$parents = $catRp->getPath($section);
 		$product = $prodRp->find($gbiId);
-		$alsoPurchase = $prodRp->findBySectionId($product->getSectionId());
 
 		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
 			'parents' => $parents,
 			'catUrl' => $this->baseCats[$catId],
 			'section' => $section,
-			'product' => $product,
-			'alsoPurchase' => $alsoPurchase
+			'product' => $product
 		));
 	}
 
@@ -127,7 +125,7 @@ class CatalogController extends Controller
 
 		$products = $prodRp->search($condition, $page);
 		foreach ($products as &$product) {
-			$category = $catRp->find($product->getSectionId());
+			$category = $product->getCategory();
 			$path = $catRp->getPath($category);
 			$product->catUrl = $this->baseCats[$path[0]->getId()];
 			$product->section = $category;
