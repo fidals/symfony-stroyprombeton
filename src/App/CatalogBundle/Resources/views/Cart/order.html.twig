@@ -33,7 +33,7 @@
 								{{ product.model.nomen }}
 							</td>
 							<td class="gbi-list name">
-								<a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}" class="gbi-link">
+								<a href="/gbi/dor-stroy/?section={{ product.model.getCategory().getId() }}&amp;gbi={{ product.model.id }}" class="gbi-link">
 									<span class="gbi-link name">
 										{{ product.model.name }}
 									</span>
