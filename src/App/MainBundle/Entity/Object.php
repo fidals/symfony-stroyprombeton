@@ -5,30 +5,35 @@ namespace App\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * StaticPages
+ * Территории
  *
- * @ORM\Table(name="static_pages")
+ * @ORM\Table(name="objects")
  * @ORM\Entity
  */
-class StaticPage
+class Object
 {
 	use PageTrait;
 
 	/**
 	 * @var integer
-	 *
-	 * @ORM\Column(name="id", type="integer", nullable=false)
+	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
-	 * TODO вернуть ORM\GeneratedValue(strategy="IDENTITY")
+	 * TODO после переноса вернуть ORM\GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="alias", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="alias", type="string", length=500, nullable=true)
 	 */
 	private $alias;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="Territory", inversedBy="objects")
+	 * ORM\JoinColumn(name="territory_id", referencedColumnName="id")
+	 */
+	protected $territory;
 
 	/**
 	 * TODO после переноса удалить сеттер
@@ -64,21 +69,18 @@ class StaticPage
 	}
 
 	/**
-	 * Для генерации sitemap
-	 * @return array
+	 * @param $territory
 	 */
-	public function getSitemapData()
+	public function setTerritory($territory)
 	{
-		return array(
-			'locData' => array(
-				'route' => 'app_main_staticpage',
-				'parameters' => array(
-					'alias' => $this->getAlias(),
-				)
-			),
-			'priority' => 0.9,
-			'changefreq' => 'weekly',
-			'entityType' => 'staticPage',
-		);
+		$this->territory = $territory;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getTerritory()
+	{
+		return $this->territory;
 	}
 }
