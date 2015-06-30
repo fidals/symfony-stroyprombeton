@@ -21,21 +21,18 @@ class Category
 {
 	use PageTrait;
 
+	const WEB_DIR_PATH = '/../../../../web';
+	const IMG_DIR_PATH = '/assets/images/sections';
+	const IMG_GAP_NAME = 'logo-prozr.png';
+
 	/**
+	 * TODO Вернуть ORM\GeneratedValue(strategy="IDENTITY")
 	 * @var integer
 	 *
 	 * @ORM\Column(name="id", type="integer", nullable=false)
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 * @ORM\Id
 	 */
 	private $id;
-
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="nomen", type="integer", nullable=true)
-	 */
-	private $nomen;
 
 	/**
 	 * @Gedmo\TreeParent
@@ -59,13 +56,6 @@ class Category
 	private $mark;
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="ord", type="integer", nullable=true)
-	 */
-	private $order;
-
-	/**
 	 * @var float
 	 *
 	 * @ORM\Column(name="coefficient", type="float", nullable=false)
@@ -73,16 +63,16 @@ class Category
 	private $coefficient;
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="photo_id", type="integer", nullable=true)
-	 */
-	private $photoId;
-
-	/**
 	 * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
 	 */
 	protected $products;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="link_to_stk_metal", type="string", length=500, nullable=true)
+	 */
+	private $linkToStkMetal;
 
 	public function __construct()
 	{
@@ -95,7 +85,6 @@ class Category
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
-		return $this;
 	}
 
 	/**
@@ -107,12 +96,12 @@ class Category
 	}
 
 	/**
+	 * TODO после переноса удалить сеттер
 	 * @param int $id
 	 */
 	public function setId($id)
 	{
 		$this->id = $id;
-		return $this;
 	}
 
 	/**
@@ -121,23 +110,6 @@ class Category
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * @param int $id
-	 */
-	public function setNomen($nomen)
-	{
-		$this->nomen = $nomen;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getNomen()
-	{
-		return $this->nomen;
 	}
 
 	public function setProducts($products)
@@ -156,7 +128,6 @@ class Category
 	public function setMark($mark)
 	{
 		$this->mark = $mark;
-		return $this;
 	}
 
 	/**
@@ -168,29 +139,11 @@ class Category
 	}
 
 	/**
-	 * @param int $order
-	 */
-	public function setOrder($order)
-	{
-		$this->order = $order;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getOrder()
-	{
-		return $this->order;
-	}
-
-	/**
 	 * @param float $coefficient
 	 */
 	public function setCoefficient($coefficient)
 	{
 		$this->coefficient = $coefficient;
-		return $this;
 	}
 
 	/**
@@ -204,7 +157,6 @@ class Category
 	public function setParent(Category $parent = null)
 	{
 		$this->parent = $parent;
-		return $this;
 	}
 
 	public function getParent()
@@ -213,20 +165,19 @@ class Category
 	}
 
 	/**
-	 * @param int $photoId
+	 * @param string $linkToStkMetal
 	 */
-	public function setPhotoId($photoId)
+	public function setLinkToStkMetal($linkToStkMetal)
 	{
-		$this->photoId = $photoId;
-		return $this;
+		$this->linkToStkMetal = $linkToStkMetal;
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
-	public function getPhotoId()
+	public function getLinkToStkMetal()
 	{
-		return $this->photoId;
+		return $this->linkToStkMetal;
 	}
 
 	public function addClosure(CategoryClosure $closure)
@@ -246,6 +197,18 @@ class Category
 			'changefreq' => 'weekly',
 			'entityType' => 'category',
 		);
+	}
+
+	public function getPicturePath()
+	{
+		$webPath = __DIR__ . self::WEB_DIR_PATH;
+		$webFilePath = self::IMG_DIR_PATH . '/' . $this->getId() . '.png';
+		$picturePath = $webPath . $webFilePath;
+		if(file_exists($picturePath)) {
+			return $webFilePath;
+		} else {
+			return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
+		}
 	}
 
 	public function __toString()
@@ -352,8 +315,6 @@ class Category
 	public function setFile($file)
 	{
 		$this->file = $file;
-
-		return $this;
 	}
 
 	/**

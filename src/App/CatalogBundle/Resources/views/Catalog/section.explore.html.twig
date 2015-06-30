@@ -25,7 +25,7 @@
 		{{ section.getH1() }}
 	</h1>
 	{% autoescape false %}
-	{{ section.getText() }}
+	    {{ section.getText() }}
 	{% endautoescape %}
 	<div class="gbi-list">
 		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
@@ -49,8 +49,8 @@
 						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}">
 							{{ product.getName() }}<span> {{ product.getMark() }}</span></a></td>
 					<td class="gbi-list price">
-						{% if product.getPrice() %}
-							{{ product.getPrice() + product.getPrice() // ((1.1 - 1)*100) }} руб.
+						{% if product.price %}
+							{{ product.getPriceRounded() }} руб.
 						{% else %}
 							По запросу
 						{% endif %}

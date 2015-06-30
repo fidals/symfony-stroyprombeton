@@ -15,24 +15,24 @@ class Product
 {
 	use PageTrait;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id", type="bigint", nullable=false)
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
-	 */
-	private $id;
+	const WEB_DIR_PATH = '/../../../../web';
+	const IMG_DIR_PATH = '/assets/images/gbi-photos';
+	const EMPTY_THUMB_NAME = 'prod-alt-image.png';
+
+	public static $imageTypes = array(
+		IMAGETYPE_JPEG,
+		IMAGETYPE_JPEG2000,
+		IMAGETYPE_PNG,
+		IMAGETYPE_GIF
+	);
 
 	/**
-	 * Связывает продукт с категорией, см $category
-	 * TODO: переименовать в category_id либо везде избавиться от этого свойства модели
-	 *
 	 * @var integer
-	 *
-	 * @ORM\Column(name="section_id", type="integer", nullable=true)
+	 * TODO вернуть ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\Column(name="id", type="bigint", nullable=false)
+	 * @ORM\Id
 	 */
-	private $sectionId;
+	private $id;
 
 	/**
 	 * @var boolean
@@ -56,6 +56,16 @@ class Product
 	 * @ORM\Column(name="mark", type="string", length=100, nullable=false)
 	 */
 	private $mark;
+
+	/**
+	 * Связывает продукт с категорией, см $category
+	 * TODO: переименовать в category_id либо везде избавиться от этого свойства модели
+	 *
+	 * @var integer
+	 *
+	 * @ORM\Column(name="section_id", type="integer", nullable=true)
+	 */
+	private $sectionId;
 
 	/**
 	 * @var integer
@@ -109,16 +119,9 @@ class Product
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="price", type="integer", nullable=false, options={"default" = 0})
+	 * @ORM\Column(name="price", type="integer", nullable=true, options={"default" = 0})
 	 */
 	private $price;
-
-	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="has_photo", type="boolean", nullable=true)
-	 */
-	private $hasPhoto;
 
 	/**
 	 * @var string
@@ -128,47 +131,18 @@ class Product
 	private $comments;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="annotation", type="string", length=250, nullable=true)
-	 */
-	private $annotation;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="link_to_stkmetal_category", type="string", length=500, nullable=true)
-	 */
-	private $linkToStkMetalCategory;
-
-	/**
-	 * @var float
-	 *
-	 * @ORM\Column(name="price_coefficient", type="string", length=250, nullable=true)
-	 */
-	private $priceCoefficient;
-
-	/**
 	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
 	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
 	 */
 	protected $category;
 
 	/**
-	 * @param int $sectionId
+	 * Название унаследовано из modx
+	 *
+	 * @var string
+	 * @ORM\Column(name="introtext", type="text", nullable=true)
 	 */
-	public function setSectionId($sectionId)
-	{
-		$this->sectionId = $sectionId;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getSectionId()
-	{
-		return $this->sectionId;
-	}
+	private $introtext;
 
 	/**
 	 * @param string $comments
@@ -235,43 +209,20 @@ class Product
 	}
 
 	/**
+	 * TODO после переноса удалить сеттер
+	 * @param int $id
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * @param boolean $isActive
-	 */
-	public function setIsActive($isActive)
-	{
-		$this->isActive = $isActive;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getIsActive()
-	{
-		return $this->isActive;
-	}
-
-	/**
-	 * @param boolean $hasPhoto
-	 */
-	public function setHasPhoto($hasPhoto)
-	{
-		$this->hasPhoto = $hasPhoto;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getHasPhoto()
-	{
-		return $this->hasPhoto;
 	}
 
 	/**
@@ -355,6 +306,32 @@ class Product
 	}
 
 	/**
+	 * Округляет цену до большей с точностью 5
+	 * @return int
+	 */
+	public function getPriceRounded()
+	{
+		$rounded = ceil($this->price / 5) * 5;
+		return ($rounded % 10) == 0 ? $rounded + 5 : $rounded;
+	}
+
+	/**
+	 * @param int $sectionId
+	 */
+	public function setSectionId($sectionId)
+	{
+		$this->sectionId = $sectionId;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSectionId()
+	{
+		return $this->sectionId;
+	}
+
+	/**
 	 * @param float $volume
 	 */
 	public function setVolume($volume)
@@ -419,51 +396,21 @@ class Product
 	}
 
 	/**
-	 * @param string $annotation
+	 * Имя переменной унаследовали из modx
+	 * @param string $introtext
 	 */
-	public function setAnnotation($annotation)
+	public function setIntrotext($introtext)
 	{
-		$this->annotation = $annotation;
+		$this->introtext = $introtext;
 	}
 
 	/**
+	 * Имя переменной унаследовали из modx
 	 * @return string
 	 */
-	public function getAnnotation()
+	public function getIntrotext()
 	{
-		return $this->annotation;
-	}
-
-	/**
-	 * @param string $linkToStkMetalCategory
-	 */
-	public function setLinkToStkMetalCategory($linkToStkMetalCategory)
-	{
-		$this->linkToStkMetalCategory = $linkToStkMetalCategory;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLinkToStkMetalCategory()
-	{
-		return $this->linkToStkMetalCategory;
-	}
-
-	/**
-	 * @param float $priceCoefficient
-	 */
-	public function setPriceCoefficient($priceCoefficient)
-	{
-		$this->priceCoefficient = $priceCoefficient;
-	}
-
-	/**
-	 * @return float
-	 */
-	public function getPriceCoefficient()
-	{
-		return $this->priceCoefficient;
+		return $this->introtext;
 	}
 
 	public function __toString()
@@ -484,5 +431,27 @@ class Product
 			'changefreq' => 'weekly',
 			'entityType' => 'product',
 		);
+	}
+
+	/**
+	 * Ищет все файлы с названием {id}.*
+	 * Определяет тип файла, и в случае если это картинка в одном из форматов указанных в self::$imageTypes - возвращает относительный путь
+	 *
+	 * @return string
+	 */
+	public function getPicturePath()
+	{
+		$webPath = __DIR__ . self::WEB_DIR_PATH;
+		$absPicName = $webPath . self::IMG_DIR_PATH . '/' . $this->getId();
+		$gres = glob($absPicName . '.*');
+		if(!empty($gres)) {
+			foreach($gres as $fileName) {
+				$searchResult = array_search(exif_imagetype($fileName), self::$imageTypes);
+				if($searchResult !== false) {
+					return self::IMG_DIR_PATH . '/' . basename($fileName);
+				}
+			}
+		}
+		return self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
 	}
 }

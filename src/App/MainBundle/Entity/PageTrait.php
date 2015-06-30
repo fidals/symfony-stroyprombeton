@@ -59,9 +59,9 @@ trait PageTrait
 	protected $date;
 
 	/**
-	 * Содержит описание товара или категории
+	 *
 	 * @var string
-	 * @ORM\Column(name="text", type="text", nullable=true)
+	 * @ORM\Column(name="text", type="text", length=5000, nullable=true)
 	 */
 	protected $text;
 

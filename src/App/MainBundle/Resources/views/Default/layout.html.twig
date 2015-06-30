@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}" type="text/css"/>
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}"/>
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}"/>
-	<link rel="stylesheet" href="{{ asset('bundles/main/css/main-modx.css') }}"/>
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery-ui.css') }}"/>
 {% endblock %}
 
@@ -31,6 +30,7 @@
 	<script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
 	{#<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>#}
+
 	{#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
 
@@ -46,6 +46,7 @@
 					<div class="logo-image"><img src="/bundles/main/images/logo.png"/></div>
 					<div class="logo-text"><a href="/">завод железобетонных изделий </a></div>
 				</div>
+
 			</div>
 			<table class="m-contacts_new vcard">
 				<tr>
@@ -60,6 +61,7 @@
 					</td>
 					<td style="vertical-align: top;">
 						<p style="display: none" class="fn org url">www.stroyprombeton.ru</p>
+
 						<p>электронная почта:</p>
 						<a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>
 						<div>
@@ -97,15 +99,17 @@
 			</div>
 		</div>
 	</div>
+
+
 	<div class="clearing"></div>
 	<div class="menu-h">
 		<ul>
 			<li><a href="/">Главная</a></li>
 			<li><a href="/gbi-visual/">Каталог продукции</a></li>
-			<li><a href="/page/about/">О компании</a></li>
-			<li><a href="/page/proizvodstvo-gbi/">Производство</a></li>
-			<li><a href="/obekty/">Наши объекты</a></li>
-			<li><a href="/page/contacts/">Контактная информация</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'proizvodstvo-gbi' }) }}">Производство</a></li>
+			<li><a href="{{ path('app_main_territory_map') }}">Наши объекты</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
 			<li>
 				{% set cartLayout = app.session.get('cart') %}
 				<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
@@ -165,17 +169,17 @@
 			</div>
 			<div class="menu-v-bottom"></div>
 			<div class="OrderPrice">
-				<a class="a_price" href="/page/konstruktor/">
+				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">
 					<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на ЖБИ" alt="Расчёт заявок на ЖБИ">
 				</a>
 			</div>
 			<div class="OrderPrice">
-				<a class="a_price" href="/page/order_price/">
+				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'order_price' }) }}">
 					<img src="/assets/images/order_price.png" title="прайс-листы на жби" alt="прайс-листы на жби">
 				</a>
 			</div>
 			<div class="OrderDraw">
-				<a href="/page/izgotovlenie-gbi-po-chertezham/">
+				<a href="{{ path('app_main_staticpage', { 'alias': 'izgotovlenie-gbi-po-chertezham' }) }}">
 					<img src="/assets/images/order_draw.png" title="изготовление ЖБИ по индивидуальным чертежам" alt="изготовление ЖБИ по индивидуальным чертежам">
 				</a>
 			</div>
@@ -214,16 +218,19 @@
 				</div>
 			</a>
 		</div>
+
+
+
 		<div class="content-container">
 			<div class="content">
 				<div class="search-form">
 					<table>
 						<tr>
-							<td class="search-form-title">Поиск в каталоге ЖБИ продукции</td>
+							<td class="search-form-title">Поиск в каталоге продукции</td>
 							<td class="search-form-input">
-								<input id="search_condition" type="text" value="введите условия поиска ..."/>
+								<input id="search_condition" type="text" value="Запрос для поиска (не менее 2 символов)"/>
 							</td>
-							<td class="search-form-submit"><input type="button" value="Найти"/></td>
+							<td class="search-form-submit"><input id="search-action-btn" type="button" value="Найти"/></td>
 						</tr>
 					</table>
 				</div>
@@ -269,6 +276,9 @@
 			s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
+	<script type="text/javascript" src="/bundles/main/js/jquery.tooltipster.min.js"></script>
+	<script type="text/javascript" src="/bundles/main/js/jquery.maphilight.min.js"></script>
+
 
 	<script type="text/javascript">
 		var _gaq = _gaq || [];

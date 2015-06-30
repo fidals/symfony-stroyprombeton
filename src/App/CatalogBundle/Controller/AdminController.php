@@ -274,7 +274,7 @@ class AdminController extends Controller
 
 		if (!empty($condition)) {
 			$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
-			$products = $prodRp->searchUncat($condition);
+			$products = $prodRp->searchUncategorized($condition);
 			$categoryProductsHtml = $this->renderView('AppCatalogBundle:Admin:search.product.html.twig',
 				array(
 					'products' => $products
