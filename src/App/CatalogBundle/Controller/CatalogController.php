@@ -128,6 +128,28 @@ class CatalogController extends Controller
 		));
 	}
 
+	public function gbiVisualAction()
+	{
+		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$baseCategories = $catRp->findById(array_keys(SitemapCommand::$baseCats));
+
+		$hierarchyOptions = array(
+			'childSort' => array(
+				'field' => 'title',
+				'dir' => 'asc'
+			)
+		);
+		$twigArgs = array();
+
+		// Формируем массив вида ['ingener_stroy'] => < дети категории >
+		foreach($baseCategories as &$category) {
+			$argumentName = str_replace('-', '_', SitemapCommand::$baseCats[$category->getId()]);
+			$twigArgs[$argumentName] = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
+		}
+
+		return $this->render('AppCatalogBundle:Catalog:gbiVisual.html.twig', $twigArgs);
+	}
+
 	/**
 	 * Обрабатывает поисковые запросы с автокомплита
 	 * @return Response

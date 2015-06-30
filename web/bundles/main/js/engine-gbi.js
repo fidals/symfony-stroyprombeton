@@ -43,6 +43,19 @@ $(function () {
 
 /* -------------------------------------------------------------------------------- */
 
+function slideImg(bool, stopInt){
+	var index = parseInt( $('.random_list_main > div:visible').index() );
+	index++;
+	var index_next=index+1;
+	if(index_next>=$(".random_list_main > div").length){
+		index_next=1;
+	}
+
+	$(".random_list_main > div:nth-child("+index+")").fadeOut( 250, function() {
+		$(".random_list_main > div:nth-child("+index_next+")").fadeIn(250);
+	});
+}
+
 function Engine_GBI_Visual() {
 	$('#gbi_visual').jcarousel({
 		animation: 500,

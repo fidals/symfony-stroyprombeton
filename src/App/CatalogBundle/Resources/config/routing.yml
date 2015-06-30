@@ -1,3 +1,7 @@
+app_catalog_gbi_visual:
+    pattern: /visual/
+    defaults: { _controller: AppCatalogBundle:Catalog:gbiVisual }
+
 app_catalog_explore_category:
     pattern: /{catUrl}/
     defaults: { _controller: AppCatalogBundle:Catalog:exploreRoute }

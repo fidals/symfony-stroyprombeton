@@ -40,7 +40,7 @@
 	<div class="page-header">
 		<div class="page-header-left-colon">
 			<div class="logo">
-				<div class="logo-praim"><a href="/praimgroup"><img src="/bundles/main/images/tel-logo-praim.png"/></a>
+				<div class="logo-praim"><a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}"><img src="/bundles/main/images/tel-logo-praim.png"/></a>
 				</div>
 				<div class="logo-prom" onclick="location.href='/'">
 					<div class="logo-image"><img src="/bundles/main/images/logo.png"/></div>
@@ -105,7 +105,7 @@
 	<div class="menu-h">
 		<ul>
 			<li><a href="/">Главная</a></li>
-			<li><a href="/gbi-visual/">Каталог продукции</a></li>
+			<li><a href="{{ path('app_catalog_gbi_visual') }}">Каталог продукции</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'proizvodstvo-gbi' }) }}">Производство</a></li>
 			<li><a href="{{ path('app_main_territory_map') }}">Наши объекты</a></li>
@@ -185,7 +185,7 @@
 			</div>
 
 			{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
-			<a href="http://stroyprombeton.ru/praimgroup" target="__blank">
+			<a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}" target="__blank">
 				<div class="partners-table">
 					<div class="partners-table-header">
 						<p>Группа</p>
@@ -253,14 +253,6 @@
 {% endblock %}
 
 {% block js %}
-
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$("#accordion1").accordion({autoHeight: false, collapsible: true});
-			$("#accordion2").accordion({autoHeight: false, collapsible: true});
-			$("#accordion3").accordion({autoHeight: false, collapsible: true});
-		});
-	</script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];

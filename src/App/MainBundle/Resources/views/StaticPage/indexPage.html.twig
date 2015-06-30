@@ -18,510 +18,58 @@
 			</div>
 			<div class="inf_content">
 			<div class="random_list_main">
-			<div style="position: relative; display: block;">
-				<div class="inf-product-header">Плита лицевая железобетонная ПЛ1-1</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi_photo/11202001-11202089.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">2980</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">1500</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">130</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">1500</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">0.6</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">13645&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/176/178/5929/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Ригель железобетонный РДП4.57-40Ат-V</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/2339.jpg">
+			{% for product in products %}
+				<div>
+					<div class="inf-product-header">{{ product.getTitle() }} {{ product.getMark() }}</div>
+					<div style="text-align: center;">
+						<div class="inf-product-photo">
+							<img class="shk-image" alt="" title="" src="{{ product.getPicturePath() }}"></div>
+					</div>
+					<div class="inf-product-desc">
+						<table class="table table-condensed product-info-table random_main_tech">
+							<tr>
+								<td class="product-desc-left-col">Длина (мм)</td>
+								<td class="product-desc-right-col">{{ product.getLength() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Ширина (мм)</td>
+								<td class="product-desc-right-col">{{ product.getWidth() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Высота (мм)</td>
+								<td class="product-desc-right-col">{{ product.getHeight() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Масса (кг)</td>
+								<td class="product-desc-right-col">{{ product.getWeight() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Объем (м3)</td>
+								<td class="product-desc-right-col">{{ product.getVolume() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">
+									<div class="product-price"><span>Цена:</span></div>
+								</td>
+								<td class="product-desc-right-col">
+									<div class="product-price">{{ product.getPriceRounded() }} руб.</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div class="inf-product-for-nds">
+										<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="clear: both;"></div>
+					<div class="inf_footer">
+						<a href="/gbi/{{ product.catUrl }}?section={{ product.getCategory().getId() }}&gbi={{ product.getId() }}">Подробнее</a>
 					</div>
 				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">5660</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">565</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">450</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">2600</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">1</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">По запросу</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/prom-stroy/89/96/2245/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Цветочница железобетонная ЦК-1-1</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/1469.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">1060</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">1060</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">440</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">528</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">3085&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/blag-territory/51/1553/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Блок упора железобетонный Б-9</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="assets/images/gbi_photo/10201018.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">800</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">250</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">510</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">220</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">0.088</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">1300&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/31/37/1301/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Фундаментная плита №42</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/886.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">2010</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">2010</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">200</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">2000</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">0.81</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">12530&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/180/275/36/233/1270/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Фундаментный блок БФ8.99</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/841.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">2340</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">990</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">500</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">2800</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">1.16</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">10915&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/180/275/35/249/1227/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Фундаментный блок БФ7.132</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/840.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">1880</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">1320</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">500</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">3000</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">1.24</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">11665&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/180/275/35/249/1226/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Кордонный блок К5</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/760.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">2760</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">450</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">420</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">1100</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">0.44</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">7415&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/180/276/34/241/1146/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Звено прямоугольное ЗП10.200</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/696.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">2000</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">2260</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">2360</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">7000</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">2.82</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">56460&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/180/276/34/239/1082/">Подробнее</a></div>
-			</div>
-			<div style="position: relative; display: none;">
-				<div class="inf-product-header">Звено прямоугольное ЗП1.200</div>
-				<div style="text-align: center;">
-					<div class="inf-product-photo">
-						<img class="shk-image" alt="" title="" src="/assets/images/gbi-photos/678.jpg"></div>
-				</div>
-				<div class="inf-product-desc">
-					<table class="table table-condensed product-info-table random_main_tech">
-						<tbody>
-						<tr>
-							<td class="product-desc-left-col">Длина (мм)</td>
-							<td class="product-desc-right-col">2000</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Ширина (мм)</td>
-							<td class="product-desc-right-col">1220</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Высота (мм)</td>
-							<td class="product-desc-right-col">1740</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Масса (кг)</td>
-							<td class="product-desc-right-col">3400</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">Объем (м3)</td>
-							<td class="product-desc-right-col">1.32</td>
-						</tr>
-						<tr>
-							<td class="product-desc-left-col">
-								<div class="product-price"><span>Цена:</span></div>
-							</td>
-							<td class="product-desc-right-col">
-								<div class="product-price">26060&nbsp;руб.</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="inf-product-for-nds">
-									<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div style="clear: both;"></div>
-				<div class="inf_footer"><a href="/gbi/dor-stroy/180/276/34/239/1064/">Подробнее</a></div>
-			</div>
-
-
-			<div style="clear: both;"></div>
-
-			</div>
-
-
+			{% endfor %}
 			</div>
 
 			</div>
@@ -533,80 +81,85 @@
 					</div>
 					<div class="inf_content">
 						<ul>
-							<li>
-								<div class="news_img">
-									<a href="/news/15082/"><img src="assets/images/news/20_05_15/20_05_15-1_tn.jpg"></a></div>
-								<i>20.05.2015</i><br> <a href="/news/15082/">Производство мостовых конструкций</a><br>
-
-								<div class="inf_intro">Наше предприятие продолжает работу по выпуску железобетонных мостовых конструкций для объектов Октябрьской железной дороги. Выпускаемые изделия предназначены для выполнения программы капитального ремонта мостов.</div>
-							</li>
-							<li>
-								<div class="news_img">
-									<a href="/news/15080/"><img src="assets/images/news/06_03_15/06_03_15_tn.png"></a></div>
-								<i>06.03.2015</i><br> <a href="/news/15080/">Снижение цен на фундаменты для МГТ</a><br>
-
-								<div class="inf_intro">С 01.03.2015 снижены прайсовые цены на весь перечень фундаментов для металлических гофрированных и стеклопластиковых труб.</div>
-							</li>
-							<li>
-								<div class="news_img">
-									<a href="/news/15079/"><img src="assets/images/news/20_02_15/20_02_15_tn.jpg"></a></div>
-								<i>20.02.2015</i><br>
-								<a href="/news/15079/">Изменилась маркировка блоков удерживающих ограждений "Нью Джерси"</a><br>
-
-								<div class="inf_intro">Для приведения в соответствие с требованиями ГОСТ Р 52607-2006 внесены изменения в маркировку блоков удерживающих ограждений для автомобилей (тип "Нью Джерси").</div>
-							</li>
+							{% for post in news %}
+								<li>
+									<div class="news_img">
+										<a href="{{ path('app_main_post', {'id': post.getId()}) }}">
+											<img src="/assets/images/news/{{ post.getDate() | date('d_m_y') }}/{{ post.getDate() | date('d_m_y') }}_tn.jpg">
+										</a>
+									</div>
+									<i>{{ post.getDate() | date('d.m.Y') }}</i><br>
+									<a href="{{ path('app_main_post', {'id': post.getId()}) }}">{{ post.getTitle() }}</a><br>
+									<div class="inf_intro">
+										{{ post.getIntroText() }}
+									</div>
+								</li>
+							{% endfor %}
 						</ul>
 					</div>
-					<div class="inf_footer"><a href="news/">Посмотреть все новости</a></div>
+					<div class="inf_footer"><a href="{{ path('app_main_post_all') }}">Посмотреть все новости</a></div>
 				</div>
 			</td>
 		</tr>
 	</table>
 	<div class="main_cat">
-		<div class="main_cat_el"><a href="gbi/prom-stroy/12/"><img src="images/indexPage/lestnici2.png" alt="">
-
+		<div class="main_cat_el">
+			<a href="/gbi/prom-stroy?section=12">
+				<img src="/assets/images/indexPage/lestnici2.png" alt="">
 				<p>Элементы лестниц</p>
-			</a></div>
+			</a>
+		</div>
 		<div class="main_cat_el">
 			<div class="title">
 				<p>Новый тип изделия</p>
 			</div>
-			<a href="gbi/dor-stroy/140/473/"><img src="images/sections/592_big.png" alt="">
-
+			<a href="/gbi/dor-stroy?section=473">
+				<img src="/assets/images/indexPage/592_big.png" alt="">
 				<p>Блоки удерживающих ограждений для автомобилей (тип "Нью Джерси")</p>
-			</a></div>
-		<div class="main_cat_el"><a href="gbi/prom-stroy/15/"><img src="images/indexPage/colonni5.png" alt="">
-
-				<p>Колонны железобетонные</p>
-			</a></div>
-		<div class="main_cat_el"><a href="gbi/dor-stroy/180/"><img src="images/indexPage/trubi251.png" alt="">
-
-				<p>Водопропускные трубы</p>
-			</a></div>
+			</a>
+		</div>
 		<div class="main_cat_el">
-			<a href="gbi/dor-stroy/176/"><img src="images/indexPage/podpornie-stenki247.png" alt="">
-
+			<a href="gbi/prom-stroy?section=15">
+				<img src="/assets/images/indexPage/colonni5.png" alt="">
+				<p>Колонны железобетонные</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<a href="gbi/dor-stroy?section=180">
+				<img src="/assets/images/indexPage/trubi251.png" alt="">
+				<p>Водопропускные трубы</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<a href="gbi/dor-stroy?section=176">
+				<img src="/assets/images/indexPage/podpornie-stenki247.png" alt="">
 				<p>Подпорные стены</p>
-			</a></div>
+			</a>
+		</div>
 		<div class="main_cat_el">
 			<div class="title">
 				<p>Новый тип изделия</p>
 			</div>
-			<a href="gbi/dor-stroy/31/12563/"><img src="images/indexPage/lotki12563.png" alt="">
-
+			<a href="gbi/dor-stroy?section=12563">
+				<img src="/assets/images/indexPage/lotki12563.png" alt="">
 				<p>Железнодорожные лотки</p>
-			</a></div>
-		<div class="main_cat_el"><a href="gbi/ingener-stroy/314/402/"><img src="images/indexPage/lotki483.png" alt="">
-
+			</a>
+		</div>
+		<div class="main_cat_el"><a href="gbi/ingener-stroy?section=402">
+				<img src="/assets/images/indexPage/lotki483.png" alt="">
 				<p>Лотки и плиты для сборных каналов и тоннелей</p>
-			</a></div>
-		<div class="main_cat_el"><a href="gbi/energy-stroy/59/"><img src="images/indexPage/fundamenti111.png" alt="">
-
+			</a>
+		</div>
+		<div class="main_cat_el"><a href="gbi/energy-stroy?section=59">
+				<img src="/assets/images/indexPage/fundamenti111.png" alt="">
 				<p>Фундаменты под опоры контактной сети для железных дорог</p>
-			</a></div>
-		<div class="main_cat_el"><a href="gbi/energy-stroy/44/"><img src="images/indexPage/fundamenti-lep70.png" alt="">
-
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<a href="gbi/energy-stroy?section=44">
+				<img src="/assets/images/indexPage/fundamenti-lep70.png" alt="">
 				<p>Конструкции фундаментов для металлических опор ЛЭП</p>
-			</a></div>
+			</a>
+		</div>
 	</div>
 {% endblock %}
