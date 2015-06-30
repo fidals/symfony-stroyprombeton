@@ -23,12 +23,12 @@ class SitemapCommand extends ContainerAwareCommand
 
 	// ugly urls
 	public static $baseCats = array(
-		537 => 'prom-stroy',
-		538 => 'dor-stroy',
-		539 => 'ingener-stroy',
-		540 => 'energy-stroy',
-		541 => 'blag-territory',
-		542 => 'neftegaz-stroy'
+		456 => 'prom-stroy',
+		457 => 'dor-stroy',
+		458 => 'ingener-stroy',
+		459 => 'energy-stroy',
+		460 => 'blag-territory',
+		461 => 'neftegaz-stroy'
 	);
 
 	protected function configure()
@@ -65,7 +65,7 @@ class SitemapCommand extends ContainerAwareCommand
 						if (!empty($path[0]) && !empty(self::$baseCats[$path[0]->getId()])) {
 							$catUrl = self::$baseCats[$path[0]->getId()];
 						} else {
-							$catUrl = self::$baseCats[537];
+							$catUrl = self::$baseCats[456];
 						}
 						$entityData = $entity->getSitemapData();
 						$entityData['locData']['parameters']['catUrl'] = $catUrl;
@@ -73,16 +73,16 @@ class SitemapCommand extends ContainerAwareCommand
 					}
 				} elseif ($repositoryName == 'AppCatalogBundle:Product') {
 					foreach ($entities as $entity) {
-						$sectionId = $entity->getCategory();
+						$sectionId = $entity->getSectionId();
 						if (!empty($sectionId)) {
 							$path = $catRp->getPath($catRp->find($sectionId));
 							if (!empty($path[0]) && !empty(self::$baseCats[$path[0]->getId()])) {
 								$catUrl = self::$baseCats[$path[0]->getId()];
 							} else {
-								$catUrl = self::$baseCats[537];
+								$catUrl = self::$baseCats[456];
 							}
 						} else {
-							$catUrl = self::$baseCats[537];
+							$catUrl = self::$baseCats[456];
 						}
 						$entityData = $entity->getSitemapData();
 						$entityData['locData']['parameters']['catUrl'] = $catUrl;

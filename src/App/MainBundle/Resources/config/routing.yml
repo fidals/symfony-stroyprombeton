@@ -1,16 +1,25 @@
-# Отображает статическую страницу с динамическим наполнением (objects)
-app_main_object_root:
-  pattern: /obekty/
-  defaults: { _controller: AppMainBundle:StaticPage:showObjects }
-
 app_main_object:
-  pattern: /obekty/{alias}/
-  defaults: { _controller: AppMainBundle:StaticPage:gbiObjeсtShow }
+  pattern: /our-object/{id}/
+  defaults: { _controller: AppMainBundle:Object:show }
 
-# Этот роут отрабатывает все url, которые не подошли предыдущим роутам
-# TODO: Сделай свою таблицу для каждого типа статичных страниц
+app_main_territory:
+  pattern: /rus-area-item/{territoryId}/
+  defaults: { _controller: AppMainBundle:Territory:show }
+
+app_main_territory_map:
+  pattern: /obekty/
+  defaults: { _controller: AppMainBundle:Territory:map }
+
+app_main_post_all:
+  pattern: /news/
+  defaults: { _controller: AppMainBundle:Post:index }
+
+app_main_post:
+  pattern: /news/{id}/
+  defaults: { _controller: AppMainBundle:Post:post }
+
 app_main_staticpage:
-  pattern:  /{alias}/
+  pattern:  /page/{alias}/
   defaults: { _controller: AppMainBundle:StaticPage:show }
   requirements:
     alias: ".+"

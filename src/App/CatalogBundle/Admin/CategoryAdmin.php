@@ -14,15 +14,12 @@ class CategoryAdmin extends Admin
 		$formMapper
 			->with('Основные свойства')
 				->add('id', null, array('read_only' => true, 'required' => false))
-				->add('nomen', null, array('required' => false))
 				->add('parent', 'sonata_type_model', array('label' => 'Родительская категория', 'required' => false))
 				->add('name', null, array('label' => 'Название', 'required' => true))
+				->add('isActive', null, array('label' => 'is_active', 'required' => false))
 				->add('alias', null, array('required' => false))
-				->add('mark', null, array('required' => false))
-				->add('order', null, array('label' => 'ord', 'required' => false))
 				->add('coefficient', null, array('required' => true, 'data' => '1.1'))
 				->add('text', null, array('required' => false))
-				->add('isActive', null, array('label' => 'is_active', 'required' => false))
 				->add('file', 'file', array('label' => 'фото', 'required' => false))
 			->end()
 			->with('SEO')
@@ -37,11 +34,8 @@ class CategoryAdmin extends Admin
 	{
 		$datagridMapper
 			->add('id')
-			->add('nomen')
 			->add('parent', null, array('label' => 'Родительская категория'))
 			->add('name', null, array('label' => 'Название'))
-			->add('mark')
-			->add('order', null, array('label' => 'ord'))
 			->add('isActive', null, array('label' => 'is_active'));
 	}
 
@@ -49,16 +43,14 @@ class CategoryAdmin extends Admin
 	{
 		$listMapper
 			->addIdentifier('id')
-			->addIdentifier('nomen')
 			->add('parent', null, array('label' => 'parent_id'))
 			->addIdentifier('name', null, array('label' => 'Название'))
-			->add('mark')
-			->add('order', null, array('label' => 'ord'))
 			->add('isActive', null, array('label' => 'is_active'));
 	}
 
 	public function postPersist($category)
 	{
+
 		$this->saveFile($category);
 	}
 

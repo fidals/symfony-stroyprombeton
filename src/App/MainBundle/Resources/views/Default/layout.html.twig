@@ -117,11 +117,11 @@
 	<div class="menu-h">
 		<ul>
 			<li><a href="/">Завод ЖБИ</a></li>
-			<li><a href="/about/">О компании &laquo;СТК-ПромБетон&raquo;</a></li>
-			<li><a href="/proizvodstvo-gbi/">Производство ЖБИ изделий</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании &laquo;СТК-ПромБетон&raquo;</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'proizvodstvo-gbi' }) }}">Производство ЖБИ изделий</a></li>
 			<li><a href="/gbi-visual/">Каталог ЖБИ продукции</a></li>
 			<li><a href="/obekty/">Наши объекты</a></li>
-			<li><a href="/contacts/">Контактная информация</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
 			<li>
 				{% set cartLayout = app.session.get('cart') %}
 				<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
@@ -273,19 +273,7 @@
 {% endblock %}
 
 {% block js %}
-
-	<script type="text/javascript">
-		$(document).ready(function () {
-
-			$("#accordion1").accordion({autoHeight: false, collapsible: true});
-			$("#accordion2").accordion({autoHeight: false, collapsible: true});
-			$("#accordion3").accordion({autoHeight: false, collapsible: true});
-		});
-	</script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-	<script type="text/javascript">
-		$().tooltip(options)
-	</script>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-27310520-1']);
@@ -300,6 +288,9 @@
 			s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
+	<script type="text/javascript" src="/bundles/main/js/jquery.tooltipster.min.js"></script>
+	<script type="text/javascript" src="/bundles/main/js/jquery.maphilight.min.js"></script>
+
 
 	<script type="text/javascript">
 		var _gaq = _gaq || [];

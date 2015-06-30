@@ -7,19 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use App\CatalogBundle\Command\SitemapCommand;
 
 class CatalogController extends Controller
 {
-	// ugly urls
-	public $baseCats = array(
-		537 => 'prom-stroy',
-		538 => 'dor-stroy',
-		539 => 'ingener-stroy',
-		540 => 'energy-stroy',
-		541 => 'blag-territory',
-		542 => 'neftegaz-stroy'
-	);
-
 	// "custom router"
 	public function exploreRouteAction($catUrl)
 	{
@@ -45,7 +36,7 @@ class CatalogController extends Controller
 	{
 		// search category ID
 
-		$catId = array_search($catUrl, $this->baseCats);
+		$catId = array_search($catUrl, SitemapCommand::$baseCats);
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
 		$category = $catRp->find(!empty($sectionId) ? $sectionId : $catId);
 		if (empty($category)) {
@@ -60,13 +51,13 @@ class CatalogController extends Controller
 				)
 			);
 
-			$childs = $catRp->buildTreeArray($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
+			$children = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
 
-			if (!empty($childs)) {
+			if (!empty($children)) {
 				return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
 					'parents' => $parents,
-					'childs' => $childs,
-					'catUrl' => $this->baseCats[$catId],
+					'children' => $children,
+					'catUrl' => SitemapCommand::$baseCats[$catId],
 					'category' => $category
 				));
 			} else {
@@ -77,7 +68,7 @@ class CatalogController extends Controller
 				);
 				return $this->render('AppCatalogBundle:Catalog:section.explore.html.twig', array(
 					'parents' => $parents,
-					'catUrl' => $this->baseCats[$catId],
+					'catUrl' => SitemapCommand::$baseCats[$catId],
 					'section' => $category,
 					'products' => $products
 				));
@@ -91,7 +82,7 @@ class CatalogController extends Controller
 	public function exploreProductAction($catUrl, $sectionId, $gbiId)
 	{
 		// search category ID
-		$catId = array_search($catUrl, $this->baseCats);
+		$catId = array_search($catUrl, SitemapCommand::$baseCats);
 
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
 		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
@@ -101,7 +92,7 @@ class CatalogController extends Controller
 
 		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
 			'parents' => $parents,
-			'catUrl' => $this->baseCats[$catId],
+			'catUrl' => SitemapCommand::$baseCats[$catId],
 			'section' => $section,
 			'product' => $product
 		));
@@ -127,7 +118,7 @@ class CatalogController extends Controller
 		foreach ($products as &$product) {
 			$category = $product->getCategory();
 			$path = $catRp->getPath($category);
-			$product->catUrl = $this->baseCats[$path[0]->getId()];
+			$product->catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
 			$product->section = $category;
 			$product->path = $path;
 		}
