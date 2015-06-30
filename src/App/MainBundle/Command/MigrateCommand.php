@@ -237,11 +237,13 @@ class MigrateCommand extends ContainerAwareCommand
 			$catIdMap[$rel['contentid']] = (int) $rel['value'];
 		}
 
-		// папка для фоток
-		if(!file_exists($this->imgPath . '/gbi-photos')) {
-			mkdir($this->imgPath . '/gbi-photos');
+		if($this->modxImgPath) {
+			// папка для фоток
+			if(!file_exists($this->imgPath . '/gbi-photos')) {
+				mkdir($this->imgPath . '/gbi-photos');
+			}
+			copy($this->modxImgPath . self::PRODUCT_IMG_THUMB, $this->imgPath . self::PRODUCT_IMG_THUMB);
 		}
-		copy($this->modxImgPath . self::PRODUCT_IMG_THUMB, $this->imgPath . self::PRODUCT_IMG_THUMB);
 
 		$done = 0;
 		foreach($prods as $productData) {

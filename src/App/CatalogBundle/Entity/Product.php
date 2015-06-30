@@ -119,7 +119,7 @@ class Product
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="price", type="integer", nullable=false, options={"default" = 0})
+	 * @ORM\Column(name="price", type="integer", nullable=true, options={"default" = 0})
 	 */
 	private $price;
 
