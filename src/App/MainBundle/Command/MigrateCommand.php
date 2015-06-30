@@ -10,6 +10,7 @@ use App\MainBundle\Entity\Post;
 use App\MainBundle\Entity\StaticPage;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -30,6 +31,9 @@ class MigrateCommand extends ContainerAwareCommand
 	const MODX_SITE_CONTENT = 'modx_site_content';
 	const MODX_SITE_TMPLVARS = 'modx_site_tmplvars';
 	const MODX_SITE_TMPLVAR_CONTENTVALUES = 'modx_site_tmplvar_contentvalues';
+
+	const CATEGORY_IMG_THUMB = '/sections/logo-prozr.png';
+	const PRODUCT_IMG_THUMB = '/gbi-photos/prod-alt-image.png';
 
 	/**
 	 * Идентификатор корня дерева категорий
@@ -52,12 +56,24 @@ class MigrateCommand extends ContainerAwareCommand
 	 */
 	public static $ignoreIds = array(12608);
 
-
 	/**
 	 * Массив id статических страниц
 	 * @var array
 	 */
 	public static $staticPages = array(3, 4, 7, 8, 9, 624, 12435);
+
+
+	/**
+	 * Путь до директории с картинками
+	 * @var
+	 */
+	private $imgPath;
+
+	/**
+	 * Путь до папки с картинками от modx
+	 * @var null
+	 */
+	private $modxImgPath = null;
 
 	public $pdo = null;
 
@@ -78,7 +94,14 @@ class MigrateCommand extends ContainerAwareCommand
 	protected function configure()
 	{
 		$this->setName('db:migrate')
-			->setDescription('Migrate DB from modx to symfony2');
+			->setDescription('Migrate DB from modx to symfony2')
+			->addOption(
+				'modx-img-path',
+				null,
+				InputOption::VALUE_REQUIRED,
+				'ModX pictures path',
+				null
+			);
 	}
 
 	protected function initialize()
@@ -106,10 +129,20 @@ class MigrateCommand extends ContainerAwareCommand
 			$connection->executeUpdate($truncateSql);
 		}
 		$connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
+
+		$this->imgPath = __DIR__ . '/../../../../web/assets/images';
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$modxImgPath = $input->getOption('modx-img-path');
+		if(!is_null($modxImgPath)) {
+			if(file_exists($modxImgPath)) {
+				$this->modxImgPath = rtrim($modxImgPath, "/");;
+			} else {
+				throw new \Exception("Invalid modx_img_path option.\nDirectory " . $modxImgPath . " does not exist.");
+			}
+		}
 		$this->migrateCategories();
 		$this->migrateProducts();
 		$this->migrateTerritories();
@@ -142,6 +175,27 @@ class MigrateCommand extends ContainerAwareCommand
 
 				if($parentCategory) {
 					$category->setParent($parentCategory);
+				}
+
+				if(!empty($this->modxImgPath)) {
+					if(!file_exists($this->imgPath . '/sections')) {
+						mkdir($this->imgPath . '/sections');
+					}
+					$catImg = isset($properties['cat_image_tn']) ? $properties['cat_image_tn'] : self::CATEGORY_IMG_THUMB;
+					$catImg = str_replace('/assets/images', '', $catImg);
+					$catImg = str_replace('assets/images', '', $catImg);
+					if($catImg != self::CATEGORY_IMG_THUMB) {
+						if(file_exists($this->modxImgPath . $catImg)) {
+							$pathInfo = pathinfo($this->modxImgPath . $catImg);
+							copy($this->modxImgPath . $catImg, $this->imgPath . '/sections/' . $row['id'] . '.' . $pathInfo['extension']);
+						} else {
+							echo 'Image ' . $this->modxImgPath . $catImg . ' for category ' . $row['id'] . 'does not exist' . "\n";
+						}
+					} else {
+						if(!file_exists($this->imgPath . self::CATEGORY_IMG_THUMB)) {
+							copy($this->modxImgPath . self::CATEGORY_IMG_THUMB, $this->imgPath . self::CATEGORY_IMG_THUMB);
+						}
+					}
 				}
 
 				$em->persist($category);
@@ -183,6 +237,12 @@ class MigrateCommand extends ContainerAwareCommand
 			$catIdMap[$rel['contentid']] = (int) $rel['value'];
 		}
 
+		// папка для фоток
+		if(!file_exists($this->imgPath . '/gbi-photos')) {
+			mkdir($this->imgPath . '/gbi-photos');
+		}
+		copy($this->modxImgPath . self::PRODUCT_IMG_THUMB, $this->imgPath . self::PRODUCT_IMG_THUMB);
+
 		$done = 0;
 		foreach($prods as $productData) {
 			$product = new Product();
@@ -219,6 +279,33 @@ class MigrateCommand extends ContainerAwareCommand
 				$product->setName($productData['pagetitle']);
 			}
 
+			if(!empty($this->modxImgPath)) {
+				// работа с фотками
+				$prodImg = isset($productProperties['cat_image']) ? $productProperties['cat_image'] : self::PRODUCT_IMG_THUMB;
+				$prodImg = str_replace('/assets/images', '', $prodImg);
+				$prodImg = str_replace('assets/images', '', $prodImg);
+
+				if(isset($productProperties['cat_image_tn'])) {
+					$prodImgTh = $productProperties['cat_image_tn'];
+					$prodImgTh = str_replace('/assets/images', '', $prodImgTh);
+					$prodImgTh = str_replace('assets/images', '', $prodImgTh);
+				}
+
+				if($prodImg != self::PRODUCT_IMG_THUMB) {
+					if(file_exists($this->modxImgPath . $prodImg)) {
+						$pathInfo = pathinfo($this->modxImgPath . $prodImg);
+						copy($this->modxImgPath . $prodImg, $this->imgPath . '/gbi-photos/' . $productData['id'] . '.' . $pathInfo['extension']);
+						if(!empty($prodImgTh)) {
+							$pathInfoTh = pathinfo($this->modxImgPath . $prodImgTh);
+							copy($this->modxImgPath . $prodImg, $this->imgPath . '/gbi-photos/' . $productData['id'] . '-th.' . $pathInfoTh['extension']);
+						}
+					} else {
+						echo 'Image ' . $this->modxImgPath . $prodImg . ' for product ' . $productData['id'] . 'does not exist ' . "\n";
+					}
+				}
+			}
+
+			// сохранение сущности
 			$em->persist($product);
 			$done++;
 			if($done % 500 === 0) {
