@@ -17,6 +17,9 @@ class ProductRepository extends EntityRepository
 	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
 
 	/**
+	 * Метод поиска для автодополнения
+	 * Используется в TableGear
+	 *
 	 * @param $term
 	 * @param int $limit
 	 * @return array

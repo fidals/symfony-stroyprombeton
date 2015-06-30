@@ -218,9 +218,12 @@ function EngineSearch() {
 		minLength: 2,
 		delay: 500,
 		autoFocus: false,
+		open: function( event, ui ) {
+			$('.ui-menu').width( $(this).css("width") );
+		},
 		select: function (event, ui) {
 			$input_cond.val(ui.item.value);
-			//location.href = "/gbi/" + ui.item.alias + "/?section=" + ui.item.section + "&gbi=" + ui.item.id;
+			location.href = ui.item.url;
 			return false;
 		}
 	});
@@ -254,6 +257,42 @@ function EngineSearch() {
 			RunSearch();
 		}
 	});
+
+	$input_cond.data( "autocomplete")._renderMenu = function(ul, items) {
+		var that = this;
+		$.each(items, function(index, item) {
+			that._renderItem(ul, item);
+		});
+
+		if(items.length == 50) {
+			var a = $('<a>', {
+				text: 'Смотреть все результаты...',
+				href: '#'
+			});
+			a.css("color", "#C90000");
+			a.css("cursor", "pointer");
+			a.click(function(){
+				$(".search-form-submit > input[type=button]").trigger( "click" );
+				$input_cond.data("autocomplete").close();
+			});
+			var $li = $('<li>');
+			$li.append(a).appendTo(ul);
+		}
+	}
+
+	// код взят с modx-версии
+	$input_cond.data( "autocomplete" )._renderItem = function( ul, item ) {
+		var a = $('<a>', {
+			onclick: "document.location.href = '"+item.url+"'",
+			text: item.label
+		});
+		if(item.razdel){
+			a.css("font-weight", "bold");
+		}
+		if(item.desc && item.desc != '') a.prepend("<span style='color: #808080;'>[" + item.desc + "]</span> ");
+		var $li = $('<li>');
+		return $li.append(a).data('item.autocomplete', item).appendTo(ul);
+	}
 
 	$("div.search-form td.search-form-submit input").click(function () {
 		var $input_cond = $("input#search_condition");

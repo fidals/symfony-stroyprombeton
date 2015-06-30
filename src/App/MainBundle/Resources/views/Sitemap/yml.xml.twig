@@ -24,10 +24,10 @@
 		</categories>
 		<offers>
 			{% for product in products %}
-				<url>{{ urlIndex }}/gbi/{{ product.catUrl }}/?section={{ product.sectionId }}&gbi={{ product.id }}</url>
+				<url>{{ urlIndex }}/gbi/{{ product.catUrl }}/?section={{ product.getCategory().getId() }}&gbi={{ product.id }}</url>
 				<price>{{ product.price }}</price>
 				<currencyId>RUR</currencyId>
-				<categoryId>{{ product.sectionId }}</categoryId>
+				<categoryId>{{ product.getCategory().getId() }}</categoryId>
 				<picture>
 					<img src="{{ product.getPicturePath() }}">
 				</picture>

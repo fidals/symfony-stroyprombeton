@@ -58,6 +58,9 @@ class Product
 	private $mark;
 
 	/**
+	 * Связывает продукт с категорией, см $category
+	 * TODO: переименовать в category_id либо везде избавиться от этого свойства модели
+	 *
 	 * @var integer
 	 *
 	 * @ORM\Column(name="section_id", type="integer", nullable=true)
@@ -116,7 +119,7 @@ class Product
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="price", type="integer", nullable=true)
+	 * @ORM\Column(name="price", type="integer", nullable=false, options={"default" = 0})
 	 */
 	private $price;
 
@@ -188,7 +191,6 @@ class Product
 	{
 		return $this->diameterOut;
 	}
-
 
 	/**
 	 * @param int $height
@@ -377,17 +379,24 @@ class Product
 		return $this->width;
 	}
 
+	/**
+	 * @param Category $category
+	 */
 	public function setCategory($category)
 	{
 		$this->category = $category;
 	}
 
+	/**
+	 * @return Category
+	 */
 	public function getCategory()
 	{
 		return $this->category;
 	}
 
 	/**
+	 * Имя переменной унаследовали из modx
 	 * @param string $introtext
 	 */
 	public function setIntrotext($introtext)
@@ -396,6 +405,7 @@ class Product
 	}
 
 	/**
+	 * Имя переменной унаследовали из modx
 	 * @return string
 	 */
 	public function getIntrotext()
@@ -411,7 +421,7 @@ class Product
 	public function getSitemapData()
 	{
 		return array(
-			'section' => $this->getSectionId(),
+			'section' => $this->getCategory()->getId(),
 			'gbi' => $this->getId(),
 			'locData' => array(
 				'route' => 'app_catalog_explore_category',

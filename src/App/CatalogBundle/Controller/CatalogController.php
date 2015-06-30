@@ -2,9 +2,6 @@
 
 namespace App\CatalogBundle\Controller;
 
-use App\CatalogBundle\Entity\Category;
-use App\CatalogBundle\Entity\CategoryClosure;
-use App\CatalogBundle\Entity\Gbi;
 use App\CatalogBundle\Entity\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,14 +89,12 @@ class CatalogController extends Controller
 		$section = $catRp->find($sectionId);
 		$parents = $catRp->getPath($section);
 		$product = $prodRp->find($gbiId);
-		$alsoPurchase = $prodRp->findBySectionId($product->getSectionId());
 
 		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
 			'parents' => $parents,
 			'catUrl' => SitemapCommand::$baseCats[$catId],
 			'section' => $section,
-			'product' => $product,
-			'alsoPurchase' => $alsoPurchase
+			'product' => $product
 		));
 	}
 
@@ -121,7 +116,7 @@ class CatalogController extends Controller
 
 		$products = $prodRp->search($condition, $page);
 		foreach ($products as &$product) {
-			$category = $catRp->find($product->getSectionId());
+			$category = $product->getCategory();
 			$path = $catRp->getPath($category);
 			$product->catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
 			$product->section = $category;
@@ -145,9 +140,11 @@ class CatalogController extends Controller
 			return new Response();
 		}
 
-		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
 		$jsonSrv = new JsonEncoder();
-		$result = $prodRp->searchAutocomplete($term);
+
+		// возвращает массив данных для автокомплита
+		$result = $this->get('catalog.autocomplete')->suggest($term);
+
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 
 		return new Response($json);

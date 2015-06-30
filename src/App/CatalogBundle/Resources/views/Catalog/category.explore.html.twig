@@ -1,19 +1,22 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ category.title }}
+	{{ category.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{{ category.description }}
+	{{ category.getDescription() }}
 {% endblock %}
 
+{% block keywords %}
+	{{ category.getKeywords() }}
+{% endblock %}
 
 {% block content %}
 	<div class="location">
 		{% for item in parents %}
 			<span class="location section">
-				<a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
+				<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
 			</span>
 			<span class="location separate">/</span>
 		{% endfor %}
@@ -30,10 +33,7 @@
 						<div class="gbi-showcase-top-line">
 							<img src="{{ item.model.getPicturePath() }}"/>
 							<div class="cat-info">
-								{#<h3>{% if item.model.getMark() %}{{ item.model.getMark() }}{% endif %}</h3><br/>#}
-
 								<p>{{ item.model.getTitle() }}</p>
-
 								<div class="link-detailed">подробнее&nbsp&raquo</div>
 							</div>
 						</div>
@@ -47,6 +47,6 @@
 		</table>
 	</div>
 	{% autoescape false %}
-	{{ category.description }}
+	{{ category.getText() }}
 	{% endautoescape %}
 {% endblock %}

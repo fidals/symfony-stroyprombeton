@@ -1,28 +1,32 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ product.name }} {{ product.mark }}
+	{{ product.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{{ product.description }}
+	{{ product.getDescription() }}
+{% endblock %}
+
+{% block keywords %}
+	{{ product.getKeywords() }}
 {% endblock %}
 
 {% block content %}
 	<div class="location">
 		{% for item in parents %}
 			<span class="location section">
-            <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
-        </span>
+			<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+		</span>
 			<span class="location separate">/</span>
 		{% endfor %}
 	</div>
 	<div class="product-header">
 		<h1 style="color:#333333">
-			{{ product.name }}
-			<span class="product-number">{{ product.mark }}</span>
-			{% if product.nomen %}
-				<span class="nomen" style="float: right">{{ product.nomen }}</span>
+			{{ product.getH1() }}
+			<span class="product-number">{{ product.getMark() }}</span>
+			{% if product.getNomen() %}
+				<span class="nomen" style="float: right">{{ product.getNomen() }}</span>
 			{% endif %}
 		</h1>
 
@@ -41,79 +45,79 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab1">
 					<table class="table table-condensed product-info-table">
-						{% if product.nomen %}
+						{% if product.getNomen() %}
 							<tr>
 								<td class="product-desc-left-col">Код</td>
-								<td class="product-desc-right-col">{{ product.nomen }}</td>
+								<td class="product-desc-right-col">{{ product.getNomen() }}</td>
 							</tr>
 						{% endif %}
 
-						{% if product.mark %}
+						{% if product.getMark() %}
 							<tr>
 								<td class="product-desc-left-col">Марка ЖБИ</td>
-								<td class="product-desc-right-col">{{ product.mark }}</td>
+								<td class="product-desc-right-col">{{ product.getMark() }}</td>
 							</tr>
 						{% endif %}
-						{% if section.mark %}
+						{% if section.getMark() %}
 							<tr>
 								<td class="product-desc-left-col">Рабочая документация</td>
-								<td class="product-desc-right-col">{{ section.mark }}</td>
+								<td class="product-desc-right-col">{{ section.getMark() }}</td>
 							</tr>
 						{% endif %}
 
-						{% if product.length %}
+						{% if product.getLength() %}
 							<tr>
 								<td class="product-desc-left-col">Длина (мм)</td>
-								<td class="product-desc-right-col">{{ product.length }}</td>
+								<td class="product-desc-right-col">{{ product.getLength() }}</td>
 							</tr>
 						{% endif %}
 
-						{% if product.width %}
+						{% if product.getWidth() %}
 							<tr>
 								<td class="product-desc-left-col">Ширина (мм)</td>
-								<td class="product-desc-right-col">{{ product.width }}</td>
+								<td class="product-desc-right-col">{{ product.getWidth() }}</td>
 							</tr>
 						{% endif %}
 
-						{% if product.height %}
+						{% if product.getHeight() %}
 							<tr>
 								<td class="product-desc-left-col">Высота (мм)</td>
-								<td class="product-desc-right-col">{{ product.height }}</td>
+								<td class="product-desc-right-col">{{ product.getHeight() }}</td>
 							</tr>
 						{% endif %}
-						{% if product.diameterIn %}
+						{% if product.getDiameterIn() %}
 							<tr>
 								<td class="product-desc-left-col">Внутренний диаметр (мм)</td>
-								<td class="product-desc-right-col">{{ product.diameterIn }}</td>
+								<td class="product-desc-right-col">{{ product.getDiameterIn() }}</td>
 							</tr>
 						{% endif %}
 
-						{% if product.diameterOut %}
+						{% if product.getDiameterOut() %}
 							<tr>
 								<td class="product-desc-left-col">Внешний диаметр (мм)</td>
-								<td class="product-desc-right-col">{{ product.diameterOut }}</td>
+								<td class="product-desc-right-col">{{ product.getDiameterOut() }}</td>
 							</tr>
 						{% endif %}
 
 
-						{% if product.weight %}
+						{% if product.getWeight() %}
 							<tr>
 								<td class="product-desc-left-col">Масса (кг)</td>
-								<td class="product-desc-right-col">{{ product.weight }}</td>
+								<td class="product-desc-right-col">{{ product.getWeight() }}</td>
 							</tr>
 						{% endif %}
 
-						{% if product.volume %}
+						{% if product.getVolume() %}
 							<tr>
 								<td class="product-desc-left-col">Объем (м3)</td>
-								<td class="product-desc-right-col">{{ product.volume }}</td>
+								<td class="product-desc-right-col">{{ product.getVolume() }}</td>
 							</tr>
 						{% endif %}
 					</table>
 				</div>
 				<div class="tab-pane" id="tab2">
 					{% autoescape false %}
-					{{ product.description }}
+					{{ product.getText() }}
 					{% endautoescape %}
 				</div>
 			</div>
@@ -134,7 +138,7 @@
 			{% endif %}
 		</div>
 		<div class="product-bottom-box">
-			<a href="/gbi/{{ catUrl }}/?section={{ product.category.id }}&gbi={{ product.id }}&buy=true" section="{{ product.category.id }}" code="{{ product.id }}" price="{{ product.price }}" class="btn btn-primary add-basket">
+			<a href="/gbi/{{ catUrl }}/?section={{ product.getCategory().getId() }}&gbi={{ product.getId() }}&buy=true" section="{{ product.getCategory().getId() }}" code="{{ product.getId() }}" price="{{ product.getPrice() }}" class="btn btn-primary add-basket">
 				<i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
 		</div>
 	</div>

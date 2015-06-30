@@ -6,11 +6,13 @@ use App\CatalogBundle\Entity\Category;
 use App\CatalogBundle\Entity\Product;
 use App\CatalogBundle\Extension\AjaxError;
 use App\CatalogBundle\Extension\AjaxSuccess;
+use App\CatalogBundle\Extension\TableGear;
 use App\CatalogBundle\Form\CategoryType;
 use App\CatalogBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+
 
 class AdminController extends Controller
 {
@@ -87,8 +89,8 @@ class AdminController extends Controller
 
 	public function categoryParentAction()
 	{
-		$parentId = (int)$this->getRequest()->request->get('parentId');
-		$categoryId = (int)$this->getRequest()->request->get('childId');
+		$parentId = (int) $this->getRequest()->request->get('parentId');
+		$categoryId = (int) $this->getRequest()->request->get('childId');
 
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
 		$category = $catRp->find($categoryId);
@@ -187,7 +189,7 @@ class AdminController extends Controller
 
 	public function deleteProductAction()
 	{
-		$productId = (int)$this->getRequest()->request->get('productId');
+		$productId = (int) $this->getRequest()->request->get('productId');
 
 		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
 		$product = $prodRp->find($productId);
@@ -250,7 +252,7 @@ class AdminController extends Controller
 
 	public function getProductAction()
 	{
-		$productId = (int)$this->getRequest()->query->get('productId');
+		$productId = (int) $this->getRequest()->query->get('productId');
 
 		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
 		$product = $prodRp->find($productId);
@@ -288,8 +290,8 @@ class AdminController extends Controller
 
 	public function productCategoryAction()
 	{
-		$productId = (int)$this->getRequest()->request->get('productId');
-		$categoryId = (int)$this->getRequest()->request->get('categoryId');
+		$productId = (int) $this->getRequest()->request->get('productId');
+		$categoryId = (int) $this->getRequest()->request->get('categoryId');
 
 		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
@@ -435,5 +437,14 @@ class AdminController extends Controller
 				$this->dCats++;
 			}
 		}
+	}
+
+	public function editProductsAction()
+	{
+		$tableGear = new TableGear($this->container);
+		return $this->render('AppCatalogBundle:Admin:edit_products.html.twig', array(
+			'tablegear_content' => $tableGear->getContent(),
+			'admin_pool'        => $this->container->get('sonata.admin.pool')
+		));
 	}
 }

@@ -5,6 +5,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 class CategoryAdmin extends Admin
 {
@@ -67,5 +68,11 @@ class CategoryAdmin extends Admin
 	public function preRemove($category)
 	{
 		$category->rmUploaded();
+	}
+
+	// Валидация происходит в "validate" методе модели
+	public function validate(ErrorElement $errorElement, $object)
+	{
+		$errorElement->assertCallback(array('validate'));
 	}
 }

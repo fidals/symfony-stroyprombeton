@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\CatalogBundle\Extension\Utils;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * Category
@@ -213,6 +214,18 @@ class Category
 	public function __toString()
 	{
 		return (string)$this->getId() . "." . (string)$this->getTitle();
+	}
+
+	/**
+	 * Метод валидации для админки
+	 * @param ExecutionContext $context
+	 */
+	public function validate(ExecutionContext $context)
+	{
+		$alias = $this->getAlias();
+		if(preg_match("/[^a-z0-9_\/-]/", $alias)) {
+			$context->addViolation('Недопустимые для ссылки символы');
+		}
 	}
 
 	/* ----------- Блок кода для файла. Нужен для админки. Очень понавательный. -------------- */

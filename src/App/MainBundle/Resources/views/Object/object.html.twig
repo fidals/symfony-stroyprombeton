@@ -1,31 +1,31 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ object.title }}
+	{{ object.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{% if object.description is empty %}
-		{{ object.title }}
+	{% if object.getDescription() is empty %}
+		{{ object.getTitle() }}
 	{% else %}
-		{{ object.description }}
+		{{ object.getDescription() }}
 	{% endif %}
 {% endblock %}
 
 {% block  keywords %}
-	{{ object.keywords }}
+	{{ object.getKeywords() }}
 {% endblock %}
 
 {% block content %}
 	<h1>
-		{% if object.h1 is empty %}
-			{{ object.title }}
+		{% if object.getH1() is empty %}
+			{{ object.getTitle() }}
 		{% else %}
-			{{ object.h1 }}
+			{{ object.getH1() }}
 		{% endif %}
 	</h1>
 	{% autoescape false %}
-		{% include template_from_string(object.text) %}
+	    {% include template_from_string(object.getText()) %}
 	{% endautoescape %}
 
 
