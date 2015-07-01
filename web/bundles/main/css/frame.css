@@ -708,7 +708,7 @@ div.location {
 }
 
 div.location span.separate {
-	color: #999999;
+	color: #000;
 }
 
 div.location span.section {
@@ -1218,6 +1218,7 @@ p.price-desc {
 	padding: 0;
 	font-weight: bold;
 	text-align: right;
+	color: #999;
 }
 
 .price-desc-1 {

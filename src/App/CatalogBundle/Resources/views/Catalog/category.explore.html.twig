@@ -14,39 +14,37 @@
 
 {% block content %}
 	<div class="location">
+		<span class="location section">
+			<a href="/">Главная</a>
+		</span>
+
 		{% for item in parents %}
-			<span class="location section">
-				<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
-			</span>
-			<span class="location separate">/</span>
+			{% if loop.index != loop.last %}
+				<span class="location separate">»</span>
+				<span class="location section">
+					<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+				</span>
+			{% endif %}
 		{% endfor %}
 	</div>
 
-	<div class="gbi-showcase">
-		<table>
-			{% for item in children if item.model.getIsActive() %}
-				{% if loop.index is odd %}<tr>{% endif %}
-				<td>
-					<span>{{ item.model.getId() }}</span> <a href="/gbi/{{ catUrl }}/?section={{ item.model.getId() }}">
-						<h2>{% if item.model.getName() %}{{ item.model.getName() }}{% else %}{{ item.model.getTitle() }}{% endif %}</h2>
-
-						<div class="gbi-showcase-top-line">
-							<img src="{{ item.model.getPicturePath() }}"/>
-							<div class="cat-info">
-								<p>{{ item.model.getTitle() }}</p>
-								<div class="link-detailed">подробнее&nbsp&raquo</div>
-							</div>
+	<h1>{{ category.getH1() }}</h1>
+	{% for item in children | sortbyfield('name') %}
+		{% if item.model.getIsActive() %}
+			<div class="cat_cat">
+				<a href="{{ path('app_catalog_explore_category', {'catUrl': catUrl, 'section': item.model.getId()}) }}">
+					<div style="display: inline-block">
+						<span class="number">{{ item.model.getId() }}</span>
+						<span class="catalog-second-level">{{ item.model.getName() }}</span>
+					</div>
+					<div class="gbi-showcase-top-line">
+						<img src="{{ item.model.getPicturePath() }}">
+						<div class="cat-info">
 						</div>
-					</a>
-				</td>
-				{% if loop.index is even %}
-					</tr>
-					<tr style="height:20px"></tr>
-				{% endif %}
-			{% endfor %}
-		</table>
-	</div>
-	{% autoescape false %}
-	{{ category.getText() }}
-	{% endautoescape %}
+					</div>
+					<div class="link-detailed">подробнее&nbsp;»</div>
+				</a>
+			</div>
+		{% endif %}
+	{% endfor %}
 {% endblock %}

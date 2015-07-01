@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "de955250308de6c40a02ccfab2930789",
+    "hash": "b583c35b4e10e85481ca0f649f59567d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2050,6 +2050,43 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2015-04-21 07:52:05"
+        },
+        {
+            "name": "snilius/twig-sort-by-field",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/victorhaggqvist/Twig-sort-by-field.git",
+                "reference": "80ee650fb6c3e3c4246679c86eaace51d99f50fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/victorhaggqvist/Twig-sort-by-field/zipball/80ee650fb6c3e3c4246679c86eaace51d99f50fc",
+                "reference": "80ee650fb6c3e3c4246679c86eaace51d99f50fc",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5",
+                "twig/extensions": "~1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Snilius\\Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Victor Häggqvist",
+                    "email": "victor@snilius.com"
+                }
+            ],
+            "description": "A Twig Extension filter to sort an array of entries (objects or arrays) by the specified field",
+            "time": "2015-03-05 01:42:58"
         },
         {
             "name": "sonata-project/admin-bundle",
