@@ -17,6 +17,11 @@ class ProductRepository extends EntityRepository
 	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
 
 	/**
+	 * Сколько берем в запросе продуктов для поиска продуктов с картинками
+	 */
+	const DEFAULT_PER_QUERY = 100;
+
+	/**
 	 * Метод поиска для автодополнения
 	 * Используется в TableGear
 	 *
@@ -82,26 +87,43 @@ class ProductRepository extends EntityRepository
 		return ($returnObjAsArray) ? $query->getQuery()->getArrayResult() : $query->getQuery()->getResult();
 	}
 
+	/**
+	 * @param int $limit
+	 * @return array
+	 */
 	public function getRandomProducts($limit = self::DEFAULT_LIMIT)
 	{
-		$max = $this->getEntityManager()
-			->createQueryBuilder()
-			->select('MAX(p.id)')
-			->from(self::getClassName(), 'p')
-			->getQuery()
-			->getSingleScalarResult();
-
 		return $this->getEntityManager()
-			->createQueryBuilder()
-			->select('p')
-			->from(self::getClassName(), 'p')
-			->where('p.id >= :rand')
-			->orderBy('p.id')
+			->createQuery(
+				'SELECT p, RAND() AS HIDDEN rand FROM AppCatalogBundle:Product p WHERE p.isActive = 1 ORDER BY rand')
 			->setMaxResults($limit)
-			->setParameter('rand', rand(0, $max - 10000))
-			->getQuery()
 			->getResult();
 	}
+
+	/**
+	 * Выбираем N продуктов из базы, не глядя на картинки, а потом берём из этой сотни первые $limit с картинками.
+	 * @param int $limit
+	 * @return array
+	 */
+	public function getRandomProductsHasPhoto($limit = self::DEFAULT_LIMIT)
+	{
+		$productsWithPictures = array();
+		$productsWithPicturesCount = 0;
+		while($productsWithPicturesCount < $limit) {
+			$randomProducts = $this->getRandomProducts(self::DEFAULT_PER_QUERY);
+			$i = 0;
+			while(($productsWithPicturesCount < $limit) && ($i < self::DEFAULT_PER_QUERY)) {
+				$product = $randomProducts[$i];
+				if($product->hasPicture() && !in_array($product, $productsWithPictures)) {
+					$productsWithPictures[] = $product;
+					$productsWithPicturesCount++;
+				}
+				$i++;
+			}
+		}
+		return $productsWithPictures;
+	}
+
 
 	/**
 	 * Возвращает массив свойств для TableGear

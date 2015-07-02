@@ -379,8 +379,8 @@ class MigrateCommand extends ContainerAwareCommand
 
 			$staticPage = new StaticPage();
 			$staticPage->setId($pageRow['id']);
-			$staticPage->setTitle($pageRow['longtitle']);
-			$staticPage->setName($pageRow['pagetitle']);
+			$staticPage->setTitle(str_replace('"images/', '"/assets/images/', $pageRow['longtitle']));
+			$staticPage->setName(str_replace('"images/', '"/assets/images/', $pageRow['pagetitle']));
 			$staticPage->setDescription($pageRow['description']);
 			$staticPage->setAlias($pageRow['alias']);
 			$staticPage->setText($content);

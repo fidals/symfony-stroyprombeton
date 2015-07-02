@@ -40,7 +40,7 @@
 	<div class="page-header">
 		<div class="page-header-left-colon">
 			<div class="logo">
-				<div class="logo-praim"><a href="/praimgroup"><img src="/bundles/main/images/tel-logo-praim.png"/></a>
+				<div class="logo-praim"><a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}"><img src="/bundles/main/images/tel-logo-praim.png"/></a>
 				</div>
 				<div class="logo-prom" onclick="location.href='/'">
 					<div class="logo-image"><img src="/bundles/main/images/logo.png"/></div>
@@ -48,45 +48,33 @@
 				</div>
 
 			</div>
-			<table class="m-contacts vcard">
+			<table class="m-contacts_new vcard">
 				<tr>
 					<td rowspan="2">
-						<p>телефоны отдела продаж:</p>
-
-						<p class="tel"><span>(812)</span> 648-13-80</p>
-
-						<p class="tel"><span>(812)</span> 449-53-38</p>
-
-						<p class="tel"><span>(812)</span> 642-47-09</p>
-
-						<p style="margin-top: 15px;">звонок по России бесплатный</p>
-
-						<p class="tel">8-800-700-50-98</p>
-
+						<p><i>Санкт-Петербург:</i></p>
+						<p>8 <span class="code">(812)</span> <span class="tel 1">655-73-60</span></p>
+						<p>8 <span class="code">(812)</span> <span class="tel 2">655-72-95</span></p>
+						<p><i>Москва:</i></p>
+						<p>8 <span class="code">(499)</span> <span class="tel 3">649-33-79</span></p>
+						<p><i>Архангельск:</i></p>
+						<p>8 <span class="code">(8182)</span> <span class="tel 4">63-92-35</span></p>
 					</td>
-					<td>
+					<td style="vertical-align: top;">
 						<p style="display: none" class="fn org url">www.stroyprombeton.ru</p>
 
 						<p>электронная почта:</p>
 						<a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div style="position: relative;top:28px;">
-							<p style="margin-top: 15px;">адрес офиса продаж:</p>
-
-							<p class="adr"><span class="locality">Санкт-Петербург</span>,<br/>
+						<div>
+							<p style="margin-top: 20px;">адрес офиса продаж:</p>
+							<p class="adr"><span class="locality">Санкт-Петербург</span>,<br>
 								<span class="street-address"> пр. Елизарова 38А, офис 218</span></p>
 						</div>
 					</td>
 				</tr>
 			</table>
 		</div>
-
 		<div class="page-header-right-colon-container">
 			<div class="page-header-right-colon">
-
 				<!-- <table class="basket-wrapper">
 						<tr>
 							<td class="basket-wrapper empty">
@@ -116,11 +104,11 @@
 	<div class="clearing"></div>
 	<div class="menu-h">
 		<ul>
-			<li><a href="/">Завод ЖБИ</a></li>
-			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании &laquo;СТК-ПромБетон&raquo;</a></li>
-			<li><a href="{{ path('app_main_staticpage', { 'alias': 'proizvodstvo-gbi' }) }}">Производство ЖБИ изделий</a></li>
-			<li><a href="/gbi-visual/">Каталог ЖБИ продукции</a></li>
-			<li><a href="/obekty/">Наши объекты</a></li>
+			<li><a href="/">Главная</a></li>
+			<li><a href="{{ path('app_catalog_gbi_visual') }}">Каталог продукции</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'proizvodstvo-gbi' }) }}">Производство</a></li>
+			<li><a href="{{ path('app_main_territory_map') }}">Наши объекты</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
 			<li>
 				{% set cartLayout = app.session.get('cart') %}
@@ -139,23 +127,24 @@
 									<ul>
 										<li>
 											<a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order">
-												<img src="/bundles/main/images/ok.png"></a></li>
+												<img src="/bundles/main/images/ok.png">
+											</a>
+										</li>
 										<li>
 											<a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">
-												<img src="/bundles/main/images/clear.png"></a></li>
+												<img src="/bundles/main/images/clear.png">
+											</a>
+										</li>
 									</ul>
 								</div>
 							{% else %}
 								<div class="basket-content">
 									<p>Корзина пуста</p>
 								</div>
-
 								<div class="menu-basket-img">
 									<img src="/bundles/main/images/basket-empty.png">
 								</div>
-								<div class="cart-actions">
-
-								</div>
+								<div class="cart-actions"></div>
 							{% endif %}
 						</div>
 					</div>
@@ -166,10 +155,8 @@
 	<div class="page-content">
 		<div class="menu-v">
 			<div class="menu-v-top"></div>
-
 			<div class="menu-v-content-wrapper">
 				<div class="menu-v-content">
-
 					<ul>
 						<li><a href="/gbi/prom-stroy/">Общегражданское и промышленное строительство</a></li>
 						<li><a href="/gbi/dor-stroy/">Дорожное строительство</a></li>
@@ -178,62 +165,61 @@
 						<li><a href="/gbi/blag-territory/">Благоустройство территорий</a></li>
 						<li><a href="/gbi/neftegaz-stroy/">Нефтегазовое строительство</a></li>
 					</ul>
-
 				</div>
 			</div>
-
 			<div class="menu-v-bottom"></div>
-			<div class="m-izg" onclick="location.href='/izgotovlenie-gbi-po-chertezham/'">
-				<a href="/izgotovlenie-gbi-po-chertezham/">изготовление по чертежам</a>
+			<div class="OrderPrice">
+				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">
+					<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на ЖБИ" alt="Расчёт заявок на ЖБИ">
+				</a>
+			</div>
+			<div class="OrderPrice">
+				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'order_price' }) }}">
+					<img src="/assets/images/order_price.png" title="прайс-листы на жби" alt="прайс-листы на жби">
+				</a>
+			</div>
+			<div class="OrderDraw">
+				<a href="{{ path('app_main_staticpage', { 'alias': 'izgotovlenie-gbi-po-chertezham' }) }}">
+					<img src="/assets/images/order_draw.png" title="изготовление ЖБИ по индивидуальным чертежам" alt="изготовление ЖБИ по индивидуальным чертежам">
+				</a>
 			</div>
 
-
-			<script>
-				$(".partners-table").click(function () {
-					window.location.href = "http://stroyprombeton.ru/praimgroup";
-
-				});
-			</script>
 			{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
-			<div class="partners-table" onclick="window.open('/praimgroup'); return false;">
-				<div class="partners-table-header">
-					<p>Группа</p>
-					<img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
+			<a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}" target="__blank">
+				<div class="partners-table">
+					<div class="partners-table-header">
+						<p>Группа</p>
+						<img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
+					</div>
+					<table class="partners-table">
+						<tr>
+							<td>
+								<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo"/>
+								<p style="color:#005CC7;">СТК-МЕТАЛЛ</p>
+								<p class="partner-desc" style="color:#005CC7;">завод металлоконструкций</p>
+							</td>
+							<td>
+								<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo" style="margin-top: 5px;"/>
+								<p style="color:#747675;">Строй<span style="color: #FFA700;">К</span>омплект</p>
+								<p class="partner-desc" style="color:#747675;">проектирование и строительство</p>
+							</td>
+							{#<td>#}
+							{#<img src="{{ asset('bundles/main/images/modul.png') }}" alt="stk-modul.ru" class="logo"/>#}
+							{#<p style="color: #C20000;">СТК-Модуль</p>#}
+							{#<p class="partner-desc" style="color: #C20000;">поставка нерудных материалов</p>#}
+							{#</td>#}
+							<td>
+								<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru" class="logo"/>
+								<p style="color:#0757a1">АвтоСпецСервис</p>
+								<p class="partner-desc" style="color:#0757a1">ремонт грузовых автомобилей</p>
+							</td>
+						</tr>
+					</table>
 				</div>
-				<table class="partners-table">
-					<tr>
-						<td>
-							<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo"/>
-
-							<p style="color:#005CC7;">СТК-МЕТАЛЛ</p>
-
-							<p class="partner-desc" style="color:#005CC7;">завод металлоконструкций</p>
-						</td>
-						<td>
-							<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo" style="margin-top: 5px;"/>
-
-							<p style="color:#747675;">Строй<span style="color: #FFA700;">К</span>омплект</p>
-
-							<p class="partner-desc" style="color:#747675;">проектирование и строительство</p>
-						</td>
-						<td>
-							<img src="{{ asset('bundles/main/images/modul.png') }}" alt="stk-modul.ru" class="logo"/>
-
-							<p style="color: #C20000;">СТК-Модуль</p>
-
-							<p class="partner-desc" style="color: #C20000;">поставка нерудных материалов</p>
-						</td>
-						<td>
-							<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru" class="logo"/>
-
-							<p style="color:#0757a1">АвтоСпецСервис</p>
-
-							<p class="partner-desc" style="color:#0757a1">ремонт грузовых автомобилей</p>
-						</td>
-					</tr>
-				</table>
-			</div>
+			</a>
 		</div>
+
+
 
 		<div class="content-container">
 			<div class="content">
@@ -248,7 +234,6 @@
 						</tr>
 					</table>
 				</div>
-
 				<div class="primary-content">
 					{% block content %}{% endblock %}
 				</div>
@@ -258,14 +243,9 @@
 
 	<div class="clearing"></div>
 
-	<div class="last-adds">
-		<!--[!last-adds-tmp!]-->
-	</div>
-
 	<div class="footer-empty">&nbsp;</div>
 	<div class="footer rcs">
-		<div>Copyright &copy; 2009&#151;2013 ООО &laquo;СТК-ПромБетон&raquo; (Санкт-Петербург)</div>
-		<div><a href="/">Завод ЖБИ</a>: продажа и производство ЖБИ</div>
+		<div>Все права защищены. <script>document.write("2009-"+new Date().getFullYear());</script> ООО &laquo;СТК-ПромБетон&raquo; (Санкт-Петербург)</div>
 	</div>
 	</div>
 
@@ -367,4 +347,8 @@
 		})();
 
 	</script>
+
+	<!-- Callbaska -->
+	<script src="https://my.callbaska.ru/callback.js" async type="text/javascript" charset="utf-8"></script>
+	<!-- Callbaska -->
 {% endblock %}
