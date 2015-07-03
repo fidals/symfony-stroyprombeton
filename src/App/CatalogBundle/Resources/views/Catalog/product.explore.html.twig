@@ -34,6 +34,9 @@
 	<div class="product-header">
 		<h1 style="color:#333333">
 			{{ product.getH1() }}
+			{% if product.getNomen() %}
+				<span class="nomen" style="float: right">{{ product.getNomen() }}</span>
+			{% endif %}
 		</h1>
 	</div>
 	<div class="product">
@@ -137,7 +140,7 @@
 						<tr>
 							<td class="product-desc-left-col">
 								<div class="shk_basket_count" style="float: none !important;">
-									<input type="text" name="shk-count" value="1" size="2" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0px">
+									<input type="text" name="shk-count" value="1" size="2" code="{{ product.getId() }}" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0px">
 									<img class="field-arr-up" onclick="spinUpCount(this)" src="http://www.stroyprombeton.ru/assets/snippets/shopkeeper/style/default/img/arr_up.gif" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 11px -2px; vertical-align: bottom;">
 									<img class="field-arr-down" onclick="spinDownCount(this)" src="http://www.stroyprombeton.ru/assets/snippets/shopkeeper/style/default/img/arr_down.gif" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
 								</div>
@@ -151,11 +154,7 @@
 						<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
 					</div>
 				</div>
-				<div class="tab-pane" id="tab2">
-					{% autoescape false %}
-					{{ product.getText() }}
-					{% endautoescape %}
-				</div>
+				<div class="tab-pane" id="tab2"></div>
 			</div>
 		</div>
 	</div>

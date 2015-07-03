@@ -19,8 +19,8 @@ $(function () {
 
 	// --------------------------------------------------------------------------------
 
-	if ($("a.add-basket").length > 0) {
-		$("a.add-basket").click(AddGoodsToBasket);
+	if ($("input.add-basket").length > 0) {
+		$("input.add-basket").click(AddGoodsToBasket);
 	}
 
 	// --------------------------------------------------------------------------------

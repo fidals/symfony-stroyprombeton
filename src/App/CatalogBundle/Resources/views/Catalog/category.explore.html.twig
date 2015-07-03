@@ -35,7 +35,7 @@
 				<a href="{{ path('app_catalog_explore_category', {'catUrl': catUrl, 'section': item.model.getId()}) }}">
 					<div style="display: inline-block">
 						<span class="number">{{ item.model.getId() }}</span>
-						<span class="catalog-second-level">{{ item.model.getName() }}</span>
+						<span class="catalog-second-level">{{ item.model.getTitle() }}</span>
 					</div>
 					<div class="gbi-showcase-top-line">
 						<img src="{{ item.model.getPicturePath() }}">

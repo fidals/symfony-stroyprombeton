@@ -49,7 +49,7 @@
 					<td class="gbi-list code">{{ product.getNomen() }}</td>
 					<td class="gbi-list name">
 						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}">
-							{{ product.getName() }}<span> {{ product.getMark() }}</span></a></td>
+							{{ product.getName() }}</a></td>
 					<td class="gbi-list price">
 						{% if product.price %}
 							{{ product.getPriceRounded() }} руб.
@@ -68,6 +68,7 @@
 									</div>
 									<div class="shk_basket_buy">
 										<input type="button" class="btn-gray add-basket" name="shk-submit" type="submit" value="Заказать">
+										<a section="{{ section.getId() }}" code="{{ product.getId() }}" price="{% if product.getPrice() %} {{ product.getPrice() }} {% endif %}"></a>
 									</div>
 								</fieldset>
 							</form>

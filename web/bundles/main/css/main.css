@@ -306,7 +306,6 @@ div.product {
 }
 
 div.product-header {
-	width: 850px;
 	height: 30px;
 }
 
@@ -322,7 +321,7 @@ div.product-photo {
 	display: inline-block;
 	float: left;
 	margin-left: 5px;
-	width: 50%;
+	width: 45%;
 	border-radius: 5px;
 	border: 3px double #dddddd;
 }
@@ -332,14 +331,13 @@ div.product-photo img {
 }
 
 div.product-info {
-	width: 44%;
+	width: 45%;
 	margin: 5px 10px 5px 20px;
 	float: right;
 	font-size: 16px;
 }
 
 div.product-info div.tab-pane {
-	height: 300px;
 	width: 100%;
 }
 
@@ -662,7 +660,8 @@ span.catalog-second-level, span.catalog-third-level {
 }
 
 .shk_basket_count .field-arr-down, .product-desc-left-col .field-arr-down, .shk-item .field-arr-down{
-	margin: 0 0 0 -21px !important;
+	margin: 11px 0 0 -18px !important;
+	position: absolute;
 }
 
 .btn-gray {
