@@ -572,3 +572,44 @@ img.news_image_border {
 	border: 3px double #DDDDDD;
 	border-radius: 5px;
 }
+
+.basket-sticky{
+	height: 45px;
+}
+
+div.menu-basket{
+	float:right;
+	margin-right: 9px;
+}
+
+#shopCart{
+	margin: 0;
+}
+
+.shop-cart {margin:10px 0; width: 100%;}
+
+#shopCart a{
+	margin: 0;
+}
+
+#cartInner {
+	cursor: pointer;
+	height: 45px;
+	margin: 0;
+	padding: 0;
+	width: 214px;
+}
+
+.cart-empty {
+	background: url("/bundles/main/images/basket.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.cart-full {
+	background: url("/bundles/main/images/basket_full.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+div.basket-content {
+	margin: 23px 0 0 77px;
+	position: absolute;
+}
+
