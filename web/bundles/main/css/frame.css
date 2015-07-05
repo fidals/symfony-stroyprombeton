@@ -35,7 +35,7 @@ img {
 h1, h2, h3, h4, h5, h6 {
 	margin: 0px;
 	padding: 0px;
-	color: #c90000;
+	color: #c90000 !important;
 	line-height: 1.7em;
 }
 
@@ -708,7 +708,7 @@ div.location {
 }
 
 div.location span.separate {
-	color: #999999;
+	color: #000;
 }
 
 div.location span.section {
@@ -1105,7 +1105,7 @@ div.gbi-list table {
 div.gbi-list table th, div.gbi-list table td {
 	padding: 5px;
 	font-size: 1em;
-	text-align: left;
+	text-align: center;
 	border: 1px solid #999999;
 }
 
@@ -1164,20 +1164,6 @@ div.gbi-list table td.rest {
 	text-align: center !important;
 }
 
-div.gbi-list table td.buy {
-	text-align: center !important;
-}
-
-div.gbi-list table td.buy a {
-	width: 60px;
-	padding: 2px;
-
-}
-
-div.gbi-list table td.buy a:hover {
-	box-shadow: 0 0 2px 2px #c90000;
-}
-
 td.gbi-section-desc {
 	width: 100%;
 	white-space: normal !important;
@@ -1218,6 +1204,7 @@ p.price-desc {
 	padding: 0;
 	font-weight: bold;
 	text-align: right;
+	color: #999;
 }
 
 .price-desc-1 {
@@ -1890,4 +1877,123 @@ div.object-card div:hover {
 
 .group-table tr td div p:last-child {
 	color: #cdcdcd;
+}
+
+div.gbi-list {
+	margin-top: 10px;
+	padding: 10px;
+	background-color: #e1e1e1;
+	border-radius: 7px;
+}
+div.gbi-list table {
+	width: 100%;
+}
+div.gbi-list table th, div.gbi-list table td {
+	padding: 5px;
+	font-size: 1em;
+	text-align: left;
+	/*border: 1px solid #999999;*/
+}
+div.gbi-list table th {
+	background-color: #CCCCCC;
+	text-align: center;
+	white-space: nowrap;
+}
+div.gbi-list table td {
+	white-space: nowrap;
+	background-color: #f1f1f1;
+}
+td.no-white-space {
+	white-space: normal !important;
+}
+div.gbi-list table td.photo {
+	text-align: center !important;
+	width: 30px;
+}
+div.gbi-list table td.photo img{
+	width: 20px;
+	max-width: 20px;
+}
+div.gbi-list table td.code {
+	font-size: 0.7em;
+	width: 45px;
+}
+div.gbi-list table td.name {
+	white-space: normal;
+	padding: 5px 10px;
+	font-weight: 700;
+}
+
+.prod_nomen{
+	color: #999999;
+	float: right;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: -30px 0 0;
+}
+
+div.gbi-list table td.name a, div.gbi-list table td.name a:visited{
+	color: #333333;
+	text-decoration: underline;
+}
+div.gbi-list table td.name a:hover{
+	color: #C90000;
+	text-decoration: underline;
+}
+
+div.gbi-list table td.name span {
+	color: #C90000;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.gbi-list-name-add-padding {
+	padding: 5px !important;
+	font-weight: bold;
+}
+
+div.gbi-list table td.price {
+	color: #C90000;
+	font-weight: bold;
+	text-align: right;
+	width: 90px;
+}
+
+div.gbi-list table td.rest {
+	/*padding-right: 20px !important;*/
+	text-align: center !important;
+}
+div.gbi-list table td.buy {
+	text-align: center !important;
+	width: 170px;
+}
+div.gbi-list table td.buy a {
+	width: 60px;
+	padding: 2px;
+
+}
+div.gbi-list table td.buy a:hover {
+	box-shadow: 0 0 2px 2px #c90000;
+}
+
+td.gbi-section-desc {
+	width: 100%;
+	white-space: normal !important;
+	background-color: #f1f1f1 !important;
+}
+
+td.gbi-section-desc a {
+	display: inline !important;
+}
+
+div.gbi-list table td p {
+	margin: 0;
+	padding: 0 0 10px 0;
+}
+div.gbi-list table td ul {
+	margin: 0 0 10px 0;
+}
+
+.shk-item {
+	width: 170px;
 }

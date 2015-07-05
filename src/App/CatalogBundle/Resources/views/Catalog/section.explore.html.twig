@@ -14,40 +14,42 @@
 
 {% block content %}
 	<div class="location">
+		<span class="location section">
+			<a href="/">Главная</a>
+		</span>
+
 		{% for item in parents %}
-			<span class="location section">
-				<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
-			</span>
-			<span class="location separate">/</span>
+			{% if loop.index != loop.last %}
+				<span class="location separate">»</span>
+				<span class="location section">
+					<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+				</span>
+			{% endif %}
 		{% endfor %}
 	</div>
 	<h1 class="gbi-section">
 		{{ section.getH1() }}
 	</h1>
-	{% autoescape false %}
-	    {{ section.getText() }}
-	{% endautoescape %}
 	<div class="gbi-list">
 		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
 
 		<p class="price-desc price-desc-1">Не является публичной офертой</p>
 		<table>
 			<tr>
-				<td colspan="2">Код</td>
+				<th colspan="2">Код</th>
 				<th>Наименование и марка ЖБИ изделия</th>
 				<th>Цена</th>
 				<th>Количество</th>
-				<th>Купить</th>
 			</tr>
 			{% for product in products if product.isActive %}
 				<tr>
 					<td class="gbi-list photo">
-						<img src="/assets/main/images/bullet.png">
+						<img src="/bundles/main/images/bullet.png">
 					</td>
 					<td class="gbi-list code">{{ product.getNomen() }}</td>
 					<td class="gbi-list name">
 						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}">
-							{{ product.getName() }}<span> {{ product.getMark() }}</span></a></td>
+							{{ product.getName() }}</a></td>
 					<td class="gbi-list price">
 						{% if product.price %}
 							{{ product.getPriceRounded() }} руб.
@@ -55,12 +57,21 @@
 							По запросу
 						{% endif %}
 					</td>
-					<td class="gbi-list rest rest-container">
-						<input class="basket-rest" type="number" min="1" max="999999" code="{{ product.getId() }}" value="1">
-					</td>
 					<td class="gbi-list buy">
-						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}&amp;buy=true" section="{{ section.getId() }}" code="{{ product.getId() }}" price="{% if product.getPrice() %} {{ product.getPrice() }} {% endif %}" title="{{ product.getName() }}" class="add-basket">
-							<i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
+						<div class="shk-item">
+							<form action="" method="post">
+								<fieldset>
+									<div class="shk_basket_count">
+										<input type="text" name="shk-count" value="1" size="2" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0px">
+										<img class="field-arr-up" onclick="spinUpCount(this)" src="/assets/snippets/shopkeeper/style/default/img/arr_up.gif" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 11px -2px; vertical-align: bottom;">
+										<img class="field-arr-down" onclick="spinDownCount(this)" src="/assets/snippets/shopkeeper/style/default/img/arr_down.gif" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
+									</div>
+									<div class="shk_basket_buy">
+										<input type="button" class="btn-gray add-basket" name="shk-submit" type="submit" value="Заказать">
+									</div>
+								</fieldset>
+							</form>
+						</div>
 					</td>
 				</tr>
 			{% endfor %}

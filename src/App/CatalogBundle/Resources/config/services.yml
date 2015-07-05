@@ -5,3 +5,8 @@ services:
     catalog.autocomplete:
         class: App\CatalogBundle\Extension\Autocomplete
         arguments: ['@service_container']
+
+    app.twig_extension:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }
