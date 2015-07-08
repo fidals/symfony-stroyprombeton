@@ -5,3 +5,6 @@ services:
     catalog.autocomplete:
         class: App\CatalogBundle\Extension\Autocomplete
         arguments: ['@service_container']
+    catalog.cart:
+        class: App\CatalogBundle\Extension\CartService
+        arguments: ['@service_container']

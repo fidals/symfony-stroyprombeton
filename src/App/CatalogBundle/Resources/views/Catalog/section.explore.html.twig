@@ -59,8 +59,10 @@
 						<input class="basket-rest" type="number" min="1" max="999999" code="{{ product.getId() }}" value="1">
 					</td>
 					<td class="gbi-list buy">
-						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}&amp;buy=true" section="{{ section.getId() }}" code="{{ product.getId() }}" price="{% if product.getPrice() %} {{ product.getPrice() }} {% endif %}" title="{{ product.getName() }}" class="add-basket">
-							<i class="icon-shopping-cart" style="margin-right: 7px;"></i>В корзину</a>
+						<a onclick="Cart.add({{ product.getId() }}, $(this).closest('tr').find('.basket-rest').val()); return;" section="{{ section.getId() }}" code="{{ product.getId() }}" price="{% if product.getPrice() %} {{ product.getPrice() }} {% endif %}" title="{{ product.getName() }}" class="add-basket">
+							<i class="icon-shopping-cart" style="margin-right: 7px;"></i>
+							В корзину
+						</a>
 					</td>
 				</tr>
 			{% endfor %}

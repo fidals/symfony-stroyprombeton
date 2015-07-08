@@ -3,8 +3,6 @@
 namespace App\CatalogBundle\Controller;
 
 use App\CatalogBundle\Entity\Order;
-use App\CatalogBundle\Entity\Cart;
-use App\CatalogBundle\Entity\Repository\CartRepository;
 use App\CatalogBundle\Form\OrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,43 +10,42 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
-	/**
-	 * CRUD корзины
-	 * @return Response
-	 */
-	public function indexAction()
+	public function addAction()
 	{
-		$query = $this->getRequest()->query;
-		$mode = $query->get('mode');
-		$cartRp = CartRepository::getInstance($this);
-		$res = new Response();
+		$id = (int) $this->getRequest()->request->getInt('id');
+		$quantity = (int) $this->getRequest()->request->getInt('quantity');
 
-		if ($mode == 'add') {
-			$code = (int)$query->get('code');
-			$rest = (int)$query->get('rest');
-
-			$cart = $cartRp->loadCart();
-			$cart->addProduct($code, $rest);
-			$cartRp->saveCart($cart);
-
-			$res = new Response($cart->getTotalProductsCount());
-		} elseif ($mode == 'edit') {
-			$order = $query->get('order_basket');
-			$cart = $cartRp->loadCart();
-			if (!empty($order)) {
-				$parts = explode('-', $order);
-				foreach ($parts as $part) {
-					$props = explode(':', $part);
-					$cart->addProduct((int)$props[0], (int)$props[1]);
-				}
-				$cartRp->saveCart($cart);
-			}
-			$res = new Response($cart->serialize());
-		} elseif ($mode == 'clear') {
-			$cartRp->cleanCart();
+		$cartService = $this->get('catalog.cart');
+		$cart = $cartService->loadCart();
+		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+		$product = $prodRp->find($id);
+		if(!empty($product)) {
+			$cart->addProduct($id, $quantity);
+			$cartService->saveCart($cart);
+		} else {
+			throw new \Exception("Not found product with provided identity");
 		}
 
-		return $res;
+		return $this->render('AppCatalogBundle:Cart:cart.html.twig');
+	}
+
+	public function removeAction()
+	{
+		$id = (int) $this->getRequest()->request->getInt('id');
+		$quantity = (int) $this->getRequest()->request->getInt('quantity');
+
+		$cartService = $this->get('catalog.cart');
+		$cart = $cartService->loadCart();
+
+		$cart->removeProduct($id, $quantity);
+		$cartService->saveCart($cart);
+		return $this->render('AppCatalogBundle:Cart:cart.html.twig');
+	}
+
+	public function cleanAction()
+	{
+		$this->get('catalog.cart')->cleanCart();
+		return $this->render('AppCatalogBundle:Cart:cart.html.twig');
 	}
 
 	/**
@@ -72,18 +69,19 @@ class CartController extends Controller
 					->setContentType("text/html")
 					->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
 							'form' => $form->createView(),
-							'cart' => CartRepository::getInstance($this)->loadCart(true)
+							'cart' => $this->get('catalog.cart')->loadCart(true)
 						))
 					);
 				$mailer->send($message);
-				CartRepository::getInstance($this)->cleanCart();
+				$this->get('catalog.cart')->cleanCart();
 				return $this->redirect($this->generateUrl('app_main_index'));
 			}
 		}
 
+		$cart = $this->get('catalog.cart')->loadCart(true);
 		return $this->render('AppCatalogBundle:Cart:order.html.twig', array(
-			'order' => CartRepository::getInstance($this)->loadCart(true),
-			'form' => $form->createView()
+			'order' => $cart,
+			'form'  => $form->createView()
 		));
 	}
 }

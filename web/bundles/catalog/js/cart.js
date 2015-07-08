@@ -1,100 +1,45 @@
 var Cart = {
-
-	productsCount: 0,
-
-	cash: 0,
-
 	url: {
-		cart: '/metallokonstruktsii/cart/',
-		edit: '/metallokonstruktsii/cart/edit/',
-		add: '/metallokonstruktsii/cart/add/',
-		remove: '/metallokonstruktsii/cart/remove/',
-		clean: '/metallokonstruktsii/cart/clean/'
+		add: '/gbi/cart/add/',
+		remove: '/gbi/cart/remove/',
+		clean: '/gbi/cart/clean/'
 	},
-
 	part: {
-		content: '.cart-content',
-		actions: '.cart-actions',
-		counter: '.cart-products-cnt',
-		json: '.order-json'
+		container: '.menu-basket'
 	},
-
-	service: {
-		foreach: function (jsonObj, callback) {
-			for (var key in jsonObj) {
-				if (jsonObj.hasOwnProperty(key)) {
-					callback(key, jsonObj[key])
-				}
-			}
-		}
-	},
-
 	view: {
-		changeCount: function (count) {
-			Cart.productsCount = count;
-			if (count != 0) {
-				$(Cart.part.content).html('Товаров в корзине: <b>' + count + '</b>');
-				$(Cart.part.actions).css({visibility: 'visible'});
-			} else {
-				$(Cart.part.content).html('Корзина<br>пуста');
-				$(Cart.part.actions).css({visibility: 'hidden'});
-			}
-		},
-		clean: function () {
-			$(Cart.part.content).html('Корзина пуста');
-			$(Cart.part.actions).css({visibility: 'hidden'});
-		},
-		remove: function (el) {
-			$(el).remove();
+		update: function (html) {
+			$(Cart.part.container).html(html);
 		}
 	},
-
-	edit: function (productId, count) {
-		$.post(
-			Cart.url.edit,
-			{
-				productId: productId,
-				count: count
-			},
-			function (json) {
-				Cart.view.changeCount(json.count);
-			}, 'json'
-		)
-	},
-
-	add: function (productId, count) {
+	add: function (id, quantity) {
 		$.post(
 			Cart.url.add,
 			{
-				productId: productId,
-				count: count
+				id: id,
+				quantity: quantity
 			},
-			function (json) {
-				Cart.view.changeCount(json.count)
-			}, 'json'
+			Cart.view.update,
+			'html'
 		)
 	},
-
-	remove: function (el, productId) {
+	remove: function (id, quantity) {
 		$.post(
 			Cart.url.remove,
 			{
-				productId: productId
+				id: id,
+				quantity: quantity
 			},
-			function (json) {
-				Cart.view.changeCount(json.count);
-				Cart.view.remove(el);
-			}, 'json'
+			Cart.view.update,
+			'html'
 		)
 	},
-
 	clean: function () {
 		$.post(
 			Cart.url.clean,
 			{},
-			function (json) {
-				Cart.view.clean();
-			}, 'json'
+			Cart.view.update,
+			'html'
 		)
 	}
 }

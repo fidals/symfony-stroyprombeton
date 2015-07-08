@@ -1,9 +1,10 @@
 <?php
 
-namespace App\CatalogBundle\Entity\Repository;
+namespace App\CatalogBundle\Extension;
 
+use App\CatalogBundle\Command\SitemapCommand;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use App\CatalogBundle\Entity\Cart;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class CartRepository
@@ -13,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  *
  * @package App\CatalogBundle\Entity\Repository
  */
-class CartRepository
+class CartService
 {
 	/**
 	 * @var \Doctrine\Bundle\DoctrineBundle\Registry
@@ -23,50 +24,37 @@ class CartRepository
 	 * @var null|\Symfony\Component\HttpFoundation\Session\SessionInterface
 	 */
 	protected $session;
-	/**
-	 * @var
-	 */
-	protected static $_instance;
 
-	/**
-	 * @param Controller $controller
-	 * @return CartRepository
-	 */
-	public static function getInstance(Controller $controller)
-	{
-		if (null === self::$_instance) {
-			self::$_instance = new self($controller);
-		}
-		return self::$_instance;
-	}
+	private $container;
 
-	/**
-	 * @param Controller $controller
-	 */
-	public function __construct(Controller $controller)
+	public function __construct(ContainerInterface $container)
 	{
-		$this->doctrine = $controller->getDoctrine();
-		$this->session = $controller->getRequest()->getSession();
+		$this->container = $container;
+		$this->doctrine = $container->get('doctrine');
+		$this->session = $container->get('session');
 	}
 
 	// cart methods
 	/**
-	 * @param bool $with_products - корзина с продуктами, или нет
+	 * @param bool $withProducts - корзина с продуктами, или нет
 	 * @return Cart
 	 */
-	public function loadCart($with_products = false)
+	public function loadCart($withProducts = false)
 	{
 		$cart = $this->session->get('cart', false);
 
-		if ($with_products && $cart) {
+		if ($withProducts && $cart) {
 			$cart = clone $cart;
 			$prodRp = $this->doctrine->getRepository('AppCatalogBundle:Product');
+			$catRp = $this->doctrine->getRepository('AppCatalogBundle:Category');
 			$products = $cart->getProducts();
-			$cart_products = array();
+			$cartProducts = array();
 			foreach ($products as $id => $count) {
-				$cart_products[$id] = array('count' => $count, 'model' => $prodRp->find($id));
+				$model = $prodRp->find($id);
+				$catUrl = SitemapCommand::$baseCats[$catRp->getPath($model->getCategory())[0]->getId()];
+				$cartProducts[$id] = array('count' => $count, 'model' => $model, 'catUrl' => $catUrl);
 			}
-			$cart->setProducts($cart_products);
+			$cart->setProducts($cartProducts);
 		}
 		return ($cart) ? clone $cart : new Cart();
 	}

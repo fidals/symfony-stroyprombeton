@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-	{#<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>#}
+	<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>
 
 	{#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
@@ -100,40 +100,10 @@
 			<li><a href="/obekty/">Наши объекты</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
 			<li>
-				{% set cartLayout = app.session.get('cart') %}
 				<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
 					<div class="basket basket-sticky">
 						<div class="menu-basket">
-							<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
-								<div class="basket basket-sticky">
-									<div class="menu-basket">
-										<div id="shopCart" class="shop-cart">
-											<a href="/order/">
-												<div id="cartInner" class="{% if cartLayout is not null %}cart-full{% else %}cart-empty{% endif %}">
-													<div class="basket-content">{% if cartLayout is not null %} {{ cartLayout.products | length }} {% else %} 0 {% endif %}</div>
-												</div>
-											</a>
-										</div>
-
-									</div>
-								</div>
-							</div>
-								{#<div class="basket-content">#}
-									{#<p>Товаров <br>в корзине: </p>#}
-								{#</div>#}
-								{#<div class="menu-basket-img">#}
-									{#<img src="/bundles/main/images/busket-full.png">#}
-								{#</div>#}
-								{#<div class="cart-actions">#}
-									{#<ul>#}
-										{#<li>#}
-											{#<a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order">#}
-												{#<img src="/bundles/main/images/ok.png"></a></li>#}
-										{#<li>#}
-											{#<a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">#}
-												{#<img src="/bundles/main/images/clear.png"></a></li>#}
-									{#</ul>#}
-								{#</div>#}
+							{% include 'AppCatalogBundle:Cart:cart.html.twig' %}
 						</div>
 					</div>
 				</div>
@@ -164,13 +134,6 @@
 				<a href="/izgotovlenie-gbi-po-chertezham/">изготовление по чертежам</a>
 			</div>
 
-
-			<script>
-				$(".partners-table").click(function () {
-					window.location.href = "http://stroyprombeton.ru/praimgroup";
-
-				});
-			</script>
 			{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
 			<div class="partners-table" onclick="window.open('/praimgroup'); return false;">
 				<div class="partners-table-header">

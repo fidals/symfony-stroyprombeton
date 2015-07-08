@@ -15,7 +15,7 @@ class Cart
 	 * Всего продуктов в козине
 	 * @var int
 	 */
-	private $total_products_count = 0;
+	private $totalProductsCount = 0;
 
 	/**
 	 * @param $id
@@ -24,9 +24,19 @@ class Cart
 	public function addProduct($id, $count)
 	{
 		$this->products[$id] = (isset($this->products[$id])) ? $this->products[$id] + $count : $count;
-		$this->total_products_count += $count;
-		// TODO - зачем здесь такое интересное echo ? Протести и снеси, если тест ок
-		echo '';
+		$this->totalProductsCount += $count;
+	}
+
+	public function removeProduct($id, $count)
+	{
+		if(isset($this->products[$id])) {
+			$this->totalProductsCount -= $this->products[$id];
+			if($count >= $this->products[$id]) {
+				unset($this->products[$id]);
+			} else {
+				$this->products[$id] -= $count;
+			}
+		}
 	}
 
 	public function setProducts($products)
@@ -41,24 +51,11 @@ class Cart
 
 	public function setTotalProductsCount($total_products_count)
 	{
-		$this->total_products_count = $total_products_count;
+		$this->totalProductsCount = $total_products_count;
 	}
 
 	public function getTotalProductsCount()
 	{
-		return $this->total_products_count;
-	}
-
-	public function serialize()
-	{
-		if (empty($this->products)) {
-			return false;
-		}
-
-		$cart_prods_arr = array();
-		foreach ($this->products as $id => $count) {
-			$cart_prods_arr[] = $id . ':' . $count;
-		}
-		return implode('-', $cart_prods_arr);
+		return $this->totalProductsCount;
 	}
 }

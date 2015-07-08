@@ -1,72 +1,148 @@
-<form action="{{ path('app_catalog_order') }}" method="post" {{ form_enctype(form) }}>
-	{{ form_errors(form) }}
-	<table>
-		<tr>
-			<td><span class="obligat">*</span></td>
-			<td class="form-order title"><label for="person">Ваше имя:</label></td>
-			<td class="form-order data">{{ form_widget(form.person) }}</td>
-		</tr>
-		<tr>
-			<td><span class="obligat">*</span></td>
-			<td class="form-order title"><label for="phone">Контактный телефон:</label>
-				<span class="phone-prefix-country">+7</span></td>
-			<td class="form-order data">{{ form_widget(form.phone) }}</td>
-		</tr>
-		<tr>
-			<td><span class="obligat">*</span></td>
-			<td class="form-order title"><label for="email">Электронная почта:</label></td>
-			<td class="form-order data">{{ form_widget(form.email) }}</td>
-		</tr>
-		<tr>
-			<td><span class="obligat">*</span></td>
-			<td class="form-order title"><label for="delivery_address">Адрес доставки:</label></td>
-			<td class="form-order data">{{ form_widget(form.deliveryAdress) }}</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td class="form-order title"></td>
-			<td class="form-order order-warning">
-				<div class="dostavka-gbi">
-					<p>
-						Варианты поставки ЖБИ изделий
-					</p>
-					<ul>
-						<li>Доставка ЖБИ изделий автотранспортом компании</li>
-						<li>Доставка ЖБИ изделий по железной дороге</li>
-						<li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>
-					</ul>
-				</div>
-				<div class="dostavka-gbi">
-					<p>
-						Стоимость доставки ЖБИ изделий
-					</p>
-					<ul>
-						<li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>
-						<li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>
-						<li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>
-					</ul>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td class="form-order title"><label for="comment">Комментарий к заказу:</label></td>
-			<td class="form-order data">{{ form_widget(form.comment) }}</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td class="form-order title"></td>
-			<td class="form-order warning"></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td class="form-order title"></td>
-			<td class="form-order submit">
-				<div>
-					<input type="submit" value="Отправить заказ"> <input type="button" value="Очистить поля">
-				</div>
-			</td>
-		</tr>
-	</table>
-	{{ form_rest(form) }}
+
+
+<form enctype="multipart/form-data" method="post" action="order/" id="shopOrderForm">
+	<fieldset>
+		<input type="hidden" name="formid" value="shopOrderForm">
+		<input type="hidden" name="reportTpl" value="shopOrderReport">
+		<table class="shopOrderTable">
+			<tbody><tr>
+				<td>Ваше имя:<sup>*</sup></td>
+				<td><input name="name" size="30" class="textfield" type="text" value=""></td>
+			</tr>
+			<tr>
+				<td>Контактный телефон:<sup>*</sup></td>
+				<td><input name="phone" size="30" class="textfield" type="text" value=""></td>
+			</tr>
+			<tr>
+				<td>Электронный адрес (Е-mail):<sup>*</sup></td>
+				<td><input name="email" size="30" class="textfield" type="text" value=""> </td>
+			</tr>
+			<tr>
+				<td>Полное название организации:<sup>*</sup></td>
+				<td><input name="company" size="30" class="textfield" type="text" value=""> </td>
+			</tr>
+			<tr>
+				<td>Адрес поставки:</td>
+				<td><input name="address" size="30" class="textfield" type="text" value=""></td>
+			</tr>
+			<tr>
+				<td>Комментарий к заказу:</td>
+				<td><textarea name="message" class="textfield" rows="4" cols="30"></textarea></td>
+			</tr>
+			<tr>
+				<td>Приложить файл:</td>
+				<td>
+					<div>
+						<div class="attach_field"><div><input type="file" name="attachment[]" accept="text/plain, application/msword, text/richtext, application/x-compressed" value="/"></div></div>
+						<a href="javascript:;" class="add_attach_field" style="display: none;">Прикрепить ещё файл</a>
+					</div></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="td_submit"><input type="submit" name="submit" class="button btn" value="Отправить заказ"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="form-order order-warning">
+					<div class="dostavka-gbi">
+						<p>
+							Варианты поставки
+						</p>
+						<ul>
+							<li>Доставка автотранспортом компании</li>
+							<li>Доставка по железной дороге</li>
+							<li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>
+						</ul>
+					</div>
+					<div class="dostavka-gbi">
+						<p>
+							Стоимость доставки
+						</p>
+						<ul>
+							<li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>
+							<li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>
+							<li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+
+
+
+			</tbody></table>
+	</fieldset>
 </form>
+
+
+{#<form action="{{ path('app_catalog_order') }}" method="post" {{ form_enctype(form) }}>#}
+	{#{{ form_errors(form) }}#}
+	{#<table>#}
+		{#<tr>#}
+			{#<td><span class="obligat">*</span></td>#}
+			{#<td class="form-order title"><label for="person">Ваше имя:</label></td>#}
+			{#<td class="form-order data">{{ form_widget(form.person) }}</td>#}
+		{#</tr>#}
+		{#<tr>#}
+			{#<td><span class="obligat">*</span></td>#}
+			{#<td class="form-order title"><label for="phone">Контактный телефон:</label>#}
+				{#<span class="phone-prefix-country">+7</span></td>#}
+			{#<td class="form-order data">{{ form_widget(form.phone) }}</td>#}
+		{#</tr>#}
+		{#<tr>#}
+			{#<td><span class="obligat">*</span></td>#}
+			{#<td class="form-order title"><label for="email">Электронная почта:</label></td>#}
+			{#<td class="form-order data">{{ form_widget(form.email) }}</td>#}
+		{#</tr>#}
+		{#<tr>#}
+			{#<td><span class="obligat">*</span></td>#}
+			{#<td class="form-order title"><label for="delivery_address">Адрес доставки:</label></td>#}
+			{#<td class="form-order data">{{ form_widget(form.deliveryAdress) }}</td>#}
+		{#</tr>#}
+		{#<tr>#}
+			{#<td></td>#}
+			{#<td class="form-order title"></td>#}
+			{#<td class="form-order order-warning">#}
+				{#<div class="dostavka-gbi">#}
+					{#<p>#}
+						{#Варианты поставки ЖБИ изделий#}
+					{#</p>#}
+					{#<ul>#}
+						{#<li>Доставка ЖБИ изделий автотранспортом компании</li>#}
+						{#<li>Доставка ЖБИ изделий по железной дороге</li>#}
+						{#<li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>#}
+					{#</ul>#}
+				{#</div>#}
+				{#<div class="dostavka-gbi">#}
+					{#<p>#}
+						{#Стоимость доставки ЖБИ изделий#}
+					{#</p>#}
+					{#<ul>#}
+						{#<li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>#}
+						{#<li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>#}
+						{#<li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>#}
+					{#</ul>#}
+				{#</div>#}
+			{#</td>#}
+		{#</tr>#}
+		{#<tr>#}
+			{#<td></td>#}
+			{#<td class="form-order title"><label for="comment">Комментарий к заказу:</label></td>#}
+			{#<td class="form-order data">{{ form_widget(form.comment) }}</td>#}
+		{#</tr>#}
+		{#<tr>#}
+			{#<td></td>#}
+			{#<td class="form-order title"></td>#}
+			{#<td class="form-order warning"></td>#}
+		{#</tr>#}
+		{#<tr>#}
+			{#<td></td>#}
+			{#<td class="form-order title"></td>#}
+			{#<td class="form-order submit">#}
+				{#<div>#}
+					{#<input type="submit" value="Отправить заказ"> <input type="button" value="Очистить поля">#}
+				{#</div>#}
+			{#</td>#}
+		{#</tr>#}
+	{#</table>#}
+	{#{{ form_rest(form) }}#}
+{#</form>#}

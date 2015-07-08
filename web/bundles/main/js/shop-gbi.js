@@ -1,6 +1,6 @@
 $(function () {
 	
-	$(document).on("mouseenter", "#cartInner_full", function(){ 
+	$(document).on("mouseenter", "#cartInner.cart-full", function(){
         $(".mbasket-items").css("display", "block");
 	});
 	$(document).on("mouseleave", ".menu-basket", function(){ 
@@ -48,19 +48,19 @@ $(function () {
 
 	// --------------------------------------------------------------------------------
 
-	if ($("a.add-basket").length > 0) {
-		$("a.add-basket").click(AddGoodsToBasket);
-	}
-
-	// --------------------------------------------------------------------------------
-
-	if ($("a.order-delete").length > 0) {
-		EngineDeleteOrderItem();
-	}
-
-	if ($("a.clear-basket").length > 0) {
-		$("a.clear-basket").click(ClearBasket);
-	}
+//	if ($("a.add-basket").length > 0) {
+//		$("a.add-basket").click(AddGoodsToBasket);
+//	}
+//
+//	// --------------------------------------------------------------------------------
+//
+//	if ($("a.order-delete").length > 0) {
+//		EngineDeleteOrderItem();
+//	}
+//
+//	if ($("a.clear-basket").length > 0) {
+//		$("a.clear-basket").click(ClearBasket);
+//	}
 
 	// --------------------------------------------------------------------------------
 
@@ -132,9 +132,7 @@ function RecalcOrderContent () {
 			order_basket: order_basket
 		},
 		cache: false,
-		success: function (data) {
-			RecalcBasketContent(data);
-		}
+		success: RecalcBasketContent
 	});
 
 	$("div.self-order").text(order_basket);
@@ -189,19 +187,11 @@ function AddGoodsToBasket () {
 }
 
 function RecalcBasketContent (data) {
-
-	var $basket = $("div.basket-content");
-	var html = '<p>Товаров <br>в корзине:' + data +'</p> ';
-	$basket.html(html);
+	console.log('data', data);
+	$("div.basket-content").html(data);
     var $basket_img = $("div.menu-basket-img");
     var html = '<img src="/bundles/main/images/busket-full.png">';
     $basket_img.html(html);
-	var $basket_actions = $("div.cart-actions");
-	var html = '<ul>';
-	html += '<li><a href="/order/"> <img src="/bundles/main/images/ok.png"></a></li>';
-	html += '<li><a href="javascript:void(0);" class="clear-basket from-basket" onclick="ClearBasket(true);"><img src="/bundles/main/images/clear.png"></a></li>';
-	html += '</ul>';
-	$basket_actions.html(html);
 }
 
 function ClearBasket (from_basket) {
@@ -222,9 +212,7 @@ function ClearBasket (from_basket) {
 		},
 		cache: false,
 		success: function (data) {
-
-			var html = '<p>Корзина пуста</p>';
-			$("div.basket-content").html(html);
+			$("div.basket-content").html('0');
             var $basket_img = $("div.menu-basket-img");
             var html = '<img src="/bundles/main/images/basket-empty.png">';
             $basket_img.html(html);
@@ -239,23 +227,6 @@ function ClearBasket (from_basket) {
 	return false;
 }
 
-/*function TryHideBasket () {
-	var uri = location.pathname;
-	for (;;) {
-		if (uri.indexOf("/") == -1) {
-			break;
-		}
-		uri = uri.replace("/", "");
-	}
-
-	if (uri != "order") {
-		return;
-	}
-
-	$(".basket").hide();
-	$(".basket-sticky-wrapper").hide();
-}
-*/
 // --------------------------------------------------------------------------------
 
 function EngineOrder () {
