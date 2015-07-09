@@ -1,57 +1,49 @@
 <?php
 
-namespace App\CatalogBundle\Entity;
+namespace App\MainBundle\Entity;
 
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class Order
+class PriceListBooking
 {
 	private $person = '';
 	private $phone = '';
 	private $email = '';
 	private $company = '';
-	private $deliveryAddress = '';
-	private $comment = '';
+	private $city = '';
+	private $activity = '';
+	private $site = '';
 
 	public static function loadValidatorMetadata(ClassMetadata $metadata)
 	{
-		$metadata->addPropertyConstraint('person', new NotBlank());
 		$metadata->addPropertyConstraint('phone', new NotBlank());
 		$metadata->addPropertyConstraint('phone', new Regex(array('pattern' => "/^((8|0|\+\d{1,2})[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i")));
 		$metadata->addPropertyConstraint('email', new NotBlank());
 		$metadata->addPropertyConstraint('company', new NotBlank());
+		$metadata->addPropertyConstraint('city', new NotBlank());
+		$metadata->addPropertyConstraint('activity', new NotBlank());
 	}
 
-	public function setComment($comment)
+	public function setActivity($activity)
 	{
-		$this->comment = $comment;
+		$this->activity = $activity;
 	}
 
-	public function getComment()
+	public function getActivity()
 	{
-		return $this->comment;
+		return $this->activity;
 	}
 
-	public function setDeliveryAddress($deliveryAddress)
+	public function setCity($city)
 	{
-		$this->deliveryAddress = $deliveryAddress;
+		$this->city = $city;
 	}
 
-	public function getDeliveryAddress()
+	public function getCity()
 	{
-		return $this->deliveryAddress;
-	}
-
-	public function setEmail($email)
-	{
-		$this->email = $email;
-	}
-
-	public function getEmail()
-	{
-		return $this->email;
+		return $this->city;
 	}
 
 	public function setCompany($company)
@@ -62,6 +54,16 @@ class Order
 	public function getCompany()
 	{
 		return $this->company;
+	}
+
+	public function setEmail($email)
+	{
+		$this->email = $email;
+	}
+
+	public function getEmail()
+	{
+		return $this->email;
 	}
 
 	public function setPerson($person)
@@ -82,5 +84,15 @@ class Order
 	public function getPhone()
 	{
 		return $this->phone;
+	}
+
+	public function setSite($site)
+	{
+		$this->site = $site;
+	}
+
+	public function getSite()
+	{
+		return $this->site;
 	}
 }

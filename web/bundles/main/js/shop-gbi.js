@@ -1,5 +1,10 @@
 $(function () {
-	
+	$("#order_phone,#price_list_booking_phone").mask("+9(999) 999-9999",{placeholder:"+_(___) ___-____"});
+
+	$('#price_list_booking_city').kladr({
+		type: $.kladr.type.city
+	});
+
 	$(document).on("mouseenter", "#cartInner.cart-full", function(){
         $(".mbasket-items").css("display", "block");
 	});

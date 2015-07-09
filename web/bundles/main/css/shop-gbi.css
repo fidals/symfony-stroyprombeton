@@ -344,6 +344,26 @@ div.form_comment{
 .shopOrderTable .td_submit, .OrderPriceForm .td_submit{
 	text-align: right;
 }
+
 .shopOrderTable td:nth-child(1){
 	width: 230px;
+	vertical-align: top !important;
+	padding-top: 5px;
+}
+
+.shopOrderTable .form-error ul {
+	list-style: none;
+	color: indianred;
+	margin-top: -10px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	margin-left: 0px;
+}
+
+.OrderPriceForm td:nth-child(1) {
+	width: 330px;
+}
+
+.OrderPriceForm td .activity {
+	width: 310px;
 }

@@ -1,0 +1,61 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+	Оформление запроса на прайсы
+{% endblock %}
+
+{% block description %}
+{% endblock %}
+
+{% block jslinks %}
+	{{ parent() }}
+	<script type="text/javascript" src="/bundles/main/js/jquery.kladr.min.js"></script>
+{% endblock %}
+
+{% block csslinks %}
+	{{ parent() }}
+	<link rel="stylesheet" href="/bundles/main/css/jquery.kladr.min.css"/>
+{% endblock %}
+
+{% block content %}
+	<h1>Оформление запроса на прайсы</h1>
+	<form method="post" action="{{ path('app_main_price_list_booking') }}" id="OrderPriceForm" class="OrderPriceForm">
+		<table class="OrderPriceForm">
+			<tbody><tr>
+				<td>Ваше имя:</td>
+				<td>{{ form_widget(form.person) }}</td>
+			</tr>
+			<tr>
+				<td>Контактный телефон:<sup>*</sup></td>
+				<td>{{ form_widget(form.phone) }}</td>
+			</tr>
+			<tr>
+				<td>Электронный адрес (E-mail):<sup>*</sup></td>
+				<td>{{ form_widget(form.email) }}</td>
+			</tr>
+			<tr>
+				<td>Полное название организации:<sup>*</sup></td>
+				<td>{{ form_widget(form.company) }}</td>
+			</tr>
+			<tr>
+				<td>Город:<sup>*</sup></td>
+				<td>{{ form_widget(form.city, {'attr': {'autocomplete': 'off', 'data-kladr-type': 'city'} }) }}</td>
+			</tr>
+			<tr>
+				<td>Направление деятельности организации:<sup>*</sup></td>
+				<td>
+					{{ form_widget(form.activity, {'attr': {'class': 'activity'}}) }}
+				</td>
+			</tr>
+			<tr>
+				<td>Сайт:</td>
+				<td><input name="fp_site" size="30" class="textfield" type="text" value=""></td>
+			</tr>
+
+			<tr>
+				<!--<td colspan=2 align="center"><input type="submit" name="submit" class="btn btn-primary btn-lg btn-success" value="Отправить запрос" /></td>-->
+				<td colspan="2" align="center"><button class="btn btn-lg btn-success" style="width: 125px"><span class="glyphicon glyphicon-bell"></span> Заказать</button></td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}

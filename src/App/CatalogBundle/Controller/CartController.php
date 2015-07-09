@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
-	public function addAction()
+	public function addAction(Request $request)
 	{
-		$id = (int) $this->getRequest()->request->getInt('id');
-		$quantity = (int) $this->getRequest()->request->getInt('quantity');
+		$id = $request->request->getInt('id');
+		$quantity = $request->request->getInt('quantity');
 
 		$cartService = $this->get('catalog.cart');
 		$cart = $cartService->loadCart();
@@ -29,10 +29,10 @@ class CartController extends Controller
 		return $this->render('AppCatalogBundle:Cart:cart.html.twig');
 	}
 
-	public function removeAction()
+	public function removeAction(Request $request)
 	{
-		$id = (int) $this->getRequest()->request->getInt('id');
-		$quantity = (int) $this->getRequest()->request->getInt('quantity');
+		$id = $request->request->getInt('id');
+		$quantity = $request->request->getInt('quantity');
 
 		$cartService = $this->get('catalog.cart');
 		$cart = $cartService->loadCart();
@@ -50,21 +50,20 @@ class CartController extends Controller
 
 	/**
 	 * Форма заказа
-	 * @return mixed - html-формы или редирект на страницу обработки формы
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
 	 */
-	public function orderAction()
+	public function orderAction(Request $request)
 	{
-		$order = new Order();
-		$form = $this->createForm(new OrderType(), $order);
+		$form = $this->createForm(new OrderType(), null, array('csrf_protection' => false));
 
-		if ($this->getRequest()->getMethod() == 'POST') {
-			$form->bindRequest($this->getRequest());
+		if ($request->getMethod() == 'POST') {
+			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
-
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
-					->setTo('info@stroyprombeton.ru')
+					->setTo(array('info@stroyprombeton.ru', $form['email']->getData()))
 					->setFrom('order@stroyprombeton.ru')
 					->setContentType("text/html")
 					->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
@@ -74,7 +73,7 @@ class CartController extends Controller
 					);
 				$mailer->send($message);
 				$this->get('catalog.cart')->cleanCart();
-				return $this->redirect($this->generateUrl('app_main_index'));
+				return $this->redirect($this->generateUrl('app_catalog_order_thanks'));
 			}
 		}
 
@@ -83,5 +82,10 @@ class CartController extends Controller
 			'order' => $cart,
 			'form'  => $form->createView()
 		));
+	}
+
+	public function orderThanksAction()
+	{
+		return $this->render('AppCatalogBundle:Cart:thanks.order.html.twig');
 	}
 }
