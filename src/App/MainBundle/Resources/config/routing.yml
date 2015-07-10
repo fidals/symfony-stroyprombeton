@@ -1,3 +1,4 @@
+# Роутинг для каталога
 app_main_object:
   pattern: /our-object/{id}/
   defaults: { _controller: AppMainBundle:Object:show }
@@ -27,3 +28,31 @@ app_main_staticpage:
 app_main_index:
   pattern: /
   defaults: { _controller: AppMainBundle:StaticPage:showIndex }
+
+
+# Роутинг для редиректов modx url
+
+# Сразу редиректит на другой роут (301 Permanent)
+modx_routing_gbi_visual:
+  pattern: /gbi/
+  defaults:
+      _controller: FrameworkBundle:Redirect:redirect
+      route: app_catalog_gbi_visual
+      permanent: true
+
+# Сразу редиректит на другой роут (301 Permanent)
+modx_routing_staticpage:
+  pattern: /{alias}/
+  requirements: { alias: "[^\/]+" }
+  defaults:
+      _controller: FrameworkBundle:Redirect:redirect
+      route: app_main_staticpage
+      permanent: true
+
+# Сразу редиректит на другой роут (301 Permanent)
+modx_routing_territory:
+  pattern: /obekty/{territoryId}/
+  defaults:
+      _controller: FrameworkBundle:Redirect:redirect
+      route: app_main_territory
+      permanent: true
