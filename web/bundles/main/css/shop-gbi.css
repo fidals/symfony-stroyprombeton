@@ -367,3 +367,11 @@ div.form_comment{
 .OrderPriceForm td .activity {
 	width: 310px;
 }
+
+#undefined-sticky-wrapper:hover .mbasket-items {
+	display: block;
+}
+
+.mbasket-clear, .shk-del {
+	cursor: pointer;
+}

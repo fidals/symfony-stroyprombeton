@@ -1,17 +1,17 @@
 $(function () {
+//	$(document).on("mouseenter", "#cartInner.cart-full", function(){
+//		$(".mbasket-items").css("display", "block");
+//	});
+//	$(document).on("mouseleave", ".menu-basket", function(){
+//		$(".mbasket-items").css("display", 'none');
+//	});
+
 	$("#order_phone,#price_list_booking_phone").mask("+9(999) 999-9999",{placeholder:"+_(___) ___-____"});
 
 	$('#price_list_booking_city').kladr({
 		type: $.kladr.type.city
 	});
 
-	$(document).on("mouseenter", "#cartInner.cart-full", function(){
-        $(".mbasket-items").css("display", "block");
-	});
-	$(document).on("mouseleave", ".menu-basket", function(){ 
-        $(".mbasket-items").css("display", 'none');
-	});
-	
 	$(document).on("mousedown", "#cartInner_full", function(){ 
         $("#cartInner_full").css("background-image", 'url("../images/shop_but_full_a.png")');
 	});

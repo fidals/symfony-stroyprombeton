@@ -7,7 +7,7 @@
 	</a>
 </div>
 {% if cart.getProducts() | length != 0 %}
-<div class="mbasket-items" style="display: none;">
+<div class="mbasket-items">
 	<table width="100%">
 		{% for product in cart.getProducts() %}
 		<tr class="cart-order">
