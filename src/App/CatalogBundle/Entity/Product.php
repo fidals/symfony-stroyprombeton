@@ -28,7 +28,7 @@ class Product
 
 	/**
 	 * @var integer
-	 * TODO вернуть ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 * @ORM\Column(name="id", type="bigint", nullable=false)
 	 * @ORM\Id
 	 */

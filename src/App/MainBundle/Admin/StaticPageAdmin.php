@@ -13,15 +13,13 @@ class StaticPageAdmin extends Admin
 	{
 		$formMapper
 			->with('Основные свойства')
-				->add('id', null, array('read_only' => true, 'required' => false))
-				->add('name', null, array('required' => false))
-				->add('introText', null, array('required' => false))
-				->add('menuTitle', null, array('required' => true))
-				->add('alias', null, array('required' => false))
-				->add('text', null, array('required' => false))
-				->add('isActive', null, array('label' => 'is_active', 'required' => false))
+				->add('id', null, array('read_only' => true, 'required' => true))
+				->add('name', null, array('label' => 'Название', 'required' => true))
+				->add('alias', null, array('label'=> 'Алиас', 'required' => true))
+				->add('text', 'textarea', array('required' => false))
 			->end()
 			->with('SEO')
+				->add('isActive', null, array('label' => 'Активно', 'required' => false))
 				->add('title', null, array('required' => false))
 				->add('h1', null, array('required' => false))
 				->add('keywords', null, array('required' => false))
@@ -33,16 +31,18 @@ class StaticPageAdmin extends Admin
 	{
 		$datagridMapper
 			->add('id')
-			->add('name')
-			->add('isActive');
+			->add('name', null, array('label' => 'Название'))
+			->add('alias', null, array('label' => 'Алиас'))
+			->add('isActive', null, array('label' => 'Активно'));
 	}
 
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->addIdentifier('id')
-			->add('name')
-			->add('isActive');
+			->add('id')
+			->addIdentifier('name', null, array('label' => 'Название'))
+			->add('alias', null, array('label' => 'Алиас'))
+			->add('isActive', null, array('label' => 'Активно'));
 	}
 
 	// Валидация происходит в "validate" методе модели
