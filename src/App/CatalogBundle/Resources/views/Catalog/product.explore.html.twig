@@ -22,13 +22,13 @@
 			{% if loop.index != loop.last %}
 				<span class="location separate">»</span>
 				<span class="location section">
-					<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+					<a href="{{ path('app_catalog_category', {'id': item.getId()}) }}">{{ item.getTitle() }}</a>
 				</span>
 			{% endif %}
 		{% endfor %}
 		<span class="location separate">»</span>
 			<span class="location section">
-			<a href="/gbi/{{ catUrl }}/?section={{ product.getCategory().getId() }}">{{ product.getCategory().getTitle() }}</a>
+			<a href="{{ path('app_catalog_category', {'id': product.getCategory().getId()}) }}">{{ product.getCategory().getTitle() }}</a>
 		</span>
 	</div>
 	<div class="product-header">
@@ -66,10 +66,10 @@
 								<td class="product-desc-right-col">{{ product.getMark() }}</td>
 							</tr>
 						{% endif %}
-						{% if section.getMark() %}
+						{% if category.getMark() %}
 							<tr>
 								<td class="product-desc-left-col">Рабочая документация</td>
-								<td class="product-desc-right-col">{{ section.getMark() }}</td>
+								<td class="product-desc-right-col">{{ category.getMark() }}</td>
 							</tr>
 						{% endif %}
 

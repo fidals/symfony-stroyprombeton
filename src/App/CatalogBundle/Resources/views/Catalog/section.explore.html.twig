@@ -1,15 +1,15 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ section.getTitle() }}
+	{{ category.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{{ section.getDescription() }}
+	{{ category.getDescription() }}
 {% endblock %}
 
 {% block keywords %}
-	{{ section.getKeywords() }}
+	{{ category.getKeywords() }}
 {% endblock %}
 
 {% block content %}
@@ -22,13 +22,13 @@
 			{% if loop.index != loop.last %}
 				<span class="location separate">»</span>
 				<span class="location section">
-					<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+					<a href="{{ path('app_catalog_category', {'id': item.getId()}) }}">{{ item.getTitle() }}</a>
 				</span>
 			{% endif %}
 		{% endfor %}
 	</div>
 	<h1 class="gbi-section">
-		{{ section.getH1() }}
+		{{ category.getH1() }}
 	</h1>
 	<div class="gbi-list">
 		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
@@ -41,15 +41,14 @@
 				<th>Цена</th>
 				<th>Количество</th>
 			</tr>
-			{% for product in products if product.isActive %}
+			{% for product in category.getProducts() if product.isActive %}
 				<tr>
 					<td class="gbi-list photo">
 						<img src="/bundles/main/images/bullet.png">
 					</td>
 					<td class="gbi-list code">{{ product.getNomen() }}</td>
 					<td class="gbi-list name">
-						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}">
-							{{ product.getName() }}</a></td>
+						<a href="{{ path('app_catalog_product', {'id': product.getId()}) }}">{{ product.getName() }}</a></td>
 					<td class="gbi-list price">
 						{% if product.price %}
 							{{ product.getPriceRounded() }} руб.
