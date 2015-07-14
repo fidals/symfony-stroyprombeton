@@ -40,17 +40,36 @@ class StaticPageController extends Controller
 	{
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
 
-		$randomProducts = $this->getDoctrine()
-			->getRepository('AppCatalogBundle:Product')
-			->getRandomProducts();
+		$mainCategoryIds = array(12, 15, 473, 180, 12563, 176, 402, 44, 59);
+		$isNewMainCategoryIds = array(473, 12563);
+		$mainCategories = $catRp->findById($mainCategoryIds);
+		$mainCategoriesById = array();
+		foreach($mainCategories as $mainCategory) {
+			$mainCategory->catUrl = SitemapCommand::$baseCats[$catRp->getPath($mainCategory)[0]->getId()];
+			$mainCategory->isNew = in_array($mainCategory->getId(), $isNewMainCategoryIds);
+			$mainCategoriesById[$mainCategory->getId()] = $mainCategory;
+		}
 
-		foreach ($randomProducts as &$product) {
+		$mainCategoriesSorted = array();
+		foreach($mainCategoryIds as $mainCategoryId) {
+			$mainCategoriesSorted[] = $mainCategoriesById[$mainCategoryId];
+		}
+
+		$productsWithPictures = $this->getDoctrine()->getRepository('AppCatalogBundle:Product')->getRandomProductsHasPhoto(10);
+
+		foreach($productsWithPictures as &$product) {
 			$path = $catRp->getPath($product->getCategory());
 			$product->catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
 		}
 
+		// берем три последние новости
+		$newsRp = $this->getDoctrine()->getRepository('AppMainBundle:Post');
+		$lastNews = $newsRp->findBy(array('isActive' => 1), array('date' => 'DESC'), 3);
+
 		return $this->render('AppMainBundle:StaticPage:indexPage.html.twig', array(
-			'randomProducts' => $randomProducts
+			'products'       => $productsWithPictures,
+			'news'           => $lastNews,
+			'mainCategories' => $mainCategoriesSorted
 		));
 	}
 

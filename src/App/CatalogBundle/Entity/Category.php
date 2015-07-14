@@ -21,9 +21,16 @@ class Category
 {
 	use PageTrait;
 
-	const WEB_DIR_PATH = '/../../../../web';
-	const IMG_DIR_PATH = '/assets/images/sections';
-	const IMG_GAP_NAME = 'logo-prozr.png';
+	const WEB_DIR_PATH 	   = '/../../../../web';
+	const IMG_DIR_PATH     = '/assets/images/sections';
+	const EMPTY_THUMB_NAME = 'logo-prozr.png';
+
+	public static $imageTypes = array(
+		IMAGETYPE_JPEG,
+		IMAGETYPE_JPEG2000,
+		IMAGETYPE_PNG,
+		IMAGETYPE_GIF
+	);
 
 	/**
 	 * TODO Вернуть ORM\GeneratedValue(strategy="IDENTITY")
@@ -199,16 +206,36 @@ class Category
 		);
 	}
 
+	/**
+	 * Вернет true если есть картинка или false если нет
+	 *
+	 * @return bool
+	 */
+	public function hasPicture()
+	{
+		return $this->getPicturePath() != self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
+	}
+
+	/**
+	 * Ищет все файлы с названием {id}.*
+	 * Определяет тип файла, и в случае если это картинка в одном из форматов указанных в self::$imageTypes - возвращает относительный путь
+	 *
+	 * @return string
+	 */
 	public function getPicturePath()
 	{
 		$webPath = __DIR__ . self::WEB_DIR_PATH;
-		$webFilePath = self::IMG_DIR_PATH . '/' . $this->getId() . '.png';
-		$picturePath = $webPath . $webFilePath;
-		if(file_exists($picturePath)) {
-			return $webFilePath;
-		} else {
-			return self::IMG_DIR_PATH . '/' . self::IMG_GAP_NAME;
+		$absPicName = $webPath . self::IMG_DIR_PATH . '/' . $this->getId();
+		$gres = glob($absPicName . '.*');
+		if(!empty($gres)) {
+			foreach($gres as $fileName) {
+				$searchResult = array_search(exif_imagetype($fileName), self::$imageTypes);
+				if($searchResult !== false) {
+					return self::IMG_DIR_PATH . '/' . basename($fileName);
+				}
+			}
 		}
+		return self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
 	}
 
 	public function __toString()

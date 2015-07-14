@@ -7,4 +7,8 @@ services:
         arguments: ['@service_container']
     catalog.cart:
         class: App\CatalogBundle\Extension\CartService
-        arguments: ['@service_container']
+        arguments: ['@service_container']        
+    app.twig_extension:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }

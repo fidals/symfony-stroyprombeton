@@ -27,7 +27,8 @@
         "gedmo/doctrine-extensions": "~2.4",
         "sonata-project/core-bundle": "~2.3",
         "sonata-project/admin-bundle": "~2.3",
-        "knplabs/knp-paginator-bundle": "~2.4"
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "snilius/twig-sort-by-field": "0.1.*"
     },
     "require-dev": {
     },

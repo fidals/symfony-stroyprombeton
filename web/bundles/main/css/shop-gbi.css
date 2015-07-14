@@ -272,6 +272,20 @@ div.order-report {
 
 /* -------------------------------------------------------------------------------- */
 
+.OrderPrice{
+	width: 270px;
+	margin-bottom: 30px;
+}
+
+.OrderDraw{
+	width: 270px;
+	margin: -10px 0 20px 0;
+}
+
+.OrderPrice .a_price img {
+	border-radius: 3px;
+}
+
 .mbasket-items{
 	background-color: #FFFFFF;
 	border: 1px solid #999999;

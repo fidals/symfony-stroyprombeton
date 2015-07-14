@@ -434,6 +434,16 @@ class Product
 	}
 
 	/**
+	 * Вернет true если есть картинка или false если нет
+	 *
+	 * @return bool
+	 */
+	public function hasPicture()
+	{
+		return $this->getPicturePath() != self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
+	}
+
+	/**
 	 * Ищет все файлы с названием {id}.*
 	 * Определяет тип файла, и в случае если это картинка в одном из форматов указанных в self::$imageTypes - возвращает относительный путь
 	 *

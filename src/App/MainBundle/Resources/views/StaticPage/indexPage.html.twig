@@ -5,108 +5,161 @@
 {% endblock %}
 {% block keywords %}ЖБИ, завод ЖБИ, изготовление ЖБИ, производство ЖБИ {% endblock %}
 {% block content %}
-	<table class="index-new-gbi">
+	<h1>Завод железобетонных изделий «СТК-Промбетон»</h1>
+	<table class="index-main-top" border="0">
 		<tr>
-			<td>
-				<h1>Завод ЖБИ</h1>
+			<td style="width: 50%; vertical-align: top; padding: 0px 3% 0 0;">
+			<script type="text/javascript">
+				intId = setInterval('slideImg(true, false)', 10000);
+			</script>
+			<div class="m_informer">
+			<div class="inf_header">Наша продукция
+				<div class="inf_marker"></div>
+			</div>
+			<div class="inf_content">
+			<div class="random_list_main">
+			{% for product in products %}
+				<div>
+					<div class="inf-product-header">{{ product.getTitle() }} {{ product.getMark() }}</div>
+					<div style="text-align: center;">
+						<div class="inf-product-photo">
+							<img class="shk-image" alt="" title="" src="{{ product.getPicturePath() }}"></div>
+					</div>
+					<div class="inf-product-desc">
+						<table class="table table-condensed product-info-table random_main_tech">
+							<tr>
+								<td class="product-desc-left-col">Длина (мм)</td>
+								<td class="product-desc-right-col">{{ product.getLength() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Ширина (мм)</td>
+								<td class="product-desc-right-col">{{ product.getWidth() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Высота (мм)</td>
+								<td class="product-desc-right-col">{{ product.getHeight() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Масса (кг)</td>
+								<td class="product-desc-right-col">{{ product.getWeight() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">Объем (м3)</td>
+								<td class="product-desc-right-col">{{ product.getVolume() }}</td>
+							</tr>
+							<tr>
+								<td class="product-desc-left-col">
+									<div class="product-price"><span>Цена:</span></div>
+								</td>
+								<td class="product-desc-right-col">
+									<div class="product-price">{{ product.getPriceRounded() }} руб.</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div class="inf-product-for-nds">
+										<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="clear: both;"></div>
+					<div class="inf_footer">
+						<a href="/gbi/{{ product.catUrl }}?section={{ product.getCategory().getId() }}&gbi={{ product.getId() }}">Подробнее</a>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
 
-				<p>Компания «СТК-ПромБетон» производит железобетонные изделия для дорожного, энергетического, общегражданского видов строительства. Мы производим более 12 000 различных ЖБИ изделий. Все они представлены в нашем каталоге с описанием технических параметров. За 3 года работы мы обеспечили железобетонными изделиями более 150 строительных объектов не только в Санкт-Петербурге, но и по всей России. Коллектив и техническое оснащение нашего производства позволяют обеспечить нам высокое качество и оптимальные сроки выполнения работ.</p>
+			</div>
 			</td>
-			<td></td>
-			<td>
-				<div class="title"><p>Новый тип изделия</p></div>
-				<a href="/gbi/dor-stroy/?section=592"><img src="/assets/main/images/sections/592_big.png"/>
-
-					<p>Блоки железобетонные удерживающих ограждений для автомобилей </p></a>
+			<td style="width: 50%; vertical-align: top; padding: 0px;">
+				<div class="m_informer">
+					<div class="inf_header">Новости компании
+						<div class="inf_marker"></div>
+					</div>
+					<div class="inf_content">
+						<ul>
+							{% for post in news %}
+								<li>
+									<div class="news_img">
+										<a href="{{ path('app_main_post', {'id': post.getId()}) }}">
+											<img src="/assets/images/news/{{ post.getDate() | date('d_m_y') }}/{{ post.getDate() | date('d_m_y') }}_tn.jpg">
+										</a>
+									</div>
+									<i>{{ post.getDate() | date('d.m.Y') }}</i><br>
+									<a href="{{ path('app_main_post', {'id': post.getId()}) }}">{{ post.getTitle() }}</a><br>
+									<div class="inf_intro">
+										{{ post.getIntroText() }}
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="inf_footer"><a href="{{ path('app_main_post_all') }}">Посмотреть все новости</a></div>
+				</div>
 			</td>
 		</tr>
 	</table>
-	<table class="index-list-gbi">
-		<tr>
-			<td><a href="/gbi/prom-stroy/?section=2"><img src="/assets/main/images/indexPage/lestnici2.png"/>
-
-					<p>Элементы лестниц</p></a></td>
-			<td><a href="/gbi/prom-stroy/?section=5"><img src="/assets/main/images/indexPage/colonni5.png"/>
-
-					<p>Колонны железобетонные</p></a></td>
-			<td><a href="/gbi/prom-stroy/?section=577"><img src="/assets/main/images/indexPage/svai577.png"/>
-
-					<p>Сваи железобетонные</p></a></td>
-
-		</tr>
-		<tr style="height: 3px"></tr>
-		<tr>
-			<td><a href="/gbi/dor-stroy/?section=251"><img src="/assets/main/images/indexPage/trubi251.png"/>
-
-					<p>Водопропускные трубы</p></a></td>
-			<td><a href="/gbi/dor-stroy/?section=235"><img src="/assets/main/images/indexPage/mosti235.png"/>
-
-					<p>Мосты и путепроводы</p></a></td>
-			<td><a href="/gbi/dor-stroy/?section=247"><img src="/assets/main/images/indexPage/podpornie-stenki247.png"/>
-
-					<p>Подпорные стены</p></a></td>
-		</tr>
-		<tr style="height: 3px"></tr>
-		<tr>
-			<td><a href="/gbi/ingener-stroy/?section=483"><img src="/assets/main/images/indexPage/lotki483.png"/>
-
-					<p>Лотки и плиты для сборных каналов и тоннелей</p></a></td>
-			<td><a href="/gbi/energy-stroy/?section=70"><img src="/assets/main/images/indexPage/fundamenti-lep70.png"/>
-
-					<p>Конструкции фундаментов для металлических опор ЛЭП</p></a></td>
-			<td><a href="/gbi/energy-stroy/?section=111"><img src="/assets/main/images/indexPage/fundamenti111.png"/>
-
-					<p>Фундаменты под опоры контактной сети для железных дорог</p></a></td>
-		</tr>
-	</table>
-
-	<h2>Изготовление ЖБИ, производство железобетонных изделий</h2>
-	<p>Компания «СТК-ПромБетон» располагает высокотехнологичным оборудованием, обладающем значительным резервом производственных мощностей. Главной особенностью нашей технологической схемы является возможность изготовления ЖБИ по индивидуальным чертежам заказчика, чем часто пользуются наши клиенты, когда требуется изготовление нетиповых железобетонных изделий.</p>
-	<p>Технологический процесс изготовления железобетонных изделий включает в себя подготовку арматуры и опалубки, их установку в соответствии с типовым или индивидуальным проектом, заливку бетонной смеси и уход за готовым изделием до его полного застывания. Завод ЖБИ компании «СТК-ПромБетон» тщательно контролирует каждый из перечисленных этапов производства. </p>
-
-	<h2>Продукция завода железобетонных изделий</h2>
-	<p>Продукция компании «СТК-ПромБетон» пользуется высоким спросом не только из-за лучших эксплуатационных характеристик, но и за счет следующих особенностей: </p>
-	<ul>
-		<li>производственные мощности завода ЖБИ;</li>
-		<li>инженерно-технологическая группа предлагает услуги проектирования ЖБИ по индивидуальным заказам;</li>
-		<li>изделия железобетонные могут быть доставлены прямо на строительную площадку в Санкт-Петербурге или Ленинградской области транспортом «СТК-ПромБетон».</li>
-	</ul>
-	<p>
-		<strong>Каталог продукции завода ЖБИ</strong> включает в себя такие позиции, как звенья труб для монтажа водопропускных систем под насыпями автомобильных и железных дорог, лестничные марши, сваи, колонны, лотки для прокладки сборных каналов, фундаменты для металлических опор ЛЭП и опор контактной сети для железных дорог.
-	</p>
-
-	Вы не нашли нужное изделие в каталоге?
-	Мы изготовим его по чертежам.
-
-	В списке представлены  категории нашей продукции, пользующиеся наибольшим спросом:
-	<ul>
-		<li><a href="/gbi-visual/zvenya-trub/"><span style="font-weight: bold;">Звенья труб</span></a></li>
-		<li><a href="/gbi-visual/truby-1/"><span style="font-weight: bold;">Трубы железобетонные</span></a>
-		</li>
-		<li>
-			<a href="/gbi-visual/dorozhnye-zhbi-plity/"><span style="font-weight: bold;">Дорожные железобетонные плиты</span></a>
-		</li>
-		<li><a href="/gbi-visual/lotki-zhbi-vodootvodnye/"><span style="font-weight: bold;">Лотки железобетонные</span></a>
-		</li>
-		<li>
-			<a href="/gbi-visual/lotki-zhbi-zhelezobetonnye/"><span style="font-weight: bold;">Лотки железнодорожные</span></a>
-		</li>
-		<li>
-			<a href="/gbi-visual/fundamenty-zhbi-dlya-trub/"><span style="font-weight: bold;">Фундаменты для труб из гофрированного металла</span></a>
-		</li>
-		<li>
-			<a href="/gbi-visual/fundamenty-zhbi-pod-lep/"><span style="font-weight: bold;">Фундаменты железобетонные под ЛЭП</span></a>
-		</li>
-		<li>
-			<a href="/gbi-visual/stojki-opory-pod-lep/"><span style="font-weight: bold;">Стойки и опоры под ЛЭП</span></a>
-		</li>
-		<li>
-			<a href="/gbi-visual/fundamenty-trehluchevye/"><span style="font-weight: bold;">Фундаменты трехлучевые</span></a>
-		</li>
-		<li><a href="/gbi-visual/lestnichnye-marshy/"><span style="font-weight: bold;">Лестничные марши</span></a>
-		</li>
-		<li>
-			<a href="/gbi-visual/lestnichnye-ploschadky/"><span style="font-weight: bold;">Лестничные площадки</span></a>
-		</li>
-	</ul>
+	<div class="main_cat">
+		<div class="main_cat_el">
+			<a href="/gbi/prom-stroy?section=12">
+				<img src="/assets/images/indexPage/lestnici2.png" alt="">
+				<p>Элементы лестниц</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<div class="title">
+				<p>Новый тип изделия</p>
+			</div>
+			<a href="/gbi/dor-stroy?section=473">
+				<img src="/assets/images/indexPage/592_big.png" alt="">
+				<p>Блоки удерживающих ограждений для автомобилей (тип "Нью Джерси")</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<a href="gbi/prom-stroy?section=15">
+				<img src="/assets/images/indexPage/colonni5.png" alt="">
+				<p>Колонны железобетонные</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<a href="gbi/dor-stroy?section=180">
+				<img src="/assets/images/indexPage/trubi251.png" alt="">
+				<p>Водопропускные трубы</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<a href="gbi/dor-stroy?section=176">
+				<img src="/assets/images/indexPage/podpornie-stenki247.png" alt="">
+				<p>Подпорные стены</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<div class="title">
+				<p>Новый тип изделия</p>
+			</div>
+			<a href="gbi/dor-stroy?section=12563">
+				<img src="/assets/images/indexPage/lotki12563.png" alt="">
+				<p>Железнодорожные лотки</p>
+			</a>
+		</div>
+		<div class="main_cat_el"><a href="gbi/ingener-stroy?section=402">
+				<img src="/assets/images/indexPage/lotki483.png" alt="">
+				<p>Лотки и плиты для сборных каналов и тоннелей</p>
+			</a>
+		</div>
+		<div class="main_cat_el"><a href="gbi/energy-stroy?section=59">
+				<img src="/assets/images/indexPage/fundamenti111.png" alt="">
+				<p>Фундаменты под опоры контактной сети для железных дорог</p>
+			</a>
+		</div>
+		<div class="main_cat_el">
+			<a href="gbi/energy-stroy?section=44">
+				<img src="/assets/images/indexPage/fundamenti-lep70.png" alt="">
+				<p>Конструкции фундаментов для металлических опор ЛЭП</p>
+			</a>
+		</div>
+	</div>
 {% endblock %}
