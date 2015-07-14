@@ -61,16 +61,20 @@ class CartController extends Controller
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
+				$recipients = array(
+					'info@stroyprombeton.ru',
+					$form['email']->getData()
+				);
+				$body = $this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
+					'form' => $form->createView(),
+					'cart' => $this->get('catalog.cart')->loadCart(true)
+				));
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
-					->setTo(array('info@stroyprombeton.ru', $form['email']->getData()))
+					->setTo($recipients)
 					->setFrom('order@stroyprombeton.ru')
 					->setContentType("text/html")
-					->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
-							'form' => $form->createView(),
-							'cart' => $this->get('catalog.cart')->loadCart(true)
-						))
-					);
+					->setBody($body);
 				$mailer->send($message);
 				$this->get('catalog.cart')->cleanCart();
 				return $this->redirect($this->generateUrl('app_catalog_order_thanks'));

@@ -357,6 +357,11 @@ div.form_comment{
 
 .shopOrderTable .td_submit, .OrderPriceForm .td_submit{
 	text-align: right;
+	padding-right: 0px;
+}
+
+.shopOrderTable td{
+	padding-right: 15px;
 }
 
 .shopOrderTable td:nth-child(1){
@@ -388,4 +393,8 @@ div.form_comment{
 
 .mbasket-clear, .shk-del {
 	cursor: pointer;
+}
+
+.td form-order {
+	padding-right: 0px;
 }

@@ -16,15 +16,20 @@ class PriceListController extends Controller
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
+				$recipients = array(
+					'info@stroyprombeton.ru',
+					'as@stkmail.ru',
+					$form['email']->getData()
+				);
+				$body = $this->renderView('AppMainBundle:PriceList:email.booking.html.twig', array(
+					'form' => $form->createView()
+				));
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New price order')
-					->setTo(array('info@stroyprombeton.ru', 'as@stkmail.ru', $form['email']->getData()))
+					->setTo($recipients)
 					->setFrom('order@stroyprombeton.ru')
 					->setContentType("text/html")
-					->setBody($this->renderView('AppMainBundle:PriceList:email.booking.html.twig', array(
-							'form' => $form->createView()
-						))
-					);
+					->setBody($body);
 				$mailer->send($message);
 				return $this->redirect($this->generateUrl('app_main_price_list_booking_success'));
 			}
