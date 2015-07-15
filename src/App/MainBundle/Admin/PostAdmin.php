@@ -40,12 +40,6 @@ class PostAdmin extends Admin
 		$datagridMapper
 			->add('id')
 			->add('name', null, array('label' => 'Название'))
-			->add('date', null, array('label' => 'Дата'), 'sonata_type_datetime_picker', array(
-				'format'          => 'dd/MM/yyyy HH:mm',
-				'dp_side_by_side' => true,
-				'dp_use_current'  => true,
-				'dp_use_seconds'  => false,
-			))
 			->add('isActive', null, array('label' => 'Активно'));
 	}
 
