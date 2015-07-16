@@ -56,13 +56,12 @@ class CartController extends Controller
 	public function orderAction(Request $request)
 	{
 		$form = $this->createForm(new OrderType(), null, array('csrf_protection' => false));
-
 		if ($request->getMethod() == 'POST') {
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
 				$recipients = array(
-					'info@stroyprombeton.ru',
+					$this->container->getParameter('email_info'),
 					$form['email']->getData()
 				);
 				$body = $this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
@@ -72,7 +71,7 @@ class CartController extends Controller
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
 					->setTo($recipients)
-					->setFrom('order@stroyprombeton.ru')
+					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
 					->setBody($body);
 				$mailer->send($message);

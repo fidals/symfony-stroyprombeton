@@ -17,8 +17,8 @@ class PriceListController extends Controller
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
 				$recipients = array(
-					'info@stroyprombeton.ru',
-					'as@stkmail.ru',
+					$this->container->getParameter('email_info'),
+					$this->container->getParameter('email_as'),
 					$form['email']->getData()
 				);
 				$body = $this->renderView('AppMainBundle:PriceList:email.booking.html.twig', array(
@@ -27,7 +27,7 @@ class PriceListController extends Controller
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New price order')
 					->setTo($recipients)
-					->setFrom('order@stroyprombeton.ru')
+					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
 					->setBody($body);
 				$mailer->send($message);
