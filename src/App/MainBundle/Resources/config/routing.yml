@@ -44,7 +44,6 @@ modx_gbi_visual:
 # TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
 modx_staticpage:
     pattern: /{alias}/
-    requirements: { alias: "[^\/]+" }
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: app_main_staticpage

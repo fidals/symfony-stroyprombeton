@@ -24,8 +24,7 @@ modx_catalog_explore_category:
     requirements:
         categoryTranslit: "prom-stroy|dor-stroy|ingener-stroy|energy-stroy|blag-territory|neftegaz-stroy"
 
+# Старый урл с get-параметрами section и gbi
 app_catalog_explore_category:
     pattern: /{catUrl}/
     defaults: { _controller: AppCatalogBundle:Catalog:exploreRoute }
-    # в этом роуте есть еще section и gbi, но если написать например section: 0,
-    # то такой url не получится генерировать роутером
