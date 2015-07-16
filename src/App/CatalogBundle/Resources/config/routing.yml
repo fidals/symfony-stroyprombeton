@@ -1,13 +1,30 @@
+app_catalog_category:
+    pattern: /categories/{id}/
+    defaults: { _controller: AppCatalogBundle:Catalog:category }
+
+app_catalog_product:
+    pattern: /products/{id}/
+    defaults: { _controller: AppCatalogBundle:Catalog:product }
+
 app_catalog_gbi_visual:
     pattern: /visual/
     defaults: { _controller: AppCatalogBundle:Catalog:gbiVisual }
 
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_catalog_explore:
+    pattern: /{chain}/{lastId}/
+    defaults: { _controller: AppMainBundle:Redirect:appCatalogExplore }
+    requirements:
+        chain: ".+"
+
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_catalog_explore_category:
+    pattern: /{categoryTranslit}/
+    defaults: { _controller: AppMainBundle:Redirect:appCatalogExploreTranslit }
+    requirements:
+        categoryTranslit: "prom-stroy|dor-stroy|ingener-stroy|energy-stroy|blag-territory|neftegaz-stroy"
+
+# Старый урл с get-параметрами section и gbi
 app_catalog_explore_category:
     pattern: /{catUrl}/
     defaults: { _controller: AppCatalogBundle:Catalog:exploreRoute }
-    # в этом роуте есть еще section и gbi, но если написать например section: 0,
-    # то такой url не получится генерировать роутером
-
-app_catalog_homepage:
-    pattern:  /
-    defaults: { _controller: AppCatalogBundle:Catalog:index }

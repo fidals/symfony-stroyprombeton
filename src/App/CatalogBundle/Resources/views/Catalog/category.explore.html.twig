@@ -22,7 +22,7 @@
 			{% if loop.index != loop.last %}
 				<span class="location separate">»</span>
 				<span class="location section">
-					<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+					<a href="{{ path('app_catalog_category', {'id': item.getId()}) }}">{{ item.getTitle() }}</a>
 				</span>
 			{% endif %}
 		{% endfor %}
@@ -32,7 +32,7 @@
 	{% for item in children | sortbyfield('name') %}
 		{% if item.model.getIsActive() %}
 			<div class="cat_cat">
-				<a href="{{ path('app_catalog_explore_category', {'catUrl': catUrl, 'section': item.model.getId()}) }}">
+				<a href="{{ path('app_catalog_category', {'id': item.model.getId()}) }}">
 					<div style="display: inline-block">
 						<span class="number">{{ item.model.getId() }}</span>
 						<span class="catalog-second-level">{{ item.model.getTitle() }}</span>
