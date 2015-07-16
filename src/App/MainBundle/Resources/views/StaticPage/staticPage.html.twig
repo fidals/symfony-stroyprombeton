@@ -1,22 +1,22 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	  {{ staticPage.getTitle() }}
+	{{ staticPage.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	  {{ staticPage.getDescription() }}
+	{{ staticPage.getDescription() }}
 {% endblock %}
 
 {% block keywords %}
-	  {{ staticPage.getKeywords() }}
+	{{ staticPage.getKeywords() }}
 {% endblock %}
 
 {% block content %}
-	  <h1>{{ staticPage.getH1() }}</h1>
-		{% if staticPage.getText() %}
-		  	{% autoescape false %}
-	  	  	  {{ include(template_from_string(staticPage.getText())) }}
-	  		{% endautoescape %}
-		{% endif %}
+	<h1>{{ staticPage.getH1() }}</h1>
+	{% if staticPage.getText() %}
+		{% autoescape false %}
+			{{ include(template_from_string(staticPage.getText())) }}
+		{% endautoescape %}
+	{% endif %}
 {% endblock %}

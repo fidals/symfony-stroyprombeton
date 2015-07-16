@@ -84,7 +84,6 @@ class Territory
 	}
 
 	/**
-	 * Приведение объекта Territoy к строке вернет Name
 	 * Используется в админке
 	 *
 	 * @return string

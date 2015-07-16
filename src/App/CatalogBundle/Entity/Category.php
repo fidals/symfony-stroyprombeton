@@ -290,11 +290,6 @@ class Category
 		$this->file = null;
 	}
 
-	public function rmUploaded()
-	{
-		Utils::categoryRemove($this);
-	}
-
 	public function getFilePath()
 	{
 		$nameFile = $this->getFileDir() . $this->getId() . ".";

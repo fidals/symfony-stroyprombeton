@@ -16,7 +16,7 @@ class ObjectAdmin extends Admin
 				->add('id', null, array('read_only' => true, 'required' => true))
 				->add('name', null, array('label' => 'Название', 'required' => true))
 				->add('territory', 'sonata_type_model', array('label' => 'Субъект РФ', 'required' => true))
-				->add('text', 'textarea', array('required' => false))
+				->add('text', 'textarea', array('label' => 'Текст', 'required' => false))
 			->end()
 			->with('SEO')
 				->add('isActive', null, array('label' => 'Активно', 'required' => false))

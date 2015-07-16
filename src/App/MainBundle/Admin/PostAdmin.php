@@ -23,8 +23,8 @@ class PostAdmin extends Admin
 					'dp_use_current'  => true,
 					'dp_use_seconds'  => false,
 				))
-				->add('introText', 'textarea', array('required' => false))
-				->add('text', 'textarea', array('required' => false))
+				->add('introText', 'textarea', array('label' => 'Интротекст', 'required' => false))
+				->add('text', 'textarea', array('label' => 'Текст', 'required' => false))
 			->end()
 			->with('SEO')
 				->add('isActive', null, array('label' => 'Активно', 'required' => false))
