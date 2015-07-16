@@ -24,9 +24,9 @@
 			{{ object.getH1() }}
 		{% endif %}
 	</h1>
-	{% autoescape false %}
-	    {% include template_from_string(object.getText()) %}
-	{% endautoescape %}
-
-
+	{% if object.getText() %}
+		{% autoescape false %}
+			{% include template_from_string(object.getText()) %}
+		{% endautoescape %}
+	{% endif %}
 {% endblock %}

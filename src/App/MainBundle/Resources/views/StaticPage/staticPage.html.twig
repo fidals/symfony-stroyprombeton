@@ -13,8 +13,10 @@
 {% endblock %}
 
 {% block content %}
+	{% if staticPage.getText() %}
 	{% autoescape false %}
 		<h1>{{ staticPage.getTitle() }}</h1>
 		{{ include(template_from_string(staticPage.getText())) }}
 	{% endautoescape %}
+	{% endif %}
 {% endblock %}

@@ -127,9 +127,11 @@
 	<img class="gbi_map" src="/assets/images/stroyprombeton_map_2.jpg" width="850px" height="485px" usemap="#rf" border="0"/>
 	<map name="rf">
 		{% for territory in territories %}
-			{% for coordset in attribute(coords, territory.getTranslitName()) %}
-				<area href="{{ path('app_main_territory', {territoryId: territory.getId()}) }}" title='<div class="map_header">{{territory.getName()}}</div>{{territory.getText()}}<div class="map_footer"><a href="{{ path("app_main_territory", {territoryId: territory.getId()}) }}">Подробнее...</a></div>' class="gbi_tooltip" data-maphilight='{"strokeColor":"000000","fillColor":"eb0001"}' shape="poly" coords="{{ coordset }}">
-			{% endfor %}
+			{% if attribute(coords, territory.getTranslitName()) is defined %}
+				{% for coordset in attribute(coords, territory.getTranslitName()) %}
+					<area href="{{ path('app_main_territory', {territoryId: territory.getId()}) }}" title='<div class="map_header">{{territory.getName()}}</div>{{territory.getText()}}<div class="map_footer"><a href="{{ path("app_main_territory", {territoryId: territory.getId()}) }}">Подробнее...</a></div>' class="gbi_tooltip" data-maphilight='{"strokeColor":"000000","fillColor":"eb0001"}' shape="poly" coords="{{ coordset }}">
+				{% endfor %}
+			{% endif %}
 		{% endfor %}
 	</map>
 	<h2>Наши партнёры:</h2>
