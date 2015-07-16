@@ -27,8 +27,6 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
-swiftmailer:
-    disable_delivery:  false
-    delivery_address:  cybervito21@gmail.com
-
-
+#swiftmailer:
+#    disable_delivery:  false
+#    delivery_address:  cybervito21@gmail.com

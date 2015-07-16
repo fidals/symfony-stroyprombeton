@@ -364,6 +364,10 @@ div.form_comment{
 	padding-right: 15px;
 }
 
+.shopOrderTable .shipping {
+	padding-right: 0px;
+}
+
 .shopOrderTable td:nth-child(1){
 	width: 230px;
 	vertical-align: top !important;

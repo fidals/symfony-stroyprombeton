@@ -86,7 +86,7 @@ swiftmailer:
     #username:  %mailer_user%
     #password:  %mailer_password%
     spool:     { type: memory }
-    delivery_address:  info@stroyprombeton.ru
+#    delivery_address:  info@stroyprombeton.ru
     disable_delivery:  false
 sonata_admin:
     title: Административная панель
