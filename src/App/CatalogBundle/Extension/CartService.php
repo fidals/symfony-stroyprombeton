@@ -46,13 +46,11 @@ class CartService
 		if ($withProducts && $cart) {
 			$cart = clone $cart;
 			$prodRp = $this->doctrine->getRepository('AppCatalogBundle:Product');
-			$catRp = $this->doctrine->getRepository('AppCatalogBundle:Category');
 			$products = $cart->getProducts();
 			$cartProducts = array();
 			foreach ($products as $id => $count) {
 				$model = $prodRp->find($id);
-				$catUrl = SitemapCommand::$baseCats[$catRp->getPath($model->getCategory())[0]->getId()];
-				$cartProducts[$id] = array('count' => $count, 'model' => $model, 'catUrl' => $catUrl);
+				$cartProducts[$id] = array('count' => $count, 'model' => $model);
 			}
 			$cart->setProducts($cartProducts);
 		}

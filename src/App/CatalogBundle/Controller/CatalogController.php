@@ -11,6 +11,58 @@ use App\CatalogBundle\Command\SitemapCommand;
 
 class CatalogController extends Controller
 {
+	public function categoryAction(Request $request)
+	{
+		$categoryId = $request->get('id');
+		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$category = $catRp->find($categoryId);
+		if(!empty($category)) {
+			$parents = $catRp->getPath($category);
+
+			$hierarchyOptions = array(
+				'childSort' => array(
+					'field' => 'title',
+					'dir' => 'asc'
+				)
+			);
+
+			$children = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
+
+			if (!empty($children)) {
+				return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
+					'parents' => $parents,
+					'children' => $children,
+					'category' => $category
+				));
+			} else {
+				return $this->render('AppCatalogBundle:Catalog:section.explore.html.twig', array(
+					'parents'  => $parents,
+					'category' => $category
+				));
+			}
+		} else {
+			throw $this->createNotFoundException();
+		}
+	}
+
+	public function productAction(Request $request)
+	{
+		$productId = $request->get('id');
+
+		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+
+		$product = $prodRp->find($productId);
+		$category = $product->getCategory();
+		$parents = $catRp->getPath($category);
+
+		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
+			'parents' => $parents,
+			'category' => $category,
+			'product' => $product
+		));
+	}
+
 	// "custom router"
 	public function exploreRouteAction($catUrl)
 	{
@@ -30,72 +82,6 @@ class CatalogController extends Controller
 			));
 		}
 		die('Page is not found');
-	}
-
-	public function exploreCategoryAction($catUrl, $sectionId)
-	{
-		// search category ID
-
-		$catId = array_search($catUrl, SitemapCommand::$baseCats);
-		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
-		$category = $catRp->find(!empty($sectionId) ? $sectionId : $catId);
-		if (empty($category)) {
-			throw $this->createNotFoundException();
-		}
-		$parents = $catRp->getPath($category);
-		if ($this->isParent($category, $catUrl)) {
-			$hierarchyOptions = array(
-				'childSort' => array(
-					'field' => 'title',
-					'dir' => 'asc'
-				)
-			);
-
-			$children = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
-
-			if (!empty($children)) {
-				return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
-					'parents' => $parents,
-					'children' => $children,
-					'catUrl' => SitemapCommand::$baseCats[$catId],
-					'category' => $category
-				));
-			} else {
-				$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
-				$products = $prodRp->findBy(
-					array('sectionId' => $sectionId),
-					array('nomen' => 'ASC')
-				);
-				return $this->render('AppCatalogBundle:Catalog:section.explore.html.twig', array(
-					'parents' => $parents,
-					'catUrl' => SitemapCommand::$baseCats[$catId],
-					'section' => $category,
-					'products' => $products
-				));
-			}
-		} else {
-			//TODO:сделать редиректы
-			return $this->render("AppMainBundle:StaticPage:404.html.twig");
-		}
-	}
-
-	public function exploreProductAction($catUrl, $sectionId, $gbiId)
-	{
-		// search category ID
-		$catId = array_search($catUrl, SitemapCommand::$baseCats);
-
-		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
-		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
-		$section = $catRp->find($sectionId);
-		$parents = $catRp->getPath($section);
-		$product = $prodRp->find($gbiId);
-
-		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
-			'parents' => $parents,
-			'catUrl' => SitemapCommand::$baseCats[$catId],
-			'section' => $section,
-			'product' => $product
-		));
 	}
 
 	/**
@@ -147,7 +133,7 @@ class CatalogController extends Controller
 			$twigArgs[$argumentName] = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
 		}
 
-		return $this->render('AppCatalogBundle:Catalog:gbiVisual.html.twig', $twigArgs);
+		return $this->render('AppCatalogBundle:Catalog:gbi.visual.html.twig', $twigArgs);
 	}
 
 	/**
@@ -170,17 +156,5 @@ class CatalogController extends Controller
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 
 		return new Response($json);
-	}
-
-	private function isParent($category, $catUrl)
-	{
-
-		$catRp = $this->getDoctrine()->getRepository("AppCatalogBundle:Category");
-		$parents = $catRp->getPath($category);
-		foreach ($parents as $parent) {
-			if ($parent->getAlias() == $catUrl)
-				return true;
-		}
-		return false;
 	}
 }

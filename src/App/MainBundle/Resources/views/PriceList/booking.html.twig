@@ -19,8 +19,8 @@
 
 {% block content %}
 	<h1>Оформление запроса на прайсы</h1>
-	<form method="post" action="{{ path('app_main_price_list_booking') }}" id="OrderPriceForm" class="OrderPriceForm">
-		<table class="OrderPriceForm">
+	<form method="post" action="{{ path('app_main_price_list_booking') }}" id="order-price-form" class="order-price-form">
+		<table class="order-price-form">
 			<tbody><tr>
 				<td>Ваше имя:</td>
 				<td>{{ form_widget(form.person) }}</td>
@@ -51,10 +51,14 @@
 				<td>Сайт:</td>
 				<td><input name="fp_site" size="30" class="textfield" type="text" value=""></td>
 			</tr>
-
 			<tr>
-				<!--<td colspan=2 align="center"><input type="submit" name="submit" class="btn btn-primary btn-lg btn-success" value="Отправить запрос" /></td>-->
-				<td colspan="2" align="center"><button class="btn btn-lg btn-success" style="width: 125px"><span class="glyphicon glyphicon-bell"></span> Заказать</button></td>
+				<td></td>
+				<td align="left">
+					<button class="btn btn-lg btn-success" style="width: 125px">
+						<span class="glyphicon glyphicon-bell"></span>
+						Заказать
+					</button>
+				</td>
 			</tr>
 		</table>
 	</form>

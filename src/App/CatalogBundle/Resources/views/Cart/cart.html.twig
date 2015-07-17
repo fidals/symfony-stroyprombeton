@@ -1,5 +1,5 @@
 {% set cart = cart_service.loadCart(true) %}
-<div id="shopCart" class="shop-cart">
+<div id="shop-cart" class="shop-cart">
 	<a href="/order/">
 		<div id="cartInner" class="{% if cart.getProducts() | length != 0 %}cart-full{% else %}cart-empty{% endif %}">
 			<div class="basket-content">{{ cart.getProducts() | length }}</div>
@@ -7,26 +7,26 @@
 	</a>
 </div>
 {% if cart.getProducts() | length != 0 %}
-<div class="mbasket-items">
-	<table width="100%">
-		{% for product in cart.getProducts() %}
-		<tr class="cart-order">
-			<td width="70%" align="right" nowrap="">
-				<b>
-					<a href="{{ path('app_catalog_explore_category', {'catUrl': product.catUrl, 'section': product.model.getCategory().getId(), 'gbi': product.model.getId()}) }}">{{ product.model.getTitle() }}</a>
-				</b>
-			</td>
-			<td width="15%" align="left">
-				<b>{{ product.count }} шт.</b>
-			</td>
-			<td width="15%" align="right">
-				<a onclick="Cart.remove({{ product.model.getId() }}, {{ product.count }}); return;" title="Удалить" class="shk-del"><img src="/bundles/main/images/icon-delete.png" alt="Удалить"></a>
-			</td>
-		</tr>
-		{% endfor %}
-	</table>
-	<div class="mbasket-clear">
-		<a onclick="Cart.clean(); return;" id="butEmptyCart">Удалить все позиции</a>
+	<div class="mbasket-items">
+		<table width="100%">
+			{% for product in cart.getProducts() %}
+				<tr class="cart-order">
+					<td width="70%" align="right" nowrap="">
+						<b>
+							<a href="{{ path('app_catalog_product', {'id': product.model.getId()}) }}">{{ product.model.getTitle() }}</a>
+						</b>
+					</td>
+					<td width="15%" align="left">
+						<b>{{ product.count }} шт.</b>
+					</td>
+					<td width="15%" align="right">
+						<a onclick="return Cart.remove({{ product.model.getId() }}, {{ product.count }});" title="Удалить" class="shk-del"><img src="/bundles/main/images/icon-delete.png" alt="Удалить"></a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<div class="mbasket-clear">
+			<a onclick="return Cart.clean();" id="butEmptyCart">Удалить все позиции</a>
+		</div>
 	</div>
-</div>
 {% endif %}

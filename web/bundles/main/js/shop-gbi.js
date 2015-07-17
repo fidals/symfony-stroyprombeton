@@ -1,73 +1,28 @@
 $(function () {
-//	$(document).on("mouseenter", "#cartInner.cart-full", function(){
-//		$(".mbasket-items").css("display", "block");
-//	});
-//	$(document).on("mouseleave", ".menu-basket", function(){
-//		$(".mbasket-items").css("display", 'none');
-//	});
-
-	$("#order_phone,#price_list_booking_phone").mask("+9(999) 999-9999",{placeholder:"+_(___) ___-____"});
+	$("#order_phone,#price_list_booking_phone").mask("+9(999) 999-9999", {placeholder: "+_(___) ___-____"});
 
 	$('#price_list_booking_city').kladr({
 		type: $.kladr.type.city
 	});
 
-	$(document).on("mousedown", "#cartInner_full", function(){ 
-        $("#cartInner_full").css("background-image", 'url("../images/shop_but_full_a.png")');
+	$(document).on("mousedown", "#cartInner_full", function () {
+		$("#cartInner_full").css("background-image", 'url("../images/shop_but_full_a.png")');
 	});
-	$(document).on("mousedown", "#cartInner_empty", function(){ 
-        $("#cartInner_empty").css("background-image", 'url("../images/shop_but_empty_a.png")');
+	$(document).on("mousedown", "#cartInner_empty", function () {
+		$("#cartInner_empty").css("background-image", 'url("../images/shop_but_empty_a.png")');
 	});
-	$(document).on("mousedown", ".calc_button", function(){ 
-        $(".calc_button img").attr('src', '/images/calc_button_a.png');
+	$(document).on("mousedown", ".calc_button", function () {
+		$(".calc_button img").attr('src', '/images/calc_button_a.png');
 	});
-	
+
 	$("#cartInner_new2").hover(
-      function () {
-        $(".mbasket-items").css("display", "block");
-      },
-      function () {
-        $(".mbasket-items").css("display", "none");
-	  }
+		function () {
+			$(".mbasket-items").css("display", "block");
+		},
+		function () {
+			$(".mbasket-items").css("display", "none");
+		}
 	);
-	var count_item = $("tr.cart-order").length;
-	//$("#cartInner_new .basket-content").html("Выбрано позиций:&nbsp;"+count_item);
-
-    /* TryHideBasket();
-
-	$("div.basket").sticky({
-		className: 'basket-sticky',
-		wrapperClassName: 'basket-sticky-wrapper'
-	});*/
-
-//	$('input#phone').mask('(999) 999-99-99');
-
-    /*
-	$("input.basket-rest").each(function () {
-		$.spin.imageBasePath = "/assets/templates/default/images/spin/";
-		$(this).spin({
-			min: 1,
-			max: 10000
-		});
-	});*/
-
-	// --------------------------------------------------------------------------------
-
-//	if ($("a.add-basket").length > 0) {
-//		$("a.add-basket").click(AddGoodsToBasket);
-//	}
-//
-//	// --------------------------------------------------------------------------------
-//
-//	if ($("a.order-delete").length > 0) {
-//		EngineDeleteOrderItem();
-//	}
-//
-//	if ($("a.clear-basket").length > 0) {
-//		$("a.clear-basket").click(ClearBasket);
-//	}
-
-	// --------------------------------------------------------------------------------
 
 	if ($("div.form-order").length > 0) {
 		EngineSpinOrder();
@@ -75,18 +30,10 @@ $(function () {
 	}
 });
 
-function EngineSpinOrder () {
+function EngineSpinOrder() {
 	$.spin.imageBasePath = "/assets/templates/default/images/spin/";
 
 	$("input.order-rest").each(function () {
-		/*$(this).spin({
-			min: 1,
-			max: 10000,
-			changed: function (n, o) {
-				RecalcOrderContent();
-			}
-		});*/
-
 		$(this).change(function () {
 			var rest = parseInt($.trim($(this).val()));
 			if (isNaN(rest) || rest == 0) {
@@ -99,7 +46,7 @@ function EngineSpinOrder () {
 	});
 }
 
-function RecalcOrderContent () {
+function RecalcOrderContent() {
 	var arr_order = [];
 	var $order = $("div.order-basket div.gbi-list");
 	var cnt_goods = 0;
@@ -143,7 +90,7 @@ function RecalcOrderContent () {
 	$("div.self-order").text(order_basket);
 }
 
-function EngineDeleteOrderItem () {
+function EngineDeleteOrderItem() {
 	$("a.order-delete").click(function () {
 		var $parent_row = $(this).parent().parent();
 		$parent_row.remove();
@@ -151,7 +98,7 @@ function EngineDeleteOrderItem () {
 	});
 }
 
-function AddGoodsToBasket () {
+function AddGoodsToBasket() {
 	if ($(this).hasClass("disabled")) {
 		return false;
 	}
@@ -162,7 +109,6 @@ function AddGoodsToBasket () {
 	if (isNaN(rest) || rest == 0) {
 		rest = 1;
 	}
-
 
 
 	$.ajax({
@@ -191,15 +137,15 @@ function AddGoodsToBasket () {
 	return false;
 }
 
-function RecalcBasketContent (data) {
+function RecalcBasketContent(data) {
 	console.log('data', data);
 	$("div.basket-content").html(data);
-    var $basket_img = $("div.menu-basket-img");
-    var html = '<img src="/bundles/main/images/busket-full.png">';
-    $basket_img.html(html);
+	var $basket_img = $("div.menu-basket-img");
+	var html = '<img src="/bundles/main/images/busket-full.png">';
+	$basket_img.html(html);
 }
 
-function ClearBasket (from_basket) {
+function ClearBasket(from_basket) {
 	var is_from_basket = false;
 	if ($(this).hasClass("from-basket")) {
 		is_from_basket = true;
@@ -218,9 +164,9 @@ function ClearBasket (from_basket) {
 		cache: false,
 		success: function (data) {
 			$("div.basket-content").html('0');
-            var $basket_img = $("div.menu-basket-img");
-            var html = '<img src="/bundles/main/images/basket-empty.png">';
-            $basket_img.html(html);
+			var $basket_img = $("div.menu-basket-img");
+			var html = '<img src="/bundles/main/images/basket-empty.png">';
+			$basket_img.html(html);
 			var html = ' ';
 			$("div.cart-actions").html(html);
 			if (!is_from_basket) {
@@ -234,14 +180,14 @@ function ClearBasket (from_basket) {
 
 // --------------------------------------------------------------------------------
 
-function EngineOrder () {
+function EngineOrder() {
 	var $form = $("div.form-order form");
 	$form.submit(OrderFormSumbit);
 
 	$form.find("input[type=button]").click(OrderFormReset);
 }
 
-function OrderFormSumbit () {
+function OrderFormSumbit() {
 	$("div.form-order td.warning").empty();
 
 	$(this).find("input, select, textarea").each(function () {
@@ -272,13 +218,6 @@ function OrderFormSumbit () {
 		is_error = true;
 	}
 
-    /*
-	var phone_val = $.trim($("input#phone").val()) + "";
-	if (phone_val.length != 15) {
-		$("input#phone").addClass("error-input");
-		is_error = true;
-	}*/
-
 	if (is_error) {
 		var $div = $("div.form-order td.warning");
 		$div.html("<div>Не все обязательные поля формы заполнены или заполнены неверно.</div>");
@@ -290,7 +229,7 @@ function OrderFormSumbit () {
 	return true;
 }
 
-function OrderFormReset () {
+function OrderFormReset() {
 	var $form = $("div.form-order form");
 	$form.find("input, select, textarea").each(function () {
 		var type = $(this).attr("type") + "";
@@ -305,7 +244,7 @@ function OrderFormReset () {
 	DisabledButtons(false);
 }
 
-function DisabledButtons (is_disabled) {
+function DisabledButtons(is_disabled) {
 	var $form = $("div.form-order form");
 
 	var $btn_submit = $($form.find("input[type=submit]").get(0));
@@ -320,7 +259,7 @@ function DisabledButtons (is_disabled) {
 	}
 }
 
-function isValidEmailAddress (emailAddress) {
+function isValidEmailAddress(emailAddress) {
 	var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 	return pattern.test(emailAddress);
 }
@@ -328,11 +267,13 @@ function isValidEmailAddress (emailAddress) {
 function spinUpCount(el) {
 	var currentVal = parseInt($(el).parent().find('.basket-rest').val());
 	$(el).parent().find('.basket-rest').val(currentVal + 1);
+	return false;
 }
 
 function spinDownCount(el) {
 	var currentVal = parseInt($(el).parent().find('.basket-rest').val());
-	if(currentVal > 1) {
+	if (currentVal > 1) {
 		$(el).parent().find('.basket-rest').val(currentVal - 1);
 	}
+	return false;
 }

@@ -18,7 +18,7 @@ class Territory
 	 * @var integer
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
-	 * TODO после переноса вернуть ORM\GeneratedValue(strategy="AUTO")
+	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
 
@@ -81,5 +81,15 @@ class Territory
 	public function getObjects()
 	{
 		return $this->objects;
+	}
+
+	/**
+	 * Используется в админке
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->getName();
 	}
 }

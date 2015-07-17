@@ -1,15 +1,15 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-	{{ section.getTitle() }}
+	{{ category.getTitle() }}
 {% endblock %}
 
 {% block description %}
-	{{ section.getDescription() }}
+	{{ category.getDescription() }}
 {% endblock %}
 
 {% block keywords %}
-	{{ section.getKeywords() }}
+	{{ category.getKeywords() }}
 {% endblock %}
 
 {% block content %}
@@ -22,13 +22,13 @@
 			{% if loop.index != loop.last %}
 				<span class="location separate">»</span>
 				<span class="location section">
-					<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+					<a href="{{ path('app_catalog_category', {'id': item.getId()}) }}">{{ item.getTitle() }}</a>
 				</span>
 			{% endif %}
 		{% endfor %}
 	</div>
 	<h1 class="gbi-section">
-		{{ section.getH1() }}
+		{{ category.getH1() }}
 	</h1>
 	<div class="gbi-list">
 		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
@@ -41,15 +41,14 @@
 				<th>Цена</th>
 				<th>Количество</th>
 			</tr>
-			{% for product in products if product.isActive %}
+			{% for product in category.getProducts() if product.isActive %}
 				<tr>
 					<td class="gbi-list photo">
 						<img src="/bundles/main/images/bullet.png">
 					</td>
 					<td class="gbi-list code">{{ product.getNomen() }}</td>
 					<td class="gbi-list name">
-						<a href="/gbi/{{ catUrl }}/?section={{ section.getId() }}&amp;gbi={{ product.getId() }}">
-							{{ product.getName() }}</a></td>
+						<a href="{{ path('app_catalog_product', {'id': product.getId()}) }}">{{ product.getName() }}</a></td>
 					<td class="gbi-list price">
 						{% if product.price %}
 							{{ product.getPriceRounded() }} руб.
@@ -63,11 +62,11 @@
 								<fieldset>
 									<div class="shk_basket_count">
 										<input type="text" name="shk-count" value="1" size="2" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0px">
-										<img class="field-arr-up" onclick="spinUpCount(this)" src="/bundles/main/images/spin-up.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 11px -2px; vertical-align: bottom;">
-										<img class="field-arr-down" onclick="spinDownCount(this)" src="/bundles/main/images/spin-down.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
+										<img class="field-arr-up" onclick="return spinUpCount(this)" src="/bundles/main/images/spin-up.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 11px -2px; vertical-align: bottom;">
+										<img class="field-arr-down" onclick="return spinDownCount(this)" src="/bundles/main/images/spin-down.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
 									</div>
 									<div class="shk_basket_buy">
-										<input onclick="Cart.add({{ product.getId() }}, $(this).closest('fieldset').find('.basket-rest').val()); return;" type="button" class="btn-gray add-basket" name="shk-submit" type="submit" value="Заказать">
+										<input onclick="return Cart.add({{ product.getId() }}, $(this).closest('fieldset').find('.basket-rest').val());" type="button" class="btn-gray add-basket" name="shk-submit" type="submit" value="Заказать">
 									</div>
 								</fieldset>
 							</form>

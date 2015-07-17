@@ -12,25 +12,17 @@ class Cart
 	private $products = array();
 
 	/**
-	 * Всего продуктов в козине
-	 * @var int
-	 */
-	private $totalProductsCount = 0;
-
-	/**
 	 * @param $id
 	 * @param $count
 	 */
 	public function addProduct($id, $count)
 	{
 		$this->products[$id] = (isset($this->products[$id])) ? $this->products[$id] + $count : $count;
-		$this->totalProductsCount += $count;
 	}
 
 	public function removeProduct($id, $count)
 	{
 		if(isset($this->products[$id])) {
-			$this->totalProductsCount -= $this->products[$id];
 			if($count >= $this->products[$id]) {
 				unset($this->products[$id]);
 			} else {
@@ -49,13 +41,13 @@ class Cart
 		return $this->products;
 	}
 
-	public function setTotalProductsCount($total_products_count)
-	{
-		$this->totalProductsCount = $total_products_count;
-	}
-
+	/**
+	 * Возвращает кол-во товаров в корзине.
+	 * Именно кол-во товаров, а не позиций
+	 * @return int
+	 */
 	public function getTotalProductsCount()
 	{
-		return $this->totalProductsCount;
+		return (int) array_sum($this->getProducts());
 	}
 }

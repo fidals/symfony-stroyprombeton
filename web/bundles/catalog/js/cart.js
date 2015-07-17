@@ -4,12 +4,11 @@ var Cart = {
 		remove: '/gbi/cart/remove/',
 		clean: '/gbi/cart/clean/'
 	},
-	part: {
-		container: '.menu-basket'
-	},
 	view: {
+		container: '.menu-basket',
+
 		update: function (html) {
-			$(Cart.part.container).html(html);
+			$(Cart.view.container).html(html);
 		}
 	},
 	add: function (id, quantity) {
@@ -21,7 +20,8 @@ var Cart = {
 			},
 			Cart.view.update,
 			'html'
-		)
+		);
+		return false;
 	},
 	remove: function (id, quantity) {
 		$.post(
@@ -32,7 +32,8 @@ var Cart = {
 			},
 			Cart.view.update,
 			'html'
-		)
+		);
+		return false;
 	},
 	clean: function () {
 		$.post(
@@ -40,6 +41,7 @@ var Cart = {
 			{},
 			Cart.view.update,
 			'html'
-		)
+		);
+		return false;
 	}
 }

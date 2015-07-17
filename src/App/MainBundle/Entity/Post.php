@@ -19,7 +19,7 @@ class Post
 	 *
 	 * @ORM\Column(name="id", type="integer", nullable=false)
 	 * @ORM\Id
-	 * TODO вернуть ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
 	private $id;
 

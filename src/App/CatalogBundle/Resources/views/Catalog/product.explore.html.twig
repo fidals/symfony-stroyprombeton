@@ -22,13 +22,13 @@
 			{% if loop.index != loop.last %}
 				<span class="location separate">»</span>
 				<span class="location section">
-					<a href="/gbi/{{ catUrl }}/?section={{ item.getId() }}">{{ item.getTitle() }}</a>
+					<a href="{{ path('app_catalog_category', {'id': item.getId()}) }}">{{ item.getTitle() }}</a>
 				</span>
 			{% endif %}
 		{% endfor %}
 		<span class="location separate">»</span>
 			<span class="location section">
-			<a href="/gbi/{{ catUrl }}/?section={{ product.getCategory().getId() }}">{{ product.getCategory().getTitle() }}</a>
+			<a href="{{ path('app_catalog_category', {'id': product.getCategory().getId()}) }}">{{ product.getCategory().getTitle() }}</a>
 		</span>
 	</div>
 	<div class="product-header">
@@ -66,10 +66,10 @@
 								<td class="product-desc-right-col">{{ product.getMark() }}</td>
 							</tr>
 						{% endif %}
-						{% if section.getMark() %}
+						{% if category.getMark() %}
 							<tr>
 								<td class="product-desc-left-col">Рабочая документация</td>
-								<td class="product-desc-right-col">{{ section.getMark() }}</td>
+								<td class="product-desc-right-col">{{ category.getMark() }}</td>
 							</tr>
 						{% endif %}
 
@@ -141,12 +141,12 @@
 							<td class="product-desc-left-col">
 								<div class="shk_basket_count" style="float: none !important;">
 									<input type="text" name="shk-count" value="1" size="2" code="{{ product.getId() }}" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0px">
-									<img class="field-arr-up" onclick="spinUpCount(this)" src="/bundles/main/images/spin-up.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 11px -2px; vertical-align: bottom;">
-									<img class="field-arr-down" onclick="spinDownCount(this)" src="/bundles/main/images/spin-down.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
+									<img class="field-arr-up" onclick="return spinUpCount(this, event);" src="/bundles/main/images/spin-up.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 11px -2px; vertical-align: bottom;">
+									<img class="field-arr-down" onclick="return spinDownCount(this, event);" src="/bundles/main/images/spin-down.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
 								</div>
 							</td>
 							<td class="product-desc-right-col">
-								<input onclick="Cart.add({{ product.getId() }}, $(this).closest('tr').find('.basket-rest').val()); return;" style="float: left" type="button" class="btn-gray add-basket" name="shk-submit" value="Заказать">
+								<input onclick="return Cart.add({{ product.getId() }}, $(this).closest('tr').find('.basket-rest').val());" style="float: left" type="button" class="btn-gray add-basket" name="shk-submit" value="Заказать">
 							</td>
 						</tr>
 					</table>

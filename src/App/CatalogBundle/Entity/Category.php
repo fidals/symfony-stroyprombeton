@@ -33,7 +33,7 @@ class Category
 	);
 
 	/**
-	 * TODO Вернуть ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 * @var integer
 	 *
 	 * @ORM\Column(name="id", type="integer", nullable=false)
@@ -65,7 +65,7 @@ class Category
 	/**
 	 * @var float
 	 *
-	 * @ORM\Column(name="coefficient", type="float", nullable=false)
+	 * @ORM\Column(name="coefficient", type="float", nullable=true)
 	 */
 	private $coefficient;
 
@@ -315,11 +315,6 @@ class Category
 		/*-------- двигаем файл ------*/
 		$this->file->move($this->getUploadRootDir($basePath), $this->getId() . "." . $this->getFile()->guessExtension());
 		$this->file = null;
-	}
-
-	public function rmUploaded()
-	{
-		Utils::categoryRemove($this);
 	}
 
 	public function getFilePath()
