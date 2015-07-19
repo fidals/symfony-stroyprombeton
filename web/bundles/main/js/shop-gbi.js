@@ -1,39 +1,28 @@
 $(function () {
-	/* TryHideBasket();
+	$("#order_phone,#price_list_booking_phone").mask("+9(999) 999-9999", {placeholder: "+_(___) ___-____"});
 
-	 $("div.basket").sticky({
-	 className: 'basket-sticky',
-	 wrapperClassName: 'basket-sticky-wrapper'
-	 });*/
+	$('#price_list_booking_city').kladr({
+		type: $.kladr.type.city
+	});
 
-	$('input#phone').mask('(999) 999-99-99');
+	$(document).on("mousedown", "#cartInner_full", function () {
+		$("#cartInner_full").css("background-image", 'url("../images/shop_but_full_a.png")');
+	});
+	$(document).on("mousedown", "#cartInner_empty", function () {
+		$("#cartInner_empty").css("background-image", 'url("../images/shop_but_empty_a.png")');
+	});
+	$(document).on("mousedown", ".calc_button", function () {
+		$(".calc_button img").attr('src', '/images/calc_button_a.png');
+	});
 
-	/*
-	 $("input.basket-rest").each(function () {
-	 $.spin.imageBasePath = "/assets/templates/default/images/spin/";
-	 $(this).spin({
-	 min: 1,
-	 max: 10000
-	 });
-	 });*/
-
-	// --------------------------------------------------------------------------------
-
-	if ($("input.add-basket").length > 0) {
-		$("input.add-basket").click(AddGoodsToBasket);
-	}
-
-	// --------------------------------------------------------------------------------
-
-	if ($("a.order-delete").length > 0) {
-		EngineDeleteOrderItem();
-	}
-
-	if ($("a.clear-basket").length > 0) {
-		$("a.clear-basket").click(ClearBasket);
-	}
-
-	// --------------------------------------------------------------------------------
+	$("#cartInner_new2").hover(
+		function () {
+			$(".mbasket-items").css("display", "block");
+		},
+		function () {
+			$(".mbasket-items").css("display", "none");
+		}
+	);
 
 	if ($("div.form-order").length > 0) {
 		EngineSpinOrder();
@@ -45,14 +34,6 @@ function EngineSpinOrder() {
 	$.spin.imageBasePath = "/assets/templates/default/images/spin/";
 
 	$("input.order-rest").each(function () {
-		/*$(this).spin({
-		 min: 1,
-		 max: 10000,
-		 changed: function (n, o) {
-		 RecalcOrderContent();
-		 }
-		 });*/
-
 		$(this).change(function () {
 			var rest = parseInt($.trim($(this).val()));
 			if (isNaN(rest) || rest == 0) {
@@ -103,9 +84,7 @@ function RecalcOrderContent() {
 			order_basket: order_basket
 		},
 		cache: false,
-		success: function (data) {
-			RecalcBasketContent(data);
-		}
+		success: RecalcBasketContent
 	});
 
 	$("div.self-order").text(order_basket);
@@ -159,19 +138,11 @@ function AddGoodsToBasket() {
 }
 
 function RecalcBasketContent(data) {
-
-	var $basket = $("div.basket-content");
-	var html = '<p>Товаров <br>в корзине:' + data + '</p> ';
-	$basket.html(html);
+	console.log('data', data);
+	$("div.basket-content").html(data);
 	var $basket_img = $("div.menu-basket-img");
 	var html = '<img src="/bundles/main/images/busket-full.png">';
 	$basket_img.html(html);
-	var $basket_actions = $("div.cart-actions");
-	var html = '<ul>';
-	html += '<li><a href="/order/"> <img src="/bundles/main/images/ok.png"></a></li>';
-	html += '<li><a href="javascript:void(0);" class="clear-basket from-basket" onclick="ClearBasket(true);"><img src="/bundles/main/images/clear.png"></a></li>';
-	html += '</ul>';
-	$basket_actions.html(html);
 }
 
 function ClearBasket(from_basket) {
@@ -192,9 +163,7 @@ function ClearBasket(from_basket) {
 		},
 		cache: false,
 		success: function (data) {
-
-			var html = '<p>Корзина пуста</p>';
-			$("div.basket-content").html(html);
+			$("div.basket-content").html('0');
 			var $basket_img = $("div.menu-basket-img");
 			var html = '<img src="/bundles/main/images/basket-empty.png">';
 			$basket_img.html(html);
@@ -209,23 +178,6 @@ function ClearBasket(from_basket) {
 	return false;
 }
 
-/*function TryHideBasket () {
- var uri = location.pathname;
- for (;;) {
- if (uri.indexOf("/") == -1) {
- break;
- }
- uri = uri.replace("/", "");
- }
-
- if (uri != "order") {
- return;
- }
-
- $(".basket").hide();
- $(".basket-sticky-wrapper").hide();
- }
- */
 // --------------------------------------------------------------------------------
 
 function EngineOrder() {
@@ -265,13 +217,6 @@ function OrderFormSumbit() {
 		$("input#email").addClass("error-input");
 		is_error = true;
 	}
-
-	/*
-	 var phone_val = $.trim($("input#phone").val()) + "";
-	 if (phone_val.length != 15) {
-	 $("input#phone").addClass("error-input");
-	 is_error = true;
-	 }*/
 
 	if (is_error) {
 		var $div = $("div.form-order td.warning");
@@ -322,11 +267,13 @@ function isValidEmailAddress(emailAddress) {
 function spinUpCount(el) {
 	var currentVal = parseInt($(el).parent().find('.basket-rest').val());
 	$(el).parent().find('.basket-rest').val(currentVal + 1);
+	return false;
 }
 
 function spinDownCount(el) {
 	var currentVal = parseInt($(el).parent().find('.basket-rest').val());
-	if(currentVal > 1) {
+	if (currentVal > 1) {
 		$(el).parent().find('.basket-rest').val(currentVal - 1);
 	}
+	return false;
 }

@@ -1,3 +1,15 @@
+app_catalog_cart_add:
+    pattern: /cart/add/
+    defaults: { _controller: AppCatalogBundle:Cart:add }
+
+app_catalog_cart_remove:
+    pattern: /cart/remove/
+    defaults: { _controller: AppCatalogBundle:Cart:remove }
+
+app_catalog_cart_clean:
+    pattern: /cart/clean/
+    defaults: { _controller: AppCatalogBundle:Cart:clean }
+
 app_catalog_category:
     pattern: /categories/{id}/
     defaults: { _controller: AppCatalogBundle:Catalog:category }
@@ -16,6 +28,10 @@ modx_catalog_explore:
     defaults: { _controller: AppMainBundle:Redirect:appCatalogExplore }
     requirements:
         chain: ".+"
+
+app_catalog_product:
+    pattern: /products/{id}/
+    defaults: { _controller: AppCatalogBundle:Catalog:product }
 
 # TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
 modx_catalog_explore_category:

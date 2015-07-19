@@ -24,12 +24,12 @@
 	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.maskedinput.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/bundles/main/js/jquery.mask.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-	{#<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>#}
+	<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>
 
 	{#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
@@ -74,29 +74,7 @@
 			</table>
 		</div>
 		<div class="page-header-right-colon-container">
-			<div class="page-header-right-colon">
-				<!-- <table class="basket-wrapper">
-						<tr>
-							<td class="basket-wrapper empty">
-							</td>
-							<td class="basket-wrapper wrapper">
-								<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky" style="height: 74px;">
-									<div class="basket basket-sticky" style="position: fixed; top: 20px;">
-										<div class="basket-content">
-											Нет<br>заказов
-										</div>
-										<div class="basket-actions">
-											<ul>
-												<li>Оформить</li>
-												<li>Удалить</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</td>
-						</tr>
-					</table>-->
-			</div>
+			<div class="page-header-right-colon"></div>
 		</div>
 	</div>
 
@@ -111,41 +89,10 @@
 			<li><a href="{{ path('app_main_territory_map') }}">Наши объекты</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
 			<li>
-				{% set cartLayout = app.session.get('cart') %}
 				<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
 					<div class="basket basket-sticky">
 						<div class="menu-basket">
-							<img src="/bundles/main/images/razdelitel.png">
-							{% if cartLayout and cartLayout.products and (cartLayout.totalProductsCount != 0) %}
-								<div class="basket-content">
-									<p>Товаров <br>в корзине: {{ cartLayout.totalProductsCount }}</p>
-								</div>
-								<div class="menu-basket-img">
-									<img src="/bundles/main/images/busket-full.png">
-								</div>
-								<div class="cart-actions">
-									<ul>
-										<li>
-											<a href="/order/" data-toggle="tooltip" data-placement="top" title="Оформить" id="order">
-												<img src="/bundles/main/images/ok.png">
-											</a>
-										</li>
-										<li>
-											<a onclick="Cart.clean(); return false;" href="javscript:void(0);" class="clear-basket from-basket">
-												<img src="/bundles/main/images/clear.png">
-											</a>
-										</li>
-									</ul>
-								</div>
-							{% else %}
-								<div class="basket-content">
-									<p>Корзина пуста</p>
-								</div>
-								<div class="menu-basket-img">
-									<img src="/bundles/main/images/basket-empty.png">
-								</div>
-								<div class="cart-actions"></div>
-							{% endif %}
+							{% include 'AppCatalogBundle:Cart:cart.html.twig' %}
 						</div>
 					</div>
 				</div>

@@ -1,3 +1,11 @@
+app_main_price_list_booking:
+    pattern: /order_price/
+    defaults: { _controller: AppMainBundle:PriceList:booking }
+
+app_main_price_list_booking_success:
+    pattern: /order_price_success/
+    defaults: { _controller: AppMainBundle:PriceList:bookingSuccess }
+
 app_main_object:
     pattern: /our-object/{id}/
     defaults: { _controller: AppMainBundle:Object:show }

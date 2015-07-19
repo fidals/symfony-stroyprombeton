@@ -133,7 +133,7 @@ class CatalogController extends Controller
 			$twigArgs[$argumentName] = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
 		}
 
-		return $this->render('AppCatalogBundle:Catalog:gbiVisual.html.twig', $twigArgs);
+		return $this->render('AppCatalogBundle:Catalog:gbi.visual.html.twig', $twigArgs);
 	}
 
 	/**

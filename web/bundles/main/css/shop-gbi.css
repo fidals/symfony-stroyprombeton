@@ -285,3 +285,124 @@ div.order-report {
 .OrderPrice .a_price img {
 	border-radius: 3px;
 }
+
+.mbasket-items{
+	background-color: #FFFFFF;
+	border: 1px solid #999999;
+	border-radius: 10px;
+	display: none;
+	margin-top: 0;
+	opacity: 0.9;
+	padding: 10px 20px;
+	position: absolute;
+	right: 0;
+	width: 450px;
+}
+
+.shop-cart table {border-collapse:collapse; margin:5px 0;}
+
+.cart-order {
+	margin: 5px 0;
+	text-align: center;
+}
+
+.shop-cart td {
+	padding: 3px;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+}
+.shop-cart td {
+	border-top: none !important;
+}
+.mbasket-items td {
+	padding: 10px !important;
+}
+
+div.menu-h ul li a {
+	display: block;
+	padding: 0 0 0 0;
+	margin: 0 20px;
+	color: #c90000;
+	font-weight: bold;
+	font-size: 0.90em;
+	text-align: center;
+	text-decoration: underline;
+	line-height: 1em;
+}
+
+.mbasket-items a, .mbasket-items a:hover, .mbasket-items a:visited {
+	margin: 0 !important;
+	text-align: right !important;
+}
+
+#shop-cart a {
+	margin: 0;
+}
+
+.shop-order-table, .order-price-form {
+	width: 100%;
+}
+
+#shop-order-form input[type='text'], #shop-order-form textarea, #order-price-form input[type='text']{
+	width: 100%;
+}
+
+div.form_comment{
+	color: #999999;
+	font-size: 0.9em;
+	line-height: 1.1em;
+	padding: 5px 10px 5px 0;
+	text-align: justify;
+}
+
+.shop-order-table .td-submit, .order-price-form{
+	/*text-align: right;*/
+	padding-right: 0px;
+}
+
+.shop-order-table, .order-price-form td{
+	padding-right: 15px;
+}
+
+.shop-order-table .shipping {
+	padding-right: 0px;
+}
+
+.shop-order-table td:nth-child(1){
+	width: 230px;
+	vertical-align: top !important;
+	padding-top: 5px;
+}
+
+.shop-order-table td {
+	padding-right: 15px;
+}
+
+.shop-order-table .form-error ul {
+	list-style: none;
+	color: indianred;
+	margin-top: -10px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	margin-left: 0px;
+}
+
+.order-price-form td:nth-child(1) {
+	width: 330px;
+}
+
+.order-price-form td .activity {
+	width: 310px;
+}
+
+#undefined-sticky-wrapper:hover .mbasket-items {
+	display: block;
+}
+
+.mbasket-clear, .shk-del {
+	cursor: pointer;
+}
+
+.td form-order {
+	padding-right: 0px;
+}

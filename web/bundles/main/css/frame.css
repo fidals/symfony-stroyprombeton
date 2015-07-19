@@ -1153,12 +1153,6 @@ div.gbi-list table td.name span {
 	font-weight: bold;
 }
 
-div.gbi-list table td.price {
-	color: #c90000;
-	font-weight: bold;
-	text-align: right;
-}
-
 div.gbi-list table td.rest {
 	padding-right: 20px !important;
 	text-align: center !important;
@@ -1368,7 +1362,7 @@ div.gbi-separate {
 /* -------------------------------------------------------------------------------- */
 
 div.dostavka-gbi {
-	margin: 15px 15px 10px 15px;
+	margin: 15px 0px 10px 15px;
 }
 
 div.dostavka-gbi p {
@@ -1955,7 +1949,7 @@ div.gbi-list table td.name span {
 div.gbi-list table td.price {
 	color: #C90000;
 	font-weight: bold;
-	text-align: right;
+	text-align: center;
 	width: 90px;
 }
 

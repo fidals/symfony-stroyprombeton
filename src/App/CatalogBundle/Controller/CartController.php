@@ -3,8 +3,6 @@
 namespace App\CatalogBundle\Controller;
 
 use App\CatalogBundle\Entity\Order;
-use App\CatalogBundle\Entity\Cart;
-use App\CatalogBundle\Entity\Repository\CartRepository;
 use App\CatalogBundle\Form\OrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,78 +10,85 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
-	/**
-	 * CRUD корзины
-	 * @return Response
-	 */
-	public function indexAction()
+	public function addAction(Request $request)
 	{
-		$query = $this->getRequest()->query;
-		$mode = $query->get('mode');
-		$cartRp = CartRepository::getInstance($this);
-		$res = new Response();
+		$id = $request->request->getInt('id');
+		$quantity = $request->request->getInt('quantity');
 
-		if ($mode == 'add') {
-			$code = (int)$query->get('code');
-			$rest = (int)$query->get('rest');
-
-			$cart = $cartRp->loadCart();
-			$cart->addProduct($code, $rest);
-			$cartRp->saveCart($cart);
-
-			$res = new Response($cart->getTotalProductsCount());
-		} elseif ($mode == 'edit') {
-			$order = $query->get('order_basket');
-			$cart = $cartRp->loadCart();
-			if (!empty($order)) {
-				$parts = explode('-', $order);
-				foreach ($parts as $part) {
-					$props = explode(':', $part);
-					$cart->addProduct((int)$props[0], (int)$props[1]);
-				}
-				$cartRp->saveCart($cart);
-			}
-			$res = new Response($cart->serialize());
-		} elseif ($mode == 'clear') {
-			$cartRp->cleanCart();
+		$cartService = $this->get('catalog.cart');
+		$cart = $cartService->loadCart();
+		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+		$product = $prodRp->find($id);
+		if(!empty($product)) {
+			$cart->addProduct($id, $quantity);
+			$cartService->saveCart($cart);
+		} else {
+			throw new \Exception("Not found product with provided identity");
 		}
 
-		return $res;
+		return $this->render('AppCatalogBundle:Cart:cart.html.twig');
+	}
+
+	public function removeAction(Request $request)
+	{
+		$id = $request->request->getInt('id');
+		$quantity = $request->request->getInt('quantity');
+
+		$cartService = $this->get('catalog.cart');
+		$cart = $cartService->loadCart();
+
+		$cart->removeProduct($id, $quantity);
+		$cartService->saveCart($cart);
+		return $this->render('AppCatalogBundle:Cart:cart.html.twig');
+	}
+
+	public function cleanAction()
+	{
+		$this->get('catalog.cart')->cleanCart();
+		return $this->render('AppCatalogBundle:Cart:cart.html.twig');
 	}
 
 	/**
 	 * Форма заказа
-	 * @return mixed - html-формы или редирект на страницу обработки формы
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
 	 */
-	public function orderAction()
+	public function orderAction(Request $request)
 	{
-		$order = new Order();
-		$form = $this->createForm(new OrderType(), $order);
-
-		if ($this->getRequest()->getMethod() == 'POST') {
-			$form->bindRequest($this->getRequest());
+		$form = $this->createForm(new OrderType(), null, array('csrf_protection' => false));
+		if ($request->getMethod() == 'POST') {
+			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
-
+				$recipients = array(
+					$this->container->getParameter('email_info'),
+					$form['email']->getData()
+				);
+				$body = $this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
+					'form' => $form->createView(),
+					'cart' => $this->get('catalog.cart')->loadCart(true)
+				));
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
-					->setTo('info@stroyprombeton.ru')
-					->setFrom('order@stroyprombeton.ru')
+					->setTo($recipients)
+					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
-					->setBody($this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
-							'form' => $form->createView(),
-							'cart' => CartRepository::getInstance($this)->loadCart(true)
-						))
-					);
+					->setBody($body);
 				$mailer->send($message);
-				CartRepository::getInstance($this)->cleanCart();
-				return $this->redirect($this->generateUrl('app_main_index'));
+				$this->get('catalog.cart')->cleanCart();
+				return $this->redirect($this->generateUrl('app_catalog_order_thanks'));
 			}
 		}
 
+		$cart = $this->get('catalog.cart')->loadCart(true);
 		return $this->render('AppCatalogBundle:Cart:order.html.twig', array(
-			'order' => CartRepository::getInstance($this)->loadCart(true),
-			'form' => $form->createView()
+			'order' => $cart,
+			'form'  => $form->createView()
 		));
+	}
+
+	public function orderThanksAction()
+	{
+		return $this->render('AppCatalogBundle:Cart:thanks.order.html.twig');
 	}
 }

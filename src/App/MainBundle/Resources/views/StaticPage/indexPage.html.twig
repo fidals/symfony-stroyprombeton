@@ -3,76 +3,77 @@
 {% block title %}
 	Завод ЖБИ «СТК-ПромБетон»,  производство ЖБИ в Санкт-Петербурге, железобетонные изделия спб
 {% endblock %}
+
 {% block keywords %}ЖБИ, завод ЖБИ, изготовление ЖБИ, производство ЖБИ {% endblock %}
+
 {% block content %}
 	<h1>Завод железобетонных изделий «СТК-Промбетон»</h1>
 	<table class="index-main-top" border="0">
 		<tr>
 			<td style="width: 50%; vertical-align: top; padding: 0px 3% 0 0;">
-			<script type="text/javascript">
-				intId = setInterval('slideImg(true, false)', 10000);
-			</script>
-			<div class="m_informer">
-			<div class="inf_header">Наша продукция
-				<div class="inf_marker"></div>
-			</div>
-			<div class="inf_content">
-			<div class="random_list_main">
-			{% for product in products %}
-				<div>
-					<div class="inf-product-header">{{ product.getTitle() }} {{ product.getMark() }}</div>
-					<div style="text-align: center;">
-						<div class="inf-product-photo">
-							<img class="shk-image" alt="" title="" src="{{ product.getPicturePath() }}"></div>
+				<script type="text/javascript">
+					intId = setInterval('slideImg(true, false)', 10000);
+				</script>
+				<div class="m_informer">
+					<div class="inf_header">Наша продукция
+						<div class="inf_marker"></div>
 					</div>
-					<div class="inf-product-desc">
-						<table class="table table-condensed product-info-table random_main_tech">
-							<tr>
-								<td class="product-desc-left-col">Длина (мм)</td>
-								<td class="product-desc-right-col">{{ product.getLength() }}</td>
-							</tr>
-							<tr>
-								<td class="product-desc-left-col">Ширина (мм)</td>
-								<td class="product-desc-right-col">{{ product.getWidth() }}</td>
-							</tr>
-							<tr>
-								<td class="product-desc-left-col">Высота (мм)</td>
-								<td class="product-desc-right-col">{{ product.getHeight() }}</td>
-							</tr>
-							<tr>
-								<td class="product-desc-left-col">Масса (кг)</td>
-								<td class="product-desc-right-col">{{ product.getWeight() }}</td>
-							</tr>
-							<tr>
-								<td class="product-desc-left-col">Объем (м3)</td>
-								<td class="product-desc-right-col">{{ product.getVolume() }}</td>
-							</tr>
-							<tr>
-								<td class="product-desc-left-col">
-									<div class="product-price"><span>Цена:</span></div>
-								</td>
-								<td class="product-desc-right-col">
-									<div class="product-price">{{ product.getPriceRounded() }} руб.</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<div class="inf-product-for-nds">
-										<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
+					<div class="inf_content">
+						<div class="random_list_main">
+							{% for product in products %}
+								<div>
+									<div class="inf-product-header">{{ product.getTitle() }} {{ product.getMark() }}</div>
+									<div style="text-align: center;">
+										<div class="inf-product-photo">
+											<img class="shk-image" alt="" title="" src="{{ product.getPicturePath() }}"></div>
 									</div>
-								</td>
-							</tr>
-						</table>
+									<div class="inf-product-desc">
+										<table class="table table-condensed product-info-table random_main_tech">
+											<tr>
+												<td class="product-desc-left-col">Длина (мм)</td>
+												<td class="product-desc-right-col">{{ product.getLength() }}</td>
+											</tr>
+											<tr>
+												<td class="product-desc-left-col">Ширина (мм)</td>
+												<td class="product-desc-right-col">{{ product.getWidth() }}</td>
+											</tr>
+											<tr>
+												<td class="product-desc-left-col">Высота (мм)</td>
+												<td class="product-desc-right-col">{{ product.getHeight() }}</td>
+											</tr>
+											<tr>
+												<td class="product-desc-left-col">Масса (кг)</td>
+												<td class="product-desc-right-col">{{ product.getWeight() }}</td>
+											</tr>
+											<tr>
+												<td class="product-desc-left-col">Объем (м3)</td>
+												<td class="product-desc-right-col">{{ product.getVolume() }}</td>
+											</tr>
+											<tr>
+												<td class="product-desc-left-col">
+													<div class="product-price"><span>Цена:</span></div>
+												</td>
+												<td class="product-desc-right-col">
+													<div class="product-price">{{ product.getPriceRounded() }} руб.</div>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<div class="inf-product-for-nds">
+														<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<div style="clear: both;"></div>
+									<div class="inf_footer">
+										<a href="/gbi/{{ product.catUrl }}?section={{ product.getCategory().getId() }}&gbi={{ product.getId() }}">Подробнее</a>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
 					</div>
-					<div style="clear: both;"></div>
-					<div class="inf_footer">
-						<a href="/gbi/{{ product.catUrl }}?section={{ product.getCategory().getId() }}&gbi={{ product.getId() }}">Подробнее</a>
-					</div>
-				</div>
-			{% endfor %}
-			</div>
-
-			</div>
 			</td>
 			<td style="width: 50%; vertical-align: top; padding: 0px;">
 				<div class="m_informer">
@@ -90,6 +91,7 @@
 									</div>
 									<i>{{ post.getDate() | date('d.m.Y') }}</i><br>
 									<a href="{{ path('app_main_post', {'id': post.getId()}) }}">{{ post.getTitle() }}</a><br>
+
 									<div class="inf_intro">
 										{{ post.getIntroText() }}
 									</div>
@@ -104,8 +106,7 @@
 	</table>
 	<div class="main_cat">
 		<div class="main_cat_el">
-			<a href="/gbi/prom-stroy?section=12">
-				<img src="/assets/images/indexPage/lestnici2.png" alt="">
+			<a href="/gbi/prom-stroy?section=12"> <img src="/assets/images/indexPage/lestnici2.png" alt="">
 				<p>Элементы лестниц</p>
 			</a>
 		</div>
@@ -113,26 +114,22 @@
 			<div class="title">
 				<p>Новый тип изделия</p>
 			</div>
-			<a href="/gbi/dor-stroy?section=473">
-				<img src="/assets/images/indexPage/592_big.png" alt="">
+			<a href="/gbi/dor-stroy?section=473"> <img src="/assets/images/indexPage/592_big.png" alt="">
 				<p>Блоки удерживающих ограждений для автомобилей (тип "Нью Джерси")</p>
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/prom-stroy?section=15">
-				<img src="/assets/images/indexPage/colonni5.png" alt="">
+			<a href="gbi/prom-stroy?section=15"> <img src="/assets/images/indexPage/colonni5.png" alt="">
 				<p>Колонны железобетонные</p>
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/dor-stroy?section=180">
-				<img src="/assets/images/indexPage/trubi251.png" alt="">
+			<a href="gbi/dor-stroy?section=180"> <img src="/assets/images/indexPage/trubi251.png" alt="">
 				<p>Водопропускные трубы</p>
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/dor-stroy?section=176">
-				<img src="/assets/images/indexPage/podpornie-stenki247.png" alt="">
+			<a href="gbi/dor-stroy?section=176"> <img src="/assets/images/indexPage/podpornie-stenki247.png" alt="">
 				<p>Подпорные стены</p>
 			</a>
 		</div>
@@ -140,8 +137,7 @@
 			<div class="title">
 				<p>Новый тип изделия</p>
 			</div>
-			<a href="gbi/dor-stroy?section=12563">
-				<img src="/assets/images/indexPage/lotki12563.png" alt="">
+			<a href="gbi/dor-stroy?section=12563"> <img src="/assets/images/indexPage/lotki12563.png" alt="">
 				<p>Железнодорожные лотки</p>
 			</a>
 		</div>
@@ -156,8 +152,7 @@
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/energy-stroy?section=44">
-				<img src="/assets/images/indexPage/fundamenti-lep70.png" alt="">
+			<a href="gbi/energy-stroy?section=44"> <img src="/assets/images/indexPage/fundamenti-lep70.png" alt="">
 				<p>Конструкции фундаментов для металлических опор ЛЭП</p>
 			</a>
 		</div>

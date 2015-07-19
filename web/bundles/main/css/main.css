@@ -488,7 +488,7 @@ div.map {
 	color: #c90000;
 }
 
-.informer {
+.infformer {
 	background-color: #F9F9F9;
 	border: 1px solid #CAC6C3;
 	border-radius: 7px;
@@ -580,6 +580,46 @@ img.news_image_border {
 	border-radius: 5px;
 }
 
+.basket-sticky{
+	height: 45px;
+}
+
+div.menu-basket{
+	float:right;
+	margin-right: 19px;
+}
+
+#shop-cart{
+	margin: 0;
+}
+
+.shop-cart {margin:10px 0; width: 100%;}
+
+#shop-cart a{
+	margin: 0;
+}
+
+#cartInner {
+	cursor: pointer;
+	height: 45px;
+	margin: 0;
+	padding: 0;
+	width: 214px;
+}
+
+.cart-empty {
+	background: url("/bundles/main/images/basket.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.cart-full {
+	background: url("/bundles/main/images/basket_full.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+div.basket-content {
+	margin: 23px 0 0 77px;
+	position: absolute;
+}
+
 .cat_cat{
 	float: left;
 	height: 190px;
@@ -669,7 +709,7 @@ span.catalog-second-level, span.catalog-third-level {
 }
 
 .shk_basket_count .field-arr-down, .product-desc-left-col .field-arr-down, .shk-item .field-arr-down{
-	margin: 11px 0 0 -18px !important;
+	margin: 11px 0 0 -17px !important;
 	position: absolute;
 }
 
@@ -699,8 +739,6 @@ span.catalog-second-level, span.catalog-third-level {
 
 .props-tbl tr {
 	border-bottom: 1px #EEE solid;
-}
-
 }
 
 table.m-contacts_new{
@@ -887,3 +925,4 @@ div.main_cat_gbi{
 .index-main-top, .main_cat{
 	text-align: justify;
 }
+

@@ -33,6 +33,10 @@ app_catalog_order:
     pattern: /order/
     defaults: { _controller: AppCatalogBundle:Cart:order }
 
+app_catalog_order_thanks:
+    pattern: /order_thanks/
+    defaults: { _controller: AppCatalogBundle:Cart:orderThanks }
+
 app_main:
     resource: "@AppMainBundle/Resources/config/routing.yml"
     prefix:   /
