@@ -4,8 +4,6 @@
 	Завод ЖБИ «СТК-ПромБетон»,  производство ЖБИ в Санкт-Петербурге, железобетонные изделия спб
 {% endblock %}
 
-{% block keywords %}ЖБИ, завод ЖБИ, изготовление ЖБИ, производство ЖБИ {% endblock %}
-
 {% block content %}
 	<h1>Завод железобетонных изделий «СТК-Промбетон»</h1>
 	<table class="index-main-top" border="0">
@@ -68,7 +66,7 @@
 									</div>
 									<div style="clear: both;"></div>
 									<div class="inf_footer">
-										<a href="/gbi/{{ product.catUrl }}?section={{ product.getCategory().getId() }}&gbi={{ product.getId() }}">Подробнее</a>
+										<a href="{{ path('app_catalog_product', {'id': product.getId()}) }}">Подробнее</a>
 									</div>
 								</div>
 							{% endfor %}
@@ -106,7 +104,7 @@
 	</table>
 	<div class="main_cat">
 		<div class="main_cat_el">
-			<a href="/gbi/prom-stroy?section=12"> <img src="/assets/images/indexPage/lestnici2.png" alt="">
+			<a href="{{ path('app_catalog_category', {'id': 12}) }}"> <img src="/assets/images/indexPage/lestnici2.png" alt="">
 				<p>Элементы лестниц</p>
 			</a>
 		</div>
@@ -114,22 +112,22 @@
 			<div class="title">
 				<p>Новый тип изделия</p>
 			</div>
-			<a href="/gbi/dor-stroy?section=473"> <img src="/assets/images/indexPage/592_big.png" alt="">
+			<a href="{{ path('app_catalog_category', {'id': 473}) }}"> <img src="/assets/images/indexPage/592_big.png" alt="">
 				<p>Блоки удерживающих ограждений для автомобилей (тип "Нью Джерси")</p>
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/prom-stroy?section=15"> <img src="/assets/images/indexPage/colonni5.png" alt="">
+			<a href="{{ path('app_catalog_category', {'id': 15}) }}"> <img src="/assets/images/indexPage/colonni5.png" alt="">
 				<p>Колонны железобетонные</p>
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/dor-stroy?section=180"> <img src="/assets/images/indexPage/trubi251.png" alt="">
+			<a href="{{ path('app_catalog_category', {'id': 180}) }}"> <img src="/assets/images/indexPage/trubi251.png" alt="">
 				<p>Водопропускные трубы</p>
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/dor-stroy?section=176"> <img src="/assets/images/indexPage/podpornie-stenki247.png" alt="">
+			<a href="{{ path('app_catalog_category', {'id': 176}) }}"> <img src="/assets/images/indexPage/podpornie-stenki247.png" alt="">
 				<p>Подпорные стены</p>
 			</a>
 		</div>
@@ -137,22 +135,22 @@
 			<div class="title">
 				<p>Новый тип изделия</p>
 			</div>
-			<a href="gbi/dor-stroy?section=12563"> <img src="/assets/images/indexPage/lotki12563.png" alt="">
+			<a href="{{ path('app_catalog_category', {'id': 12563}) }}"> <img src="/assets/images/indexPage/lotki12563.png" alt="">
 				<p>Железнодорожные лотки</p>
 			</a>
 		</div>
-		<div class="main_cat_el"><a href="gbi/ingener-stroy?section=402">
+		<div class="main_cat_el"><a href="{{ path('app_catalog_category', {'id': 402}) }}">
 				<img src="/assets/images/indexPage/lotki483.png" alt="">
 				<p>Лотки и плиты для сборных каналов и тоннелей</p>
 			</a>
 		</div>
-		<div class="main_cat_el"><a href="gbi/energy-stroy?section=59">
+		<div class="main_cat_el"><a href="{{ path('app_catalog_category', {'id': 59}) }}">
 				<img src="/assets/images/indexPage/fundamenti111.png" alt="">
 				<p>Фундаменты под опоры контактной сети для железных дорог</p>
 			</a>
 		</div>
 		<div class="main_cat_el">
-			<a href="gbi/energy-stroy?section=44"> <img src="/assets/images/indexPage/fundamenti-lep70.png" alt="">
+			<a href="{{ path('app_catalog_category', {'id': 44}) }}"> <img src="/assets/images/indexPage/fundamenti-lep70.png" alt="">
 				<p>Конструкции фундаментов для металлических опор ЛЭП</p>
 			</a>
 		</div>

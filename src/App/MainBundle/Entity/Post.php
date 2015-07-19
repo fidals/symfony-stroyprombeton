@@ -17,9 +17,9 @@ class Post
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="id", type="integer", nullable=false)
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\Column(name="id", type="integer", nullable=false)
 	 */
 	private $id;
 
@@ -29,15 +29,6 @@ class Post
 	 * @ORM\Column(name="intro_text", type="text", nullable=true)
 	 */
 	private $introText;
-
-	/**
-	 * TODO после переноса удалить сеттер
-	 * @param int $id
-	 */
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
 
 	/**
 	 * @return int
@@ -61,24 +52,5 @@ class Post
 	public function getIntroText()
 	{
 		return $this->introText;
-	}
-
-	/**
-	 * Для генерации sitemap
-	 * @return array
-	 */
-	public function getSitemapData()
-	{
-		return array(
-			'locData' => array(
-				'route' => 'app_main_staticpage',
-				'parameters' => array(
-					'alias' => $this->getAlias(),
-				)
-			),
-			'priority' => 0.9,
-			'changefreq' => 'weekly',
-			'entityType' => 'staticPage',
-		);
 	}
 }

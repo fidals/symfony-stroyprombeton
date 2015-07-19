@@ -2,8 +2,8 @@ parameters:
 #    app_catalog.example.class: App\CatalogBundle\Example
 
 services:
-    catalog.autocomplete:
-        class: App\CatalogBundle\Extension\Autocomplete
+    catalog.search:
+        class: App\CatalogBundle\Extension\Search
         arguments: ['@service_container']
     catalog.cart:
         class: App\CatalogBundle\Extension\CartService
@@ -12,3 +12,18 @@ services:
         class: Snilius\Twig\SortByFieldExtension
         tags:
             - { name: twig.extension }
+    sonata.block.service.tablegear:
+        class: App\CatalogBundle\Block\TableGearBlockService
+        arguments: [ "sonata.block.service.tablegear", @templating ]
+        tags:
+            - { name: sonata.block }
+
+    catalog.sitemap.category:
+        class: App\CatalogBundle\Listener\CategorySitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.sitemap.product:
+        class: App\CatalogBundle\Listener\ProductSitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]

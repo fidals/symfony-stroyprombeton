@@ -1,16 +1,7 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
-{% block title %}
-	{{ product.getTitle() }}
-{% endblock %}
-
-{% block description %}
-	{{ product.getDescription() }}
-{% endblock %}
-
-{% block keywords %}
-	{{ product.getKeywords() }}
-{% endblock %}
+{% block title %}{{ product.getTitle() }}{% endblock %}
+{% block keywords %}{{ product.getKeywords() }}{% endblock %}
 
 {% block content %}
 	<div class="location">
@@ -32,12 +23,10 @@
 		</span>
 	</div>
 	<div class="product-header">
-		<h1 style="color:#333333">
-			{{ product.getH1() }}
-			{% if product.getNomen() %}
-				<span class="nomen" style="float: right">{{ product.getNomen() }}</span>
-			{% endif %}
-		</h1>
+		<h1>{{ product.getH1() }}</h1>
+		{% if product.getNomen() %}
+			<span class="nomen">{{ product.getNomen() }}</span>
+		{% endif %}
 	</div>
 	<div class="product">
 	<div class="product-main">

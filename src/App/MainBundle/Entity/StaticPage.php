@@ -32,15 +32,6 @@ class StaticPage
 	private $alias;
 
 	/**
-	 * TODO после переноса удалить сеттер
-	 * @param int $id
-	 */
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getId()
@@ -62,25 +53,6 @@ class StaticPage
 	public function getAlias()
 	{
 		return $this->alias;
-	}
-
-	/**
-	 * Для генерации sitemap
-	 * @return array
-	 */
-	public function getSitemapData()
-	{
-		return array(
-			'locData' => array(
-				'route' => 'app_main_staticpage',
-				'parameters' => array(
-					'alias' => $this->getAlias(),
-				)
-			),
-			'priority' => 0.9,
-			'changefreq' => 'weekly',
-			'entityType' => 'staticPage',
-		);
 	}
 
 	/**

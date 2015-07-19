@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}" type="text/css"/>
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}"/>
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}"/>
-	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery-ui.css') }}"/>
 {% endblock %}
 
 {% block jslinks %}
@@ -30,8 +29,6 @@
 	<script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/catalog/js/cart.js') }}"></script>
-
-	{#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>#}
 {% endblock %}
 
 {% block body %}
@@ -121,7 +118,7 @@
 				</a>
 			</div>
 			<div class="OrderPrice">
-				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'order_price' }) }}">
+				<a class="a_price" href="{{ path('app_main_price_list_booking') }}">
 					<img src="/assets/images/order_price.png" title="прайс-листы на жби" alt="прайс-листы на жби">
 				</a>
 			</div>

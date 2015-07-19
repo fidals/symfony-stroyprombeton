@@ -22,7 +22,7 @@
 			{{ territory.getH1() }}
 		{% endif %}
 	</h1>
-	<ul>
+	<ul class="gbi_map_list">
 		{% for object in territory.getObjects() %}
 			<li>
 				<a href="{{ path('app_main_object', {id: object.getId()}) }}">{{ object.getTitle() }}</a>

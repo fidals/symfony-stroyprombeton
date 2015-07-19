@@ -19,20 +19,21 @@ class Product
 	const IMG_DIR_PATH = '/assets/images/gbi-photos';
 	const EMPTY_THUMB_NAME = 'prod-alt-image.png';
 
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\Column(name="id", type="bigint", nullable=false)
+	 */
+	private $id;
+
 	public static $imageTypes = array(
 		IMAGETYPE_JPEG,
 		IMAGETYPE_JPEG2000,
 		IMAGETYPE_PNG,
 		IMAGETYPE_GIF
 	);
-
-	/**
-	 * @var integer
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
-	 * @ORM\Column(name="id", type="bigint", nullable=false)
-	 * @ORM\Id
-	 */
-	private $id;
 
 	/**
 	 * @var boolean
@@ -209,15 +210,6 @@ class Product
 	}
 
 	/**
-	 * TODO после переноса удалить сеттер
-	 * @param int $id
-	 */
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getId()
@@ -311,8 +303,7 @@ class Product
 	 */
 	public function getPriceRounded()
 	{
-		$rounded = ceil($this->price / 5) * 5;
-		return ($rounded % 10) == 0 ? $rounded + 5 : $rounded;
+		return ceil($this->price / 5) * 5;
 	}
 
 	/**
@@ -416,21 +407,6 @@ class Product
 	public function __toString()
 	{
 		return (string)$this->getName();
-	}
-
-	public function getSitemapData()
-	{
-		return array(
-			'section' => $this->getCategory()->getId(),
-			'gbi' => $this->getId(),
-			'locData' => array(
-				'route' => 'app_catalog_explore_category',
-				'parameters' => array()
-			),
-			'priority' => 0.9,
-			'changefreq' => 'weekly',
-			'entityType' => 'product',
-		);
 	}
 
 	/**

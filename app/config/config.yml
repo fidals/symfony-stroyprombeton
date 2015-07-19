@@ -31,7 +31,6 @@ twig:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
 
-
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
@@ -94,14 +93,19 @@ swiftmailer:
 sonata_admin:
     title: Административная панель
     title_logo: /bundles/main/images/logo.png
+    dashboard:
+        blocks:
+             - { position: left, type: sonata.admin.block.admin_list }
+             - { position: right, type: sonata.block.service.tablegear }
 sonata_block:
     default_contexts: [cms]
     blocks:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
-        sonata.block.service.text:
-        sonata.block.service.rss:
+        sonata.block.service.tablegear: ~
+        sonata.block.service.text: ~
+        sonata.block.service.rss: ~
 
 services:
     template.from.database.twig.extension.loader:
@@ -110,3 +114,7 @@ services:
              - { name: 'twig.extension' }
 twig:
     exception_controller:  AppMainBundle:StaticPage:exeption
+
+presta_sitemap:
+    dumper_base_url: %base_url%
+    route_annotation_listener: false

@@ -84,33 +84,25 @@ class CatalogController extends Controller
 		die('Page is not found');
 	}
 
+
 	/**
 	 * Поискиовая выдача списка продуктов с пагинацей
+	 * Поиск основан на данных из автокомплита
+	 * @param Request $request
 	 * @return Response
 	 */
-	public function searchAction()
+	public function searchAction(Request $request)
 	{
-		$condition = $this->getRequest()->query->get('condition');
-		$page = $this->getRequest()->query->get('page', 1);
+		$condition = $request->get('condition');
+		$page = $request->get('page', 1);
+		$limit = 150;
 
 		if (empty($condition)) {
 			return new Response();
 		}
 
-		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
-		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
-
-		$products = $prodRp->search($condition, $page);
-		foreach ($products as &$product) {
-			$category = $product->getCategory();
-			$path = $catRp->getPath($category);
-			$product->catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
-			$product->section = $category;
-			$product->path = $path;
-		}
-
-		return $this->render('AppCatalogBundle:Catalog:search.html.twig', array(
-			'products' => $products
+		return $this->render('AppCatalogBundle:Search:search.html.twig', array(
+			'elements' => $this->get('catalog.search')->search($condition, $limit * $page)
 		));
 	}
 
@@ -151,7 +143,7 @@ class CatalogController extends Controller
 		$jsonSrv = new JsonEncoder();
 
 		// возвращает массив данных для автокомплита
-		$result = $this->get('catalog.autocomplete')->suggest($term);
+		$result = $this->get('catalog.search')->suggest($term);
 
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 

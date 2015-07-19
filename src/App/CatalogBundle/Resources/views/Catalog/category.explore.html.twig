@@ -1,16 +1,7 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
-{% block title %}
-	{{ category.getTitle() }}
-{% endblock %}
-
-{% block description %}
-	{{ category.getDescription() }}
-{% endblock %}
-
-{% block keywords %}
-	{{ category.getKeywords() }}
-{% endblock %}
+{% block title %}{{ category.getName() }}{% endblock %}
+{% block keywords %}{{ category.getKeywords() }}{% endblock %}
 
 {% block content %}
 	<div class="location">

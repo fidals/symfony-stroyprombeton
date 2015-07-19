@@ -3,15 +3,16 @@
 namespace App\CatalogBundle\Extension;
 
 use App\CatalogBundle\Command\SitemapCommand;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\Query\ResultSetMapping;
+
 
 /**
- * Автокомплит для главной
- * Class Autocomplete
+ * Поиск для главной
+ * Class Search
  * @package App\CatalogBundle\Extension
  */
-class Autocomplete
+class Search
 {
 	/**
 	 * Контейнер
@@ -20,7 +21,7 @@ class Autocomplete
 	public $container;
 
 	/**
-	 * Лимит элементов в автокомплите
+	 * Лимит элементов в поиске
 	 * Если найдено категорий n >= LIMIT, то продукты не ищем, если n < LIMIT то ишем LIMIT - n продуктов
 	 */
 	const DEFAULT_LIMIT = 50;
@@ -33,8 +34,20 @@ class Autocomplete
 		$this->container = $container;
 	}
 
+	/**
+	 * Метод поиска
+	 * Использует автокомплит
+	 * @param $term
+	 * @param $limit
+	 * @return mixed
+	 */
+	public function search($term, $limit = self::DEFAULT_LIMIT)
+	{
+		return $this->suggest($term, $limit);
+	}
 
 	/**
+	 * Автокомплит
 	 * @param $term
 	 * @param int $limit
 	 * @return array
@@ -100,21 +113,17 @@ class Autocomplete
 
 		// генерация url категорий
 		$router = $this->container->get('router');
-		$catRp = $this->container->get('doctrine')->getRepository('AppCatalogBundle:Category');
 
 		$categoryResults = array();
 		foreach($categories as $category) {
-			$path = $catRp->getPath($category);
-			$catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
-
 			$categoryResults[] = array(
 				'desc'   => $category->getDescription(),
 				'label'  => $category->getName(),
 				'razdel' => 1,
-				'url'    => $router->generate('app_catalog_explore_category', array(
-					'catUrl' => $catUrl,
-					'section' => $category->getId()
-				))
+				'url'    => $router->generate('app_catalog_category', array(
+					'id' => $category->getId()
+				)),
+				'id' => $category->getId()
 			);
 		}
 		return $categoryResults;
@@ -130,7 +139,7 @@ class Autocomplete
 	{
 		// sql запрос для продуктов
 		$productsQuery = "
-			SELECT id, description, name, section_id,
+			SELECT id, description, name, mark, price, nomen,
 				CASE WHEN name = :term THEN 0
 					WHEN name LIKE :term_ THEN 1
 					WHEN CONCAT(introtext, ' ', name) LIKE :_term_ THEN 2
@@ -155,23 +164,21 @@ class Autocomplete
 
 		// генерация url продуктов
 		$router = $this->container->get('router');
-		$catRp = $this->container->get('doctrine')->getRepository('AppCatalogBundle:Category');
 
 		$productResults = array();
 		foreach($products as $product) {
-			$category = $catRp->find($product['section_id']);
-			$path = $catRp->getPath($category);
-			$catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
 
 			$productResults[] = array(
 				'desc' => $product['description'],
 				'label' => $product['name'],
 				'razdel' => 0,
-				'url' => $router->generate('app_catalog_explore_category', array(
-					'catUrl'  => $catUrl,
-					'section' => $category->getId(),
-					'gbi'     => $product['id']
-				))
+				'url' => $router->generate('app_catalog_product', array(
+					'id' => $product['id'],
+				)),
+				'id'    => $product['id'],
+				'mark'  => $product['mark'],
+				'price' => $product['price'],
+				'nomen' => $product['nomen']
 			);
 		}
 		return $productResults;

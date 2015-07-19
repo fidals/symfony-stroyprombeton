@@ -28,6 +28,24 @@ class RedirectController extends Controller
 	}
 
 	/**
+	 * Редиректит строительные объекты по алиасу
+	 * @param Request $request
+	 * @return RedirectResponse
+	 */
+	public function appMainObjectAliasAction(Request $request)
+	{
+		$objectRp = $this->getDoctrine()->getRepository('AppMainBundle:Object');
+		$object = $objectRp->findOneBy(
+			array(
+				'alias' => $request->get('alias')
+			)
+		);
+		$router = $this->get('router');
+		$url = $router->generate('app_main_object', array('id' => $object->getId()));
+		return new RedirectResponse($url, 301);
+	}
+
+	/**
 	 * Редиректит url каталога с идентификатором в конце
 	 * @param Request $request
 	 * @return RedirectResponse
@@ -49,8 +67,16 @@ class RedirectController extends Controller
 	public function appCatalogExploreTranslitAction(Request $request)
 	{
 		$categoryTranslit = $request->get('categoryTranslit');
-		$categoryId = array_search($categoryTranslit, SitemapCommand::$baseCats);
-		$url = $this->get('router')->generate('app_catalog_category', array('id' => $categoryId));
+		$section = $request->get('section');
+		$gbi = $request->get('gbi');
+		if(empty($section)) {
+			$categoryId = array_search($categoryTranslit, SitemapCommand::$baseCats);
+			$url = $this->get('router')->generate('app_catalog_category', array('id' => $categoryId));
+		} else if(empty($gbi)){
+			$url = $this->get('router')->generate('app_catalog_category', array('id' => $section));
+		} else {
+			$url = $this->get('router')->generate('app_catalog_product', array('id' => $gbi));
+		}
 		return new RedirectResponse($url, 301);
 	}
 }

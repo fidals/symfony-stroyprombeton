@@ -61,6 +61,13 @@ modx_staticpage:
 modx_object:
     pattern: /obekty/{territoryId}/{id}/
     defaults: { _controller: AppMainBundle:Redirect:appMainObject }
+    requirements:
+        id: "d+"
+
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_object_alias:
+    pattern: /obekty/{territoryId}/{alias}/
+    defaults: { _controller: AppMainBundle:Redirect:appMainObjectAlias }
 
 # Сразу редиректит на другой роут (301 Permanent)
 # TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
