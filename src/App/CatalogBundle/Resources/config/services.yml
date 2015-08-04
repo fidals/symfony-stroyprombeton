@@ -12,6 +12,21 @@ services:
         class: Snilius\Twig\SortByFieldExtension
         tags:
             - { name: twig.extension }
+    catalog.yandex_market_category_listener:
+        class: App\CatalogBundle\Listener\YmlCategoryListener
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: yandex_market.yml.listener }
+    catalog.yandex_market_product_listener:
+        class: App\CatalogBundle\Listener\YmlProductListener
+        arguments: ['@doctrine.orm.entity_manager', '@router']
+        tags:
+            - { name: yandex_market.yml.listener }
+    catalog.yandex_market_currency_listener:
+        class: App\CatalogBundle\Listener\YmlCurrencyListener
+        tags:
+            - { name: yandex_market.yml.listener }
+
     sonata.block.service.tablegear:
         class: App\CatalogBundle\Block\TableGearBlockService
         arguments: [ "sonata.block.service.tablegear", @templating ]

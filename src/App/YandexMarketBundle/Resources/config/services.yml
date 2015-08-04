@@ -1,0 +1,4 @@
+services:
+    yandex_market.generator:
+        class: App\YandexMarketBundle\Service\YmlGenerator
+        arguments: [@service_container]
