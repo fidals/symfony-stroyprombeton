@@ -133,22 +133,21 @@ class ProductRepository extends EntityRepository
 	public function getTableGearProperties()
 	{
 		return [
-			'name'                      => 'Заголовок',
-			'title'                     => 'Расширенный заголовок',
-			'description'               => 'Описание',
-			'annotation'                => 'Аннотация',
-			'mark'                      => 'mark',
-			'price_coefficient'         => 'Коэффициент цены',
-			'price'                     => 'Цена',
-			'nomen'                     => 'Код',
-			'length'                    => 'Длина (мм)',
-			'width'                     => 'Ширина (мм)',
-			'heigth'                    => 'Высота (мм)',
-			'weight'                    => 'Масса (кг)',
-			'volume'                    => 'Объем (м3)',
-			'diameter_in'               => 'Внутренний диаметр (мм)',
-			'diamenter_out'             => 'Внешний диаметр (мм)',
-			'link_to_stkmetal_category' => 'Ссылка на соответствующую категорию на stk-metal'
+			'name'         => 'Заголовок',
+			'title'        => 'Расширенный заголовок',
+			'description'  => 'Описание',
+			'text'         => 'Текст',
+			'introtext'    => 'Аннотация',
+			'mark'         => 'Марка',
+			'price'        => 'Цена',
+			'nomen'        => 'Код',
+			'length'       => 'Длина (мм)',
+			'width'        => 'Ширина (мм)',
+			'height'       => 'Высота (мм)',
+			'weight'       => 'Масса (кг)',
+			'volume'       => 'Объем (м3)',
+			'diameter_in'  => 'Внутренний диаметр (мм)',
+			'diameter_out' => 'Внешний диаметр (мм)'
 		];
 	}
 }

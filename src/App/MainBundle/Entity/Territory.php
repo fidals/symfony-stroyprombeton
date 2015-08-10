@@ -16,9 +16,10 @@ class Territory
 
 	/**
 	 * @var integer
-	 * @ORM\Column(name="id", type="integer")
+	 *
 	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\Column(name="id", type="integer")
 	 */
 	private $id;
 
@@ -33,15 +34,6 @@ class Territory
 	 * @ORM\OneToMany(targetEntity="Object", mappedBy="territory")
 	 */
 	protected $objects;
-
-	/**
-	 * TODO после переноса удалить сеттер
-	 * @param int $id
-	 */
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
 
 	/**
 	 * @return int

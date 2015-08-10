@@ -27,6 +27,7 @@ class AppKernel extends Kernel
 			new App\CatalogBundle\AppCatalogBundle(),
 			new App\MainBundle\AppMainBundle(),
 			new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+			new Presta\SitemapBundle\PrestaSitemapBundle()
 		);
 
 		if (in_array($this->getEnvironment(), array('dev', 'test'))) {

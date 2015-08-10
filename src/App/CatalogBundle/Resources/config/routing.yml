@@ -29,10 +29,6 @@ modx_catalog_explore:
     requirements:
         chain: ".+"
 
-app_catalog_product:
-    pattern: /products/{id}/
-    defaults: { _controller: AppCatalogBundle:Catalog:product }
-
 # TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
 modx_catalog_explore_category:
     pattern: /{categoryTranslit}/

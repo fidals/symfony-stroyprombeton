@@ -1,9 +1,12 @@
 $(function () {
 	$("#order_phone,#price_list_booking_phone").mask("+9(999) 999-9999", {placeholder: "+_(___) ___-____"});
 
-	$('#price_list_booking_city').kladr({
-		type: $.kladr.type.city
-	});
+	// проверим загружен ли плагин
+	if($().kladr) {
+		$('#price_list_booking_city').kladr({
+			type: $.kladr.type.city
+		});
+	}
 
 	$(document).on("mousedown", "#cartInner_full", function () {
 		$("#cartInner_full").css("background-image", 'url("../images/shop_but_full_a.png")');

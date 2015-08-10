@@ -33,11 +33,11 @@ class Category
 	);
 
 	/**
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 * @var integer
 	 *
-	 * @ORM\Column(name="id", type="integer", nullable=false)
 	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\Column(name="id", type="integer", nullable=false)
 	 */
 	private $id;
 
@@ -100,15 +100,6 @@ class Category
 	public function getAlias()
 	{
 		return $this->alias;
-	}
-
-	/**
-	 * TODO после переноса удалить сеттер
-	 * @param int $id
-	 */
-	public function setId($id)
-	{
-		$this->id = $id;
 	}
 
 	/**
@@ -190,20 +181,6 @@ class Category
 	public function addClosure(CategoryClosure $closure)
 	{
 		$this->closures[] = $closure;
-	}
-
-	public function getSitemapData()
-	{
-		return array(
-			'section' => $this->getId(),
-			'locData' => array(
-				'route' => 'app_catalog_explore_category',
-				'parameters' => array()
-			),
-			'priority' => 0.9,
-			'changefreq' => 'weekly',
-			'entityType' => 'category',
-		);
 	}
 
 	/**

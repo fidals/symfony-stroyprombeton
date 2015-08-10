@@ -54,7 +54,7 @@ class MigrateCommand extends ContainerAwareCommand
 	 * Массив игнорируемых id при генерации url
 	 * @var array
 	 */
-	public static $ignoreIds = array(12608);
+	public static $ignoreIds = array();
 
 	/**
 	 * Массив id статических страниц
@@ -62,6 +62,14 @@ class MigrateCommand extends ContainerAwareCommand
 	 */
 	public static $staticPages = array(3, 4, 7, 8, 9, 624, 12435);
 
+
+	/**
+	 * Массив специальных страниц в виде modx_id => symfony_route
+	 * @var array
+	 */
+	public static $pages = array(
+		12608 => 'app_main_price_list_booking'
+	);
 
 	/**
 	 * Путь до директории с картинками
@@ -331,10 +339,10 @@ class MigrateCommand extends ContainerAwareCommand
 			$postProperties = $this->getContentProperties($p['id']);
 
 			$content = preg_replace_callback(
-				'/\[\~\d+\~\]/',
+				'/(\[|\{)\~\d+\~(\]|\})/',
 				function($matches) {
 					$matchInt = (int) preg_replace('/\D+/', '', $matches[0]);
-					return $this->getPathExpression($matchInt);
+					return $this->getPathForEntityId($matchInt);
 				},
 				$p['content']
 			);
@@ -365,10 +373,10 @@ class MigrateCommand extends ContainerAwareCommand
 		foreach($pages as $pageRow) {
 
 			$content = preg_replace_callback(
-				'/\[\~\d+\~\]/',
+				'/(\[|\{)\~\d+\~(\]|\})/',
 				function($matches) {
 					$matchInt = (int) preg_replace('/\D+/', '', $matches[0]);
-					return $this->getPathExpression($matchInt);
+					return $this->getPathForEntityId($matchInt);
 				},
 				$pageRow['content']
 			);
@@ -390,45 +398,41 @@ class MigrateCommand extends ContainerAwareCommand
 		$em->flush();
 	}
 
-	// Этот метод расширяет код того что в ветке branch-274
-	private function getPathExpression($entityId)
+	private function getPathForEntityId($entityId)
 	{
-		if(array_search($entityId, self::$staticPages) !== false) {
+		// Ищем среди статических страниц
+		if(in_array($entityId, self::$staticPages)) {
 			$alias = $this->pdo->query('SELECT alias FROM ' . self::MODX_SITE_CONTENT . ' WHERE id = ' . $entityId)->fetchColumn();
-			$routeName = 'app_main_staticpage';
-			$args = array('alias' => $alias);
-		} else {
-			$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
-			$category = $catRp->find($entityId);
-			if(!empty($category)) {
-				$rootCategoryUrl = SitemapCommand::$baseCats[$catRp->getPath($category)[0]->getId()];
-				$routeName = 'app_catalog_explore_category';
-				$args = array(
-					'catUrl' => $rootCategoryUrl,
-					'section' => $entityId
-				);
-			} else {
-				$prodRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Product');
-				$product = $prodRp->find($entityId);
-				if(!empty($product)) {
-					$productSection = $product->getCategory()->getId();
-					$productCatUrl = SitemapCommand::$baseCats[$catRp->getPath($product->getCategory())[0]->getId()];
-					$routeName = 'app_catalog_explore_category';
-					$args = array(
-						'catUrl' => $productCatUrl,
-						'section' => $productSection,
-						'gbi' => $entityId
-					);
-				}
-			}
+			return $this->getPathExpression('app_main_staticpage', array('alias' => $alias));
 		}
-		if(isset($routeName)) {
-			return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
-		} else {
-			if(array_search($entityId, self::$ignoreIds) === false) {
-				throw new \Exception("Invalid link to entity " . $entityId);
-			};
+
+		// Ищем среди обычных страниц (типа заказать прайсы итд)
+		if(in_array($entityId, array_keys(self::$pages))) {
+			return $this->getPathExpression(self::$pages[$entityId]);
 		}
+
+		// Ишем среди категорий
+		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+		$category = $catRp->find($entityId);
+		if(!empty($category)) {
+			return $this->getPathExpression('app_catalog_category', array('id' => $entityId));
+		}
+
+		// Ищем среди продуктов
+		$prodRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Product');
+		$product = $prodRp->find($entityId);
+		if(!empty($product)) {
+			return $this->getPathExpression('app_catalog_product', array('id' => $entityId));
+		}
+
+		if(array_search($entityId, self::$ignoreIds) === false) {
+			throw new \Exception("Invalid link to entity " . $entityId);
+		};
+	}
+
+	private function getPathExpression($routeName, $args = array())
+	{
+		return '{{ path("' . $routeName . '"' . (($args) ? ', ' . json_encode($args) : "") . ') }}';
 	}
 
 	private function migrateTerritories($rootTerritoryId = self::ROOT_TERRITORY_ID)
@@ -465,12 +469,21 @@ class MigrateCommand extends ContainerAwareCommand
 			$object = new Object();
 
 			$pregLinks = preg_replace_callback(
-				'/\[\~\d+\~\]/',
+				'/(\[|\{)\~\d+\~(\]|\})/',
 				function($matches) {
 					$matchInt = (int) preg_replace('/\D+/', '', $matches[0]);
-					return $this->getPathExpression($matchInt);
+					return $this->getPathForEntityId($matchInt);
 				},
 				$obj['content']
+			);
+
+			$pregLinks = preg_replace_callback(
+				'/href=(\"|\')\d+(\"|\')/',
+				function($matches) {
+					$matchInt = (int) preg_replace('/\D+/', '', $matches[0]);
+					return 'href="' . $this->getPathForEntityId($matchInt) . '"';
+				},
+				$pregLinks
 			);
 
 			// меняем "assets/ на "/assets/

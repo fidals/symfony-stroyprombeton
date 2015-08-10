@@ -1,16 +1,7 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
-{% block title %}
-	{{ category.getTitle() }}
-{% endblock %}
-
-{% block description %}
-	{{ category.getDescription() }}
-{% endblock %}
-
-{% block keywords %}
-	{{ category.getKeywords() }}
-{% endblock %}
+{% block title %}{{ category.getName() }}{% endblock %}
+{% block keywords %}{{ category.getKeywords() }}{% endblock %}
 
 {% block content %}
 	<div class="location">
@@ -46,7 +37,11 @@
 					<td class="gbi-list photo">
 						<img src="/bundles/main/images/bullet.png">
 					</td>
-					<td class="gbi-list code">{{ product.getNomen() }}</td>
+					<td class="gbi-list code">
+						{% if product.getNomen() != 0 %}
+							{{ product.getNomen() }}
+						{% endif %}
+					</td>
 					<td class="gbi-list name">
 						<a href="{{ path('app_catalog_product', {'id': product.getId()}) }}">{{ product.getName() }}</a></td>
 					<td class="gbi-list price">
