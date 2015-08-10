@@ -2,6 +2,28 @@ parameters:
 #    app_catalog.example.class: App\CatalogBundle\Example
 
 services:
-#    app_catalog.example:
-#        class: %app_catalog.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    catalog.search:
+        class: App\CatalogBundle\Extension\Search
+        arguments: ['@service_container']
+    catalog.cart:
+        class: App\CatalogBundle\Extension\CartService
+        arguments: ['@service_container']        
+    app.twig_extension:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }
+    sonata.block.service.tablegear:
+        class: App\CatalogBundle\Block\TableGearBlockService
+        arguments: [ "sonata.block.service.tablegear", @templating ]
+        tags:
+            - { name: sonata.block }
+
+    catalog.sitemap.category:
+        class: App\CatalogBundle\Listener\CategorySitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.sitemap.product:
+        class: App\CatalogBundle\Listener\ProductSitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]

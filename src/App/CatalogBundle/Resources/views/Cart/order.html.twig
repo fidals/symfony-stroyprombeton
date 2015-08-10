@@ -1,82 +1,88 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block title %}
-    Оформление заказа на ЖБИ продукцию
+	Оформление заказа на ЖБИ продукцию
 {% endblock %}
 
 {% block description %}
 {% endblock %}
 
 {% block content %}
-    <div class="location">
-        <span class="location section"><a href="/">СТК-ПромБетон</a></span>
-        <span class="location separate">/</span>
-        <span class="location section"><a href="/order/">Оформление заказа на ЖБИ продукцию</a></span>
-    </div>
-    <h1>
-        Оформление заказа на ЖБИ продукцию
-    </h1>
-    <div class="order">
-        <div class="order-basket">
-            <div class="gbi-list">
-                <table>
-                    <tr>
-                        <td colspan="2">Код</td>
-                        <th>Наименование</th>
-                        <th>Цена</th>
-                        <th colspan="2">Количество</th>
-                    </tr>
-                    {% for product in order.products %}
-                    <tr>
-                        <td class="gbi-list photo">
-                            <a href="/assets/main/images/gbi-photos/323/763.jpg" rel="shadowbox[gbi-photos]" title="{{ product.model.name }} {{ product.model.mark }}| ЖБИ изделие">
-                                <img src="/assets/main/images/icon-photo.png">
-                            </a>
-                        </td>
-                        <td class="gbi-list code">
-                            {{ product.model.nomen }}
-                        </td>
-                        <td class="gbi-list name">
-                            <a href="/gbi/dor-stroy/?section={{ product.model.sectionId }}&amp;gbi={{ product.model.id }}" class="gbi-link">
-                                <span class="gbi-link name">
-                                    {{ product.model.name }}
-                                </span>
-                                <span class="gbi-link mark">
-                                    {{ product.model.mark }}
-                                </span>
-                            </a>
-                        </td>
-                        <td class="gbi-list price">
-                            {% if product.model.price %}
-                                {{ product.model.price }} руб.
-                            {% else %}
-                                По запросу
-                            {% endif %}
-                        </td>
-                        <td class="gbi-list rest rest-container">
-                            <input type="number" min="1" max="999999" code="{{ product.model.id }}" value="{{ product.count }}" class="order-rest" style="margin-right: 0px; padding-right: 0px;">
-                        </td>
-                        <td class="positions-list delete">
-                            <a href="javascript:void(0);" class="order-delete" title="Удалить из заказа">
-                                <img src="/assets/main/images/icon-delete.png">
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    <tr class="gbi-list-header">
-                        <td colspan="2"></td>
-                        <th class="clear-basket"><a href="javascript:void(0);" class="clear-basket">Удалить все заказы</a></th>
-                        <th>ЖБИ</th>
-                        <th colspan="2" class="cnt-goods">{{ order.totalProductsCount }}</th>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="showcase-title">Контактные данные</div>
-        <div class="order-basket">
-            <div class="form-order">
-                {% include "AppCatalogBundle:Form:order.html.twig" %}
-            </div>
-        </div>
-    </div>
+	<h1>Оформление заказа на ЖБИ продукцию</h1>
+	<form action="{{ path('app_catalog_order') }}" method="post" {{ form_enctype(form) }} id="shop-order-form">
+		{{ form_errors(form) }}
+		<table class="shop-order-table">
+			<tr>
+				<td>Ваше имя:<sup>*</sup></td>
+				<td>{{ form_widget(form.person) }}</td>
+			</tr>
+			<tr>
+				<td>Контактный телефон:<sup>*</sup></td>
+				<td>
+					{{ form_widget(form.phone) }}
+					<div class="form-error">
+						{{ form_errors(form.phone) }}
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>Электронный адрес (Е-mail):<sup>*</sup></td>
+				<td>{{ form_widget(form.email) }}</td>
+			</tr>
+			<tr>
+				<td>Полное название организации:<sup>*</sup></td>
+				<td>{{ form_widget(form.company) }}</td>
+			</tr>
+			<tr>
+				<td>Адрес поставки:</td>
+				<td>{{ form_widget(form.deliveryAddress) }}</td>
+			</tr>
+			<tr>
+				<td>Комментарий к заказу:</td>
+				<td>{{ form_widget(form.comment) }}</td>
+			</tr>
+			{#<tr>#}
+			{#<td>Приложить файл:</td>#}
+			{#<td>#}
+			{#<div>#}
+			{#<div class="attach_field">#}
+			{#<div>#}
+			{#<input type="file" name="attachment[]" accept="text/plain, application/msword, text/richtext, application/x-compressed" value="/">#}
+			{#</div>#}
+			{#</div>#}
+			{#<a href="javascript:;" class="add_attach_field" style="display: none;">Прикрепить ещё файл</a>#}
+			{#</div>#}
+			{#</td>#}
+			{#</tr>#}
+			<tr>
+				<td></td>
+				<td class="td-submit"><input type="submit" name="submit" class="button btn" value="Отправить заказ"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="form-order order-warning shipping">
+					<div class="dostavka-gbi">
+						<p>
+							Варианты поставки
+						</p>
+						<ul>
+							<li>Доставка автотранспортом компании</li>
+							<li>Доставка по железной дороге</li>
+							<li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>
+						</ul>
+					</div>
+					<div class="dostavka-gbi">
+						<p>
+							Стоимость доставки
+						</p>
+						<ul>
+							<li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>
+							<li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>
+							<li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
 {% endblock %}

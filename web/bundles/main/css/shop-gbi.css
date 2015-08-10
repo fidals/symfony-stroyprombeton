@@ -30,6 +30,7 @@ table.basket-wrapper td.wrapper {
 div.basket-content {
 	display: inline-block;
 }
+
 /*
 div.basket-content span {
 	padding: 1px 5px 1px 5px;
@@ -85,15 +86,18 @@ div.basket-add-goods-intro {
 	text-align: right;
 	font-weight: bold;
 }
+
 div.basket-add-goods-intro ul {
 	margin: 0;
 	padding: 0;
 	list-style-type: none
 }
+
 div.basket-add-goods-intro ul li {
 	display: inline-block;
 	padding: 5px;
 }
+
 .rest-container {
 	padding: 5px 15px 5px 5px !important;
 }
@@ -108,6 +112,7 @@ input.basket-rest, input.order-rest {
 a.add-basket {
 
 }
+
 /* -------------------------------------------------------------------------------- */
 
 /*div.self-order {
@@ -156,23 +161,28 @@ span.obligat {
 div.form-order table {
 	width: 100%;
 }
+
 div.form-order table td {
 	padding: 5px;
 	vertical-align: top;
 }
+
 div.form-order table td.title {
 	white-space: nowrap;
 	text-align: right;
 }
+
 div.form-order table td.data {
 	width: 100%;
 }
+
 div.form-order table td.data input, div.form-order table td.data select, div.form-order table td.data textarea {
 	width: 100%;
 	padding: 2px;
 	border: 1px solid #999999;
 	border-radius: 5px;
 }
+
 div.form-order table td.data textarea {
 	padding: 2px;
 	font-family: Arial;
@@ -188,11 +198,13 @@ div.form-order table td.submit {
 	width: 100%;
 	text-align: center;
 }
+
 div.form-order table td.submit div {
 	padding: 5px;
 	background-color: #cccccc;
 	border-radius: 10px;
 }
+
 div.form-order table td.submit input {
 	width: 150px;
 	padding: 2px;
@@ -203,13 +215,14 @@ div.form-order table td.submit input {
 }
 
 div.form-order table td.order-warning {
-	width: 100%;+
-	font-weight: bold;
+	width: 100%;
++ font-weight : bold;
 }
 
 div.form-order table td.warning {
 	width: 100%;
 }
+
 div.form-order table td.warning div {
 	padding: 10px;
 	color: #c90000;
@@ -241,6 +254,7 @@ div.order-number {
 	border-radius: 10px;
 	box-shadow: 0 0 3px 3px #999999;
 }
+
 div.order-number span {
 	padding: 5px;
 	background-color: #ffffff;
@@ -257,3 +271,138 @@ div.order-report {
 }
 
 /* -------------------------------------------------------------------------------- */
+
+.OrderPrice{
+	width: 270px;
+	margin-bottom: 30px;
+}
+
+.OrderDraw{
+	width: 270px;
+	margin: -10px 0 20px 0;
+}
+
+.OrderPrice .a_price img {
+	border-radius: 3px;
+}
+
+.mbasket-items{
+	background-color: #FFFFFF;
+	border: 1px solid #999999;
+	border-radius: 10px;
+	display: none;
+	margin-top: 0;
+	opacity: 0.9;
+	padding: 10px 20px;
+	position: absolute;
+	right: 0;
+	width: 450px;
+}
+
+.shop-cart table {border-collapse:collapse; margin:5px 0;}
+
+.cart-order {
+	margin: 5px 0;
+	text-align: center;
+}
+
+.shop-cart td {
+	padding: 3px;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+}
+.shop-cart td {
+	border-top: none !important;
+}
+.mbasket-items td {
+	padding: 10px !important;
+}
+
+div.menu-h ul li a {
+	display: block;
+	padding: 0 0 0 0;
+	margin: 0 20px;
+	color: #c90000;
+	font-weight: bold;
+	font-size: 0.90em;
+	text-align: center;
+	text-decoration: underline;
+	line-height: 1em;
+}
+
+.mbasket-items a, .mbasket-items a:hover, .mbasket-items a:visited {
+	margin: 0 !important;
+	text-align: right !important;
+}
+
+#shop-cart a {
+	margin: 0;
+}
+
+.shop-order-table, .order-price-form {
+	width: 100%;
+}
+
+#shop-order-form input[type='text'], #shop-order-form textarea, #order-price-form input[type='text']{
+	width: 100%;
+}
+
+div.form_comment{
+	color: #999999;
+	font-size: 0.9em;
+	line-height: 1.1em;
+	padding: 5px 10px 5px 0;
+	text-align: justify;
+}
+
+.shop-order-table .td-submit, .order-price-form{
+	/*text-align: right;*/
+	padding-right: 0px;
+}
+
+.shop-order-table, .order-price-form td{
+	padding-right: 15px;
+}
+
+.shop-order-table .shipping {
+	padding-right: 0px;
+}
+
+.shop-order-table td:nth-child(1){
+	width: 230px;
+	vertical-align: top !important;
+	padding-top: 5px;
+}
+
+.shop-order-table td {
+	padding-right: 15px;
+}
+
+.shop-order-table .form-error ul {
+	list-style: none;
+	color: indianred;
+	margin-top: -10px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	margin-left: 0px;
+}
+
+.order-price-form td:nth-child(1) {
+	width: 330px;
+}
+
+.order-price-form td .activity {
+	width: 310px;
+}
+
+#undefined-sticky-wrapper:hover .mbasket-items {
+	display: block;
+}
+
+.mbasket-clear, .shk-del {
+	cursor: pointer;
+}
+
+.td form-order {
+	padding-right: 0px;
+}

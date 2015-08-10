@@ -2,12 +2,12 @@
 
 namespace App\CatalogBundle\Entity;
 
+use App\MainBundle\Entity\PageTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use App\CatalogBundle\Extension\Utils;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * Category
@@ -19,431 +19,311 @@ use App\CatalogBundle\Extension\Utils;
  */
 class Category
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Id
-     */
-    private $id;
+	use PageTrait;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nomen", type="integer", nullable=true)
-     */
-    private $nomen;
+	const WEB_DIR_PATH 	   = '/../../../../web';
+	const IMG_DIR_PATH     = '/assets/images/sections';
+	const EMPTY_THUMB_NAME = 'logo-prozr.png';
 
-    /**
-     * @Gedmo\TreeParent
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     */
-    private $parent;
+	public static $imageTypes = array(
+		IMAGETYPE_JPEG,
+		IMAGETYPE_JPEG2000,
+		IMAGETYPE_PNG,
+		IMAGETYPE_GIF
+	);
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=1000, nullable=true)
-     */
-    private $name;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\Column(name="id", type="integer", nullable=false)
+	 */
+	private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=1000, nullable=true)
-     */
-    private $title;
+	/**
+	 * @Gedmo\TreeParent
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+	 * @ORM\ManyToOne(targetEntity="Category")
+	 */
+	private $parent;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="alias", type="string", length=1000, nullable=true)
-     */
-    private $alias;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="alias", type="string", length=1000, nullable=true)
+	 */
+	private $alias;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mark", type="string", length=1000, nullable=true)
-     */
-    private $mark;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="mark", type="string", length=1000, nullable=true)
+	 */
+	private $mark;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ord", type="integer", nullable=true)
-     */
-    private $order;
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="coefficient", type="float", nullable=true)
+	 */
+	private $coefficient;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="coefficient", type="float", nullable=false)
-     */
-    private $coefficient;
+	/**
+	 * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+	 */
+	protected $products;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_active", type="boolean", nullable=true)
-     */
-    private $isActive;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="link_to_stk_metal", type="string", length=500, nullable=true)
+	 */
+	private $linkToStkMetal;
 
+	public function __construct()
+	{
+		$this->products = new ArrayCollection();
+	}
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="description", type="string", length=1000, nullable=true)
-     */
-    private $description;
+	/**
+	 * @param string $alias
+	 */
+	public function setAlias($alias)
+	{
+		$this->alias = $alias;
+	}
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="photo_id", type="integer", nullable=true)
-     */
-    private $photoId;
+	/**
+	 * @return string
+	 */
+	public function getAlias()
+	{
+		return $this->alias;
+	}
 
-    /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
-     */
-    protected $products;
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
+	public function setProducts($products)
+	{
+		$this->products = $products;
+	}
 
-    /**
-     * @param string $alias
-     */
-    public function setAlias($alias)
-    {
-        $this->alias = $alias;
-        return $this;
-    }
+	public function getProducts()
+	{
+		return $this->products;
+	}
 
-    /**
-     * @return string
-     */
-    public function getAlias()
-    {
-        return $this->alias;
-    }
+	/**
+	 * @param string $mark
+	 */
+	public function setMark($mark)
+	{
+		$this->mark = $mark;
+	}
 
-    /**
-     * @param int $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-        return $this;
-    }
+	/**
+	 * @return string
+	 */
+	public function getMark()
+	{
+		return $this->mark;
+	}
 
-    /**
-     * @return int
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+	/**
+	 * @param float $coefficient
+	 */
+	public function setCoefficient($coefficient)
+	{
+		$this->coefficient = $coefficient;
+	}
 
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
+	/**
+	 * @return float
+	 */
+	public function getCoefficient()
+	{
+		return $this->coefficient;
+	}
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-    /**
-     * @param int $id
-     */
-    public function setNomen($nomen)
-    {
-        $this->nomen = $nomen;
-        return $this;
-    }
+	public function setParent(Category $parent = null)
+	{
+		$this->parent = $parent;
+	}
 
-    /**
-     * @return int
-     */
-    public function getNomen()
-    {
-        return $this->nomen;
-    }
+	public function getParent()
+	{
+		return $this->parent;
+	}
 
-    /*
-     * Object relations methods
-     */
+	/**
+	 * @param string $linkToStkMetal
+	 */
+	public function setLinkToStkMetal($linkToStkMetal)
+	{
+		$this->linkToStkMetal = $linkToStkMetal;
+	}
 
-    public function setProducts($products)
-    {
-        $this->products = $products;
-    }
+	/**
+	 * @return string
+	 */
+	public function getLinkToStkMetal()
+	{
+		return $this->linkToStkMetal;
+	}
 
-    public function getProducts()
-    {
-        return $this->products;
-    }
+	public function addClosure(CategoryClosure $closure)
+	{
+		$this->closures[] = $closure;
+	}
 
-    /**
-     * @param string $mark
-     */
-    public function setMark($mark)
-    {
-        $this->mark = $mark;
-        return $this;
-    }
+	/**
+	 * Вернет true если есть картинка или false если нет
+	 *
+	 * @return bool
+	 */
+	public function hasPicture()
+	{
+		return $this->getPicturePath() != self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
+	}
 
-    /**
-     * @return string
-     */
-    public function getMark()
-    {
-        return $this->mark;
-    }
+	/**
+	 * Ищет все файлы с названием {id}.*
+	 * Определяет тип файла, и в случае если это картинка в одном из форматов указанных в self::$imageTypes - возвращает относительный путь
+	 *
+	 * @return string
+	 */
+	public function getPicturePath()
+	{
+		$webPath = __DIR__ . self::WEB_DIR_PATH;
+		$absPicName = $webPath . self::IMG_DIR_PATH . '/' . $this->getId();
+		$gres = glob($absPicName . '.*');
+		if(!empty($gres)) {
+			foreach($gres as $fileName) {
+				$searchResult = array_search(exif_imagetype($fileName), self::$imageTypes);
+				if($searchResult !== false) {
+					return self::IMG_DIR_PATH . '/' . basename($fileName);
+				}
+			}
+		}
+		return self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
+	}
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
+	public function __toString()
+	{
+		return (string)$this->getId() . "." . (string)$this->getTitle();
+	}
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	/**
+	 * Метод валидации для админки
+	 * @param ExecutionContext $context
+	 */
+	public function validate(ExecutionContext $context)
+	{
+		$alias = $this->getAlias();
+		if(preg_match("/[^a-z0-9_\/-]/", $alias)) {
+			$context->addViolation('Недопустимые для ссылки символы');
+		}
+	}
 
-    /**
-     * @param int $order
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-        return $this;
-    }
+	/* ----------- Блок кода для файла. Нужен для админки. Очень понавательный. -------------- */
+	private $file;
+	/**
+	 * @var string
+	 * Папка для изображений. Почему она static написано в матчасти.
+	 * Без переднего слэша, чтобы бэкэнду была понятна папка.
+	 * На фронте прямо в твиге сандалим слешик.
+	 */
+	public static $defaultDirForImg = 'bundles/catalog/img/categories/';
 
-    /**
-     * @return int
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
+	public static $imgExtensions = array('png', 'jpg', 'jpeg', 'bmp', 'gif', 'tiff');
 
-    /**
-     * @param float $coefficient
-     */
-    public function setCoefficient($coefficient)
-    {
-        $this->coefficient = $coefficient;
-        return $this;
-    }
+	public function getAbsolutePath()
+	{
+		return null === $this->imageName ? null : '/' . $this->getUploadDir() . '/' . $this->getId() . '/' . $this->imageName;
+	}
 
-    /**
-     * @return float
-     */
-    public function getCoefficient()
-    {
-        return $this->coefficient;
-    }
+	public function getWebPath()
+	{
+		return null === $this->imageName ? null : $this->getUploadDir() . '/' . $this->getId() . '/' . $this->imageName;
+	}
 
-    /**
-     * @param boolean $isActive
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-        return $this;
-    }
+	protected function getUploadDir()
+	{
+		return Category::$defaultDirForImg;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
+	protected function getFileDir()
+	{
+		return Category::$defaultDirForImg;
+	}
 
-    public function setParent(Category $parent = null)
-    {
-        $this->parent = $parent;
-        return $this;
-    }
+	protected function getUploadRootDir($basePath)
+	{
+		return $basePath . $this->getUploadDir();
+	}
 
-    public function getParent()
-    {
-        return $this->parent;
-    }
+	public function upload($basePath)
+	{
+		// the file property can be empty if the field is not required
+		if (null === $this->file) {
+			return;
+		}
 
-    /**
-     * @param int $photoId
-     */
-    public function setPhotoId($photoId)
-    {
-        $this->photoId = $photoId;
-        return $this;
-    }
+		if (null === $basePath) {
+			return;
+		}
 
-    /**
-     * @return int
-     */
-    public function getPhotoId()
-    {
-        return $this->photoId;
-    }
+		// we use the original file name here but you should
+		// sanitize it at least to avoid any security issues
 
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
+		/*-------- проверяем на наличие других файлов main в папке и удаляем если есть ------*/
+		$nameFile = $this->getFileDir() . $this->getId() . ".";
+		foreach (Category::$imgExtensions as $extension) {
+			if (file_exists($nameFile . $extension))
+				unlink($nameFile . $extension);
+		}
+		/*-------- двигаем файл ------*/
+		$this->file->move($this->getUploadRootDir($basePath), $this->getId() . "." . $this->getFile()->guessExtension());
+		$this->file = null;
+	}
 
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+	public function getFilePath()
+	{
+		$nameFile = $this->getFileDir() . $this->getId() . ".";
+		foreach (Category::$imgExtensions as $extension) {
+			if (file_exists($nameFile . $extension))
+				return $nameFile . $extension;
+		}
 
-    public function addClosure(CategoryClosure $closure)
-    {
-        $this->closures[] = $closure;
-    }
+		return 'bundles/catalog/empty.png';
+	}
 
-    public function getSitemapData()
-    {
-        return array(
-			'section' => $this->getId(),
-            'locData' => array(
-                'route' => 'app_catalog_explore_category',
-                'parameters' => array(
-                )
-            ),
-            'priority'   => 0.9,
-            'changefreq' => 'weekly',
-			'entityType' => 'category',
-		);
-    }
-    public function __toString()
-    {
-        return (string)$this->getId().".".(string)$this->getTitle();
-    }
-    /* ----------- Блок кода для файла. Нужен для админки. Очень понавательный. -------------- */
-    private $file;
-    /**
-     * @var string
-     * Папка для изображений. Почему она static написано в матчасти.
-     * Без переднего слэша, чтобы бэкэнду была понятна папка.
-     * На фронте прямо в твиге сандалим слешик.
-     */
-    public static $defaultDirForImg = 'bundles/catalog/img/categories/';
+	/**
+	 * Set file
+	 *
+	 * @param string $file
+	 * @return Product
+	 */
+	public function setFile($file)
+	{
+		$this->file = $file;
+	}
 
-    public static $imgExtensions = array('png', 'jpg', 'jpeg', 'bmp', 'gif', 'tiff');
-
-    public function getAbsolutePath()
-    {
-        return null === $this->imageName ? null : '/'.$this->getUploadDir().'/'.$this->getId().'/'.$this->imageName;
-    }
-
-    public function getWebPath()
-    {
-        return null === $this->imageName ? null : $this->getUploadDir().'/'.$this->getId().'/'.$this->imageName;
-    }
-
-    protected function getUploadDir()
-    {
-        return Category::$defaultDirForImg;
-    }
-    protected function getFileDir()
-    {
-        return Category::$defaultDirForImg;
-    }
-    protected function getUploadRootDir($basePath)
-    {
-        return $basePath.$this->getUploadDir();
-    }
-    public function upload($basePath)
-    {
-        // the file property can be empty if the field is not required
-        if (null === $this->file) {
-            return;
-        }
-
-        if (null === $basePath) {
-            return;
-        }
-
-        // we use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-
-        /*-------- проверяем на наличие других файлов main в папке и удаляем если есть ------*/
-        $nameFile = $this->getFileDir().$this->getId().".";
-        foreach(Category::$imgExtensions as $extension){
-            if (file_exists($nameFile.$extension))
-                unlink($nameFile.$extension);
-        }
-        /*-------- двигаем файл ------*/
-        $this->file->move($this->getUploadRootDir($basePath), $this->getId().".".$this->getFile()->guessExtension());
-        $this->file = null;
-    }
-
-    public function rmUploaded(){
-        Utils::categoryRemove($this);
-    }
-
-    public function getFilePath()
-    {
-        $nameFile = $this->getFileDir().$this->getId().".";
-        foreach(Category::$imgExtensions as $extension){
-            if (file_exists($nameFile.$extension))
-                return $nameFile.$extension;
-        }
-
-        return 'bundles/catalog/empty.png';
-    }
-    /**
-     * Set file
-     *
-     * @param string $file
-     * @return Product
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-
-        return $this;
-    }
-
-    /**
-     * Get file
-     *
-     * @return string
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-    /* ----------- Код для файла кончился -------------- */
+	/**
+	 * Get file
+	 *
+	 * @return string
+	 */
+	public function getFile()
+	{
+		return $this->file;
+	}
+	/* ----------- Код для файла кончился -------------- */
 }

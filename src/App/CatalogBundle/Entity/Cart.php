@@ -4,46 +4,50 @@ namespace App\CatalogBundle\Entity;
 
 class Cart
 {
-    private $products = array();
-    private $totalProductsCount = 0;
+	/**
+	 * array_key - id продукта в базе
+	 * array_value - кол-во продуктов
+	 * @var array
+	 */
+	private $products = array();
 
-    public function addProduct($productId, $count)
-    {
-        $this->products[$productId] = (isset($this->products[$productId])) ? $this->products[$productId] + $count : $count;
-        $this->totalProductsCount += $count;
-        echo '';
-    }
+	/**
+	 * @param $id
+	 * @param $count
+	 */
+	public function addProduct($id, $count)
+	{
+		$this->products[$id] = (isset($this->products[$id])) ? $this->products[$id] + $count : $count;
+	}
 
-    public function setProducts($products)
-    {
-        $this->products = $products;
-        return $this;
-    }
+	public function removeProduct($id, $count)
+	{
+		if(isset($this->products[$id])) {
+			if($count >= $this->products[$id]) {
+				unset($this->products[$id]);
+			} else {
+				$this->products[$id] -= $count;
+			}
+		}
+	}
 
-    public function getProducts()
-    {
-        return $this->products;
-    }
+	public function setProducts($products)
+	{
+		$this->products = $products;
+	}
 
-    public function setTotalProductsCount($totalProductsCount)
-    {
-        $this->totalProductsCount = $totalProductsCount;
-        return $this;
-    }
+	public function getProducts()
+	{
+		return $this->products;
+	}
 
-    public function getTotalProductsCount()
-    {
-        return $this->totalProductsCount;
-    }
-
-    public function serialize()
-    {
-        if(!empty($this->products)) {
-            foreach($this->products as $productId => $count) {
-                $prodStrArr[] = $productId . ':' . $count;
-            }
-            return implode('-', $prodStrArr);
-        }
-        return false;
-    }
+	/**
+	 * Возвращает кол-во товаров в корзине.
+	 * Именно кол-во товаров, а не позиций
+	 * @return int
+	 */
+	public function getTotalProductsCount()
+	{
+		return (int) array_sum($this->getProducts());
+	}
 }

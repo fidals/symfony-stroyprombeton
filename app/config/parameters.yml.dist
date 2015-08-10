@@ -1,0 +1,20 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     stroyprombeton
+    database_user:     root
+    database_password: ~
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+    locale:            ru
+    base_url:          http://www.stroyprombeton.ru
+    email_order:       order@stroyprombeton.ru
+    email_info:        info@stroyprombeton.ru
+    email_as:          as@stkmail.ru
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            3c99e88d2f2c52390819c78bc38e38d1e7df8d5c

@@ -1,0 +1,23 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+	{{ post.getName() }}
+{% endblock %}
+
+{% block description %}
+	{{ post.getDescription() }}
+{% endblock %}
+
+
+{% block content %}
+	<strong>
+		<i>{{ post.getDate|date('m.d.Y') }}</i>
+	</strong>
+	<h1>{{ post.getH1() }}</h1>
+	{% if post.getText() %}
+		{% autoescape false %}
+			{{ include(template_from_string(post.getText())) }}
+		{% endautoescape %}
+	{% endif %}
+
+{% endblock %}

@@ -1,7 +1,25 @@
-parameters:
-#    app_main.example.class: App\MainBundle\Example
-
 services:
-#    app_main.example:
-#        class: %app_main.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    catalog.sitemap.object:
+        class: App\MainBundle\Listener\ObjectSitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.sitemap.post:
+        class: App\MainBundle\Listener\PostSitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.sitemap.staticpage:
+        class: App\MainBundle\Listener\StaticPageSitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.sitemap.post:
+        class: App\MainBundle\Listener\PostSitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.sitemap.territory:
+        class: App\MainBundle\Listener\TerritorySitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]

@@ -1,46 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE yml_catalog SYSTEM "shops.dtd">
 <yml_catalog date="{{ "now"|date("m-d-Y H:i") }}">
-    <shop>
-        <name>Stroyprombeton</name>
-        <company>Стройпромбетон</company>
-        <url>{{ urlIndex }}</url>
-        <currencies>
-            <currency id="RUR" rate="1"/>
-        </currencies>
-        <categories>
-        {# start nesting macro #}
-        {% macro nesting(category) %}
-            {% for categoryChildren in category.__children %}
-                <category id="{{ categoryChildren.id }}" parentId="{{ category.id }}">{% if categoryChildren.name %}{{ categoryChildren.name }}{% else %}{{ categoryChildren.title }}{% endif %}</category>
-                {{ _self.nesting(categoryChildren) }}
-            {% endfor %}
-        {% endmacro %}
-        {# end nesting macro #}
-        {% for category in tree %}
-            <category id="{{ category.id }}">{% if category.name %}{{ category.name }}{% else %}{{ category.title }}{% endif %}</category>
-            {{ _self.nesting(category) }}
-        {% endfor %}
-        </categories>
-        <offers>
-        {% for product in products %}
-            <url>{{ urlIndex }}/gbi/{{ product.catUrl }}/?section={{ product.sectionId }}&gbi={{ product.id }}</url>
-            <price>{{ product.price }}</price>
-            <currencyId>RUR</currencyId>
-            <categoryId>{{ product.sectionId }}</categoryId>
-            <picture>
-                {% if product.isHavePhoto %}
-                    <img src="/bundles/main/images/gbi-photos/{{ product.id }}.jpg">
-                {% else %}
-                    <img src="/bundles/main/images/gbi-photos/prod-alt-image.png">
-                {% endif %}
-            </picture>
-            <store>false</store>
-            <pickup>true</pickup>
-            <delivery>true</delivery>
-            <name>{{ product.name }}</name>
-            <description>{{ product.desc }}</description>
-        {% endfor %}
-        </offers>
-    </shop>
+	<shop>
+		<name>Stroyprombeton</name>
+		<company>Стройпромбетон</company>
+		<url>{{ urlIndex }}</url>
+		<currencies>
+			<currency id="RUR" rate="1"/>
+		</currencies>
+		<categories>
+			{# start nesting macro #}
+			{% macro nesting(category) %}
+				{% for categoryChildren in category.__children %}
+					<category id="{{ categoryChildren.id }}" parentId="{{ category.id }}">{% if categoryChildren.name %}{{ categoryChildren.name }}{% else %}{{ categoryChildren.title }}{% endif %}</category>
+					{{ _self.nesting(categoryChildren) }}
+				{% endfor %}
+			{% endmacro %}
+			{# end nesting macro #}
+			{% for category in tree %}
+				<category id="{{ category.id }}">{% if category.name %}{{ category.name }}{% else %}{{ category.title }}{% endif %}</category>
+				{{ _self.nesting(category) }}
+			{% endfor %}
+		</categories>
+		<offers>
+			{% for product in products %}
+				<url>{{ urlIndex }}/gbi/{{ product.catUrl }}/?section={{ product.getCategory().getId() }}&gbi={{ product.id }}</url>
+				<price>{{ product.price }}</price>
+				<currencyId>RUR</currencyId>
+				<categoryId>{{ product.getCategory().getId() }}</categoryId>
+				<picture>
+					<img src="{{ product.getPicturePath() }}">
+				</picture>
+				<store>false</store>
+				<pickup>true</pickup>
+				<delivery>true</delivery>
+				<name>{{ product.name }}</name>
+				<description>{{ product.desc }}</description>
+			{% endfor %}
+		</offers>
+	</shop>
 </yml_catalog>

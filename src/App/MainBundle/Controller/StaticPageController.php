@@ -2,80 +2,80 @@
 
 namespace App\MainBundle\Controller;
 
-use App\MainBundle\Entity\StaticPage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use App\CatalogBundle\Command\SitemapCommand;
 
 class StaticPageController extends Controller
 {
 
-    // ugly urls
-    public $baseCats = array(
-        537 => 'prom-stroy',
-        538 => 'dor-stroy',
-        539 => 'ingener-stroy',
-        540 => 'energy-stroy',
-        541 => 'blag-territory',
-        542 => 'neftegaz-stroy'
-    );
+	/**
+	 * Показывает статичные страницы напрямую из базы
+	 * @param $alias - по факту полный урл. Т.е. может содержать символ "/"
+	 * @return Response
+	 * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+	 */
+	public function showAction($alias)
+	{
+		// prepare alias
+		$alias = trim($alias, ' /');
 
-    // search by alias here and show some result
-    public function showAction($alias)
-    {
-        // prepare alias
-        $alias = trim($alias, ' /');
+		// search in repository
+		$spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
+		$staticPage = $spRepository->findOneByAlias($alias);
 
-        // search in repository
-        $spRepository = $this->getDoctrine()->getRepository('AppMainBundle:StaticPage');
-        $staticPage = $spRepository->findOneByAlias($alias);
-        if(!empty($staticPage)) {
-            if($alias == 'obekty'){
-                $goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-                $objects = $goRp->findAll();
-                return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', array(
-                    'staticPage' => $staticPage,
-                    'objects' => $objects
-                ));
-            }
-            return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', array(
-                'staticPage' => $staticPage
-            ));
-        } else {
-             throw $this->createNotFoundException();
-        }
-    }
+		if (empty($staticPage)) {
+			throw $this->createNotFoundException();
+		}
 
-    public function showIndexAction()
-    {
-        $catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$twigArgs = array('staticPage' => $staticPage);
+		return $this->render('AppMainBundle:StaticPage:staticPage.html.twig', $twigArgs);
+	}
 
-        $randomProducts = $this->getDoctrine()
-            ->getRepository('AppCatalogBundle:Product')
-            ->getRandomProducts();
+	/**
+	 * Главная страница
+	 * @return Response
+	 */
+	public function showIndexAction()
+	{
+		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
 
-        foreach($randomProducts as &$product) {
-            $path = $catRp->getPath($product->getCategory());
-            $product->catUrl = $this->baseCats[$path[0]->getId()];
-        }
+		$mainCategoryIds = array(12, 15, 473, 180, 12563, 176, 402, 44, 59);
+		$isNewMainCategoryIds = array(473, 12563);
+		$mainCategories = $catRp->findById($mainCategoryIds);
+		$mainCategoriesById = array();
+		foreach($mainCategories as $mainCategory) {
+			$mainCategory->catUrl = SitemapCommand::$baseCats[$catRp->getPath($mainCategory)[0]->getId()];
+			$mainCategory->isNew = in_array($mainCategory->getId(), $isNewMainCategoryIds);
+			$mainCategoriesById[$mainCategory->getId()] = $mainCategory;
+		}
 
-        return $this->render('AppMainBundle:StaticPage:indexPage.html.twig', array(
-            'randomProducts' => $randomProducts
-        ));
-    }
+		$mainCategoriesSorted = array();
+		foreach($mainCategoryIds as $mainCategoryId) {
+			$mainCategoriesSorted[] = $mainCategoriesById[$mainCategoryId];
+		}
 
-    public function gbiObjeсtShowAction($alias){
-        $goRp = $this->getDoctrine()->getRepository("AppMainBundle:GbiObject");
-        $go = $goRp->findOneByAlias($alias);
-        if($go){
-            return $this->render("AppMainBundle:StaticPage:gbiObject.html.twig",array(
-                'gbiObject' => $go
-            ));
-        }
-        return $this->render('AppMainBundle:StaticPage:404.html.twig');
-    }
-    public function exeptionAction()
-    {
-        return $this->render('AppMainBundle:StaticPage:404.html.twig');
-    }
+		$productsWithPictures = $this->getDoctrine()->getRepository('AppCatalogBundle:Product')->getRandomProductsHasPhoto(10);
+
+		foreach($productsWithPictures as &$product) {
+			$path = $catRp->getPath($product->getCategory());
+			$product->catUrl = SitemapCommand::$baseCats[$path[0]->getId()];
+		}
+
+		// берем три последние новости
+		$newsRp = $this->getDoctrine()->getRepository('AppMainBundle:Post');
+		$lastNews = $newsRp->findBy(array('isActive' => 1), array('date' => 'DESC'), 3);
+
+		return $this->render('AppMainBundle:StaticPage:indexPage.html.twig', array(
+			'products'       => $productsWithPictures,
+			'news'           => $lastNews,
+			'mainCategories' => $mainCategoriesSorted
+		));
+	}
+
+	public function exeptionAction()
+	{
+		return $this->render('AppMainBundle:StaticPage:404.html.twig');
+	}
 
 }

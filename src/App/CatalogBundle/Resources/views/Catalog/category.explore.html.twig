@@ -1,53 +1,41 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
-{% block title %}
-    {{ category.title }}
-{% endblock %}
-
-{% block description %}
-    {{ category.description }}
-{% endblock %}
-
+{% block title %}{{ category.getName() }}{% endblock %}
+{% block keywords %}{{ category.getKeywords() }}{% endblock %}
 
 {% block content %}
-    <div class="location">
-        {% for item in parents %}
-            <span class="location section">
-                <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">{{ item.title }}</a>
-            </span>
-            <span class="location separate">/</span>
-        {% endfor %}
-    </div>
+	<div class="location">
+		<span class="location section">
+			<a href="/">Главная</a>
+		</span>
 
-  <div class="gbi-showcase">
-    <table>
-      {% for item in childs if item.isActive %}
-        {% if loop.index is odd %}<tr>{% endif %}
-          <td>
-            <span>{{ item.id }}</span>
-            <a href="/gbi/{{ catUrl }}/?section={{ item.id }}">
-              <h2>{% if item.name %}{{ item.name }}{% else %}{{ item.title }}{% endif %}</h2>
-              <div class="gbi-showcase-top-line">
-                  {% if item.photoId %}
-										<img src="/assets/main/images/sections/{{ item.id }}.png" />
-				  				{% else %}
-                  	<img src="/assets/main/images/sections/logo-prozr.png"/>
-									{% endif %}
-                    <div class="cat-info">
-                        <h3>{% if item.mark %}{{ item.mark }}{% endif %}</h3><br />
-                        <p>{{ item.title }}</p>
-                        <div class="link-detailed">подробнее&nbsp&raquo</div>
-                    </div>
-              </div>
-            </a>
-           </td>
-        {% if loop.index is even %}
-          </tr><tr style="height:20px"></tr>
-        {% endif %}
-      {% endfor %}
-    </table>
-  </div>
-    {% autoescape false %}
-    {{ category.description }}
-    {% endautoescape %}
+		{% for item in parents %}
+			{% if loop.index != loop.last %}
+				<span class="location separate">»</span>
+				<span class="location section">
+					<a href="{{ path('app_catalog_category', {'id': item.getId()}) }}">{{ item.getTitle() }}</a>
+				</span>
+			{% endif %}
+		{% endfor %}
+	</div>
+
+	<h1>{{ category.getH1() }}</h1>
+	{% for item in children | sortbyfield('name') %}
+		{% if item.model.getIsActive() %}
+			<div class="cat_cat">
+				<a href="{{ path('app_catalog_category', {'id': item.model.getId()}) }}">
+					<div style="display: inline-block">
+						<span class="number">{{ item.model.getId() }}</span>
+						<span class="catalog-second-level">{{ item.model.getTitle() }}</span>
+					</div>
+					<div class="gbi-showcase-top-line">
+						<img src="{{ item.model.getPicturePath() }}">
+						<div class="cat-info">
+						</div>
+					</div>
+					<div class="link-detailed">подробнее&nbsp;»</div>
+				</a>
+			</div>
+		{% endif %}
+	{% endfor %}
 {% endblock %}

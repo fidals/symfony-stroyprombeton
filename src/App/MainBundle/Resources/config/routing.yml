@@ -1,17 +1,79 @@
-app_main_gbi:
-  pattern: /gbi/
-  defaults: { _controller: AppMainBundle:StaticPage:gbiRedirect }
+app_main_price_list_booking:
+    pattern: /order_price/
+    defaults: { _controller: AppMainBundle:PriceList:booking }
+
+app_main_price_list_booking_success:
+    pattern: /order_price_success/
+    defaults: { _controller: AppMainBundle:PriceList:bookingSuccess }
 
 app_main_object:
-  pattern: /obekty/{alias}/
-  defaults: { _controller: AppMainBundle:StaticPage:gbiObjeсtShow }
+    pattern: /our-object/{id}/
+    defaults: { _controller: AppMainBundle:Object:show }
+
+app_main_territory:
+    pattern: /rus-area-item/{territoryId}/
+    defaults: { _controller: AppMainBundle:Territory:show }
+
+app_main_territory_map:
+    pattern: /obekty/
+    defaults: { _controller: AppMainBundle:Territory:map }
+
+app_main_post_all:
+    pattern: /news/
+    defaults: { _controller: AppMainBundle:Post:index }
+
+app_main_post:
+    pattern: /news/{id}/
+    defaults: { _controller: AppMainBundle:Post:post }
 
 app_main_staticpage:
-    pattern:  /{alias}/
+    pattern:  /page/{alias}/
     defaults: { _controller: AppMainBundle:StaticPage:show }
     requirements:
-            alias: ".+"
+        alias: ".+"
 
 app_main_index:
-  pattern: /
-  defaults: { _controller: AppMainBundle:StaticPage:showIndex }
+    pattern: /
+    defaults: { _controller: AppMainBundle:StaticPage:showIndex }
+
+
+# Роутинг для редиректов modx url
+
+# Сразу редиректит на другой роут (301 Permanent)
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_gbi_visual:
+    pattern: /gbi/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: app_catalog_gbi_visual
+        permanent: true
+
+# Сразу редиректит на другой роут (301 Permanent)
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_staticpage:
+    pattern: /{alias}/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: app_main_staticpage
+        permanent: true
+
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_object:
+    pattern: /obekty/{territoryId}/{id}/
+    defaults: { _controller: AppMainBundle:Redirect:appMainObject }
+    requirements:
+        id: "d+"
+
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_object_alias:
+    pattern: /obekty/{territoryId}/{alias}/
+    defaults: { _controller: AppMainBundle:Redirect:appMainObjectAlias }
+
+# Сразу редиректит на другой роут (301 Permanent)
+# TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
+modx_territory:
+    pattern: /obekty/{territoryId}/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: app_main_territory
+        permanent: true

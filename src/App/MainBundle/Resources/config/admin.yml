@@ -1,0 +1,44 @@
+services:
+    sonata.admin.territory:
+        class: App\MainBundle\Admin\TerritoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Другое, label: "Территории" }
+        arguments:
+            - ~
+            - App\MainBundle\Entity\Territory
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppMainBundle]]
+
+    sonata.admin.object:
+        class: App\MainBundle\Admin\ObjectAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Другое, label: "Объекты" }
+        arguments:
+            - ~
+            - App\MainBundle\Entity\Object
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppMainBundle]]
+
+    sonata.admin.post:
+        class: App\MainBundle\Admin\PostAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Другое, label: "Новости" }
+        arguments:
+            - ~
+            - App\MainBundle\Entity\Post
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppMainBundle]]
+
+    sonata.admin.static_page:
+        class: App\MainBundle\Admin\StaticPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Другое, label: "Страницы" }
+        arguments:
+            - ~
+            - App\MainBundle\Entity\StaticPage
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppMainBundle]]

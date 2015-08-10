@@ -1,0 +1,14 @@
+{% block content %}
+	<div class="gbi-list">
+		<p class="price-desc price-desc-1">Все цены на <a href="/gbi/">железобетонные изделия</a> указаны с НДС</p>
+		<table>
+			{% for element in elements %}
+				{% if element.razdel == 1 %}
+					{% include 'AppCatalogBundle:Search:category.tr.search.html.twig' %}
+				{% else %}
+					{% include 'AppCatalogBundle:Search:product.tr.search.html.twig' %}
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

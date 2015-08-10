@@ -1,0 +1,9 @@
+<table>
+	<tr><td>Имя:</td><td>{{ form.vars.value.person }}</td></tr>
+	<tr><td>Город:</td><td>{{ form.vars.value.city }}</td></tr>
+	<tr><td>Название организации:</td><td>{{ form.vars.value.company }}</td></tr>
+	<tr><td>Направление деятельности:</td><td>{{ form.vars.value.activity }}</td></tr>
+	<tr><td>Сайт:</td><td><a href="{{ form.vars.value.site }}">{{ form.vars.value.site }}</a></td></tr>
+	<tr><td>Электронный адрес:</td><td><a href="mailto:{{ form.vars.value.email }}">{{ form.vars.value.email }}</a></td></tr>
+	<tr><td>Телефон:</td><td>{{ form.vars.value.phone }}</td></tr>
+</table>
