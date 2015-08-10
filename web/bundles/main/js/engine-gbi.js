@@ -359,7 +359,7 @@ function RunSearch() {
 				$pc_div.html(loc_html + '<div class="search-noresult">По вашему запросу в каталоге продукции ЖБИ изделий не найдено.</div>');
 				return;
 			}
-
+			history.pushState(null, document.title, '/search-results/?search=' + _search_condition);
 			$pc_div.empty();
 			$pc_div.html(loc_html + data);
 		}

@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
 	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
 	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/history.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
@@ -172,7 +173,7 @@
 						<tr>
 							<td class="search-form-title">Поиск в каталоге продукции</td>
 							<td class="search-form-input">
-								<input id="search_condition" type="text" value="Запрос для поиска (не менее 2 символов)"/>
+								<input id="search_condition" type="text" value="{% if searchCondition|default %}{{ searchCondition }}{% else %}Запрос для поиска (не менее 2 символов){% endif %}"/>
 							</td>
 							<td class="search-form-submit"><input id="search-action-btn" type="button" value="Найти"/></td>
 						</tr>
