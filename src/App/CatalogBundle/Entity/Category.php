@@ -110,6 +110,17 @@ class Category
 		return $this->id;
 	}
 
+	/**
+	* Нужен для src/App/CatalogBundle/Entity/Repository/CategoryRepository.php
+	 * TODO: отрефактори CategoryRepository и удали setId()
+	* @param int $id
+	*/
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+
 	public function setProducts($products)
 	{
 		$this->products = $products;
