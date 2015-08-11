@@ -1,4 +1,31 @@
+function getQueryParams(qs) {
+	qs = qs.split('+').join(' ');
+
+	var params = {},
+		tokens,
+		re = /[?&]?([^=]+)=([^&]*)/g;
+
+	while (tokens = re.exec(qs)) {
+		params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+	}
+
+	return params;
+}
+
 $(function () {
+	History.Adapter.bind(window,'popstate',function(e){
+		var State = History.getState();
+		var parser = document.createElement('a');
+		parser.href = State.url;
+		var search = parser.search;
+		var params = getQueryParams(search);
+		if(parser.pathname !== '/search-results/') {
+			window.location.reload();
+		} else {
+			RunSearch(params.search);
+		}
+	});
+
 	if ($("div.menu-v-content").length > 0) {
 		DropDownVerticalMenu();
 	}
@@ -267,6 +294,7 @@ function EngineSearch() {
 			}
 
 			_search_condition = val;
+			History.pushState(null, document.title, '/search-results/?search=' + _search_condition);
 			RunSearch();
 		}
 	});
@@ -316,6 +344,7 @@ function EngineSearch() {
 		}
 
 		_search_condition = val;
+		History.pushState(null, document.title, '/search-results/?search=' + _search_condition);
 		RunSearch();
 	});
 
@@ -324,8 +353,8 @@ function EngineSearch() {
 
 /* ```````````````````````````````````````````````````````````````````````````````` */
 
-function RunSearch() {
-	_search_condition = $.trim(_search_condition);
+function RunSearch(condition) {
+	_search_condition = condition || $.trim(_search_condition);
 	if (_search_condition == "") {
 		return;
 	}
@@ -359,7 +388,6 @@ function RunSearch() {
 				$pc_div.html(loc_html + '<div class="search-noresult">По вашему запросу в каталоге продукции ЖБИ изделий не найдено.</div>');
 				return;
 			}
-			history.pushState(null, document.title, '/search-results/?search=' + _search_condition);
 			$pc_div.empty();
 			$pc_div.html(loc_html + data);
 		}
