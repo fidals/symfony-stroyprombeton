@@ -20,7 +20,9 @@ class CategoryRepository extends ClosureTreeRepository
 			unset($category['__children']);
 			foreach ($category as $property => $value) {
 				$method = sprintf('set%s', ucwords($property));
-				$categoryModel->$method($value);
+				if(method_exists($categoryModel, $method)) {
+					$categoryModel->$method($value);
+				}
 			}
 			if (!empty($children)) {
 				$category['__children'] = $this->buildTreeObjectsChilds($children, $categoryModel);
