@@ -11,6 +11,10 @@ app_catalog_search:
     pattern: /search/
     defaults: { _controller: AppCatalogBundle:Catalog:search }
 
+app_catalog_search_results:
+    pattern: /search-results/
+    defaults: { _controller: AppCatalogBundle:Catalog:searchResults }
+
 app_catalog_basket:
     pattern: /basket/
     defaults: { _controller: AppCatalogBundle:Cart:index }
