@@ -1,3 +1,4 @@
+// Преобразует строку Url с параметрами объект, где название параметра является ключем к его значению
 function getQueryParams(qs) {
 	qs = qs.split('+').join(' ');
 
@@ -13,12 +14,16 @@ function getQueryParams(qs) {
 }
 
 $(function () {
+	// Делаем callback на событие popstate из history.js
 	History.Adapter.bind(window,'popstate',function(e){
 		var State = History.getState();
+		// Способ парсинга url взят отсюда https://gist.github.com/jlong/2428561
 		var parser = document.createElement('a');
 		parser.href = State.url;
-		var search = parser.search;
+		var search = parser.search; // то что в url после знака "?"
 		var params = getQueryParams(search);
+
+		// Если Url не аяксовый поиск - то загружаем страницу как обычно
 		if(parser.pathname !== '/search-results/') {
 			window.location.reload();
 		} else {
