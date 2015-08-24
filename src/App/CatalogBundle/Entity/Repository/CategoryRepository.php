@@ -27,7 +27,7 @@ class CategoryRepository extends ClosureTreeRepository
 			if (!empty($children)) {
 				$category['__children'] = $this->buildTreeObjectsChilds($children, $categoryModel);
 			}
-			$category['model'] = $categoryModel;
+			$category['model'] = $this->find($category['id']);
 		}
 		return $categories;
 	}
