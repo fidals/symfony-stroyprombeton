@@ -206,7 +206,13 @@ class Category
 		$gres = glob($absPicName . '.*');
 		if(!empty($gres)) {
 			foreach($gres as $fileName) {
-				$searchResult = array_search(exif_imagetype($fileName), self::$imageTypes);
+				// пытаемся определить тип картинки
+				try {
+					$mimetype = exif_imagetype($fileName);
+				} catch(\Exception $e) {
+					continue;
+				}
+				$searchResult = array_search($mimetype, self::$imageTypes);
 				if($searchResult !== false) {
 					return self::IMG_DIR_PATH . '/' . basename($fileName);
 				}
