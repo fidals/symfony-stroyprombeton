@@ -19,7 +19,7 @@ services:
             - { name: yandex_market.yml.listener }
     catalog.yandex_market_product_listener:
         class: App\CatalogBundle\Listener\YmlProductListener
-        arguments: ['@doctrine.orm.entity_manager', '@router']
+        arguments: ['@service_container']
         tags:
             - { name: yandex_market.yml.listener }
     catalog.yandex_market_currency_listener:

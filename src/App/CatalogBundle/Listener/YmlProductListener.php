@@ -7,6 +7,7 @@ use App\YandexMarketBundle\Element\VendorModelOffer;
 use App\YandexMarketBundle\Event\YmlGenerateEvent;
 use App\YandexMarketBundle\Service\YmlListenerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -17,17 +18,12 @@ use Symfony\Component\Routing\RouterInterface;
 class YmlProductListener implements YmlListenerInterface
 {
 	/**
-	 * @var \Doctrine\ORM\EntityManagerInterface
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
-	private $entityManager;
-	/**
-	 * @var \Symfony\Component\Routing\RouterInterface
-	 */
-	private $router;
+	private $container;
 
-	public function __construct(EntityManagerInterface $em, RouterInterface $router) {
-		$this->entityManager = $em;
-		$this->router = $router;
+	public function __construct(ContainerInterface $container) {
+		$this->container = $container;
 	}
 
 	/**
@@ -36,7 +32,9 @@ class YmlProductListener implements YmlListenerInterface
 	public function generate(YmlGenerateEvent $event)
 	{
 		$products = $this
-			->entityManager
+			->container
+			->get('doctrine')
+			->getManager()
 			->getRepository('AppCatalogBundle:Product')
 			->findBy(array('isActive' => 1));
 
@@ -48,7 +46,9 @@ class YmlProductListener implements YmlListenerInterface
 			$offer->setDelivery(true);
 			$offer->setSalesNotes('Детали оплаты и доставки уточните с менеджером.');
 
-			!$product->hasPicture() ?: $offer->setPicture($product->getPicturePath());
+			if($product->hasPicture()) {
+				$offer->setPicture($this->container->getParameter('base_url') . $product->getPicturePath());
+			}
 			is_null($product->getLength()) ?: $offer->addParam('Длина', $product->getLength());
 			is_null($product->getWidth()) ?: $offer->addParam('Ширина', $product->getWidth());
 			is_null($product->getHeight()) ?: $offer->addParam('Высота', $product->getHeight());
@@ -56,9 +56,9 @@ class YmlProductListener implements YmlListenerInterface
 			is_null($product->getVolume()) ?: $offer->addParam('Объем', $product->getVolume());
 			is_null($product->getDiameterIn()) ?: $offer->addParam('Диаметр внутренний', $product->getDiameterIn());
 			is_null($product->getDiameterOut()) ?: $offer->addParam('Диаметр внешний', $product->getDiameterOut());
-			$url = $this->router->generate('app_catalog_product', array('id' => $product->getId()), true);
+			$url = $this->container->get('router')->generate('app_catalog_product', array('id' => $product->getId()), true);
 			$offer->setUrl($url);
-			$offer->setPrice($product->getPrice());
+			$offer->setPrice($product->getPrice() == 0 ? 1 : $product->getPrice());
 			$offer->setCurrencyId(Currency::ID_RUR);
 			$offer->setCategoryId($product->getCategory()->getId());
 			$offer->setDelivery(true);
