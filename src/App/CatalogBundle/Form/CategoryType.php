@@ -16,7 +16,6 @@ class CategoryType extends AbstractType
 			->add('title', 'textarea')
 			->add('mark', 'textarea', array('required' => false))
 			->add('order', 'integer')
-			->add('coefficient', 'number')
 			->add('isActive', 'checkbox', array('required' => false))
 			->add('description', 'textarea', array('required' => false))
 			->add('photoId', 'integer', array('required' => false));
