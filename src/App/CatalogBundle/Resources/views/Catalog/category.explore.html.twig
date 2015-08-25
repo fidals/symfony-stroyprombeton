@@ -23,7 +23,7 @@
 	{% for item in children | sortbyfield('name') %}
 		{% if item.model.getIsActive() %}
 			<div class="cat_cat">
-				<a href="{{ path('app_catalog_category', {'id': item.model.getId()}) }}">
+				<a href="{{ path('app_catalog_category', {'id': item.id}) }}">
 					<div style="display: inline-block">
 						<span class="number">{{ item.model.getId() }}</span>
 						<span class="catalog-second-level">{{ item.model.getTitle() }}</span>
