@@ -39,6 +39,10 @@ class YmlProductListener implements YmlListenerInterface
 			->findBy(array('isActive' => 1));
 
 		foreach($products as $product) {
+			// если товар не имеет цены, то его не включаем в прайс для маркета
+			if(!$product->getPrice()) {
+				continue;
+			}
 			$offer = new BaseOffer();
 			$offer->setId($product->getId());
 			$offer->setAvailable(false);
@@ -57,8 +61,8 @@ class YmlProductListener implements YmlListenerInterface
 			is_null($product->getDiameterIn()) ?: $offer->addParam('Диаметр внутренний', $product->getDiameterIn());
 			is_null($product->getDiameterOut()) ?: $offer->addParam('Диаметр внешний', $product->getDiameterOut());
 			$url = $this->container->get('router')->generate('app_catalog_product', array('id' => $product->getId()), true);
+			$offer->setPrice($product->getPrice());
 			$offer->setUrl($url);
-			$offer->setPrice($product->getPrice() == 0 ? 1 : $product->getPrice());
 			$offer->setCurrencyId(Currency::ID_RUR);
 			$offer->setCategoryId($product->getCategory()->getId());
 			$offer->setDelivery(true);

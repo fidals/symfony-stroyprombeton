@@ -18,3 +18,9 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            3c99e88d2f2c52390819c78bc38e38d1e7df8d5c
+    email_order: order@stroyprombeton.ru
+    email_info: info@stroyprombeton.ru
+    email_as: as@stkmail.ru
+    secret: 3c99e88d2f2c52390819c78bc38e38d1e7df8d5c
+    base_url: www.stroyprombeton.ru
+    router.request_context.host: %base_url%
