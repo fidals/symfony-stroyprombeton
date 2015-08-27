@@ -20,6 +20,11 @@
 	</div>
 
 	<h1>{{ category.getH1() }}</h1>
+	{% if category.isTextPublished %}
+		{% autoescape false %}
+			{{ category.text }}
+		{% endautoescape %}
+	{% endif %}
 	{% for item in children | sortbyfield('name') %}
 		{% if item.model.getIsActive() %}
 			<div class="cat_cat">

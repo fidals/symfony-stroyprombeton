@@ -74,6 +74,13 @@ class Category
 	 */
 	private $linkToStkMetal;
 
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 1})
+	 */
+	private $isTextPublished = false;
+
 	public function __construct()
 	{
 		$this->products = new ArrayCollection();
@@ -153,6 +160,22 @@ class Category
 	public function getLinkToStkMetal()
 	{
 		return $this->linkToStkMetal;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isIsTextPublished()
+	{
+		return $this->isTextPublished;
+	}
+
+	/**
+	 * @param boolean $isTextPublished
+	 */
+	public function setIsTextPublished($isTextPublished)
+	{
+		$this->isTextPublished = $isTextPublished;
 	}
 
 	public function addClosure(CategoryClosure $closure)
