@@ -170,7 +170,6 @@ class MigrateCommand extends ContainerAwareCommand
 
 				$category = new Category();
 				$category->setAlias($row['alias']);
-				$category->setCoefficient($properties['coefficient']);
 				$category->setName($row['pagetitle']);
 				$category->setTitle($row['longtitle']);
 				$category->setH1($row['pagetitle']);
@@ -513,7 +512,6 @@ class MigrateCommand extends ContainerAwareCommand
 	private function getCategoryProperties($categoryId)
 	{
 		$properties = array(
-			'coefficient' => 1.1,
 			'stk-metal1'  => ''
 		);
 		return array_merge($properties, $this->getContentProperties($categoryId));

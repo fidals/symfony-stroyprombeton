@@ -63,13 +63,6 @@ class Category
 	private $mark;
 
 	/**
-	 * @var float
-	 *
-	 * @ORM\Column(name="coefficient", type="float", nullable=true)
-	 */
-	private $coefficient;
-
-	/**
 	 * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
 	 */
 	protected $products;
@@ -134,22 +127,6 @@ class Category
 	public function getMark()
 	{
 		return $this->mark;
-	}
-
-	/**
-	 * @param float $coefficient
-	 */
-	public function setCoefficient($coefficient)
-	{
-		$this->coefficient = $coefficient;
-	}
-
-	/**
-	 * @return float
-	 */
-	public function getCoefficient()
-	{
-		return $this->coefficient;
 	}
 
 	public function setParent(Category $parent = null)
