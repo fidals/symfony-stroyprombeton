@@ -147,9 +147,9 @@ class Product
 	/**
 	 * @var bool
 	 *
-	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 1})
+	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
 	 */
-	private $isTextPublished = false;
+	private $isTextPublished = true;
 
 	/**
 	 * @param string $comments

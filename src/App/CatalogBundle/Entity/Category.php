@@ -6,7 +6,6 @@ use App\MainBundle\Entity\PageTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\CatalogBundle\Extension\Utils;
 use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
@@ -77,9 +76,9 @@ class Category
 	/**
 	 * @var bool
 	 *
-	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 1})
+	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
 	 */
-	private $isTextPublished = false;
+	private $isTextPublished = true;
 
 	public function __construct()
 	{
