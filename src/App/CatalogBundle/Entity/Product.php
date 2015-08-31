@@ -67,7 +67,6 @@ class Product
 	 * @ORM\Column(name="section_id", type="integer", nullable=true)
 	 */
 	private $sectionId;
-
 	/**
 	 * @var integer
 	 *
@@ -146,6 +145,13 @@ class Product
 	private $introtext;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+	 */
+	private $isTextPublished = true;
+
+	/**
 	 * @param string $comments
 	 */
 	public function setComments($comments)
@@ -208,6 +214,15 @@ class Product
 	{
 		return $this->height;
 	}
+
+	/**
+	 * @param int $id
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
 
 	/**
 	 * @return int
@@ -402,6 +417,22 @@ class Product
 	public function getIntrotext()
 	{
 		return $this->introtext;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isIsTextPublished()
+	{
+		return $this->isTextPublished;
+	}
+
+	/**
+	 * @param boolean $isTextPublished
+	 */
+	public function setIsTextPublished($isTextPublished)
+	{
+		$this->isTextPublished = $isTextPublished;
 	}
 
 	public function __toString()

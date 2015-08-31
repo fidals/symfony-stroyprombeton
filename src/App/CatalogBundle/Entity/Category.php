@@ -6,7 +6,6 @@ use App\MainBundle\Entity\PageTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\CatalogBundle\Extension\Utils;
 use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
@@ -73,6 +72,13 @@ class Category
 	 * @ORM\Column(name="link_to_stk_metal", type="string", length=500, nullable=true)
 	 */
 	private $linkToStkMetal;
+
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+	 */
+	private $isTextPublished = true;
 
 	public function __construct()
 	{
@@ -153,6 +159,22 @@ class Category
 	public function getLinkToStkMetal()
 	{
 		return $this->linkToStkMetal;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isIsTextPublished()
+	{
+		return $this->isTextPublished;
+	}
+
+	/**
+	 * @param boolean $isTextPublished
+	 */
+	public function setIsTextPublished($isTextPublished)
+	{
+		$this->isTextPublished = $isTextPublished;
 	}
 
 	public function addClosure(CategoryClosure $closure)

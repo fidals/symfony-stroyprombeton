@@ -19,6 +19,7 @@ class ProductAdmin extends Admin
 				->add('mark', null, array('label' => 'Марка', 'required' => false))
 				->add('price', null, array('label' => 'Цена', 'required' => false))
 				->add('introtext', 'textarea', array('required' => false))
+				->add('isTextPublished', null, array('label' => 'Текст опубликован', 'required' => false))
 				->add('text', 'textarea', array('required' => false))
 			->end()
 			->with('Характеристики')
