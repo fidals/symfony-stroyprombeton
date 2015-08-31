@@ -37,7 +37,9 @@
 		<div class="product-info">
 			<ul class="nav nav-tabs" id="product-tab">
 				<li class="active"><a href="#tab1" data-toggle="tab">Характеристики</a></li>
-				<li><a href="#tab2" data-toggle="tab">Описание</a></li>
+				{% if product.isTextPublished %}
+					<li><a href="#tab2" data-toggle="tab">Описание</a></li>
+				{% endif %}
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab1">
@@ -143,13 +145,13 @@
 						<p>Цена указана с учетом НДС. Не является публичной офертой.</p>
 					</div>
 				</div>
+				{% if product.isTextPublished %}
 				<div class="tab-pane" id="tab2">
-					{% if product.isTextPublished %}
-						{% autoescape false %}
-							{{ product.text }}
-						{% endautoescape %}
-					{% endif %}
+					{% autoescape false %}
+						{{ product.text }}
+					{% endautoescape %}
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
