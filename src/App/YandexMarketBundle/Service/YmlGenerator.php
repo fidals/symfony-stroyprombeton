@@ -51,6 +51,7 @@ class YmlGenerator
 
 	/**
 	 * Генерирует содержимое yml файла
+	 * @throws \Exception
 	 * @return mixed
 	 */
 	public function generate()

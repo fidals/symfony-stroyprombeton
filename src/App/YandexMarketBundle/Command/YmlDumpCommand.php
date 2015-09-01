@@ -25,11 +25,8 @@ class YmlDumpCommand extends ContainerAwareCommand
 	{
 		$generator = $this->getContainer()->get('yandex_market.generator');
 		$yml = $generator->generate();
-//		$yml = str_replace(array("\r","\n", "\t"), "", $yml);
-		$fname = $this->getContainer()->getParameter('app_yandex_market.filename');
-		if(empty($fname)) {
-			throw new Exception('Configuration for app_yandex_market.filename not provided');
-		}
-		file_put_contents('web/' . $this->getContainer()->getParameter('app_yandex_market.filename') . '.xml', $yml);
+		$yml = str_replace(array("\r","\n", "\t"), "", $yml);
+		$dumpFileName = $this->getContainer()->getParameter('app_yandex_market.filename');
+		file_put_contents('web/' . $dumpFileName . '.xml', $yml);
 	}
 }
