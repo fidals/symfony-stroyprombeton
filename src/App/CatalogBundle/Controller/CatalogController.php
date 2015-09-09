@@ -106,6 +106,28 @@ class CatalogController extends Controller
 		));
 	}
 
+	/**
+	 * Поискиовая выдача списка продуктов с пагинацей
+	 * Поиск основан на данных из автокомплита
+	 * @param Request $request
+	 * @return Response
+	 */
+	public function searchResultsAction(Request $request)
+	{
+		$condition = $request->get('search');
+		$page = $request->get('page', 1);
+		$limit = 150;
+
+		if (empty($condition)) {
+			return new Response();
+		}
+
+		return $this->render('AppCatalogBundle:Search:results.search.html.twig', array(
+			'elements' => $this->get('catalog.search')->search($condition, $limit * $page),
+			'searchCondition' => $condition
+		));
+	}
+
 	public function gbiVisualAction()
 	{
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');

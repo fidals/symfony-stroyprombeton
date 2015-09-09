@@ -1,0 +1,28 @@
+<yml_catalog date="{{ "now"|date("Y-m-d H:i") }}">
+	<shop>
+		<name>{{ name }}</name>
+		<company>{{ company }}</company>
+		<url>{{ url }}</url>
+		{% if platform %}<platform>{{ platform }}</platform>{% endif %}
+		{% if version %}<version>{{ version }}</version>{% endif %}
+		{% if agency %}<agency>{{ agency }}</agency>{% endif %}
+		{% if email %}<email>{{ email }}</email>{% endif %}
+		<currencies>
+			{% for currency in currencies %}
+				{% include 'AppYandexMarketBundle:Element:currency.xml.twig' with currency %}
+			{% endfor %}
+		</currencies>
+		<categories>
+			{% for category in categories %}
+				{% include 'AppYandexMarketBundle:Element:category.xml.twig' with category %}
+			{% endfor %}
+		</categories>
+		<local_delivery_cost>{{ localDeliveryCost }}</local_delivery_cost>
+		{% if cpa %}<cpa>{{ cpa }}</cpa>{% endif %}
+		<offers>
+			{% for offer in offers %}
+				{% include 'AppYandexMarketBundle:Element:offer.xml.twig' with offer %}
+			{% endfor %}
+		</offers>
+	</shop>
+</yml_catalog>

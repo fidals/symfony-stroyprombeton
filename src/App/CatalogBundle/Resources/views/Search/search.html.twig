@@ -1,14 +1,32 @@
-{% block content %}
-	<div class="gbi-list">
-		<p class="price-desc price-desc-1">Все цены на <a href="/gbi/">железобетонные изделия</a> указаны с НДС</p>
-		<table>
-			{% for element in elements %}
-				{% if element.razdel == 1 %}
-					{% include 'AppCatalogBundle:Search:category.tr.search.html.twig' %}
-				{% else %}
-					{% include 'AppCatalogBundle:Search:product.tr.search.html.twig' %}
-				{% endif %}
-			{% endfor %}
-		</table>
-	</div>
-{% endblock %}
+<div class="gbi-list">
+	<p class="price-desc price-desc-1">Все цены на <a href="/gbi/">железобетонные изделия</a> указаны с НДС</p>
+	<table>
+		{% for element in elements %}
+			{% if element.razdel == 1 %}
+				<tr>
+					<td>категория</td>
+					<td></td>
+					<td class="gbi-list name">
+						<a target="_blank" href="{{ path('app_catalog_category', {'id': element.id}) }}">{{ element.label }}</a>
+					</td>
+					<td></td>
+				</tr>
+			{% else %}
+				<tr>
+					<td>товар</td>
+					<td>{{ element.nomen }}</td>
+					<td class="gbi-list name">
+						<a style="font-weight: normal;" target="_blank"  href="{{ path('app_catalog_product', {'id': element.id}) }}">{{ element.label }}</a>
+					</td>
+					<td>
+						{% if element.price != 0 %}
+							{{ ((element.price / 5) | round(0, 'ceil')) * 5 }} руб
+						{% else %}
+							По запросу
+						{% endif %}
+					</td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+</div>

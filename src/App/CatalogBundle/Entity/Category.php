@@ -6,7 +6,6 @@ use App\MainBundle\Entity\PageTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\CatalogBundle\Extension\Utils;
 use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
@@ -63,13 +62,6 @@ class Category
 	private $mark;
 
 	/**
-	 * @var float
-	 *
-	 * @ORM\Column(name="coefficient", type="float", nullable=true)
-	 */
-	private $coefficient;
-
-	/**
 	 * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
 	 */
 	protected $products;
@@ -80,6 +72,13 @@ class Category
 	 * @ORM\Column(name="link_to_stk_metal", type="string", length=500, nullable=true)
 	 */
 	private $linkToStkMetal;
+
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+	 */
+	private $isTextPublished = true;
 
 	public function __construct()
 	{
@@ -147,22 +146,6 @@ class Category
 		return $this->mark;
 	}
 
-	/**
-	 * @param float $coefficient
-	 */
-	public function setCoefficient($coefficient)
-	{
-		$this->coefficient = $coefficient;
-	}
-
-	/**
-	 * @return float
-	 */
-	public function getCoefficient()
-	{
-		return $this->coefficient;
-	}
-
 	public function setParent(Category $parent = null)
 	{
 		$this->parent = $parent;
@@ -187,6 +170,22 @@ class Category
 	public function getLinkToStkMetal()
 	{
 		return $this->linkToStkMetal;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isIsTextPublished()
+	{
+		return $this->isTextPublished;
+	}
+
+	/**
+	 * @param boolean $isTextPublished
+	 */
+	public function setIsTextPublished($isTextPublished)
+	{
+		$this->isTextPublished = $isTextPublished;
 	}
 
 	public function addClosure(CategoryClosure $closure)
@@ -217,7 +216,13 @@ class Category
 		$gres = glob($absPicName . '.*');
 		if(!empty($gres)) {
 			foreach($gres as $fileName) {
-				$searchResult = array_search(exif_imagetype($fileName), self::$imageTypes);
+				// пытаемся определить тип картинки
+				try {
+					$mimetype = exif_imagetype($fileName);
+				} catch(\Exception $e) {
+					continue;
+				}
+				$searchResult = array_search($mimetype, self::$imageTypes);
 				if($searchResult !== false) {
 					return self::IMG_DIR_PATH . '/' . basename($fileName);
 				}
