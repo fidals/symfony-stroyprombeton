@@ -25,7 +25,7 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th width="15%">Код</td>
+					<th class="order-center" width="15%">Код</td>
 					<th>Наименование и марка</td>
 					<th width="15%">Цена</td>
 					<th width="15%">Количество</td>
@@ -35,8 +35,12 @@
 			<tbody>
 				{% for product in order.getProducts() %}
 					<tr>
-						<td>
-							{{ product.model.getNomen() }}
+						<td class="order-center">
+							{% if product.model.getNomen() %}
+								{{ product.model.getNomen() }}
+							{% else %}
+								-
+							{% endif %}
 						</td>
 						<td>
 							<a href="{{ path('app_catalog_product', {'id': product.model.getId()}) }}">{{ product.model }}</a>

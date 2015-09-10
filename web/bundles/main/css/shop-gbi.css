@@ -413,6 +413,6 @@ div.form_comment{
 	padding-right: 0px;
 }
 
-.order-row {
-	border: 1px solid #CCC;
+.table .order-center {
+	text-align: center;
 }
