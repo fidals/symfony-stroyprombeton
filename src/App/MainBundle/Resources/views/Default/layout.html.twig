@@ -12,24 +12,7 @@
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}">
 {% endblock %}
 
-{% block jslinks %}
-	<script src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
-	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
-	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
-	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
-	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
-	<script src="{{ asset('bundles/main/js/jquery.history.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
-	<script src="{{ asset('/bundles/main/js/jquery.mask.min.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
-	<script src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
-	<script src="{{ asset('bundles/catalog/js/cart.js') }}"></script>
-{% endblock %}
+{% block jslinks %}{% endblock %}
 
 {% block body %}
 	<div class="redline"></div>
@@ -197,7 +180,23 @@
 {% endblock %}
 
 {% block js %}
+	<script src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
+	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
+	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
+	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
+	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
+	<script src="{{ asset('bundles/main/js/jquery.history.js') }}"></script>
+	<script src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
+	<script src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
+	<script src="{{ asset('bundles/main/js/jquery.sticky.js') }}"></script>
+	<script src="{{ asset('bundles/main/js/jquery.spin.js') }}"></script>
+	<script src="{{ asset('/bundles/main/js/jquery.mask.min.js') }}"></script>
+	<script src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
+	<script src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
+	<script src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
 	<script src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
+	<script src="{{ asset('bundles/catalog/js/cart.js') }}"></script>
+
 	<script >
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-27310520-1']);
