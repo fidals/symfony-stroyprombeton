@@ -1355,14 +1355,10 @@ h3.gbi-section a {
 	display: block;
 }
 
-div.gbi-separate {
-	/*border-bottom: 1px solid #cccccc;*/
-}
-
 /* -------------------------------------------------------------------------------- */
 
 div.dostavka-gbi {
-	margin: 15px 0px 10px 15px;
+	margin: 15px 0 10px;
 }
 
 div.dostavka-gbi p {
