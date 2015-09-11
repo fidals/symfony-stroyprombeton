@@ -20,7 +20,7 @@ table.basket-wrapper td.wrapper {
 	background-position: 10px 8px;
 	background-color: #ffffff;
 	font-size: 0.9em;
-	
+
 	border: 1px solid #c90000;
 
 	border-radius: 10px;
@@ -378,9 +378,16 @@ div.form_comment{
 	padding-right: 15px;
 }
 
+.order-price-form sup,
+.shop-order-table sup {
+	color: #C90000;
+	font-size: 14px;
+	font-weight: 800;
+}
+
 .shop-order-table .form-error ul {
 	list-style: none;
-	color: indianred;
+	color: #C90000;
 	margin-top: -10px;
 	margin-bottom: 10px;
 	font-size: 12px;
@@ -405,4 +412,8 @@ div.form_comment{
 
 .td form-order {
 	padding-right: 0px;
+}
+
+.table .order-center {
+	text-align: center;
 }

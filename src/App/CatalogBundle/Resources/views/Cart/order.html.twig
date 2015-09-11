@@ -9,6 +9,59 @@
 
 {% block content %}
 	<h1>Оформление заказа на ЖБИ продукцию</h1>
+	<h2>Ваш заказ</h2>
+
+	{% if order.getProducts() is empty %}
+		<p class="text-center">
+			Ваша корзина пуста. Добавьте изделие из
+			<a href="{{ path('app_catalog_gbi_visual') }}">нашего каталога</a> или закажите <br>
+			изготовление ЖБИ по
+			<a href="{{ path('app_main_staticpage', {'alias': 'izgotovlenie-gbi-po-chertezham'}) }}">индивидуальным
+			чертежам</a>.
+			Укажите всю имеющуюся <br>
+			информацию о чертеже в комментарии к заказу.
+		</p>
+	{% else %}
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th class="order-center" width="15%">Код</td>
+					<th>Наименование и марка</td>
+					<th width="15%">Цена</td>
+					<th width="15%">Количество</td>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for product in order.getProducts() %}
+					<tr>
+						<td class="order-center">
+							{% if product.model.getNomen() %}
+								{{ product.model.getNomen() }}
+							{% else %}
+								-
+							{% endif %}
+						</td>
+						<td>
+							<a href="{{ path('app_catalog_product', {'id': product.model.getId()}) }}">{{ product.model }}</a>
+						</td>
+						<td>
+							{% if product.model.getPrice() %}
+								{{ product.model.getPriceRounded() }} руб.
+							{% else %}
+								По запросу
+							{% endif %}
+						</td>
+						<td>
+							{{ product.count }} шт.
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+
+	<h2>Контактная информация</h2>
 	<form action="{{ path('app_catalog_order') }}" method="post" {{ form_enctype(form) }} id="shop-order-form">
 		{{ form_errors(form) }}
 		<table class="shop-order-table">

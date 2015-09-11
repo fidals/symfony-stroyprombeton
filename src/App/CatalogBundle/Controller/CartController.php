@@ -81,6 +81,7 @@ class CartController extends Controller
 		}
 
 		$cart = $this->get('catalog.cart')->loadCart(true);
+
 		return $this->render('AppCatalogBundle:Cart:order.html.twig', array(
 			'order' => $cart,
 			'form'  => $form->createView()
