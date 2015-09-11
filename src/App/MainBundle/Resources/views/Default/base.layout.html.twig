@@ -3,19 +3,19 @@
 <head>
 	<meta charset="UTF-8"/>
 	<meta http-equiv="pragma" content="no-cache"/>
+
 	<title>{% block title %} {% endblock %}</title>
+
 	{% block csslinks %}{% endblock %}
-	{% block jsheadlinks %}{% endblock %}
+	{% block jslinks %}{% endblock %}
 
 	<meta name="Keywords" content="{% block keywords %} {% endblock %}"/>
 	<meta name="Description" content="{% block description %} {% endblock %}"/>
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body>
-{% block body %}{% endblock %}
-{% block jslinks %}{% endblock %}
-{% block js %}{% endblock %}
-{% block css %}{% endblock %}
+	{% block body %}{% endblock %}
+	{% block js %}{% endblock %}
+	{% block css %}{% endblock %}
 </body>
-</html>
 </html>
