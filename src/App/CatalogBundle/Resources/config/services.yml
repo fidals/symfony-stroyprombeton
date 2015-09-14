@@ -12,6 +12,11 @@ services:
         class: Snilius\Twig\SortByFieldExtension
         tags:
             - { name: twig.extension }
+    app.tree_extension:
+        class: App\CatalogBundle\Extension\TreeMenuExtension
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: twig.extension }
     catalog.yandex_market_category_listener:
         class: App\CatalogBundle\Listener\YmlCategoryListener
         arguments: ['@doctrine.orm.entity_manager']

@@ -48,6 +48,22 @@ class Category
 	private $parent;
 
 	/**
+	 * Уровень вложенности
+	 *
+	 * @ORM\Column(name="level", type="integer", nullable=true)
+	 * @Gedmo\TreeLevel
+	 */
+	private $level;
+
+	/**
+	 * @return mixed
+	 */
+	public function getLevel()
+	{
+		return $this->level;
+	}
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="alias", type="string", length=1000, nullable=true)
@@ -72,6 +88,8 @@ class Category
 	 * @ORM\Column(name="link_to_stk_metal", type="string", length=500, nullable=true)
 	 */
 	private $linkToStkMetal;
+
+
 
 	/**
 	 * @var bool

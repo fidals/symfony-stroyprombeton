@@ -1991,3 +1991,12 @@ div.gbi-list table td ul {
 .shk-item {
 	width: 170px;
 }
+
+.category-tree-depth-1 > li {
+	font-weight: bold;
+}
+
+.category-tree-depth-2 > li {
+	font-size: 14px;
+	margin-left: 15px;
+}
