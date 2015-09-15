@@ -138,7 +138,7 @@
 			</div>
 		</div>
 
-		{% if product.isTextPublished %}
+		{% if product.isTextPublished and product.text|default %}
 			<div class="product-about">
 				<h2>Описание</h2>
 				{% autoescape false %}
