@@ -138,14 +138,13 @@
 			</div>
 		</div>
 
-		{# TODO: Убери комменты после тестинга #}
-		{# {% if product.isTextPublished %} #}
+		{% if product.isTextPublished %}
 			<div class="product-about">
 				<h2>Описание</h2>
 				{% autoescape false %}
 					{{ product.text }}
 				{% endautoescape %}
 			</div>
-		{# {% endif %} #}
+		{% endif %}
 	</div>
 {% endblock %}
