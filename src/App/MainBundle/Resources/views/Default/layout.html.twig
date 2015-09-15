@@ -1,15 +1,14 @@
 {% extends "AppMainBundle:Default:base.layout.html.twig" %}
 
 {% block csslinks %}
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/font-awesome.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('bundles/main/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/twirl.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/visual-gbi.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/shop-gbi.css') }}">
-	<link rel="stylesheet" href="{{ asset('bundles/main/plugins/shadowbox/shadowbox.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}">
 {% endblock %}
 
 {% block jslinks %}
@@ -195,7 +194,7 @@
 	<script src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
 	<script src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
 	<script src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
-	<script src="{{ asset('bundles/main/js/bootstrap.js') }}"></script>
+	<script src="{{ asset('bundles/main/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('bundles/catalog/js/cart.js') }}"></script>
 
 	<script >
@@ -214,7 +213,6 @@
 	</script>
 	<script src="/bundles/main/js/jquery.tooltipster.min.js"></script>
 	<script src="/bundles/main/js/jquery.maphilight.min.js"></script>
-
 
 	<script>
 		var _gaq = _gaq || [];
@@ -288,10 +286,9 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 		})();
-
 	</script>
 
 	<!-- Callbaska -->
-	<script src="https://my.callbaska.ru/callback.js" async charset="utf-8"></script>
+		<script src="https://my.callbaska.ru/callback.js" async charset="utf-8"></script>
 	<!-- Callbaska -->
 {% endblock %}

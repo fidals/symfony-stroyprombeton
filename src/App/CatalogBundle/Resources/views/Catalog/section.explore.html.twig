@@ -18,13 +18,12 @@
 			{% endif %}
 		{% endfor %}
 	</div>
+
 	<h1 class="gbi-section">
 		{{ category.getH1() }}
 	</h1>
-	<div class="gbi-list">
-		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
 
-		<p class="price-desc price-desc-1">Не является публичной офертой</p>
+	<div class="gbi-list">
 		<table>
 			<tr>
 				<th colspan="2">Код</th>
@@ -70,5 +69,7 @@
 				</tr>
 			{% endfor %}
 		</table>
+		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
+		<p class="price-desc price-desc-last price-desc-1">Не является публичной офертой</p>
 	</div>
 {% endblock %}
