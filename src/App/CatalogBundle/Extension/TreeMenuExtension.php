@@ -10,9 +10,28 @@ use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
  */
 class TreeMenuExtension extends \Twig_Extension
 {
-	private $categoryRepo;
 	const MAX_DEPTH = 50;
 	const STARTING_DEPTH = 1;
+
+	/**
+	 * html-дерево категорий нужной глубины
+	 * @var string
+	 */
+	protected $htmlTree;
+
+	/**
+	 * переданный из шаблона css-класс для <ul>-списков
+	 * @var string
+	 */
+	protected $cssClass;
+
+	/**
+	 * необходимая глубина дерева, должна быть < MAX_DEPTH
+	 * @var integer
+	 */
+	protected $treeDepth;
+
+	private $categoryRepo;
 
 	public function __construct(\Doctrine\ORM\EntityManager $em)
 	{
@@ -45,39 +64,37 @@ class TreeMenuExtension extends \Twig_Extension
 			throw new InvalidArgumentException('Depth for tree rendering cannot be more than ' . self::MAX_DEPTH);
 		}
 
-		$categories = $this->categoryRepo->childrenHierarchy();
-		$tree = $this->treeBuild($depth, self::STARTING_DEPTH, $categories, $tree, $cssClass);
+		$this->treeDepth = $depth;
+		$this->cssClass = $cssClass;
 
-		return $tree;
+		$categories = $this->categoryRepo->childrenHierarchy();
+		$this->htmlTreeBuild(self::STARTING_DEPTH, $categories);
+
+		return $this->htmlTree;
 	}
 
 	/**
-	 * Метод для построения дерева категорий
+	 * Метод для построения дерева категорий.
+	 * Рекурсивно обходим категории до нужной глубины и сохраняем html-дерево в свойстве класса $htmlTree.
 	 *
-	 * @param integer $depth запрашиваемая глубина дерева категорий
 	 * @param integer $currentDepth глубина дерева в цепочке вызовов
 	 * @param array $categories список категорий для построения ветви дерева
-	 * @param string $tree строка с html-деревом, изменяющаяся от вызова к вызову, передается по ссылке
-	 * @param string $cssClass строка с переданным из шаблона css-классом для <ul>-элементов
 	 *
-	 * @return string html-дерева для raw-отображения в шаблоне
 	 */
-	private function treeBuild($depth, $currentDepth, $categories, &$tree, $cssClass) {
+	private function htmlTreeBuild($currentDepth, $categories) {
 
-		$ulClass = $cssClass . "-depth-" . $currentDepth;
-		$tree .= "<ul class=" . $ulClass . ">";
+		$ulClass = $this->cssClass . "-depth-" . $currentDepth;
+		$this->htmlTree .= "<ul class=" . $ulClass . ">";
 
 		foreach ($categories as $cat) {
 			$anchor = "<a href='/gbi/category/" . $cat['id']  . "'>" . $cat['name'] . "</a>";
-			$tree .= "<li>" . $anchor . "</li>";
+			$this->htmlTree .= "<li>" . $anchor . "</li>";
 
-			if ($currentDepth + 1 <= $depth) {
-				$this->treeBuild($depth, $currentDepth + 1, $cat['__children'], $tree, $cssClass);
+			if ($currentDepth < $this->treeDepth) {
+				$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
 			}
 		}
 
-		$tree .= "</ul>";
-
-		return $tree;
+		$this->htmlTree .= "</ul>";
 	}
 }
