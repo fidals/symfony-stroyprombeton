@@ -32,10 +32,12 @@ class TreeMenuExtension extends \Twig_Extension
 	protected $treeDepth;
 
 	private $categoryRepo;
+	private $router;
 
-	public function __construct(\Doctrine\ORM\EntityManager $em)
+	public function __construct( \Doctrine\ORM\EntityManager $em, \Symfony\Bundle\FrameworkBundle\Routing\Router $router )
 	{
 		$this->categoryRepo = $em->getRepository('AppCatalogBundle:Category');
+		$this->router = $router;
 	}
 
 	public function getFunctions()
@@ -66,8 +68,8 @@ class TreeMenuExtension extends \Twig_Extension
 
 		$this->treeDepth = $depth;
 		$this->cssClass = $cssClass;
-
 		$categories = $this->categoryRepo->childrenHierarchy();
+
 		$this->htmlTreeBuild(self::STARTING_DEPTH, $categories);
 
 		return $this->htmlTree;
@@ -81,18 +83,20 @@ class TreeMenuExtension extends \Twig_Extension
 	 * @param array $categories список категорий для построения ветви дерева
 	 *
 	 */
-	private function htmlTreeBuild($currentDepth, $categories) {
+	private function htmlTreeBuild ($currentDepth, $categories) {
 
 		$ulClass = $this->cssClass . "-depth-" . $currentDepth;
 		$this->htmlTree .= "<ul class=" . $ulClass . ">";
 
-		foreach ($categories as $cat) {
-			$anchor = "<a href='/gbi/category/" . $cat['id']  . "'>" . $cat['name'] . "</a>";
+		foreach ( $categories as $cat ) {
+			$linkToCategory = $this->router->generate( 'app_catalog_category', array( 'id' => $cat['id'] ) );
+			$anchor = "<a href='" . $linkToCategory  . "'>" . $cat['name'] . "</a>";
 			$this->htmlTree .= "<li>" . $anchor . "</li>";
 
-			if ($currentDepth < $this->treeDepth) {
-				$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
+			if ( $currentDepth < $this->treeDepth ) {
+				$this->htmlTreeBuild( $currentDepth + 1, $cat['__children'] );
 			}
+
 		}
 
 		$this->htmlTree .= "</ul>";
