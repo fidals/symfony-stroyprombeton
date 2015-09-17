@@ -15,7 +15,7 @@ services:
     app.tree_extension:
         class: App\CatalogBundle\Extension\TreeMenuExtension
         arguments:
-            em: '@doctrine.orm.entity_manager'
+            entityManager: '@doctrine.orm.entity_manager'
             router: '@router'
         tags:
             - { name: twig.extension }

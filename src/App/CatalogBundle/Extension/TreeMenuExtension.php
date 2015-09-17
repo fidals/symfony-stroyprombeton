@@ -3,6 +3,8 @@
 namespace App\CatalogBundle\Extension;
 
 use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
  * Class TreeMenuExtension для отрисовки дерева категории в шаблонах
@@ -35,9 +37,9 @@ class TreeMenuExtension extends \Twig_Extension
 	private $categoryRepo;
 	private $router;
 
-	public function __construct(\Doctrine\ORM\EntityManager $em, \Symfony\Bundle\FrameworkBundle\Routing\Router $router)
+	public function __construct(EntityManager $entityManager, Router $router)
 	{
-		$this->categoryRepo = $em->getRepository('AppCatalogBundle:Category');
+		$this->categoryRepo = $entityManager->getRepository('AppCatalogBundle:Category');
 		$this->router = $router;
 	}
 
@@ -45,7 +47,7 @@ class TreeMenuExtension extends \Twig_Extension
 	{
 		return array(
 			new \Twig_SimpleFunction(
-				'tree', array($this, 'getTree'),
+				'buildCategoryTree', array($this, 'getTree'),
 				array('is_safe' => array('html'))
 			),
 		);
@@ -62,7 +64,7 @@ class TreeMenuExtension extends \Twig_Extension
 	 * @param integer $depth переданная из шаблона глубина дерева
 	 * @param string $cssClass строка с нужным css-классом для <ul>-элементов
 	 *
-	 * @return string html-дерева для raw-отображения в шаблоне
+	 * @return string html-дерева для отображения в шаблоне
 	 */
 	public function getTree($depth = self::MAX_DEPTH, $cssClass = self::DEFAULT_CSS_CLASS)
 	{
@@ -89,19 +91,19 @@ class TreeMenuExtension extends \Twig_Extension
 	 */
 	private function htmlTreeBuild($currentDepth, $categories)
 	{
-
 		$ulClass = $this->cssClass . "-depth-" . $currentDepth;
-		$this->htmlTree .= "<ul class=" . $ulClass.">";
+		$this->htmlTree .= "<ul class=" . $ulClass . ">";
 
 		foreach ($categories as $cat) {
 			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
 			$link = "<a href='" . $routeToCategory . "'>" . $cat['name'] . "</a>";
-			$this->htmlTree .= "<li>" . $link . "</li>";
+			$this->htmlTree .= "<li>" . $link;
 
-			if ( ( $currentDepth < $this->treeDepth ) && ( !empty( $cat['__children'] ) ) ) {
+			if (($currentDepth < $this->treeDepth) && !empty($cat['__children'])) {
 				$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
 			}
 
+			$this->htmlTree .= "</li>";
 		}
 
 		$this->htmlTree .= "</ul>";

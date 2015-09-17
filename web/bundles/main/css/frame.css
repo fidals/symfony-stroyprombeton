@@ -1997,6 +1997,7 @@ div.gbi-list table td ul {
 }
 
 .category-tree-depth-2 > li {
+	font-weight: normal;
 	font-size: 14px;
 	margin-left: 15px;
 }
