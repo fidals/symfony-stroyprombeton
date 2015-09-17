@@ -20,13 +20,13 @@ class TreeMenuExtension extends \Twig_Extension
 	protected $htmlTree;
 
 	/**
-	 * переданный из шаблона css-класс для <ul>-списков
+	 * Переданный из шаблона css-класс для <ul>-списков
 	 * @var string
 	 */
 	protected $cssClass;
 
 	/**
-	 * необходимая глубина дерева, должна быть < MAX_DEPTH
+	 * Нужная глубина дерева, должна быть <= MAX_DEPTH
 	 * @var integer
 	 */
 	protected $treeDepth;
@@ -34,7 +34,7 @@ class TreeMenuExtension extends \Twig_Extension
 	private $categoryRepo;
 	private $router;
 
-	public function __construct( \Doctrine\ORM\EntityManager $em, \Symfony\Bundle\FrameworkBundle\Routing\Router $router )
+	public function __construct(\Doctrine\ORM\EntityManager $em, \Symfony\Bundle\FrameworkBundle\Routing\Router $router)
 	{
 		$this->categoryRepo = $em->getRepository('AppCatalogBundle:Category');
 		$this->router = $router;
@@ -43,10 +43,10 @@ class TreeMenuExtension extends \Twig_Extension
 	public function getFunctions()
 	{
 		return array(
-			new \Twig_SimpleFunction('tree', array($this, 'getTree'), array(
-					'is_safe' => array('all')
-				)
-			)
+			new \Twig_SimpleFunction(
+				'tree', array($this, 'getTree'),
+				array('is_safe' => array('html'))
+			),
 		);
 	}
 
@@ -86,18 +86,19 @@ class TreeMenuExtension extends \Twig_Extension
 	 * @param array $categories список категорий для построения ветви дерева
 	 *
 	 */
-	private function htmlTreeBuild ($currentDepth, $categories) {
+	private function htmlTreeBuild($currentDepth, $categories)
+	{
 
 		$ulClass = $this->cssClass . "-depth-" . $currentDepth;
-		$this->htmlTree .= "<ul class=" . $ulClass . ">";
+		$this->htmlTree .= "<ul class=" . $ulClass.">";
 
-		foreach ( $categories as $cat ) {
-			$linkToCategory = $this->router->generate( 'app_catalog_category', array( 'id' => $cat['id'] ) );
-			$anchor = "<a href='" . $linkToCategory  . "'>" . $cat['name'] . "</a>";
-			$this->htmlTree .= "<li>" . $anchor . "</li>";
+		foreach ($categories as $cat) {
+			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
+			$link = "<a href='" . $routeToCategory."'>" . $cat['name']."</a>";
+			$this->htmlTree .= "<li>" . $link . "</li>";
 
-			if ( $currentDepth < $this->treeDepth ) {
-				$this->htmlTreeBuild( $currentDepth + 1, $cat['__children'] );
+			if ($currentDepth < $this->treeDepth) {
+				$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
 			}
 
 		}
