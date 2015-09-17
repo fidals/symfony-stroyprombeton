@@ -10,6 +10,7 @@ use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
  */
 class TreeMenuExtension extends \Twig_Extension
 {
+	const DEFAULT_CSS_CLASS = "category-tree";
 	const MAX_DEPTH = 50;
 	const STARTING_DEPTH = 1;
 
@@ -63,7 +64,7 @@ class TreeMenuExtension extends \Twig_Extension
 	 *
 	 * @return string html-дерева для raw-отображения в шаблоне
 	 */
-	public function getTree($depth, $cssClass)
+	public function getTree($depth = self::MAX_DEPTH, $cssClass = self::DEFAULT_CSS_CLASS)
 	{
 		if ($depth > self::MAX_DEPTH) {
 			throw new InvalidArgumentException('Depth for tree rendering cannot be more than ' . self::MAX_DEPTH);
@@ -94,10 +95,10 @@ class TreeMenuExtension extends \Twig_Extension
 
 		foreach ($categories as $cat) {
 			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
-			$link = "<a href='" . $routeToCategory."'>" . $cat['name']."</a>";
+			$link = "<a href='" . $routeToCategory . "'>" . $cat['name'] . "</a>";
 			$this->htmlTree .= "<li>" . $link . "</li>";
 
-			if ($currentDepth < $this->treeDepth) {
+			if ( ( $currentDepth < $this->treeDepth ) && ( !empty( $cat['__children'] ) ) ) {
 				$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
 			}
 
