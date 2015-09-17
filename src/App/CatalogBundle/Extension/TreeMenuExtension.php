@@ -43,7 +43,10 @@ class TreeMenuExtension extends \Twig_Extension
 	public function getFunctions()
 	{
 		return array(
-			new \Twig_SimpleFunction('tree', array($this, 'getTree'))
+			new \Twig_SimpleFunction('tree', array($this, 'getTree'), array(
+					'is_safe' => array('all')
+				)
+			)
 		);
 	}
 
