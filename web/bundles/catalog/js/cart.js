@@ -79,6 +79,10 @@ $(function () {
 
 	darkTooltipInit();
 
+	$('.shk-del').on('click', function () {
+		setTimeout( darkTooltipInit, 1000);
+	});
+
 	$('.add-basket')
 		.darkTooltip({
 			trigger   : 'click',
