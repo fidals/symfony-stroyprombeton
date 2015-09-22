@@ -50,7 +50,8 @@ $(function () {
 	/*
 	 * Тултипы
 	 */
-	var $basketItemsContainer = $('.mbasket-items');
+	var $basketWrapper        = $('#sticky-wrapper'),
+		$basketItemsContainer = $('.mbasket-items');
 
 	function darkTooltipInit() {
 		$('#butEmptyCart')
@@ -79,21 +80,40 @@ $(function () {
 
 	darkTooltipInit();
 
-	$('.shk-del').on('click', function () {
+	$basketWrapper.on('click', '.shk-del', function () {
 		setTimeout( darkTooltipInit, 1000);
 	});
 
 	$('.add-basket')
 		.darkTooltip({
 			trigger   : 'click',
-			animation : 'fadeIn',
+			opacity   : 0,
 			gravity   : 'south',
 			theme     : 'light'
 		})
 		.on('click', function () {
-			setTimeout( darkTooltipInit, 1000);
+			var currentTooltip = $(this).attr('id');
+
+			$('#darktooltip-' + currentTooltip )
+				.css({
+					'display' : 'block'
+				})
+				.stop().animate({
+					'opacity' : 0.9
+				}, 500)
+			;
+
 			setTimeout( function() {
-				$('.dark-tooltip').fadeOut();
-			}, 500);
+				$('#darktooltip-' + currentTooltip )
+					.stop().animate({
+						'opacity' : 0
+					}, 500, function() {
+						$(this).css({
+							'display' : 'none'
+						});
+					});
+
+				darkTooltipInit;
+			}, 1000);
 		});
 });

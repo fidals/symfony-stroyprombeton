@@ -3,7 +3,7 @@
 {% block csslinks %}
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/font-awesome.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('bundles/main/plugins/darktooltip/darktooltip.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('bundles/main/plugins/darktooltip/darktooltip.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/plugins/shadowbox/shadowbox.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/frame.css') }}">
@@ -72,7 +72,7 @@
 			<li><a href="{{ path('app_main_territory_map') }}">Наши объекты</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
 			<li>
-				<div id="undefined-sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
+				<div id="sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
 					<div class="basket basket-sticky">
 						<div class="menu-basket">
 							{% include 'AppCatalogBundle:Cart:cart.html.twig' %}

@@ -418,7 +418,7 @@ div.form_comment{
 }
 
 .mbasket-items.active,
-#undefined-sticky-wrapper:hover .mbasket-items {
+.basket-sticky-wrapper:hover .mbasket-items {
 	display: block;
 }
 
@@ -426,16 +426,25 @@ div.form_comment{
 	background-color: #FFF;
 	border: 1px solid #999;
 	border-radius: 10px;
-	opacity: 0.9;
+	-webkit-transition: opacity 1s ease-in-out;
+	        transition: opacity 1s ease-in-out;
+}
+
+[id*='darktooltip-shk-submit'] {
+	-webkit-transition: none !important;
+	        transition: none !important;
 }
 
 .dark-tooltip.light > div:first-child {
 	color: #C90000;
+	text-align: center;
 }
 
 .dark-tooltip.light ul.confirm li {
 	background-color: #979797;
 	color: #FFF;
+	margin: 5px 5px 0;
+	padding: 3px 10px;
 	text-align: center;
 }
 
