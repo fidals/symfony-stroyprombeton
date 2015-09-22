@@ -11,19 +11,28 @@
 		</thead>
 		{% for element in elements %}
 			{% if element.razdel == 1 %}
-				<tr>
+				<tr class="gbi-list-{{ element.id }}">
 					<td>Раздел</td>
-					<td></td>
+					<td>
+						{% if element.img != "/assets/images/sections/logo-prozr.png" %}
+							<img src="/assets/images/icon-photo.png">
+						{% endif %}
+					</td>
 					<td class="search-element-nomen">-</td>
 					<td class="gbi-list name">
 						<a href="{{ path('app_catalog_category', {'id': element.id}) }}">{{ element.label }}</a>
 					</td>
 					<td></td>
 				</tr>
+				<div class="image"></div>
 			{% else %}
 				<tr>
 					<td>Изделие</td>
-					<td></td>
+					<td>
+						{% if element.img != "/assets/images/sections/logo-prozr.png" %}
+							<img src="/assets/images/icon-photo.png">
+						{% endif %}
+					</td>
 					<td class="search-element-nomen">{{ element.nomen }}</td>
 					<td class="gbi-list name">
 						<a style="font-weight: normal;" href="{{ path('app_catalog_product', {'id': element.id}) }}">
@@ -38,6 +47,7 @@
 						{% endif %}
 					</td>
 				</tr>
+				<div class="image-"{{ element.id }}></div>
 			{% endif %}
 		{% endfor %}
 	</table>

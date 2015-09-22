@@ -132,6 +132,8 @@ class Search
 	 */
 	private function suggestProducts($term, $limit = self::DEFAULT_LIMIT)
 	{
+		// инициализация rsm
+		// rsm нужен для того чтобы получить массив сущностей из обычного sql запроса
 		$productRsm = new ResultSetMapping();
 		$productRsm->addEntityResult('AppCatalogBundle:Product', 'p');
 		$productRsm->addFieldResult('p', 'id', 'id');
@@ -141,7 +143,7 @@ class Search
 		$productRsm->addFieldResult('p', 'price', 'price');
 		$productRsm->addFieldResult('p', 'nomen', 'nomen');
 
-		// sql запрос для продуктов
+		// native query запрос для продуктов
 		$productsNativeQuery = "
 			SELECT id, description, name, mark, price, nomen,
 				CASE WHEN name = :term THEN 0
