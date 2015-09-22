@@ -1984,3 +1984,7 @@ div.gbi-list table td ul {
 	font-size: 14px;
 	margin-left: 15px;
 }
+
+td.search-element-nomen {
+	text-align: center !important;
+}
