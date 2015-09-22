@@ -94,6 +94,7 @@ $(function () {
 		.on('click', function () {
 			var currentTooltip = $(this).attr('id');
 
+
 			$('#darktooltip-' + currentTooltip )
 				.css({
 					'display' : 'block'
@@ -112,8 +113,8 @@ $(function () {
 							'display' : 'none'
 						});
 					});
-
-				darkTooltipInit;
 			}, 1000);
+
+			setTimeout( darkTooltipInit, 1000);
 		});
 });
