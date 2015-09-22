@@ -113,7 +113,7 @@ $(function () {
 							'display' : 'none'
 						});
 					});
-			}, 1000);
+			}, 2000);
 
 			setTimeout( darkTooltipInit, 1000);
 		});
