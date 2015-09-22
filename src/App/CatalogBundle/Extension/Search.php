@@ -111,19 +111,14 @@ class Search
 
 		$categories = $categoryQuery->getResult();
 
-		// генерация url категорий
-		$router = $this->container->get('router');
-
 		$categoryResults = array();
 		foreach($categories as $category) {
 			$categoryResults[] = array(
 				'desc'   => $category->getDescription(),
 				'label'  => $category->getName(),
 				'razdel' => 1,
-				'url'    => $router->generate('app_catalog_category', array(
-					'id' => $category->getId()
-				)),
-				'id' => $category->getId()
+				'id' => $category->getId(),
+				'img' => $category->getPicturePath()
 			);
 		}
 		return $categoryResults;
@@ -137,8 +132,17 @@ class Search
 	 */
 	private function suggestProducts($term, $limit = self::DEFAULT_LIMIT)
 	{
+		$productRsm = new ResultSetMapping();
+		$productRsm->addEntityResult('AppCatalogBundle:Product', 'p');
+		$productRsm->addFieldResult('p', 'id', 'id');
+		$productRsm->addFieldResult('p', 'name', 'name');
+		$productRsm->addFieldResult('p', 'description', 'description');
+		$productRsm->addFieldResult('p', 'mark', 'mark');
+		$productRsm->addFieldResult('p', 'price', 'price');
+		$productRsm->addFieldResult('p', 'nomen', 'nomen');
+
 		// sql запрос для продуктов
-		$productsQuery = "
+		$productsNativeQuery = "
 			SELECT id, description, name, mark, price, nomen,
 				CASE WHEN name = :term THEN 0
 					WHEN name LIKE :term_ THEN 1
@@ -151,36 +155,36 @@ class Search
 				AND (name LIKE :_term_ OR title LIKE :_term_ OR introtext LIKE :_term_)
 			ORDER BY priority, name ASC LIMIT 0, :limit";
 
-		$stmt = $this->container->get('doctrine')->getConnection()->prepare($productsQuery);
-		$stmt->bindValue('term', $term);
-		$stmt->bindValue('_term_', '%' . $term . '%');
-		$stmt->bindValue('term_',  $term . '%');
-		$stmt->bindValue('_term', '%' . $term);
-		$stmt->bindValue('limit', $limit, \PDO::PARAM_INT);
+		$categoryQuery = $this->container
+			->get('doctrine')
+			->getManager()
+			->createNativeQuery($productsNativeQuery, $productRsm)
+			->setParameters(
+				array(
+					'term' => $term,
+					'_term_' => '%' . $term . '%',
+					'term_' => $term . '%',
+					'_term' => '%' . $term,
+					'limit' => $limit
+				)
+			);
 
-
-		$stmt->execute();
-		$products = $stmt->fetchAll();
-
-		// генерация url продуктов
-		$router = $this->container->get('router');
+		$products = $categoryQuery->getResult();
 
 		$productResults = array();
 		foreach($products as $product) {
-
 			$productResults[] = array(
-				'desc' => $product['description'],
-				'label' => $product['name'],
+				'desc'   => $product->getDescription(),
+				'label'  => $product->getName(),
 				'razdel' => 0,
-				'url' => $router->generate('app_catalog_product', array(
-					'id' => $product['id'],
-				)),
-				'id'    => $product['id'],
-				'mark'  => $product['mark'],
-				'price' => $product['price'],
-				'nomen' => $product['nomen']
+				'id' => $product->getId(),
+				'mark'  => $product->getMark(),
+				'price' => $product->getPrice(),
+				'nomen' => $product->getNomen(),
+				'img' => $product->getPicturePath()
 			);
 		}
+
 		return $productResults;
 	}
 }
