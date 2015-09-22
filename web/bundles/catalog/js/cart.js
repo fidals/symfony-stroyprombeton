@@ -44,4 +44,52 @@ var Cart = {
 		);
 		return false;
 	}
-}
+};
+
+$(function () {
+	/*
+	 * Тултипы
+	 */
+	var $basketItemsContainer = $('.mbasket-items');
+
+	function darkTooltipInit() {
+		$('#butEmptyCart')
+			.darkTooltip({
+				trigger   : 'click',
+				animation : 'fadeIn',
+				gravity   : 'south',
+				confirm   : true,
+				yes       : 'Да',
+				no        : 'Нет',
+				theme     : 'light',
+				onYes : function() {
+					Cart.clean();
+				},
+				onNo  : function() {
+					$basketItemsContainer.removeClass('active');
+				},
+				onClose: function() {
+					$basketItemsContainer.removeClass("active");
+				}
+			})
+			.on('click', function () {
+				$(this).closest('.mbasket-items').addClass('active');
+			});
+	}
+
+	darkTooltipInit();
+
+	$('.add-basket')
+		.darkTooltip({
+			trigger   : 'click',
+			animation : 'fadeIn',
+			gravity   : 'south',
+			theme     : 'light'
+		})
+		.on('click', function () {
+			setTimeout( darkTooltipInit, 1000);
+			setTimeout( function() {
+				$('.dark-tooltip').fadeOut();
+			}, 500);
+		});
+});

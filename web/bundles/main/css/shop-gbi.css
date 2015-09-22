@@ -330,9 +330,24 @@ div.menu-h ul li a {
 	line-height: 1em;
 }
 
-.mbasket-items a, .mbasket-items a:hover, .mbasket-items a:visited {
+.mbasket-items a,
+.mbasket-items a:hover,
+.mbasket-items a:visited {
 	margin: 0 !important;
 	text-align: right !important;
+}
+
+.empty-cart {
+	display: block;
+	padding: 0 0 0 0;
+	margin: 0 20px;
+	color: #C90000;
+	float: right;
+	font-weight: bold;
+	font-size: 0.90em;
+	text-align: center;
+	text-decoration: underline;
+	line-height: 1em;
 }
 
 #shop-cart a {
@@ -402,8 +417,34 @@ div.form_comment{
 	width: 310px;
 }
 
+.mbasket-items.active,
 #undefined-sticky-wrapper:hover .mbasket-items {
 	display: block;
+}
+
+.dark-tooltip.light {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-radius: 10px;
+	opacity: 0.9;
+}
+
+.dark-tooltip.light > div:first-child {
+	color: #C90000;
+}
+
+.dark-tooltip.light ul.confirm li {
+	background-color: #979797;
+	color: #FFF;
+	text-align: center;
+}
+
+.dark-tooltip.light ul.confirm li:hover {
+	background-color: #C90000;
+}
+
+.dark-tooltip.light.south .tip {
+	border-color: #999 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0)
 }
 
 .mbasket-clear, .shk-del {
@@ -411,7 +452,7 @@ div.form_comment{
 }
 
 .td form-order {
-	padding-right: 0px;
+	padding-right: 0;
 }
 
 .table .order-center {
