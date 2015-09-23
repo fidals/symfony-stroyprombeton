@@ -26,7 +26,7 @@
 			{% endfor %}
 		</table>
 		<div class="mbasket-clear">
-			<a onclick="return Cart.clean();" id="butEmptyCart">Удалить все позиции</a>
+			<span id="butEmptyCart" class="empty-cart" data-tooltip="Вы уверены?">Удалить все позиции</span>
 		</div>
 	</div>
 {% endif %}

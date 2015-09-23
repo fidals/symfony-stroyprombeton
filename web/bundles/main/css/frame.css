@@ -331,25 +331,13 @@ div.menu-h ul li {
 div.menu-h ul li.menu-h-s a {
 	/*background-image: url('../images/menu-h-selected.png');*/
 	background: url('../images/menu-h-hover_2.png') no-repeat center center;
-	color: #ffffff;
+	color: #FFF;
 	font-weight: bold;
 	text-decoration: none;
 }
 
 div.menu-h ul li.menu-h-s a:hover {
 	text-decoration: underline;
-}
-
-div.menu-h ul li a {
-	display: block;
-	padding: 0 0 0 0;
-	margin: 0 20px;
-	color: #c90000;
-	font-weight: bold;
-	font-size: 0.90em;
-	text-align: center;
-	text-decoration: underline;
-	line-height: 1em;
 }
 
 div.menu-h ul li a:hover {
