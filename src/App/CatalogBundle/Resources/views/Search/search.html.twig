@@ -2,35 +2,36 @@
 	<table>
 		<thead>
 		<tr>
-			<td> Тип </td>
-			<td> Фото </td>
-			<td class="search-element-nomen"> Код </td>
-			<td> Рабочая документация / Наименование / Марка </td>
-			<td> Цена </td>
+			<td>Тип</td>
+			<td>Фото</td>
+			<td class="search-element-nomen">Код</td>
+			<td>Рабочая документация / Наименование / Марка</td>
+			<td>Цена</td>
 		</tr>
 		</thead>
 		{% for element in elements %}
 			{% if element.razdel == 1 %}
-				<tr class="gbi-list-{{ element.id }}">
+				<tr>
 					<td>Раздел</td>
-					<td>
+					<td class="image">
 						{% if element.img != "/assets/images/sections/logo-prozr.png" %}
 							<img src="/assets/images/icon-photo.png">
+							<a href="{{ element.img }}" rel="shadowbox"><img src="{{ element.img }}" class="element-photo"></a>
 						{% endif %}
 					</td>
 					<td class="search-element-nomen">-</td>
 					<td class="gbi-list name">
 						<a href="{{ path('app_catalog_category', {'id': element.id}) }}">{{ element.label }}</a>
 					</td>
-					<td></td>
+					<td>-</td>
 				</tr>
-				<div class="image"></div>
 			{% else %}
 				<tr>
 					<td>Изделие</td>
-					<td>
-						{% if element.img != "/assets/images/sections/logo-prozr.png" %}
+					<td class="image">
+						{% if element.img != "/assets/images/gbi-photos/prod-alt-image.png" %}
 							<img src="/assets/images/icon-photo.png">
+							<a href="{{ element.img }}" rel="shadowbox"><img src="{{ element.img }}" class="element-photo"></a>
 						{% endif %}
 					</td>
 					<td class="search-element-nomen">{{ element.nomen }}</td>
@@ -47,7 +48,6 @@
 						{% endif %}
 					</td>
 				</tr>
-				<div class="image-"{{ element.id }}></div>
 			{% endif %}
 		{% endfor %}
 	</table>

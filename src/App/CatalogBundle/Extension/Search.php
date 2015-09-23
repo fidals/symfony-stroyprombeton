@@ -174,7 +174,7 @@ class Search
 		$products = $categoryQuery->getResult();
 
 		$productResults = array();
-		foreach($products as $product) {
+		foreach ($products as $product) {
 			$productResults[] = array(
 				'desc'   => $product->getDescription(),
 				'label'  => $product->getName(),

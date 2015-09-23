@@ -1988,3 +1988,13 @@ div.gbi-list table td ul {
 td.search-element-nomen {
 	text-align: center !important;
 }
+
+.image .element-photo {
+	position: absolute;
+	display: none;
+	width: 200px;
+}
+
+.image:hover .element-photo {
+	display: block;
+}
