@@ -1998,3 +1998,7 @@ td.search-element-nomen {
 .image:hover .element-photo {
 	display: block;
 }
+
+th{
+	font-weight: bold;
+}
