@@ -624,7 +624,11 @@ div.menu-basket{
 }
 
 .cart-full {
-	background: url("/bundles/main/images/basket.png") no-repeat 0 -90px;
+	background: url("/bundles/main/images/basket.png") no-repeat 0 -135px;
+}
+
+.cart-full:active {
+	background-position: 0 -90px;
 }
 
 div.basket-content {
