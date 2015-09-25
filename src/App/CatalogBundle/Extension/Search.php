@@ -193,7 +193,7 @@ class Search
 				'label'  => $product->getName(),
 				'razdel' => 0,
 				'url' => $router->generate('app_catalog_product', array(
-					'id' => $product['id'],
+					'id' => $product->getId(),
 				)),
 				'id' => $product->getId(),
 				'mark'  => $product->getMark(),
