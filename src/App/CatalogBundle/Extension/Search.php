@@ -111,6 +111,11 @@ class Search
 
 		$categories = $categoryQuery->getResult();
 
+		/**
+		 * Получаем router для генерации урлов. Нужно для работающего автокомплита.
+		 */
+		$router = $this->container->get('router');
+
 		$categoryResults = array();
 		foreach($categories as $category) {
 			$categoryResults[] = array(
@@ -118,6 +123,9 @@ class Search
 				'label'  => $category->getName(),
 				'razdel' => 1,
 				'id' => $category->getId(),
+				'url'    => $router->generate('app_catalog_category', array(
+					'id' => $category->getId()
+				)),
 				'img' => $category->getPicturePath()
 			);
 		}
@@ -173,12 +181,20 @@ class Search
 
 		$products = $categoryQuery->getResult();
 
+		/**
+		 * Получаем router для генерации урлов. Нужно для работающего автокомплита.
+		 */
+		$router = $this->container->get('router');
+
 		$productResults = array();
 		foreach ($products as $product) {
 			$productResults[] = array(
 				'desc'   => $product->getDescription(),
 				'label'  => $product->getName(),
 				'razdel' => 0,
+				'url' => $router->generate('app_catalog_product', array(
+					'id' => $product['id'],
+				)),
 				'id' => $product->getId(),
 				'mark'  => $product->getMark(),
 				'price' => $product->getPrice(),
