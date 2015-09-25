@@ -353,6 +353,7 @@ function EngineSearch() {
 		RunSearch();
 	});
 
+
 	RunSearch();
 }
 
@@ -395,6 +396,8 @@ function RunSearch(condition) {
 			}
 			$pc_div.empty();
 			$pc_div.html(loc_html + data);
+
+			Shadowbox.setup();
 		}
 	});
 }

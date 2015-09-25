@@ -1,26 +1,48 @@
 <div class="gbi-list">
-	<p class="price-desc price-desc-1">Все цены на <a href="/gbi/">железобетонные изделия</a> указаны с НДС</p>
 	<table>
+		<thead>
+			<tr>
+				<th>Тип</th>
+				<th>Фото</th>
+				<th>Код</th>
+				<th>Рабочая документация / Наименование / Марка</th>
+				<th>Цена</th>
+			</tr>
+		</thead>
 		{% for element in elements %}
 			{% if element.razdel == 1 %}
 				<tr>
-					<td>категория</td>
-					<td></td>
-					<td class="gbi-list name">
-						<a target="_blank" href="{{ path('app_catalog_category', {'id': element.id}) }}">{{ element.label }}</a>
+					<td>Раздел</td>
+					<td class="image">
+						{% if element.img != "/assets/images/sections/logo-prozr.png" %}
+							<img src="/assets/images/icon-photo.png">
+							<a href="{{ element.img }}" rel="shadowbox"><img src="{{ element.img }}" class="element-photo"></a>
+						{% endif %}
 					</td>
-					<td></td>
+					<td class="search-element-nomen">-</td>
+					<td class="gbi-list name">
+						<a href="{{ path('app_catalog_category', {'id': element.id}) }}">{{ element.label }}</a>
+					</td>
+					<td>-</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td>товар</td>
-					<td>{{ element.nomen }}</td>
+					<td>Изделие</td>
+					<td class="image">
+						{% if element.img != "/assets/images/gbi-photos/prod-alt-image.png" %}
+							<img src="/assets/images/icon-photo.png">
+							<a href="{{ element.img }}" rel="shadowbox"><img src="{{ element.img }}" class="element-photo"></a>
+						{% endif %}
+					</td>
+					<td class="search-element-nomen">{{ element.nomen }}</td>
 					<td class="gbi-list name">
-						<a style="font-weight: normal;" target="_blank"  href="{{ path('app_catalog_product', {'id': element.id}) }}">{{ element.label }}</a>
+						<a style="font-weight: normal;" href="{{ path('app_catalog_product', {'id': element.id}) }}">
+							[{{ element.desc }}] {{ element.label }}
+						</a>
 					</td>
 					<td>
 						{% if element.price != 0 %}
-							{{ ((element.price / 5) | round(0, 'ceil')) * 5 }} руб
+							{{ ((element.price / 5) | round(0, 'ceil')) * 5 }} руб.
 						{% else %}
 							По запросу
 						{% endif %}
@@ -29,4 +51,5 @@
 			{% endif %}
 		{% endfor %}
 	</table>
+	<p class="price-desc price-desc-1">Все цены на <a href="/gbi/">железобетонные изделия</a> указаны с НДС</p>
 </div>
