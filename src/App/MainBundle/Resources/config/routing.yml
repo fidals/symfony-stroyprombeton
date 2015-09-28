@@ -62,7 +62,7 @@ modx_object:
     pattern: /obekty/{territoryId}/{id}/
     defaults: { _controller: AppMainBundle:Redirect:appMainObject }
     requirements:
-        id: "d+"
+        id: \d+
 
 # TODO: добавлено июль 2015. Снеси эти роуты и редиректы, когда их не останется в индексе.
 modx_object_alias:

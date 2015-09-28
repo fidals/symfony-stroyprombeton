@@ -34,8 +34,14 @@ class RedirectController extends Controller
 	 */
 	public function appMainObjectAliasAction(Request $request)
 	{
+		$objectRp = $this->getDoctrine()->getRepository('AppMainBundle:Object');
+		$object = $objectRp->findOneBy(
+			array(
+				'alias' => $request->get('alias')
+			)
+		);
 		$router = $this->get('router');
-		$url = $router->generate('app_main_object', array('id' => $request->get('alias')));
+		$url = $router->generate('app_main_object', array('id' => $object->getId()));
 		return new RedirectResponse($url, 301);
 	}
 
