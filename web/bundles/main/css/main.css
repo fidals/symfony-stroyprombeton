@@ -541,6 +541,7 @@ div.map {
 
 .inf_content {
 	line-height: 1.1em;
+	text-align: justify;
 }
 
 div.random_list_main > div{
@@ -550,8 +551,8 @@ div.random_list_main > div:first-child{
 	display: block;
 }
 
-.informer ul {
-	margin: 0 0 10px;
+ul.informer {
+	margin: 0px 0px 10px 0px;
 	padding: 0;
 }
 
@@ -566,7 +567,6 @@ div.random_list_main > div:first-child{
 
 .inf_intro {
 	font-size: 0.9em;
-	text-align: left;
 }
 
 .inf_footer {
