@@ -24,6 +24,11 @@ class PostController extends Controller
 	{
 		$postRp = $this->getDoctrine()->getRepository('AppMainBundle:Post');
 		$post = $postRp->find($id);
-		return $this->render('AppMainBundle:Post:post.html.twig', array('post' => $post));
+
+		if (!empty($post)) {
+			return $this->render('AppMainBundle:Post:post.html.twig', array('post' => $post));
+		}
+
+		return $this->render('AppMainBundle:StaticPage:404.html.twig');
 	}
 }
