@@ -1990,3 +1990,8 @@ td.search-element-nomen {
 th{
 	font-weight: bold;
 }
+
+span.pointer:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
