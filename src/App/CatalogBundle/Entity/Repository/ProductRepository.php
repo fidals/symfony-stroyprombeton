@@ -16,7 +16,12 @@ class ProductRepository extends EntityRepository
 	 */
 	const DEFAULT_LIMIT = 20;
 	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
-	const MAX_RANDOM_GETS = 30;
+
+	/**
+	 * Константа - максимальное количество последовательнных рандомных запросов случайных продуктов из базы.
+	 * Нужна для предовращения бесконечного цикла while в методе getRandomProductsHasPhoto при отстутствии товаров с фотографиями.
+	 */
+	const MAX_RANDOM_GETS = 100;
 
 	/**
 	 * Сколько берем в запросе продуктов для поиска продуктов с картинками
