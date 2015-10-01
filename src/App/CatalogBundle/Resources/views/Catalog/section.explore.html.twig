@@ -19,10 +19,12 @@
 		{% endfor %}
 	</div>
 
-	<h1 class="gbi-section">
-		{{ category.getH1() }}
-	</h1>
-
+	<h1 class="gbi-section"> {{ category.getH1() }} </h1>
+	{% if category.isTextPublished %}
+		{% autoescape false %}
+			{{ category.text }}
+		{% endautoescape %}
+	{% endif %}
 	<div class="gbi-list" id="gbi-list">
 		<table>
 			<tr>
