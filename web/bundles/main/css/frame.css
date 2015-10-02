@@ -481,6 +481,7 @@ div.menu-v-content ul li a:hover {
 }
 
 .akkordion-title .fa {
+	color: #B48282;
 	position: absolute;
 	right: 5px;
 	-webkit-transition: -webkit-transform 0.3s ease-in-out;
