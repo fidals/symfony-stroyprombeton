@@ -23,9 +23,7 @@
 	{% endfor %}
 	<cpa>1</cpa>
 	{% for paramUnit in param if param|default %}
-		{% if attribute(paramUnit, 'value') > 0 %}
-			<param name="{{ attribute(paramUnit, 'name') }}" {% if attribute(paramUnit, 'unit') %}unit="{{ attribute(paramUnit, 'unit') }}"{% endif %}>{{ attribute(paramUnit, 'value') }}</param>
-		{% endif %}
+		<param name="{{ attribute(paramUnit, 'name') }}" {% if attribute(paramUnit, 'unit') %}unit="{{ attribute(paramUnit, 'unit') }}"{% endif %}>{{ attribute(paramUnit, 'value') }}</param>
 	{% endfor %}
 	<categoryId>{{ categoryId }}</categoryId>
 	{% if delivery|default %}<delivery>{% if delivery == true %}true{% else %}false{% endif %}</delivery>{% endif %}
