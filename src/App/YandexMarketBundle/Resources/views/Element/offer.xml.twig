@@ -1,30 +1,31 @@
-<offer id="{{ id }}"{% if type|default %} type="{{ type }}"{% endif %}{% if available|default %} available="{% if available == true%}true{% else %}false{% endif %}"{% endif %}{% if bid|default %} bid="{{ bid }}"{% endif %}{% if cbid|default %} cbid="{{ cbid }}"{% endif %}>
+<offer id="{{ id }}" available="false" {% if type|default %} type="{{ type }}"{% endif %}{% if bid|default %} bid="{{ bid }}"{% endif %}{% if cbid|default %} cbid="{{ cbid }}"{% endif %}>
 	{% if url|default %}<url>{{ url }}</url>{% endif %}
-	<price>{{ price }}</price>
+	<price>{{ 5 * (price / 5)|round }}</price>
 	{% if oldPrice|default %}<oldprice>{{ oldPrice }}</oldprice>{% endif %}
 	<currencyId>{{ currencyId }}</currencyId>
 	{% if marketCategory|default %}<market_category>{{ marketCategory }}</market_category>{% endif %}
-	{% if picture|default %}<picture>{{ picture }}</picture>{% endif %}
-	{% if store|default %}<store>{% if store == true %}true{% else %}false{% endif %}</store>{% endif %}
+	{% if picture is defined %}<picture>{{ picture }}</picture>{% endif %}
+	<store>false</store>
 	{% if pickup|default %}<pickup>{% if pickup == true %}true{% else %}false{% endif %}</pickup>{% endif %}
 	{% if vendor|default %}<vendor>{{ vendor }}</vendor>{% endif %}
 	{% if vendorCode|default %}<vendorCode>{{ vendorCode }}</vendorCode>{% endif %}
 	{% if description|default %}<description>{{ description }}</description>{% endif %}
-	{% if salesNotes|default %}<sales_notes>{{ salesNotes }}</sales_notes>{% endif %}
-	{% if manufacturerWarranty|default %}<manufacturer_warranty>{{ manufacturerWarranty }}</manufacturer_warranty>{% endif %}
-	{% if countryOfOrigin|default %}<country_of_origin>{{ countryOfOrigin }}</country_of_origin>{% endif %}
+	<sales_notes>Нужна предоплата, минимум 10 изделий</sales_notes>
+	<manufacturer_warranty>true</manufacturer_warranty>
+	<country_of_origin>Россия</country_of_origin>
 	{% if age['unit'] is defined and age['value'] is defined %}<age unit="{{ age['unit'] }}">{{ age['value'] }}</age>{% endif %}
 	{% for barcodeUnit in barcode if barcode|default %}
 		<barcode>{{ barcodeUnit }}</barcode>
 	{% endfor %}
-	{% if cpa|default %}<cpa>{{ cpa }}</cpa>{% endif %}
+	<cpa>1</cpa>
 	{% for paramUnit in param if param|default %}
-		<param name="{{ attribute(paramUnit, 'name') }}" {% if attribute(paramUnit, 'unit') %}unit="{{ attribute(paramUnit, 'unit') }}"{% endif %}>{{ attribute(paramUnit, 'value') }}</param>
+		{% if attribute(paramUnit, 'value') > 0 %}
+			<param name="{{ attribute(paramUnit, 'name') }}" {% if attribute(paramUnit, 'unit') %}unit="{{ attribute(paramUnit, 'unit') }}"{% endif %}>{{ attribute(paramUnit, 'value') }}</param>
+		{% endif %}
 	{% endfor %}
 	<categoryId>{{ categoryId }}</categoryId>
 	{% if delivery|default %}<delivery>{% if delivery == true %}true{% else %}false{% endif %}</delivery>{% endif %}
 	<name>{{ name }}</name>
-	{% if localDeliveryCost|default %}<local_delivery_cost>{{ localDeliveryCost }}</local_delivery_cost>{% endif %}
 	{% if typePrefix|default %}<typePrefix>{{ typePrefix }}</typePrefix>{% endif %}
 	{% if model|default %}<model>{{ model }}</model>{% endif %}
 	{% if rec|default %}<rec>{% for recUnit in rec %}{{ recUnit }}{% if not loop.last %},{% endif %}{% endfor %}</rec>{% endif %}

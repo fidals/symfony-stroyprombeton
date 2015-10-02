@@ -17,11 +17,15 @@
 				{% include 'AppYandexMarketBundle:Element:category.xml.twig' with category %}
 			{% endfor %}
 		</categories>
-		<local_delivery_cost>{{ localDeliveryCost }}</local_delivery_cost>
+		<delivery-options>
+			<option cost="6000" days=""/>
+		</delivery-options>
 		{% if cpa %}<cpa>{{ cpa }}</cpa>{% endif %}
 		<offers>
 			{% for offer in offers %}
-				{% include 'AppYandexMarketBundle:Element:offer.xml.twig' with offer %}
+				{% if offer.price > 0 %}
+					{% include 'AppYandexMarketBundle:Element:offer.xml.twig' with offer %}
+				{% endif %}
 			{% endfor %}
 		</offers>
 	</shop>
