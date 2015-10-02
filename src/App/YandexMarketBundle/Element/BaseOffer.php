@@ -54,11 +54,11 @@ class BaseOffer extends AbstractElement
 	protected $marketCategory;
 
 	/**
-	 * Ссылка на картинку соответствующего товарного предложения. Недопустимо давать ссылку на «заглушку»,
+	 * Массив картинок соответствующего товарного предложения. Недопустимо давать ссылку на «заглушку»,
 	 * т. е. на страницу, где написано «картинка отсутствует», или на логотип магазина.
-	 * @var string
+	 * @var array
 	 */
-	protected $picture;
+	protected $pictures = array();
 
 	/**
 	 * Возможность купить соответствующий товар в розничном магазине
@@ -480,17 +480,22 @@ class BaseOffer extends AbstractElement
 	/**
 	 * @param $picture
 	 */
-	public function setPicture($picture)
+	public function setPictures($picture)
 	{
-		$this->picture = $picture;
+		$this->pictures = $picture;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getPicture()
+	public function getPictures()
 	{
-		return $this->picture;
+		return $this->pictures;
+	}
+
+	public function addPicture($picture)
+	{
+		array_push($this->pictures, $picture);
 	}
 
 	/**

@@ -1,10 +1,14 @@
 <offer id="{{ id }}" available="false" {% if type|default %} type="{{ type }}"{% endif %}{% if bid|default %} bid="{{ bid }}"{% endif %}{% if cbid|default %} cbid="{{ cbid }}"{% endif %}>
 	{% if url|default %}<url>{{ url }}</url>{% endif %}
-	<price>{{ 5 * (price / 5)|round }}</price>
+	<price>{{ price }}</price>
 	{% if oldPrice|default %}<oldprice>{{ oldPrice }}</oldprice>{% endif %}
 	<currencyId>{{ currencyId }}</currencyId>
 	{% if marketCategory|default %}<market_category>{{ marketCategory }}</market_category>{% endif %}
-	{% if picture is defined %}<picture>{{ picture }}</picture>{% endif %}
+	{% if pictures|length > 0 %}
+		{% for picture in pictures  %}
+			<picture>{{ picture }}</picture>
+		{% endfor %}
+	{% endif %}
 	<store>false</store>
 	{% if pickup|default %}<pickup>{% if pickup == true %}true{% else %}false{% endif %}</pickup>{% endif %}
 	{% if vendor|default %}<vendor>{{ vendor }}</vendor>{% endif %}

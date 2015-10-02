@@ -23,9 +23,7 @@
 		{% if cpa %}<cpa>{{ cpa }}</cpa>{% endif %}
 		<offers>
 			{% for offer in offers %}
-				{% if offer.price > 0 %}
-					{% include 'AppYandexMarketBundle:Element:offer.xml.twig' with offer %}
-				{% endif %}
+				{% include 'AppYandexMarketBundle:Element:offer.xml.twig' with offer %}
 			{% endfor %}
 		</offers>
 	</shop>
