@@ -517,6 +517,11 @@ div.menu-v-content ul li a:hover {
 	padding: 5px 3px;
 }
 
+.akkordion-link-to-category .fa {
+	position: relative;
+	top: 1px;
+}
+
 div.menu-v-content div.menu-v-dropdown {
 	padding: 5px 0 10px 15px;
 }
@@ -2011,6 +2016,10 @@ div.gbi-list table td ul {
 
 .category-tree-depth-1 > li {
 	font-weight: bold;
+}
+
+.akkordion-content {
+	display: none;
 }
 
 .akkordion-content p,

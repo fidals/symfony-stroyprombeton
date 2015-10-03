@@ -110,25 +110,30 @@ class TreeMenuExtension extends \Twig_Extension
 	// }
 	private function htmlTreeBuild($currentDepth, $categories)
 	{
-		$this->htmlTree .= '<section class="akkordion">';
+		$this->htmlTree .= '<section class="akkordion" id="akkordion">';
 
 		foreach ($categories as $cat) {
 			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
-			$link = "<div class='akkordion-title'>" . $cat['name'] . "<i class='fa fa-chevron-left'></i></div>";
+			$catId = basename(parse_url($routeToCategory, PHP_URL_PATH));
+
+			$link = "<div class='akkordion-title' id='cat-" . $catId . "'>" . $cat['name'] . "<i class='fa fa-chevron-left'></i></div>";
 
 			$this->htmlTree .= $link;
 
 			if ( ($currentDepth < $this->treeDepth) && !empty($cat['__children']) ) {
-				$this->htmlTwo($currentDepth + 1, $cat['__children']);
+				$this->htmlTwo($currentDepth + 1, $cat['__children'], $routeToCategory);
 			}
 		}
 
 		$this->htmlTree .= "</section>";
 	}
 
-	private function htmlTwo($currentDepth, $categories)
+	private function htmlTwo($currentDepth, $categories, $routeToCategory)
 	{
 		$this->htmlTree .= "<div class='akkordion-content'>";
+		$goToCategory = "<p class='akkordion-last-paragraph'><a class='akkordion-link-to-category' href=" . $routeToCategory . ">" . 'перейти в категорию ' . "<i class='fa fa-long-arrow-right'></i></a></p>";
+
+		$this->htmlTree .= $goToCategory;
 
 		foreach ($categories as $cat) {
 			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
@@ -140,9 +145,6 @@ class TreeMenuExtension extends \Twig_Extension
 			}
 		}
 
-		$goToCategory = "<p class='akkordion-last-paragraph'><a class='akkordion-link-to-category' href=" . $routeToCategory . ">" . 'перейти в категорию ' . "<i class='fa fa-long-arrow-right'></i></a></p>";
-
-		$this->htmlTree .= $goToCategory;
 		$this->htmlTree .= "</div>";
 	}
 }
