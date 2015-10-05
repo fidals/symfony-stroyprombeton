@@ -135,6 +135,10 @@ class TreeMenuExtension extends \Twig_Extension
 
 		$this->htmlTree .= $goToCategory;
 
+		usort($categories, function($a, $b) {
+			return strcmp($a['name'], $b['name']);
+		});
+
 		foreach ($categories as $cat) {
 			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
 			$link = "<p><a class='akkordion-link' href='" . $routeToCategory . "'>" . $cat['name'] . "</a></p>";
