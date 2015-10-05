@@ -452,7 +452,7 @@ div.menu-v-content ul {
 .akkordion-title,
 div.menu-v-content ul li a {
 	border: 1px solid transparent;
-	border-bottom: 1px solid #DDD;
+	border-top: 1px solid #DDD;
 	border-radius: 5px;
 	color: #C90000;
 	cursor: pointer;
@@ -461,6 +461,10 @@ div.menu-v-content ul li a {
 	font-weight: bold;
 	padding: 5px 3px;
 	text-decoration: none;
+}
+
+.akkordion-title:first-child {
+	border-color: transparent;
 }
 
 .akkordion-link {
