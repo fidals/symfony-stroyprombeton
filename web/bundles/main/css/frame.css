@@ -485,22 +485,23 @@ div.menu-v-content ul li a:hover {
 }
 
 .akkordion-title .fa {
-	color: #B48282;
+	height: 11px;
 	font-size: 0.75em;
 	position: absolute;
-	right: 3px;
+	right: -2px;
 	-webkit-transition: -webkit-transform 0.3s ease-in-out;
 	        transition: 		transform 0.3s ease-in-out;
 	-webkit-transform: translate(0, -50%);
 	    -ms-transform: translate(0, -50%);
 	        transform: translate(0, -50%);
 	top: 50%;
+	width: 11px;
 }
 
 .akkordion-title.active .fa {
-	-webkit-transform: rotate(-90deg) translate(50%, 0);
-	    -ms-transform: rotate(-90deg) translate(50%, 0);
-	        transform: rotate(-90deg) translate(50%, 0);
+	-webkit-transform: rotate(-90deg) translate(60%, -25%);
+	    -ms-transform: rotate(-90deg) translate(60%, -25%);
+	        transform: rotate(-90deg) translate(60%, -25%);
 }
 
 .akkordion-last-paragraph .fa {

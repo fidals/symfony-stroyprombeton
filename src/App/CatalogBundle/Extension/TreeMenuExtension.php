@@ -116,7 +116,7 @@ class TreeMenuExtension extends \Twig_Extension
 			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
 			$catId = basename(parse_url($routeToCategory, PHP_URL_PATH));
 
-			$link = "<div class='akkordion-title' id='cat-" . $catId . "'>" . $cat['name'] . "<i class='fa fa-chevron-left'></i></div>";
+			$link = "<div class='akkordion-title' id='cat-" . $catId . "'>" . $cat['name'] . "<i class='fa fa-caret-left'></i></div>";
 
 			$this->htmlTree .= $link;
 
