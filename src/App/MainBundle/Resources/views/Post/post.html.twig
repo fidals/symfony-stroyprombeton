@@ -11,7 +11,7 @@
 
 {% block content %}
 	<strong>
-		<i>{{ post.getDate|date('m.d.Y') }}</i>
+		<i>{{ post.getDate|date('d.m.Y') }}</i>
 	</strong>
 	<h1>{{ post.getH1() }}</h1>
 	{% if post.getText() %}
