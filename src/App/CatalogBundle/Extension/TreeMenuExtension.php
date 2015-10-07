@@ -89,23 +89,66 @@ class TreeMenuExtension extends \Twig_Extension
 	 * @param array $categories список категорий для построения ветви дерева
 	 *
 	 */
+	// private function htmlTreeBuild($currentDepth, $categories)
+	// {
+	// 	$ulClass = $this->cssClass . "-depth-" . $currentDepth;
+	// 	$this->htmlTree .= "<ul class=" . $ulClass . ">";
+
+	// 	foreach ($categories as $cat) {
+	// 		$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
+	// 		$link = "<a href='" . $routeToCategory . "'>" . $cat['name'] . "</a>";
+	// 		$this->htmlTree .= "<li>" . $link;
+
+	// 		if (($currentDepth < $this->treeDepth) && !empty($cat['__children'])) {
+	// 			$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
+	// 		}
+
+	// 		$this->htmlTree .= "</li>";
+	// 	}
+
+	// 	$this->htmlTree .= "</ul>";
+	// }
 	private function htmlTreeBuild($currentDepth, $categories)
 	{
-		$ulClass = $this->cssClass . "-depth-" . $currentDepth;
-		$this->htmlTree .= "<ul class=" . $ulClass . ">";
+		$this->htmlTree .= '<section class="akkordion" id="akkordion">';
 
 		foreach ($categories as $cat) {
 			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
-			$link = "<a href='" . $routeToCategory . "'>" . $cat['name'] . "</a>";
-			$this->htmlTree .= "<li>" . $link;
+			$catId = basename(parse_url($routeToCategory, PHP_URL_PATH));
 
-			if (($currentDepth < $this->treeDepth) && !empty($cat['__children'])) {
-				$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
+			$link = "<div class='akkordion-title' id='cat-" . $catId . "'>" . $cat['name'] . "<i class='fa fa-caret-left'></i></div>";
+
+			$this->htmlTree .= $link;
+
+			if ( ($currentDepth < $this->treeDepth) && !empty($cat['__children']) ) {
+				$this->htmlTwo($currentDepth + 1, $cat['__children'], $routeToCategory);
 			}
-
-			$this->htmlTree .= "</li>";
 		}
 
-		$this->htmlTree .= "</ul>";
+		$this->htmlTree .= "</section>";
+	}
+
+	private function htmlTwo($currentDepth, $categories, $routeToCategory)
+	{
+		$this->htmlTree .= "<div class='akkordion-content'>";
+		$goToCategory = "<p class='akkordion-last-paragraph'><a class='akkordion-link-to-category' href=" . $routeToCategory . ">" . 'перейти в категорию ' . "<i class='fa fa-long-arrow-right'></i></a></p>";
+
+		$this->htmlTree .= $goToCategory;
+
+		usort($categories, function($a, $b) {
+			return strcmp($a['name'], $b['name']);
+		});
+
+		foreach ($categories as $cat) {
+			$routeToCategory = $this->router->generate('app_catalog_category', array('id' => $cat['id']));
+			$link = "<p><a class='akkordion-link' href='" . $routeToCategory . "'>" . $cat['name'] . "</a></p>";
+			$this->htmlTree .= $link;
+
+			if ( ($currentDepth < $this->treeDepth) && !empty($cat['__children']) ) {
+				$this->htmlTreeBuild($currentDepth + 1, $cat['__children']);
+			}
+		}
+
+		$this->htmlTree .= "</div>";
 	}
 }
