@@ -3,7 +3,7 @@
 	<price>{{ price }}</price>
 	{% if oldPrice is defined %}<oldprice>{{ oldPrice }}</oldprice>{% endif %}
 	<currencyId>{{ currencyId }}</currencyId>
-	{% if marketCategory is defineds %}<market_category>{{ marketCategory }}</market_category>{% endif %}
+	{% if marketCategory is defined %}<market_category>{{ marketCategory }}</market_category>{% endif %}
 	{% if pictures|length > 0 %}
 		{% for picture in pictures  %}
 			<picture>{{ picture }}</picture>
