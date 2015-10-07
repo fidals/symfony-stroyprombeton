@@ -48,7 +48,11 @@ class YmlProductListener implements YmlListenerInterface
 			$offer->setAvailable(false);
 			$offer->setPickup(true);
 			$offer->setDelivery(true);
-			$offer->setSalesNotes('Детали оплаты и доставки уточните с менеджером.');
+			$offer->setSalesNotes('Нужна предоплата, минимум 10 изделий');
+			$offer->setStore(false);
+			$offer->setManufacturerWarranty(true);
+			$offer->setCountryOfOrigin('Россия');
+			$offer->setCpa(1);
 
 			if($product->hasPicture()) {
 				$offer->addPicture($this->container->getParameter('base_url') . $product->getPicturePath());

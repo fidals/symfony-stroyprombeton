@@ -1,37 +1,38 @@
-<offer id="{{ id }}" available="false" {% if type|default %} type="{{ type }}"{% endif %}{% if bid|default %} bid="{{ bid }}"{% endif %}{% if cbid|default %} cbid="{{ cbid }}"{% endif %}>
-	{% if url|default %}<url>{{ url }}</url>{% endif %}
+<offer id="{{ id }}"{% if type is defined %} type="{{ type }}"{% endif %} available="{{ available ? 'true' : 'false' }}" {% if bid is defined %} bid="{{ bid }}"{% endif %}{% if cbid is defined %} cbid="{{ cbid }}"{% endif %}>
+	{% if url is defined %}<url>{{ url }}</url>{% endif %}
 	<price>{{ price }}</price>
-	{% if oldPrice|default %}<oldprice>{{ oldPrice }}</oldprice>{% endif %}
+	{% if oldPrice is defined %}<oldprice>{{ oldPrice }}</oldprice>{% endif %}
 	<currencyId>{{ currencyId }}</currencyId>
-	{% if marketCategory|default %}<market_category>{{ marketCategory }}</market_category>{% endif %}
+	{% if marketCategory is defineds %}<market_category>{{ marketCategory }}</market_category>{% endif %}
 	{% if pictures|length > 0 %}
 		{% for picture in pictures  %}
 			<picture>{{ picture }}</picture>
 		{% endfor %}
 	{% endif %}
-	<store>false</store>
-	{% if pickup|default %}<pickup>{% if pickup == true %}true{% else %}false{% endif %}</pickup>{% endif %}
-	{% if vendor|default %}<vendor>{{ vendor }}</vendor>{% endif %}
-	{% if vendorCode|default %}<vendorCode>{{ vendorCode }}</vendorCode>{% endif %}
-	{% if description|default %}<description>{{ description }}</description>{% endif %}
-	<sales_notes>Нужна предоплата, минимум 10 изделий</sales_notes>
-	<manufacturer_warranty>true</manufacturer_warranty>
-	<country_of_origin>Россия</country_of_origin>
+	{% if store is defined %}<store>{{ store ? 'true' : 'false' }}</store>{% endif %}
+	{% if pickup is defined %}<pickup>{{ pickup ? 'true' : 'false' }}</pickup>{% endif %}
+	{% if vendor is defined %}<vendor>{{ vendor }}</vendor>{% endif %}
+	{% if vendorCode is defined %}<vendorCode>{{ vendorCode }}</vendorCode>{% endif %}
+	{% if description is defined %}<description>{{ description }}</description>{% endif %}
+	{% if salesNotes is defined %}<sales_notes>{{ salesNotes }}</sales_notes>{% endif %}
+	{% if manufacturerWarranty is defined %}<manufacturer_warranty>{{ manufacturerWarranty ? 'true' : 'false' }}</manufacturer_warranty>{% endif %}
+	{% if countryOfOrigin is defined %}<country_of_origin>{{ countryOfOrigin }}</country_of_origin>{% endif %}
 	{% if age['unit'] is defined and age['value'] is defined %}<age unit="{{ age['unit'] }}">{{ age['value'] }}</age>{% endif %}
-	{% for barcodeUnit in barcode if barcode|default %}
+	{% for barcodeUnit in barcode if barcode is defined %}
 		<barcode>{{ barcodeUnit }}</barcode>
 	{% endfor %}
-	<cpa>1</cpa>
-	{% for paramUnit in param if param|default %}
+	{% if cpa is defined %}<cpa>{{ cpa }}</cpa>{% endif %}
+	{% for paramUnit in param if param is defined %}
 		<param name="{{ attribute(paramUnit, 'name') }}" {% if attribute(paramUnit, 'unit') %}unit="{{ attribute(paramUnit, 'unit') }}"{% endif %}>{{ attribute(paramUnit, 'value') }}</param>
 	{% endfor %}
 	<categoryId>{{ categoryId }}</categoryId>
-	{% if delivery|default %}<delivery>{% if delivery == true %}true{% else %}false{% endif %}</delivery>{% endif %}
+	{% if delivery is defined %}<delivery>{{ delivery ? 'true' : 'false' }}</delivery>{% endif %}
 	<name>{{ name }}</name>
-	{% if typePrefix|default %}<typePrefix>{{ typePrefix }}</typePrefix>{% endif %}
-	{% if model|default %}<model>{{ model }}</model>{% endif %}
-	{% if rec|default %}<rec>{% for recUnit in rec %}{{ recUnit }}{% if not loop.last %},{% endif %}{% endfor %}</rec>{% endif %}
-	{% if expiry|default %}<expiry>{{ expiry }}</expiry>{% endif %}
-	{% if weight|default %}<weight>{{ weight }}</weight>{% endif %}
-	{% if dimensions|default %}<dimensions>{{ dimensions['length'] }}/{{ dimensions['width'] }}/{{ dimensions['height'] }}</dimensions>{% endif %}
+	{% if localDeliveryCost is defined %}<local_delivery_cost>{{ localDeliveryCost }}</local_delivery_cost>{% endif %}
+	{% if typePrefix is defined %}<typePrefix>{{ typePrefix }}</typePrefix>{% endif %}
+	{% if model is defined %}<model>{{ model }}</model>{% endif %}
+	{% if rec is defined %}<rec>{% for recUnit in rec %}{{ recUnit }}{% if not loop.last %},{% endif %}{% endfor %}</rec>{% endif %}
+	{% if expiry is defined %}<expiry>{{ expiry }}</expiry>{% endif %}
+	{% if weight is defined %}<weight>{{ weight }}</weight>{% endif %}
+	{% if dimensions is defined %}<dimensions>{{ dimensions['length'] }}/{{ dimensions['width'] }}/{{ dimensions['height'] }}</dimensions>{% endif %}
 </offer>
