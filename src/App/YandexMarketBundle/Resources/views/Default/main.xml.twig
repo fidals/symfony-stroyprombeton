@@ -18,7 +18,7 @@
 			{% endfor %}
 		</categories>
 		<delivery-options>
-			<option cost="6000" days=""/>
+			<option cost="{{ deliveryCost }}" days="{{ deliveryDays }}"/>
 		</delivery-options>
 		{% if cpa %}<cpa>{{ cpa }}</cpa>{% endif %}
 		<offers>

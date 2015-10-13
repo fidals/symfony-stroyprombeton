@@ -129,3 +129,6 @@ app_yandex_market:
         platform: symfony
         version: 2.5
         cpa: 0
+        delivery_options:
+            cost: 6000
+            days:

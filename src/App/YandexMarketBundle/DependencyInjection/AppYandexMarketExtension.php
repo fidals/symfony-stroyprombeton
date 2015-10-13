@@ -30,6 +30,8 @@ class AppYandexMarketExtension extends Extension
 		$container->setParameter($this->getAlias() . '.shop.company', $config['shop']['company']);
 		$container->setParameter($this->getAlias() . '.shop.url', $config['shop']['url']);
 		$container->setParameter($this->getAlias() . '.shop.local_delivery_cost', $config['shop']['local_delivery_cost']);
+		$container->setParameter($this->getAlias() . '.shop.delivery_options.cost', $config['shop']['delivery_options']['cost']);
+		$container->setParameter($this->getAlias() . '.shop.delivery_options.days', $config['shop']['delivery_options']['days']);
 		(empty($config['shop']['platform'])) ?: $container->setParameter($this->getAlias() . '.shop.platform', $config['shop']['platform']);
 		(empty($config['shop']['version'])) ?: $container->setParameter($this->getAlias() . '.shop.version', $config['shop']['version']);
 		(empty($config['shop']['agency'])) ?: $container->setParameter($this->getAlias() . '.shop.agency', $config['shop']['agency']);
