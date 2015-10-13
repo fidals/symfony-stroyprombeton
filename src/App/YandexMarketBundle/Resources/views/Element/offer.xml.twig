@@ -1,4 +1,4 @@
-<offer id="{{ id }}"{% if type|default %} type="{{ type }}"{% endif %} available="{{ available ? 'true' : 'false' }}" {% if bid|default %} bid="{{ bid }}"{% endif %}{% if cbid|default %} cbid="{{ cbid }}"{% endif %}>
+<offer id="{{ id }}"{% if type|default %} type="{{ type }}"{% endif %}{% if available is defined %} available="{{ available ? 'true' : 'false' }}"{% endif %}{% if bid|default %} bid="{{ bid }}"{% endif %}{% if cbid|default %} cbid="{{ cbid }}"{% endif %}>
 	{% if url|default %}<url>{{ url }}</url>{% endif %}
 	<price>{{ price }}</price>
 	{% if oldPrice|default %}<oldprice>{{ oldPrice }}</oldprice>{% endif %}
@@ -10,12 +10,12 @@
 		{% endfor %}
 	{% endif %}
 	{% if store is defined %}<store>{{ store ? 'true' : 'false' }}</store>{% endif %}
-	{% if pickup|default %}<pickup>{{ pickup ? 'true' : 'false' }}</pickup>{% endif %}
+	{% if pickup is defined %}<pickup>{{ pickup ? 'true' : 'false' }}</pickup>{% endif %}
 	{% if vendor|default %}<vendor>{{ vendor }}</vendor>{% endif %}
 	{% if vendorCode|default %}<vendorCode>{{ vendorCode }}</vendorCode>{% endif %}
 	{% if description|default %}<description>{{ description }}</description>{% endif %}
 	{% if salesNotes|default %}<sales_notes>{{ salesNotes }}</sales_notes>{% endif %}
-	{% if manufacturerWarranty|default %}<manufacturer_warranty>{{ manufacturerWarranty ? 'true' : 'false' }}</manufacturer_warranty>{% endif %}
+	{% if manufacturerWarranty is defined %}<manufacturer_warranty>{{ manufacturerWarranty ? 'true' : 'false' }}</manufacturer_warranty>{% endif %}
 	{% if countryOfOrigin|default %}<country_of_origin>{{ countryOfOrigin }}</country_of_origin>{% endif %}
 	{% if age['unit'] is defined and age['value'] is defined %}<age unit="{{ age['unit'] }}">{{ age['value'] }}</age>{% endif %}
 	{% for barcodeUnit in barcode if barcode|default %}
@@ -26,7 +26,7 @@
 		<param name="{{ attribute(paramUnit, 'name') }}" {% if attribute(paramUnit, 'unit') %}unit="{{ attribute(paramUnit, 'unit') }}"{% endif %}>{{ attribute(paramUnit, 'value') }}</param>
 	{% endfor %}
 	<categoryId>{{ categoryId }}</categoryId>
-	{% if delivery|default %}<delivery>{{ delivery ? 'true' : 'false' }}</delivery>{% endif %}
+	{% if delivery is defined %}<delivery>{{ delivery ? 'true' : 'false' }}</delivery>{% endif %}
 	<name>{{ name }}</name>
 	{% if localDeliveryCost|default %}<local_delivery_cost>{{ localDeliveryCost }}</local_delivery_cost>{% endif %}
 	{% if typePrefix|default %}<typePrefix>{{ typePrefix }}</typePrefix>{% endif %}
