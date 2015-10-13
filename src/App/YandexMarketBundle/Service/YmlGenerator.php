@@ -75,7 +75,9 @@ class YmlGenerator
 			'version'           => $this->container->hasParameter('app_yandex_market.shop.version') ? $this->container->getParameter('app_yandex_market.shop.version') : null,
 			'agency'            => $this->container->hasParameter('app_yandex_market.shop.agency') ? $this->container->getParameter('app_yandex_market.shop.agency') : null,
 			'email'             => $this->container->hasParameter('app_yandex_market.shop.email') ? $this->container->getParameter('app_yandex_market.shop.email') : null,
-			'cpa'               => $this->container->hasParameter('app_yandex_market.shop.cpa') ? $this->container->getParameter('app_yandex_market.shop.cpa') : null
+			'cpa'               => $this->container->hasParameter('app_yandex_market.shop.cpa') ? $this->container->getParameter('app_yandex_market.shop.cpa') : null,
+			'deliveryCost'		=> $this->container->hasParameter('app_yandex_market.shop.delivery_options.cost') ? $this->container->getParameter('app_yandex_market.shop.delivery_options.cost') : null,
+			'deliveryDays'		=> $this->container->hasParameter('app_yandex_market.shop.delivery_options.days') ? $this->container->getParameter('app_yandex_market.shop.delivery_options.days') : null
 		);
 		return $this->container->get('templating')->render('AppYandexMarketBundle:Default:main.xml.twig', $params);
 	}
