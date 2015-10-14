@@ -2041,17 +2041,10 @@ p.akkordion-last-paragraph {
 
 td.search-element-nomen, td.image {
 	text-align: center !important;
-	color: #333333;
 }
 
 .image .element-photo {
-	position: absolute;
 	display: none;
-	width: 200px;
-}
-
-.image:hover .element-photo {
-	display: block;
 }
 
 th{
@@ -2066,9 +2059,10 @@ span.pointer:hover{
 .fa-camera {
 	height: 16px;
 	width: 16px;
+	color: #333333;
 }
 
-.fa-camera:hover {
+i.fa-camera:hover {
 	cursor: pointer;
 	color: #c90000;
 }

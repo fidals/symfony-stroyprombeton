@@ -15,8 +15,7 @@
 					<td>Раздел</td>
 					<td class="image">
 						{% if element.img != "/assets/images/sections/logo-prozr.png" %}
-							<i class="fa fa-camera"></i>
-							<a href="{{ element.img }}" rel="shadowbox"><img src="{{ element.img }}" class="element-photo"></a>
+							<a href="{{ element.img }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
 						{% endif %}
 					</td>
 					<td class="search-element-nomen">-</td>
@@ -42,7 +41,7 @@
 					</td>
 					<td class="gbi-list price">
 						{% if element.price != 0 %}
-							{{ (((element.price / 5) | round(0, 'ceil')) * 5)|number_format(0, '.', ' ') }} руб.
+							{{ ((element.price / 5) | round(0, 'ceil')) * 5 }} руб.
 						{% else %}
 							По запросу
 						{% endif %}
