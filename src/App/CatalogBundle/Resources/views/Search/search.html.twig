@@ -15,7 +15,7 @@
 					<td>Раздел</td>
 					<td class="image">
 						{% if element.img != "/assets/images/sections/logo-prozr.png" %}
-							<img src="/assets/images/icon-photo.png">
+							<i class="fa fa-camera"></i>
 							<a href="{{ element.img }}" rel="shadowbox"><img src="{{ element.img }}" class="element-photo"></a>
 						{% endif %}
 					</td>
@@ -30,7 +30,7 @@
 					<td>Изделие</td>
 					<td class="image">
 						{% if element.img != "/assets/images/gbi-photos/prod-alt-image.png" %}
-							<img src="/assets/images/icon-photo.png">
+							<i class="fa fa-camera"></i>
 							<a href="{{ element.img }}" rel="shadowbox"><img src="{{ element.img }}" class="element-photo"></a>
 						{% endif %}
 					</td>
@@ -40,9 +40,9 @@
 							[{{ element.desc }}] {{ element.label }}
 						</a>
 					</td>
-					<td>
+					<td class="gbi-list price">
 						{% if element.price != 0 %}
-							{{ ((element.price / 5) | round(0, 'ceil')) * 5 }} руб.
+							{{ (((element.price / 5) | round(0, 'ceil')) * 5)|number_format(0, '.', ' ') }} руб.
 						{% else %}
 							По запросу
 						{% endif %}
@@ -51,5 +51,6 @@
 			{% endif %}
 		{% endfor %}
 	</table>
-	<p class="price-desc price-desc-1">Все цены на <a href="/gbi/">железобетонные изделия</a> указаны с НДС</p>
+	<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
+	<p class="price-desc price-desc-last price-desc-1">Не является публичной офертой</p>
 </div>

@@ -2039,8 +2039,9 @@ p.akkordion-last-paragraph {
 	margin: 0;
 }
 
-td.search-element-nomen {
+td.search-element-nomen, td.image {
 	text-align: center !important;
+	color: #333333;
 }
 
 .image .element-photo {
@@ -2057,7 +2058,17 @@ th{
 	font-weight: bold;
 }
 
-span.pointer:hover {
+span.pointer:hover{
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+.fa-camera {
+	height: 16px;
+	width: 16px;
+}
+
+.fa-camera:hover {
+	cursor: pointer;
+	color: #c90000;
 }
