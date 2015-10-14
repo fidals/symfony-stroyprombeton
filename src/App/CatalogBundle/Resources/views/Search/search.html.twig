@@ -41,7 +41,7 @@
 					</td>
 					<td class="gbi-list price">
 						{% if element.price != 0 %}
-							{{ ((element.price / 5) | round(0, 'ceil')) * 5 }} руб.
+							{{ (((element.price / 5) | round(0, 'ceil')) * 5)|number_format(0, '.', ' ') }} руб.
 						{% else %}
 							По запросу
 						{% endif %}
