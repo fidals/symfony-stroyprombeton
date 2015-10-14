@@ -2072,3 +2072,16 @@ span.pointer:hover{
 	cursor: pointer;
 	color: #c90000;
 }
+
+.order-product-price,
+.order-product-count {
+	padding-left: 5px;
+	padding-right: 5px;
+	width: auto;
+	text-align: center !important;
+}
+
+.order-total {
+	font-weight: bold;
+	text-align: center !important;
+}
