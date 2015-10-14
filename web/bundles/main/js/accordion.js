@@ -21,6 +21,7 @@
 		if( $this.hasClass('active') ) {
 			$this.removeClass('active');
 			$target.stop().slideUp();
+			localStorage.setItem("akkordionActiveItem", null);
 		} else {
 			$allTitles.removeClass('active');
 			$this.addClass('active');
