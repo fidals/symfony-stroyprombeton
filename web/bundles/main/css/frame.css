@@ -2077,5 +2077,6 @@ i.fa-camera:hover {
 
 .order-total {
 	font-weight: bold;
-	text-align: center !important;
+	padding-right: 6px;
+	text-align: right !important;
 }

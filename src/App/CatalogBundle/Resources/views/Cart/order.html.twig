@@ -9,12 +9,11 @@
 
 {% block content %}
 	<h1>Оформление заказа на ЖБИ продукцию</h1>
-	<h2>Ваш заказ</h2>
-
 	{% if order.getProducts() is empty %}
 		<h2 class="text-center">Нет выбранных позиций</h2>
-		<p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>: Мы изготовим его <a href="/page/izgotovlenie-gbi-po-chertezham/">по вашим чертежам</a>. Отправьте их на почту info@stroyprombeton.ru или просто опишите их в комментарии к заявке в форме ниже.</p>
+		<p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>: <br>Мы изготовим его <a href="/page/izgotovlenie-gbi-po-chertezham/">по вашим чертежам</a>. Отправьте их на почту <a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a> или просто опишите их в комментарии к заявке в форме ниже.</p>
 	{% else %}
+		<h2>Ваш заказ</h2>
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
@@ -59,11 +58,14 @@
 				<tr>
 					<td class="order-total" colspan="2">Итого:</td>
 					<td class="order-product-price">
-						{{ orderTotal|number_format(0, '.', ' ') }} руб.
-						{% if isOnDemand %}
+						{% if orderTotal > 0 %}
+							{{ orderTotal|number_format(0, '.', ' ') }} руб.
+							{% if isOnDemand %}
 							+ По запросу
+							{% endif %}
+						{% else %}
+							По запросу
 						{% endif %}
-
 					</td>
 					<td class="order-product-count">
 						{{ totalCount }} шт.
