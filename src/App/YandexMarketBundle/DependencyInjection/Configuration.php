@@ -39,7 +39,6 @@ class Configuration implements ConfigurationInterface
 							->min(0)
 							->max(1)
 						->end()
-						->integerNode('local_delivery_cost')->isRequired()->end()
 						->arrayNode('delivery_options')
 							->children()
 								->scalarNode('cost')->end()

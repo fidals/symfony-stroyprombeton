@@ -70,7 +70,6 @@ class YmlGenerator
 			'name'              => $this->container->getParameter('app_yandex_market.shop.name'),
 			'company'           => $this->container->getParameter('app_yandex_market.shop.company'),
 			'url'               => 'http://' . $this->container->getParameter('app_yandex_market.shop.url'),
-			'localDeliveryCost' => $this->container->getParameter('app_yandex_market.shop.local_delivery_cost'),
 			'platform'          => $this->container->hasParameter('app_yandex_market.shop.platform') ? $this->container->getParameter('app_yandex_market.shop.platform') : null,
 			'version'           => $this->container->hasParameter('app_yandex_market.shop.version') ? $this->container->getParameter('app_yandex_market.shop.version') : null,
 			'agency'            => $this->container->hasParameter('app_yandex_market.shop.agency') ? $this->container->getParameter('app_yandex_market.shop.agency') : null,

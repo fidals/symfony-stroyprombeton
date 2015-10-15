@@ -28,7 +28,6 @@
 	<categoryId>{{ categoryId }}</categoryId>
 	{% if delivery is defined %}<delivery>{{ delivery ? 'true' : 'false' }}</delivery>{% endif %}
 	<name>{{ name }}</name>
-	{% if localDeliveryCost|default %}<local_delivery_cost>{{ localDeliveryCost }}</local_delivery_cost>{% endif %}
 	{% if typePrefix|default %}<typePrefix>{{ typePrefix }}</typePrefix>{% endif %}
 	{% if model|default %}<model>{{ model }}</model>{% endif %}
 	{% if rec|default %}<rec>{% for recUnit in rec %}{{ recUnit }}{% if not loop.last %},{% endif %}{% endfor %}</rec>{% endif %}
