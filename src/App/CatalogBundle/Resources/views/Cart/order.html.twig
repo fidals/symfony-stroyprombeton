@@ -43,7 +43,7 @@
 						<td class="order-product-price">
 							{% if product.model.getPrice() %}
 								{{ product.model.getPriceRounded()|number_format(0, '.', ' ') }} руб.
-								{% set orderTotal = orderTotal + product.model.getPriceRounded() %}
+								{% set orderTotal = orderTotal + product.model.getPriceRounded()*product.count %}
 							{% else %}
 								По запросу
 								{% set isOnDemand = true %}
