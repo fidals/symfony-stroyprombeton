@@ -11,7 +11,8 @@
 	<h1>Оформление заказа на ЖБИ продукцию</h1>
 	{% if order.getProducts() is empty %}
 		<h2 class="text-center">Нет выбранных позиций</h2>
-		<p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>: <br>Мы изготовим его <a href="/page/izgotovlenie-gbi-po-chertezham/">по вашим чертежам</a>. Отправьте их на почту <a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a> или просто опишите их в комментарии к заявке в форме ниже.</p>
+		<p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>,
+		<br>мы изготовим его <a href="/page/izgotovlenie-gbi-po-chertezham/">по вашим чертежам</a>.  Отправьте их через форму ниже или на почту <a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>.</p>
 	{% else %}
 		<h2>Ваш заказ</h2>
 		<table class="table table-bordered table-striped">
