@@ -29,9 +29,7 @@
 					<td>Изделие</td>
 					<td class="image">
 						{% if element.img != "/assets/images/gbi-photos/prod-alt-image.png" %}
-							<a class="fancybox" rel="product-gallery" href="{{ element.img }}" title="{{ element.nomen }}">
-								<i class="fa fa-camera"></i>
-							</a>
+							<a href="{{ element.img }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
 						{% endif %}
 					</td>
 					<td class="search-element-nomen">{{ element.nomen }}</td>
