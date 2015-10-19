@@ -17,7 +17,6 @@
 
 {% block jslinks %}
 	<script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
-	<script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
 	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
 	<script type="text/javascript" src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
@@ -30,8 +29,6 @@
 	<script type="text/javascript" src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/plugins/shadowbox/shadowbox.js') }}"></script>
-
-
 {% endblock %}
 
 {% block body %}
@@ -293,12 +290,5 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 		})();
-	</script>
-
-	<script type="text/javascript">
-		Shadowbox.init({
-			handleOversize: "drag",
-			animSequence: "hw"
-		});
 	</script>
 {% endblock %}

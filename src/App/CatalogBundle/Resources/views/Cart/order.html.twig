@@ -9,30 +9,26 @@
 
 {% block content %}
 	<h1>Оформление заказа на ЖБИ продукцию</h1>
-	<h2>Ваш заказ</h2>
-
 	{% if order.getProducts() is empty %}
-		<p class="text-center">
-			Ваша корзина пуста. Добавьте изделие из
-			<a href="{{ path('app_catalog_gbi_visual') }}">нашего каталога</a> или закажите <br>
-			изготовление ЖБИ по
-			<a href="{{ path('app_main_staticpage', {'alias': 'izgotovlenie-gbi-po-chertezham'}) }}">индивидуальным
-			чертежам</a>.
-			Укажите всю имеющуюся <br>
-			информацию о чертеже в комментарии к заказу.
-		</p>
+		<h2 class="text-center">Нет выбранных позиций</h2>
+		<p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>,
+		<br>мы изготовим его <a href="/page/izgotovlenie-gbi-po-chertezham/">по вашим чертежам</a>.  Отправьте их через форму ниже или на почту <a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>.</p>
 	{% else %}
+		<h2>Ваш заказ</h2>
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
 					<th class="order-center" width="15%">Код</td>
 					<th>Наименование и марка</td>
-					<th width="15%">Цена</td>
-					<th width="15%">Количество</td>
+					<th class="order-product-price">Цена</td>
+					<th class="order-product-count">Количество</td>
 				</tr>
 			</thead>
 
 			<tbody>
+				{% set orderTotal = 0 %}
+				{% set totalCount = 0 %}
+				{% set isOnDemand = false %}
 				{% for product in order.getProducts() %}
 					<tr>
 						<td class="order-center">
@@ -45,18 +41,37 @@
 						<td>
 							<a href="{{ path('app_catalog_product', {'id': product.model.getId()}) }}">{{ product.model }}</a>
 						</td>
-						<td>
+						<td class="order-product-price">
 							{% if product.model.getPrice() %}
-								{{ product.model.getPriceRounded() }} руб.
+								{{ product.model.getPriceRounded()|number_format(0, '.', ' ') }} руб.
+								{% set orderTotal = orderTotal + product.model.getPriceRounded()*product.count %}
 							{% else %}
 								По запросу
+								{% set isOnDemand = true %}
 							{% endif %}
 						</td>
-						<td>
+						<td class="order-product-count">
 							{{ product.count }} шт.
+							{% set totalCount = totalCount + product.count %}
 						</td>
 					</tr>
 				{% endfor %}
+				<tr>
+					<td class="order-total" colspan="2">Итого:</td>
+					<td class="order-product-price">
+						{% if orderTotal > 0 %}
+							{{ orderTotal|number_format(0, '.', ' ') }} руб.
+							{% if isOnDemand %}
+							+ По запросу
+							{% endif %}
+						{% else %}
+							По запросу
+						{% endif %}
+					</td>
+					<td class="order-product-count">
+						{{ totalCount }} шт.
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	{% endif %}

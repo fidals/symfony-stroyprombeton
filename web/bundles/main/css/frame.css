@@ -2039,25 +2039,44 @@ p.akkordion-last-paragraph {
 	margin: 0;
 }
 
-td.search-element-nomen {
+td.search-element-nomen, td.image {
 	text-align: center !important;
 }
 
 .image .element-photo {
-	position: absolute;
 	display: none;
-	width: 200px;
-}
-
-.image:hover .element-photo {
-	display: block;
 }
 
 th{
 	font-weight: bold;
 }
 
-span.pointer:hover {
+span.pointer:hover{
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+.fa-camera {
+	height: 16px;
+	width: 16px;
+	color: #333333;
+}
+
+i.fa-camera:hover {
+	cursor: pointer;
+	color: #c90000;
+}
+
+.order-product-price,
+.order-product-count {
+	padding-left: 5px;
+	padding-right: 5px;
+	width: auto;
+	text-align: center !important;
+}
+
+.order-total {
+	font-weight: bold;
+	padding-right: 6px;
+	text-align: right !important;
 }
