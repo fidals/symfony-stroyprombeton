@@ -48,20 +48,24 @@ class YmlProductListener implements YmlListenerInterface
 			$offer->setAvailable(false);
 			$offer->setPickup(true);
 			$offer->setDelivery(true);
-			$offer->setSalesNotes('Детали оплаты и доставки уточните с менеджером.');
+			$offer->setSalesNotes('Нужна предоплата, минимум 10 изделий');
+			$offer->setStore(false);
+			$offer->setManufacturerWarranty(true);
+			$offer->setCountryOfOrigin('Россия');
+			$offer->setCpa(1);
 
 			if($product->hasPicture()) {
-				$offer->setPicture($this->container->getParameter('base_url') . $product->getPicturePath());
+				$offer->addPicture($this->container->getParameter('base_url') . $product->getPicturePath());
 			}
-			is_null($product->getLength()) ?: $offer->addParam('Длина', $product->getLength());
-			is_null($product->getWidth()) ?: $offer->addParam('Ширина', $product->getWidth());
-			is_null($product->getHeight()) ?: $offer->addParam('Высота', $product->getHeight());
-			is_null($product->getWeight()) ?: $offer->addParam('Вес', $product->getWeight());
-			is_null($product->getVolume()) ?: $offer->addParam('Объем', $product->getVolume());
-			is_null($product->getDiameterIn()) ?: $offer->addParam('Диаметр внутренний', $product->getDiameterIn());
-			is_null($product->getDiameterOut()) ?: $offer->addParam('Диаметр внешний', $product->getDiameterOut());
+			empty($product->getLength()) ?: $offer->addParam('Длина', $product->getLength());
+			empty($product->getWidth()) ?: $offer->addParam('Ширина', $product->getWidth());
+			empty($product->getHeight()) ?: $offer->addParam('Высота', $product->getHeight());
+			empty($product->getWeight()) ?: $offer->addParam('Вес', $product->getWeight());
+			empty($product->getVolume()) ?: $offer->addParam('Объем', $product->getVolume());
+			empty($product->getDiameterIn()) ?: $offer->addParam('Диаметр внутренний', $product->getDiameterIn());
+			empty($product->getDiameterOut()) ?: $offer->addParam('Диаметр внешний', $product->getDiameterOut());
 			$url = $this->container->get('router')->generate('app_catalog_product', array('id' => $product->getId()), true);
-			$offer->setPrice($product->getPrice());
+			$offer->setPrice($product->getPriceRounded());
 			$offer->setUrl($url);
 			$offer->setCurrencyId(Currency::ID_RUR);
 			$offer->setCategoryId($product->getCategory()->getId());
