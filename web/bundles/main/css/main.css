@@ -1,6 +1,6 @@
 table.index-list-gbi {
 	width: 100%;
-	margin: 15px 0px;
+	margin: 15px 0;
 }
 
 table.index-list-gbi td {
@@ -306,47 +306,47 @@ div.product {
 	display: block;
 }
 
-div.product-header {
-	width: 100%;
+.product-header {
 	height: 30px;
+	width: 100%;
 }
 
-div.product-header > h1 {
-	color:#333333;
+.product-header-title {
+	color: #333;
 	float: left;
-}
-
-div.product-header > span {
-	float: right;
-	font-weight: bolder;
 }
 
 .product-number {
-	color: #c90000;
+	color: #C90000;
 }
 
-div.product-main {
-	width: 100%;
-	margin: 20px 0px 0px 0px;
+.product-main {
+	margin: 20px 0 0 0;
 }
 
-div.product-photo {
+.product-photo {
+	border: 3px double #DDD;
+	border-radius: 5px;
 	display: inline-block;
 	float: left;
-	margin-left: 5px;
 	width: 45%;
-	border-radius: 5px;
-	border: 3px double #dddddd;
 }
 
-div.product-photo img {
+.product-photo img {
 	border-radius: 5px;
 }
 
-div.product-info {
-	width: 45%;
-	margin: 5px 10px 5px 20px;
+.product-info {
 	float: right;
+	font-size: 16px;
+	margin: -12px 10px 5px 20px;
+	width: 45%;
+}
+
+.product-about {
+	clear: both;
+	float: left;
+	margin: 10px 0 5px 5px;
 	font-size: 16px;
 }
 
@@ -366,7 +366,7 @@ div.product-price {
 	font-size: 18px;
 	display: inline-block;
 	font-weight: bold;
-	color: #c90000;
+	color: #C90000;
 }
 
 div.product-price span {
@@ -374,7 +374,7 @@ div.product-price span {
 }
 
 .nomen {
-	color: #999999;
+	color: #999;
 }
 
 div.product-bottom-box {
@@ -382,13 +382,11 @@ div.product-bottom-box {
 	float: right;
 }
 
-div.product-for-nds {
+.product-for-nds {
 	float: right;
-	color: #999999;
-}
-
-div.product-for-nds p {
-	margin: 0px;
+	color: #999;
+	margin-top: 10px;
+	font-size: 12px;
 }
 
 td.product-desc-left-col {
@@ -543,6 +541,7 @@ div.map {
 
 .inf_content {
 	line-height: 1.1em;
+	text-align: justify;
 }
 
 div.random_list_main > div{
@@ -552,8 +551,8 @@ div.random_list_main > div:first-child{
 	display: block;
 }
 
-.informer ul {
-	margin: 0 0 10px;
+ul.informer {
+	margin: 0px 0px 10px 0px;
 	padding: 0;
 }
 
@@ -568,7 +567,6 @@ div.random_list_main > div:first-child{
 
 .inf_intro {
 	font-size: 0.9em;
-	text-align: left;
 }
 
 .inf_footer {
@@ -618,11 +616,19 @@ div.menu-basket{
 }
 
 .cart-empty {
-	background: url("/bundles/main/images/basket.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: url("/bundles/main/images/basket.png") no-repeat;
+}
+
+.cart-empty:active {
+	background-position: 0 -45px;
 }
 
 .cart-full {
-	background: url("/bundles/main/images/basket_full.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: url("/bundles/main/images/basket.png") no-repeat 0 -135px;
+}
+
+.cart-full:active {
+	background-position: 0 -90px;
 }
 
 div.basket-content {
@@ -714,29 +720,40 @@ span.catalog-second-level, span.catalog-third-level {
 	float: left;
 	padding-top: 4px;
 }
-.shk_basket_buy{
+
+.shk_basket_buy {
 	float: right;
 }
 
-.shk_basket_count .field-arr-down, .product-desc-left-col .field-arr-down, .shk-item .field-arr-down{
+.shk_basket_count .field-arr-down,
+.product-desc-left-col .field-arr-down,
+.shk-item .field-arr-down{
 	margin: 11px 0 0 -17px !important;
 	position: absolute;
 }
 
 .btn-gray {
-	color: #FFFFFF;
+	background: url(../images/grad.gif) repeat-x center bottom #DFDFDF;
+	border: 1px solid #888;
+	border-radius: 5px;
+	color: #FFF;
 	float: right;
 	height: 27px;
+	line-height: 0.8;
 	margin: 0 0 0 10px;
-	padding: 0;
 	outline: none;
-	border-radius: 5px;
-	border: 1px #AAAAAA solid;
-	background: url(../images/grad.gif) repeat-x scroll center bottom #DFDFDF;
+	padding: 0;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
 }
 
 .btn-gray:hover {
-	background: url(../images/grad_red.gif) repeat-x scroll center bottom #DFDFDF;
+	background: url(../images/grad_red.gif) repeat-x center bottom #DFDFDF;
+}
+
+.btn-gray.active,
+.btn-gray:active {
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset,
+				0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .add-basket {
@@ -748,7 +765,7 @@ span.catalog-second-level, span.catalog-third-level {
 }
 
 .props-tbl tr {
-	border-bottom: 1px #EEE solid;
+	border-bottom: 1px solid #DADADA;
 }
 
 table.m-contacts_new{
@@ -854,6 +871,7 @@ div.main_cat_el{
 	text-align: center;
 	width: 30%;
 }
+
 
 
 .main_cat_el .title{

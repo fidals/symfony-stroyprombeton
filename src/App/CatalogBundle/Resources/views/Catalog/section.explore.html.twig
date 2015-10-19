@@ -18,13 +18,14 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-	<h1 class="gbi-section">
-		{{ category.getH1() }}
-	</h1>
-	<div class="gbi-list">
-		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
 
-		<p class="price-desc price-desc-1">Не является публичной офертой</p>
+	<h1 class="gbi-section"> {{ category.getH1() }} </h1>
+	{% if category.isTextPublished %}
+		{% autoescape false %}
+			{{ category.text }}
+		{% endautoescape %}
+	{% endif %}
+	<div class="gbi-list" id="gbi-list">
 		<table>
 			<tr>
 				<th colspan="2">Код</th>
@@ -61,7 +62,7 @@
 										<img class="field-arr-down" onclick="return spinDownCount(this)" src="/bundles/main/images/spin-down.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
 									</div>
 									<div class="shk_basket_buy">
-										<input onclick="return Cart.add({{ product.getId() }}, $(this).closest('fieldset').find('.basket-rest').val());" type="button" class="btn-gray add-basket" name="shk-submit" type="submit" value="Заказать">
+										<input onclick="return Cart.add({{ product.getId() }}, $(this).closest('fieldset').find('.basket-rest').val());" type="button" class="btn-gray add-basket" id="shk-submit-{{ product.getId() }}" name="shk-submit" type="submit" value="Заказать" data-tooltip="Товар добавлен в заказ">
 									</div>
 								</fieldset>
 							</form>
@@ -70,5 +71,7 @@
 				</tr>
 			{% endfor %}
 		</table>
+		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
+		<p class="price-desc price-desc-last price-desc-1">Не является публичной офертой</p>
 	</div>
 {% endblock %}

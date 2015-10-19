@@ -13,20 +13,20 @@
 				<tr class="cart-order">
 					<td width="70%" align="right" nowrap="">
 						<b>
-							<a href="{{ path('app_catalog_product', {'id': product.model.getId()}) }}">{{ product.model.getTitle() }}</a>
+							<a href="{{ path('app_catalog_product', {'id': product.model.getId()}) }}">{{ product.model|slice(0, 45) }}</a>
 						</b>
 					</td>
-					<td width="15%" align="left">
+					<td width="20%" align="center">
 						<b>{{ product.count }} шт.</b>
 					</td>
-					<td width="15%" align="right">
+					<td width="10%" align="right">
 						<a onclick="return Cart.remove({{ product.model.getId() }}, {{ product.count }});" title="Удалить" class="shk-del"><img src="/bundles/main/images/icon-delete.png" alt="Удалить"></a>
 					</td>
 				</tr>
 			{% endfor %}
 		</table>
 		<div class="mbasket-clear">
-			<a onclick="return Cart.clean();" id="butEmptyCart">Удалить все позиции</a>
+			<span id="butEmptyCart" class="empty-cart" data-tooltip="Вы уверены?">Удалить все позиции</span>
 		</div>
 	</div>
 {% endif %}

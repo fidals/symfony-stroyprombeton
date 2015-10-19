@@ -4,9 +4,8 @@
 	Регионы, в которые поставлялась продукция «СТК-ПромБетон»
 {% endblock %}
 
-{% block jsheadlinkss %}
+{% block jslinks %}
 	{{ parent() }}
-	<script type="text/javascript" src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/main/js/jquery.maphilight.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/main/js/jquery.tooltipster.min.js') }}"></script>
 {% endblock %}
@@ -137,44 +136,44 @@
 	<h2>Наши партнёры:</h2>
 	<table class="pb_partners">
 		<tr><th colspan="2">Строительные организации</th></tr>
-		<tr><td><img src="/assets/images/partner/zaovad.png"></td><td>ЗАО "ВАД"<br /><span>www.zaovad.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/eurotransstroy.png"></td><td>ООО "ЕТС"<br /><span>www.eurotransstroy.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/seaport.png"></td><td>ОАО "Морской порт Санкт-Петербург"<br /><span>www.seaport.spb.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/most6.png"></td><td>ОАО "Мостострой №6"<br /><span>www.most6.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/zaovad.png"></td><td>ЗАО "ВАД"<br /><span class="pointer"  onclick='window.location="http://www.zaovad.ru"'>www.zaovad.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/eurotransstroy.png"></td><td>ООО "ЕТС"<br /><span class="pointer"  onclick='window.location="http://www.eurotransstroy.ru"'>www.eurotransstroy.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/seaport.png"></td><td>ОАО "Морской порт Санкт-Петербург"<br /><span class="pointer"  onclick='window.location="http://www.seaport.spb.ru"'>www.seaport.spb.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/most6.png"></td><td>ОАО "Мостострой №6"<br /><span class="pointer"  onclick='window.location="http://www.most6.ru"'>www.most6.ru</span></td></tr>
 		<tr><td><img src="/assets/images/partner/novostroy.png"></td><td>ООО "Петербургская строительная компания"<br />
-		<span>www.novostroy.su/spb/companies/peterburgskaya_stroitelnaya_kompania/</span></td></tr>
-		<tr><td><img src="/assets/images/partner/zao-spi.png"></td><td>ЗАО "СтройПутьИнвест"<br /><span>www.zao-spi.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/su308.png"></td><td>ОАО "СУ №308"<br /><span>www.su308.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/tsm.png"></td><td>ОАО "ТрансСтройМеханизация"<br /><span>www.tsm.msk.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/bmgs.png"></td><td>АО BMGS. Латвия<br /><span>www.bmgs.lv</span></td></tr>
-		<tr><td><img src="/assets/images/partner/ica-logo.png"></td><td>ИДЖА Асталди-Ичташ, г. Санкт-Петербург<br /><span>www.ica-whsd.com</span></td></tr>
-		<tr><td><img src="/assets/images/partner/stroytrest.png"></td><td>ООО «Генеральная строительная компания №2»<br /><span>www.stroytrest.spb.ru</span></td></tr>
+				<span class="pointer"  onclick='window.location="http://www.novostroy.su/spb/companies/peterburgskaya_stroitelnaya_kompania/"'>www.novostroy.su/spb/companies/peterburgskaya_stroitelnaya_kompania/</span></td></tr>
+		<tr><td><img src="/assets/images/partner/zao-spi.png"></td><td>ЗАО "СтройПутьИнвест"<br /><span class="pointer"  onclick='window.location="http://www.zao-spi.ru"'>www.zao-spi.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/su308.png"></td><td>ОАО "СУ №308"<br /><span class="pointer"  onclick='window.location="http://www.su308.ru"'>www.su308.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/tsm.png"></td><td>ОАО "ТрансСтройМеханизация"<br /><span class="pointer"  onclick='window.location="http://www.tsm.msk.ru"'>www.tsm.msk.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/bmgs.png"></td><td>АО BMGS. Латвия<br /><span class="pointer"  onclick='window.location="http://www.bmgs.lv"'>www.bmgs.lv</span></td></tr>
+		<tr><td><img src="/assets/images/partner/ica-logo.png"></td><td>ИДЖА Асталди-Ичташ, г. Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.ica-whsd.com"'>www.ica-whsd.com</span></td></tr>
+		<tr><td><img src="/assets/images/partner/stroytrest.png"></td><td>ООО «Генеральная строительная компания №2»<br /><span class="pointer"  onclick='window.location="http://www.stroytrest.spb.ru"'>www.stroytrest.spb.ru</span></td></tr>
 		<tr><td><img src="/assets/images/partner/lendostroy.png"></td><td>ЗАО «Лендорстрой-2»</td></tr>
-		<tr><td><img src="/assets/images/partner/buer.png"></td><td>ЗАО «Буер» <br /><span>www.zaobuer.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/buer.png"></td><td>ЗАО «Буер» <br /><span class="pointer"  onclick='window.location="http://www.zaobuer.ru"'>www.zaobuer.ru</span></td></tr>
 		<tr><th colspan="2">Проектные организации</th></tr>
-		<tr><td><img src="/assets/images/partner/dor.png"></td><td>ЗАО "Авто-Дорсервис", Санкт-Петербург<br /><span>www.dor.spb.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/ards.png"></td><td>ООО "Аэродромдорстрой-проект", Тюмень<br /><span>www.ards.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/aestis.png"></td><td>ЗАО «АЭСТ и С», ЛО, Сосновый Бор<br /><span>www.aestis.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/bmp-spb.png"></td><td>ООО "БалтМостПроект". Санкт-Петербург<br /><span>www.bmp-spb.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/giprogazcentr.png"></td><td>ОАО "ГипроГазЦентр" Нижний Новгород<br /><span>www.giprogazcentr.aspogazprom.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/giprodor.png"></td><td>ОАО "ГипроДорНИИ" <br /><span>www.giprodor.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/gpsm.png"></td><td>ЗАО "Институт-Гипростроймост Санкт-Петербург"<br /><span>www.gpsm.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/dalsep.png"></td><td>ООО "НИПИКТИ "Дальсельэнергопроект". Хабаровск<br /><span>www.dalsep.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/transport-project.png"></td><td>ООО "Институт ДорПроект". Томск<br /><span>www.transport-project.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/intranscom.png"></td><td>ТОО "Индортранс". Казахстан, Алматы<br /><span>www.intranscom.kz</span></td></tr>
-		<tr><td><img src="/assets/images/partner/szit.png"></td><td>ООО "НИИПРИИ "Севзапинжтехнология", Санкт-Петербург<br /><span>www.szit.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/inkomproekt.png"></td><td>ЗАО "ИнкомПроект", Санкт-Петербург<br /><span>www.inkomproekt.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/modul-pkb.png"></td><td>ООО "Модуль-ПКБ". Санкт-Петербург<br /><span>www.modul-pkb.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/most-proekt.png"></td><td>ООО "МостПроект". Санкт-Петербург<br /><span>www.most-proekt.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/projectstroyplus.png"></td><td>ООО «Проект Строй Плюс». Санкт-Петербург<br /><span>www.projectstroyplus.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/rg-proekt.png"></td><td>ООО "РегионПроект". Новосибирск<br /><span>www.rg-proekt.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/rzdp.png"></td><td>Уфимское отделение Самарского проектно-изыскательского института «Желдорпроект Поволжья»<br /><span>www.rzdp.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/giph.png"></td><td>ФГУП "РНЦ "Прикладная химия". Санкт-Петербург<br /><span>www.giph.su</span></td></tr>
-		<tr><td><img src="/assets/images/partner/lgt.png"></td><td>ОАО "Ленгипротранс", Санкт-Петербург<br /><span>www.lgt.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/dor.png"></td><td>ЗАО "Авто-Дорсервис", Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.dor.spb.ru"'>www.dor.spb.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/ards.png"></td><td>ООО "Аэродромдорстрой-проект", Тюмень<br /><span class="pointer"  onclick='window.location="http://www.ards.ru"'>www.ards.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/aestis.png"></td><td>ЗАО «АЭСТ и С», ЛО, Сосновый Бор<br /><span class="pointer"  onclick='window.location="http://www.aestis.ru"'>www.aestis.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/bmp-spb.png"></td><td>ООО "БалтМостПроект". Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.bmp-spb.ru"'>www.bmp-spb.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/giprogazcentr.png"></td><td>ОАО "ГипроГазЦентр" Нижний Новгород<br /><span class="pointer"  onclick='window.location="http://www.giprogazcentr.aspogazprom.ru"'>www.giprogazcentr.aspogazprom.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/giprodor.png"></td><td>ОАО "ГипроДорНИИ" <br /><span class="pointer"  onclick='window.location="http://www.giprodor.ru"'>www.giprodor.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/gpsm.png"></td><td>ЗАО "Институт-Гипростроймост Санкт-Петербург"<br /><span class="pointer"  onclick='window.location="http://www.gpsm.ru"'>www.gpsm.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/dalsep.png"></td><td>ООО "НИПИКТИ "Дальсельэнергопроект". Хабаровск<br /><span class="pointer"  onclick='window.location="http://www.dalsep.ru"'>www.dalsep.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/transport-project.png"></td><td>ООО "Институт ДорПроект". Томск<br /><span class="pointer"  onclick='window.location="http://www.transport-project.ru"'>www.transport-project.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/intranscom.png"></td><td>ТОО "Индортранс". Казахстан, Алматы<br /><span class="pointer"  onclick='window.location="http://www.intranscom.kz"'>www.intranscom.kz</span></td></tr>
+		<tr><td><img src="/assets/images/partner/szit.png"></td><td>ООО "НИИПРИИ "Севзапинжтехнология", Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.szit.ru"'>www.szit.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/inkomproekt.png"></td><td>ЗАО "ИнкомПроект", Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.inkomproekt.ru"'>www.inkomproekt.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/modul-pkb.png"></td><td>ООО "Модуль-ПКБ". Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.modul-pkb.ru"'>www.modul-pkb.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/most-proekt.png"></td><td>ООО "МостПроект". Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.most-proekt.ru"'>www.most-proekt.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/projectstroyplus.png"></td><td>ООО «Проект Строй Плюс». Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.projectstroyplus.ru"'>www.projectstroyplus.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/rg-proekt.png"></td><td>ООО "РегионПроект". Новосибирск<br /><span class="pointer"  onclick='window.location="http://www.rg-proekt.ru"'>www.rg-proekt.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/rzdp.png"></td><td>Уфимское отделение Самарского проектно-изыскательского института «Желдорпроект Поволжья»<br /><span class="pointer"  onclick='window.location="http://www.rzdp.ru"'>www.rzdp.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/giph.png"></td><td>ФГУП "РНЦ "Прикладная химия". Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.giph.su"'>www.giph.su</span></td></tr>
+		<tr><td><img src="/assets/images/partner/lgt.png"></td><td>ОАО "Ленгипротранс", Санкт-Петербург<br /><span class="pointer"  onclick='window.location="http://www.lgt.ru"'>www.lgt.ru</span></td></tr>
 		<tr><th colspan="2">Региональные центры по ценообразованию в строительстве</th></tr>
-		<tr><td><img src="/assets/images/partner/krccs.png"></td><td>ГАУ КО "Региональный центр по ценообразованию в строительстве", Калининград<br /><span>www.krccs.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/zinins.png"></td><td>ООО "Центр информации и индексации в строительстве" по Ленинградской области<br /><span>www.zinins.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/krskrccs.png"></td><td>филиала ФАУ "ФЦЦС" по Красноярскому краю<br /><span>www.krskrccs.ru</span></td></tr>
-		<tr><td><img src="/assets/images/partner/gz-spb.png"></td><td>СПб КГУ "Дирекция транспортного строительства"<br /><span>www.gz-spb.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/krccs.png"></td><td>ГАУ КО "Региональный центр по ценообразованию в строительстве", Калининград<br /><span class="pointer"  onclick='window.location="http://www.krccs.ru"'>www.krccs.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/zinins.png"></td><td>ООО "Центр информации и индексации в строительстве" по Ленинградской области<br /><span class="pointer"  onclick='window.location="http://www.zinins.ru"'>www.zinins.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/krskrccs.png"></td><td>филиала ФАУ "ФЦЦС" по Красноярскому краю<br /><span class="pointer"  onclick='window.location="http://www.krskrccs.ru"'>www.krskrccs.ru</span></td></tr>
+		<tr><td><img src="/assets/images/partner/gz-spb.png"></td><td>СПб КГУ "Дирекция транспортного строительства"<br /><span class="pointer"  onclick='window.location="http://www.gz-spb.ru"'>www.gz-spb.ru</span></td></tr>
 	</table>
 {% endblock %}

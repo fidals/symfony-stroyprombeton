@@ -3,6 +3,7 @@
 namespace App\CatalogBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class ProductRepository
@@ -15,6 +16,12 @@ class ProductRepository extends EntityRepository
 	 */
 	const DEFAULT_LIMIT = 20;
 	const UNCAT_PRODUCT_SEARCH_LIMIT = 100;
+
+	/**
+	 * Константа - максимальное количество последовательнных рандомных запросов случайных продуктов из базы.
+	 * Нужна для предовращения бесконечного цикла while в методе getRandomProductsHasPhoto при отстутствии товаров с фотографиями.
+	 */
+	const MAX_RANDOM_GETS = 100;
 
 	/**
 	 * Сколько берем в запросе продуктов для поиска продуктов с картинками
@@ -101,26 +108,36 @@ class ProductRepository extends EntityRepository
 	}
 
 	/**
-	 * Выбираем N продуктов из базы, не глядя на картинки, а потом берём из этой сотни первые $limit с картинками.
-	 * @param int $limit
-	 * @return array
+	 * Метод поиска $limit-продуктов с фотографиями.
+	 *
+	 * Получаем DEFAULT_PER_QUERY товаров из базы и добавляем в результирующий массив те из них, что с фотографиями и еще не в массиве.
+	 * Делаем это до тех пор, пока не наберем $limit в массиве или не превысим предел рандомных запросов (MAX_RANDOM_GETS), нужный для предотвращения бесконечного цикла.
+	 * Если в результате работы метода получился массив меньше, чем $limit, мы кидаем Exception, иначе - возвращаем получивший массив.
+	 *
+	 * @param int $limit - нужное нам количество товаров с фотографиями
+	 * @throws Exception - если размер получившегося массива меньше запрашиваемого
+	 * @return array - limit рандомно-уникальных товаров с фотографиями
 	 */
 	public function getRandomProductsHasPhoto($limit = self::DEFAULT_LIMIT)
 	{
 		$productsWithPictures = array();
-		$productsWithPicturesCount = 0;
-		while($productsWithPicturesCount < $limit) {
+		$randomGets = 0;
+
+		while(count($productsWithPictures) < $limit && $randomGets < self::MAX_RANDOM_GETS) {
 			$randomProducts = $this->getRandomProducts(self::DEFAULT_PER_QUERY);
-			$i = 0;
-			while(($productsWithPicturesCount < $limit) && ($i < self::DEFAULT_PER_QUERY)) {
-				$product = $randomProducts[$i];
-				if($product->hasPicture() && !in_array($product, $productsWithPictures)) {
+			$randomGets++;
+
+			foreach ($randomProducts as $product) {
+				if($product->hasPicture() && !in_array($product, $productsWithPictures) && count($productsWithPictures) < $limit) {
 					$productsWithPictures[] = $product;
-					$productsWithPicturesCount++;
 				}
-				$i++;
 			}
 		}
+
+		if (count($productsWithPictures) < $limit) {
+			throw new Exception("Not enough products with pictures, check /assets/images/gbi-photos/ directory.");
+		}
+
 		return $productsWithPictures;
 	}
 
