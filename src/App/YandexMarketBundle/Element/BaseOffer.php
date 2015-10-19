@@ -159,12 +159,6 @@ class BaseOffer extends AbstractElement
 	protected $name;
 
 	/**
-	 * Цена доставки
-	 * @var int
-	 */
-	protected $localDeliveryCost;
-
-	/**
 	 * Основная ставка
 	 * @link https://yandex.ru/support/partnermarket/bid-cbid.xml
 	 * @var int
@@ -348,22 +342,6 @@ class BaseOffer extends AbstractElement
 	public function getDescription()
 	{
 		return $this->description;
-	}
-
-	/**
-	 * @param $localDeliveryCost
-	 */
-	public function setLocalDeliveryCost($localDeliveryCost)
-	{
-		$this->localDeliveryCost = $localDeliveryCost;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getLocalDeliveryCost()
-	{
-		return $this->localDeliveryCost;
 	}
 
 	/**
