@@ -19,13 +19,13 @@
 					<tr>
 						<td>Раздел</td>
 						<td class="image">
-							{% if category.img != "/assets/images/sections/logo-prozr.png" %}
-								<a href="{{ category.img }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
+							{% if category.picturePath != "/assets/images/sections/logo-prozr.png" %}
+								<a href="{{ category.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
 							{% endif %}
 						</td>
 						<td class="search-element-nomen">-</td>
 						<td class="gbi-list name">
-							<a href="{{ path('app_catalog_category', {'id': category.id}) }}">{{ category.label }}</a>
+							<a href="{{ path('app_catalog_category', {'id': category.id}) }}">{{ category.name }}</a>
 						</td>
 						<td>-</td>
 					</tr>
@@ -34,14 +34,14 @@
 					<tr>
 						<td>Изделие</td>
 						<td class="image">
-							{% if product.img != "/assets/images/gbi-photos/prod-alt-image.png" %}
-								<a href="{{ product.img }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
+							{% if product.picturePath != "/assets/images/gbi-photos/prod-alt-image.png" %}
+								<a href="{{ product.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
 							{% endif %}
 						</td>
 						<td class="search-element-nomen">{{ product.nomen }}</td>
 						<td class="gbi-list name">
 							<a style="font-weight: normal;" href="{{ path('app_catalog_product', {'id': product.id}) }}">
-								[{{ product.desc }}] {{ product.label }}
+								[{{ product.description }}] {{ product.name }}
 							</a>
 						</td>
 						<td class="gbi-list price">
