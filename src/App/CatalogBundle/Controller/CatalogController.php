@@ -146,12 +146,14 @@ class CatalogController extends Controller
 
 		$jsonSrv = new JsonEncoder();
 
-		// возвращает массив данных для автокомплита
+		/**
+		 * Получаем результат поиска в виде ассоциативного массива с ключами categories и products.
+		 * На основе него мы сделаем общий массив с нужными нам ключами для JSON преобразования.
+		 */
 		$result = $this->get('catalog.search')->suggest($term);
-
 		$router = $this->container->get('router');
-		$categoryResults = array();
 
+		$categoryResults = array();
 		foreach($result['categories'] as $category) {
 			$categoryResults[] = array(
 				'desc'   => $category->getDescription(),
@@ -166,7 +168,6 @@ class CatalogController extends Controller
 		}
 
 		$productResults = array();
-
 		foreach ($result['products'] as $product) {
 			$productResults[] = array(
 				'desc' => $product->getDescription(),
@@ -186,6 +187,7 @@ class CatalogController extends Controller
 			);
 		}
 
+		//Получаем общий массив
 		$result = array_merge($categoryResults, $productResults);
 
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
