@@ -1,6 +1,6 @@
-{% extends app.request.xmlHttpRequest
-	? ""
-	: "AppMainBundle:Default:layout.html.twig"
+{% extends app.request.isXmlHttpRequest
+	? 'AppCatalogBundle:Search:search.html.twig'
+	: 'AppMainBundle:Default:layout.html.twig'
 %}
 
 {% block content %}
