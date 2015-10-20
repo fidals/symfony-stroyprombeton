@@ -47,21 +47,25 @@ class Search
 	}
 
 	/**
-	 * Автокомплит
-	 * @param $term
-	 * @param int $limit
-	 * @return array
+	 * Общий метод для автокомплита.
+	 * Получаем результаты вызовов аналогичных методов для Категорий и Товаров, после чего возвращаем массив с соотв. ключами.
+	 * @param mixed $term - условие поиска
+	 * @param int $limit - нужное количество "подсказок" для автокомплита
+	 * @return array - ассоциативный массив с результатами поиска по категориям и продуктам под соотв. ключами
 	 */
 	public function suggest($term, $limit = self::DEFAULT_LIMIT)
 	{
-		$categoryResults = $this->suggestCategories($term, $limit);
-		$categoryResultsCount = count($categoryResults);
-		$productResults = array();
+		$categorySuggest = $this->suggestCategories($term, $limit);
+		$categoryResultsCount = count($categorySuggest);
+		$productSuggest = array();
 		if($categoryResultsCount != $limit) {
-			$productResults = $this->suggestProducts($term, $limit - $categoryResultsCount);
+			$productSuggest = $this->suggestProducts($term, $limit - $categoryResultsCount);
 		}
-		// отдаем ранжированный массив, сначала категории, потом продукты
-		return array_merge($categoryResults, $productResults);
+
+		return array(
+			'categories' => $categorySuggest,
+			'products' => $productSuggest
+		);
 	}
 
 	/**
@@ -111,9 +115,8 @@ class Search
 
 		$categories = $categoryQuery->getResult();
 
-		/**
-		 * Получаем router для генерации урлов. Нужно для работающего автокомплита.
-		 */
+		return $categories;
+		/*
 		$router = $this->container->get('router');
 
 		$categoryResults = array();
@@ -130,6 +133,7 @@ class Search
 			);
 		}
 		return $categoryResults;
+		*/
 	}
 
 	/**
@@ -181,9 +185,9 @@ class Search
 
 		$products = $categoryQuery->getResult();
 
-		/**
-		 * Получаем router для генерации урлов. Нужно для работающего автокомплита.
-		 */
+		return $products;
+
+		/*
 		$router = $this->container->get('router');
 
 		$productResults = array();
@@ -204,5 +208,6 @@ class Search
 		}
 
 		return $productResults;
+		*/
 	}
 }
