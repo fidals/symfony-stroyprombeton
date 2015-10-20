@@ -103,7 +103,7 @@ class CatalogController extends Controller
 
 		$searchResults = $this->get('catalog.search')->search($condition, $limit * $page);
 
-		return $this->render('AppCatalogBundle:Search:search.html.twig', array(
+		return $this->render('AppCatalogBundle:Search:results.search.html.twig', array(
 			'elements' => $searchResults,
 			'searchCondition' => $condition
 		));
