@@ -8,7 +8,7 @@ app_catalog_suggest:
     defaults: { _controller: AppCatalogBundle:Catalog:suggest }
 
 app_catalog_search:
-    pattern: /search-ajax/
+    pattern: /search/
     defaults: { _controller: AppCatalogBundle:Catalog:searchResults }
 
 app_catalog_search_results:
