@@ -36,7 +36,7 @@ class Search
 
 	/**
 	 * Метод поиска
-	 * Использует автокомплит
+	 * Делегирует вызов методу автокомплита
 	 * @param $term
 	 * @param $limit
 	 * @return mixed
@@ -47,7 +47,7 @@ class Search
 	}
 
 	/**
-	 * Общий метод для автокомплита.
+	 * Общий метод для автокомплита и поиска.
 	 * Получаем результаты вызовов аналогичных методов для Категорий и Товаров, после чего возвращаем массив с соотв. ключами.
 	 * @param mixed $term - условие поиска
 	 * @param int $limit - нужное количество "подсказок" для автокомплита
@@ -116,31 +116,13 @@ class Search
 		$categories = $categoryQuery->getResult();
 
 		return $categories;
-		/*
-		$router = $this->container->get('router');
-
-		$categoryResults = array();
-		foreach($categories as $category) {
-			$categoryResults[] = array(
-				'desc'   => $category->getDescription(),
-				'label'  => $category->getName(),
-				'razdel' => 1,
-				'id' => $category->getId(),
-				'url'    => $router->generate('app_catalog_category', array(
-					'id' => $category->getId()
-				)),
-				'img' => $category->getPicturePath()
-			);
-		}
-		return $categoryResults;
-		*/
 	}
 
 	/**
 	 * Автокомплит для продуктов
 	 * @param $term
 	 * @param int $limit
-	 * @return array
+	 * @return array - массив сущностей, полученный из SQL-запроса через RSM
 	 */
 	private function suggestProducts($term, $limit = self::DEFAULT_LIMIT)
 	{
@@ -186,28 +168,5 @@ class Search
 		$products = $categoryQuery->getResult();
 
 		return $products;
-
-		/*
-		$router = $this->container->get('router');
-
-		$productResults = array();
-		foreach ($products as $product) {
-			$productResults[] = array(
-				'desc'   => $product->getDescription(),
-				'label'  => $product->getName(),
-				'razdel' => 0,
-				'url' => $router->generate('app_catalog_product', array(
-					'id' => $product->getId(),
-				)),
-				'id' => $product->getId(),
-				'mark'  => $product->getMark(),
-				'price' => $product->getPrice(),
-				'nomen' => $product->getNomen(),
-				'img' => $product->getPicturePath()
-			);
-		}
-
-		return $productResults;
-		*/
 	}
 }

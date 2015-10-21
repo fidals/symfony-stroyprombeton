@@ -94,7 +94,6 @@ class CatalogController extends Controller
 	{
 		$condition = $request->get('search');
 		$page = $request->get('page', 1);
-		$routeName = $request->get('_route');
 		$limit = 150;
 
 		if (empty($condition)) {
@@ -148,7 +147,7 @@ class CatalogController extends Controller
 
 		/**
 		 * Получаем результат поиска в виде ассоциативного массива с ключами categories и products.
-		 * На основе него мы сделаем общий массив с нужными нам ключами для JSON преобразования.
+		 * На основе него мы сделаем общий массив с нужными нам ключами для JSON ответа.
 		 */
 		$result = $this->get('catalog.search')->suggest($term);
 		$router = $this->container->get('router');
@@ -187,9 +186,11 @@ class CatalogController extends Controller
 			);
 		}
 
-		//Получаем общий массив
+		/**
+		 * Получаем общий массив.
+		 * Преобразовываем его в JSON и отдаем в виде респонса.
+		 */
 		$result = array_merge($categoryResults, $productResults);
-
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 
 		return new Response($json);
