@@ -9,7 +9,7 @@ app_catalog_suggest:
 
 app_catalog_search:
     pattern: /search/
-    defaults: { _controller: AppCatalogBundle:Catalog:search }
+    defaults: { _controller: AppCatalogBundle:Catalog:searchResults }
 
 app_catalog_search_results:
     pattern: /search-results/

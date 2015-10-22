@@ -387,7 +387,7 @@ function RunSearch(condition) {
 	$.ajax({
 		type: "GET",
 		url: "/search/",
-		data: { condition: _search_condition },
+		data: { search: _search_condition },
 		cache: false,
 		success: function (data) {
 			if (data == "noresult") {

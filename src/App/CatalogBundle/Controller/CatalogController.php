@@ -84,28 +84,6 @@ class CatalogController extends Controller
 		die('Page is not found');
 	}
 
-
-	/**
-	 * Поискиовая выдача списка продуктов с пагинацей
-	 * Поиск основан на данных из автокомплита
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function searchAction(Request $request)
-	{
-		$condition = $request->get('condition');
-		$page = $request->get('page', 1);
-		$limit = 150;
-
-		if (empty($condition)) {
-			return new Response();
-		}
-
-		return $this->render('AppCatalogBundle:Search:search.html.twig', array(
-			'elements' => $this->get('catalog.search')->search($condition, $limit * $page)
-		));
-	}
-
 	/**
 	 * Поискиовая выдача списка продуктов с пагинацей
 	 * Поиск основан на данных из автокомплита
@@ -122,10 +100,13 @@ class CatalogController extends Controller
 			return new Response();
 		}
 
+		$searchResults = $this->get('catalog.search')->search($condition, $limit * $page);
+
 		return $this->render('AppCatalogBundle:Search:results.search.html.twig', array(
-			'elements' => $this->get('catalog.search')->search($condition, $limit * $page),
+			'elements' => $searchResults,
 			'searchCondition' => $condition
 		));
+
 	}
 
 	public function gbiVisualAction()
@@ -164,9 +145,52 @@ class CatalogController extends Controller
 
 		$jsonSrv = new JsonEncoder();
 
-		// возвращает массив данных для автокомплита
+		/**
+		 * Получаем результат поиска в виде ассоциативного массива с ключами categories и products.
+		 * На основе него мы сделаем общий массив с нужными нам ключами для JSON ответа.
+		 */
 		$result = $this->get('catalog.search')->suggest($term);
+		$router = $this->container->get('router');
 
+		$categoryResults = array();
+		foreach($result['categories'] as $category) {
+			$categoryResults[] = array(
+				'desc'   => $category->getDescription(),
+				'label'  => $category->getName(),
+				'razdel' => 1,
+				'id' => $category->getId(),
+				'url'    => $router->generate('app_catalog_category', array(
+					'id' => $category->getId()
+				)),
+				'img' => $category->getPicturePath()
+			);
+		}
+
+		$productResults = array();
+		foreach ($result['products'] as $product) {
+			$productResults[] = array(
+				'desc' => $product->getDescription(),
+				'label' => $product->getName(),
+				'razdel' => 0,
+				'url' => $router->generate(
+					'app_catalog_product',
+					array(
+						'id' => $product->getId(),
+					)
+				),
+				'id' => $product->getId(),
+				'mark' => $product->getMark(),
+				'price' => $product->getPrice(),
+				'nomen' => $product->getNomen(),
+				'img' => $product->getPicturePath()
+			);
+		}
+
+		/**
+		 * Получаем общий массив.
+		 * Преобразовываем его в JSON и отдаем в виде респонса.
+		 */
+		$result = array_merge($categoryResults, $productResults);
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 
 		return new Response($json);
