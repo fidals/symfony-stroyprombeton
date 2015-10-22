@@ -123,7 +123,7 @@ class Search
 				'desc'   => $category->getDescription(),
 				'label'  => $category->getName(),
 				'razdel' => 1,
-				'id' => $category->getId(),
+				'id'     => $category->getId(),
 				'url'    => $router->generate('app_catalog_category', array(
 					'id' => $category->getId()
 				)),

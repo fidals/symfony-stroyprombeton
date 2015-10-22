@@ -1,3 +1,8 @@
+// ================================================================
+// ПЕРЕМЕННЫЕ:
+// ================================================================
+var singleResultId = 0;
+
 // Преобразует строку Url с параметрами объект, где название параметра является ключем к его значению
 function getQueryParams(qs) {
 	qs = qs.split('+').join(' ');
@@ -15,7 +20,7 @@ function getQueryParams(qs) {
 
 $(function () {
 	// Делаем callback на событие popstate из history.js
-	History.Adapter.bind(window,'popstate',function(e){
+	History.Adapter.bind(window, 'popstate', function(e) {
 		var State = History.getState();
 		// Способ парсинга url взят отсюда https://gist.github.com/jlong/2428561
 		var parser = document.createElement('a');
@@ -24,10 +29,10 @@ $(function () {
 		var params = getQueryParams(search);
 
 		// Если Url не аяксовый поиск - то загружаем страницу как обычно
-		if(parser.pathname !== '/search-results/') {
+		if ( parser.pathname !== '/search-results/' ) {
 			window.location.reload();
 		} else {
-			RunSearch(params.search);
+			RunSearch( params.search );
 		}
 	});
 
@@ -258,14 +263,14 @@ function EngineSearch() {
 	_def_val = $input_cond.val();
 
 	$input_cond.autocomplete({
-		source: "/suggest/",
-		minLength: 2,
-		delay: 500,
-		autoFocus: false,
-		open: function( event, ui ) {
+		source    : "/suggest/",
+		minLength : 2,
+		delay     : 500,
+		autoFocus : false,
+		open      : function( event, ui ) {
 			$('.ui-menu').width( $(this).css("width") );
 		},
-		select: function (event, ui) {
+		select    : function (event, ui) {
 			$input_cond.val(ui.item.value);
 			location.href = ui.item.url;
 			return false;
@@ -288,21 +293,54 @@ function EngineSearch() {
 
 	$input_cond.keypress(function (event) {
 		if (event.which == 13) {
-			var $input_cond = $("input#search_condition");
-			var val = $.trim($input_cond.val());
-			if (val == "" || val == _def_val) {
+			var $input_cond       = $("#search_condition"),
+				searchResultItems = $('.ui-autocomplete').find('.ui-menu-item').size(), // кол-во найденых товаров;
+				val               = $.trim($input_cond.val());
+
+			if ( val == "" || val == _def_val ) {
 				alert("Введите условие поиска по каталогу ЖБИ продукции");
 				return;
 			}
 
+			if ( searchResultItems == 1 ) {
+				window.location.pathname = 'gbi/products/' + singleResultId + '/';
+			} else {
+				_search_condition = val;
+
+				History.pushState(null, document.title, '/search-results/?search=' + _search_condition);
+				RunSearch();
+			}
+		}
+	});
+
+	$("#btn-search-action").click(function () {
+		var $input_cond       = $("#search_condition"),
+			searchResultItems = $('.ui-autocomplete').find('.ui-menu-item').size(), // кол-во найденых товаров;
+			val               = $.trim($input_cond.val());
+
+		if (val == "" || val == _def_val) {
+			alert("Введите условие поиска по каталогу ЖБИ продукции");
+			return;
+		}
+
+		if ( searchResultItems == 1 ) {
+			window.location.pathname = 'gbi/products/' + singleResultId + '/';
+		} else {
 			_search_condition = val;
+
 			History.pushState(null, document.title, '/search-results/?search=' + _search_condition);
 			RunSearch();
 		}
 	});
 
-	$input_cond.data( "autocomplete")._renderMenu = function(ul, items) {
+	$input_cond.data( "autocomplete" )._renderMenu = function( ul, items ) {
 		var that = this;
+
+		if ( items.length == 1 ) {
+			// Если результат поиска - 1 товар, то запоминаем его id:
+			singleResultId = items[0].id;
+		}
+
 		$.each(items, function(index, item) {
 			that._renderItem(ul, item);
 		});
@@ -312,16 +350,17 @@ function EngineSearch() {
 				text: 'Показать все результаты...',
 				href: '#'
 			});
-			// a.css('color', '#C90000');
-			// a.css('cursor', 'pointer');
+
 			a.css({
 				'color'  : '#C90000',
 				'cursor' : 'pointer'
 			});
+
 			a.click(function(){
 				$('.search-form-submit > input[type=button]').trigger( 'click' );
 				$input_cond.data('autocomplete').close();
 			});
+
 			var $li = $('<li>');
 			$li.append(a).appendTo(ul);
 		}
@@ -330,49 +369,44 @@ function EngineSearch() {
 	// код взят с modx-версии
 	$input_cond.data( "autocomplete" )._renderItem = function( ul, item ) {
 		var a = $('<a>', {
-			onclick: "document.location.href = '"+item.url+"'",
-			text: item.label
+			onclick : "document.location.href = '" + item.url + "'",
+			text    : item.label
 		});
-		if(item.razdel){
+
+		if ( item.razdel ) {
 			a.css("font-weight", "bold");
 		}
-		if(item.desc && item.desc != '') a.prepend("<span style='color: #808080;'>[" + item.desc + "]</span> ");
-		var $li = $('<li>');
-		return $li.append(a).data('item.autocomplete', item).appendTo(ul);
-	}
 
-	$("div.search-form td.search-form-submit input").click(function () {
-		var $input_cond = $("input#search_condition");
-		var val = $.trim($input_cond.val());
-		if (val == "" || val == _def_val) {
-			alert("Введите условие поиска по каталогу ЖБИ продукции");
-			return;
+		if ( item.desc && item.desc != '' ) {
+			a.prepend("<span style='color: #808080;'>[" + item.desc + "]</span> ");
 		}
 
-		_search_condition = val;
-		History.pushState(null, document.title, '/search-results/?search=' + _search_condition);
-		RunSearch();
-	});
+		var $li = $('<li>');
 
+		return $li.append(a).data('item.autocomplete', item).appendTo(ul);
+	};
 
 	RunSearch();
 }
 
 /* ```````````````````````````````````````````````````````````````````````````````` */
 
-function RunSearch(condition) {
+function RunSearch( condition ) {
 	_search_condition = condition || $.trim(_search_condition);
-	if (_search_condition == "") {
+
+	if ( _search_condition == "" ) {
 		return;
 	}
 
-	var $input_cond = $("input#search_condition");
+	var $input_cond = $("#search_condition");
 	$input_cond.val(_search_condition);
 
 	var $pc_div = $("div.primary-content");
+
 	if (_pc_div_html_backup == null) {
 		_pc_div_html_backup = $pc_div.html();
 	}
+
 	$pc_div.empty();
 
 	$pc_div.html('<div class="search-waiting">Подождите пожалуйста.<br />Выполняется поиск в каталоге продукции ...</div>');
@@ -408,7 +442,7 @@ function SearchClose() {
 	var $pc_div = $("div.primary-content");
 	$pc_div.html(_pc_div_html_backup);
 
-	var $input_cond = $("input#search_condition");
+	var $input_cond = $("#search_condition");
 	$input_cond.val(_def_val);
 }
 
