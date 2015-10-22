@@ -254,9 +254,8 @@ function GVDS_ShowSubSections() {
 /* -------------------------------------------------------------------------------- */
 
 function EngineSearch() {
-	var $input_cond = $("input#search_condition");
+	var $input_cond = $("#search_condition");
 	_def_val = $input_cond.val();
-	var class_active = "search-input-active";
 
 	$input_cond.autocomplete({
 		source: "/suggest/",
@@ -277,7 +276,6 @@ function EngineSearch() {
 		var val = $.trim($(this).val());
 		if (val == _def_val) {
 			$(this).val("");
-			$(this).addClass(class_active);
 		}
 	});
 
@@ -285,7 +283,6 @@ function EngineSearch() {
 		var val = $.trim($(this).val());
 		if (val == "") {
 			$(this).val(_def_val);
-			$(this).removeClass(class_active);
 		}
 	});
 
@@ -310,21 +307,25 @@ function EngineSearch() {
 			that._renderItem(ul, item);
 		});
 
-		if(items.length == 50) {
+		if ( items.length == 20 ) {
 			var a = $('<a>', {
-				text: 'Смотреть все результаты...',
+				text: 'Показать все результаты...',
 				href: '#'
 			});
-			a.css("color", "#C90000");
-			a.css("cursor", "pointer");
+			// a.css('color', '#C90000');
+			// a.css('cursor', 'pointer');
+			a.css({
+				'color'  : '#C90000',
+				'cursor' : 'pointer'
+			});
 			a.click(function(){
-				$(".search-form-submit > input[type=button]").trigger( "click" );
-				$input_cond.data("autocomplete").close();
+				$('.search-form-submit > input[type=button]').trigger( 'click' );
+				$input_cond.data('autocomplete').close();
 			});
 			var $li = $('<li>');
 			$li.append(a).appendTo(ul);
 		}
-	}
+	};
 
 	// код взят с modx-версии
 	$input_cond.data( "autocomplete" )._renderItem = function( ul, item ) {
@@ -367,7 +368,6 @@ function RunSearch(condition) {
 
 	var $input_cond = $("input#search_condition");
 	$input_cond.val(_search_condition);
-	$input_cond.addClass("search-input-active");
 
 	var $pc_div = $("div.primary-content");
 	if (_pc_div_html_backup == null) {
@@ -410,7 +410,6 @@ function SearchClose() {
 
 	var $input_cond = $("input#search_condition");
 	$input_cond.val(_def_val);
-	$input_cond.removeClass("search-input-active");
 }
 
 /* -------------------------------------------------------------------------------- */
