@@ -2080,3 +2080,5 @@ i.fa-camera:hover {
 	padding-right: 6px;
 	text-align: right !important;
 }
+
+#sb-wrapper-inner, #sb-body, #sb-body-inner { background-color: #fff; }
