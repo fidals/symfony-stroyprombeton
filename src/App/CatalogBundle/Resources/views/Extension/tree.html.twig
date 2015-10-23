@@ -1,0 +1,7 @@
+{# Шаблон для отрисовки дерева на главной. Все, что мы делаем - вызываем макрос и передаем ему дерево категорий и желаемую глубину #}
+
+{% import 'AppCatalogBundle:Extension:tree_macro.html.twig' as tree %}
+
+<section class="akkordion" id="akkordion">
+	{{ tree.tree_build(categoryTree, depth) }}
+</section>
