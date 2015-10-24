@@ -52,7 +52,13 @@
 													<div class="product-price"><span>Цена:</span></div>
 												</td>
 												<td class="product-desc-right-col">
-													<div class="product-price">{{ product.getPriceRounded() }} руб.</div>
+														<div class="product-price">
+															{% if product.getPriceRounded() %}
+																{{ product.getPriceRounded() }} руб.
+															{% else %}
+																По запросу
+															{% endif %}
+														</div>
 												</td>
 											</tr>
 											<tr>
