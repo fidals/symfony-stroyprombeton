@@ -27,7 +27,6 @@
 
 			<tbody>
 				{% set orderTotal = 0 %}
-				{% set totalCount = 0 %}
 				{% set isOnDemand = false %}
 				{% for product in order.getProducts() %}
 					<tr>
@@ -52,7 +51,6 @@
 						</td>
 						<td class="order-product-count">
 							{{ product.count }} шт.
-							{% set totalCount = totalCount + product.count %}
 						</td>
 					</tr>
 				{% endfor %}
@@ -69,7 +67,6 @@
 						{% endif %}
 					</td>
 					<td class="order-product-count">
-						{{ totalCount }} шт.
 					</td>
 				</tr>
 			</tbody>
