@@ -56,26 +56,36 @@ class CartController extends Controller
 	public function orderAction(Request $request)
 	{
 		$form = $this->createForm(new OrderType(), null, array('csrf_protection' => false));
+
 		if ($request->getMethod() == 'POST') {
+
 			$form->handleRequest($request);
+
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
+
 				$recipients = array(
 					$this->container->getParameter('email_info'),
 					$form['email']->getData()
 				);
+
 				$body = $this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
 					'form' => $form->createView(),
 					'cart' => $this->get('catalog.cart')->loadCart(true)
 				));
+
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
 					->setTo($recipients)
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
-					->setBody($body);
+					->setBody($body)
+					->attach(\Swift_Attachment::fromPath($attach));
+
 				$mailer->send($message);
+
 				$this->get('catalog.cart')->cleanCart();
+
 				return $this->redirect($this->generateUrl('app_catalog_order_thanks'));
 			}
 		}

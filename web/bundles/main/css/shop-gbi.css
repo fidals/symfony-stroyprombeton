@@ -407,6 +407,10 @@ div.form_comment{
 	margin-left: 0px;
 }
 
+.shop-order-table .btn-order-send {
+	float: right;
+}
+
 .order-price-form td:nth-child(1) {
 	width: 330px;
 }

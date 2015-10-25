@@ -14,7 +14,8 @@ class OrderType extends AbstractType
 			->add('email', 'email', array('required' => true))
 			->add('company', 'text', array('required' => true))
 			->add('deliveryAddress', 'textarea', array('required' => false))
-			->add('comment', 'textarea', array('required' => false));
+			->add('comment', 'textarea', array('required' => false))
+			->add('file', 'file', array('required' => false));
 	}
 
 	public function getName()
