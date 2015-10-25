@@ -86,23 +86,24 @@
 	</div>
 	<div class="page-content">
 		<div class="menu-v">
-			<div class="menu-v-top"></div>
 			<div class="menu-v-content-wrapper">
 				<div class="menu-v-content">
 					{{ buildCategoryTree(2) }}
 				</div>
 			</div>
-			<div class="menu-v-bottom"></div>
+
 			<div class="OrderPrice">
 				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">
 					<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на изделия" alt="Расчёт заявок на конструкции">
 				</a>
 			</div>
+
 			<div class="OrderPrice">
 				<a class="a_price" href="{{ path('app_main_price_list_booking') }}">
 					<img src="/assets/images/order_price.png" title="прайс-листы на изделия" alt="прайс-листы на конструкции">
 				</a>
 			</div>
+
 			<div class="OrderDraw">
 				<a href="{{ path('app_main_staticpage', { 'alias': 'izgotovlenie-gbi-po-chertezham' }) }}">
 					<img src="/assets/images/order_draw.png" title="изготовление изделий по индивидуальным чертежам" alt="производство конструкций по индивидуальным чертежам">
