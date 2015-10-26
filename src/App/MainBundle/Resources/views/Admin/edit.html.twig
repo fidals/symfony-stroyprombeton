@@ -1,14 +1,9 @@
 {% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
 
 {% block title %}
-	{{ "My title" }}
-{% endblock%}
-
-{% block actions %}
-	<div class="sonata-actions">
-			{% if object.getRouteName() %}
-				<a href="{{ path(object.getRouteName(), object.getRouteParameters) }}">{{ object.getRouteName() }}</a>
-			{% endif %}
-		</ul>
-	</div>
+	{{ parent() }}
+	<br>
+		{% if object.getRouteName() %}
+			<a href="{{ path(object.getRouteName(), object.getRouteParameters) }}" target="_blank">{{ path(object.getRouteName(), object.getRouteParameters) }}</a>
+		{% endif %}
 {% endblock %}
