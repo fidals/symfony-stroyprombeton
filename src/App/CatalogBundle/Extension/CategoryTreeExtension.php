@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
- * Class TreeMenuExtension для получения массива с деревом категорий
+ * Class CategoryTreeExtension для получения массива с деревом категорий
  * @package App\CatalogBundle\Extension
  */
 class CategoryTreeExtension extends \Twig_Extension
