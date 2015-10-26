@@ -89,7 +89,7 @@
 			<div class="menu-v-top"></div>
 			<div class="menu-v-content-wrapper">
 				<div class="menu-v-content">
-					{{ buildCategoryTree(2) }}
+					{% include 'AppCatalogBundle:Extension:tree.html.twig' with {categoryTree: getCategoryTree(), depth: 2} %}
 				</div>
 			</div>
 			<div class="menu-v-bottom"></div>
