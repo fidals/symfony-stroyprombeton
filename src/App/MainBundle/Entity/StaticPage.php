@@ -66,4 +66,11 @@ class StaticPage
 			$context->addViolation('Недопустимые для ссылки символы');
 		}
 	}
+
+	public function getRouteName()
+	{
+		$route = '/page/'.$this->getAlias().'/';
+
+		return $route;
+	}
 }

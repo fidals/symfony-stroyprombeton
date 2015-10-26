@@ -331,4 +331,12 @@ class Category
 		return $this->file;
 	}
 	/* ----------- Код для файла кончился -------------- */
+
+
+	public function getRouteName()
+	{
+		$route = '/gbi/categories/'.$this->getId().'/';
+
+		return $route;
+	}
 }

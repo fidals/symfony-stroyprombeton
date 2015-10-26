@@ -53,4 +53,11 @@ class Post
 	{
 		return $this->introText;
 	}
+
+	public function getRouteName()
+	{
+		$route = '/news/'.$this->getId().'/';
+
+		return $route;
+	}
 }

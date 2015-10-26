@@ -75,4 +75,11 @@ class Object
 	{
 		return $this->territory;
 	}
+
+	public function getRouteName()
+	{
+		$route = '/our-object/'.$this->getId().'/';
+
+		return $route;
+	}
 }

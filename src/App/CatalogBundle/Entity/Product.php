@@ -471,4 +471,11 @@ class Product
 		}
 		return self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
 	}
+
+	public function getRouteName()
+	{
+		$route = '/gbi/products/'.$this->getId().'/';
+
+		return $route;
+	}
 }
