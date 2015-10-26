@@ -1,8 +1,8 @@
 {% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
 
-{% block title %}
+{% block form %}
+	{% if object.getRouteName() and object.getRouteParameters() %}
+		<a class="page-link" href="{{ path(object.getRouteName(), object.getRouteParameters()) }}" target="_blank">{{ path(object.getRouteName(), object.getRouteParameters()) }}</a>
+	{% endif %}
 	{{ parent() }}
-		{% if object.getRouteName() %}
-			<a href="{{ path(object.getRouteName(), object.getRouteParameters) }}" target="_blank">{{ path(object.getRouteName(), object.getRouteParameters) }}</a>
-		{% endif %}
 {% endblock %}
