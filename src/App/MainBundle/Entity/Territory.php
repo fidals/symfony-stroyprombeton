@@ -84,4 +84,16 @@ class Territory
 	{
 		return $this->getName();
 	}
+
+	public function getRouteName()
+	{
+		return 'app_main_territory';
+	}
+
+	public function getRouteParameters()
+	{
+		$parameters = array('territoryId' => $this->getId());
+
+		return $parameters;
+	}
 }

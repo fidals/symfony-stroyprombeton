@@ -471,4 +471,16 @@ class Product
 		}
 		return self::IMG_DIR_PATH . '/' . self::EMPTY_THUMB_NAME;
 	}
+
+	public function getRouteName()
+	{
+		return 'app_catalog_product';
+	}
+
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
+	}
 }

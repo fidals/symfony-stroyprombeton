@@ -53,4 +53,16 @@ class Post
 	{
 		return $this->introText;
 	}
+
+	public function getRouteName()
+	{
+		return 'app_main_post';
+	}
+
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
+	}
 }
