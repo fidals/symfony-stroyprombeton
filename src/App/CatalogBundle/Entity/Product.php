@@ -474,8 +474,13 @@ class Product
 
 	public function getRouteName()
 	{
-		$route = '/gbi/products/'.$this->getId().'/';
+		return 'app_catalog_product';
+	}
 
-		return $route;
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
 	}
 }

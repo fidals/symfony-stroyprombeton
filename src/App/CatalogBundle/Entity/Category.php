@@ -335,8 +335,13 @@ class Category
 
 	public function getRouteName()
 	{
-		$route = '/gbi/categories/'.$this->getId().'/';
+		return 'app_catalog_category';
+	}
 
-		return $route;
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
 	}
 }

@@ -93,6 +93,8 @@ swiftmailer:
 sonata_admin:
     title: Административная панель
     title_logo: /bundles/main/images/logo.png
+    templates:
+        edit: AppMainBundle:Admin:edit.html.twig
     dashboard:
         blocks:
              - { position: left, type: sonata.admin.block.admin_list }

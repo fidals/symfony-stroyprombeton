@@ -78,8 +78,13 @@ class Object
 
 	public function getRouteName()
 	{
-		$route = '/our-object/'.$this->getId().'/';
+		return 'app_main_object';
+	}
 
-		return $route;
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
 	}
 }

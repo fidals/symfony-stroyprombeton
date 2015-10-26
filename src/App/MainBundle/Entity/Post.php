@@ -56,8 +56,13 @@ class Post
 
 	public function getRouteName()
 	{
-		$route = '/news/'.$this->getId().'/';
+		return 'app_main_post';
+	}
 
-		return $route;
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
 	}
 }

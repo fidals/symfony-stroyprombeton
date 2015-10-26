@@ -69,8 +69,13 @@ class StaticPage
 
 	public function getRouteName()
 	{
-		$route = '/page/'.$this->getAlias().'/';
+		return 'app_main_staticpage';
+	}
 
-		return $route;
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getAlias());
+
+		return $parameters;
 	}
 }
