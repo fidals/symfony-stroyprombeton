@@ -9,15 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
  * Class TreeMenuExtension для получения массива с деревом категорий
  * @package App\CatalogBundle\Extension
  */
-class TreeMenuExtension extends \Twig_Extension
+class CategoryTreeExtension extends \Twig_Extension
 {
 	private $categoryRepo;
-	private $router;
 
-	public function __construct(EntityManager $entityManager, Router $router)
+	public function __construct(EntityManager $entityManager)
 	{
 		$this->categoryRepo = $entityManager->getRepository('AppCatalogBundle:Category');
-		$this->router = $router;
 	}
 
 	public function getFunctions()
@@ -31,7 +29,7 @@ class TreeMenuExtension extends \Twig_Extension
 
 	public function getName()
 	{
-		return "tree_menu_extension";
+		return "category_tree_extension";
 	}
 
 	/**
