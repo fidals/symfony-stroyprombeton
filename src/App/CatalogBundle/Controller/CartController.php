@@ -74,13 +74,15 @@ class CartController extends Controller
 					'cart' => $this->get('catalog.cart')->loadCart(true)
 				));
 
+				$attachFile = '/tmp';
+
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
 					->setTo($recipients)
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
 					->setBody($body)
-					->attach(\Swift_Attachment::fromPath($attach));
+					->attach(\Swift_Attachment::fromPath($attachFile));
 
 				$mailer->send($message);
 

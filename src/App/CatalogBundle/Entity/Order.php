@@ -2,9 +2,10 @@
 
 namespace App\CatalogBundle\Entity;
 
-use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Assert\File;
 
 class Order
 {
@@ -14,6 +15,7 @@ class Order
 	private $company = '';
 	private $deliveryAddress = '';
 	private $comment = '';
+	private $attachFile;
 
 	public static function loadValidatorMetadata(ClassMetadata $metadata)
 	{
@@ -22,6 +24,26 @@ class Order
 		$metadata->addPropertyConstraint('phone', new Regex(array('pattern' => "/^((8|0|\+\d{1,2})[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i")));
 		$metadata->addPropertyConstraint('email', new NotBlank());
 		$metadata->addPropertyConstraint('company', new NotBlank());
+		$metadata->addPropertyConstraint('attachFile', new File(array(
+			'maxSize'   => '5M',
+            'mimeTypes' => array(
+                'application/pdf',
+                'application/x-pdf',
+                'image/png'
+            ),
+            'mimeTypesMessage' => 'Неверный формат файла',
+            'uploadFormSizeErrorMessage' => 'Размер файла не должен превышать 5 Мб'
+        )));
+	}
+
+	public function setAttachFile($attachFile)
+	{
+		$this->attachFile = $attachFile;
+	}
+
+	public function getAttachFile()
+	{
+		return $this->attachFile;
 	}
 
 	public function setComment($comment)
