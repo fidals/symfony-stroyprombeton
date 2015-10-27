@@ -71,7 +71,7 @@ class Search
 	 * @param int $limit
 	 * @return array
 	 */
-	private function suggestCategories($term, $limit = self::SEARCH_DEFAULT_LIMIT)
+	private function suggestCategories($term, $limit = self::SUGGEST_DEFAULT_LIMIT)
 	{
 		// инициализация rsm
 		// rsm нужен для того чтобы получить массив сущностей из обычного sql запроса
