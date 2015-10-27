@@ -303,22 +303,23 @@ div.address ul li.address-title {
 	font-weight: normal;
 }
 
-/* -------------------------------------------------------------------------------- */
-
-div.menu-h {
+/* ================================================================
+ * Меню навигация:
+ * ================================================================ */
+.menu-h {
 	margin: 0;
 	display: block;
 }
 
-div.menu-h ul {
-	background-repeat: repeat-x;
-	background-image: url('../images/polosa.png');
-	background-position: center center;;
-	margin: -70px 0 -10px 0px;
-	width: 100%;
+.menu-h ul {
+	background: #F9F9F9;
+	background: -webkit-linear-gradient(top, #F9F9F9, #E8E8E8);
+	background:   linear-gradient(to bottom, #F9F9F9, #E8E8E8);
+	margin: -70px 0 -10px 0;
 	padding: 0;
 	display: table;
 	list-style-type: none;
+	width: 100%;
 }
 
 div.menu-h ul li {
@@ -329,7 +330,6 @@ div.menu-h ul li {
 }
 
 div.menu-h ul li.menu-h-s a {
-	/*background-image: url('../images/menu-h-selected.png');*/
 	background: url('../images/menu-h-hover_2.png') no-repeat center center;
 	color: #FFF;
 	font-weight: bold;
@@ -398,51 +398,36 @@ div.cart-actions ul li:last-child img {
 
 /* -------------------------------------------------------------------------------- */
 
-div.page-content {
-	margin-bottom: 0px;
+.page-content {
+	margin-bottom: 0;
 	margin-top: 30px;
 }
 
-/* ```````````````````````````````````````````````````````````````````````````````` */
-
-div.menu-v {
+/* ================================================================
+ * Меню аккордеон:
+ * ================================================================ */
+ .menu-v {
 	float: left;
-	width: 270px;
-	position: relative;
-	z-index: 1;
 	padding: 0 0 50px 0;
-}
-
-/* ```````````````````````````````````````````````````````````````````````````````` */
-
-div.menu-v-top {
+	position: relative;
 	width: 270px;
-	height: 25px;
-	background-image: url("../images/menu-v-top.jpg");
-	background-repeat: no-repeat;
-	background-position: center bottom;
+	z-index: 1;
 }
 
-div.menu-v-bottom {
-	width: 270px;
-	height: 45px;
-	background: url("../images/menu-v-bottom.jpg") center top no-repeat;
+.menu-v-content-wrapper {
+	background: #EBEBEB;
+	border-radius: 10px;
+	border: 5px solid #FFF;
+	box-shadow: 0 3px 10px #999;
+	margin: 0 10px;
+	width: 240px;
 }
 
-div.menu-v-content-wrapper {
-	width: 270px;
-	background: url("../images/menu-v-bg.jpg") repeat-y;
+.menu-v-content {
+	padding: 20px 15px 40px;
 }
 
-/* ```````````````````````````````````````````````````````````````````````````````` */
-
-div.menu-v-content {
-	width: 210px;
-	padding: 0 30px 0 30px;
-	background: url("../images/menu-v-bg-bullet.jpg") center bottom repeat-x;
-}
-
-div.menu-v-content ul {
+.menu-v-content ul {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
@@ -450,10 +435,9 @@ div.menu-v-content ul {
 
 .akkordion-link,
 .akkordion-title,
-div.menu-v-content ul li a {
+.menu-v-content ul li a {
 	border: 1px solid transparent;
 	border-top: 1px solid #DDD;
-	border-radius: 5px;
 	color: #C90000;
 	cursor: pointer;
 	display: block;
@@ -473,9 +457,10 @@ div.menu-v-content ul li a {
 
 .akkordion-link:hover,
 .akkordion-title:hover,
-div.menu-v-content ul li a:hover {
+.menu-v-content ul li a:hover {
 	background-color: #CFCFCF;
 	border: 1px solid #999;
+	border-radius: 5px;
 	color: #000;
 	text-decoration: none;
 }
@@ -490,30 +475,30 @@ div.menu-v-content ul li a:hover {
 	position: absolute;
 	right: -2px;
 	-webkit-transition: -webkit-transform 0.3s ease-in-out;
-	        transition: 		transform 0.3s ease-in-out;
+			transition: 		transform 0.3s ease-in-out;
 	-webkit-transform: translate(0, -50%);
-	    -ms-transform: translate(0, -50%);
-	        transform: translate(0, -50%);
+		-ms-transform: translate(0, -50%);
+			transform: translate(0, -50%);
 	top: 50%;
 	width: 11px;
 }
 
 .akkordion-title.active .fa {
 	-webkit-transform: rotate(-90deg) translate(60%, -25%);
-	    -ms-transform: rotate(-90deg) translate(60%, -25%);
-	        transform: rotate(-90deg) translate(60%, -25%);
+		-ms-transform: rotate(-90deg) translate(60%, -25%);
+			transform: rotate(-90deg) translate(60%, -25%);
 }
 
 .akkordion-last-paragraph .fa {
 	position: relative;
 	-webkit-transition: all 0.3s ease-in-out;
-	        transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
 }
 
 .akkordion-last-paragraph:hover .fa {
 	-webkit-transform: translate(5px, 0);
-	    -ms-transform: translate(5px, 0);
-	        transform: translate(5px, 0);
+		-ms-transform: translate(5px, 0);
+			transform: translate(5px, 0);
 }
 
 .akkordion-link-to-category {
@@ -528,26 +513,27 @@ div.menu-v-content ul li a:hover {
 	top: 1px;
 }
 
-div.menu-v-content div.menu-v-dropdown {
+.menu-v-dropdown {
 	padding: 5px 0 10px 15px;
 }
 
-div.menu-v-content a.show-v-dropdown {
-	background: url("../images/icon-v-menu-open.png") right center no-repeat;
+.show-v-dropdown {
+	/*background: url("../images/icon-v-menu-open.png") right center no-repeat;*/
 	border: 1px solid #CCC;
 }
 
 .show-v-dropdown-close {
-	background-image: url("../images/icon-v-menu-close.png") !important;
+	/*background-image: url("../images/icon-v-menu-close.png") !important;*/
 	border: 1px solid transparent !important;
 }
-/* ```````````````````````````````````````````````````````````````````````````````` */
 
-div.menu-v-content ul li.special-section a {
+/* меню аккордеон конец */
+
+.menu-v-content ul li.special-section a {
 	padding-left: 17px !important;
 }
 
-div.special-section-asterisk {
+.special-section-asterisk {
 	background-image: url("../images/asterisk.png");
 	background-repeat: no-repeat;
 	height: 10px;
@@ -892,9 +878,6 @@ div.contacts table td.contact-data ul {
 
 /* -------------------------------------------------------------------------------- */
 
-table.data-table {
-}
-
 table.data-table th, table.data-table td {
 	padding: 2px !important;
 	font-size: 0.8em;
@@ -910,13 +893,10 @@ table.data-table th {
 /* -------------------------------------------------------------------------------- */
 
 div#YMapsID-229 table td {
-	padding: 0px !important;
+	padding: 0 !important;
 }
 
 /* -------------------------------------------------------------------------------- */
-
-div.page-separate {
-}
 
 div.page-separate table {
 	width: 100%;
@@ -991,10 +971,6 @@ div.gbi-showcase-top-line img {
 	float: left;
 }
 
-div.gbi-showcase-top-line div {
-
-}
-
 div.gbi-showcase-top-line h3 {
 	height: 20px;
 	color: #999;
@@ -1027,7 +1003,6 @@ div.gbi-showcase-top-line div.link-detailed {
 	margin-right: 0px;
 	position: relative;
 	left: 10px;
-
 }
 
 .cat-info p {
@@ -1038,8 +1013,7 @@ div.gbi-showcase-top-line div.link-detailed {
 	vertical-align: top;
 }
 
-/*
-* ******************************************************************************* */
+/* ******************************************************************************* */
 
 div.gbi-showcase table td.gbi-showcase-name a {
 	display: block;
@@ -2028,7 +2002,7 @@ div.gbi-list table td ul {
 .category-tree-depth-2 > li {
 	font-weight: normal;
 	font-size: 14px;
-	margin: 0 0 0 15px;
+	margin: 0 0 0 10px;
 }
 
 p.akkordion-last-paragraph {
