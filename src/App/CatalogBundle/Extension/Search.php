@@ -24,7 +24,8 @@ class Search
 	 * Лимит элементов в поиске
 	 * Если найдено категорий n >= LIMIT, то продукты не ищем, если n < LIMIT то ишем LIMIT - n продуктов
 	 */
-	const DEFAULT_LIMIT = 50;
+	const SEARCH_DEFAULT_LIMIT = 50;
+	const SUGGEST_DEFAULT_LIMIT = 20;
 
 	/**
 	 * @param ContainerInterface $container
@@ -41,7 +42,7 @@ class Search
 	 * @param $limit
 	 * @return mixed
 	 */
-	public function search($term, $limit = self::DEFAULT_LIMIT)
+	public function search($term, $limit = self::SEARCH_DEFAULT_LIMIT)
 	{
 		return $this->suggest($term, $limit);
 	}
@@ -53,7 +54,7 @@ class Search
 	 * @param int $limit - нужное количество "подсказок" для автокомплита
 	 * @return array - ассоциативный массив с результатами поиска по категориям и продуктам под соотв. ключами
 	 */
-	public function suggest($term, $limit = self::DEFAULT_LIMIT)
+	public function suggest($term, $limit = self::SUGGEST_DEFAULT_LIMIT)
 	{
 		$categorySuggest = $this->suggestCategories($term, $limit);
 		$categoryResultsCount = count($categorySuggest);
@@ -74,7 +75,7 @@ class Search
 	 * @param int $limit
 	 * @return array
 	 */
-	private function suggestCategories($term, $limit = self::DEFAULT_LIMIT)
+	private function suggestCategories($term, $limit = self::SUGGEST_DEFAULT_LIMIT)
 	{
 		// инициализация rsm
 		// rsm нужен для того чтобы получить массив сущностей из обычного sql запроса
@@ -124,7 +125,7 @@ class Search
 	 * @param int $limit
 	 * @return array - массив сущностей, полученный из SQL-запроса через RSM
 	 */
-	private function suggestProducts($term, $limit = self::DEFAULT_LIMIT)
+	private function suggestProducts($term, $limit = self::SUGGEST_DEFAULT_LIMIT)
 	{
 		// инициализация rsm
 		// rsm нужен для того чтобы получить массив сущностей из обычного sql запроса

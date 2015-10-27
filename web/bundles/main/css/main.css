@@ -447,25 +447,8 @@ div.map {
 	height: 100% !important;
 }
 
-#search-action-btn {
-	background: url(../images/grad.gif) repeat-x scroll center bottom #DFDFDF;
-	color: #FFFFFF;
-	float: right;
-	height: 27px;
-	margin: 0 0 0 10px;
-	padding: 0;
-	width: 100px;
-	outline: none;
-	border-radius: 5px;
-	border: 1px #AAAAAA solid;
-}
-
-#search-action-btn:hover {
-	background: url(../images/grad_red.gif) repeat-x scroll center bottom #DFDFDF;
-}
-
 #search_condition {
-	margin: 0px;
+	margin: 0;
 }
 
 .gbi_map {
@@ -732,22 +715,35 @@ span.catalog-second-level, span.catalog-third-level {
 	position: absolute;
 }
 
+.search-form .btn-search-action {
+	float: right;
+	width: 100px;
+}
+
 .btn-gray {
 	background: url(../images/grad.gif) repeat-x center bottom #DFDFDF;
 	border: 1px solid #888;
 	border-radius: 5px;
 	color: #FFF;
-	float: right;
+	cursor: pointer;
 	height: 27px;
 	line-height: 0.8;
-	margin: 0 0 0 10px;
 	outline: none;
 	padding: 0;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
 }
 
+/**
+ * Предзагрузка картинки для состояния кнопки при наведении,
+ * во избежание блика при первом наведении на кнопку.
+ */
+.page-all:before {
+	background-image: url(../images/grad_red.gif);
+	content: "";
+}
+
 .btn-gray:hover {
-	background: url(../images/grad_red.gif) repeat-x center bottom #DFDFDF;
+	background-image: url(../images/grad_red.gif);
 }
 
 .btn-gray.active,
@@ -757,7 +753,12 @@ span.catalog-second-level, span.catalog-third-level {
 }
 
 .add-basket {
+	margin: 0 0 0 10px;
 	width: 77px !important;
+}
+
+.product-info .add-basket {
+	margin-left: 0;
 }
 
 .props-tbl {
