@@ -1,0 +1,31 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}Все категории{% endblock %}
+
+{% block content %}
+	<div class="location">
+		<span class="location section">
+			<a href="/">Главная</a>
+		</span>
+	</div>
+
+	<h1>Все категории</h1>
+
+	<ul>
+		{% for item in children | sortbyfield('name') %}
+			{% if item.model.getIsActive() %}
+				<li>
+					<a href="{{ path('app_catalog_category', {'id': category.getId()}) }}">
+						{{ category.getH1() }}
+					</a>
+					<a href="{{ path('app_catalog_category', {'id': item.id}) }}">
+						{{ item.model.getTitle() }}
+					</a>
+					<ul>
+						<li>OLOLO</li>
+					</ul>
+				</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+{% endblock %}

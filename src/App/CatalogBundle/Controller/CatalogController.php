@@ -16,6 +16,7 @@ class CatalogController extends Controller
 		$categoryId = $request->get('id');
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
 		$category = $catRp->find($categoryId);
+
 		if(!empty($category)) {
 			$parents = $catRp->getPath($category);
 
@@ -30,7 +31,7 @@ class CatalogController extends Controller
 
 			if (!empty($children)) {
 				return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
-					'parents' => $parents,
+					'parents'  => $parents,
 					'children' => $children,
 					'category' => $category
 				));
@@ -40,6 +41,33 @@ class CatalogController extends Controller
 					'category' => $category
 				));
 			}
+		} else {
+			throw $this->createNotFoundException();
+		}
+	}
+
+	public function categoriesFullAction(Request $request)
+	{
+		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$category = $catRp->find('456');
+		// echo "<pre>";
+		// 	print_r( $catRp );
+		// echo "</pre>";
+
+		if(!empty($category)) {
+			$hierarchyOptions = array(
+				'childSort' => array(
+					'field' => 'title',
+					'dir' => 'asc'
+				)
+			);
+
+			$children = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
+
+			return $this->render('AppCatalogBundle:Catalog:categories.html.twig', array(
+				'children' => $children,
+				'category' => $category
+			));
 		} else {
 			throw $this->createNotFoundException();
 		}
@@ -57,9 +85,9 @@ class CatalogController extends Controller
 		$parents = $catRp->getPath($category);
 
 		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
-			'parents' => $parents,
+			'parents'  => $parents,
 			'category' => $category,
-			'product' => $product
+			'product'  => $product
 		));
 	}
 
