@@ -74,26 +74,32 @@ class CartController extends Controller
 					'cart' => $this->get('catalog.cart')->loadCart(true)
 				));
 
-				$fs = new Filesystem();
-
-				$file         = $form['file']->getData();
-				$filePath     = 'tmp/';
-				$fileName     = $file->getClientOriginalName();
-				$fileFullPath = $filePath . $fileName;
-
-				$file->move($filePath, $fileName);
-
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
 					->setTo($recipients)
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
-					->setBody($body)
-					->attach(\Swift_Attachment::fromPath($fileFullPath));
+					->setBody($body);
 
-				$mailer->send($message);
+				$file = $form['file']->getData();
 
-				$fs->remove($fileFullPath);
+				if ($file) {
+					$fs = new Filesystem();
+
+					$filePath     = 'tmp/';
+					$fileName     = $file->getClientOriginalName();
+					$fileFullPath = $filePath . $fileName;
+
+					$file->move($filePath, $fileName);
+
+					$message->attach(\Swift_Attachment::fromPath($fileFullPath));
+
+					$mailer->send($message);
+
+					$fs->remove($fileFullPath);
+				} else {
+					$mailer->send($message);
+				}
 
 				$this->get('catalog.cart')->cleanCart();
 
