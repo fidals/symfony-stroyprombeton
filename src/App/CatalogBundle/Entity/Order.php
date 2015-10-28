@@ -15,7 +15,7 @@ class Order
 	private $company = '';
 	private $deliveryAddress = '';
 	private $comment = '';
-	private $attachFile;
+	private $file;
 
 	public static function loadValidatorMetadata(ClassMetadata $metadata)
 	{
@@ -24,26 +24,20 @@ class Order
 		$metadata->addPropertyConstraint('phone', new Regex(array('pattern' => "/^((8|0|\+\d{1,2})[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i")));
 		$metadata->addPropertyConstraint('email', new NotBlank());
 		$metadata->addPropertyConstraint('company', new NotBlank());
-		$metadata->addPropertyConstraint('attachFile', new File(array(
-			'maxSize'   => '5M',
-            'mimeTypes' => array(
-                'application/pdf',
-                'application/x-pdf',
-                'image/png'
-            ),
-            'mimeTypesMessage' => 'Неверный формат файла',
-            'uploadFormSizeErrorMessage' => 'Размер файла не должен превышать 5 Мб'
-        )));
+		$metadata->addPropertyConstraint('file', new File(array(
+			'maxSize' => 50000,
+			'uploadFormSizeErrorMessage' => 'Размер файла не должен превышать 50 Мб'
+		)));
 	}
 
-	public function setAttachFile($attachFile)
+	public function setFile($file)
 	{
-		$this->attachFile = $attachFile;
+		$this->file = $file;
 	}
 
-	public function getAttachFile()
+	public function getFile()
 	{
-		return $this->attachFile;
+		return $this->file;
 	}
 
 	public function setComment($comment)

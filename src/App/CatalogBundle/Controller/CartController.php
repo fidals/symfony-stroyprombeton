@@ -4,6 +4,7 @@ namespace App\CatalogBundle\Controller;
 
 use App\CatalogBundle\Entity\Order;
 use App\CatalogBundle\Form\OrderType;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,7 +59,6 @@ class CartController extends Controller
 		$form = $this->createForm(new OrderType(), null, array('csrf_protection' => false));
 
 		if ($request->getMethod() == 'POST') {
-
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
@@ -74,7 +74,14 @@ class CartController extends Controller
 					'cart' => $this->get('catalog.cart')->loadCart(true)
 				));
 
-				$attachFile = '/tmp';
+				$fs = new Filesystem();
+
+				$file         = $form['file']->getData();
+				$filePath     = 'tmp/';
+				$fileName     = $file->getClientOriginalName();
+				$fileFullPath = $filePath . $fileName;
+
+				$file->move($filePath, $fileName);
 
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
@@ -82,9 +89,11 @@ class CartController extends Controller
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
 					->setBody($body)
-					->attach(\Swift_Attachment::fromPath($attachFile));
+					->attach(\Swift_Attachment::fromPath($fileFullPath));
 
 				$mailer->send($message);
+
+				$fs->remove($fileFullPath);
 
 				$this->get('catalog.cart')->cleanCart();
 
