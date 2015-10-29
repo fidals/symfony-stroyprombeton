@@ -96,6 +96,10 @@ class CartController extends Controller
 
 					$mailer->send($message);
 
+					$transport = $this->container->get('mailer')->getTransport();
+					$spool = $transport->getSpool();
+					$spool->flushQueue($this->container->get('swiftmailer.transport.real'));
+
 					$fs->remove($fileFullPath);
 				} else {
 					$mailer->send($message);
