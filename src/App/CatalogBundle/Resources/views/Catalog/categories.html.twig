@@ -1,0 +1,15 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}Все категории{% endblock %}
+
+{% block content %}
+	<div class="location">
+		<span class="location section">
+			<a href="/">Главная</a>
+		</span>
+	</div>
+
+	<h1>Все категории</h1>
+
+	{% include 'AppCatalogBundle:Extension:catalog.tree.html.twig' with {categoryTree: getCategoryTree(), depth: 2} %}
+{% endblock %}

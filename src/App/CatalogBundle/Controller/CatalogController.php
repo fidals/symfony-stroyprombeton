@@ -16,6 +16,7 @@ class CatalogController extends Controller
 		$categoryId = $request->get('id');
 		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
 		$category = $catRp->find($categoryId);
+
 		if(!empty($category)) {
 			$parents = $catRp->getPath($category);
 
@@ -30,7 +31,7 @@ class CatalogController extends Controller
 
 			if (!empty($children)) {
 				return $this->render('AppCatalogBundle:Catalog:category.explore.html.twig', array(
-					'parents' => $parents,
+					'parents'  => $parents,
 					'children' => $children,
 					'category' => $category
 				));
@@ -45,6 +46,11 @@ class CatalogController extends Controller
 		}
 	}
 
+	public function categoriesFullAction()
+	{
+		return $this->render('AppCatalogBundle:Catalog:categories.html.twig');
+	}
+
 	public function productAction(Request $request)
 	{
 		$productId = $request->get('id');
@@ -57,9 +63,9 @@ class CatalogController extends Controller
 		$parents = $catRp->getPath($category);
 
 		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
-			'parents' => $parents,
+			'parents'  => $parents,
 			'category' => $category,
-			'product' => $product
+			'product'  => $product
 		));
 	}
 

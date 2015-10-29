@@ -1,0 +1,26 @@
+{# Шаблон для отрисовки дерева на странице Каталога. Все, что мы делаем - вызываем макрос и передаем ему дерево категорий и желаемую глубину #}
+
+{# Макрос для построения дерева с категориями. Реализован через стандартный рекурсивный алгоритм обхода дерева. #}
+
+{% macro tree_build(categoriesTree, depthToBuild) %}
+	{% for category in categoriesTree %}
+		{% if depthToBuild > 1 %}
+			<li>
+				<a href="{{ path('app_catalog_category', {'id': category.id}) }}">{{ category.name }}</a>
+				{% if category.__children is not empty %}
+					<ul>
+						{{ _self.tree_build(category.__children | sortbyfield('name'), depthToBuild - 1) }}
+					</ul>
+				{% endif %}
+			</li>
+		{% else %}
+			<li>
+				<a href="{{ path('app_catalog_category', {'id': category.id}) }}">{{ category['name'] }}</a>
+			</li>
+		{% endif %}
+	{% endfor %}
+{% endmacro %}
+
+<ul class="catalog">
+	{{ _self.tree_build(categoryTree, depth) }}
+</ul>
