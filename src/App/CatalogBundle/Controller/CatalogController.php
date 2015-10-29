@@ -46,31 +46,9 @@ class CatalogController extends Controller
 		}
 	}
 
-	public function categoriesFullAction(Request $request)
+	public function categoriesFullAction()
 	{
-		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
-		$category = $catRp->find('456');
-		// echo "<pre>";
-		// 	print_r( $catRp );
-		// echo "</pre>";
-
-		if(!empty($category)) {
-			$hierarchyOptions = array(
-				'childSort' => array(
-					'field' => 'title',
-					'dir' => 'asc'
-				)
-			);
-
-			$children = $catRp->buildTreeObjects($catRp->getNodesHierarchy($category, false, $hierarchyOptions));
-
-			return $this->render('AppCatalogBundle:Catalog:categories.html.twig', array(
-				'children' => $children,
-				'category' => $category
-			));
-		} else {
-			throw $this->createNotFoundException();
-		}
+		return $this->render('AppCatalogBundle:Catalog:categories.html.twig');
 	}
 
 	public function productAction(Request $request)

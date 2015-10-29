@@ -38,7 +38,6 @@ class CategoryTreeExtension extends \Twig_Extension
 	 */
 	public function getTree()
 	{
-
 		$categories = $this->categoryRepo->childrenHierarchy();
 
 		return $categories;

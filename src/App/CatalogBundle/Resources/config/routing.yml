@@ -10,7 +10,7 @@ app_catalog_cart_clean:
     pattern: /cart/clean/
     defaults: { _controller: AppCatalogBundle:Cart:clean }
 
-app_catalog_category:
+app_catalog_categories:
     pattern: /categories/
     defaults: { _controller: AppCatalogBundle:Catalog:categoriesFull }
 
