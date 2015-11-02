@@ -18,6 +18,7 @@ class ProductAdmin extends Admin
 				->add('category', 'sonata_type_model', array('label' => 'Родитель', 'required' => false))
 				->add('mark', null, array('label' => 'Марка', 'required' => false))
 				->add('price', null, array('label' => 'Цена', 'required' => false))
+                ->add('datePriceUpdated', 'sonata_type_datetime_picker', array('label' => 'Дата цены', 'required' => false, 'format' => 'dd.MM.yy', 'read_only' => true, 'disabled' => true))
 				->add('introtext', 'textarea', array('required' => false))
 				->add('isTextPublished', null, array('label' => 'Текст опубликован', 'required' => false))
 				->add('text', 'textarea', array('required' => false))

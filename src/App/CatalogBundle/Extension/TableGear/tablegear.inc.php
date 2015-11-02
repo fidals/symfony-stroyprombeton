@@ -22,6 +22,29 @@ $options["pagination"]["perPage"] = 300;  // rows per page.
 $options["pagination"]["prev"] = "prev"; // "prev" link will be shown.
 $options["pagination"]["next"] = "next"; // "next" link will be shown.
 
+$options["callback"] = array("onUpdate" => "updatePriceDate", "getPrevious" => true);
+$options["columns"] = array("price_date" => "highlite sortable date");
+$options['formatting'] = array("price_date" => "date[d.m.Y]");
+
+/**
+ * Коллбек для апдейта Даты цены.
+ * Используется стандартная сигнатура для функций-коллбеков в TableGear
+* @param $key - PK изменяемого кортежа. В нашем случае он null, поэтому получаем явно $previous['id']
+* @param $previous - изменяемый объект, хрянящий инфу до изменения
+* @param $updated - изменяемый объект, хрянящий инфу после изменения
+* @param $ref - ссылка на инстанс TableGear. Нам нужна для выполнения MySQL query.
+ */
+function updatePriceDate($key, $previous, $updated, $ref)
+{
+    $oldPrice = $previous["price"];
+    $newPrice = $updated["price"];
+
+    if ($newPrice && ($oldPrice != $newPrice)) {
+        $updateQuery = "UPDATE products SET price_date = NOW() WHERE id = " . $previous['id'] . ";";
+        $ref->query($updateQuery);
+    }
+}
+
 //$options["headers"]["pagetitle"]="Заголовок";
 //$options["headers"]["longtitle"]="Расширенный заголовок";
 //$options["headers"]["description"]="Описание";
@@ -35,6 +58,7 @@ $options["headers"] = $productRepository->getTableGearProperties();
 
 // --> Предполагаю, что этот класс юзаем "из коробки" и вообще не трогаем в нём код
 $table = new TableGear($options);
+
 
 $cookie_ff=array();
 if( isset($_COOKIE['tg_filterf']) ){
@@ -126,6 +150,26 @@ $(function() {
 		}
 	});
 });
+
+$(function() {
+    setTimeout(function() {
+            $("td.editable.highlite").each(function() {
+                var today = new Date();
+                var dateInTable = $(this).children("span").text().split('.');
+                var endDate = new Date(dateInTable[2], dateInTable[1] - 1, dateInTable[0]);
+
+                var diffInDays = Math.round((today.getTime()- endDate.getTime()) / (1000 * 60 * 60 * 24));
+
+                if (diffInDays > 60) {
+                    $(this).css("background-color", '#ff8a80');
+                } else if (diffInDays > 30) {
+                    $(this).css("background-color", '#ffd180');
+                } else if (diffInDays > 14) {
+                    $(this).css("background-color", '#ffff8d');
+                }
+            });
+    }, 0);
+}());
 
 </script>
 
@@ -252,7 +296,7 @@ $table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1 WHERE " . 
 
 ?>
 
-  <div>
+  <div class="wrapper">
 <?= $table->getTable() ?>
   </div>
 <?= $table->getJavascript("jquery") ?>
