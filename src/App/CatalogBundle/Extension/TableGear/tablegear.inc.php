@@ -96,82 +96,6 @@ if( count($_POST["ff"])>0 ){
 	setcookie( "tg_filterf", serialize($_POST["ff"]), time()+2592000 );
 }
 ?>
-<!DOCTYPE html>
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
-<head>
-<!--  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
-  <title>TableGear for jQuery</title>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/bundles/catalog/plugins/tablegear/javascripts/TableGear1.6.1-jQuery.js"></script>
-	<script type="text/javascript" src="/bundles/catalog/plugins/tablegear/javascripts/tablegear-jquery_bootstrap.js"></script>
-  <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-  <link type="text/css" rel="stylesheet" href="/bundles/catalog/plugins/tablegear/stylesheets/tablegear.css" />
-</head>
-<body>
-  <div>
-<script type="text/javascript">
-// --> Скрипты со стилями-событями. Менять ничего не надо.
-function enableParentSelectionTG() {
-    parent.tree.ca = "parent_tg";
-	$(".choose_razd").css('opacity', '0.3');
-	$(".choose_razd").html('&lt;Выберите раздел');
-}
-function setParentTG(pId, pName) {
-    $("input[name='parent_tg_id']").val(pId);
-    $("input[name='parent_tg_name']").val(pName);
-	parent.tree.ca = "open";
-	$(".choose_razd").css('opacity', '1');
-	$(".choose_razd").html('Выберите раздел');
-	$("form[name='formtg']").submit();
-}
-
-$(function() {
-	$( "#sortable" ).sortable({
-		placeholder: "ui-state-highlight"
-	});
-	$( "#sortable" ).disableSelection();
-	$("input[name=ff[]]").change(function(){
-		if( $(this).is(':checked') ){
-			$("#sortable").append('<li class="ui-state-default sortf_'+$(this).val()+'"><input type="hidden" name="sortff[]" value="'+$(this).val()+'">'+$("#fs_"+$(this).val()).html()+'</li>')
-		}else{
-			$(".sortf_"+$(this).val()).remove();
-		}
-	});
-	$(".hide_sort").click(function(){
-		var expire = new Date( new Date().getTime() +  3600000*24*10 );
-		if( $(".trhide").css('display')=="table-cell" ){
-			$(".trhide").fadeOut();
-			$(this).html('показать');
-			document.cookie = "hide_sort=0;expires="+expire.toGMTString();
-		}else{
-			$(".trhide").fadeIn();
-			$(this).html('скрыть');
-			document.cookie = "hide_sort=1;expires="+expire.toGMTString();
-		}
-	});
-});
-
-$(function() {
-    setTimeout(function() {
-            $("td.editable.highlite").each(function() {
-                var today = new Date();
-                var dateInTable = $(this).children("span").text().split('.');
-                var endDate = new Date(dateInTable[2], dateInTable[1] - 1, dateInTable[0]);
-
-                var diffInDays = Math.round((today.getTime()- endDate.getTime()) / (1000 * 60 * 60 * 24));
-
-                if (diffInDays > 60) {
-                    $(this).css("background-color", '#ff8a80');
-                } else if (diffInDays > 30) {
-                    $(this).css("background-color", '#ffd180');
-                } else if (diffInDays > 14) {
-                    $(this).css("background-color", '#ffff8d');
-                }
-            });
-    }, 0);
-}());
-
-</script>
 
 <form method="post" name="formtg" action="">
 <input type="hidden" name="parent_tg_id" value="<?php if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ) echo intval($_POST['parent_tg_id']); ?>">
@@ -304,10 +228,6 @@ $table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1 WHERE " . 
 <?php
 }
 ?>
-
-  </div>
-</body>
-</html>
 
 <?php
 	return $data = ob_get_clean();

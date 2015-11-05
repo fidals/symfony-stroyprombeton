@@ -1,0 +1,84 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+
+	<link rel="stylesheet" href="/bundles/main/plugins/jstree/themes/default/style.min.css">
+
+	<style>
+		.left-side,
+		body > .header .logo {
+			width: 500px !important;
+		}
+
+		.right-side,
+		body > .header .navbar {
+			margin-left: 500px !important;
+		}
+
+		.admin-tree ul {
+			padding-left: 20px;
+		}
+
+		.jstree-anchor .list-id {
+			color: #AAA;
+		}
+
+		.jstree-default .jstree-hovered,
+		.jstree-default .jstree-clicked {
+			background: #0C7678;
+			box-shadow: none;
+		}
+
+		.jstree-default .jstree-anchor {
+			display: inline-block;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			width: 90%;
+		}
+
+		.jstree-leaf .jstree-icon {
+			visibility: hidden;
+			width: 12px !important;
+		}
+
+		.slimScrollBar {
+			background: #27B1B4 !important;
+		}
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script src="/bundles/main/plugins/jstree/jstree.min.js"></script>
+
+	<script>
+		$(function () {
+			$('#admin-tree-wrapper')
+				.jstree({
+					'core': {
+						'data': {
+							'url' : function (node) {
+								return node.id === '#' ?
+									'/buildCategoryTree/' :
+									'/getTreeProducts/';
+							},
+							'dataType' : 'json',
+							'data' : function (node) {
+								return { 'id' : node.id };
+							}
+						}
+					}
+				});
+		});
+	</script>
+{% endblock %}
+
+{% block side_bar_after_nav %}
+	<p class="text-center" style="border-top: 1px solid #444444; padding-top: 10px">
+		<a href="http://sonata-project.org" rel="noreferrer" target="_blank">sonata project</a>
+	</p>
+
+	<div id="admin-tree-wrapper"></div>
+{% endblock %}
