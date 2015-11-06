@@ -157,6 +157,7 @@ class ProductRepository extends EntityRepository
 			'introtext'    => 'Аннотация',
 			'mark'         => 'Марка',
 			'price'        => 'Цена',
+            'price_date'   => 'Дата цены',
 			'nomen'        => 'Код',
 			'length'       => 'Длина (мм)',
 			'width'        => 'Ширина (мм)',

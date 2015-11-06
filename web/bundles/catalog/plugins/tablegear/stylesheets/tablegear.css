@@ -1,207 +1,198 @@
 ﻿
-
-body
-{
-margin: 0 auto;
-/*padding: 0 20px 20px 20px;*/
-font-family: Tahoma, Helvetica, Arial, sans-serif;
-/*background: #444;*/
+body {
+    margin: 0 auto;
+    /*padding: 0 20px 20px 20px;*/
+    font-family: Tahoma, Helvetica, Arial, sans-serif;
+    /*background: #444;*/
 }
 
-fieldset
-{
-border: none;
-padding: 0;
+fieldset {
+    border: none;
+    padding: 0;
 }
 
 form {
-  padding: 1em;
+    padding: 1em;
 }
 
-table
-{
-font-size: 12px;
-width: 100%;
-background-color: #ffffff;
-padding: 1em;
-border-spacing: 2px;
-border-collapse: collapse;
+table {
+    font-size: 12px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1em;
+    border-spacing: 2px;
+    border-collapse: collapse;
 }
 
-tr.odd
-{
-background-color: #eaeaea;
+tr.odd {
+    background-color: #eaeaea;
 }
 
 tr.noDataRow td {
-  text-align: center;
+    text-align: center;
 }
 
-table th.title
-{
-text-align: center;
+table th.title {
+    text-align: center;
 }
 
-
-th,td
-{
-text-align: left;
+th, td {
+    text-align: left;
+    min-width: 50px;
 }
 
-td
-{
-height: 1.6em;
-padding: 0 0.5em;
+.wrapper {
+    overflow-x: scroll;
 }
 
-td.editable
-{
-width: 200px;
-height: 22px;
-white-space: nowrap;
-}
-td.editable input
-{
-width: 100%;
+td {
+    height: 1.6em;
+    padding: 0 0.5em;
 }
 
-th.sortable
-{
-cursor: pointer;
+td.editable {
+    width: 200px;
+    height: 22px;
+    white-space: nowrap;
+}
+
+td.editable input {
+    width: 100%;
+}
+
+th.sortable {
+    cursor: pointer;
 }
 
 tr.loading {
-  color: #dddddd;
-  background-color: #f6f6f6;
+    color: #dddddd;
+    background-color: #f6f6f6;
 }
 
-td.loading
-{
-  background: url('../images/loading.gif') no-repeat 4px center;
-  padding-left: 24px;
-  color: #aaaaaa;
-  width: 176px;
+td.loading {
+    background: url('../images/loading.gif') no-repeat 4px center;
+    padding-left: 24px;
+    color: #aaaaaa;
+    width: 176px;
 }
 
 td.delete {
-  background: url('../images/delete.gif') no-repeat 4px center;
-  cursor: pointer;
-  padding: 0 1em;
+    background: url('../images/delete.gif') no-repeat 4px center;
+    cursor: pointer;
+    padding: 0 1em;
 }
 
 td.delete label {
-  display: none;
+    display: none;
 }
 
 table.activated th.edit,
 table.activated td.edit {
-  display: none;
+    display: none;
 }
 
 table.activated td.delete input {
-  display: none;
+    display: none;
 }
 
 table.activated td.delete label {
-  display: block;
+    display: block;
 }
 
 p.addRow {
-  text-align: right;
-  margin: 0 1em 0 0;
+    text-align: right;
+    margin: 0 1em 0 0;
 }
 
 p.addRow a {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 form fieldset.errors {
-  color: red;
+    color: red;
 }
 
 form fieldset.errors p {
-  margin: 0.2em;
+    margin: 0.2em;
 }
 
 form div.submit {
-  padding: 1em;
-  text-align: right;
+    padding: 1em;
+    text-align: right;
 }
 
 form div.submit input {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 form.newRow h3 {
-  margin: 0;
+    margin: 0;
 }
 
 form.newRow th.edit,
 form.newRow td.edit,
 form.newRow th.delete,
 form.newRow td.delete {
-  display: none;
+    display: none;
 }
 
 .pagination {
-  margin: 1em 0;
-  color: #888888;
-  width: 350px;
-  margin: 0 auto;
+    margin: 1em 0;
+    color: #888888;
+    width: 350px;
+    margin: 0 auto;
 }
 
 .pagination a {
-  color: #6666ff;
+    color: #6666ff;
 }
 
-.pagination .prev 
-{
-  float: left;
+.pagination .prev {
+    float: left;
 }
 
-.pagination .next
-{
-  float: right;
+.pagination .next {
+    float: right;
 }
 
-.pagination .pages
-{
-  text-align: center;
+.pagination .pages {
+    text-align: center;
 }
 
 div.error {
-  margin: 20px;
-  padding: 20px;
-  background-color: #222;
-  color: #d44;
-  font-weight: bold;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #222;
+    color: #d44;
+    font-weight: bold;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 
 #sortable {
     list-style-type: none;
     margin: 0;
     padding: 0;
-	width: 365px;
+    width: 365px;
 }
 
 #sortable li {
-	list-style: none;
+    list-style: none;
     font-size: 11px;
     height: 1.9em;
     margin: 0 2px 1px;
     padding: 2px 5px;
     border: 1px solid #D3D3D3;
     color: #555555;
-	background: #fff;
+    background: #fff;
     font-weight: normal;
-	cursor: pointer;
+    cursor: pointer;
 }
-#sortable li.ui-state-highlight{
-	border: 1px solid #fcefa1;
-	background: #fbf9ee;
-	color: #363636;
-	margin: 0 2px 1px;
-	padding: 2px 5px;
+
+#sortable li.ui-state-highlight {
+    border: 1px solid #fcefa1;
+    background: #fbf9ee;
+    color: #363636;
+    margin: 0 2px 1px;
+    padding: 2px 5px;
 }

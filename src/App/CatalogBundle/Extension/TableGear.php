@@ -35,7 +35,8 @@ class TableGear
 	/**
 	 * @param ContainerInterface $container
 	 */
-	public function __construct(ContainerInterface $container) {
+	public function __construct(ContainerInterface $container)
+    {
 		$this->container = $container;
 	}
 
@@ -60,7 +61,8 @@ class TableGear
 	 * @return mixed
 	 * @throws \Symfony\Component\Config\Exception\FileLoaderLoadException
 	 */
-	private static function call(array $args) {
+	private static function call(array $args)
+    {
 		extract($args);
 		$filePath = dirname(__FILE__) . self::INC_PHP_PATH;
 		if(file_exists($filePath)) {
