@@ -296,7 +296,7 @@ div.order-report {
 	padding: 10px 20px;
 	position: absolute;
 	right: 0;
-	width: 500px;
+	width: auto;
 	z-index: 1;
 }
 
@@ -317,7 +317,15 @@ div.order-report {
 }
 
 .mbasket-items td {
-	padding: 10px 5px 10px 5px !important;
+	padding: 10px !important;
+}
+
+.mbasket-items td:last-child {
+    padding: 0 !important;
+}
+
+.mbasket-items tr:last-child {
+    border-bottom: 0px;
 }
 
 div.menu-h ul li a {
@@ -336,7 +344,13 @@ div.menu-h ul li a {
 .mbasket-items a:hover,
 .mbasket-items a:visited {
 	margin: 0 !important;
-	text-align: right !important;
+}
+
+#catalog-link, span.empty-cart-dropdown {
+    text-align: center !important;
+    display: inline;
+    font-weight: bold;
+    font-size: 0.90em;
 }
 
 .empty-cart {
