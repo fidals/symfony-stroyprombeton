@@ -2,7 +2,9 @@
 
 {% block form %}
 	{% if object.getRouteName() and object.getRouteParameters() %}
-		<a class="page-link" href="{{ path(object.getRouteName(), object.getRouteParameters()) }}" target="_blank">{{ path(object.getRouteName(), object.getRouteParameters()) }}</a>
+		<div class="page-link">
+			<a href="{{ path(object.getRouteName(), object.getRouteParameters()) }}" target="_blank">{{ path(object.getRouteName(), object.getRouteParameters()) }}</a>
+		</div>
 	{% endif %}
 	{{ parent() }}
 {% endblock %}
