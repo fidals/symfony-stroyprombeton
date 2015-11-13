@@ -120,8 +120,12 @@
 			{#</td>#}
 			{#</tr>#}
 			<tr>
-				<td></td>
-				<td class="td-submit"><input type="submit" name="submit" class="button btn" value="Отправить заказ"></td>
+				<td>Прикрепить файл:</td>
+				<td class="td-submit">
+					{{ form_widget(form.file) }}
+					<input type="submit" name="submit" class="button btn btn-danger btn-order-send" value="Отправить заказ">
+					<p class="muted">Максимальный размер файла - 50 Мб</p>
+				</td>
 			</tr>
 			<tr>
 				<td></td>

@@ -342,4 +342,17 @@ class Category
 		return $this->file;
 	}
 	/* ----------- Код для файла кончился -------------- */
+
+
+	public function getRouteName()
+	{
+		return 'app_catalog_category';
+	}
+
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
+	}
 }

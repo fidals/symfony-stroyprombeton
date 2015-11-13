@@ -75,4 +75,16 @@ class Object
 	{
 		return $this->territory;
 	}
+
+	public function getRouteName()
+	{
+		return 'app_main_object';
+	}
+
+	public function getRouteParameters()
+	{
+		$parameters = array('id' => $this->getId());
+
+		return $parameters;
+	}
 }

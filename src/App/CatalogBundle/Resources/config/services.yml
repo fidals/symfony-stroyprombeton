@@ -13,10 +13,9 @@ services:
         tags:
             - { name: twig.extension }
     app.tree_extension:
-        class: App\CatalogBundle\Extension\TreeMenuExtension
+        class: App\CatalogBundle\Extension\CategoryTreeExtension
         arguments:
             entityManager: '@doctrine.orm.entity_manager'
-            router: '@router'
         tags:
             - { name: twig.extension }
     catalog.yandex_market_category_listener:

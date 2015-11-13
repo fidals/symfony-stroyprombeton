@@ -24,7 +24,8 @@ class Search
 	 * Лимит элементов в поиске
 	 * Если найдено категорий n >= LIMIT, то продукты не ищем, если n < LIMIT то ишем LIMIT - n продуктов
 	 */
-	const DEFAULT_LIMIT = 50;
+	const SEARCH_DEFAULT_LIMIT = 50;
+	const SUGGEST_DEFAULT_LIMIT = 20;
 
 	/**
 	 * @param ContainerInterface $container
@@ -36,32 +37,36 @@ class Search
 
 	/**
 	 * Метод поиска
-	 * Использует автокомплит
+	 * Делегирует вызов методу автокомплита
 	 * @param $term
 	 * @param $limit
 	 * @return mixed
 	 */
-	public function search($term, $limit = self::DEFAULT_LIMIT)
+	public function search($term, $limit = self::SEARCH_DEFAULT_LIMIT)
 	{
 		return $this->suggest($term, $limit);
 	}
 
 	/**
-	 * Автокомплит
-	 * @param $term
-	 * @param int $limit
-	 * @return array
+	 * Общий метод для автокомплита и поиска.
+	 * Получаем результаты вызовов аналогичных методов для Категорий и Товаров, после чего возвращаем массив с соотв. ключами.
+	 * @param mixed $term - условие поиска
+	 * @param int $limit - нужное количество "подсказок" для автокомплита
+	 * @return array - ассоциативный массив с результатами поиска по категориям и продуктам под соотв. ключами
 	 */
-	public function suggest($term, $limit = self::DEFAULT_LIMIT)
+	public function suggest($term, $limit = self::SUGGEST_DEFAULT_LIMIT)
 	{
-		$categoryResults = $this->suggestCategories($term, $limit);
-		$categoryResultsCount = count($categoryResults);
-		$productResults = array();
+		$categorySuggest = $this->suggestCategories($term, $limit);
+		$categoryResultsCount = count($categorySuggest);
+		$productSuggest = array();
 		if($categoryResultsCount != $limit) {
-			$productResults = $this->suggestProducts($term, $limit - $categoryResultsCount);
+			$productSuggest = $this->suggestProducts($term, $limit - $categoryResultsCount);
 		}
-		// отдаем ранжированный массив, сначала категории, потом продукты
-		return array_merge($categoryResults, $productResults);
+
+		return array(
+			'categories' => $categorySuggest,
+			'products' => $productSuggest
+		);
 	}
 
 	/**
@@ -70,7 +75,7 @@ class Search
 	 * @param int $limit
 	 * @return array
 	 */
-	private function suggestCategories($term, $limit = self::DEFAULT_LIMIT)
+	private function suggestCategories($term, $limit = self::SUGGEST_DEFAULT_LIMIT)
 	{
 		// инициализация rsm
 		// rsm нужен для того чтобы получить массив сущностей из обычного sql запроса
@@ -111,34 +116,16 @@ class Search
 
 		$categories = $categoryQuery->getResult();
 
-		/**
-		 * Получаем router для генерации урлов. Нужно для работающего автокомплита.
-		 */
-		$router = $this->container->get('router');
-
-		$categoryResults = array();
-		foreach($categories as $category) {
-			$categoryResults[] = array(
-				'desc'   => $category->getDescription(),
-				'label'  => $category->getName(),
-				'razdel' => 1,
-				'id' => $category->getId(),
-				'url'    => $router->generate('app_catalog_category', array(
-					'id' => $category->getId()
-				)),
-				'img' => $category->getPicturePath()
-			);
-		}
-		return $categoryResults;
+		return $categories;
 	}
 
 	/**
 	 * Автокомплит для продуктов
 	 * @param $term
 	 * @param int $limit
-	 * @return array
+	 * @return array - массив сущностей, полученный из SQL-запроса через RSM
 	 */
-	private function suggestProducts($term, $limit = self::DEFAULT_LIMIT)
+	private function suggestProducts($term, $limit = self::SUGGEST_DEFAULT_LIMIT)
 	{
 		// инициализация rsm
 		// rsm нужен для того чтобы получить массив сущностей из обычного sql запроса
@@ -181,28 +168,6 @@ class Search
 
 		$products = $categoryQuery->getResult();
 
-		/**
-		 * Получаем router для генерации урлов. Нужно для работающего автокомплита.
-		 */
-		$router = $this->container->get('router');
-
-		$productResults = array();
-		foreach ($products as $product) {
-			$productResults[] = array(
-				'desc'   => $product->getDescription(),
-				'label'  => $product->getName(),
-				'razdel' => 0,
-				'url' => $router->generate('app_catalog_product', array(
-					'id' => $product->getId(),
-				)),
-				'id' => $product->getId(),
-				'mark'  => $product->getMark(),
-				'price' => $product->getPrice(),
-				'nomen' => $product->getNomen(),
-				'img' => $product->getPicturePath()
-			);
-		}
-
-		return $productResults;
+		return $products;
 	}
 }

@@ -4,6 +4,7 @@ namespace App\CatalogBundle\Controller;
 
 use App\CatalogBundle\Entity\Order;
 use App\CatalogBundle\Form\OrderType;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,8 +57,10 @@ class CartController extends Controller
 	public function orderAction(Request $request)
 	{
 		$form = $this->createForm(new OrderType(), null, array('csrf_protection' => false));
+
 		if ($request->getMethod() == 'POST') {
 			$form->handleRequest($request);
+
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
 				$recipients = array(
@@ -74,8 +77,26 @@ class CartController extends Controller
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
 					->setBody($body);
-				$mailer->send($message);
+				$file = $form['file']->getData();
+
+				if ($file) {
+					$fs = new Filesystem();
+					$filePath = 'tmp/';
+					$fileName = $file->getClientOriginalName();
+					$fileFullPath = $filePath . $fileName;
+					$file->move($filePath, $fileName);
+					$message->attach(\Swift_Attachment::fromPath($fileFullPath));
+					$mailer->send($message);
+					$transport = $this->container->get('mailer')->getTransport();
+					$spool = $transport->getSpool();
+					$spool->flushQueue($this->container->get('swiftmailer.transport.real'));
+					$fs->remove($fileFullPath);
+				} else {
+					$mailer->send($message);
+				}
+
 				$this->get('catalog.cart')->cleanCart();
+
 				return $this->redirect($this->generateUrl('app_catalog_order_thanks'));
 			}
 		}

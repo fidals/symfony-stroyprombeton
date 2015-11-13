@@ -351,3 +351,9 @@ legend.sonata-ba-fieldset-collapsed-description + .sonata-ba-collapsed-fields {
     text-align: center;
     width: 100%;
 }
+
+div.page-link {
+	font-size: 20px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}

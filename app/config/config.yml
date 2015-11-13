@@ -93,6 +93,8 @@ swiftmailer:
 sonata_admin:
     title: Административная панель
     title_logo: /bundles/main/images/logo.png
+    templates:
+        edit: AppMainBundle:Admin:edit.html.twig
     dashboard:
         blocks:
              - { position: left, type: sonata.admin.block.admin_list }
@@ -124,8 +126,10 @@ app_yandex_market:
         name: СТК-ПромБетон
         company: СТК-ПромБетон
         url: %base_url%
-        local_delivery_cost: 7000
         email: %email_order%
         platform: symfony
         version: 2.5
         cpa: 0
+        delivery_options:
+            cost: 6000
+            days:

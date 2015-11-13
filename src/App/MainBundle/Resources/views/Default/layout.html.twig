@@ -71,6 +71,7 @@
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'proizvodstvo-gbi' }) }}">Производство</a></li>
 			<li><a href="{{ path('app_main_territory_map') }}">Наши объекты</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'delivery' }) }}">Доставка</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
 			<li>
 				<div id="sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
@@ -85,23 +86,24 @@
 	</div>
 	<div class="page-content">
 		<div class="menu-v">
-			<div class="menu-v-top"></div>
 			<div class="menu-v-content-wrapper">
 				<div class="menu-v-content">
-					{{ buildCategoryTree(2) }}
+					{% include 'AppCatalogBundle:Extension:akkordion.tree.html.twig' with {categoryTree: getCategoryTree(), depth: 2} %}
 				</div>
 			</div>
-			<div class="menu-v-bottom"></div>
+
 			<div class="OrderPrice">
 				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">
 					<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на изделия" alt="Расчёт заявок на конструкции">
 				</a>
 			</div>
+
 			<div class="OrderPrice">
 				<a class="a_price" href="{{ path('app_main_price_list_booking') }}">
 					<img src="/assets/images/order_price.png" title="прайс-листы на изделия" alt="прайс-листы на конструкции">
 				</a>
 			</div>
+
 			<div class="OrderDraw">
 				<a href="{{ path('app_main_staticpage', { 'alias': 'izgotovlenie-gbi-po-chertezham' }) }}">
 					<img src="/assets/images/order_draw.png" title="изготовление изделий по индивидуальным чертежам" alt="производство конструкций по индивидуальным чертежам">
@@ -143,18 +145,18 @@
 			</a>
 		</div>
 
-
-
 		<div class="content-container">
 			<div class="content">
 				<div class="search-form">
 					<table>
 						<tr>
-							<td class="search-form-title">Поиск в каталоге продукции</td>
+							<td class="search-form-title">Поиск в каталоге продукции:</td>
 							<td class="search-form-input">
-								<input id="search_condition" type="text" value="{% if searchCondition|default %}{{ searchCondition }}{% else %}Запрос для поиска (не менее 2 символов){% endif %}"/>
+								<input id="search_condition" type="text" value="{% if searchCondition|default %}{{ searchCondition }}{% else %}Запрос для поиска ...{% endif %}">
 							</td>
-							<td class="search-form-submit"><input id="search-action-btn" type="button" value="Найти"/></td>
+							<td class="search-form-submit">
+								<input class="btn-gray btn-search-action" id="btn-search-action" type="button" value="Найти">
+							</td>
 						</tr>
 					</table>
 				</div>
