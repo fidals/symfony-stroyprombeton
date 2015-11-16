@@ -45,6 +45,13 @@
 		.slimScrollBar {
 			background: #27B1B4 !important;
 		}
+
+		.jstree-anchor {
+			-webkit-user-select: none;
+			   -moz-user-select: none;
+				-ms-user-select: none;
+					user-select: none;
+		}
 	</style>
 {% endblock %}
 
@@ -57,8 +64,8 @@
 		$(function () {
 			$('#admin-tree-wrapper')
 				.jstree({
-					'core': {
-						'data': {
+					'core' : {
+						'data' : {
 							'url' : function (node) {
 								return node.id === '#' ?
 									'/buildCategoryTree/' :
@@ -68,9 +75,48 @@
 							'data' : function (node) {
 								return { 'id' : node.id };
 							}
+						},
+						'check_callback' : true
+					},
+					'contextmenu' : {
+						'items' : jsTreeContextMenu
+					},
+					'plugins' : [ 'contextmenu', 'state' ]
+				});
+
+			function jsTreeContextMenu( node ) {
+				var $tree = $('#admin-tree-wrapper').jstree(true);
+
+				return {
+					editItem : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'Редактировать',
+						'icon'   : 'fa fa-pencil-square-o',
+						'action' : function (obj) {
+							$tree.edit(node);
+						}
+					},
+					tableGear : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'TableGear',
+						'icon'   : 'fa fa-columns',
+						'action' : function (obj) {
+							$tree.edit(node);
+						}
+					},
+					toItemsPage : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'На страницу',
+						'icon'   : 'fa fa-link',
+						'action' : function (obj) {
+							$tree.edit(node);
 						}
 					}
-				});
+				};
+			}
 		});
 	</script>
 {% endblock %}
