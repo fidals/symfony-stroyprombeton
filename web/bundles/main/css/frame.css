@@ -2037,8 +2037,7 @@ i.fa-camera:hover {
 	color: #c90000;
 }
 
-.order-product-price,
-.order-product-count {
+.order-product {
 	padding-left: 5px;
 	padding-right: 5px;
 	width: auto;
@@ -2052,3 +2051,11 @@ i.fa-camera:hover {
 }
 
 #sb-wrapper-inner, #sb-body, #sb-body-inner { background-color: #fff; }
+
+i.fa-times {
+    cursor: pointer;
+}
+
+input.input-switcher {
+    width: 40px;
+}

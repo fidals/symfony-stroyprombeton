@@ -20,6 +20,18 @@ class Cart
 		$this->products[$id] = (isset($this->products[$id])) ? $this->products[$id] + $count : $count;
 	}
 
+    /**
+     * Метод для прямой установки количества товара в заказе.
+     * Полезен для апдейта корзины при изменениях в дропдауне.
+     *
+     * @param int $id нужного нам товара
+     * @param int $newCount его новое количество в заказе.
+     */
+    public function setCount($id, $newCount)
+    {
+        $this->products[$id] = $newCount;
+    }
+
 	public function removeProduct($id, $count)
 	{
 		if(isset($this->products[$id])) {
