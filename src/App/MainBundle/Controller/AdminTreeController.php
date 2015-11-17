@@ -39,7 +39,9 @@ class AdminTreeController extends Controller
 
 			$productTree = array(
 				'text'   => '[' . $item->getId() . '] ' . $item->getName(),
-				'a_attr' => $productAttrs
+				'a_attr' => array(
+					'data-id' => $item->getId()
+				)
 			);
 
 			$products[] = (object) $productTree;

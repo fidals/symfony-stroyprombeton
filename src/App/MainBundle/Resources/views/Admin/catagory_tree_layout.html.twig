@@ -62,6 +62,8 @@
 
 	<script>
 		$(function () {
+			var $linkToGo = $('#link-to-go');
+
 			$('#admin-tree-wrapper')
 				.jstree({
 					'core' : {
@@ -119,9 +121,16 @@
 						'label'  : 'На страницу',
 						'icon'   : 'fa fa-link',
 						'action' : function (obj) {
-							var productId = obj.reference[0].attributes[3].value;
+							var contextAnchor = obj.reference[0],
+								productId     = $(contextAnchor).data('id');
 
-							document.location.href = '/gbi/products/' + productId;
+							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
+								$linkToGo.attr('href', '/gbi/products/'   + productId + '/');
+								$linkToGo[0].click();
+							} else {
+								$linkToGo.attr('href', '/gbi/categories/' + productId + '/');
+								$linkToGo[0].click();
+							}
 						}
 					}
 				};
@@ -136,4 +145,5 @@
 	</p>
 
 	<div id="admin-tree-wrapper"></div>
+	<a class="hidden" id="link-to-go" href="#" target="_blank"></a>
 {% endblock %}
