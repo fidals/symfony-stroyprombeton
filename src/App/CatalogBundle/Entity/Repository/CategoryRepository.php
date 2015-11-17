@@ -43,8 +43,11 @@ class CategoryRepository extends ClosureTreeRepository
 
 		foreach ($array as $item => $prop) {
 			$arrayTree = array(
-				'id'   => $prop['id'],
-				'text' => '[' . $prop['id'] . '] ' . $prop['name']
+				'id'     => $prop['id'],
+				'text'   => '[' . $prop['id'] . '] ' . $prop['name'],
+				'a_attr' => array(
+					'data-id' => $prop['id']
+				)
 			);
 
 			if (!empty($prop['__children'])) {

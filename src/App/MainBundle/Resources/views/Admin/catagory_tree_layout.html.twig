@@ -45,6 +45,13 @@
 		.slimScrollBar {
 			background: #27B1B4 !important;
 		}
+
+		.jstree-anchor {
+			-webkit-user-select: none;
+			   -moz-user-select: none;
+				-ms-user-select: none;
+					user-select: none;
+		}
 	</style>
 {% endblock %}
 
@@ -55,10 +62,12 @@
 
 	<script>
 		$(function () {
+			var $linkToGo = $('#link-to-go');
+
 			$('#admin-tree-wrapper')
 				.jstree({
-					'core': {
-						'data': {
+					'core' : {
+						'data' : {
 							'url' : function (node) {
 								return node.id === '#' ?
 									'/buildCategoryTree/' :
@@ -68,9 +77,64 @@
 							'data' : function (node) {
 								return { 'id' : node.id };
 							}
+						},
+						'check_callback' : true
+					},
+					'contextmenu' : {
+						'items' : jsTreeContextMenu
+					},
+					'plugins' : [ 'contextmenu', 'state' ]
+				});
+
+			function jsTreeContextMenu( node ) {
+				var $tree = $('#admin-tree-wrapper').jstree(true);
+
+				return {
+					editItem : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'Редактировать',
+						'icon'   : 'fa fa-pencil-square-o',
+						'action' : function (obj) {
+							var contextAnchor = obj.reference[0],
+								anchorId      = $(contextAnchor).data('id');
+
+							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
+								document.location.href = '/adminka/app/catalog/product/' + anchorId + '/edit';
+							} else {
+								document.location.href = '/adminka/app/catalog/category/' + anchorId + '/edit';
+							}
+						}
+					},
+					tableGear : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'TableGear',
+						'icon'   : 'fa fa-columns',
+						'action' : function (obj) {
+							document.location.href = '/adminka/editproducts';
+						}
+					},
+					toItemsPage : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'На страницу',
+						'icon'   : 'fa fa-link',
+						'action' : function (obj) {
+							var contextAnchor = obj.reference[0],
+								productId     = $(contextAnchor).data('id');
+
+							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
+								$linkToGo.attr('href', '/gbi/products/'   + productId + '/');
+							} else {
+								$linkToGo.attr('href', '/gbi/categories/' + productId + '/');
+							}
+
+							$linkToGo[0].click();
 						}
 					}
-				});
+				};
+			}
 		});
 	</script>
 {% endblock %}
@@ -81,4 +145,5 @@
 	</p>
 
 	<div id="admin-tree-wrapper"></div>
+	<a class="hidden" id="link-to-go" href="#" target="_blank"></a>
 {% endblock %}
