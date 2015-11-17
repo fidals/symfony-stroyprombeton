@@ -126,11 +126,11 @@
 
 							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
 								$linkToGo.attr('href', '/gbi/products/'   + productId + '/');
-								$linkToGo[0].click();
 							} else {
 								$linkToGo.attr('href', '/gbi/categories/' + productId + '/');
-								$linkToGo[0].click();
 							}
+
+							$linkToGo[0].click();
 						}
 					}
 				};
