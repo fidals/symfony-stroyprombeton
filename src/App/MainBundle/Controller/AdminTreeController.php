@@ -33,7 +33,16 @@ class AdminTreeController extends Controller
 		$products = array();
 
 		foreach ($category->getProducts() as $item) {
-			$products[] = '[' . $item->getId() . '] ' . $item->getName();
+			$productAttrs = array(
+				'data-id' => $item->getId()
+			);
+
+			$productTree = array(
+				'text'   => '[' . $item->getId() . '] ' . $item->getName(),
+				'a_attr' => $productAttrs
+			);
+
+			$products[] = (object) $productTree;
 		}
 
 		return new JsonResponse($products);

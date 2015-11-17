@@ -94,7 +94,14 @@
 						'label'  : 'Редактировать',
 						'icon'   : 'fa fa-pencil-square-o',
 						'action' : function (obj) {
-							$tree.edit(node);
+							var contextAnchor = obj.reference[0],
+								anchorId      = $(contextAnchor).data('id');
+
+							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
+								document.location.href = '/adminka/app/catalog/product/' + anchorId + '/edit';
+							} else {
+								document.location.href = '/adminka/app/catalog/category/' + anchorId + '/edit';
+							}
 						}
 					},
 					tableGear : {
@@ -103,7 +110,7 @@
 						'label'  : 'TableGear',
 						'icon'   : 'fa fa-columns',
 						'action' : function (obj) {
-							$tree.edit(node);
+							document.location.href = '/adminka/editproducts/';
 						}
 					},
 					toItemsPage : {
@@ -112,7 +119,9 @@
 						'label'  : 'На страницу',
 						'icon'   : 'fa fa-link',
 						'action' : function (obj) {
-							$tree.edit(node);
+							var productId = obj.reference[0].attributes[3].value;
+
+							document.location.href = '/gbi/products/' + productId;
 						}
 					}
 				};
