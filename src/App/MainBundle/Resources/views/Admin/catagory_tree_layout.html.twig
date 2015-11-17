@@ -1,0 +1,149 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+
+	<link rel="stylesheet" href="/bundles/main/plugins/jstree/themes/default/style.min.css">
+
+	<style>
+		.left-side,
+		body > .header .logo {
+			width: 500px !important;
+		}
+
+		.right-side,
+		body > .header .navbar {
+			margin-left: 500px !important;
+		}
+
+		.admin-tree ul {
+			padding-left: 20px;
+		}
+
+		.jstree-anchor .list-id {
+			color: #AAA;
+		}
+
+		.jstree-default .jstree-hovered,
+		.jstree-default .jstree-clicked {
+			background: #0C7678;
+			box-shadow: none;
+		}
+
+		.jstree-default .jstree-anchor {
+			display: inline-block;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			width: 90%;
+		}
+
+		.jstree-leaf .jstree-icon {
+			visibility: hidden;
+			width: 12px !important;
+		}
+
+		.slimScrollBar {
+			background: #27B1B4 !important;
+		}
+
+		.jstree-anchor {
+			-webkit-user-select: none;
+			   -moz-user-select: none;
+				-ms-user-select: none;
+					user-select: none;
+		}
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script src="/bundles/main/plugins/jstree/jstree.min.js"></script>
+
+	<script>
+		$(function () {
+			var $linkToGo = $('#link-to-go');
+
+			$('#admin-tree-wrapper')
+				.jstree({
+					'core' : {
+						'data' : {
+							'url' : function (node) {
+								return node.id === '#' ?
+									'/buildCategoryTree/' :
+									'/getTreeProducts/';
+							},
+							'dataType' : 'json',
+							'data' : function (node) {
+								return { 'id' : node.id };
+							}
+						},
+						'check_callback' : true
+					},
+					'contextmenu' : {
+						'items' : jsTreeContextMenu
+					},
+					'plugins' : [ 'contextmenu', 'state' ]
+				});
+
+			function jsTreeContextMenu( node ) {
+				var $tree = $('#admin-tree-wrapper').jstree(true);
+
+				return {
+					editItem : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'Редактировать',
+						'icon'   : 'fa fa-pencil-square-o',
+						'action' : function (obj) {
+							var contextAnchor = obj.reference[0],
+								anchorId      = $(contextAnchor).data('id');
+
+							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
+								document.location.href = '/adminka/app/catalog/product/' + anchorId + '/edit';
+							} else {
+								document.location.href = '/adminka/app/catalog/category/' + anchorId + '/edit';
+							}
+						}
+					},
+					tableGear : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'TableGear',
+						'icon'   : 'fa fa-columns',
+						'action' : function (obj) {
+							document.location.href = '/adminka/editproducts';
+						}
+					},
+					toItemsPage : {
+						'separator_before' : false,
+						'separator_after'  : false,
+						'label'  : 'На страницу',
+						'icon'   : 'fa fa-link',
+						'action' : function (obj) {
+							var contextAnchor = obj.reference[0],
+								productId     = $(contextAnchor).data('id');
+
+							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
+								$linkToGo.attr('href', '/gbi/products/'   + productId + '/');
+							} else {
+								$linkToGo.attr('href', '/gbi/categories/' + productId + '/');
+							}
+
+							$linkToGo[0].click();
+						}
+					}
+				};
+			}
+		});
+	</script>
+{% endblock %}
+
+{% block side_bar_after_nav %}
+	<p class="text-center" style="border-top: 1px solid #444444; padding-top: 10px">
+		<a href="http://sonata-project.org" rel="noreferrer" target="_blank">sonata project</a>
+	</p>
+
+	<div id="admin-tree-wrapper"></div>
+	<a class="hidden" id="link-to-go" href="#" target="_blank"></a>
+{% endblock %}

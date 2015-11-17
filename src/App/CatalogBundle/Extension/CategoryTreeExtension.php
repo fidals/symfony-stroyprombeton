@@ -42,6 +42,4 @@ class CategoryTreeExtension extends \Twig_Extension
 
 		return $categories;
 	}
-
-
 }
