@@ -23,56 +23,72 @@
 {% block body %}
 	<div class="redline"></div>
 	<div class="page-all">
-	<div class="page-header">
-		<div class="page-header-left-colon">
-			<div class="logo">
-				<div class="logo-prom" onclick="location.href='/'">
-					<div class="logo-image"><img src="/bundles/main/images/logo.png"/></div>
-					<div class="logo-text"><a href="/">завод железобетонных изделий </a></div>
+		<div class="header clearfix">
+			<div class="header-left-colomn">
+				<div class="header-logo">
+					<a class="header-logo-link" href="/">
+						<img src="/bundles/main/images/logo.png" title="На главную" alt="Логотип">
+						<span class="header-logo-text">завод железобетонных изделий</span>
+					</a>
 				</div>
+
+				<table class="header-contacts m-contacts_new vcard">
+					<tr>
+						<td>
+							<p class="header-city text-muted"><i>Санкт-Петербург:</i></p>
+							<p class="header-phone">
+								<strong>8 <span class="code">(812)</span> <span class="tel 1">655-73-60</span></strong>
+							</p>
+							<p class="header-phone header-phone-last">
+								<strong>8 <span class="code">(812)</span> <span class="tel 2">655-72-95</span></strong>
+							</p>
+
+							<p class="header-city text-muted"><i>Москва:</i></p>
+							<p class="header-phone header-phone-last">
+								8 <span class="code">(499)</span> <span class="tel 3">649-33-79</span>
+							</p>
+						</td>
+
+						<td>
+							<p class="header-city text-muted"><i>Архангельск:</i></p>
+							<p class="header-phone header-phone-last">
+								8 <span class="code">(8182)</span> <span class="tel 4">63-92-35</span>
+							</p>
+
+							<p class="header-city text-muted"><i>Мурманск:</i></p>
+							<p class="header-phone header-phone-last">
+								8 <span class="code">(8152)</span> <span class="tel 5">65-50-48</span>
+							</p>
+
+							<p style="display: none" class="fn org url">www.stroyprombeton.ru</p>
+						</td>
+
+						<td>
+							<a class="header-email" href="mailto:info@stroyprombeton.ru"><i class="fa fa-envelope"></i> info@stroyprombeton.ru</a>
+							<p class="header-address-title text-muted">Адрес офиса продаж:</p>
+							<p class="header-address">
+								<i class="icon icon-map-marker"></i>
+								Санкт-Петербург, <br>
+								пр. Елизарова 38А, <br>
+								офис 218
+							</p>
+						</td>
+					</tr>
+				</table>
 			</div>
-
-			<table class="m-contacts_new vcard">
-				<tr>
-					<td rowspan="2">
-						<p><i>Санкт-Петербург:</i></p>
-						<p>8 <span class="code">(812)</span> <span class="tel 1">655-73-60</span></p>
-						<p>8 <span class="code">(812)</span> <span class="tel 2">655-72-95</span></p>
-						<p><i>Москва:</i></p>
-						<p>8 <span class="code">(499)</span> <span class="tel 3">649-33-79</span></p>
-						<p><i>Архангельск:</i></p>
-						<p>8 <span class="code">(8182)</span> <span class="tel 4">63-92-35</span></p>
-					</td>
-					<td style="vertical-align: top;">
-						<p style="display: none" class="fn org url">www.stroyprombeton.ru</p>
-
-						<p>электронная почта:</p>
-						<a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>
-						<div>
-							<p style="margin-top: 20px;">адрес офиса продаж:</p>
-							<p class="adr"><span class="locality">Санкт-Петербург</span>,<br>
-								<span class="street-address"> пр. Елизарова 38А, офис 218</span></p>
-						</div>
-					</td>
-				</tr>
-			</table>
+			<div class="header-right-colomn-container">
+				<div class="header-right-colomn"></div>
+			</div>
 		</div>
-		<div class="page-header-right-colon-container">
-			<div class="page-header-right-colon"></div>
-		</div>
-	</div>
 
-
-	<div class="clearing"></div>
-	<div class="menu-h">
-		<ul>
+		<ul class="menu">
 			<li><a href="/">Главная</a></li>
-			<li><a href="{{ path('app_catalog_gbi_visual') }}">Каталог продукции</a></li>
-			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'ordering' }) }}">Оформление заказа</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'delivery' }) }}">Доставка</a></li>
 			<li><a href="{{ path('app_main_staticpage', { 'alias': 'proizvodstvo-gbi' }) }}">Производство</a></li>
 			<li><a href="{{ path('app_main_territory_map') }}">Наши объекты</a></li>
-			<li><a href="{{ path('app_main_staticpage', { 'alias': 'delivery' }) }}">Доставка</a></li>
-			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контактная информация</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'about' }) }}">О компании</a></li>
+			<li><a href="{{ path('app_main_staticpage', { 'alias': 'contacts' }) }}">Контакты</a></li>
 			<li>
 				<div id="sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
 					<div class="basket basket-sticky">
@@ -83,96 +99,86 @@
 				</div>
 			</li>
 		</ul>
-	</div>
-	<div class="page-content">
-		<div class="menu-v">
-			<div class="menu-v-content-wrapper">
-				<div class="menu-v-content">
-					{% include 'AppCatalogBundle:Extension:akkordion.tree.html.twig' with {categoryTree: getCategoryTree(), depth: 2} %}
-				</div>
-			</div>
 
-			<div class="OrderPrice">
-				<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">
-					<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на изделия" alt="Расчёт заявок на конструкции">
-				</a>
-			</div>
-
-			<div class="OrderPrice">
-				<a class="a_price" href="{{ path('app_main_price_list_booking') }}">
-					<img src="/assets/images/order_price.png" title="прайс-листы на изделия" alt="прайс-листы на конструкции">
-				</a>
-			</div>
-
-			<div class="OrderDraw">
-				<a href="{{ path('app_main_staticpage', { 'alias': 'izgotovlenie-gbi-po-chertezham' }) }}">
-					<img src="/assets/images/order_draw.png" title="изготовление изделий по индивидуальным чертежам" alt="производство конструкций по индивидуальным чертежам">
-				</a>
-			</div>
-
-			{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
-			<a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}" target="__blank">
-				<div class="partners-table">
-					<div class="partners-table-header">
-						<p>Группа</p>
-						<img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
+		<div class="page-content">
+			<div class="menu-v">
+				<div class="menu-v-content-wrapper">
+					<div class="menu-v-content">
+						{% include 'AppCatalogBundle:Extension:akkordion.tree.html.twig' with {categoryTree: getCategoryTree(), depth: 2} %}
 					</div>
-					<table class="partners-table">
-						<tr>
-							<td>
-								<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo"/>
-								<p style="color:#005CC7;">СТК-МЕТАЛЛ</p>
-								<p class="partner-desc" style="color:#005CC7;">завод металлоконструкций</p>
-							</td>
-							<td>
-								<img src="{{ asset('bundles/main/images/sk78.png') }}" alt="sk78.ru" class="logo" style="margin-top: 5px;"/>
-								<p style="color:#747675;">Строй<span style="color: #FFA700;">К</span>омплект</p>
-								<p class="partner-desc" style="color:#747675;">проектирование и строительство</p>
-							</td>
-							{#<td>#}
-							{#<img src="{{ asset('bundles/main/images/modul.png') }}" alt="stk-modul.ru" class="logo"/>#}
-							{#<p style="color: #C20000;">СТК-Модуль</p>#}
-							{#<p class="partner-desc" style="color: #C20000;">поставка нерудных материалов</p>#}
-							{#</td>#}
-							<td>
-								<img src="{{ asset('bundles/main/images/auto.png') }}" alt="avtospecservis.ru" class="logo"/>
-								<p style="color:#0757a1">АвтоСпецСервис</p>
-								<p class="partner-desc" style="color:#0757a1">ремонт грузовых автомобилей</p>
-							</td>
-						</tr>
-					</table>
 				</div>
-			</a>
-		</div>
 
-		<div class="content-container">
-			<div class="content">
-				<div class="search-form">
-					<table>
-						<tr>
-							<td class="search-form-title">Поиск в каталоге продукции:</td>
-							<td class="search-form-input">
-								<input id="search_condition" type="text" value="{% if searchCondition|default %}{{ searchCondition }}{% else %}Запрос для поиска ...{% endif %}">
-							</td>
-							<td class="search-form-submit">
-								<input class="btn-gray btn-search-action" id="btn-search-action" type="button" value="Найти">
-							</td>
-						</tr>
-					</table>
+				<div class="OrderPrice">
+					<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">
+						<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на изделия" alt="Расчёт заявок на конструкции">
+					</a>
 				</div>
-				<div class="primary-content">
-					{% block content %}{% endblock %}
+
+				<div class="OrderPrice">
+					<a class="a_price" href="{{ path('app_main_price_list_booking') }}">
+						<img src="/assets/images/order_price.png" title="прайс-листы на изделия" alt="прайс-листы на конструкции">
+					</a>
+				</div>
+
+				<div class="OrderDraw">
+					<a href="{{ path('app_main_staticpage', { 'alias': 'izgotovlenie-gbi-po-chertezham' }) }}">
+						<img src="/assets/images/order_draw.png" title="изготовление изделий по индивидуальным чертежам" alt="производство конструкций по индивидуальным чертежам">
+					</a>
+				</div>
+
+				{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
+				<a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}" target="__blank">
+					<div class="partners-table">
+						<div class="partners-table-header">
+							<p>Группа</p>
+							<img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
+						</div>
+						<table class="partners-table">
+							<tr>
+								<td>
+									<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo">
+									<p>СТК-МЕТАЛЛ</p>
+									<p class="partner-desc">завод металлоконструкций</p>
+								</td>
+								<td>
+									<p class="partners-text">
+										C 2011 года мы рекомендуем завод СТК-Металл как поставщиков МК. Компания доставляет МК до строительных объектов по всей России. Если в вашем проекте требуются не только ЖБИ, но и МК, вы можете составить заявку для наших партнёров <a href="http://www.stk-metal.ru">на сайте СТК-Металла</a>
+									</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</a>
+			</div>
+
+			<div class="content-container">
+				<div class="content">
+					<div class="search-form">
+						<table>
+							<tr>
+								<td class="search-form-title">Поиск в каталоге продукции:</td>
+								<td class="search-form-input">
+									<input id="search_condition" type="text" value="{% if searchCondition|default %}{{ searchCondition }}{% else %}Запрос для поиска ...{% endif %}">
+								</td>
+								<td class="search-form-submit">
+									<input class="btn-gray btn-search-action" id="btn-search-action" type="button" value="Найти">
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="primary-content">
+						{% block content %}{% endblock %}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="clearing"></div>
+		<div class="clearing"></div>
 
-	<div class="footer-empty">&nbsp;</div>
-	<div class="footer rcs">
-		<div>Все права защищены. <script>document.write("2009-"+new Date().getFullYear());</script> ООО &laquo;СТК-ПромБетон&raquo; (Санкт-Петербург)</div>
-	</div>
+		<div class="footer-empty">&nbsp;</div>
+		<div class="footer rcs">
+			<div>Все права защищены. <script>document.write("2009-"+new Date().getFullYear());</script> ООО &laquo;СТК-ПромБетон&raquo; (Санкт-Петербург)</div>
+		</div>
 	</div>
 
 	<div class="redline"></div>
