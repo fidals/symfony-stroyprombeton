@@ -76,9 +76,8 @@
 					</tr>
 				</table>
 			</div>
-			<div class="header-right-colomn-container">
-				<div class="header-right-colomn"></div>
-			</div>
+
+			<div class="header-right-colomn"></div>
 		</div>
 
 		<ul class="menu">
@@ -129,16 +128,14 @@
 				{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
 				<a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}" target="__blank">
 					<div class="partners-table">
-						<div class="partners-table-header">
-							<p>Группа</p>
-							<img src="{{ asset('bundles/main/images/partners-table-header.png') }}">
-						</div>
 						<table class="partners-table">
 							<tr>
 								<td>
-									<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo">
-									<p>СТК-МЕТАЛЛ</p>
-									<p class="partner-desc">завод металлоконструкций</p>
+									<a href="http://www.stk-metal.ru/">
+										<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo">
+										<p>СТК-МЕТАЛЛ</p>
+										<p class="partner-desc">завод металлоконструкций</p>
+									</a>
 								</td>
 								<td>
 									<p class="partners-text">

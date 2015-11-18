@@ -135,10 +135,11 @@ div.footer {
 .header {
 	background: url("../images/header-bg.jpg") no-repeat right 20px;
 	margin: 0 auto 10px;
+	position: relative;
 }
 
 .header-left-colomn {
-	background: url("../images/header-squares-bg.png") no-repeat right 27px;
+	background: url("../images/header-squares-left-bg.png") no-repeat right 27px;
 	float: left;
 	padding: 0 0 20px;
 	position: relative;
@@ -158,14 +159,21 @@ div.footer {
 	z-index: -1;
 }
 
-.header-right-colomn-container {
+.header-right-colomn {
 	float: right;
-	margin-left: -400px;
+	position: relative;
+	top: 20px;
 	width: 550px;
 }
 
-.header-right-colomn {
-	margin-left: 300px;
+.header-right-colomn:after {
+	background: url("../images/header-squares-right-bg.png") no-repeat right 0;
+	content: "";
+	height: 195px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 151px;
 }
 
 .header-logo {
@@ -647,7 +655,7 @@ div.partners-table {
 	float: left;
 	border: 5px solid #C7C8CB;
 	border-radius: 15px;
-	padding: 0px 7px 0px 7px;
+	padding: 5px 7px 0;
 	margin-left: 15px;
 	cursor: pointer;
 }
@@ -682,7 +690,7 @@ table.partners-table {
 
 .partners-table .partners-text {
 	font-family: Calibri, sans-serif;
-	color: #CFCFCF;
+	color: #000;
 	font-size: 14px;
 	font-weight: 400;
 	margin: 0;
