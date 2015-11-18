@@ -9,9 +9,9 @@ use Symfony\Component\Validator\Constraints\Assert\File;
 
 class Order
 {
-	private $person = '';
-	private $phone = '';
-	private $email = '';
+	private $person  = '';
+	private $phone   = '';
+	private $email   = '';
 	private $company = '';
 	private $deliveryAddress = '';
 	private $comment = '';
@@ -19,13 +19,13 @@ class Order
 
 	public static function loadValidatorMetadata(ClassMetadata $metadata)
 	{
-		$metadata->addPropertyConstraint('person', new NotBlank());
-		$metadata->addPropertyConstraint('phone', new NotBlank());
-		$metadata->addPropertyConstraint('phone', new Regex(array('pattern' => "/^((8|0|\+\d{1,2})[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i")));
-		$metadata->addPropertyConstraint('email', new NotBlank());
+		$metadata->addPropertyConstraint('person',  new NotBlank());
+		$metadata->addPropertyConstraint('phone',   new NotBlank());
+		$metadata->addPropertyConstraint('phone',   new Regex(array('pattern' => "/^((8|0|\+\d{1,2})[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i")));
+		$metadata->addPropertyConstraint('email',   new NotBlank());
 		$metadata->addPropertyConstraint('company', new NotBlank());
-		$metadata->addPropertyConstraint('file', new File(array(
-			'maxSize' => 50000,
+		$metadata->addPropertyConstraint('files',   new File(array(
+			'maxSize'  => 50000,
 			'uploadFormSizeErrorMessage' => 'Размер файла не должен превышать 50 Мб'
 		)));
 	}
