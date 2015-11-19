@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block content %}
-
 	{# Инициализация инстанса Рактива для отражения таблицы с заказом #}
 	<script>
 		$(function () {
@@ -25,6 +24,23 @@
 				var product = this.get(event.keypath);
 
 				Cart.update(product.id, product.count);
+			});
+
+			var $btnSend = $('#btn-order-send');
+
+			$('#order_files').change(function() {
+				if ( parseInt( $(this).get(0).files.length ) > 10 ) {
+					$('.js-error-text').css('color', '#C90000');
+					$btnSend.attr('disabled', true);
+				} else {
+					$('.js-error-text').css('color', '#999');
+					$btnSend.attr('disabled', false);
+				}
+			});
+
+			$btnSend.on('click', function() {
+				localStorage.setItem( 'userEmailForOrder', $('#order_email').val() );
+				localStorage.setItem( 'userPhoneForOrder', $('#order_phone').val() );
 			});
 		});
 	</script>
@@ -140,9 +156,9 @@
 				<td>Прикрепить файл:</td>
 				<td class="td-submit">
 					{{ form_widget(form.files) }}
-					<input type="submit" name="submit" class="button btn btn-danger btn-order-send" value="Отправить заказ">
+					<input type="submit" name="submit" class="button btn btn-danger btn-order-send" id="btn-order-send" value="Отправить заказ">
 					<p class="muted">Максимальный размер файла - 50 Мб</p>
-					<p class="muted">Вы можете прикрепить не более 10 вложений</p>
+					<p class="muted js-error-text">Вы можете прикрепить не более 10 вложений одновременно</p>
 				</td>
 			</tr>
 			<tr>

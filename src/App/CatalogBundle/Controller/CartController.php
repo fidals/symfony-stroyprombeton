@@ -135,21 +135,21 @@ class CartController extends Controller
 
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
-					// ->setTo($recipients)
-					->setTo('yozhezhi@gmail.com')
+					->setTo($recipients)
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
 					->setBody($body);
 
 				$files = $form['files']->getData();
 
-				if ($files) {
+				if (count($files) > 1) {
+					$fs = new Filesystem();
+					$filePath = 'tmp/';
+
 					foreach ($files as $file) {
-						$fs = new Filesystem();
-						$filePath = 'tmp/';
 						$fileName = $file->getClientOriginalName();
-						$fileFullPath = $filePath . $fileName;
 						$file->move($filePath, $fileName);
+						$fileFullPath = $filePath . $fileName;
 						$message->attach(\Swift_Attachment::fromPath($fileFullPath));
 					}
 
@@ -157,7 +157,10 @@ class CartController extends Controller
 					$transport = $this->container->get('mailer')->getTransport();
 					$spool = $transport->getSpool();
 					$spool->flushQueue($this->container->get('swiftmailer.transport.real'));
-					$fs->remove($fileFullPath);
+
+					foreach ($files as $file) {
+						$fs->remove($filePath . $file->getClientOriginalName());
+					}
 				} else {
 					$mailer->send($message);
 				}
