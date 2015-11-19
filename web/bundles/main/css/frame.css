@@ -144,7 +144,7 @@ div.footer {
 	padding: 0 0 20px;
 	position: relative;
 	top: -7px;
-	width: 700px;
+	width: 730px;
 	z-index: 1;
 }
 
@@ -155,7 +155,7 @@ div.footer {
 	left: 0;
 	top: 0;
 	position: absolute;
-	width: 552px;
+	width: 582px;
 	z-index: -1;
 }
 
@@ -163,7 +163,6 @@ div.footer {
 	float: right;
 	position: relative;
 	top: 20px;
-	width: 550px;
 }
 
 .header-right-colomn:after {
@@ -188,34 +187,27 @@ div.footer {
 	padding: 15px 0 0;
 	position: relative;
 	text-decoration: none;
-	width: 250px;
+	width: 280px;
 }
 
 .header-logo-text {
-	-webkit-transition: all 0.5s ease;
-	        transition: all 0.5s ease;
 	color: #000;
 	display: block;
-	font-size: 15px;
+	font-size: 17px;
 	letter-spacing: 0.02em;
-	margin: -4px 0 0 9px;
-}
-
-.header-logo-link:hover .header-logo-text {
-	letter-spacing: 0.03em;
-	margin-left: 7px;
+	margin: -2px 0 0 4px;
 }
 
 .header-contacts {
 	border-collapse: separate;
 	border-spacing: 0;
 	font-family: "Lucida Grande", Calibri, Arial;
-	font-size: 13px;
+	font-size: 15px;
 	margin-top: 20px;
 }
 
 .header-contacts td {
-	padding-right: 40px;
+	padding-right: 30px;
 	vertical-align: top;
 }
 
