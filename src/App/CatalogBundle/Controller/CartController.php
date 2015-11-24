@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CartController extends Controller
 {
-
     /**
      * Метод для добавления товаров в корзину
      *
@@ -142,7 +141,7 @@ class CartController extends Controller
 
 				$files = $form['files']->getData();
 
-				if (count($files) > 1) {
+				if (count($files) >= 1) {
 					$fs = new Filesystem();
 					$filePath = 'tmp/';
 
