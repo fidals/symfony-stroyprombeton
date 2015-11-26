@@ -141,7 +141,7 @@ class CartController extends Controller
 
 				$files = $form['files']->getData();
 
-				if ($files[0] >= 1) {
+				if (!empty($files)) {
 					$fs = new Filesystem();
 					$filePath = 'tmp/';
 
