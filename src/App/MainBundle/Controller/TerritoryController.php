@@ -26,7 +26,7 @@ class TerritoryController extends Controller
 
 			return $this->render('AppMainBundle:Territory:show.html.twig', $twigArgs);
 		} else {
-			return $this->render('AppMainBundle:StaticPage:404.html.twig');
+			throw $this->createNotFoundException();
 		}
 	}
 }

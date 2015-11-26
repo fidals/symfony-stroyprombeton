@@ -69,7 +69,7 @@ class CatalogController extends Controller
 				'product'  => $product
 			));
 		} else {
-			return $this->render('AppMainBundle:StaticPage:404.html.twig');
+			throw $this->createNotFoundException();
 		}
 	}
 
