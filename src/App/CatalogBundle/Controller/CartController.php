@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CartController extends Controller
 {
-
     /**
      * Метод для добавления товаров в корзину
      *
@@ -108,7 +107,6 @@ class CartController extends Controller
         return new JsonResponse($cartService->getProductsInfo());
     }
 
-
 	/**
 	 * Форма заказа
 	 * @param Request $request
@@ -123,34 +121,45 @@ class CartController extends Controller
 
 			if ($form->isValid()) {
 				$mailer = $this->get('mailer');
+
 				$recipients = array(
 					$this->container->getParameter('email_info'),
 					$form['email']->getData()
 				);
+
 				$body = $this->renderView('AppCatalogBundle:Cart:email.order.html.twig', array(
 					'form' => $form->createView(),
 					'cart' => $this->get('catalog.cart')->loadCart(true)
 				));
+
 				$message = \Swift_Message::newInstance()
 					->setSubject('Stroyprombeton | New order')
 					->setTo($recipients)
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
 					->setBody($body);
-				$file = $form['file']->getData();
 
-				if ($file) {
+				$files = $form['files']->getData();
+
+				if (!empty($files)) {
 					$fs = new Filesystem();
 					$filePath = 'tmp/';
-					$fileName = $file->getClientOriginalName();
-					$fileFullPath = $filePath . $fileName;
-					$file->move($filePath, $fileName);
-					$message->attach(\Swift_Attachment::fromPath($fileFullPath));
+
+					foreach ($files as $file) {
+						$fileName = $file->getClientOriginalName();
+						$file->move($filePath, $fileName);
+						$fileFullPath = $filePath . $fileName;
+						$message->attach(\Swift_Attachment::fromPath($fileFullPath));
+					}
+
 					$mailer->send($message);
 					$transport = $this->container->get('mailer')->getTransport();
 					$spool = $transport->getSpool();
 					$spool->flushQueue($this->container->get('swiftmailer.transport.real'));
-					$fs->remove($fileFullPath);
+
+					foreach ($files as $file) {
+						$fs->remove($filePath . $file->getClientOriginalName());
+					}
 				} else {
 					$mailer->send($message);
 				}
