@@ -92,6 +92,10 @@ class CatalogController extends Controller
 			));
 		}
 
+		if (empty($sectionId) || empty($gbiId)) {
+			throw $this->createNotFoundException();
+		}
+
 		die('Page is not found');
 	}
 
