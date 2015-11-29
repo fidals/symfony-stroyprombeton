@@ -403,10 +403,8 @@ div.form_comment{
 .shop-order-table .form-error ul {
 	list-style: none;
 	color: #C90000;
-	margin-top: -10px;
 	margin-bottom: 10px;
-	font-size: 12px;
-	margin-left: 0px;
+	margin-left: 0;
 }
 
 .shop-order-table .btn-order-send {

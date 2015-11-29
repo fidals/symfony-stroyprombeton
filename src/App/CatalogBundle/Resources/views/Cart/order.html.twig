@@ -26,22 +26,56 @@
 				Cart.update(product.id, product.count);
 			});
 
+			/**
+			 * Логика работы с файлами в форме:
+			 */
 			var $btnSend = $('#btn-order-send');
 
 			$('#order_files').change(function() {
-				if ( parseInt( $(this).get(0).files.length ) > 10 ) {
-					$('.js-error-text').css('color', '#C90000');
+				var fileCount = parseInt($(this).get(0).files.length);
+
+				if ( fileCount > 0 ) {
+					$('#order-file-notify').html('Число файлов: ' + fileCount);
+				} else {
+					$('#order-file-notify').html('Файлы не выбраны');
+				}
+
+				if ( fileCount > 10 ) {
+					$('.js-error-count').css('color', '#C90000');
 					$btnSend.attr('disabled', true);
 				} else {
-					$('.js-error-text').css('color', '#999');
+					$('.js-error-count').css('color', '#999');
+					$btnSend.attr('disabled', false);
+				}
+
+				if ( checkFilesSize() === false ) {
+					$('.js-error-large-file').removeClass('hide').css('color', '#C90000');
+					$btnSend.attr('disabled', true);
+				} else {
+					$('.js-error-large-file').addClass('hide');
 					$btnSend.attr('disabled', false);
 				}
 			});
 
-			$btnSend.on('click', function() {
+			$btnSend.on('click', function(event) {
 				localStorage.setItem( 'userEmailForOrder', $('#order_email').val() );
 				localStorage.setItem( 'userPhoneForOrder', $('#order_phone').val() );
 			});
+
+			function checkFilesSize() {
+				var $input = document.getElementById("order_files");
+
+				// сначала - проверка на поддержку в браузерах
+				if ( $input.files && $input.files.length > 0 ) {
+					for (var i = 0, len = $input.files.length; i < len; i++) {
+						if ( $input.files[i].size > 25550000 ) { // ~25 Mb;
+							return false;
+						}
+					}
+				}
+
+				return true;
+			}
 		});
 	</script>
 
@@ -112,7 +146,12 @@
 		<table class="shop-order-table">
 			<tr>
 				<td>Ваше имя:<sup>*</sup></td>
-				<td>{{ form_widget(form.person) }}</td>
+				<td>
+					{{ form_widget(form.person) }}
+					<div class="form-error">
+						{{ form_errors(form.person) }}
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td>Контактный телефон:<sup>*</sup></td>
@@ -125,11 +164,21 @@
 			</tr>
 			<tr>
 				<td>Электронный адрес (Е-mail):<sup>*</sup></td>
-				<td>{{ form_widget(form.email) }}</td>
+				<td>
+					{{ form_widget(form.email) }}
+					<div class="form-error">
+						{{ form_errors(form.email) }}
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td>Полное название организации:<sup>*</sup></td>
-				<td>{{ form_widget(form.company) }}</td>
+				<td>
+					{{ form_widget(form.company) }}
+					<div class="form-error">
+						{{ form_errors(form.company) }}
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td>Адрес поставки:</td>
@@ -139,26 +188,20 @@
 				<td>Комментарий к заказу:</td>
 				<td>{{ form_widget(form.comment) }}</td>
 			</tr>
-			{#<tr>#}
-			{#<td>Приложить файл:</td>#}
-			{#<td>#}
-			{#<div>#}
-			{#<div class="attach_field">#}
-			{#<div>#}
-			{#<input type="file" name="attachment[]" accept="text/plain, application/msword, text/richtext, application/x-compressed" value="/">#}
-			{#</div>#}
-			{#</div>#}
-			{#<a href="javascript:;" class="add_attach_field" style="display: none;">Прикрепить ещё файл</a>#}
-			{#</div>#}
-			{#</td>#}
-			{#</tr>#}
 			<tr>
 				<td>Прикрепить файл:</td>
 				<td class="td-submit">
-					{{ form_widget(form.files) }}
+					<div>
+						{{ form_widget(form.files) }}
+						<span id="order-file-notify">Файлы не выбраны</span>
+					</div>
 					<input type="submit" name="submit" class="button btn btn-danger btn-order-send" id="btn-order-send" value="Отправить заказ">
-					<p class="muted">Максимальный размер файла - 50 Мб</p>
-					<p class="muted js-error-text">Вы можете прикрепить не более 10 вложений одновременно</p>
+					<div class="form-error">
+						{{ form_errors(form.files) }}
+					</div>
+					<p class="muted">Максимальный размер файла - 25 Мб</p>
+					<p class="muted js-error-count">Вы можете прикрепить не более 10 вложений одновременно</p>
+					<p class="muted js-error-large-file hide">Один из файлов превышает допустимый размер в 25 Мб</p>
 				</td>
 			</tr>
 			<tr>

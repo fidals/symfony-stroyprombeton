@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use Symfony\Component\Validator\Validation;
+
 class CartController extends Controller
 {
     /**
@@ -133,7 +135,7 @@ class CartController extends Controller
 				));
 
 				$message = \Swift_Message::newInstance()
-					->setSubject('Stroyprombeton | New order')
+					->setSubject('Stroyprombeton | Новый заказ')
 					->setTo($recipients)
 					->setFrom($this->container->getParameter('email_order'))
 					->setContentType("text/html")
@@ -141,7 +143,7 @@ class CartController extends Controller
 
 				$files = $form['files']->getData();
 
-				if (!empty($files)) {
+				if (!empty(array_filter($files))) {
 					$fs = new Filesystem();
 					$filePath = 'tmp/';
 

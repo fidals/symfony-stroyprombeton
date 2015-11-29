@@ -4,14 +4,26 @@
 	{{ i }}.)   {{ product.count }}  *  {{ product.model.id }} - {{ product.model.name }} - {{ product.model.mark }}<br>
 	{% set i = i + 1 %}
 {% endfor %}
-<br /><br />
+<br>
+<br>
 <b>Данные покупателя:</b>
 <table>
-	<tr><td>Компания:</td><td>{{ form.vars.value.company }}</td></tr>
-	<tr><td>Адрес поставки:</td><td>{{ form.vars.value.deliveryAddress}}</td></tr>
 	<tr><td>Имя:</td><td>{{ form.vars.value.person }}</td></tr>
+
 	<tr><td>Телефон:</td><td>{{ form.vars.value.phone }}</td></tr>
-	<tr><td>E-mail:</td><td><a href="mailto:{{ form.vars.value.email }}">{{ form.vars.value.email }}</a></td></tr>
-	<tr><td>Сообщение:</td><td>{{ form.vars.value.comment }}</td></tr>
-	<tr><td>Приложения:</td><td></td></tr>
+
+	<tr>
+		<td>E-mail:</td>
+		<td><a href="mailto:{{ form.vars.value.email }}">{{ form.vars.value.email }}</a></td>
+	</tr>
+
+	<tr><td>Организация:</td><td>{{ form.vars.value.company }}</td></tr>
+
+	{% if form.vars.value.deliveryAddress %}
+		<tr><td>Адрес поставки:</td><td>{{ form.vars.value.deliveryAddress }}</td></tr>
+	{% endif %}
+
+	{% if form.vars.value.comment %}
+		<tr><td>Комментарий к заказу:</td><td>{{ form.vars.value.comment }}</td></tr>
+	{% endif %}
 </table>

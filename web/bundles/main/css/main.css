@@ -937,3 +937,7 @@ div.main_cat_gbi{
 .gbi_map_list li{
 	padding: 5px;
 }
+
+#order_files {
+	width: 125px;
+}
