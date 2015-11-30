@@ -80,23 +80,14 @@ class CatalogController extends Controller
 		$gbiId     = $this->getRequest()->query->get('gbi');
 
 		if (!empty($catUrl) && !empty($sectionId) && !empty($gbiId)) {
-			return $this->forward('AppCatalogBundle:Catalog:exploreProduct', array(
-				'catUrl'    => $catUrl,
-				'sectionId' => (int) $sectionId,
-				'gbiId'     => (int) $gbiId
+			return $this->forward('AppCatalogBundle:Catalog:product', array(
+				'id' => (int) $gbiId
 			));
 		} elseif (!empty($catUrl) || !empty($sectionId)) {
-			return $this->forward('AppCatalogBundle:Catalog:exploreCategory', array(
-				'catUrl'    => $catUrl,
-				'sectionId' => (int) $sectionId,
+			return $this->forward('AppCatalogBundle:Catalog:category', array(
+				'id' => (int) $sectionId,
 			));
 		}
-
-		if (empty($sectionId) || empty($gbiId)) {
-			throw $this->createNotFoundException();
-		}
-
-		die('Page is not found');
 	}
 
 	/**
