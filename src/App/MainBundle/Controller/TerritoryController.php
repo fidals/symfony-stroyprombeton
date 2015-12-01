@@ -10,7 +10,8 @@ class TerritoryController extends Controller
 	{
 		$territoryRp = $this->getDoctrine()->getRepository('AppMainBundle:Territory');
 		$territories = $territoryRp->findAll();
-		$twigArgs = array('territories' => $territories);
+		$twigArgs    = array('territories' => $territories);
+
 		return $this->render('AppMainBundle:Territory:map.html.twig', $twigArgs);
 	}
 
@@ -18,8 +19,14 @@ class TerritoryController extends Controller
 	{
 		// search in repository
 		$territoryRp = $this->getDoctrine()->getRepository('AppMainBundle:Territory');
-		$territory = $territoryRp->find($territoryId);
-		$twigArgs = array('territory' => $territory);
-		return $this->render('AppMainBundle:Territory:show.html.twig', $twigArgs);
+		$territory   = $territoryRp->find($territoryId);
+
+		if (!empty($territory)) {
+			$twigArgs = array('territory' => $territory);
+
+			return $this->render('AppMainBundle:Territory:show.html.twig', $twigArgs);
+		} else {
+			throw $this->createNotFoundException();
+		}
 	}
 }
