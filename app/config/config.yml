@@ -95,7 +95,7 @@ sonata_admin:
     title_logo: /bundles/main/images/logo.png
     templates:
         edit:   AppMainBundle:Admin:edit.html.twig
-        layout: AppMainBundle:Admin:catagory_tree_layout.html.twig
+        layout: AppMainBundle:Admin:category_tree_layout.html.twig
     dashboard:
         blocks:
              - { position: left, type: sonata.admin.block.admin_list }

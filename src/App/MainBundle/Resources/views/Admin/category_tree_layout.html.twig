@@ -86,33 +86,58 @@
 					'plugins' : [ 'contextmenu', 'state' ]
 				});
 
+			var bindEditAction = function() {
+				$('.jstree-anchor').bind('mousedown', function (e) {
+					if (e.which == 1) { // если клик левой кнопкой мыши
+						var anchor = $(e.currentTarget);
+						var entityId = anchor.data('id');
+						var entityType = anchor.parent().hasClass('jstree-leaf') ? 'product' : 'category';
+						var pathname =  '/adminka/app/catalog/' + entityType + '/' + entityId + '/edit';
+						if (pathname != window.location.pathname) {
+							window.location.href = pathname;
+						}
+					}
+				});
+				$('#admin-tree-wrapper').on('after_open.jstree', bindEditAction);
+			};
+
+			$('#admin-tree-wrapper').on('state_ready.jstree', bindEditAction);
+
 			function jsTreeContextMenu( node ) {
 				var $tree = $('#admin-tree-wrapper').jstree(true);
 
 				return {
-					editItem : {
-						'separator_before' : false,
-						'separator_after'  : false,
-						'label'  : 'Редактировать',
-						'icon'   : 'fa fa-pencil-square-o',
-						'action' : function (obj) {
-							var contextAnchor = obj.reference[0],
-								anchorId      = $(contextAnchor).data('id');
-
-							if ( $(contextAnchor).parent().hasClass('jstree-leaf') ) {
-								document.location.href = '/adminka/app/catalog/product/' + anchorId + '/edit';
-							} else {
-								document.location.href = '/adminka/app/catalog/category/' + anchorId + '/edit';
-							}
-						}
-					},
 					tableGear : {
 						'separator_before' : false,
 						'separator_after'  : false,
 						'label'  : 'TableGear',
 						'icon'   : 'fa fa-columns',
 						'action' : function (obj) {
-							document.location.href = '/adminka/editproducts';
+							var contextAnchor = obj.reference[0];
+							var categoryId;
+							if (!$(contextAnchor).parent().hasClass('jstree-leaf')) {
+								categoryId = $(contextAnchor).data('id');
+							} else {
+								categoryId = $(contextAnchor).parents('.jstree-node:not(.jstree-leaf)').eq(0).find('.jstree-anchor').eq(0).data('id');
+							}
+							var url = '/adminka/editproducts';
+							var form = $('<form action="' + url + '" method="post">' +
+									'<input type="text" name="type_search" value="0" />' +
+									'<input type="text" name="field_search" value="tv_section_id" />' +
+									'<input type="text" name="query" value="' + categoryId + '" />' +
+									'</form>');
+							$('body').append(form);
+							form.submit();
+						},
+						_disabled: function(obj) {
+							var ref = $(obj.reference);
+							console.log();
+							if(ref.parent().hasClass('jstree-leaf')
+								|| ref.parent().find('ul').first().find('li').first().hasClass('jstree-leaf')
+							) {
+								return false;
+							}
+							return true;
 						}
 					},
 					toItemsPage : {

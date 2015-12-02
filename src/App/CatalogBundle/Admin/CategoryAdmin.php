@@ -17,6 +17,7 @@ class CategoryAdmin extends Admin
 				->add('name', null, array('label' => 'Название', 'required' => true))
 				->add('parent', 'sonata_type_model', array('label' => 'Родитель', 'required' => false))
 				->add('linkToStkMetal', null, array('required' => false))
+				->add('ord', null, array('required' => false))
 				->add('isTextPublished', null, array('label' => 'Текст опубликован', 'required' => false))
 				->add('text', null, array('required' => false))
 			->end()

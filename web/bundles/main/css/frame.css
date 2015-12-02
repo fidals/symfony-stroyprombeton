@@ -139,7 +139,7 @@ div.footer {
 }
 
 .header-left-colomn {
-	background: url("../images/header-squares-left-bg.png") no-repeat right 27px;
+	background: url("../images/header-squares-left-bg.png") no-repeat right 1px top 27px;
 	float: left;
 	padding: 0 0 20px;
 	position: relative;
@@ -649,7 +649,6 @@ div.partners-table {
 	border-radius: 15px;
 	padding: 5px 7px 0;
 	margin-left: 15px;
-	cursor: pointer;
 }
 
 div.partners-table-header p {

@@ -141,7 +141,7 @@ class CartController extends Controller
 
 				$files = $form['files']->getData();
 
-				if (!empty($files)) {
+				if (!empty($files) && $files[0] !== null) {  // $files[0] !== null - если не прикреплено файлов, то files[0] будет null
 					$fs = new Filesystem();
 					$filePath = 'tmp/';
 

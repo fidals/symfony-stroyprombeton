@@ -126,26 +126,24 @@
 				</div>
 
 				{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
-				<a href="{{ path('app_main_staticpage', {'alias': 'praimgroup'}) }}" target="__blank">
-					<div class="partners-table">
-						<table class="partners-table">
-							<tr>
-								<td>
-									<a href="http://www.stk-metal.ru/">
-										<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo">
-										<p>СТК-МЕТАЛЛ</p>
-										<p class="partner-desc">завод металлоконструкций</p>
-									</a>
-								</td>
-								<td>
-									<p class="partners-text">
-										C 2011 года мы рекомендуем завод СТК-Металл как поставщиков МК. Компания доставляет МК до строительных объектов по всей России. Если в вашем проекте требуются не только ЖБИ, но и МК, вы можете составить заявку для наших партнёров <a href="http://www.stk-metal.ru">на сайте СТК-Металла</a>
-									</p>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</a>
+				<div class="partners-table">
+					<table class="partners-table">
+						<tr>
+							<td>
+								<a class="stkmetall-card" rel="nofollow" target="_blank" href="http://www.stk-metal.ru/">
+									<img src="{{ asset('bundles/main/images/metall.png') }}" alt="stk-metal.ru" class="logo">
+									<p>СТК-МЕТАЛЛ</p>
+									<p class="partner-desc">завод металлоконструкций</p>
+								</a>
+							</td>
+							<td>
+								<p class="partners-text">
+									C 2011 года мы рекомендуем завод СТК-Металл как поставщиков МК. Компания доставляет МК до строительных объектов по всей России. Если в вашем проекте требуются не только ЖБИ, но и МК, вы можете составить заявку для наших партнёров <a rel="nofollow" target="_blank" href="http://www.stk-metal.ru">на сайте СТК-Металла</a>
+								</p>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 
 			<div class="content-container">
@@ -199,39 +197,8 @@
 	<script src="{{ asset('bundles/main/js/shop-gbi.js') }}"></script>
 	<script src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
 	<script src="{{ asset('bundles/catalog/js/cart.js') }}"></script>
-
-	<script>
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-27310520-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function () {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
 	<script src="/bundles/main/js/jquery.tooltipster.min.js"></script>
 	<script src="/bundles/main/js/jquery.maphilight.min.js"></script>
-
-	<script>
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-27310520-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function () {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-
 	<script type="text/javascript">
 		Shadowbox.init({
 			animate: false,
@@ -277,18 +244,13 @@
 
 	<!-- Google analitics -->
 	<script>
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-42242414-1']);
-		_gaq.push(['_trackPageview']);
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		(function () {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
+		ga('create', 'UA-42242414-1', 'auto');
+		ga('send', 'pageview');
 	</script>
 
 	<!-- Callbaska -->

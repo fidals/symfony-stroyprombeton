@@ -49,7 +49,10 @@ var ractiveDropdown = new Ractive({
  */
 ractiveDropdown.on('updateCount', function (event) {
     var product = this.get(event.keypath);
-
+    if (product.count < 1) {
+        product.count = 1;
+        this.set(event.keypath, product);
+    }
     Cart.update(product.id, product.count);
 });
 
@@ -75,6 +78,9 @@ var Cart = {
     },
 
     add: function (id, quantity) {
+        if(quantity < 1) {
+            return false;
+        }
         $.post(
             Cart.url.add,
             {

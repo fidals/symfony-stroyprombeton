@@ -63,6 +63,9 @@ $table = new TableGear($options);
 $cookie_ff=array();
 if( isset($_COOKIE['tg_filterf']) ){
 	$cookie_ff=unserialize($_COOKIE['tg_filterf']);
+} else {
+	$cookie_ff = $productRepository->getTableGearDefaultProperties();
+	$cookie_fs = $productRepository->getTableGearDefaultProperties();
 }
 
 // --> Здесь через $_POST и $_COOKIE формируется список полей. Вроде менять ничего не надо
@@ -164,6 +167,10 @@ if( isset($_REQUEST['ff']) && count($_REQUEST['ff'])>0 ){
 		$fileds .= ", tb1.". $val;
 	}
   }
+} else {
+	foreach($cookie_fs as $val) {
+		$fileds .= ", tb1.". $val;
+	}
 }
 
 if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
