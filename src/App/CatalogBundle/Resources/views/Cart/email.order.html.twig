@@ -1,11 +1,12 @@
-<p><b>Состав заказа:</b></p>
-{% set i = 1 %}
-{% for product in cart.products %}
-	{{ i }})   {{ product.count }}  *  {{ product.model.id }} - {{ product.model.name }} - {{ product.model.mark }}<br>
-	{% set i = i + 1 %}
-{% endfor %}
-
-<br /><br />
+{% if cart.products %}
+    <p><b>Состав заказа:</b></p>
+    {% set i = 1 %}
+    {% for product in cart.products %}
+        {{ i }})   {{ product.count }}  *  {{ product.model.id }} - {{ product.model.name }} - {{ product.model.mark }}<br>
+        {% set i = i + 1 %}
+    {% endfor %}
+    <br /><br />
+{% endif %}
 <b>Данные покупателя:</b>
 <table>
     {% if form.vars.value.company %}
