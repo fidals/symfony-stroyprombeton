@@ -26,6 +26,7 @@
     {% if form.vars.value.comment %}
         <tr><td>Сообщение:</td><td>{{ form.vars.value.comment }}</td></tr>
     {% endif %}
-
-    <tr><td>Приложения:</td><td></td></tr>
+    {% if form.vars.value.files.0  %}
+        <tr><td>Приложения:</td><td></td></tr>
+    {% endif %}
 </table>
