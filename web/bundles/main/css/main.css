@@ -642,7 +642,6 @@ div.basket-content {
 }
 
 .cat_cat span {
-	float: left;
 	font-weight: bold;
 }
 
@@ -677,7 +676,7 @@ div.cat_cat div.link-detailed {
 
 span.number {
 	color: #777;
-	float: left;
+	display: block;
 }
 
 .catalog-second-level {
@@ -687,6 +686,7 @@ span.number {
 
 .catalog-second-level,
 .catalog-third-level {
+	display: block;
 	line-height: 1.5em;
 	margin-bottom: 5px;
 	min-height: 56px;
