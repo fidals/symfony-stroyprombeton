@@ -150,8 +150,10 @@ class ProductRepository extends EntityRepository
 	public function getTableGearProperties()
 	{
 		return [
-			'name'         => 'Заголовок',
+			'h1'           => 'Заголовок',
+			'name'         => 'Название',
 			'title'        => 'Расширенный заголовок',
+			'section_id'   => 'Категория',
 			'description'  => 'Описание',
 			'text'         => 'Текст',
 			'introtext'    => 'Аннотация',
@@ -166,6 +168,16 @@ class ProductRepository extends EntityRepository
 			'volume'       => 'Объем (м3)',
 			'diameter_in'  => 'Внутренний диаметр (мм)',
 			'diameter_out' => 'Внешний диаметр (мм)'
+		];
+	}
+
+	public function getTableGearDefaultProperties()
+	{
+		return [
+			'h1',
+			'mark',
+			'price',
+			'nomen'
 		];
 	}
 }

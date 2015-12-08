@@ -80,6 +80,13 @@ class Category
 	 */
 	private $isTextPublished = true;
 
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(name="ord", type="integer", nullable=true)
+	 */
+	private $ord;
+
 	public function __construct()
 	{
 		$this->products = new ArrayCollection();
@@ -175,6 +182,22 @@ class Category
 	public function setIsTextPublished($isTextPublished)
 	{
 		$this->isTextPublished = $isTextPublished;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getOrd()
+	{
+		return $this->ord;
+	}
+
+	/**
+	 * @param int $ord
+	 */
+	public function setOrd($ord)
+	{
+		$this->ord = $ord;
 	}
 
 	public function addClosure(CategoryClosure $closure)

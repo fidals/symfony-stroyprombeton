@@ -937,3 +937,11 @@ div.main_cat_gbi{
 .gbi_map_list li{
 	padding: 5px;
 }
+
+.stkmetall-card {
+	color: #003cb3;
+}
+
+input::-webkit-inner-spin-button {
+	opacity: 1;
+}
