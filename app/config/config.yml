@@ -94,11 +94,15 @@ sonata_admin:
     title: Административная панель
     title_logo: /bundles/main/images/logo.png
     templates:
-        edit: AppMainBundle:Admin:edit.html.twig
+        edit:   AppMainBundle:Admin:edit.html.twig
+        layout: AppMainBundle:Admin:category_tree_layout.html.twig
     dashboard:
         blocks:
              - { position: left, type: sonata.admin.block.admin_list }
              - { position: right, type: sonata.block.service.tablegear }
+    options:
+        use_icheck: false
+
 sonata_block:
     default_contexts: [cms]
     blocks:

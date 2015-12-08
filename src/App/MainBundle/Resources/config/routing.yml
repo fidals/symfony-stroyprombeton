@@ -36,6 +36,13 @@ app_main_index:
     pattern: /
     defaults: { _controller: AppMainBundle:StaticPage:showIndex }
 
+app_build_category_tree:
+    pattern: /buildCategoryTree/
+    defaults: { _controller: AppMainBundle:AdminTree:buildCategoryTree }
+
+app_get_category_tree_products:
+    pattern: /getTreeProducts/
+    defaults: { _controller: AppMainBundle:AdminTree:getProductsByCategoryId }
 
 # Роутинг для редиректов modx url
 

@@ -3,7 +3,7 @@
 {# Макрос для построения дерева с категориями. Реализован через стандартный рекурсивный алгоритм обхода дерева. #}
 
 {% macro tree_build(categoriesTree, depthToBuild) %}
-	{% for category in categoriesTree %}
+	{% for category in categoriesTree | sortbyfield('ord') %}
 		{% if depthToBuild > 1 %}
 			<div class='akkordion-title' id='cat-{{ category.id }}'>{{ category.name }}<i class='fa fa-caret-left'></i></div>
 			{% if category.__children is not empty %}

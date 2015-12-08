@@ -769,30 +769,7 @@ span.catalog-second-level, span.catalog-third-level {
 	border-bottom: 1px solid #DADADA;
 }
 
-table.m-contacts_new{
-	border-collapse: separate;
-	border-spacing: 0;
-	margin-top: 20px;
-}
-
-table.m-contacts_new td{
-	padding-right: 20px;
-	vertical-align: top;
-}
-
-table.m-contacts_new tr td p{
-	color: #6c6c6c;
-	margin: 0;
-}
-table.m-contacts_new tr td p.tel{
-	font-weight: bold;
-	color:#000;
-}
-
-table.m-contacts_new tr td p.tel span{color:#6c6c6c;}
-table.m-contacts_new tr td p.adr{color: #000;font-weight: bold}
-
-.inf-product-header{
+.inf-product-header {
 	color: #c90000;
 	display: table-cell;
 	font-size: 1.1em;
@@ -802,8 +779,9 @@ table.m-contacts_new tr td p.adr{color: #000;font-weight: bold}
 	padding: 0 10px;
 	vertical-align: middle;
 }
+
 div.inf-product-for-nds {
-	color: #999999;
+	color: #999;
 	font-size: 0.8em;
 	margin-top: 5px;
 	text-align: right;
@@ -958,4 +936,12 @@ div.main_cat_gbi{
 
 .gbi_map_list li{
 	padding: 5px;
+}
+
+.stkmetall-card {
+	color: #003cb3;
+}
+
+input::-webkit-inner-spin-button {
+	opacity: 1;
 }

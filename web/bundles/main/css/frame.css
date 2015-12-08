@@ -2,8 +2,8 @@ html, body {
 	width: 100%;
 	height: 100%;
 	min-width: 1000px;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	background-color: #FFF;
 	color: #333;
 	font-family: "xxxLucida Grande", Calibri, Arial, sans-serif;
@@ -12,7 +12,7 @@ html, body {
 
 table, td {
 	border-collapse: collapse;
-	border-spacing: 0px;
+	border-spacing: 0;
 }
 
 form {
@@ -69,14 +69,10 @@ div.error {
 
 div.clearing {
 	clear: both;
-	height: 0px;
-	margin: 0px;
-	padding: 0px;
+	height: 0;
+	margin: 0;
+	padding: 0;
 }
-
-/* -------------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------------- */
 
 .rcs {
 	border-radius: 10px;
@@ -86,11 +82,11 @@ div.clearing {
 	border-radius: 5px;
 }
 
-/* -------------------------------------------------------------------------------- */
-
-div.redline {
-	background-color: #c90000;
+.redline {
+	background-color: #C90000;
 	padding: 2px;
+	position: relative;
+	z-index: 10;
 }
 
 /* -------------------------------------------------------------------------------- */
@@ -100,12 +96,16 @@ html>body div.page-all {
 	min-height: 100%;
 }
 
-div.page-all {
+.page-all {
 	position: relative;
 	width: 80%;
 	min-width: 980px;
 	height: 100%;
 	margin: 0 auto;
+}
+
+.text-muted {
+	color: #6C6C6C;
 }
 
 /* -------------------------------------------------------------------------------- */
@@ -127,77 +127,126 @@ div.footer {
 	font-size: 0.7em;
 	text-align: center;
 	height: 45px;
-
 }
 
-/* -------------------------------------------------------------------------------- */
-
-.page-header {
-	background: url("../images/cover.jpg") no-repeat right top;
-	height: 270px;
+/* ================================
+ * ШАПКА
+ * ================================ */
+.header {
+	background: url("../images/header-bg.jpg") no-repeat right 20px;
+	margin: 0 auto 10px;
+	position: relative;
 }
 
-/* -------------------------------------------------------------------------------- */
-
-div.page-header-left-colon {
+.header-left-colomn {
+	background: url("../images/header-squares-left-bg.png") no-repeat right 1px top 27px;
 	float: left;
-	width: 700px;
-	margin-top: -25px;
+	padding: 0 0 20px;
+	position: relative;
+	top: -7px;
+	width: 730px;
 	z-index: 1;
 }
 
-div.page-header-right-colon-container {
+.header-left-colomn:after {
+	background: #FFF;
+	content: "";
+	height: 100%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	width: 582px;
+	z-index: -1;
+}
+
+.header-right-colomn {
 	float: right;
-	margin-left: -400px;
-	width: 550px;
+	position: relative;
+	top: 20px;
 }
 
-div.page-header-right-colon {
-	margin-left: 300px;
+.header-right-colomn:after {
+	background: url("../images/header-squares-right-bg.png") no-repeat right 0;
+	content: "";
+	height: 195px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 151px;
 }
 
-/* ```````````````````````````````````````````````````````````````````````````````` */
-
-div.logo {
-	text-align: center;
+.header-logo {
 	display: inline;
 	border-radius: 5px;
 }
 
-div.logo a {
-	display: inline;
+.header-logo-link,
+.header-logo-link:hover {
+	display: block;
+	left: -4px;
+	padding: 15px 0 0;
+	position: relative;
 	text-decoration: none;
+	width: 280px;
 }
 
-div.logo-praim {
-	display: inline;
-	height: 68px;
-	width: 100px;
-}
-
-div.logo-prom {
-	display: inline;
-	cursor: pointer;
-}
-
-div.logo div.logo-image {
-	display: inline;
-}
-
-div.logo  div.logo-text {
-
+.header-logo-text {
 	color: #000;
+	display: block;
 	font-size: 17px;
+	letter-spacing: 0.02em;
+	margin: -2px 0 0 4px;
 }
 
-div.logo-text {
-	margin: -18px 0 0 105px;
-	width: 250px;
+.header-contacts {
+	border-collapse: separate;
+	border-spacing: 0;
+	font-family: "Lucida Grande", Arial;
+	font-size: 15px;
+	margin-top: 20px;
 }
 
-div.logo-text a, div.logo-text a:hover {
-	color: #000
+.header-contacts td {
+	padding-right: 30px;
+	vertical-align: top;
 }
+
+.header-city {
+	margin: 0;
+}
+
+.header-phone {
+	color: #000;
+	margin: 0;
+}
+
+.header-phone-last {
+	margin-bottom: 5px;
+}
+
+.header-email {
+	display: block;
+	font-weight: 600;
+	margin: 0 0 14px;
+}
+
+.header-address-title {
+	margin: 0;
+}
+
+.header-address {
+	font-weight: 600;
+	padding: 0 0 0 15px;
+	position: relative;
+}
+
+.header-address .icon {
+	left: 0;
+	position: absolute;
+	top: 3px;
+}
+
+/* ```````````````````````````````````````````````````````````````````````````````` */
 
 div.iso {
 	margin: -50px 0 0 350px;
@@ -208,8 +257,6 @@ div.iso {
 	height: 20px;
 	width: 90px;
 }
-
-/* ```````````````````````````````````````````````````````````````````````````````` */
 
 div.phones {
 	margin: 25px 0 0 15px;
@@ -303,44 +350,51 @@ div.address ul li.address-title {
 	font-weight: normal;
 }
 
-/* ================================================================
+/* ================================
  * Меню навигация:
- * ================================================================ */
-.menu-h {
-	margin: 0;
-	display: block;
-}
-
-.menu-h ul {
+ * ================================ */
+.menu {
 	background: #F9F9F9;
 	background: -webkit-linear-gradient(top, #F9F9F9, #E8E8E8);
 	background:   linear-gradient(to bottom, #F9F9F9, #E8E8E8);
-	margin: -70px 0 -10px 0;
-	padding: 0;
 	display: table;
 	list-style-type: none;
+	margin: -64px 0 -10px 0;
+	padding: 0;
 	width: 100%;
 }
 
-div.menu-h ul li {
+.menu li {
 	display: table-cell;
 	margin: 0 auto;
 	padding: 0;
 	vertical-align: middle;
 }
 
-div.menu-h ul li.menu-h-s a {
+.menu li a {
+	color: #C90000;
+	display: block;
+	padding: 0;
+	margin: 0 20px;
+	font-weight: bold;
+	font-size: 0.90em;
+	text-align: center;
+	text-decoration: underline;
+	line-height: 1em;
+}
+
+.menu li.menu-h-s a {
 	background: url('../images/menu-h-hover_2.png') no-repeat center center;
 	color: #FFF;
 	font-weight: bold;
 	text-decoration: none;
 }
 
-div.menu-h ul li.menu-h-s a:hover {
+.menu li.menu-h-s a:hover {
 	text-decoration: underline;
 }
 
-div.menu-h ul li a:hover {
+.menu li a:hover {
 	color: #000;
 	text-decoration: none;
 }
@@ -496,9 +550,9 @@ div.cart-actions ul li:last-child img {
 }
 
 .akkordion-last-paragraph:hover .fa {
-	-webkit-transform: translate(5px, 0);
-		-ms-transform: translate(5px, 0);
-			transform: translate(5px, 0);
+	-webkit-transform: translate(3px, 0);
+		-ms-transform: translate(3px, 0);
+			transform: translate(3px, 0);
 }
 
 .akkordion-link-to-category {
@@ -509,6 +563,7 @@ div.cart-actions ul li:last-child img {
 }
 
 .akkordion-link-to-category .fa {
+	left: 4px;
 	position: relative;
 	top: 1px;
 }
@@ -518,15 +573,12 @@ div.cart-actions ul li:last-child img {
 }
 
 .show-v-dropdown {
-	/*background: url("../images/icon-v-menu-open.png") right center no-repeat;*/
 	border: 1px solid #CCC;
 }
 
 .show-v-dropdown-close {
-	/*background-image: url("../images/icon-v-menu-close.png") !important;*/
 	border: 1px solid transparent !important;
 }
-
 /* меню аккордеон конец */
 
 .menu-v-content ul li.special-section a {
@@ -587,16 +639,16 @@ div.content {
 	font-size: 0.9em;
 }
 
-/* -------------------------------------------------------------------------------- */
-
+/* ================================
+ * Банеры - Партнеры
+ * ================================ */
 div.partners-table {
 	width: 217px;
 	float: left;
 	border: 5px solid #C7C8CB;
 	border-radius: 15px;
-	padding: 0px 7px 0px 7px;
+	padding: 5px 7px 0;
 	margin-left: 15px;
-	cursor: pointer;
 }
 
 div.partners-table-header p {
@@ -616,23 +668,32 @@ div.partners-table-header img {
 }
 
 table.partners-table {
-	width: 100%;
-	float: left;
 	position: relative;
 	top: -5px;
 }
 
-table.partners-table tr td p {
+.partners-table td p {
 	font-weight: bold;
+	margin: 0;
 	position: relative;
-	top: 20px;
+	top: 6px;
 }
 
-table.partners-table p.partner-desc {
+.partners-table .partners-text {
+	font-family: Calibri, sans-serif;
+	color: #000;
+	font-size: 14px;
+	font-weight: 400;
+	margin: 0;
+	padding: 10px 0 5px;
+	top: 0;
+}
+
+.partner-desc {
 	font-size: 11px;
 	position: relative;
 	top: 10px;
-	line-height: 7px;
+	line-height: 100%;
 }
 
 table.partners-table tr td img.logo {
@@ -647,12 +708,13 @@ table.partners-table tr td a {
 table.partners-table tr td {
 	display: block;
 	border-top: 1px solid #EFF1F0;
-	height: 60px;
+	min-height: 60px;
 }
 
 table.partners-table tr td:first-child {
+	color: #005CC7;
 	border: none;
-	margin: 0px;
+	margin: 0;
 }
 
 /* -------------------------------------------------------------------------------- */
@@ -2037,8 +2099,7 @@ i.fa-camera:hover {
 	color: #c90000;
 }
 
-.order-product-price,
-.order-product-count {
+.order-product {
 	padding-left: 5px;
 	padding-right: 5px;
 	width: auto;
@@ -2052,3 +2113,11 @@ i.fa-camera:hover {
 }
 
 #sb-wrapper-inner, #sb-body, #sb-body-inner { background-color: #fff; }
+
+i.fa-times {
+	cursor: pointer;
+}
+
+input.input-switcher {
+	width: 40px;
+}

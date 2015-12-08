@@ -22,6 +22,29 @@ $options["pagination"]["perPage"] = 300;  // rows per page.
 $options["pagination"]["prev"] = "prev"; // "prev" link will be shown.
 $options["pagination"]["next"] = "next"; // "next" link will be shown.
 
+$options["callback"] = array("onUpdate" => "updatePriceDate", "getPrevious" => true);
+$options["columns"] = array("price_date" => "highlite sortable date");
+$options['formatting'] = array("price_date" => "date[d.m.Y]");
+
+/**
+ * Коллбек для апдейта Даты цены.
+ * Используется стандартная сигнатура для функций-коллбеков в TableGear
+* @param $key - PK изменяемого кортежа. В нашем случае он null, поэтому получаем явно $previous['id']
+* @param $previous - изменяемый объект, хрянящий инфу до изменения
+* @param $updated - изменяемый объект, хрянящий инфу после изменения
+* @param $ref - ссылка на инстанс TableGear. Нам нужна для выполнения MySQL query.
+ */
+function updatePriceDate($key, $previous, $updated, $ref)
+{
+    $oldPrice = $previous["price"];
+    $newPrice = $updated["price"];
+
+    if ($newPrice && ($oldPrice != $newPrice)) {
+        $updateQuery = "UPDATE products SET price_date = NOW() WHERE id = " . $previous['id'] . ";";
+        $ref->query($updateQuery);
+    }
+}
+
 //$options["headers"]["pagetitle"]="Заголовок";
 //$options["headers"]["longtitle"]="Расширенный заголовок";
 //$options["headers"]["description"]="Описание";
@@ -36,9 +59,13 @@ $options["headers"] = $productRepository->getTableGearProperties();
 // --> Предполагаю, что этот класс юзаем "из коробки" и вообще не трогаем в нём код
 $table = new TableGear($options);
 
+
 $cookie_ff=array();
 if( isset($_COOKIE['tg_filterf']) ){
 	$cookie_ff=unserialize($_COOKIE['tg_filterf']);
+} else {
+	$cookie_ff = $productRepository->getTableGearDefaultProperties();
+	$cookie_fs = $productRepository->getTableGearDefaultProperties();
 }
 
 // --> Здесь через $_POST и $_COOKIE формируется список полей. Вроде менять ничего не надо
@@ -72,62 +99,6 @@ if( count($_POST["ff"])>0 ){
 	setcookie( "tg_filterf", serialize($_POST["ff"]), time()+2592000 );
 }
 ?>
-<!DOCTYPE html>
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
-<head>
-<!--  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
-  <title>TableGear for jQuery</title>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/bundles/catalog/plugins/tablegear/javascripts/TableGear1.6.1-jQuery.js"></script>
-	<script type="text/javascript" src="/bundles/catalog/plugins/tablegear/javascripts/tablegear-jquery_bootstrap.js"></script>
-  <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-  <link type="text/css" rel="stylesheet" href="/bundles/catalog/plugins/tablegear/stylesheets/tablegear.css" />
-</head>
-<body>
-  <div>
-<script type="text/javascript">
-// --> Скрипты со стилями-событями. Менять ничего не надо.
-function enableParentSelectionTG() {
-    parent.tree.ca = "parent_tg";
-	$(".choose_razd").css('opacity', '0.3');
-	$(".choose_razd").html('&lt;Выберите раздел');
-}
-function setParentTG(pId, pName) {
-    $("input[name='parent_tg_id']").val(pId);
-    $("input[name='parent_tg_name']").val(pName);
-	parent.tree.ca = "open";
-	$(".choose_razd").css('opacity', '1');
-	$(".choose_razd").html('Выберите раздел');
-	$("form[name='formtg']").submit();
-}
-
-$(function() {
-	$( "#sortable" ).sortable({
-		placeholder: "ui-state-highlight"
-	});
-	$( "#sortable" ).disableSelection();
-	$("input[name=ff[]]").change(function(){
-		if( $(this).is(':checked') ){
-			$("#sortable").append('<li class="ui-state-default sortf_'+$(this).val()+'"><input type="hidden" name="sortff[]" value="'+$(this).val()+'">'+$("#fs_"+$(this).val()).html()+'</li>')
-		}else{
-			$(".sortf_"+$(this).val()).remove();
-		}
-	});
-	$(".hide_sort").click(function(){
-		var expire = new Date( new Date().getTime() +  3600000*24*10 );
-		if( $(".trhide").css('display')=="table-cell" ){
-			$(".trhide").fadeOut();
-			$(this).html('показать');
-			document.cookie = "hide_sort=0;expires="+expire.toGMTString();
-		}else{
-			$(".trhide").fadeIn();
-			$(this).html('скрыть');
-			document.cookie = "hide_sort=1;expires="+expire.toGMTString();
-		}
-	});
-});
-
-</script>
 
 <form method="post" name="formtg" action="">
 <input type="hidden" name="parent_tg_id" value="<?php if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ) echo intval($_POST['parent_tg_id']); ?>">
@@ -196,6 +167,10 @@ if( isset($_REQUEST['ff']) && count($_REQUEST['ff'])>0 ){
 		$fileds .= ", tb1.". $val;
 	}
   }
+} else {
+	foreach($cookie_fs as $val) {
+		$fileds .= ", tb1.". $val;
+	}
 }
 
 if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ){
@@ -252,7 +227,7 @@ $table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1 WHERE " . 
 
 ?>
 
-  <div>
+  <div class="wrapper">
 <?= $table->getTable() ?>
   </div>
 <?= $table->getJavascript("jquery") ?>
@@ -260,10 +235,6 @@ $table->fetchData("SELECT tb1.id " . $fileds . " FROM products as tb1 WHERE " . 
 <?php
 }
 ?>
-
-  </div>
-</body>
-</html>
 
 <?php
 	return $data = ob_get_clean();

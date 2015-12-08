@@ -57,6 +57,33 @@ class CartService
 		return ($cart) ? clone $cart : new Cart();
 	}
 
+    /**
+     * Метод для получения данных продуктов для подготовки JSON'а.
+     * @return array данные продуктов, нужные для отрисовки заказа.
+     */
+    public function getProductsInfo()
+    {
+        $router = $this->container->get('router');
+        $cart = $this->loadCart(true);
+        $products = array();
+
+        foreach($cart->getProducts() as $product)
+        {
+            $products[] = array(
+                'id' => $product['model']->getId(),
+                'count' => $product['count'],
+                'url'    => $router->generate('app_catalog_product', array(
+                    'id' => $product['model']->getId()
+                )),
+                'name' =>  $product['model']->getName(),
+                'price' => $product['model']->getPrice(),
+                'nomen' => $product['model']->getNomen()
+            );
+        }
+
+        return $products;
+    }
+
 	/**
 	 * @param Cart $cart
 	 */

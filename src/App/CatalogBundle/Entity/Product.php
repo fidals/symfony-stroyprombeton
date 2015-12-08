@@ -151,6 +151,39 @@ class Product
 	 */
 	private $isTextPublished = true;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="price_date", type="datetime")
+     */
+    private $datePriceUpdated;
+
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+        $this->datePriceUpdated = new \DateTime();
+    }
+
+    /**
+     * Геттер для Даты цены.
+     * Если цена вообще не обновлялась, мы вернем Дату создания странички Изделия.
+     * @return \DateTime
+     */
+    public function getDatePriceUpdated()
+    {
+        return $this->datePriceUpdated;
+    }
+
+    /**
+     * @param \DateTime $datePriceUpdated
+     */
+    private function setDatePriceUpdated($datePriceUpdated)
+    {
+        $this->datePriceUpdated = $datePriceUpdated;
+    }
+
 	/**
 	 * @param string $comments
 	 */
@@ -302,6 +335,8 @@ class Product
 	public function setPrice($price)
 	{
 		$this->price = $price;
+        // Обновляем дату цены
+        $this->setDatePriceUpdated(new \DateTime());
 	}
 
 	/**
