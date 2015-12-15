@@ -945,3 +945,7 @@ div.main_cat_gbi{
 input::-webkit-inner-spin-button {
 	opacity: 1;
 }
+
+#order_files {
+	width: 125px;
+}
