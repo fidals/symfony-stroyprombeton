@@ -567,11 +567,11 @@ ul.informer {
 }
 
 img.news_image_border {
-	border: 3px double #DDDDDD;
+	border: 3px double #DDD;
 	border-radius: 5px;
 }
 
-.basket-sticky{
+.basket-sticky {
 	height: 45px;
 }
 
@@ -584,7 +584,10 @@ div.menu-basket{
 	margin: 0;
 }
 
-.shop-cart {margin:10px 0; width: 100%;}
+.shop-cart {
+	margin: 10px 0;
+	width: 100%;
+}
 
 #shop-cart a{
 	margin: 0;
@@ -619,53 +622,51 @@ div.basket-content {
 	position: absolute;
 }
 
-.cat_cat{
-	float: left;
-	height: 190px;
+.cat_cat {
+	display: inline-block;
+	min-height: 190px;
 	padding: 2%;
 	position: relative;
-	width: 46%;
+	vertical-align: top;
+	width: 45%;
 }
 
-.cat_cat a{
+.cat_cat a {
 	text-decoration: none;
 }
 
-.cat_cat:hover{
+.cat_cat:hover {
 	border: none;
 	background-color: #E8E8E8;
 	border-radius: 20px;
 }
-.cat_cat span{
-	float: left;
+
+.cat_cat span {
 	font-weight: bold;
-	margin: 5px 5px 0 0;
 }
 
-.cat_cat h2{
+.cat_cat h2 {
 	text-align: center;
 }
-.cat_content{
-	clear: both;
-}
 
+.cat_content,
 div.gbi-showcase-top-line {
 	clear: both;
 }
 
-div.gbi-showcase-top-line img{
+div.gbi-showcase-top-line img {
 	float: left;
 }
 
-div.gbi-showcase-top-line div{
+div.gbi-showcase-top-line div {
 
 }
 
-div.gbi-showcase-top-line h3{
+div.gbi-showcase-top-line h3 {
 	color: #999;
 }
 
-div.cat_cat div.link-detailed{
+div.cat_cat div.link-detailed {
 	bottom: 7%;
 	color: #C90000;
 	font-weight: bold;
@@ -673,33 +674,25 @@ div.cat_cat div.link-detailed{
 	right: 7%;
 }
 
-span.catalog-second-level {
-	font-size: 1.3em;
-	color: #c90000;
-	margin-left: 6px !important;
-}
-
 span.number {
-	padding-top: 6px;
 	color: #777;
-	float: left;
-	max-width: 36px;
+	display: block;
 }
 
-span.catalog-second-level {
+.catalog-second-level {
 	font-size: 1.3em;
 	color: #c90000;
-	margin-left: 6px !important;
 }
 
-span.catalog-second-level, span.catalog-third-level {
-	margin: 0px;
-	padding: 0px;
-	line-height: 1.7em;
-	margin: 5px 0 5px 0;
+.catalog-second-level,
+.catalog-third-level {
+	display: block;
+	line-height: 1.5em;
+	margin-bottom: 5px;
+	min-height: 56px;
 }
 
-.shk_basket_count{
+.shk_basket_count {
 	float: left;
 	padding-top: 4px;
 }
@@ -710,7 +703,7 @@ span.catalog-second-level, span.catalog-third-level {
 
 .shk_basket_count .field-arr-down,
 .product-desc-left-col .field-arr-down,
-.shk-item .field-arr-down{
+.shk-item .field-arr-down {
 	margin: 11px 0 0 -17px !important;
 	position: absolute;
 }
