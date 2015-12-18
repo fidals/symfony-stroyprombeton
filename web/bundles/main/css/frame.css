@@ -1,13 +1,9 @@
 html, body {
-	width: 100%;
 	height: 100%;
-	min-width: 1000px;
-	margin: 0;
-	padding: 0;
-	background-color: #FFF;
-	color: #333;
 	font-family: "xxxLucida Grande", Calibri, Arial, sans-serif;
 	font-size: 1em;
+	min-width: 1000px;
+	padding: 0;
 }
 
 table, td {
@@ -97,11 +93,12 @@ html>body div.page-all {
 }
 
 .page-all {
-	position: relative;
-	width: 80%;
-	min-width: 980px;
 	height: 100%;
 	margin: 0 auto;
+	min-width: 980px;
+	position: relative;
+	width: 80%;
+	z-index: 11;
 }
 
 .text-muted {
@@ -153,7 +150,7 @@ div.footer {
 	content: "";
 	height: 100%;
 	left: 0;
-	top: 0;
+	top: 7px;
 	position: absolute;
 	width: 582px;
 	z-index: -1;
@@ -175,19 +172,56 @@ div.footer {
 	width: 151px;
 }
 
-.header-logo {
-	display: inline;
-	border-radius: 5px;
+.header-logos {
+	padding: 15px 0 0;
+	position: relative;
+	z-index: 1;
 }
 
 .header-logo-link,
 .header-logo-link:hover {
 	display: block;
+	float: left;
 	left: -4px;
-	padding: 15px 0 0;
 	position: relative;
 	text-decoration: none;
 	width: 280px;
+}
+
+.header-stk-logo-wrapper {
+	background: #F1F1F1;
+	background: -webkit-linear-gradient(top, #F1F1F1,#FFF);
+	background:   linear-gradient(to bottom, #F1F1F1,#FFF);
+	box-shadow: 0 0 4px 1px #C0C0C0;
+	float: left;
+	left: 32px;
+	padding: 19px 15px 15px;
+	position: relative;
+	top: -12px;
+	width: 215px;
+}
+
+.header-stk-logo-wrapper:before,
+.header-stk-logo-wrapper:after {
+	bottom: 20px;
+	box-shadow: 0 13px 4px #ACACAC;
+	content: "";
+	height: 1px;
+	left: 0;
+	max-width: 300px;
+	position: absolute;
+	top: 80%;
+	-webkit-transform: rotate(-3deg);
+			transform: rotate(-3deg);
+	width: 50%;
+	z-index: -1;
+}
+
+.header-stk-logo-wrapper:after {
+	left: auto;
+	right: 0;
+	-webkit-transform: rotate(3deg);
+			transform: rotate(3deg);
 }
 
 .header-logo-text {
@@ -201,7 +235,7 @@ div.footer {
 .header-contacts {
 	border-collapse: separate;
 	border-spacing: 0;
-	font-family: "Lucida Grande", Arial;
+	font-family: "Lucida Grande", Arial, sans-serif;
 	font-size: 15px;
 	margin-top: 20px;
 }
@@ -293,7 +327,7 @@ div.phones ul li.phones-prime > span {
 
 div.phones ul li.phones-prime {
 	color: black;
-	padding: 0px;
+	padding: 0;
 }
 
 div.phones ul li.phones-prime img {
@@ -374,13 +408,12 @@ div.address ul li.address-title {
 .menu li a {
 	color: #C90000;
 	display: block;
-	padding: 0;
-	margin: 0 20px;
-	font-weight: bold;
+	line-height: 1em;
+	margin: 0 17px;
 	font-size: 0.90em;
+	font-weight: bold;
 	text-align: center;
 	text-decoration: underline;
-	line-height: 1em;
 }
 
 .menu li.menu-h-s a {
@@ -460,7 +493,7 @@ div.cart-actions ul li:last-child img {
 /* ================================================================
  * Меню аккордеон:
  * ================================================================ */
- .menu-v {
+.menu-v {
 	float: left;
 	padding: 0 0 50px 0;
 	position: relative;
@@ -529,30 +562,30 @@ div.cart-actions ul li:last-child img {
 	position: absolute;
 	right: -2px;
 	-webkit-transition: -webkit-transform 0.3s ease-in-out;
-			transition: 		transform 0.3s ease-in-out;
+	transition: 		transform 0.3s ease-in-out;
 	-webkit-transform: translate(0, -50%);
-		-ms-transform: translate(0, -50%);
-			transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	transform: translate(0, -50%);
 	top: 50%;
 	width: 11px;
 }
 
 .akkordion-title.active .fa {
 	-webkit-transform: rotate(-90deg) translate(60%, -25%);
-		-ms-transform: rotate(-90deg) translate(60%, -25%);
-			transform: rotate(-90deg) translate(60%, -25%);
+	-ms-transform: rotate(-90deg) translate(60%, -25%);
+	transform: rotate(-90deg) translate(60%, -25%);
 }
 
 .akkordion-last-paragraph .fa {
 	position: relative;
 	-webkit-transition: all 0.3s ease-in-out;
-			transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
 
 .akkordion-last-paragraph:hover .fa {
 	-webkit-transform: translate(3px, 0);
-		-ms-transform: translate(3px, 0);
-			transform: translate(3px, 0);
+	-ms-transform: translate(3px, 0);
+	transform: translate(3px, 0);
 }
 
 .akkordion-link-to-category {
@@ -586,8 +619,7 @@ div.cart-actions ul li:last-child img {
 }
 
 .special-section-asterisk {
-	background-image: url("../images/asterisk.png");
-	background-repeat: no-repeat;
+	background: url("../images/asterisk.png") no-repeat;
 	height: 10px;
 	margin: 7px 0 0 3px;
 	position: absolute;
@@ -794,9 +826,7 @@ div.search-hierarchy a:hover {
 div.location {
 	margin: 0 0 10px 0;
 	padding: 5px;
-
 	border-radius: 5px;
-
 	border: 1px solid #999;
 	background-color: #cfcfcf;
 }
@@ -822,12 +852,12 @@ table.main-page-showcase td {
 
 table.main-page-showcase ul {
 	margin: 0 5px 5px 20px;
-	padding: 0px;
+	padding: 0;
 	color: #e7e4e5;
 }
 
 table.main-page-showcase ul li {
-	margin: 0px;
+	margin: 0;
 	padding: 0 5px 0 10px;
 	color: #333;
 }
@@ -856,10 +886,6 @@ table.main-page-showcase a.normal-link:hover {
 }
 
 /* -------------------------------------------------------------------------------- */
-
-div.price {
-}
-
 div.price table {
 	width: 100%;
 }
@@ -897,7 +923,7 @@ div.price p.desc {
 }
 
 div.price p {
-	margin: 0px;
+	margin: 0;
 	padding: 0 0 10px 0;
 	font-size: 0.8em;
 	line-height: 1.3em !important;
@@ -1018,7 +1044,7 @@ div.gbi-showcase table td:hover {
 div.gbi-showcase td span {
 	width: 20%;
 	float: left;
-	margin: 10px 0px 0px 7px;
+	margin: 10px 0 0 7px;
 	color: #999;
 	font-weight: bold;
 }
@@ -1058,7 +1084,7 @@ div.gbi-showcase-top-line div.link-detailed {
 .gbi-sub-cat > a {
 	color: #c90000 !important;
 	font-weight: bold;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	font-size: 13px;
 	display: block;
 }
@@ -1066,7 +1092,7 @@ div.gbi-showcase-top-line div.link-detailed {
 .cat-info {
 	width: 75%;
 	margin-left: 80px;
-	margin-right: 0px;
+	margin-right: 0;
 	position: relative;
 	left: 10px;
 }
@@ -1122,13 +1148,8 @@ div.gbi-sub-section a {
 	display: block;
 	padding: 3px 7px 3px 25px;
 	border: 1px solid transparent;
-
-	background-image: url("../images/icon-v-menu-close.png");
-	background-repeat: no-repeat;
-	background-position: 5px 7px;
-
+	background: url("../images/icon-v-menu-close.png") no-repeat 5px 7px;
 	text-decoration: none;
-
 	border-radius: 7px;
 }
 

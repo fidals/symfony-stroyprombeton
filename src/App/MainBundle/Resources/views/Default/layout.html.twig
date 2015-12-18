@@ -16,8 +16,8 @@
 
 {% block jslinks %}
 	<script src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
-    <script src='http://cdn.ractivejs.org/edge/ractive.min.js'></script>
-    <script type="text/javascript" src="{{ asset('bundles/main/js/ractiveAdaptor.js') }}"></script>
+	<script src='http://cdn.ractivejs.org/edge/ractive.min.js'></script>
+	<script type="text/javascript" src="{{ asset('bundles/main/js/ractiveAdaptor.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -25,11 +25,15 @@
 	<div class="page-all">
 		<div class="header clearfix">
 			<div class="header-left-colomn">
-				<div class="header-logo">
+				<div class="header-logos clearfix">
 					<a class="header-logo-link" href="/">
 						<img src="/bundles/main/images/logo.png" title="На главную" alt="Логотип">
 						<span class="header-logo-text">завод железобетонных изделий</span>
 					</a>
+
+					<div class="header-stk-logo-wrapper">
+						<img src="{{ asset('bundles/main/images/stk-logo.png') }}" alt="СТК-Модуль" class="stk-logo">
+					</div>
 				</div>
 
 				<table class="header-contacts m-contacts_new vcard">
@@ -264,6 +268,6 @@
 	</script>
 
 	<!-- Callbaska -->
-		<script src="https://my.callbaska.ru/callback.js" async charset="utf-8"></script>
+	<script src="https://my.callbaska.ru/callback.js" async charset="utf-8"></script>
 	<!-- Callbaska -->
 {% endblock %}
