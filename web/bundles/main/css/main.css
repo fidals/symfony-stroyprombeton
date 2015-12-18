@@ -4,7 +4,7 @@ table.index-list-gbi {
 }
 
 table.index-list-gbi td {
-	padding: 0px;
+	padding: 0;
 	height: 150px;
 }
 
@@ -15,9 +15,8 @@ table.index-list-gbi td {
 	text-align: center;
 	border: 1px solid #CAC6C3;
 	margin: 15px 15px 0 0;
-	text-align: center;
 	width: 30%;
-	padding: 20px 5px 5px 5px;
+	padding: 20px 5px 5px;
 	border-radius: 7px;
 }
 
@@ -42,12 +41,12 @@ table.index-list-gbi a {
 
 table.index-new-gbi {
 	width: 100%;
-	margin: 15px 0px;
+	margin: 15px 0;
 
 }
 
 table.index-new-gbi td {
-	padding: 0px;
+	padding: 0;
 	height: 150px;
 	width: auto;
 }
@@ -64,7 +63,6 @@ table.index-new-gbi td:last-child {
 	height: 240px;
 	text-align: center;
 	border: 1px solid #CAC6C3;
-	text-align: center;
 	padding: 0 5px 5px 5px;
 	border-radius: 7px;
 	margin: 15px 0 0 0;
@@ -105,18 +103,17 @@ div.title {
 div.showcase {
 	margin: 0 0 15px 0;
 	padding: 5px;
-	border: 1px solid #999999;
+	border: 1px solid #999;
 }
 
 div.showcase ul {
 	margin: 0;
 	padding: 0;
-	list-style-type: none;
-	list-style-position: outside;
+	list-style: none;
 }
 
 div.showcase li {
-	padding: 0px;
+	padding: 0;
 	width: 185px;
 	text-align: center;
 }
@@ -535,7 +532,7 @@ div.random_list_main > div:first-child{
 }
 
 ul.informer {
-	margin: 0px 0px 10px 0px;
+	margin: 0 0 10px 0;
 	padding: 0;
 }
 
@@ -876,13 +873,13 @@ div.main_cat_gbi{
 	border: 1px solid #CAC6C3;
 	border-radius: 7px;
 	height: 320px;
-	padding: 20px 5px 5px;
+	padding: 20px 5px 5px 25px;
 	text-align: center;
 	width: 400px;
 	float: left;
 	margin: 0 0 20px;
-	padding-left: 25px;
 }
+
 .main_cat_gbi:nth-child(3n+1){
 	float: left;
 }
@@ -911,13 +908,16 @@ div.main_cat_gbi{
 	vertical-align: top;
 	width: 40%;
 }
+
 .random_main_tech td:first-child{
 	width: 50%;
-	padding: 3px 10px 3px 0px;
+	padding: 3px 10px 3px 0;
 }
+
 .random_main_tech td:last-child{
-	padding: 3px 10px 3px 0px;
+	padding: 3px 10px 3px 0;
 }
+
 .random_main_tech .product-price{
 	margin: 0;
 	font-size: 15px;
