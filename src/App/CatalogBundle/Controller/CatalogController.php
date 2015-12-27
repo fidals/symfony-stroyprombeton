@@ -59,6 +59,11 @@ class CatalogController extends Controller
 		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
 
 		$product = $prodRp->find($productId);
+
+        if (empty($product)) {
+            throw $this->createNotFoundException();
+        }
+
 		$category = $product->getCategory();
 		$parents = $catRp->getPath($category);
 
