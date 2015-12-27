@@ -55,22 +55,23 @@ class CatalogController extends Controller
 	{
 		$productId = $request->get('id');
 
-		$catRp   = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
-		$prodRp  = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$prodRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Product');
+
 		$product = $prodRp->find($productId);
 
-		if (!empty($product)) {
-			$category = $product->getCategory();
-			$parents  = $catRp->getPath($category);
+        if (empty($product)) {
+            throw $this->createNotFoundException();
+        }
 
-			return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
-				'parents'  => $parents,
-				'category' => $category,
-				'product'  => $product
-			));
-		} else {
-			throw $this->createNotFoundException();
-		}
+		$category = $product->getCategory();
+		$parents = $catRp->getPath($category);
+
+		return $this->render('AppCatalogBundle:Catalog:product.explore.html.twig', array(
+			'parents'  => $parents,
+			'category' => $category,
+			'product'  => $product
+		));
 	}
 
 	// "custom router"
