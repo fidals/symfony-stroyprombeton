@@ -74,6 +74,10 @@ class StaticPage
 
 	public function getRouteParameters()
 	{
+		if (empty($this->getAlias())){
+			return null;
+		}
+
 		$parameters = array('alias' => $this->getAlias());
 
 		return $parameters;

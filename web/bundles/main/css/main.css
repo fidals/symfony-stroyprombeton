@@ -97,11 +97,12 @@ html>body div.page-all {
 }
 
 .page-all {
-	position: relative;
-	width: 80%;
-	min-width: 980px;
 	height: 100%;
 	margin: 0 auto;
+	min-width: 980px;
+	position: relative;
+	width: 80%;
+	z-index: 11;
 }
 
 .text-muted {
@@ -153,16 +154,22 @@ div.footer {
 	content: "";
 	height: 100%;
 	left: 0;
-	top: 0;
+	top: 7px;
 	position: absolute;
 	width: 582px;
-	z-index: -1;
+	z-index: -1
 }
 
 .header-right-colomn {
 	float: right;
 	position: relative;
 	top: 20px;
+}
+
+.header-logos {
+	padding: 15px 0 0;
+	position: relative;
+	z-index: 1;
 }
 
 .header-right-colomn:after {
@@ -175,19 +182,50 @@ div.footer {
 	width: 151px;
 }
 
-.header-logo {
-	display: inline;
-	border-radius: 5px;
-}
-
 .header-logo-link,
 .header-logo-link:hover {
 	display: block;
+	float: left;
 	left: -4px;
-	padding: 15px 0 0;
 	position: relative;
 	text-decoration: none;
 	width: 280px;
+}
+
+.header-stk-logo-wrapper {
+	background: #F1F1F1;
+	background: -webkit-linear-gradient(top, #F1F1F1,#FFF);
+	background:   linear-gradient(to bottom, #F1F1F1,#FFF);
+	box-shadow: 0 0 4px 1px #C0C0C0;
+	float: left;
+	left: 32px;
+	padding: 19px 15px 15px;
+	position: relative;
+	top: -12px;
+	width: 170px;
+}
+
+.header-stk-logo-wrapper:before,
+.header-stk-logo-wrapper:after {
+	bottom: 20px;
+	box-shadow: 0 13px 4px #ACACAC;
+	content: "";
+	height: 1px;
+	left: 0;
+	max-width: 300px;
+	position: absolute;
+	top: 80%;
+	-webkit-transform: rotate(-3deg);
+	transform: rotate(-3deg);
+	width: 50%;
+	z-index: -1;
+}
+
+.header-stk-logo-wrapper:after {
+	left: auto;
+	right: 0;
+	-webkit-transform: rotate(3deg);
+	transform: rotate(3deg);
 }
 
 .header-logo-text {
@@ -201,7 +239,7 @@ div.footer {
 .header-contacts {
 	border-collapse: separate;
 	border-spacing: 0;
-	font-family: "Lucida Grande", Arial;
+	font-family: "Lucida Grande", Arial, sans-serif;
 	font-size: 15px;
 	margin-top: 20px;
 }

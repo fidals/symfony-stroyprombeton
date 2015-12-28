@@ -83,6 +83,10 @@ class Object
 
 	public function getRouteParameters()
 	{
+		if (empty($this->getId())){
+			return null;
+		}
+
 		$parameters = array('id' => $this->getId());
 
 		return $parameters;

@@ -92,6 +92,10 @@ class Territory
 
 	public function getRouteParameters()
 	{
+		if (empty($this->getId())){
+			return null;
+		}
+
 		$parameters = array('territoryId' => $this->getId());
 
 		return $parameters;
