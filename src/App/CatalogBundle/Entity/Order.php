@@ -24,10 +24,7 @@ class Order
 		$metadata->addPropertyConstraint('phone',   new Regex(array('pattern' => "/^((8|0|\+\d{1,2})[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i")));
 		$metadata->addPropertyConstraint('email',   new NotBlank());
 		$metadata->addPropertyConstraint('company', new NotBlank());
-		$metadata->addPropertyConstraint('files',   new File(array(
-			'maxSize'  => 50000,
-			'uploadFormSizeErrorMessage' => 'Размер файла не должен превышать 50 Мб'
-		)));
+		$metadata->addPropertyConstraint('files',   new File());
 	}
 
 	public function setFile($file)
