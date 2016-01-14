@@ -42,3 +42,25 @@ services:
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AppMainBundle]]
+
+    sonata.admin.category:
+          class: App\MainBundle\Admin\CategoryAdmin
+          tags:
+              - { name: sonata.admin, manager_type: orm, group: Каталог, label: "Категории" }
+          arguments:
+              - ~
+              - App\MainBundle\Entity\Category
+              - 'SonataAdminBundle:CRUD'
+          calls:
+              - [ setTranslationDomain, [AppMainBundle]]
+
+    sonata.admin.product:
+        class: App\MainBundle\Admin\ProductAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Каталог, label: "Изделия" }
+        arguments:
+            - ~
+            - App\MainBundle\Entity\Product
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AppMainBundle]]

@@ -92,7 +92,7 @@
 						var anchor = $(e.currentTarget);
 						var entityId = anchor.data('id');
 						var entityType = anchor.parent().hasClass('jstree-leaf') ? 'product' : 'category';
-						var pathname =  '/adminka/app/catalog/' + entityType + '/' + entityId + '/edit';
+						var pathname =  '/adminka/app/main/' + entityType + '/' + entityId + '/edit';
 						if (pathname != window.location.pathname) {
 							window.location.href = pathname;
 						}

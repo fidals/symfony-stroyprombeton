@@ -1,31 +1,27 @@
-app_catalog:
-    resource: "@AppCatalogBundle/Resources/config/routing.yml"
-    prefix:   /gbi/
-
 #Обрабатывает поисковые запросы с автокомплита
 app_catalog_suggest:
-    pattern: /suggest/
-    defaults: { _controller: AppCatalogBundle:Catalog:suggest }
+    path: /suggest/
+    defaults: { _controller: AppMainBundle:Catalog:suggest }
 
 app_catalog_search:
-    pattern: /search/
-    defaults: { _controller: AppCatalogBundle:Catalog:searchResults }
+    path: /search/
+    defaults: { _controller: AppMainBundle:Catalog:searchResults }
 
 app_catalog_search_results:
-    pattern: /search-results/
-    defaults: { _controller: AppCatalogBundle:Catalog:searchResults }
+    path: /search-results/
+    defaults: { _controller: AppMainBundle:Catalog:searchResults }
 
 app_catalog_basket:
-    pattern: /basket/
-    defaults: { _controller: AppCatalogBundle:Cart:index }
+    path: /basket/
+    defaults: { _controller: AppMainBundle:Cart:index }
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /adminka
 
 sonata_admin_edit_products:
-    pattern:  /adminka/editproducts
-    defaults: { _controller: AppCatalogBundle:Admin:editProducts }
+    path:  /adminka/editproducts
+    defaults: { _controller: AppMainBundle:Admin:editProducts }
 
 #TODO: Сомнительный код. Попробуй удалить и потестить. Исследуй доки SonataAdmin
 _sonata_admin:
@@ -34,12 +30,12 @@ _sonata_admin:
     prefix: /adminka
 
 app_catalog_order:
-    pattern: /order/
-    defaults: { _controller: AppCatalogBundle:Cart:order }
+    path: /order/
+    defaults: { _controller: AppMainBundle:Cart:order }
 
 app_catalog_order_thanks:
-    pattern: /order_thanks/
-    defaults: { _controller: AppCatalogBundle:Cart:orderThanks }
+    path: /order_thanks/
+    defaults: { _controller: AppMainBundle:Cart:orderThanks }
 
 app_main:
     resource: "@AppMainBundle/Resources/config/routing.yml"

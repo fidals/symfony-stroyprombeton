@@ -22,3 +22,4 @@ web/bundles/*
 !web/bundles/main/*
 !web/bundles/catalog/
 !web/bundles/catalog/*
+behat.yml

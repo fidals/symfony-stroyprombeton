@@ -1,0 +1,1 @@
+DISPLAY=:1 xvfb-run -a java -jar /etc/selenium/selenium-server-standalone-2.48.2.jar -browserSessionReuse

@@ -61,7 +61,7 @@ doctrine:
     orm:
         dql:
             numeric_functions:
-                Rand: App\CatalogBundle\DQL\RandFunction
+                Rand: App\MainBundle\DQL\RandFunction
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
         mappings:

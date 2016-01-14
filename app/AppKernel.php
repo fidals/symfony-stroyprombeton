@@ -24,7 +24,6 @@ class AppKernel extends Kernel
 			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 			new Sonata\CoreBundle\SonataCoreBundle(),
 			new Sonata\AdminBundle\SonataAdminBundle(),
-			new App\CatalogBundle\AppCatalogBundle(),
 			new App\MainBundle\AppMainBundle(),
 			new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 			new Presta\SitemapBundle\PrestaSitemapBundle(),

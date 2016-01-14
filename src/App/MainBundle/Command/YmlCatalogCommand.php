@@ -1,7 +1,7 @@
 <?php
 namespace App\MainBundle\Command;
 
-use App\CatalogBundle\Command\SitemapCommand;
+use App\MainBundle\Command\SitemapCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,8 +17,8 @@ class YmlCatalogCommand extends ContainerAwareCommand
 	// you can modify this $repositories array for include some entities in sitemap
 	// each entity MUST consist sitemapData() method
 	public $repositories = array(
-		'AppCatalogBundle:Category',
-		'AppCatalogBundle:Product'
+		'AppMainBundle:Category',
+		'AppMainBundle:Product'
 	);
 
 	protected function configure()
@@ -29,7 +29,7 @@ class YmlCatalogCommand extends ContainerAwareCommand
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:Category');
 
 		$hierarchyOptions = array(
 			'childSort' => array(
@@ -44,7 +44,7 @@ class YmlCatalogCommand extends ContainerAwareCommand
 			$tree[] = $treeNode[0];
 		}
 
-		$products = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Product')->findAll();
+		$products = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:Product')->findAll();
 		foreach ($products as &$product) {
 			$productSectionId = $product->getSectionId();
 			if (!empty($productSectionId)) {

@@ -23,3 +23,50 @@ services:
         class: App\MainBundle\Listener\TerritorySitemapListener
         arguments: ['@service_container']
         tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.search:
+        class: App\MainBundle\Extension\Search
+        arguments: ['@service_container']
+    catalog.cart:
+        class: App\MainBundle\Extension\CartService
+        arguments: ['@service_container']
+    app.twig_extension:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }
+    app.tree_extension:
+        class: App\MainBundle\Extension\CategoryTreeExtension
+        arguments:
+            entityManager: '@doctrine.orm.entity_manager'
+        tags:
+            - { name: twig.extension }
+    catalog.yandex_market_category_listener:
+        class: App\MainBundle\Listener\YmlCategoryListener
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: yandex_market.yml.listener }
+    catalog.yandex_market_product_listener:
+        class: App\MainBundle\Listener\YmlProductListener
+        arguments: ['@service_container']
+        tags:
+            - { name: yandex_market.yml.listener }
+    catalog.yandex_market_currency_listener:
+        class: App\MainBundle\Listener\YmlCurrencyListener
+        tags:
+            - { name: yandex_market.yml.listener }
+
+    sonata.block.service.tablegear:
+        class: App\MainBundle\Block\TableGearBlockService
+        arguments: [ "sonata.block.service.tablegear", @templating ]
+        tags:
+            - { name: sonata.block }
+
+    catalog.sitemap.category:
+        class: App\MainBundle\Listener\CategorySitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
+
+    catalog.sitemap.product:
+        class: App\MainBundle\Listener\ProductSitemapListener
+        arguments: ['@service_container']
+        tags: [{name: "presta.sitemap.listener"}]
