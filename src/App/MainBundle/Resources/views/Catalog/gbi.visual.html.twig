@@ -12,65 +12,103 @@
 	<h1>Каталог продукции</h1>
 	<div class="main_cat" style="float: left">
 		<div class="main_cat_gbi">
-			<p>Дорожное строительство</p>
-			<a href="{{ path('app_catalog_explore_category', {'catUrl': 'dor-stroy'}) }}"><img src="/assets/images/catnew/cat_dor_str.png" alt=""></a>
+			<a href="{{ path('app_catalog_category', {'id': '31'}) }}">
+				<p>Дорожное строительство</p>
+				<img src="/assets/images/catnew/cat_dor_str.png">
+			</a>
 		</div>
 		<ul>
 			{% for category in dor_stroy %}
-				<li><a href="{{ path('app_catalog_explore_category', {'catUrl': 'dor-stroy', 'section': category.id }) }}">{{ category.name }}</a></li>
+				<li>
+					<a href="{{ path('app_catalog_category', {'id': category.id}) }}">
+						{{ category.name }}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="main_cat" style="float: left">
 		<div class="main_cat_gbi">
-			<p>Строительство энергетических объектов</p>
-			<a href="{{ path('app_catalog_explore_category', {'catUrl': 'energy-stroy'}) }}"><img src="/assets/images/catnew/energ_str.png" alt=""></a>
+			<a href="{{ path('app_catalog_category', {'id': '459'}) }}">
+				<p>Строительство энергетических объектов</p>
+				<img src="/assets/images/catnew/energ_str.png">
+			</a>
 		</div>
 		<ul>
 			{% for category in energy_stroy %}
-				<li><a href="{{ path('app_catalog_explore_category', {'catUrl': 'energy-stroy', 'section': category.id }) }}">{{ category.name }}</a></li>
+				<li>
+					<a href="{{ path('app_catalog_category', {'id': category.id}) }}">
+						{{ category.name }}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="main_cat" style="float: left">
 		<div class="main_cat_gbi">
-			<p>Общегражданское и промышленное строительство</p>
-			<a href="{{ path('app_catalog_explore_category', {'catUrl': 'prom-stroy'}) }}"><img src="/assets/images/catnew/cat_gr_pr_str.png" alt=""></a>
+			<a href="{{ path('app_catalog_category', {'id': '456'}) }}">
+				<p>Общегражданское и промышленное строительство</p>
+				<img src="/assets/images/catnew/cat_gr_pr_str.png">
+			</a>
 		</div>
 		<ul>
 			{% for category in prom_stroy %}
-				<li><a href="{{ path('app_catalog_explore_category', {'catUrl': 'prom-stroy' }) }}">{{ category.name }}</a></li>
+				<li>
+					<a href="{{ path('app_catalog_category', {'id': category.id}) }}">
+						{{ category.name }}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="main_cat" style="float: left">
-		<div class="main_cat_gbi"><p>Строительство инженерных сетей</p>
-			<a href="{{ path('app_catalog_explore_category', {'catUrl': 'ingener-stroy' }) }}"><img src="/assets/images/catnew/str_ingener.png" alt=""></a>
+		<div class="main_cat_gbi">
+			<a href="{{ path('app_catalog_category', {'id': '458'}) }}">
+				<p>Строительство инженерных сетей</p>
+				<img src="/assets/images/catnew/str_ingener.png">
+			</a>
 		</div>
 		<ul>
 			{% for category in ingener_stroy %}
-				<li><a href="{{ path('app_catalog_explore_category', {'catUrl': 'ingener-stroy', 'section': category.id }) }}">{{ category.name }}</a></li>
+				<li>
+					<a href="{{ path('app_catalog_category', {'id': category.id}) }}">
+						{{ category.name }}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="main_cat" style="float: left">
-		<div class="main_cat_gbi"><p>Благоустройство территории</p>
-			<a href="{{ path('app_catalog_explore_category', {'catUrl': 'blag-territory'}) }}"><img src="/assets/images/catnew/cat_blagoustr.png" alt=""></a>
+		<div class="main_cat_gbi">
+			<a href="{{ path('app_catalog_category', {'id': '460'}) }}">
+				<p>Благоустройство территории</p>
+				<img src="/assets/images/catnew/cat_blagoustr.png">
+			</a>
 		</div>
 		<ul>
 			{% for category in blag_territory %}
-				<li><a href="{{ path('app_catalog_explore_category', {'catUrl': 'blag-territory', 'section': category.id }) }}">{{ category.name }}</a></li>
+				<li>
+					<a href="{{ path('app_catalog_category', {'id': category.id}) }}">
+						{{ category.name }}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="main_cat" style="float: left">
-		<div class="main_cat_gbi" style="margin-bottom: 80px"><p>Нефтегазовое строительство</p>
-			<a href="{{ path('app_catalog_explore_category', {'catUrl': 'neftegaz-stroy' }) }}"><img src="/assets/images/catnew/neft_str.png" alt="">
+		<div class="main_cat_gbi" style="margin-bottom: 80px">
+			<a href="{{ path('app_catalog_category', {'id': '461'}) }}">
+				<p>Нефтегазовое строительство</p>
+				<img src="/assets/images/catnew/neft_str.png">
 			</a>
 		</div>
 		<ul>
 			{% for category in neftegaz_stroy %}
-				<li><a href="{{ path('app_catalog_explore_category', {'catUrl': 'neftegaz-stroy', 'section': category.id }) }}">{{ category.name }}</a></li>
+				<li>
+					<a href="{{ path('app_catalog_category', {'id': category.id}) }}">
+						{{ category.name }}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 	</div>

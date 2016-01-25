@@ -2786,13 +2786,23 @@ span.catalog-third-level {
 	0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.add-basket {
-	margin: 0 0 0 10px;
-	width: 77px !important;
-}
-
 .product-info .add-basket {
 	margin-left: 0;
+}
+
+.btn-red {
+	background: #FF7F83;
+	color: #FFF;
+	text-shadow: none;
+}
+
+.btn-red:hover,
+.btn-red:focus,
+.btn-red:active {
+	background: #EF4B50;
+	color: #FFF;
+	outline: none;
+	text-shadow: none;
 }
 
 .props-tbl {
@@ -2899,23 +2909,21 @@ div.main_cat_el {
 	background-color: #E8E8E8;
 }
 
-.main_cat_gbi a {
-	height: 100%;
-	text-decoration:none;
-	display: block;
-}
-
-div.main_cat_gbi {
+.main_cat_gbi {
 	background-color: #F9F9F9;
 	border: 1px solid #CAC6C3;
 	border-radius: 7px;
-	height: 320px;
-	padding: 20px 5px 5px;
-	text-align: center;
-	width: 400px;
 	float: left;
-	margin: 0 0 20px;
-	padding-left: 25px;
+	margin: 0 10px 30px 0;
+	min-height: 320px;
+	text-align: center;
+	width: 430px;
+}
+
+.main_cat_gbi a {
+	display: block;
+	padding: 10px 0 5px;
+	text-decoration:none;
 }
 
 .main_cat_gbi:nth-child(3n+1),

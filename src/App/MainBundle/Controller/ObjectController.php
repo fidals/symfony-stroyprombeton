@@ -12,7 +12,9 @@ class ObjectController extends Controller
 		// search in repository
 		$objRepository = $this->getDoctrine()->getRepository('AppMainBundle:Object');
 		$object = $objRepository->find($id);
+
 		$twigArgs = array('object' => $object);
+
 		return $this->render('AppMainBundle:Object:object.html.twig', $twigArgs);
 	}
 }

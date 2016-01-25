@@ -22,7 +22,9 @@ class TerritoryController extends Controller
 		$territory   = $territoryRp->find($territoryId);
 
 		if (!empty($territory)) {
-			$twigArgs = array('territory' => $territory);
+			$twigArgs = array(
+				'territory' => $territory
+			);
 
 			return $this->render('AppMainBundle:Territory:show.html.twig', $twigArgs);
 		} else {

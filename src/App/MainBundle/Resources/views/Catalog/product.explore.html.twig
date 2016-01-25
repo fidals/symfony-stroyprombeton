@@ -129,7 +129,15 @@
 						</div>
 					</td>
 					<td class="product-desc-right-col">
-						<input onclick="return Cart.add({{ product.getId() }}, $(this).closest('tr').find('.basket-rest').val());" type="button" class="btn-gray add-basket" id="shk-submit-{{ product.getId() }}" name="shk-submit" value="Заказать" data-tooltip="Товар добавлен в заказ">
+						<input
+								class="btn btn-red add-basket"
+								id="shk-submit-{{ product.getId() }}"
+								onclick="return Cart.add({{ product.getId() }}, $(this).closest('tr').find('.basket-rest').val());"
+								type="button"
+								name="shk-submit"
+								value="Заказать"
+								data-tooltip="Товар добавлен в заказ"
+						>
 					</td>
 				</tr>
 				<tr>

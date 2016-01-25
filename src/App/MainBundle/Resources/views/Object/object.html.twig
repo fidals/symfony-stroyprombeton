@@ -17,6 +17,20 @@
 {% endblock %}
 
 {% block content %}
+	<div class="location">
+		<span class="location section">
+			<a href="/">Главная</a>
+		</span>
+		<span class="location separate">»</span>
+		<span class="location section">
+			<a href="/obekty/">Регионы</a>
+		</span>
+		<span class="location separate">»</span>
+		<span class="location section">
+			<a href="/rus-area-item/{{ object.getTerritory().getId() }}">{{ object.getTerritory() }}</a>
+		</span>
+	</div>
+
 	<h1>
 		{% if object.getH1() is empty %}
 			{{ object.getTitle() }}
