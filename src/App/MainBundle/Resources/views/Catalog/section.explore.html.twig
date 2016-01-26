@@ -29,55 +29,110 @@
 		<table>
 			<tr>
 				<th colspan="2">Код</th>
-				<th>Наименование и марка ЖБИ изделия</th>
+				<th>Наименование/Марка</th>
 				<th>Цена</th>
 				<th>Количество</th>
 			</tr>
-			{% for product in category.getProducts() if product.isActive %}
-				<tr>
-					<td class="gbi-list photo">
-						<img src="/bundles/main/images/bullet.png">
-					</td>
-					<td class="gbi-list code">
-						{% if product.getNomen() != 0 %}
-							{{ product.getNomen() }}
-						{% endif %}
-					</td>
-					<td class="gbi-list name">
-						<a href="{{ path('app_catalog_product', {'id': product.getId()}) }}">{{ product.getName() }}</a></td>
-					<td class="gbi-list price">
-						{% if product.price %}
-							{{ product.getPriceRounded() }} руб.
-						{% else %}
-							По запросу
-						{% endif %}
-					</td>
-					<td class="gbi-list buy">
-						<div class="shk-item">
-							<form>
-								<fieldset>
-									<div class="shk_basket_count">
-										<input type="text" name="shk-count" id="shk-count-{{ product.getId() }}" value="10" size="2" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0px">
-										<img class="field-arr-up" onclick="return spinUpCount(this)" src="/bundles/main/images/spin-up.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 11px -2px; vertical-align: bottom;">
-										<img class="field-arr-down" onclick="return spinDownCount(this)" src="/bundles/main/images/spin-down.png" width="17" height="9" alt="" style="cursor: pointer; margin: 0px 0px 1px -17px; vertical-align: bottom;">
-									</div>
-									<div class="shk_basket_buy">
-										<input
-												class="btn btn-red add-basket"
-												id="shk-submit-{{ product.getId() }}"
-												onclick="return Cart.add({{ product.getId() }},
-												$(this).closest('fieldset').find('.basket-rest').val());"
-												type="submit"
-												name="shk-submit"
-												value="Заказать"
-												data-tooltip="Товар добавлен в заказ"
-										>
-									</div>
-								</fieldset>
-							</form>
-						</div>
-					</td>
-				</tr>
+			{#TODO: нужен рефакторинг по требованиям из http://youtrack.stkmail.ru/issue/dev-487 #}
+			{% for product in category.getProducts() if product.getNomen() != 0 %}
+				{% if product.isActive %}
+					<tr>
+						<td class="gbi-list photo">
+							{%
+								if product.picturePath != "/assets/images/sections/logo-prozr.png"
+								and product.picturePath != "/assets/images/gbi-photos/prod-alt-image.png"
+							%}
+								<a href="{{ product.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
+							{% endif %}
+						</td>
+						<td class="gbi-list code">{{ product.getNomen() }}</td>
+						<td class="gbi-list name">
+							<a href="{{ path('app_catalog_product', {'id': product.getId()}) }}">{{ product.getName() }}</a>
+						</td>
+						<td class="gbi-list price">
+							{% if product.price %}
+								{{ product.getPriceRounded() }} руб.
+							{% else %}
+								По запросу
+							{% endif %}
+						</td>
+						<td class="gbi-list buy">
+							<div class="shk-item">
+								<form>
+									<fieldset>
+										<div class="shk_basket_count">
+											<input type="text" name="shk-count" id="shk-count-{{ product.getId() }}" value="10" size="2" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0">
+											<img class="field-arr-up" onclick="return spinUpCount(this)" src="/bundles/main/images/spin-up.png" width="17" height="9" style="cursor: pointer; margin: 0 0 11px -2px; vertical-align: bottom;">
+											<img class="field-arr-down" onclick="return spinDownCount(this)" src="/bundles/main/images/spin-down.png" width="17" height="9" style="cursor: pointer; margin: 0 0 1px -17px; vertical-align: bottom;">
+										</div>
+										<div class="shk_basket_buy">
+											<input
+													onclick="return Cart.add({{ product.getId() }}, $(this).closest
+													('fieldset').find('.basket-rest').val());"
+													class="btn btn-red add-basket"
+													id="shk-submit-{{ product.getId() }}"
+													name="shk-submit"
+													type="submit"
+													value="Заказать"
+													data-tooltip="Товар добавлен в заказ"
+											>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+
+			{% for product in category.getProducts() if product.getNomen() == 0 %}
+				{% if product.isActive %}
+					<tr>
+						<td class="gbi-list photo">
+							{%
+							if product.picturePath != "/assets/images/sections/logo-prozr.png"
+							and product.picturePath != "/assets/images/gbi-photos/prod-alt-image.png"
+							%}
+								<a href="{{ product.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
+							{% endif %}
+						</td>
+						<td class="gbi-list code"></td>
+						<td class="gbi-list name">
+							<a href="{{ path('app_catalog_product', {'id': product.getId()}) }}">{{ product.getName() }}</a>
+						</td>
+						<td class="gbi-list price">
+							{% if product.price %}
+								{{ product.getPriceRounded() }} руб.
+							{% else %}
+								По запросу
+							{% endif %}
+						</td>
+						<td class="gbi-list buy">
+							<div class="shk-item">
+								<form>
+									<fieldset>
+										<div class="shk_basket_count">
+											<input type="text" name="shk-count" id="shk-count-{{ product.getId() }}" value="10" size="2" maxlength="5" class="basket-rest" style="height: 16px; border: 1px solid rgb(136, 136, 136); vertical-align: bottom; text-align: center; padding: 1px 2px; font-size: 13px; margin-bottom: 0">
+											<img class="field-arr-up" onclick="return spinUpCount(this)" src="/bundles/main/images/spin-up.png" width="17" height="9" style="cursor: pointer; margin: 0 0 11px -2px; vertical-align: bottom;">
+											<img class="field-arr-down" onclick="return spinDownCount(this)" src="/bundles/main/images/spin-down.png" width="17" height="9" style="cursor: pointer; margin: 0 0 1px -17px; vertical-align: bottom;">
+										</div>
+										<div class="shk_basket_buy">
+											<input
+													onclick="return Cart.add({{ product.getId() }}, $(this).closest('fieldset').find('.basket-rest').val());"
+													class="btn btn-red add-basket"
+													id="shk-submit-{{ product.getId() }}"
+													name="shk-submit"
+													type="submit"
+													value="Заказать"
+													data-tooltip="Товар добавлен в заказ"
+											>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</td>
+					</tr>
+				{% endif %}
 			{% endfor %}
 		</table>
 		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>

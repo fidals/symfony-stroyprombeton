@@ -623,8 +623,7 @@ div.cart-actions ul li:last-child img {
 }
 
 .special-section-asterisk {
-	background-image: url("../images/asterisk.png");
-	background-repeat: no-repeat;
+	background: url("../images/asterisk.png") no-repeat;
 	height: 10px;
 	margin: 7px 0 0 3px;
 	position: absolute;
@@ -1050,7 +1049,7 @@ div.gbi-showcase table td:hover {
 div.gbi-showcase td span {
 	width: 20%;
 	float: left;
-	margin: 10px 0px 0px 7px;
+	margin: 10px 0 0 7px;
 	color: #999;
 	font-weight: bold;
 }
@@ -1192,13 +1191,21 @@ div.gbi-sub-section p {
 	font-size: 0.8em;
 }
 
-/* -------------------------------- */
-
+/* ================================================================ */
+/* Таблица изделий
+/* ================================================================ */
 div.gbi-list {
 	background-color: #e1e1e1;
 	border-radius: 5px;
 	margin-top: 10px;
 	padding: 10px;
+}
+
+.gbi-list .fa-camera {
+	height: 30px;
+	font-size: 20px;
+	line-height: 160%;
+	width: 30px;
 }
 
 div.gbi-list table {
@@ -1227,18 +1234,19 @@ td.no-white-space {
 	white-space: normal !important;
 }
 
-div.gbi-list table td.photo {
-	text-align: center !important;
-	width: 30px;
+.gbi-list .photo {
+	text-align: center;
+	width: 45px;
 }
 
-div.gbi-list table td.photo img {
+.gbi-list .photo img {
 	width: 20px;
 	max-width: 20px;
 }
 
-div.gbi-list table td.code {
-	font-size: 0.7em;
+.gbi-list .code {
+	font-size: 0.85em;
+	padding: 0 10px;
 	width: 45px;
 }
 
@@ -1250,7 +1258,6 @@ div.gbi-list table td.name {
 }
 
 div.gbi-list table td.name span {
-	color: #333;
 	color: #C90000;
 	font-weight: bold;
 	text-decoration: none;
@@ -2100,9 +2107,8 @@ table.index-list-gbi td {
 	text-align: center;
 	border: 1px solid #CAC6C3;
 	margin: 15px 15px 0 0;
-	text-align: center;
 	width: 30%;
-	padding: 20px 5px 5px 5px;
+	padding: 20px 5px 5px;
 	border-radius: 7px;
 }
 
@@ -2150,8 +2156,7 @@ table.index-new-gbi td:last-child {
 	height: 240px;
 	text-align: center;
 	border: 1px solid #CAC6C3;
-	text-align: center;
-	padding: 0 5px 5px 5px;
+	padding: 0 5px 5px;
 	border-radius: 7px;
 	margin: 15px 0 0 0;
 	width: 85%;
@@ -2197,8 +2202,7 @@ div.showcase {
 div.showcase ul {
 	margin: 0;
 	padding: 0;
-	list-style-type: none;
-	list-style-position: outside;
+	list-style: none;
 }
 
 div.showcase li {
@@ -2727,7 +2731,6 @@ span.catalog-second-level {
 
 span.catalog-second-level,
 span.catalog-third-level {
-	margin: 0;
 	padding: 0;
 	line-height: 1.7em;
 	margin: 5px 0;
@@ -2997,8 +3000,7 @@ div.gbi-visual {
 div.gbi-visual ul {
 	margin: 0;
 	padding: 0;
-	list-style-type: none;
-	list-style-position: outside;
+	list-style: none;
 	line-height: auto;
 }
 
@@ -3109,7 +3111,7 @@ div.form-order table td.data textarea {
 
 div.form-order table td.data textarea {
 	padding: 2px;
-	font-family: Arial;
+	font-family: Arial, sans-serif;
 	font-size: 0.9em;
 	border: 1px solid #999;
 }
@@ -3461,42 +3463,29 @@ div.gbi-visual-empty {
 div.gbi-visual-prom-stroy {
 	width: 940px;
 	height: 570px;
-	background-image: url('../images/gbi-visual/prom-stroy.jpg');
-	background-position: center top;
-	background-repeat: no-repeat;
+	background: url('../images/gbi-visual/prom-stroy.jpg') no-repeat center top;
 }
 
 div.gbi-visual-dor-stroy {
 	width: 940px;
 	height: 570px;
-	background-image: url('../images/gbi-visual/dor-stroy.jpg');
-	background-position: center top;
-	background-repeat: no-repeat;
+	background: url('../images/gbi-visual/dor-stroy.jpg') no-repeat center top;
 }
 
 div.gbi-visual-energy-stroy {
 	width: 940px;
 	height: 570px;
-	background-image: url('../images/gbi-visual/energy-stroy.jpg');
-	background-position: center top;
-	background-repeat: no-repeat;
+	background-image: url('../images/gbi-visual/energy-stroy.jpg') no-repeat center top;
 }
 
 div.gbi-visual-blag-territory {
 	width: 940px;
 	height: 570px;
-	background-image: url('../images/gbi-visual/blag-territory.jpg');
-	background-position: center top;
-	background-repeat: no-repeat;
+	background-image: url('../images/gbi-visual/blag-territory.jpg') no-repeat center top;
 }
 
+.hidden-ul,
 .gbi-visual-h {
-	display: none;
-}
-
-/* -------------------------------- */
-
-.hidden-ul {
 	display: none;
 }
 
@@ -3507,19 +3496,15 @@ div.gvds-pin {
 	z-index: 1;
 	width: 34px;
 	height: 46px;
-	background-image: url('../images/pin.png');
-	background-repeat: no-repeat;
-	background-position: center top;
+	background: url('../images/pin.png') no-repeat center top;
 }
 
 .gvds-pin-hover-to-left {
-	background-image: url('../images/pin-hover-to-left.png') !important;
-	background-position: right bottom !important;
+	background: url('../images/pin-hover-to-left.png') right bottom !important;
 }
 
 .gvds-pin-hover-to-right {
-	background-image: url('../images/pin-hover-to-right.png') !important;
-	background-position: left bottom !important;
+	background: url('../images/pin-hover-to-right.png') left bottom !important;
 }
 
 div.gvd-pin-head {
@@ -3596,10 +3581,7 @@ div.gvds-data-head-2 {
 div.gvds-data-head-3 {
 	margin: 5px 0;
 	padding: 5px 5px 5px 30px;
-	background-color: #BBB;
-	background-image: url('../images/icon-gvds-plus.png');
-	background-repeat: no-repeat;
-	background-position: 5px 5px;
+	background: url('../images/icon-gvds-plus.png') no-repeat 5px 5px #BBB;
 	color: #000;
 	font-size: 0.8em;
 	font-weight: bold;

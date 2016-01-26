@@ -122,6 +122,7 @@ class CartController extends Controller
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
+				$person = $request->request->get('order')['person'];
 				$mailer = $this->get('mailer');
 
 				$recipients = array(
@@ -131,7 +132,8 @@ class CartController extends Controller
 
 				$body = $this->renderView('AppMainBundle:Cart:email.order.html.twig', array(
 					'form' => $form->createView(),
-					'cart' => $this->get('catalog.cart')->loadCart(true)
+					'cart' => $this->get('catalog.cart')->loadCart(true),
+					'person' => $person
 				));
 
 				$message = \Swift_Message::newInstance()

@@ -16,19 +16,19 @@
 			</tr>
 			</thead>
 			{% for category in elements.categories %}
-					<tr>
-						<td>Раздел</td>
-						<td class="image">
-							{% if category.picturePath != "/assets/images/sections/logo-prozr.png" %}
-								<a href="{{ category.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
-							{% endif %}
-						</td>
-						<td class="search-element-nomen">-</td>
-						<td class="gbi-list name">
-							<a href="{{ path('app_catalog_category', {'id': category.id}) }}">{{ category.name }}</a>
-						</td>
-						<td>-</td>
-					</tr>
+				<tr>
+					<td>Раздел</td>
+					<td class="image">
+						{% if category.picturePath != "/assets/images/sections/logo-prozr.png" %}
+							<a href="{{ category.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
+						{% endif %}
+					</td>
+					<td class="search-element-nomen">-</td>
+					<td class="gbi-list name">
+						<a href="{{ path('app_catalog_category', {'id': category.id}) }}">{{ category.name }}</a>
+					</td>
+					<td>-</td>
+				</tr>
 			{% endfor %}
 			{% for product in elements.products %}
 					<tr>
