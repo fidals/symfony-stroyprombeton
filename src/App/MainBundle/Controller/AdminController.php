@@ -13,11 +13,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
-
 class AdminController extends Controller
 {
 	public $dProds = 0;
 	public $dCats = 0;
+
+	public function newIndexAction()
+	{
+		return $this->render('AppMainBundle:Admin:new.layout.html.twig');
+	}
+
+	public function listAction()
+	{
+		return $this->render('AppMainBundle:Admin:list.html.twig');
+	}
+
+	public function entityAction()
+	{
+		return $this->render('AppMainBundle:Admin:entity.html.twig');
+	}
+
+	// TODO: Переименовать после сноса старой функции
+	public function newEditProductsAction()
+	{
+		$tableGear = new TableGear($this->container);
+
+		return $this->render('AppMainBundle:Admin:edit.products.html.twig', array(
+			'tablegear_content' => $tableGear->getContent()
+		));
+	}
 
 	public function indexAction()
 	{
@@ -439,6 +463,7 @@ class AdminController extends Controller
 		}
 	}
 
+	// TODO: Снести старую функцию
 	public function editProductsAction()
 	{
 		$tableGear = new TableGear($this->container);

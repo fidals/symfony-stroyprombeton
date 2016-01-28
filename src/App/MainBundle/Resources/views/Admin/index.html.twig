@@ -1,6 +1,6 @@
 {% extends "AppMainBundle:Admin:layout.html.twig" %}
 
-{% block css %}
+{% block footercss %}
 	<style>
 		#sortable1, #sortable2, #sortable3 {
 			list-style-type: none;
@@ -22,7 +22,7 @@
 	</style>
 {% endblock %}
 
-{% block js %}
+{% block footerjs %}
 	<script>
 		$(CatalogAdmin.initDragAndDrop());
 		jQuery(document).ajaxStart(function () {

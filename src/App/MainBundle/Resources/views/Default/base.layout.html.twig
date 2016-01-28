@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8"/>
-	<meta http-equiv="pragma" content="no-cache"/>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
 
-	<title>{% block title %} {% endblock %}</title>
+	<title>
+		{% block title %}Завод ЖБИ «СТК-ПромБетон»{% endblock %}
+	</title>
 
-	{% block csslinks %}{% endblock %}
-	{% block jslinks %}{% endblock %}
+	{% block headercss %}{% endblock %}
+	{% block headerjs %}{% endblock %}
 
-	<meta name="Keywords" content="{% block keywords %} {% endblock %}"/>
-	<meta name="Description" content="{% block description %} {% endblock %}"/>
-	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+	<meta name="Keywords" content="{% block keywords %}{% endblock %}">
+	<meta name="Description" content="{% block description %}{% endblock %}">
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 </head>
 <body>
 	{% block body %}{% endblock %}
-	{% block js %}{% endblock %}
-	{% block css %}{% endblock %}
+	{% block footercss %}{% endblock %}
+	{% block footerjs %}{% endblock %}
 </body>
 </html>

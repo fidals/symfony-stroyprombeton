@@ -15,6 +15,24 @@ app_catalog_basket:
     path: /basket/
     defaults: { _controller: AppMainBundle:Cart:index }
 
+#Новая Админка
+newAdminIndex:
+    path: /admin
+    defaults: { _controller: AppMainBundle:Admin:newIndex }
+
+adminList:
+    path: /admin/list
+    defaults: { _controller: AppMainBundle:Admin:list }
+
+adminEntity:
+    path: /admin/entity
+    defaults: { _controller: AppMainBundle:Admin:entity }
+
+adminEditProducts:
+    path: /admin/editproducts
+    defaults: { _controller: AppMainBundle:Admin:newEditProducts }
+
+#TODO: Нужны ли нам эти 2 роута ниже, если мы снесли Сонату?
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /adminka

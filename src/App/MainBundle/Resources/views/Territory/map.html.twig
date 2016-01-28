@@ -4,18 +4,18 @@
 	Регионы, в которые поставлялась продукция «СТК-ПромБетон»
 {% endblock %}
 
-{% block jslinks %}
+{% block headerjs %}
 	{{ parent() }}
 	<script type="text/javascript" src="{{ asset('/bundles/main/js/jquery.maphilight.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/main/js/jquery.tooltipster.min.js') }}"></script>
 {% endblock %}
 
-{% block csslinks %}
+{% block headercss %}
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('/bundles/main/css/tooltipster.css') }}"/>
 {% endblock %}
 
-{% block js %}
+{% block footerjs %}
 	{{ parent() }}
 	<script type="text/javascript">
 		$(document).ready(function() {

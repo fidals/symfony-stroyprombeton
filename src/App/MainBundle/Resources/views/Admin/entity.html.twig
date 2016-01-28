@@ -1,0 +1,315 @@
+{% extends "AppMainBundle:Admin:new.layout.html.twig" %}
+
+{% block title %}Админка | Сущности{% endblock %}
+
+{% block headerjs %}
+	{{ parent() }}
+
+	<script src="/bundles/main/plugins/summernote/summernote.min.js"></script>
+	<script src="/bundles/main/plugins/summernote/summernote-ru-RU.js"></script>
+{% endblock %}
+
+{% block admin_breadcrumbs %}
+	<div class="header-links navbar-left">
+		<ol class="header-links-breadcrumbs breadcrumb">
+			<li><a href="/admin">Dashboard</a></li>
+			<li><a href="#">ProductPage</a></li>
+			<li class="active">Фундаментный блок</li>
+		</ol>
+
+		<span class="header-entity-link">
+			Ссылка на сущность: <a href="/gbi/products/637/" target="_blank">/gbi/products/637/</a>
+		</span>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<h1 class="entity-title text-center">Товар</h1>
+
+	<form class="form-inline form-entity">
+		<div class="entity-wrapper">
+			<h4 class="entity-form-title">Основные характеристики</h4>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="input-text">Название</label>
+				<div class="input-group">
+					<div class="input-group-addon">Название</div>
+					<input class="form-control" id="input-text" type="text" placeholder="Фундаментный блок">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="input-id">ID</label>
+				<div class="input-group">
+					<div class="input-group-addon">ID</div>
+					<input class="form-control" id="input-id" type="text" placeholder="637">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="input-introtext">Introtext</label>
+				<div class="input-group">
+					<div class="input-group-addon">Introtext</div>
+					<input class="form-control" id="input-introtext" type="text" placeholder="ФСБ9.3.6-Т">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox"> Текст опубликован
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="summernote-edit js-summernote-edit" id="summernote-edit"><i class="fa fa-pencil"></i></div>
+				<div class="clearfix"></div>
+				<div id="summernote"></div>
+			</div>
+		</div>
+
+		<div class="chars-wrapper">
+			<h4 class="entity-form-title">Дополнительные характеристики</h4>
+
+			<div class="row">
+				<div class="col-sm-6 paddingless-right">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-price">Цена</label>
+						<div class="input-group">
+							<div class="input-group-addon">Цена</div>
+							<input class="form-control" id="input-price" type="text" placeholder="150">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-price-date">Дата цены</label>
+						<div class="input-group">
+							<div class="input-group-addon">Дата цены</div>
+							<input class="form-control" id="input-price-date" type="text" placeholder="22.03.2016">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6 paddingless-right">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-art">Артикул</label>
+						<div class="input-group">
+							<div class="input-group-addon">Дата цены</div>
+							<input class="form-control" id="input-art" type="text" placeholder="601010231">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-height">Высота</label>
+						<div class="input-group">
+							<div class="input-group-addon">Высота</div>
+							<input class="form-control" id="input-height" type="text" placeholder="150">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6 paddingless-right">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-width">Длина</label>
+						<div class="input-group">
+							<div class="input-group-addon">Длина</div>
+							<input class="form-control" id="input-width" type="text" placeholder="150">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-length">Ширина</label>
+						<div class="input-group">
+							<div class="input-group-addon">Ширина</div>
+							<input class="form-control" id="input-length" type="text" placeholder="150">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6 paddingless-right">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-weight">Масса</label>
+						<div class="input-group">
+							<div class="input-group-addon">Масса</div>
+							<input class="form-control" id="input-weight" type="text" placeholder="150">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-label">Марка</label>
+						<div class="input-group">
+							<div class="input-group-addon">Марка</div>
+							<input class="form-control" id="input-label" type="text" placeholder="ФСБ 9.5.5">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6 paddingless-right">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-diameter-outer">Диаметр внеш</label>
+						<div class="input-group">
+							<div class="input-group-addon">Диаметр внеш</div>
+							<input class="form-control" id="input-diameter-outer" type="text" placeholder="150">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label class="control-label sr-only" for="input-diameter-inner">Диаметр внутр</label>
+						<div class="input-group">
+							<div class="input-group-addon">Диаметр внутр</div>
+							<input class="form-control" id="input-diameter-inner" type="text" placeholder="150">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="select-parent">Родитель</label>
+				<div class="input-group">
+					<div class="input-group-addon">Родитель</div>
+					<select class="form-control" id="select-parent">
+						<option value="" disabled selected style="display: none;">Выберите родителя</option>
+						<option>Фундаментные блоки</option>
+						<option>Коллоны</option>
+						<option>Лестничные марши</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="btn-wrapper">
+				<button class="btn btn-primary" type="button">Добавить новый</button>
+			</div>
+
+			<h4 class="entity-form-title">Пояснение к маркировке</h4>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon input-addon-with-input">
+						<input class="form-control" id="input-explanation-01" type="text" placeholder="ОЛ">
+					</div>
+					<input class="form-control" id="input-explanation-02" type="text" placeholder="Опора лоджии">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon input-addon-with-input">
+						<input class="form-control" id="input-explanation-03" type="text" placeholder="43.">
+					</div>
+					<input class="form-control" id="input-explanation-04" type="text" placeholder="Ширина">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon input-addon-with-input">
+						<input class="form-control" id="input-explanation-05" type="text" placeholder="10.">
+					</div>
+					<input class="form-control" id="input-explanation-06" type="text" placeholder="Длина">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon input-addon-with-input">
+						<input class="form-control" id="input-explanation-07" type="text" placeholder="6-">
+					</div>
+					<input class="form-control" id="input-explanation-08" type="text" placeholder="Высота">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon input-addon-with-input">
+						<input class="form-control" id="input-explanation-09" type="text" placeholder="Т">
+					</div>
+					<input class="form-control" id="input-explanation-10" type="text" placeholder="Эта буква тоже что-то значит">
+				</div>
+			</div>
+		</div>
+
+		<div class="seo-wrapper">
+			<h4 class="entity-form-title">SEO</h4>
+
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox"> Активно
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="input-title">Title</label>
+				<div class="input-group">
+					<div class="input-group-addon">Title</div>
+					<input class="form-control" id="input-title" type="text" placeholder="Фундаментный блок железобетонный">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="input-h1">H1</label>
+				<div class="input-group">
+					<div class="input-group-addon">H1</div>
+					<input class="form-control" id="input-h1" type="text" placeholder="Фундаментный блок железобетонный ФБС">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="input-keywords">Keywords</label>
+				<div class="input-group">
+					<div class="input-group-addon">Keywords</div>
+					<input class="form-control" id="input-keywords" type="text" placeholder="Фундаментный блок">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label sr-only" for="input-description">Descripton</label>
+				<div class="input-group">
+					<div class="input-group-addon">Descripton</div>
+					<input class="form-control" id="input-description" type="text" placeholder="ГОСТ 1357-38">
+				</div>
+			</div>
+
+			<div class="btn-wrapper">
+				<input class="btn-primary js-file-input" type="file" data-filename-placement="inside">
+			</div>
+
+			<img class="img-thumbnail" src="http://placehold.it/146x146">
+			<img class="img-thumbnail" src="http://placehold.it/146x146">
+			<img class="img-thumbnail" src="http://placehold.it/146x146">
+
+			<div class="btn-wrapper text-center">
+				<button class="btn btn-action btn-danger js-confirm-delete-modal" id="delete" type="button"><i class="fa fa-trash-o"></i>
+					Удалить</button>
+				<button class="btn btn-action btn-primary" type="button"><i class="fa fa-list"></i> Перейти к списку</button>
+				<button class="btn btn-action btn-primary" type="button"><i class="fa fa-check"></i> Создать</button>
+				<button class="btn btn-action btn-success" type="button"><i class="fa fa-floppy-o"></i> Сохранить</button>
+			</div>
+		</div>
+	</form>
+
+	<div class="modal-wrapper js-modal-wrapper" id="confirm-modal">
+		<div class="modal-box">
+			<h3 class="text-center">Вы действительно хотите удалить данную Сущность?</h3>
+			<div>
+				<button class="modal-delete btn btn-danger js-modal-delete">Удалить</button>
+				<button class="modal-delete-cancel btn btn-primary js-modal-delete-cancel">Отменить</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal-overlay"></div>
+{% endblock %}

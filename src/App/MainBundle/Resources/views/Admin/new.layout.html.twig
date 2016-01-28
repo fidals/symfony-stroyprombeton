@@ -1,0 +1,98 @@
+{% extends "AppMainBundle:Default:base.layout.html.twig" %}
+
+{% block title %}Админка{% endblock %}
+
+{% block headercss %}
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/bundles/main/plugins/font-awesome-4/font-awesome.min.css">
+	<link rel="stylesheet" href="/bundles/main/plugins/jstree/style.css">
+	<link rel="stylesheet" href="/bundles/catalog/plugins/tablegear/stylesheets/tablegear.css">
+	<link rel="stylesheet" href="/bundles/main/plugins/summernote/summernote.css">
+	<link rel="stylesheet" href="/bundles/main/css/admin.css">
+{% endblock %}
+
+{% block headerjs %}
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script src="/bundles/main/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/bundles/main/plugins/jstree/jstree.min.js"></script>
+	<script src="/bundles/main/plugins/jquery.slimscroll.js"></script>
+	<script src="/bundles/main/plugins/bootstrap.file-input.js"></script>
+{% endblock %}
+
+{% block body %}
+	{% block header %}
+		<header class="header">
+			<a class="header-logo text-center" href="/admin" title="На главную Админки">
+				<img src="/bundles/main/images/logo.png">
+			</a>
+			<nav class="navbar navbar-static-top" role="navigation">
+				<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+				{% block admin_breadcrumbs %}{% endblock %}
+
+				<div class="navbar-right">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-plus-square fa-fw"></i> <i class="fa fa-caret-down"></i>
+							</a>
+							<div class="dropdown-menu multi-column dropdown-add">
+								<ul class="actions-menu">
+									<li class="dropdown-header text-center">Другое</li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="/adminka/app/main/territory/create">Территории</a>
+									</li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="/adminka/app/main/object/create">Объекты</a>
+									</li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="/adminka/app/main/post/create">Новости</a>
+									</li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="/adminka/app/main/staticpage/create">Страницы</a>
+									</li>
+									<li class="divider"></li>
+									<li class="dropdown-header text-center">Каталог</li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="/adminka/app/main/category/create">Категории</a>
+									</li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="/adminka/app/main/product/create">Изделия</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="dropdown user-menu">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	{% endblock %}
+
+	<div class="wrapper">
+		{% include 'AppMainBundle:Admin:sidebar.html.twig' %}
+
+		<aside class="admin-content">
+			{% block content %}
+				{% include 'AppMainBundle:Admin:index.content.html.twig' %}
+			{% endblock %}
+		</aside>
+	</div>
+{% endblock %}
+
+{% block footerjs %}
+	<script src="/bundles/catalog/js/admin.js"></script>
+{% endblock %}

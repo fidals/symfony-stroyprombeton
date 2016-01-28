@@ -25,10 +25,9 @@
     <table width="100%" border="1" style="border: none; font-size: 16px;">
         <tr align="center">
             <th width="10%" style="border-color: #E4E4E4; padding: 10px; font-weight:bold;">Код</th>
-            <th width="50%" style="border-color: #E4E4E4; padding: 10px; font-weight:bold;">Наименование и
-                марка</th>
-            <th width="15%" style="border-color: #E4E4E4; padding: 10px; font-weight:bold;">Цена</th>
+            <th width="50%" style="border-color: #E4E4E4; padding: 10px; font-weight:bold;">Наименование и марка</th>
             <th width="15%" style="border-color: #E4E4E4; padding: 10px; font-weight:bold;">Количество</th>
+            <th width="15%" style="border-color: #E4E4E4; padding: 10px; font-weight:bold;">Цена</th>
         </tr>
         {% set totalSum = 0 %}
         {% set byRequest = false %}
@@ -39,6 +38,7 @@
                     <a style="color: #C90000; text-decoration: none;" href="{{ url('app_catalog_product', {'id' :
                         product.model.id}) }}">{{ product.model.name }}</a>
                 </td>
+                <td style="border-color: #E4E4E4; padding: 10px;">{{ product.count }} шт.</td>
                 <td style="border-color: #E4E4E4; padding: 10px;">
                     {% if product.model.price != 0 %}
                         {{ product.model.price }} руб.
@@ -47,7 +47,6 @@
                         {% set byRequest = true %}
                     {% endif %}
                 </td>
-                <td style="border-color: #E4E4E4; padding: 10px;">{{ product.count }} шт.</td>
             </tr>
             {% set totalSum = totalSum + product.model.price * product.count %}
         {% endfor %}

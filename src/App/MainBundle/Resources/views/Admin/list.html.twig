@@ -1,0 +1,252 @@
+{% extends "AppMainBundle:Admin:new.layout.html.twig" %}
+
+{% block title %}Админка | Список{% endblock %}
+
+{% block content %}
+	<section class="content-header">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Действия <b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="/adminka/app/main/product/create">
+									<i class="fa fa-plus-circle"></i>
+									Добавить новый товар
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</section>
+
+	<section class="content">
+		<div class="row">
+			<div class="col-lg-10">
+				<div class="box box-primary paddingless">
+					<div class="table-responsive">
+						<form>
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th class="">
+											<input id="checkbox-switcher" type="checkbox">
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Id</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Артикул</a>
+										</th>
+										<th class="table-title">
+											<a href="#">Название</a>
+										</th>
+										<th class="table-title">Родитель</th>
+										<th class="table-title text-center">
+											<a href="#">Марка</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Длина</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Ширина</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Высота</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Масса</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Диаметр внутр</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Диаметр внеш</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Цена</a>
+										</th>
+										<th class="table-title text-center">
+											<a href="#">Активно</a>
+										</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td class="table-cell">
+											<input type="checkbox" value="639">
+										</td>
+										<td class="table-cell">639</td>
+										<td class="table-cell">60101003</td>
+										<td class="table-cell">
+											<a class="item-link" href="#">
+												Фундаментный блок железобетонный ФБС9.5.6-Т
+											</a>
+										</td>
+										<td class="table-cell">
+											<a class="item-link" href="#">16.Фундаментные блоки (ФБС). ГОСТ 13579-78</a>
+										</td>
+										<td class="table-cell">ФБС9.5.6-Т</td>
+										<td class="table-cell text-center">880</td>
+										<td class="table-cell text-center">500</td>
+										<td class="table-cell text-center">580</td>
+										<td class="table-cell text-center">590</td>
+										<td class="table-cell text-center">0</td>
+										<td class="table-cell text-center">0</td>
+										<td class="table-cell text-center">1408</td>
+										<td class="table-cell item-label text-center">
+											<span class="label label-success">да</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="table-cell">
+											<input type="checkbox" value="639">
+										</td>
+										<td class="table-cell">639</td>
+										<td class="table-cell">60101003</td>
+										<td class="table-cell">
+											<a class="item-link" href="#">
+												Фундаментный блок железобетонный ФБС9.5.6-Т
+											</a>
+										</td>
+										<td class="table-cell">
+											<a class="item-link" href="#">16.Фундаментные блоки (ФБС). ГОСТ 13579-78</a>
+										</td>
+										<td class="table-cell">ФБС9.5.6-Т</td>
+										<td class="table-cell text-center">880</td>
+										<td class="table-cell text-center">500</td>
+										<td class="table-cell text-center">580</td>
+										<td class="table-cell text-center">590</td>
+										<td class="table-cell text-center">0</td>
+										<td class="table-cell text-center">0</td>
+										<td class="table-cell text-center">1408</td>
+										<td class="table-cell item-label text-center">
+											<span class="label label-success">да</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="table-cell">
+											<input type="checkbox" value="639">
+										</td>
+										<td class="table-cell">639</td>
+										<td class="table-cell">60101003</td>
+										<td class="table-cell">
+											<a class="item-link" href="#">
+												Фундаментный блок железобетонный ФБС9.5.6-Т
+											</a>
+										</td>
+										<td class="table-cell">
+											<a class="item-link" href="#">16.Фундаментные блоки (ФБС). ГОСТ 13579-78</a>
+										</td>
+										<td class="table-cell">ФБС9.5.6-Т</td>
+										<td class="table-cell text-center">880</td>
+										<td class="table-cell text-center">500</td>
+										<td class="table-cell text-center">580</td>
+										<td class="table-cell text-center">590</td>
+										<td class="table-cell text-center">0</td>
+										<td class="table-cell text-center">0</td>
+										<td class="table-cell text-center">1408</td>
+										<td class="table-cell item-label text-center">
+											<span class="label label-success">да</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="text-center">
+								<ul class="pagination">
+									<li class="active"><a href="/adminka/app/main/product/list">1</a></li>
+									<li><a href="/adminka/app/main/product/list">2</a></li>
+									<li><a href="/adminka/app/main/product/list">3</a></li>
+									<li><a href="/adminka/app/main/product/list">4</a></li>
+									<li><a href="/adminka/app/main/product/list">5</a></li>
+									<li><a href="/adminka/app/main/product/list">6</a></li>
+									<li><a href="/adminka/app/main/product/list">7</a></li>
+									<li><a href="#">...</a></li>
+									<li><a href="/adminka/app/main/product/list">18</a></li>
+									<li><a href="/adminka/app/main/product/list">19</a></li>
+									<li><a href="/adminka/app/main/product/list">20</a></li>
+									<li><a href="/adminka/app/main/product/list">21</a></li>
+									<li><a href="/adminka/app/main/product/list">22</a></li>
+									<li><a href="/adminka/app/main/product/list" title="Следующая">›</a></li>
+									<li><a href="/adminka/app/main/product/list" title="Последняя">»</a></li>
+								</ul>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="table-filter col-lg-2">
+				<div class="box box-primary">
+					<h4 class="box-title">Фильтры</h4>
+					<div class="box-body">
+						<form>
+							<div class="filter_container inactive">
+								<div class="form-group">
+									<label for="filter-id">Id</label>
+									<input class="form-control" id="filter-id" type="text" name="filter[id][value]">
+								</div>
+
+								<div class="form-group">
+									<label for="filter-nomen">Артикул</label>
+									<input type="text" class="form-control" id="filter-nomen" name="filter[nomen][value]">
+								</div>
+
+								<div class="form-group">
+									<label for="filter-name">Название</label>
+									<input class="form-control" id="filter-name" type="text" name="filter[name][value]">
+								</div>
+								
+								<div class="form-group">
+									<label for="filter-select-01">Родитель</label>
+									<select class="form-control" id="filter-select-01">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="filter-mark">Марка</label>
+									<input class="form-control" id="filter-mark" type="text" name="filter[mark][value]" >
+								</div>
+								
+								<div class="form-group">
+									<label for="filter-price">Цена</label>
+									<input class="form-control" id="filter-price" type="text" name="filter[price][value]" >
+								</div>
+								
+								<div class="form-group">
+									<label for="filter-select-02">Активно</label>
+									<select class="form-control" id="filter-select-02">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+									</select>
+								</div>
+
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-filter"></i> Фильтровать
+									</button>
+									<p></p>
+									<a class="btn btn-danger" href="/adminka/app/main/product/list?filters=reset">
+										<i class="fa fa-times"></i>
+										Сбросить
+									</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
