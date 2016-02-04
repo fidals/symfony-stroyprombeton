@@ -28,6 +28,7 @@ class YmlProductListener implements YmlListenerInterface
 
 	/**
 	 * @param YmlGenerateEvent $event
+	 * @return mixed|void
 	 */
 	public function generate(YmlGenerateEvent $event)
 	{
@@ -48,7 +49,7 @@ class YmlProductListener implements YmlListenerInterface
 			$offer->setAvailable(false);
 			$offer->setPickup(true);
 			$offer->setDelivery(true);
-			$offer->setSalesNotes('Нужна предоплата, минимум 10 изделий');
+			$offer->setSalesNotes('Нужна предоплата');
 			$offer->setStore(false);
 			$offer->setManufacturerWarranty(true);
 			$offer->setCountryOfOrigin('Россия');
