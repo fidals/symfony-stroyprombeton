@@ -28,9 +28,19 @@ class AdminController extends Controller
 		return $this->render('AppMainBundle:Admin:list.html.twig');
 	}
 
-	public function entityAction()
+	public function productAction()
 	{
-		return $this->render('AppMainBundle:Admin:entity.html.twig');
+		return $this->render('AppMainBundle:Admin:product.html.twig');
+	}
+
+	public function categoryAction()
+	{
+		return $this->render('AppMainBundle:Admin:category.html.twig');
+	}
+
+	public function staticPageAction()
+	{
+		return $this->render('AppMainBundle:Admin:static_page.html.twig');
 	}
 
 	// TODO: Переименовать после сноса старой функции

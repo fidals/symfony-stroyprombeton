@@ -397,7 +397,7 @@ ul {
 
 .entity-title {
 	font-size: 30px;
-	margin: 0;
+	margin: 0 0 5px;
 }
 
 .form-entity .form-group {
@@ -435,6 +435,10 @@ ul {
 	width: 100px;
 }
 
+.form-control {
+	padding: 6px 8px;
+}
+
 .btn-wrapper {
 	padding: 15px 0;
 }
@@ -446,11 +450,11 @@ ul {
 
 @media (min-width: 1800px) {
 	.entity-wrapper {
-		width: 28%;
+		width: 30%;
 	}
 
 	.chars-wrapper {
-		width: 37%;
+		width: 36%;
 	}
 
 	.seo-wrapper {
@@ -548,6 +552,18 @@ ul {
 
 .summernote-edit .fa:hover {
 	color: #337AB7;
+}
+
+.summernote-alert {
+	display: none;
+	float: left;
+	margin: 2px 0 0;
+}
+
+.summernote-alert .fa {
+	font-size: 25px;
+	position: relative;
+	top: 4px;
 }
 
 /* Jstree */

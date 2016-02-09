@@ -24,13 +24,21 @@ adminList:
     path: /admin/list
     defaults: { _controller: AppMainBundle:Admin:list }
 
-adminEntity:
-    path: /admin/entity
-    defaults: { _controller: AppMainBundle:Admin:entity }
+adminProduct:
+    path: /admin/product
+    defaults: { _controller: AppMainBundle:Admin:product }
 
 adminEditProducts:
     path: /admin/editproducts
     defaults: { _controller: AppMainBundle:Admin:newEditProducts }
+
+adminCategory:
+    path: /admin/category
+    defaults: { _controller: AppMainBundle:Admin:category }
+
+adminStaticPage:
+    path: /admin/staticpage
+    defaults: { _controller: AppMainBundle:Admin:staticPage }
 
 #TODO: Нужны ли нам эти 2 роута ниже, если мы снесли Сонату?
 admin:

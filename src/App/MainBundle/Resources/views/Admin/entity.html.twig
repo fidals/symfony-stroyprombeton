@@ -1,6 +1,6 @@
 {% extends "AppMainBundle:Admin:new.layout.html.twig" %}
 
-{% block title %}Админка | Сущности{% endblock %}
+{% block title %}Админка | {{ page_title }}{% endblock %}
 
 {% block headerjs %}
 	{{ parent() }}
@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block content %}
-	<h1 class="entity-title text-center">Товар</h1>
+	<h1 class="entity-title text-center">{{ page_title }}</h1>
 
 	<form class="form-inline form-entity">
 		<div class="entity-wrapper">
@@ -34,7 +34,7 @@
 				<label class="control-label sr-only" for="input-text">Название</label>
 				<div class="input-group">
 					<div class="input-group-addon">Название</div>
-					<input class="form-control" id="input-text" type="text" placeholder="Фундаментный блок">
+					<input class="form-control" id="input-text" type="text">
 				</div>
 			</div>
 
@@ -42,7 +42,7 @@
 				<label class="control-label sr-only" for="input-id">ID</label>
 				<div class="input-group">
 					<div class="input-group-addon">ID</div>
-					<input class="form-control" id="input-id" type="text" placeholder="637">
+					<input class="form-control" id="input-id" type="text">
 				</div>
 			</div>
 
@@ -50,7 +50,7 @@
 				<label class="control-label sr-only" for="input-introtext">Introtext</label>
 				<div class="input-group">
 					<div class="input-group-addon">Introtext</div>
-					<input class="form-control" id="input-introtext" type="text" placeholder="ФСБ9.3.6-Т">
+					<input class="form-control" id="input-introtext" type="text">
 				</div>
 			</div>
 
@@ -63,182 +63,141 @@
 			</div>
 
 			<div class="form-group">
-				<div class="summernote-edit js-summernote-edit" id="summernote-edit"><i class="fa fa-pencil"></i></div>
+				<p class="summernote-alert js-summernote-alert"><i class="fa fa-star-o"></i> Не забудьте сохранить изменения</p>
+				<div class="summernote-edit js-summernote-edit" id="summernote-close"><i class="fa fa-pencil"></i></div>
 				<div class="clearfix"></div>
 				<div id="summernote"></div>
 			</div>
 		</div>
 
 		<div class="chars-wrapper">
-			<h4 class="entity-form-title">Дополнительные характеристики</h4>
+			{% block chars_secondary %}
+				<h4 class="entity-form-title">Дополнительные характеристики</h4>
 
-			<div class="row">
-				<div class="col-sm-6 paddingless-right">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-price">Цена</label>
-						<div class="input-group">
-							<div class="input-group-addon">Цена</div>
-							<input class="form-control" id="input-price" type="text" placeholder="150">
+				<div class="row">
+					<div class="col-sm-6 paddingless-right">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-price">Цена</label>
+							<div class="input-group">
+								<div class="input-group-addon">Цена</div>
+								<input class="form-control" id="input-price" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-price-date">Дата цены</label>
+							<div class="input-group">
+								<div class="input-group-addon">Дата цены</div>
+								<input class="form-control" id="input-price-date" type="text">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-price-date">Дата цены</label>
-						<div class="input-group">
-							<div class="input-group-addon">Дата цены</div>
-							<input class="form-control" id="input-price-date" type="text" placeholder="22.03.2016">
+
+				<div class="row">
+					<div class="col-sm-6 paddingless-right">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-art">Артикул</label>
+							<div class="input-group">
+								<div class="input-group-addon">Дата цены</div>
+								<input class="form-control" id="input-art" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-height">Высота</label>
+							<div class="input-group">
+								<div class="input-group-addon">Высота</div>
+								<input class="form-control" id="input-height" type="text">
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-sm-6 paddingless-right">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-art">Артикул</label>
-						<div class="input-group">
-							<div class="input-group-addon">Дата цены</div>
-							<input class="form-control" id="input-art" type="text" placeholder="601010231">
+				<div class="row">
+					<div class="col-sm-6 paddingless-right">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-width">Длина</label>
+							<div class="input-group">
+								<div class="input-group-addon">Длина</div>
+								<input class="form-control" id="input-width" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-length">Ширина</label>
+							<div class="input-group">
+								<div class="input-group-addon">Ширина</div>
+								<input class="form-control" id="input-length" type="text">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-height">Высота</label>
-						<div class="input-group">
-							<div class="input-group-addon">Высота</div>
-							<input class="form-control" id="input-height" type="text" placeholder="150">
+
+				<div class="row">
+					<div class="col-sm-6 paddingless-right">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-weight">Масса</label>
+							<div class="input-group">
+								<div class="input-group-addon">Масса</div>
+								<input class="form-control" id="input-weight" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-label">Марка</label>
+							<div class="input-group">
+								<div class="input-group-addon">Марка</div>
+								<input class="form-control" id="input-label" type="text">
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-sm-6 paddingless-right">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-width">Длина</label>
-						<div class="input-group">
-							<div class="input-group-addon">Длина</div>
-							<input class="form-control" id="input-width" type="text" placeholder="150">
+				<div class="row">
+					<div class="col-sm-6 paddingless-right">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-diameter-outer">Диаметр внеш</label>
+							<div class="input-group">
+								<div class="input-group-addon">Диаметр внеш</div>
+								<input class="form-control" id="input-diameter-outer" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label sr-only" for="input-diameter-inner">Диаметр внутр</label>
+							<div class="input-group">
+								<div class="input-group-addon">Диаметр внутр</div>
+								<input class="form-control" id="input-diameter-inner" type="text">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-length">Ширина</label>
-						<div class="input-group">
-							<div class="input-group-addon">Ширина</div>
-							<input class="form-control" id="input-length" type="text" placeholder="150">
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-sm-6 paddingless-right">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-weight">Масса</label>
-						<div class="input-group">
-							<div class="input-group-addon">Масса</div>
-							<input class="form-control" id="input-weight" type="text" placeholder="150">
-						</div>
+				<div class="form-group">
+					<label class="control-label sr-only" for="select-parent">Родитель</label>
+					<div class="input-group">
+						<div class="input-group-addon">Родитель</div>
+						<select class="form-control" id="select-parent">
+							<option value="" disabled selected style="display: none;">Выберите родителя</option>
+							<option>Фундаментные блоки</option>
+							<option>Коллоны</option>
+							<option>Лестничные марши</option>
+						</select>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-label">Марка</label>
-						<div class="input-group">
-							<div class="input-group-addon">Марка</div>
-							<input class="form-control" id="input-label" type="text" placeholder="ФСБ 9.5.5">
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-sm-6 paddingless-right">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-diameter-outer">Диаметр внеш</label>
-						<div class="input-group">
-							<div class="input-group-addon">Диаметр внеш</div>
-							<input class="form-control" id="input-diameter-outer" type="text" placeholder="150">
-						</div>
-					</div>
+				<div class="btn-wrapper">
+					<button class="btn btn-primary" type="button">Добавить новый</button>
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="control-label sr-only" for="input-diameter-inner">Диаметр внутр</label>
-						<div class="input-group">
-							<div class="input-group-addon">Диаметр внутр</div>
-							<input class="form-control" id="input-diameter-inner" type="text" placeholder="150">
-						</div>
-					</div>
-				</div>
-			</div>
+			{% endblock %}
 
-			<div class="form-group">
-				<label class="control-label sr-only" for="select-parent">Родитель</label>
-				<div class="input-group">
-					<div class="input-group-addon">Родитель</div>
-					<select class="form-control" id="select-parent">
-						<option value="" disabled selected style="display: none;">Выберите родителя</option>
-						<option>Фундаментные блоки</option>
-						<option>Коллоны</option>
-						<option>Лестничные марши</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="btn-wrapper">
-				<button class="btn btn-primary" type="button">Добавить новый</button>
-			</div>
-
-			<h4 class="entity-form-title">Пояснение к маркировке</h4>
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon input-addon-with-input">
-						<input class="form-control" id="input-explanation-01" type="text" placeholder="ОЛ">
-					</div>
-					<input class="form-control" id="input-explanation-02" type="text" placeholder="Опора лоджии">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon input-addon-with-input">
-						<input class="form-control" id="input-explanation-03" type="text" placeholder="43.">
-					</div>
-					<input class="form-control" id="input-explanation-04" type="text" placeholder="Ширина">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon input-addon-with-input">
-						<input class="form-control" id="input-explanation-05" type="text" placeholder="10.">
-					</div>
-					<input class="form-control" id="input-explanation-06" type="text" placeholder="Длина">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon input-addon-with-input">
-						<input class="form-control" id="input-explanation-07" type="text" placeholder="6-">
-					</div>
-					<input class="form-control" id="input-explanation-08" type="text" placeholder="Высота">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon input-addon-with-input">
-						<input class="form-control" id="input-explanation-09" type="text" placeholder="Т">
-					</div>
-					<input class="form-control" id="input-explanation-10" type="text" placeholder="Эта буква тоже что-то значит">
-				</div>
-			</div>
+			{% block marking %}{% endblock %}
 		</div>
 
 		<div class="seo-wrapper">
@@ -256,7 +215,7 @@
 				<label class="control-label sr-only" for="input-title">Title</label>
 				<div class="input-group">
 					<div class="input-group-addon">Title</div>
-					<input class="form-control" id="input-title" type="text" placeholder="Фундаментный блок железобетонный">
+					<input class="form-control" id="input-title" type="text"">
 				</div>
 			</div>
 
@@ -264,7 +223,7 @@
 				<label class="control-label sr-only" for="input-h1">H1</label>
 				<div class="input-group">
 					<div class="input-group-addon">H1</div>
-					<input class="form-control" id="input-h1" type="text" placeholder="Фундаментный блок железобетонный ФБС">
+					<input class="form-control" id="input-h1" type="text">
 				</div>
 			</div>
 
@@ -272,7 +231,7 @@
 				<label class="control-label sr-only" for="input-keywords">Keywords</label>
 				<div class="input-group">
 					<div class="input-group-addon">Keywords</div>
-					<input class="form-control" id="input-keywords" type="text" placeholder="Фундаментный блок">
+					<input class="form-control" id="input-keywords" type="text">
 				</div>
 			</div>
 
@@ -280,7 +239,7 @@
 				<label class="control-label sr-only" for="input-description">Descripton</label>
 				<div class="input-group">
 					<div class="input-group-addon">Descripton</div>
-					<input class="form-control" id="input-description" type="text" placeholder="ГОСТ 1357-38">
+					<input class="form-control" id="input-description" type="text">
 				</div>
 			</div>
 

@@ -512,7 +512,7 @@ $(function () {
 	 * Инициализируем плагин WYSIWYG редактора на Bootstrap.
 	 */
 	$('.js-summernote-edit').on('click', function() {
-		if ($(this).attr('id') == 'summernote-close') {
+		if ($(this).attr('id') === 'summernote-close') {
 			$(this).attr('id', 'summernote-edit');
 
 			$('#summernote').summernote('destroy');
@@ -520,10 +520,27 @@ $(function () {
 			$(this).attr('id', 'summernote-close');
 
 			$('#summernote').summernote({
-				minHeight : 210,
-				lang      : 'ru-RU',
-				focus     : true
+				minHeight   : 249,
+				lang        : 'ru-RU',
+				focus       : true,
+				placeholder : 'Описание сущности'
 			});
+		}
+	});
+
+	if ($('.js-summernote-edit').attr('id') === 'summernote-close') {
+		$('#summernote').summernote({
+			minHeight   : 249,
+			lang        : 'ru-RU',
+			placeholder : 'Описание сущности'
+		});
+	}
+
+	$('#summernote').on('summernote.keyup', function() {
+		if ( $('.note-editable').text() === '' ) {
+			$('.js-summernote-alert').fadeOut()
+		} else {
+			$('.js-summernote-alert').fadeIn();
 		}
 	});
 

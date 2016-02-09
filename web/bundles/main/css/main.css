@@ -2543,7 +2543,7 @@ div.map {
 	border-bottom: 1px solid #DDD;
 	clear: both;
 	height: 138px;
-	line-height: 1.1em;
+	line-height: 1.3em;
 	list-style: none outside none;
 	margin: 15px 10px;
 }
@@ -2562,8 +2562,12 @@ div.map {
 }
 
 .inf_content {
-	line-height: 1.1em;
 	text-align: justify;
+}
+
+.inf_content li > a {
+	display: inline-block;
+	padding-bottom: 5px;
 }
 
 div.random_list_main > div{
@@ -2588,7 +2592,8 @@ ul.informer {
 }
 
 .inf_intro {
-	font-size: 0.9em;
+	font-size: 14px;
+	overflow: hidden;
 }
 
 .inf_footer {
@@ -2600,7 +2605,7 @@ ul.informer {
 .news_img {
 	border: 1px solid #CAC6C3;
 	float: left;
-	margin-right: 5px;
+	margin: 0 10px 10px 0;
 	padding: 1px;
 	width: 70px;
 }
