@@ -132,7 +132,7 @@ class Product
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="section_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $category;
 
@@ -179,7 +179,7 @@ class Product
     /**
      * @param \DateTime $datePriceUpdated
      */
-    private function setDatePriceUpdated($datePriceUpdated)
+    public function setDatePriceUpdated($datePriceUpdated)
     {
         $this->datePriceUpdated = $datePriceUpdated;
     }

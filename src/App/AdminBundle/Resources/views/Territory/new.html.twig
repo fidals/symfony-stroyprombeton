@@ -1,0 +1,62 @@
+{% extends "AppAdminBundle:Admin:entity.html.twig" %}
+
+{% set page_title = 'Территория' %}
+{% set entity_name = 'territory' %}
+{% set entity_id = form.vars.value.id ?: null %}
+
+{% block breadcrumbs %}
+	<div class="header-links navbar-left">
+		<ol class="header-links-breadcrumbs breadcrumb">
+			<li><a href="{{ path('admin_index') }}">Dashboard</a></li>
+			<li><a href="{{ path('admin_territory_list') }}">TerritoryList</a></li>
+			<li class="active">{{ form.vars.value.name ?: 'Новая территория' }}</li>
+		</ol>
+
+		<span class="header-entity-link">
+			{% if form.vars.value.id %}
+				Ссылка на сущность: <a href="{{ path('app_main_territory', {'territoryId': form.vars.value.id }) }}" target="_blank">/rus-area-item/{{ form.vars.value.id  }}/</a>
+			{% endif %}
+		</span>
+	</div>
+{% endblock %}
+
+{% block main_properties %}
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon">Название</div>
+			{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon">ID</div>
+			{{ form_widget(form.id, {'attr': {'class': 'form-control'}}) }}
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon">TranslitName</div>
+			{{ form_widget(form.translitName, {'attr': {'class': 'form-control'}}) }}
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="checkbox">
+			Текст
+		</div>
+	</div>
+{% endblock %}
+
+{% block delete_modal %}
+	{% if form.vars.value.id %}
+		<h3 class="text-center">Вы действительно хотите удалить {{ form.vars.value.name }}?</h3>
+		<div>
+			<a href="{{ path('admin_territory_delete', {'id': form.vars.value.id }) }}">
+				<button class="modal-delete btn btn-danger js-modal-delete">Удалить</button>
+			</a>
+			<button class="modal-delete-cancel btn btn-primary js-modal-delete-cancel">Отменить</button>
+		</div>
+	{% endif %}
+{% endblock %}

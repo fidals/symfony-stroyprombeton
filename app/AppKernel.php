@@ -19,15 +19,13 @@ class AppKernel extends Kernel
 			new JMS\AopBundle\JMSAopBundle(),
 			new JMS\DiExtraBundle\JMSDiExtraBundle($this),
 			new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-			new Sonata\BlockBundle\SonataBlockBundle(),
-			new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-			new Sonata\CoreBundle\SonataCoreBundle(),
-			new Sonata\AdminBundle\SonataAdminBundle(),
 			new App\MainBundle\AppMainBundle(),
 			new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 			new Presta\SitemapBundle\PrestaSitemapBundle(),
-			new App\YandexMarketBundle\AppYandexMarketBundle()
+			new App\YandexMarketBundle\AppYandexMarketBundle(),
+            new App\AdminBundle\AppAdminBundle(),
+			new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+			new FOS\UserBundle\FOSUserBundle()
 		);
 
 		if (in_array($this->getEnvironment(), array('dev', 'test'))) {

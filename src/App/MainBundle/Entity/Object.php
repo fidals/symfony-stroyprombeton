@@ -32,7 +32,7 @@ class Object
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Territory", inversedBy="objects")
-	 * ORM\JoinColumn(name="territory_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="territory_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $territory;
 
@@ -50,6 +50,11 @@ class Object
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
 	}
 
 	/**

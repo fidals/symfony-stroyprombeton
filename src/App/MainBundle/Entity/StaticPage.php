@@ -31,12 +31,22 @@ class StaticPage
 	 */
 	private $alias;
 
+	public function __construct()
+	{
+		$this->date = new \DateTime();
+	}
+
 	/**
 	 * @return int
 	 */
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
 	}
 
 	/**

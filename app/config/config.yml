@@ -27,9 +27,6 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         cart_service: '@catalog.cart'
-    form:
-        resources:
-            - 'SonataCoreBundle:Form:datepicker.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -90,40 +87,26 @@ swiftmailer:
     #password:  %mailer_password%
     spool:     { type: memory }
     disable_delivery:  false
-sonata_admin:
-    title: Административная панель
-    title_logo: /bundles/main/images/logo.png
-    templates:
-        edit:   AppMainBundle:Admin:edit.html.twig
-        layout: AppMainBundle:Admin:category_tree_layout.html.twig
-    dashboard:
-        blocks:
-             - { position: left, type: sonata.admin.block.admin_list }
-             - { position: right, type: sonata.block.service.tablegear }
-    options:
-        use_icheck: false
-
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        # Enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
-        sonata.block.service.tablegear: ~
-        sonata.block.service.text: ~
-        sonata.block.service.rss: ~
 
 services:
     template.from.database.twig.extension.loader:
         class:        Twig_Extension_StringLoader
         tags:
              - { name: 'twig.extension' }
+    fos_user.doctrine_registry:
+       alias: doctrine
+
 twig:
     exception_controller:  AppMainBundle:StaticPage:exeption
 
 presta_sitemap:
     dumper_base_url: %base_url%
     route_annotation_listener: false
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: App\AdminBundle\Entity\User
 
 app_yandex_market:
     shop:
@@ -137,3 +120,19 @@ app_yandex_market:
         delivery_options:
             cost: 6000
             days:
+
+knp_paginator:
+    page_range: 5
+    default_options:
+        page_name: page
+        sort_field_name: sort
+        sort_direction_name: direction
+        distinct: true
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+
+ivory_ck_editor:
+    configs:
+        standard:
+            toolbar: standard

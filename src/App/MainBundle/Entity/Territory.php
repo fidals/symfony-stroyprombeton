@@ -43,6 +43,11 @@ class Territory
 		return $this->id;
 	}
 
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
 	/**
 	 * @param string $translitName
 	 */

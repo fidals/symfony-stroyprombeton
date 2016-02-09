@@ -23,15 +23,15 @@
         "jms/security-extra-bundle": "~1.5",
         "jms/di-extra-bundle": "~1.5",
         "phpoffice/phpexcel": "~1.8",
-        "sonata-project/doctrine-orm-admin-bundle": "~2.3",
         "gedmo/doctrine-extensions": "~2.4",
-        "sonata-project/core-bundle": "~2.3",
-        "sonata-project/admin-bundle": "~2.3",
-        "knplabs/knp-paginator-bundle": "~2.4",
+        "knplabs/knp-paginator-bundle": "^2.5",
         "snilius/twig-sort-by-field": "0.1.*",
         "presta/sitemap-bundle": "~1.4",
         "behat/mink-extension": "~2.1",
-        "behat/mink-goutte-driver": "~1.2"
+        "behat/mink-goutte-driver": "~1.2",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "egeloen/ckeditor-bundle": "^4.0",
+        "lstrojny/functional-php": "~1.2"
     },
     "scripts": {
         "post-root-package-install": [

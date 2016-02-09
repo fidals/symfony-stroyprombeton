@@ -1,0 +1,78 @@
+{% extends "AppAdminBundle:Admin:list.html.twig" %}
+
+{% block actions %}
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Действия <b class="caret"></b></a>
+	<ul class="dropdown-menu" role="menu">
+		<li>
+			<a href="{{ path('admin_category_edit') }}">
+				<i class="fa fa-plus-circle"></i>
+				Добавить новую категорию
+			</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block table %}
+	{% if page|length %}
+		<th class="">
+			<input id="checkbox-switcher" type="checkbox">
+		</th>
+		<th class="table-title text-center">
+			{{ knp_pagination_sortable(page, 'Id', 'p.id') }}
+		</th>
+		<th class="table-title">
+			{{ knp_pagination_sortable(page, 'Название', 'p.name') }}
+		</th>
+		<th class="table-title">
+			Родитель
+		</th>
+		<th class="table-title text-center">
+			{{ knp_pagination_sortable(page, 'Марка', 'p.mark') }}
+		</th>
+		<th class="table-title text-center">
+			{{ knp_pagination_sortable(page, 'Активен', 'p.isActive') }}
+		</th>
+	{% else %}
+		<h2>Ничего не найдено</h2>
+	{% endif %}
+{% endblock %}
+
+{% block list %}
+	{% if page|length %}
+		{% for category in page %}
+			<tr>
+				<td class="table-cell">
+					<input type="checkbox" value="{{ category.id }}">
+				</td>
+				<td class="table-cell">{{ category.id }}</td>
+				<td class="table-cell">
+					<a class="item-link" href="{{ path('admin_category_edit', {'id': category.id}) }}">
+						{{ category.name }}
+					</a>
+				</td>
+				<td class="table-cell">
+					{% if category.parent %}
+						<a class="item-link" href="{{ path('admin_category_edit', {'id': category.parent.id}) }}">
+							{{ category.parent.name }}
+						</a>
+					{% endif %}
+				</td>
+				<td class="table-cell">
+					<a class="item-link" href="#">{{ category.mark }}</a>
+				</td>
+				<td class="table-cell item-label text-center">
+					{% if category.isActive %}
+						<span class="label label-success">Да</span>
+					{% else %}
+						<span class="label label-danger">Нет</span>
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
+
+
+{% block filter %}
+	{{ include('AppAdminBundle:Category:filter.html.twig') }}
+{% endblock %}

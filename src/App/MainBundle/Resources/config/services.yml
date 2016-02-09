@@ -55,12 +55,6 @@ services:
         tags:
             - { name: yandex_market.yml.listener }
 
-    sonata.block.service.tablegear:
-        class: App\MainBundle\Block\TableGearBlockService
-        arguments: [ "sonata.block.service.tablegear", @templating ]
-        tags:
-            - { name: sonata.block }
-
     catalog.sitemap.category:
         class: App\MainBundle\Listener\CategorySitemapListener
         arguments: ['@service_container']

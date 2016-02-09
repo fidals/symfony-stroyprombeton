@@ -1,0 +1,56 @@
+{% extends "AppAdminBundle:Admin:new.layout.html.twig" %}
+
+{% block title %}Админка | Список{% endblock %}
+
+{% block content %}
+	<section class="content-header">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						{% block actions %} {% endblock %}
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</section>
+
+	<section class="content">
+		<div class="row">
+			<div class="col-lg-10">
+				<div class="box box-primary paddingless">
+					<div class="table-responsive">
+						<form>
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										{% block table %} {% endblock %}
+									</tr>
+								</thead>
+
+								<tbody>
+									{% block list %}{% endblock %}
+								</tbody>
+							</table>
+
+							<div class="text-center">
+								<ul class="pagination">
+									{{ knp_pagination_render(page) }}
+								</ul>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="table-filter col-lg-2">
+				<div class="box box-primary">
+					<h4 class="box-title">Фильтры</h4>
+					<div class="box-body">
+						{% block filter %} {% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

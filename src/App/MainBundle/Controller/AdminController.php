@@ -18,41 +18,6 @@ class AdminController extends Controller
 	public $dProds = 0;
 	public $dCats = 0;
 
-	public function newIndexAction()
-	{
-		return $this->render('AppMainBundle:Admin:new.layout.html.twig');
-	}
-
-	public function listAction()
-	{
-		return $this->render('AppMainBundle:Admin:list.html.twig');
-	}
-
-	public function productAction()
-	{
-		return $this->render('AppMainBundle:Admin:product.html.twig');
-	}
-
-	public function categoryAction()
-	{
-		return $this->render('AppMainBundle:Admin:category.html.twig');
-	}
-
-	public function staticPageAction()
-	{
-		return $this->render('AppMainBundle:Admin:static_page.html.twig');
-	}
-
-	// TODO: Переименовать после сноса старой функции
-	public function newEditProductsAction()
-	{
-		$tableGear = new TableGear($this->container);
-
-		return $this->render('AppMainBundle:Admin:edit.products.html.twig', array(
-			'tablegear_content' => $tableGear->getContent()
-		));
-	}
-
 	public function indexAction()
 	{
 		$catRp = $this->getDoctrine()->getRepository('AppMainBundle:Category');
@@ -479,7 +444,6 @@ class AdminController extends Controller
 		$tableGear = new TableGear($this->container);
 		return $this->render('AppMainBundle:Admin:edit_products.html.twig', array(
 			'tablegear_content' => $tableGear->getContent(),
-			'admin_pool'        => $this->container->get('sonata.admin.pool')
 		));
 	}
 }
