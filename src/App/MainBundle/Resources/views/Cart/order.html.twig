@@ -22,56 +22,62 @@
 
 			ractiveOrder.on('updateCount', function (event) {
 				var product = this.get(event.keypath);
+
 				if (product.count < 1) {
 					product.count = 1;
 					this.set(event.keypath, product);
 				}
+
 				Cart.update(product.id, product.count);
 			});
 
 			/**
 			 * Логика работы с файлами в форме:
 			 */
-			var $btnSend = $('#btn-order-send');
+			var $btnSend = $('#btn-order-send'),
+					$fileCountNotifyTag = $('#order-file-notify'),
+					$fileCountErrorTag = $('.js-error-count'),
+					$fileSizeErrorTag = $('.js-error-large-file'),
+					maxFileSize = 25550000; // ~25 Mb
 
 			$('#order_files').change(function() {
 				var fileCount = parseInt($(this).get(0).files.length);
 
 				if ( fileCount > 0 ) {
-					$('#order-file-notify').html('Число файлов: ' + fileCount);
+					$fileCountNotifyTag.html('Число файлов: ' + fileCount);
 				} else {
-					$('#order-file-notify').html('Файлы не выбраны');
+					$fileCountNotifyTag.html('Файлы не выбраны');
 				}
 
 				if ( fileCount > 10 ) {
-					$('.js-error-count').css('color', '#C90000');
+					$fileCountErrorTag.css('color', '#C90000');
 					$btnSend.attr('disabled', true);
 				} else {
-					$('.js-error-count').css('color', '#999');
+					$fileCountErrorTag.css('color', '#999');
 					$btnSend.attr('disabled', false);
 				}
 
 				if ( checkFilesSize() === false ) {
-					$('.js-error-large-file').removeClass('hide').css('color', '#C90000');
+					$fileSizeErrorTag.removeClass('hide').css('color', '#C90000');
 					$btnSend.attr('disabled', true);
 				} else {
-					$('.js-error-large-file').addClass('hide');
+					$fileSizeErrorTag.addClass('hide');
 					$btnSend.attr('disabled', false);
 				}
 			});
 
-			$btnSend.on('click', function(event) {
-				localStorage.setItem( 'userEmailForOrder', $('#order_email').val() );
-				localStorage.setItem( 'userPhoneForOrder', $('#order_phone').val() );
+			$btnSend.on('click', function() {
+				localStorage.setItem('userEmailForOrder', $('#order_email').val());
+				localStorage.setItem('userPhoneForOrder', $('#order_phone').val());
 			});
 
 			function checkFilesSize() {
 				var $input = document.getElementById("order_files");
 
 				// сначала - проверка на поддержку в браузерах
-				if ( $input.files && $input.files.length > 0 ) {
+				if ($input.files && $input.files.length > 0) {
 					for (var i = 0, len = $input.files.length; i < len; i++) {
-						if ( $input.files[i].size > 25550000 ) { // ~25 Mb;
+						if ($input.files[i].size > maxFileSize) {
 							return false;
 						}
 					}
@@ -90,7 +96,8 @@
 			{{#if products.length == 0}}
 				<h2 class="text-center">Нет выбранных позиций</h2>
 				<p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>,
-				<br>мы изготовим его <a href="/page/izgotovlenie-gbi-po-chertezham/">по вашим чертежам</a>.  Отправьте их через форму ниже или на почту <a href="mailto:info@stroyprombeton.ru">info@stroyprombeton.ru</a>.</p>
+				<br>мы изготовим его <a href="/order-drawing/">по вашим чертежам</a>. Отправьте их
+				через форму ниже или на почту <a href="mailto:{{ stb_email }}">{{ stb_email }}</a>.</p>
 			{{else}}
 				<h2>Ваш заказ</h2>
 				<table class="table table-bordered table-striped">

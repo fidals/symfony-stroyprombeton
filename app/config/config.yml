@@ -26,7 +26,12 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
-        cart_service: '@catalog.cart'
+        cart_service:      '@catalog.cart'
+        stb_email:         %email_info%
+        stb_phone_01:      %stb_phone_01%
+        stb_phone_link_01: %stb_phone_link_01%
+        stb_phone_02:      %stb_phone_02%
+        stb_phone_link_02: %stb_phone_link_02%
 
 # Assetic Configuration
 assetic:

@@ -216,7 +216,7 @@ div.footer {
 	position: absolute;
 	top: 80%;
 	-webkit-transform: rotate(-3deg);
-	transform: rotate(-3deg);
+			transform: rotate(-3deg);
 	width: 50%;
 	z-index: -1;
 }
@@ -225,7 +225,7 @@ div.footer {
 	left: auto;
 	right: 0;
 	-webkit-transform: rotate(3deg);
-	transform: rotate(3deg);
+			transform: rotate(3deg);
 }
 
 .header-logo-text {
@@ -568,28 +568,28 @@ div.cart-actions ul li:last-child img {
 	-webkit-transition: -webkit-transform 0.3s ease-in-out;
 	transition: 		transform 0.3s ease-in-out;
 	-webkit-transform: translate(0, -50%);
-	-ms-transform: translate(0, -50%);
-	transform: translate(0, -50%);
+		-ms-transform: translate(0, -50%);
+			transform: translate(0, -50%);
 	top: 50%;
 	width: 11px;
 }
 
 .akkordion-title.active .fa {
 	-webkit-transform: rotate(-90deg) translate(60%, -25%);
-	-ms-transform: rotate(-90deg) translate(60%, -25%);
-	transform: rotate(-90deg) translate(60%, -25%);
+		-ms-transform: rotate(-90deg) translate(60%, -25%);
+			transform: rotate(-90deg) translate(60%, -25%);
 }
 
 .akkordion-last-paragraph .fa {
 	position: relative;
 	-webkit-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
 }
 
 .akkordion-last-paragraph:hover .fa {
 	-webkit-transform: translate(3px, 0);
-	-ms-transform: translate(3px, 0);
-	transform: translate(3px, 0);
+		-ms-transform: translate(3px, 0);
+			transform: translate(3px, 0);
 }
 
 .akkordion-link-to-category {
@@ -2375,7 +2375,7 @@ div.product {
 }
 
 .product-photo img {
-	border-radius: 5px;
+	border-radius: 3px;
 }
 
 .product-info {
@@ -2398,10 +2398,10 @@ div.product-info div.tab-pane {
 }
 
 div.product-price-wrapper {
-	width: 300px;
+	clear: right;
 	float: right;
 	margin-top: 15px;
-	clear: right;
+	width: 300px;
 }
 
 div.product-price {
@@ -3293,6 +3293,7 @@ div.order-report {
 #shop-order-form textarea,
 #shop-order-form input[type='text'],
 #order-price-form input[type='text'] {
+	resize: vertical;
 	width: 100%;
 }
 
@@ -3310,11 +3311,11 @@ div.form_comment {
 	padding-right: 0;
 }
 
-.shop-order-table, .order-price-form td{
+.shop-order-table, .order-price-form td {
 	padding-right: 15px;
 }
 
-.shop-order-table td:nth-child(1){
+.shop-order-table td:nth-child(1) {
 	width: 230px;
 	vertical-align: top !important;
 	padding-top: 5px;
@@ -3362,12 +3363,12 @@ div.form_comment {
 	border: 1px solid #999;
 	border-radius: 10px;
 	-webkit-transition: opacity 1s ease-in-out;
-	transition: opacity 1s ease-in-out;
+			transition: opacity 1s ease-in-out;
 }
 
 [id*='darktooltip-shk-submit'] {
 	-webkit-transition: none !important;
-	transition: none !important;
+			transition: none !important;
 }
 
 .dark-tooltip.light > div:first-child {
@@ -3429,15 +3430,12 @@ div.gbi-visual-title ul li:first-child {
 div.gbi-visual-title ul li a {
 	display: block;
 	width: 100px;
-
-	padding: 5px 10px 5px 10px;
+	padding: 5px 10px;
 	background-color: #e1e1e1;
 	border-left: 1px solid #999;
 	border-top: 1px solid #999;
 	border-right: 1px solid #999;
-
 	text-align: center;
-
 	border-radius: 5px 5px 0 0;
 }
 
@@ -3452,6 +3450,18 @@ div.gbi-visual-title ul li a:hover {
 	color: #c90000 !important;
 	border-color: #c90000 !important;
 	text-decoration: none !important;
+}
+
+.drawing-order-form textarea,
+.drawing-order-form input[type='text'],
+.drawing-order-form input[type='email'] {
+	resize: vertical;
+	width: 100%;
+}
+
+.drawing-order-form .btn-order-send {
+	top: 0;
+	right: -15px;
 }
 
 /* -------------------------------- */

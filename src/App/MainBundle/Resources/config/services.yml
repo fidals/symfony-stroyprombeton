@@ -1,4 +1,8 @@
 services:
+    mailer.manager:
+        class: App\MainBundle\Extension\MailerService
+        arguments: ['@filesystem', '@mailer', '@swiftmailer.transport.real', %email_order%]
+
     catalog.sitemap.object:
         class: App\MainBundle\Listener\ObjectSitemapListener
         arguments: ['@service_container']
@@ -27,29 +31,35 @@ services:
     catalog.search:
         class: App\MainBundle\Extension\Search
         arguments: ['@service_container']
+
     catalog.cart:
         class: App\MainBundle\Extension\CartService
         arguments: ['@service_container']
+
     app.twig_extension:
         class: Snilius\Twig\SortByFieldExtension
         tags:
             - { name: twig.extension }
+
     app.tree_extension:
         class: App\MainBundle\Extension\CategoryTreeExtension
         arguments:
             entityManager: '@doctrine.orm.entity_manager'
         tags:
             - { name: twig.extension }
+
     catalog.yandex_market_category_listener:
         class: App\MainBundle\Listener\YmlCategoryListener
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: yandex_market.yml.listener }
+
     catalog.yandex_market_product_listener:
         class: App\MainBundle\Listener\YmlProductListener
         arguments: ['@service_container']
         tags:
             - { name: yandex_market.yml.listener }
+
     catalog.yandex_market_currency_listener:
         class: App\MainBundle\Listener\YmlCurrencyListener
         tags:

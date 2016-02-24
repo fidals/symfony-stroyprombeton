@@ -20,7 +20,7 @@ app_catalog_order:
     defaults: { _controller: AppMainBundle:Cart:order }
 
 app_catalog_order_thanks:
-    path: /order_thanks/
+    path: /order-thanks/
     defaults: { _controller: AppMainBundle:Cart:orderThanks }
 
 app_main:
@@ -34,3 +34,11 @@ app_admin:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+app_order_drawing:
+    path: /order-drawing/
+    defaults: { _controller: AppMainBundle:Drawing:order }
+
+app_order_drawing_thanks:
+    path: /order-drawing-thanks/
+    defaults: { _controller: AppMainBundle:Drawing:thanks }

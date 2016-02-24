@@ -1,5 +1,7 @@
 $(function () {
-	$("#order_phone,#price_list_booking_phone").mask("+9(999) 999-9999", {placeholder: "+_(___) ___-____"});
+	$("#order_phone, #price_list_booking_phone, #order_drawing_phone").mask("+9(999) 999-9999", {
+		placeholder: "+_(___) ___-____"
+	});
 
 	// проверим загружен ли плагин
 	if($().kladr) {

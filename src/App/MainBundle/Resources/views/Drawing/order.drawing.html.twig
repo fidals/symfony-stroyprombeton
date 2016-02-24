@@ -1,0 +1,87 @@
+{% extends "AppMainBundle:Default:layout.html.twig" %}
+
+{% block title %}
+	Оформление заказа на изготовление по индивидуальным чертежам
+{% endblock %}
+
+{% block content %}
+	{% autoescape false %}
+		<h1>{{ article_content.getTitle() }}</h1>
+		{{ include(template_from_string(article_content.getText())) }}
+	{% endautoescape %}
+
+	<br>
+	<br>
+
+	<p>Для заказа изделий по индивидуальным чертежам воспользуйтесь формой ниже:</p>
+	<form action="{{ path('app_order_drawing') }}" method="post" {{ form_enctype(form) }}
+				class="drawing-order-form" id="drawing-order-form">
+		{{ form_errors(form) }}
+		<table class="shop-order-table">
+			<tr>
+				<td>Ваше имя:<sup>*</sup></td>
+				<td>
+					{{ form_widget(form.person) }}
+					<div class="form-error">
+						{{ form_errors(form.person) }}
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Электронный адрес (Е-mail):<sup>*</sup></td>
+				<td>
+					{{ form_widget(form.email) }}
+					<div class="form-error">
+						{{ form_errors(form.email) }}
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Контактный телефон:<sup>*</sup></td>
+				<td>
+					{{ form_widget(form.phone) }}
+					<div class="form-error">
+						{{ form_errors(form.phone) }}
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Прикрепить файл:</td>
+				<td class="td-submit">
+					<div>
+						{{ form_widget(form.files) }}
+						<span id="order-file-notify">Файлы не выбраны</span>
+					</div>
+					<div class="form-error">
+						{{ form_errors(form.files) }}
+					</div>
+					<p class="muted">Максимальный размер файла - 25 Мб</p>
+					<p class="muted js-error-count">Вы можете прикрепить не более 10 вложений одновременно</p>
+					<p class="muted js-error-large-file hide">Один из файлов превышает допустимый размер в 25 Мб</p>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Комментарий к заявке:</td>
+				<td>{{ form_widget(form.comment) }}</td>
+			</tr>
+
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" name="submit" class="button btn btn-red btn-order-send" id="btn-drawing-submit"
+									 value="Отправить заявку">
+				</td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}
+
+{% block footerjs %}
+	{{ parent() }}
+
+	<script src="{{ asset('bundles/main/js/orderDrawing.js') }}"></script>
+{% endblock %}
