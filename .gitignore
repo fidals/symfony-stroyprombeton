@@ -20,6 +20,8 @@ web/*.xls
 web/bundles/*
 !web/bundles/main/
 !web/bundles/main/*
+!web/bundles/admin/
+!web/bundles/admin/*
 !web/bundles/catalog/
 !web/bundles/catalog/*
 behat.yml
