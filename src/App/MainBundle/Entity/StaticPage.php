@@ -31,6 +31,13 @@ class StaticPage
 	 */
 	private $alias;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+     */
+    private $isTextPublished = true;
+
 	public function __construct()
 	{
 		$this->date = new \DateTime();
@@ -92,4 +99,20 @@ class StaticPage
 
 		return $parameters;
 	}
+
+    /**
+     * @return boolean
+     */
+    public function isIsTextPublished()
+    {
+        return $this->isTextPublished;
+    }
+
+    /**
+     * @param boolean $isTextPublished
+     */
+    public function setIsTextPublished($isTextPublished)
+    {
+        $this->isTextPublished = $isTextPublished;
+    }
 }

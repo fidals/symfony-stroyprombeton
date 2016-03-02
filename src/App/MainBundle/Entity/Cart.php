@@ -11,6 +11,13 @@ class Cart
 	 */
 	private $products = array();
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+     */
+    private $isTextPublished = true;
+
 	/**
 	 * @param $id
 	 * @param $count
@@ -62,4 +69,20 @@ class Cart
 	{
 		return (int) array_sum($this->getProducts());
 	}
+
+    /**
+     * @return boolean
+     */
+    public function isIsTextPublished()
+    {
+        return $this->isTextPublished;
+    }
+
+    /**
+     * @param boolean $isTextPublished
+     */
+    public function setIsTextPublished($isTextPublished)
+    {
+        $this->isTextPublished = $isTextPublished;
+    }
 }

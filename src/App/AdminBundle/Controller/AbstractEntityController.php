@@ -105,7 +105,9 @@ abstract class AbstractEntityController extends Controller
         if ($form->isValid()) {
             $this->saveEntity($entity);
 
-            return $this->redirectToRoute('admin_'.static::ENTITY_NAME.'_list');
+            return $this->redirectToRoute('admin_'.static::ENTITY_NAME.'_edit', array(
+                'id' => $entity->getId()
+            ));
         }
 
         $templateData = array('form' => $form->createView());

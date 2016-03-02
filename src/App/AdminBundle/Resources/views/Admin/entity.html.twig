@@ -4,13 +4,7 @@
 
 {% block title %}Админка | {{ page_title }}{% endblock %}
 
-{% block headerjs %}
-	{{ parent() }}
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
-{% endblock %}
-
-{% block breadcrumbs %} {% endblock %}
+{% block breadcrumbs %}{% endblock %}
 
 {% block content %}
 	<h1 class="entity-title text-center">{{ page_title }}</h1>
@@ -52,4 +46,10 @@
 		</div>
 	</div>
 	<div class="modal-overlay"></div>
+{% endblock %}
+
+{% block footerjs %}
+    {{ parent() }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
 {% endblock %}

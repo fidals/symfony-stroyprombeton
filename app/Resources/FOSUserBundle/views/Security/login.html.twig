@@ -4,7 +4,8 @@
 
 {% block fos_user_content %}
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4"><form action="{{ path("fos_user_security_check") }}" method="post"  style="display: block;">
+		<div class="col-md-4 col-md-offset-4">
+            <form action="{{ path("fos_user_security_check") }}" method="post"  style="display: block;">
 				{% if error %}
 					<div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 				{% endif %}

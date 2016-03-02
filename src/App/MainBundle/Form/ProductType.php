@@ -28,7 +28,6 @@ class ProductType extends AbstractType
 			->add('comments', 'textarea', array('required' => false));
 	}
 
-
 	public function getName()
 	{
 		return 'product';

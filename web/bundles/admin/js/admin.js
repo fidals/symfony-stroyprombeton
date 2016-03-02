@@ -75,7 +75,8 @@ $(function () {
 	var $linkToGo   = $('#link-to-go'),
 		$treeTarget = $('#js-tree'),
 		$sideBar    = $('.sidebar');
-		$fileUpload = $('.js-file-input');
+		$fileUpload = $('.js-file-input'),
+        $sidebarToggle = $('.js-sidebar-toggle');
 
 	$treeTarget
 		.jstree({
@@ -180,7 +181,6 @@ $(function () {
 	 */
 	$fileUpload.bootstrapFileInput();
 
-
 	/**
 	* Инициализируем плагин полосы прокрутки.
 	*/
@@ -242,6 +242,10 @@ $(function () {
 			});
 		}
 	};
+
+    $sidebarToggle.on('click', function() {
+        $('body').toggleClass('sidebar-hidden');
+    });
 
 	delete_confirmation_modal.init();
 });

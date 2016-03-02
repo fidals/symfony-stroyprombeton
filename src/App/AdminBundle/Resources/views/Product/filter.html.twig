@@ -34,11 +34,11 @@
 				<option value="">Все</option>
 				{% for category in parents|sortbyfield('name') %}
 					{% if filters.category is defined and category.id == filters.category %}
-					<option value="{{ category.id }}" selected>
+					    <option value="{{ category.id }}" selected>
 					{% else %}
 						<option value="{{ category.id }}">
 					{% endif %}
-						{{ category.name|slice(0, 100) }}
+						{{ category.name }}
 					</option>
 				{% endfor %}
 			</select>

@@ -32,11 +32,12 @@ class CategoryRepository extends ClosureTreeRepository
 		return $categories;
 	}
 
-	/**
-	 * Рекурсивно собирает и возвращает категории для дерева категорий в Админке:
-	 *
-	 * @param $array - массив всех категорий со всем набором свойств;
-	 */
+    /**
+     * Рекурсивно собирает и возвращает категории для дерева категорий в Админке:
+     *
+     * @param $array - массив всех категорий со всем набором свойств;
+     * @return array
+     */
 	public function buildCategoryTree($array)
 	{
 		$result = array();

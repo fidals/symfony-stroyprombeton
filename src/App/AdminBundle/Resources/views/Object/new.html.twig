@@ -20,7 +20,6 @@
 	</div>
 {% endblock %}
 
-
 {% block main_properties %}
 	<div class="form-group">
 		<div class="input-group">
@@ -42,21 +41,29 @@
 			{{ form_widget(form.alias, {'attr': {'class': 'form-control'}}) }}
 		</div>
 	</div>
+
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                {{ form_widget(form.isTextPublished) }} Текст опубликован
+            </label>
+        </div>
+    </div>
 {% endblock %}
 
 {% block additional_properties %}
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon">Территория</div>
-					{{ form_widget(form.territory, {'attr': {'class': 'form-control'}}) }}
-				</div>
-			</div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">Территория</div>
+            {{ form_widget(form.territory, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
 
-			<div class="btn-wrapper">
-				<a href="{{ path('admin_territory_edit') }}">
-					<button class="btn btn-primary" type="button">Добавить новый</button>
-				</a>
-			</div>
+    <div class="btn-wrapper">
+        <a href="{{ path('admin_territory_edit') }}">
+            <button class="btn btn-primary" type="button">Добавить новый</button>
+        </a>
+    </div>
 {% endblock %}
 
 {% block delete_modal %}

@@ -53,7 +53,10 @@ class ProductType extends AbstractType
             ->add('mark', TextType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'AppMainBundle:Category',
-                'choice_label' => 'name',
+                'choice_label' => function ($category) {
+                    $categoryName = $category->getH1();
+                    return (strlen($categoryName) > 25) ? mb_strimwidth($categoryName, 0, 28, "...") : $categoryName;
+                },
             ))
             ->add('title', TextType::class, array('required' => false))
             ->add('isActive', CheckboxType::class, array('required' => false))

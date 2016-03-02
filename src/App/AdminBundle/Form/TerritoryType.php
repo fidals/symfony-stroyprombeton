@@ -19,6 +19,7 @@ class TerritoryType extends AbstractType
             ->add('name', TextType::class)
             ->add('id', NumberType::class, array('read_only' => true))
             ->add('translitName', TextType::class, array('required' => false))
+            ->add('isTextPublished', CheckboxType::class, array('required' => false))
             ->add('text', CKEditorType::class, array('config_name' => 'standard'))
             ->add('title', TextType::class, array('required' => false))
             ->add('isActive', CheckboxType::class, array('required' => false))

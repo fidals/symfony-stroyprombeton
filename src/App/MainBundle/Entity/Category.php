@@ -126,7 +126,6 @@ class Category
 		$this->id = $id;
 	}
 
-
 	public function setProducts($products)
 	{
 		$this->products = $products;

@@ -25,11 +25,11 @@
 				<option value="">Все</option>
 				{% for territory in parents|sortbyfield('name') %}
 					{% if filters.territory is defined and territory.id == filters.territory %}
-					<option value="{{ territory.id }}" selected>
+					    <option value="{{ territory.id }}" selected>
 					{% else %}
 						<option value="{{ territory.id }}">
 					{% endif %}
-					{{ territory.name|slice(0, 100) }}
+					    {{ territory.name }}
 					</option>
 				{% endfor %}
 			</select>

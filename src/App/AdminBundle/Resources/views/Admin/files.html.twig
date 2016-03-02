@@ -9,14 +9,14 @@
 				{% if images_count < 3 %}
 					{% set images_count = images_count + 1 %}
 					<div class="entity-image">
-						<i class="fa fa-times" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
+						<i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
 						<a href="{{ file.path }}" data-toggle="lightbox" data-gallery="productimages">
-							<img src="{{ file.path }}" alt="">
+							<img class="img-responsive" src="{{ file.path }}">
 						</a>
 					</div>
 				{% else %}
 					<div class="entity-image-name">
-						<i class="fa fa-times" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
+						<i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
 						<a href="{{ file.path }}" data-toggle="lightbox" data-gallery="productimages">
 							{{ file.info.getFilename()|slice(0, 20) }}
 						</a>
@@ -33,7 +33,7 @@
 					<a href="{{ file.path }}">
 						{{ file.info.getFilename()|slice(0, 20) }}
 					</a>
-					<i class="fa fa-times" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
+					<i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
 				</div>
 			{% endif %}
 		{% endfor %}
