@@ -5,7 +5,7 @@ namespace App\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\CatalogBundle\Entity\Repository\CategoryRepository;
+use App\MainBundle\Entity\Repository\CategoryRepository;
 
 class AdminTreeController extends Controller
 {
@@ -14,7 +14,7 @@ class AdminTreeController extends Controller
 	 */
 	public function buildCategoryTreeAction(Request $request)
 	{
-		$catRp          = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$catRp          = $this->getDoctrine()->getRepository('AppMainBundle:Category');
 		$catHierarchy   = $catRp->childrenHierarchy();
 		$categoriesTree = $catRp->buildCategoryTree($catHierarchy);
 
@@ -27,7 +27,7 @@ class AdminTreeController extends Controller
 	public function getProductsByCategoryIdAction(Request $request)
 	{
 		$categoryId = $request->get('id');
-		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$catRp = $this->getDoctrine()->getRepository('AppMainBundle:Category');
 
 		$category = $catRp->find($categoryId);
 		$products = array();

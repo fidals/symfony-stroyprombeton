@@ -1,0 +1,40 @@
+{% extends "AppMainBundle:Admin:entity.html.twig" %}
+
+{# Variables #}
+{% set page_title = 'Статья' %}
+
+{% block chars_secondary %}
+	<h4 class="entity-form-title">Дополнительные характеристики</h4>
+
+	<div class="form-group">
+		<label class="control-label sr-only" for="input-price">Цена</label>
+		<div class="input-group">
+			<div class="input-group-addon">Дата</div>
+			<input class="form-control" id="input-date" type="text">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label sr-only" for="input-price-date">Дата цены</label>
+		<div class="input-group">
+			<div class="input-group-addon">Алиас</div>
+			<input class="form-control" id="input-alias" type="text">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label sr-only" for="select-object">Родитель</label>
+		<div class="input-group">
+			<div class="input-group-addon">Субъект РФ</div>
+			<select class="form-control" id="select-object">
+				<option value="" disabled selected style="display: none;">Выберите субъект</option>
+				<option>Санкт-Петербург</option>
+				<option>Ленинградская область</option>
+				<option>Красноярский край</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="btn-wrapper">
+		<button class="btn btn-primary" type="button">Добавить новый</button>
+	</div>
+{% endblock %}

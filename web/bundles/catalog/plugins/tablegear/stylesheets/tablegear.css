@@ -1,24 +1,12 @@
-
-body {
-    margin: 0 auto;
-    /*padding: 0 20px 20px 20px;*/
-    font-family: Tahoma, Helvetica, Arial, sans-serif;
-    /*background: #444;*/
-}
-
 fieldset {
     border: none;
     padding: 0;
 }
 
-form {
-    padding: 1em;
-}
-
 table {
     font-size: 12px;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #FFF;
     padding: 1em;
     border-spacing: 2px;
     border-collapse: collapse;
@@ -134,13 +122,6 @@ form.newRow td.edit,
 form.newRow th.delete,
 form.newRow td.delete {
     display: none;
-}
-
-.pagination {
-    margin: 1em 0;
-    color: #888888;
-    width: 350px;
-    margin: 0 auto;
 }
 
 .pagination a {

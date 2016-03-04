@@ -1,9 +1,9 @@
 <?php
 namespace App\MainBundle\Command;
 
-use App\CatalogBundle\Command\SitemapCommand;
-use App\CatalogBundle\Entity\Category;
-use App\CatalogBundle\Entity\Product;
+use App\MainBundle\Command\SitemapCommand;
+use App\MainBundle\Entity\Category;
+use App\MainBundle\Entity\Product;
 use App\MainBundle\Entity\Territory;
 use App\MainBundle\Entity\Object;
 use App\MainBundle\Entity\Post;
@@ -90,9 +90,9 @@ class MigrateCommand extends ContainerAwareCommand
 	 * @var array
 	 */
 	public static $truncateEntities = array(
-		'AppCatalogBundle:Category',
-		'AppCatalogBundle:CategoryClosure',
-		'AppCatalogBundle:Product',
+		'AppMainBundle:Category',
+		'AppMainBundle:CategoryClosure',
+		'AppMainBundle:Product',
 		'AppMainBundle:Post',
 		'AppMainBundle:StaticPage',
 		'AppMainBundle:Territory',
@@ -215,7 +215,7 @@ class MigrateCommand extends ContainerAwareCommand
 
 	private function migrateProducts()
 	{
-		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:Category');
 		$em = $this->getContainer()->get('doctrine')->getManager();
 		$prodQuery = 'SELECT * FROM ' . self::MODX_SITE_CONTENT . ' as a WHERE a.isfolder = 0 AND a.template = 7';
 		$prods = $this->pdo->query($prodQuery)->fetchAll(\PDO::FETCH_ASSOC);
@@ -411,14 +411,14 @@ class MigrateCommand extends ContainerAwareCommand
 		}
 
 		// Ишем среди категорий
-		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Category');
+		$catRp = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:Category');
 		$category = $catRp->find($entityId);
 		if(!empty($category)) {
 			return $this->getPathExpression('app_catalog_category', array('id' => $entityId));
 		}
 
 		// Ищем среди продуктов
-		$prodRp = $this->getContainer()->get('doctrine')->getRepository('AppCatalogBundle:Product');
+		$prodRp = $this->getContainer()->get('doctrine')->getRepository('AppMainBundle:Product');
 		$product = $prodRp->find($entityId);
 		if(!empty($product)) {
 			return $this->getPathExpression('app_catalog_product', array('id' => $entityId));

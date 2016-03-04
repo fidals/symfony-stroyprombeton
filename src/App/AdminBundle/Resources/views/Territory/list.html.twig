@@ -1,0 +1,47 @@
+{% extends "AppAdminBundle:Admin:list.html.twig" %}
+
+{% block table %}
+	<th class="">
+		<input id="checkbox-switcher" type="checkbox">
+	</th>
+	<th class="table-title text-center">
+		{{ knp_pagination_sortable(page, 'Id', 'p.id') }}
+	</th>
+	<th class="table-title">
+		{{ knp_pagination_sortable(page, 'Название', 'p.name') }}
+	</th>
+	<th class="table-title">
+		{{ knp_pagination_sortable(page, 'Транслит', 'p.translitName') }}
+	</th>
+	<th class="table-title text-center">
+		{{ knp_pagination_sortable(page, 'Активно', 'p.isActive') }}
+	</th>
+{% endblock %}
+
+{% block list %}
+	{% for territory in page %}
+		<tr>
+			<td class="table-cell">
+				<input type="checkbox" value="{{ territory.id }}">
+			</td>
+			<td class="table-cell">{{ territory.id }}</td>
+			<td class="table-cell">
+				<a href="{{ path('admin_territory_edit', {'id': territory.id}) }}">
+					{{ territory.name }}
+				</a>
+			</td>
+			<td class="table-cell">{{ territory.translitName }}</td>
+			<td class="table-cell item-label text-center">
+				{% if territory.isActive %}
+					<span class="label label-success">Да</span>
+				{% else %}
+					<span class="label label-danger">Нет</span>
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+{% endblock %}
+
+{% block filter %}
+	{{ include('AppAdminBundle:Territory:filter.html.twig') }}
+{% endblock %}

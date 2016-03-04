@@ -4,7 +4,7 @@ namespace App\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use App\CatalogBundle\Command\SitemapCommand;
+use App\MainBundle\Command\SitemapCommand;
 
 class StaticPageController extends Controller
 {
@@ -38,7 +38,7 @@ class StaticPageController extends Controller
 	 */
 	public function showIndexAction()
 	{
-		$catRp = $this->getDoctrine()->getRepository('AppCatalogBundle:Category');
+		$catRp = $this->getDoctrine()->getRepository('AppMainBundle:Category');
 
 		$mainCategoryIds = array(12, 15, 473, 180, 12563, 176, 402, 44, 59);
 		$isNewMainCategoryIds = array(473, 12563);
@@ -55,7 +55,7 @@ class StaticPageController extends Controller
 			$mainCategoriesSorted[] = $mainCategoriesById[$mainCategoryId];
 		}
 
-		$productsWithPictures = $this->getDoctrine()->getRepository('AppCatalogBundle:Product')->getRandomProductsHasPhoto(10);
+		$productsWithPictures = $this->getDoctrine()->getRepository('AppMainBundle:Product')->getRandomProductsHasPhoto(10);
 
 		foreach($productsWithPictures as &$product) {
 			$path = $catRp->getPath($product->getCategory());

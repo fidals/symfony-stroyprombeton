@@ -1,0 +1,11 @@
+<div class="btn-wrapper text-center">
+	{% if form.vars.value.id %}
+		{{ form_widget(form.delete, {'label': 'Удалить', 'attr': {'class': 'btn btn-action btn-danger js-confirm-delete-modal'}}) }}
+	{% else %}
+		{{ form_widget(form.delete, {'label': 'Удалить', 'attr': {'disabled': 'disabled', 'class': 'btn btn-action btn-danger js-confirm-delete-modal'}}) }}
+	{% endif %}
+	<a href="{{ path('admin_product_list') }}">
+		<button class="btn btn-action btn-primary" type="button"><i class="fa fa-list"></i> Перейти к списку</button>
+	</a>
+	{{ form_widget(form.save, {'label': 'Сохранить', 'attr': {'class': 'btn btn-action btn-success'}}) }}
+</div>

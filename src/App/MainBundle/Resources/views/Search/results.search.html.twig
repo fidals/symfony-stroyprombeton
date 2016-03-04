@@ -1,0 +1,60 @@
+{% extends app.request.isXmlHttpRequest
+	? 'AppMainBundle:Default:xhr.layout.html.twig'
+	: 'AppMainBundle:Default:layout.html.twig'
+%}
+
+{% block content %}
+	<div class="gbi-list">
+		<table>
+			<thead>
+			<tr>
+				<th>Тип</th>
+				<th>Фото</th>
+				<th>Код</th>
+				<th>Рабочая документация / Наименование / Марка</th>
+				<th>Цена</th>
+			</tr>
+			</thead>
+			{% for category in elements.categories %}
+				<tr>
+					<td>Раздел</td>
+					<td class="image">
+						{% if category.picturePath != "/assets/images/sections/logo-prozr.png" %}
+							<a href="{{ category.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
+						{% endif %}
+					</td>
+					<td class="search-element-nomen">-</td>
+					<td class="gbi-list name">
+						<a href="{{ path('app_catalog_category', {'id': category.id}) }}">{{ category.name }}</a>
+					</td>
+					<td>-</td>
+				</tr>
+			{% endfor %}
+			{% for product in elements.products %}
+					<tr>
+						<td>Изделие</td>
+						<td class="image">
+							{% if product.picturePath != "/assets/images/gbi-photos/prod-alt-image.png" %}
+								<a href="{{ product.picturePath }}" rel="shadowbox"><i class="fa fa-camera"></i></a>
+							{% endif %}
+						</td>
+						<td class="search-element-nomen">{{ product.nomen }}</td>
+						<td class="gbi-list name">
+							<a style="font-weight: normal;" href="{{ path('app_catalog_product', {'id': product.id}) }}">
+								[{{ product.description }}] {{ product.name }}
+							</a>
+						</td>
+						<td class="gbi-list price">
+							{% if product.price != 0 %}
+								{{ (((product.price / 5) | round(0, 'ceil')) * 5)|number_format(0, '.', ' ') }} руб.
+							{% else %}
+								По запросу
+							{% endif %}
+						</td>
+					</tr>
+			{% endfor %}
+		</table>
+		<p class="price-desc price-desc-1">Все цены на железобетонные изделия указаны с НДС</p>
+		<p class="price-desc price-desc-last price-desc-1">Не является публичной офертой</p>
+	</div>
+{% endblock %}

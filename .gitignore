@@ -1,3 +1,4 @@
+.DS_Store
 app/bootstrap.php.cache
 app/SymfonyRequirements.php
 app/cache/*
@@ -20,5 +21,7 @@ web/*.xls
 web/bundles/*
 !web/bundles/main/
 !web/bundles/main/*
+!web/bundles/admin/
+!web/bundles/admin/*
 !web/bundles/catalog/
 !web/bundles/catalog/*

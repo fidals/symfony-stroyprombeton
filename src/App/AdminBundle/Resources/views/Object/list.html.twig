@@ -1,0 +1,47 @@
+{% extends "AppAdminBundle:Admin:list.html.twig" %}
+
+{% block table %}
+	<th class="">
+		<input id="checkbox-switcher" type="checkbox">
+	</th>
+	<th class="table-title text-center">
+		{{ knp_pagination_sortable(page, 'Id', 'p.id') }}
+	</th>
+	<th class="table-title">
+		{{ knp_pagination_sortable(page, 'Название', 'p.name') }}
+	</th>
+	<th class="table-title">
+		Субъект РФ
+	</th>
+	<th class="table-title text-center">
+		{{ knp_pagination_sortable(page, 'Активно', 'p.isActive') }}
+	</th>
+{% endblock %}
+
+{% block list %}
+	{% for object in page %}
+		<tr>
+			<td class="table-cell">
+				<input type="checkbox" value="{{ object.id }}">
+			</td>
+			<td class="table-cell">{{ object.id }}</td>
+			<td class="table-cell">
+				<a href="{{ path('admin_object_edit', {'id': object.id}) }}">
+					{{ object.name }}
+				</a>
+			</td>
+			<td class="table-cell">{{ object.territory }}</td>
+			<td class="table-cell item-label text-center">
+				{% if object.isActive %}
+					<span class="label label-success">Да</span>
+				{% else %}
+					<span class="label label-danger">Нет</span>
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+{% endblock %}
+
+{% block filter %}
+	{{ include('AppAdminBundle:Object:filter.html.twig') }}
+{% endblock %}

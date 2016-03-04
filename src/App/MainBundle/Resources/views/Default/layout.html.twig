@@ -1,6 +1,6 @@
 {% extends "AppMainBundle:Default:base.layout.html.twig" %}
 
-{% block csslinks %}
+{% block headercss %}
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('bundles/main/plugins/font-awesome-4/font-awesome.min.css') }}">
@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}">
 {% endblock %}
 
-{% block jslinks %}
+{% block headerjs %}
 	<script src="http://yandex.st/jquery/1.8.1/jquery.min.js"></script>
 	<script src='http://cdn.ractivejs.org/edge/ractive.min.js'></script>
 	<script type="text/javascript" src="{{ asset('bundles/main/js/ractiveAdaptor.js') }}"></script>
@@ -64,7 +64,7 @@
 						</td>
 
 						<td>
-							<a class="header-email" href="mailto:info@stroyprombeton.ru"><i class="fa fa-envelope"></i> info@stroyprombeton.ru</a>
+							<a class="header-email" href="mailto:{{ stb_email }}"><i class="fa fa-envelope"></i> {{ stb_email }}</a>
 							<p class="header-address-title text-muted">Адрес офиса продаж:</p>
 							<p class="header-address">
 								<i class="icon icon-map-marker"></i>
@@ -92,7 +92,7 @@
 				<div id="sticky-wrapper" class="basket-sticky-wrapper basket-sticky">
 					<div class="basket basket-sticky">
 						<div class="menu-basket">
-							{% include 'AppCatalogBundle:Cart:cart.html.twig' %}
+							{% include 'AppMainBundle:Cart:cart.html.twig' %}
 						</div>
 					</div>
 				</div>
@@ -103,15 +103,16 @@
 			<div class="menu-v">
 				<div class="menu-v-content-wrapper">
 					<div class="menu-v-content">
-						{% include 'AppCatalogBundle:Extension:akkordion.tree.html.twig' with {categoryTree: getCategoryTree(), depth: 2} %}
+						{% include 'AppMainBundle:Extension:akkordion.tree.html.twig' with {categoryTree: getCategoryTree(), depth: 2} %}
 					</div>
 				</div>
 
-				<div class="OrderPrice">
-					<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">
-						<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на изделия" alt="Расчёт заявок на конструкции">
-					</a>
-				</div>
+				{#Калькулятор труб ждёт своего часа#}
+				{#<div class="OrderPrice">#}
+					{#<a class="a_price" href="{{ path('app_main_staticpage', { 'alias': 'konstruktor' }) }}">#}
+						{#<img src="/assets/images/inf_konstructor.png" title="Расчёт заявок на изделия" alt="Расчёт заявок на конструкции">#}
+					{#</a>#}
+				{#</div>#}
 
 				<div class="OrderPrice">
 					<a class="a_price" href="{{ path('app_main_price_list_booking') }}">
@@ -120,12 +121,14 @@
 				</div>
 
 				<div class="OrderDraw">
-					<a href="{{ path('app_main_staticpage', { 'alias': 'izgotovlenie-gbi-po-chertezham' }) }}">
-						<img src="/assets/images/order_draw.png" title="изготовление изделий по индивидуальным чертежам" alt="производство конструкций по индивидуальным чертежам">
+					<a href="{{ path('app_order_drawing') }}">
+						<img src="/assets/images/order_draw.png" title="Изготовление изделий по индивидуальным чертежам"
+								 alt="Производство конструкций по индивидуальным чертежам">
 					</a>
 				</div>
 
-				{#Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup', '_blank'); return false;">#}
+				{# Вариант с ссылкой в новой вкладке: <div class="partners-table" onclick="window.open('/praimgroup',
+				'_blank'); return false;"> #}
 				<div class="partners-table">
 					<table class="partners-table">
 						<tr>
@@ -161,13 +164,13 @@
 					<div class="search-form">
 						<table>
 							<tr>
-								<td class="search-form-title">Поиск в каталоге продукции:</td>
-								<td class="search-form-input">
+									<td class="search-form-title">Поиск в каталоге продукции:</td>
+									<td class="search-form-input">
 									<input id="search_condition" type="text" value="{% if searchCondition|default %}{{ searchCondition }}{% else %}Запрос для поиска ...{% endif %}">
-								</td>
-								<td class="search-form-submit">
+									</td>
+									<td class="search-form-submit">
 									<input class="btn-gray btn-search-action" id="btn-search-action" type="button" value="Найти">
-								</td>
+									</td>
 							</tr>
 						</table>
 					</div>
@@ -189,7 +192,7 @@
 	<div class="redline"></div>
 {% endblock %}
 
-{% block js %}
+{% block footerjs %}
 	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
 	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
 	<script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>

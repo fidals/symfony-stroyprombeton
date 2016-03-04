@@ -30,12 +30,29 @@ class Post
 	 */
 	private $introText;
 
+	public function __construct()
+	{
+		$this->date = new \DateTime();
+	}
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+     */
+    private $isTextPublished = true;
+
 	/**
 	 * @return int
 	 */
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
 	}
 
 	/**
@@ -69,4 +86,20 @@ class Post
 
 		return $parameters;
 	}
+
+    /**
+     * @return boolean
+     */
+    public function isIsTextPublished()
+    {
+        return $this->isTextPublished;
+    }
+
+    /**
+     * @param boolean $isTextPublished
+     */
+    public function setIsTextPublished($isTextPublished)
+    {
+        $this->isTextPublished = $isTextPublished;
+    }
 }

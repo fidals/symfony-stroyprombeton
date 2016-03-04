@@ -1,0 +1,33 @@
+{% extends "AppMainBundle:Default:base.layout.html.twig" %}
+
+{% block headercss %}
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"/>
+	<link rel="stylesheet" href="/bundles/main/css/admin.css"/>
+	<link rel="stylesheet" href="/bundles/main/plugins/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/bundles/main/plugins/context/jquery.contextMenu.css">
+{% endblock %}
+
+{% block headerjs %}
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script src="/bundles/catalog/js/admin.js"></script>
+	<script src="/bundles/catalog/plugins/jquery.thumbnailScroller.js"></script>
+	<script src="/bundles/main/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/bundles/main/plugins/context/jquery.contextMenu.js"></script>
+	<script src="/bundles/main/plugins/context/jquery.ui.position.js"></script>
+	{#<script src="/bundles/catalog/plugins/tinymce/jquery.tinymce.min.js"></script>#}
+	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="page">
+		{% block content %}
+		{% endblock %}
+	</div>
+	<div id='loading'>
+		<img src='/assets/catalog/images/loader.gif'/>
+	</div>
+	<div id='success' class="alert alert-success"></div>
+	<div id='error' class="alert alert-error"></div>
+	<div id='info' class="alert alert-info"></div>
+{% endblock %}

@@ -1,0 +1,9 @@
+services:
+  std.symfony_finder:
+    class: Symfony\Component\Finder\Finder
+    public: false
+
+  filemanager:
+    class: App\AdminBundle\Service\FileManager
+    arguments:
+      [@std.symfony_finder, '@filesystem', '@twig', '%kernel.root_dir%']

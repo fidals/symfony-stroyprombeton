@@ -32,9 +32,16 @@ class Object
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Territory", inversedBy="objects")
-	 * ORM\JoinColumn(name="territory_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="territory_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $territory;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+     */
+    private $isTextPublished = true;
 
 	/**
 	 * @return int
@@ -50,6 +57,11 @@ class Object
 	public function setAlias($alias)
 	{
 		$this->alias = $alias;
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
 	}
 
 	/**
@@ -91,4 +103,20 @@ class Object
 
 		return $parameters;
 	}
+
+    /**
+     * @return boolean
+     */
+    public function isIsTextPublished()
+    {
+        return $this->isTextPublished;
+    }
+
+    /**
+     * @param boolean $isTextPublished
+     */
+    public function setIsTextPublished($isTextPublished)
+    {
+        $this->isTextPublished = $isTextPublished;
+    }
 }
