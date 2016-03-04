@@ -40,7 +40,8 @@ var CatalogAdmin = {
 		var inputButton = $('.js-file-input');
 
 		inputButton.toggleClass('btn-success btn-primary');
-		inputButton.prev().text(' Добавить файл');
+		//dev-618 - Функционал с файлами не пашет, пока не переделаем структуру файлов
+		//inputButton.prev().text(' Добавить файл');
 	},
 
 	uploadFile: function (event, entity, id) {

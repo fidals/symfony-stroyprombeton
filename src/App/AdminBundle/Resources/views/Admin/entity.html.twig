@@ -27,14 +27,15 @@
 
 			<div class="seo-wrapper">
 				{% block seo %} {{ include('AppAdminBundle:Admin:seo.html.twig') }} {% endblock %}
-				{% if fileList is defined %}
-					<div class="btn-wrapper">
-						<input class="btn-primary js-file-input" type="file" data-filename-placement="inside" name="file" onchange="CatalogAdmin.uploadFile(event, '{{ entity_name }}', '{{ entity_id }}')">
-					</div>
-					<div class="assets">
-						{{ fileList|raw }}
-					</div>
-				{% endif %}
+				{# dev-618 - Функционал с файлами не пашет, пока не переделаем структуру файлов#}
+				{#{% if fileList is defined %}#}
+					{#<div class="btn-wrapper">#}
+						{#<input class="btn-primary js-file-input" type="file" data-filename-placement="inside" name="file" onchange="CatalogAdmin.uploadFile(event, '{{ entity_name }}', '{{ entity_id }}')">#}
+					{#</div>#}
+					{#<div class="assets">#}
+						{#{{ fileList|raw }}#}
+					{#</div>#}
+				{#{% endif %}#}
 				{% block actions %} {{ include('AppAdminBundle:Admin:actions.html.twig') }} {% endblock %}
 			</div>
 		{{ form_end(form) }}

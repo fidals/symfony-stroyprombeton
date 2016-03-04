@@ -1,0 +1,9 @@
+default:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://andre.shopelectro.ru
+            goutte: ~
+            selenium2:
+                wd_host: 127.0.0.1:4444/wd/hub
+                browser: chrome
+                capabilities: { "browserName": "chrome", "browser": "chrome", "version":  "25", 'chrome': {'switches':['--no-sandbox']}}
