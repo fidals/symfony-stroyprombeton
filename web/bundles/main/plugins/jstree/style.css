@@ -108,12 +108,13 @@
 }
 .vakata-context,
 .vakata-context ul {
-  margin: 0;
-  padding: 2px;
-  position: absolute;
-  background: #f5f5f5;
-  border: 1px solid #979797;
-  box-shadow: 2px 2px 2px #999;
+    margin: 0;
+    padding: 2px;
+    position: absolute;
+    background: #f5f5f5;
+    border: 1px solid #979797;
+    box-shadow: 2px 2px 2px #999;
+    z-index: 100;
 }
 .vakata-context ul {
   list-style: none;
@@ -922,9 +923,9 @@
 @media (max-width: 768px) {
   .jstree-default-responsive {
     /*
-	.jstree-open > .jstree-ocl,
-	.jstree-closed > .jstree-ocl { border-radius:20px; background-color:white; }
-	*/
+    .jstree-open > .jstree-ocl,
+    .jstree-closed > .jstree-ocl { border-radius:20px; background-color:white; }
+    */
   }
   .jstree-default-responsive .jstree-icon {
     background-image: url("40px.png");

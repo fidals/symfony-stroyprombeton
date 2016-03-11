@@ -73,9 +73,8 @@ var CatalogAdmin = {
 
 /* JS for new Admin Page */
 $(function () {
-	var $linkToGo   = $('#link-to-go'),
-		$treeTarget = $('#js-tree'),
-		$sideBar    = $('.sidebar');
+	var $treeTarget = $('#js-tree'),
+		$sideBar    = $('.sidebar'),
 		$fileUpload = $('.js-file-input'),
         $sidebarToggle = $('.js-sidebar-toggle');
 
@@ -100,6 +99,10 @@ $(function () {
 			},
 			'plugins' : [ 'contextmenu', 'state' ]
 		});
+
+    $('.sidebar-wrapper').append('<a href="#" id="link-to-go"></a>');
+
+    var $linkToGo   = $('#link-to-go')
 
 	var bindEditAction = function() {
 		$('.jstree-anchor').bind('mousedown', function (e) {
@@ -137,7 +140,7 @@ $(function () {
 					} else {
 						categoryId = $(contextAnchor).parents('.jstree-node:not(.jstree-leaf)').eq(0).find('.jstree-anchor').eq(0).data('id');
 					}
-					var url = '/adminka/editproducts';
+					var url = '/admin/editproducts';
 					var form = $('<form action="' + url + '" method="post">' +
 						'<input type="text" name="type_search" value="0">' +
 						'<input type="text" name="field_search" value="tv_section_id">' +
@@ -149,7 +152,7 @@ $(function () {
 				_disabled: function(obj) {
 					var ref = $(obj.reference);
 					if (ref.parent().hasClass('jstree-leaf')
-						|| ref.parent().find('ul').first().find('li').first().hasClass('jstree-leaf')
+						|| ref.parent().find('ul:first').find('li:first').hasClass('jstree-leaf')
 					) {
 						return false;
 					}
