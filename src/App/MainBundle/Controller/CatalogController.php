@@ -6,6 +6,7 @@ use App\MainBundle\Entity\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use App\MainBundle\Command\SitemapCommand;
 
@@ -201,5 +202,39 @@ class CatalogController extends Controller
 		$json = $jsonSrv->encode($result, JsonEncoder::FORMAT);
 
 		return new Response($json);
+	}
+
+	/**
+	 * Список всех категорий в формте csv.
+	 * Нужен сеошникам для семантического ядра.
+	 *
+	 * @return Response
+	 */
+	public function categoriesCsvFileAction() {
+
+		$categoryRepository = $this->get('doctrine')->getRepository('AppMainBundle:Category');
+		$categories = $categoryRepository->findAll();
+		foreach($categories as $category) {
+			$category->path = $categoryRepository->getPath($category);
+		}
+		$responseText = $this->container->get('templating')->render(
+			'AppMainBundle:Catalog:csv.categories.html.twig', array('categories' => $categories));
+		return $this->getResponseAsFile($responseText);
+	}
+
+	/**
+	 * Говорит браузеру, что ответ будет файлом, не страницей
+	 * @param string $text - содержимое ответа
+	 * @return Response
+	 */
+	private function getResponseAsFile($text) {
+		//
+		$response = new Response($text);
+		$disposition = $response->headers->makeDisposition(
+			ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+			'categories.csv'
+		);
+		$response->headers->set('Content-Disposition', $disposition);
+		return $response;
 	}
 }

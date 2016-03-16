@@ -72,6 +72,10 @@ app_catalog_category:
     path: /gbi/categories/{id}/
     defaults: { _controller: AppMainBundle:Catalog:category }
 
+app_catalog_categories_csv:
+    path: /service/csv/categories/
+    defaults: { _controller: AppMainBundle:Catalog:categoriesCsvFile }
+
 app_catalog_product:
     path: /gbi/products/{id}/
     defaults: { _controller: AppMainBundle:Catalog:product }

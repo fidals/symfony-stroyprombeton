@@ -255,7 +255,7 @@ class Category
 
 	public function __toString()
 	{
-		return (string)$this->getId() . "." . (string)$this->getTitle();
+		return $this->getName();
 	}
 
 	/**

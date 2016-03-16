@@ -1,0 +1,3 @@
+{% for category in categories %}
+{{ url('app_catalog_category', { 'id': category.getId() }) }};{{ category.getName() }};Главная » {{ category.path|join(' » ') }}
+{% endfor %}
