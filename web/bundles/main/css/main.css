@@ -101,7 +101,7 @@ html > body div.page-all {
     margin: 0 auto;
     min-width: 980px;
     position: relative;
-    width: 80%;
+    width: 1478px;
     z-index: 11;
 }
 
@@ -194,8 +194,8 @@ div.footer {
 
 .header-stk-logo-wrapper {
     background: #F1F1F1;
-    background: -webkit-linear-gradient(top, #F1F1F1, #FFF);
-    background: linear-gradient(to bottom, #F1F1F1, #FFF);
+    background: -webkit-linear-gradient(top, #F1F1F1,#FFF);
+    background:   linear-gradient(to bottom, #F1F1F1,#FFF);
     box-shadow: 0 0 4px 1px #C0C0C0;
     float: left;
     left: 32px;
@@ -216,7 +216,7 @@ div.footer {
     position: absolute;
     top: 80%;
     -webkit-transform: rotate(-3deg);
-    transform: rotate(-3deg);
+            transform: rotate(-3deg);
     width: 50%;
     z-index: -1;
 }
@@ -225,7 +225,7 @@ div.footer {
     left: auto;
     right: 0;
     -webkit-transform: rotate(3deg);
-    transform: rotate(3deg);
+            transform: rotate(3deg);
 }
 
 .header-logo-text {
@@ -393,7 +393,7 @@ div.address ul li.address-title {
 .menu {
     background: #F9F9F9;
     background: -webkit-linear-gradient(top, #F9F9F9, #E8E8E8);
-    background: linear-gradient(to bottom, #F9F9F9, #E8E8E8);
+    background:   linear-gradient(to bottom, #F9F9F9, #E8E8E8);
     display: table;
     list-style-type: none;
     margin: -64px 0 -10px 0;
@@ -566,30 +566,30 @@ div.cart-actions ul li:last-child img {
     position: absolute;
     right: -2px;
     -webkit-transition: -webkit-transform 0.3s ease-in-out;
-    transition: transform 0.3s ease-in-out;
+    transition: 		transform 0.3s ease-in-out;
     -webkit-transform: translate(0, -50%);
-    -ms-transform: translate(0, -50%);
-    transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
     top: 50%;
     width: 11px;
 }
 
 .akkordion-title.active .fa {
     -webkit-transform: rotate(-90deg) translate(60%, -25%);
-    -ms-transform: rotate(-90deg) translate(60%, -25%);
-    transform: rotate(-90deg) translate(60%, -25%);
+        -ms-transform: rotate(-90deg) translate(60%, -25%);
+            transform: rotate(-90deg) translate(60%, -25%);
 }
 
 .akkordion-last-paragraph .fa {
     position: relative;
     -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
 }
 
 .akkordion-last-paragraph:hover .fa {
     -webkit-transform: translate(3px, 0);
-    -ms-transform: translate(3px, 0);
-    transform: translate(3px, 0);
+        -ms-transform: translate(3px, 0);
+            transform: translate(3px, 0);
 }
 
 .akkordion-link-to-category {
@@ -616,7 +616,6 @@ div.cart-actions ul li:last-child img {
 .show-v-dropdown-close {
     border: 1px solid transparent !important;
 }
-
 /* меню аккордеон конец */
 
 .menu-v-content ul li.special-section a {
@@ -2065,8 +2064,8 @@ i.fa-camera:hover {
 .order-product {
     padding-left: 5px;
     padding-right: 5px;
-    width: auto;
     text-align: center !important;
+    width: auto;
 }
 
 .order-total {
@@ -2075,13 +2074,13 @@ i.fa-camera:hover {
     text-align: right !important;
 }
 
-#sb-wrapper-inner,
 #sb-body,
-#sb-body-inner {
+#sb-body-inner,
+#sb-wrapper-inner {
     background-color: #FFF;
 }
 
-i.fa-times {
+.fa-times {
     cursor: pointer;
 }
 
@@ -2611,6 +2610,10 @@ ul.informer {
     width: 70px;
 }
 
+.news_text {
+    overflow: hidden;
+}
+
 img.news_image_border {
     border: 3px double #DDD;
     border-radius: 5px;
@@ -2669,7 +2672,7 @@ div.basket-content {
 
 .cat_cat {
     float: left;
-    height: 190px;
+    min-height: 190px;
     padding: 2%;
     position: relative;
     width: 46%;
@@ -2751,10 +2754,20 @@ span.catalog-third-level {
     float: right;
 }
 
-.shk_basket_count .field-arr-down,
-.product-desc-left-col .field-arr-down,
-.shk-item .field-arr-down {
-    margin: 11px 0 0 -17px !important;
+.field-arr-down {
+    cursor: pointer;
+    margin: 13px 0 0 -17px;
+    position: absolute;
+}
+
+.field-arr-up {
+    cursor: pointer;
+    margin: 0 0 13px -2px;
+    vertical-align: bottom;
+}
+
+.order-count {
+    margin: 0 0 0 5px;
     position: absolute;
 }
 
@@ -2840,7 +2853,7 @@ div.inf-product-for-nds {
     text-align: right;
 }
 
-.inf-product-desc {
+.inf-product-desc{
     font-size: 0.9em;
 }
 
@@ -2848,7 +2861,7 @@ div.inf-product-for-nds {
     margin: 0;
 }
 
-div.inf-product-photo {
+div.inf-product-photo{
     border: 3px double #DDD;
     border-radius: 5px;
     display: inline-block;
@@ -3010,7 +3023,6 @@ div.gbi-visual ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    line-height: auto;
 }
 
 div.gbi-visual li {
@@ -3056,12 +3068,15 @@ div.basket-add-goods-intro ul li {
     padding: 5px 15px 5px 5px !important;
 }
 
-input.basket-rest,
-input.order-rest {
-    width: 50px;
-    height: 17px;
-    padding: 0;
+input[type="text"].order-rest,
+input[type="text"].basket-rest {
+    border: 1px solid #888;
+    font-size: 13px;
+    margin-bottom: 0;
+    padding: 1px 2px;
     text-align: center;
+    vertical-align: bottom;
+    width: 50px;
 }
 
 div.form-order {
@@ -3368,12 +3383,12 @@ div.form_comment {
     border: 1px solid #999;
     border-radius: 10px;
     -webkit-transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
+            transition: opacity 1s ease-in-out;
 }
 
 [id*='darktooltip-shk-submit'] {
     -webkit-transition: none !important;
-    transition: none !important;
+            transition: none !important;
 }
 
 .dark-tooltip.light > div:first-child {
@@ -3404,10 +3419,6 @@ div.form_comment {
 
 .mbasket-clear, .shk-del {
     cursor: pointer;
-}
-
-.td form-order {
-    padding-right: 0;
 }
 
 .table .order-center {
@@ -3495,13 +3506,13 @@ div.gbi-visual-dor-stroy {
 div.gbi-visual-energy-stroy {
     width: 940px;
     height: 570px;
-    background-image: url('../images/gbi-visual/energy-stroy.jpg') no-repeat center top;
+    background: url('../images/gbi-visual/energy-stroy.jpg') no-repeat center top;
 }
 
 div.gbi-visual-blag-territory {
     width: 940px;
     height: 570px;
-    background-image: url('../images/gbi-visual/blag-territory.jpg') no-repeat center top;
+    background: url('../images/gbi-visual/blag-territory.jpg') no-repeat center top;
 }
 
 .hidden-ul,
@@ -3648,7 +3659,6 @@ div.gvds-data ul li a div.gvds-data-work-doc {
 }
 
 /* Styles for STK-Metal info on section's page */
-
 .metal-info {
     font-size: 14px;
     color: #333333;

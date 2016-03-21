@@ -1,51 +1,51 @@
 {% extends "AppAdminBundle:Admin:list.html.twig" %}
 
 {% block table %}
-	<th class="">
-		<input id="checkbox-switcher" type="checkbox">
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Id', 'p.id') }}
-	</th>
-	<th class="table-title">
-		{{ knp_pagination_sortable(page, 'Название', 'p.name') }}
-	</th>
-	<th class="table-title">
-		{{ knp_pagination_sortable(page, 'Алиас', 'p.alias') }}
-	</th>
-	<th class="table-title">
-		{{ knp_pagination_sortable(page, 'Дата', 'p.date') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Активно', 'p.isActive') }}
-	</th>
+  <th>
+    <input id="checkbox-switcher" type="checkbox">
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Id', 'p.id') }}
+  </th>
+  <th class="table-title">
+    {{ knp_pagination_sortable(page, 'Название', 'p.name') }}
+  </th>
+  <th class="table-title">
+    {{ knp_pagination_sortable(page, 'Алиас', 'p.alias') }}
+  </th>
+  <th class="table-title">
+    {{ knp_pagination_sortable(page, 'Дата', 'p.date') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Активно', 'p.isActive') }}
+  </th>
 {% endblock %}
 
 {% block list %}
-	{% for post in page %}
-		<tr>
-			<td class="table-cell">
-				<input type="checkbox" value="{{ post.id }}">
-			</td>
-			<td class="table-cell">{{ post.id }}</td>
-			<td class="table-cell">
-				<a href="{{ path('admin_staticpage_edit', {'id': post.id} ) }}">
-					{{ post.name }}
-				</a>
-			</td>
-			<td class="table-cell">{{ post.alias }}</td>
-			<td class="table-cell">{{ post.date|date('d-m-Y') }}</td>
-			<td class="table-cell item-label text-center">
-				{% if post.isActive %}
-					<span class="label label-success">Да</span>
-				{% else %}
-					<span class="label label-danger">Нет</span>
-				{% endif %}
-			</td>
-		</tr>
-	{% endfor %}
+  {% for post in page %}
+    <tr>
+      <td class="table-cell">
+        <input type="checkbox" value="{{ post.id }}">
+      </td>
+      <td class="table-cell">{{ post.id }}</td>
+      <td class="table-cell">
+        <a href="{{ path('admin_staticpage_edit', {'id': post.id} ) }}">
+          {{ post.name }}
+        </a>
+      </td>
+      <td class="table-cell">{{ post.alias }}</td>
+      <td class="table-cell">{{ post.date|date('d-m-Y') }}</td>
+      <td class="table-cell item-label text-center">
+        {% if post.isActive %}
+          <span class="label label-success">Да</span>
+        {% else %}
+          <span class="label label-danger">Нет</span>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
 {% endblock %}
 
 {% block filter %}
-	{{ include('AppAdminBundle:StaticPage:filter.html.twig') }}
+  {{ include('AppAdminBundle:StaticPage:filter.html.twig') }}
 {% endblock %}

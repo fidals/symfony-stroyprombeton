@@ -96,26 +96,21 @@ if (count($_POST["ff"]) > 0){
 	<input type="hidden" name="parent_tg_id" value="<?php if( isset($_POST['parent_tg_id']) && intval($_POST['parent_tg_id'])>0 ) echo intval($_POST['parent_tg_id']); ?>">
 	<input type="hidden" name="parent_tg_name" value="">
 
-	<h4 class="choose_razd" style="cursor: pointer;" onclick="enableParentSelectionTG();" >Выберите раздел</h4>
-	<a class="btn btn-primary btn-xs hide_sort" href="javascript:;"><?php if( isset($_COOKIE['hide_sort']) &&
-		$_COOKIE['hide_sort']==0){ echo 'показать'; } else { echo 'скрыть'; } ?></a>
+	<h4>Выберите раздел</h4>
+	<button class="btn btn-primary btn-switch-filter js-hide-sort" type="button"><?php if( isset($_COOKIE['hide_sort']) &&
+		$_COOKIE['hide_sort']==1){ echo 'показать'; } else { echo 'скрыть'; } ?></button>
 
 	<div class="filter-wrapper row">
-		<div class="filter-fields-wrapper trhide" style="<?php if( isset($_COOKIE['hide_sort']) &&
-			$_COOKIE['hide_sort']==0){
-			echo
-		'display: none;'; } ?>">
+		<div class="filter-fields-wrapper js-trhide" style="<?php if( isset($_COOKIE['hide_sort']) &&
+			$_COOKIE['hide_sort']==1){ echo 'display: none;'; } ?>">
 			<label>Фильтр полей:</label>
 			<div class="filter-fields"><?php echo $ff;?></div>
 		</div>
 
-		<div class="sort-fields-wrapper trhide" style="<?php if( isset($_COOKIE['hide_sort']) &&
-			$_COOKIE['hide_sort']==0){ echo
-		'display: none;'; } ?>" >
+		<div class="sort-fields-wrapper js-trhide" style="<?php if( isset($_COOKIE['hide_sort']) &&
+			$_COOKIE['hide_sort']==1){ echo 'display: none;'; } ?>" >
 			<label>Сортировка полей:</label>
-			<ul id="sortable">
-				<?php echo $sort_ff; ?>
-			</ul>
+			<ul id="sortable"><?php echo $sort_ff; ?></ul>
 		</div>
 	</div>
 
@@ -137,11 +132,11 @@ if (count($_POST["ff"]) > 0){
 				<label>Поиск по:</label>
 				<select class="form-control" name="field_search">
 					<?php
-					foreach($productRepository->getTableGearProperties() as $id => $title) {
-						echo "<option value=\"tv_".$id."\" ";
-						if(isset($_POST['field_search']) && $_POST['field_search']=="tv_".$id ){ echo 'selected'; }
-						echo ">".$title."</option>";
-					}
+						foreach($productRepository->getTableGearProperties() as $id => $title) {
+							echo "<option value=\"tv_".$id."\" ";
+							if(isset($_POST['field_search']) && $_POST['field_search']=="tv_".$id ){ echo 'selected'; }
+							echo ">".$title."</option>";
+						}
 					?>
 				</select>
 			</div>

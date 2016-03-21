@@ -1,245 +1,148 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
-{% block title %}
-	Оформление заказа на ЖБИ продукцию
-{% endblock %}
-
-{% block description %}
-
-{% endblock %}
+{% block title %}Оформление заказа на ЖБИ продукцию{% endblock %}
 
 {% block content %}
-	{# Инициализация инстанса Рактива для отражения таблицы с заказом #}
-	<script>
-		$(function () {
-			var ractiveOrder = new Ractive({
-				el: '#order-table',
-				template: '#ractive-order',
+  <h1>Оформление заказа на ЖБИ продукцию</h1>
 
-				data: ractiveDropdown,
-				adapt: ['Ractive']
-			});
+  {% verbatim %}
+    <div id="order-table"></div>
+    <script id='ractive-order' type='text/ractive'>
+      {{#if products.length == 0}}
+        <h2 class="text-center">Нет выбранных позиций</h2>
+        <p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>,
+        <br>мы изготовим его <a href="/order-drawing/{{ path('app_catalog_order') }}">по вашим чертежам</a>. Отправьте их
+        через форму ниже или на почту <a href="mailto:{{ stb_email }}">{{ stb_email }}</a>.</p>
+      {{else}}
+        <h2>Ваш заказ</h2>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th class="order-product" width="15%">Код</th>
+              <th class="order-product">Наименование и марка</th>
+              <th class="order-product">Цена</th>
+              <th class="order-product" colspan="2">Количество</th>
+            </tr>
+          </thead>
+            <tbody>
+              {{#each products}}
+                <tr>
+                  <td class="order-product">
+                    {{#if nomen}}
+                        {{nomen}}
+                    {{else}}
+                        -
+                    {{/if}}
+                  </td>
+                  <td class="order-product"><a href="{{url}}">{{ name }}</a></td>
+                  <td class="order-product" nowrap>
+                    {{#if price}}
+                      {{price}} руб.
+                    {{else}}
+                      По запросу
+                    {{/if}}
+                  </td>
+                  <td class="order-product">
+                    <input class="basket-rest input-switcher" id="count-{{ id }}" type="text" value="{{ count }}"
+                           code="{{ product.getId() }}" lazy="5000" min="1">
+                    <img class="field-arr-up" on-click="productCountPlus" src="/bundles/main/images/spin-up.png">
+                    <img class="field-arr-down" on-click="productCountMinus" src="/bundles/main/images/spin-down.png">
+                    <span class="order-count">шт.</span>
+                  </td>
+                  <td class="order-product">
+                    <a onclick="return Cart.remove({{ id }}, {{ count }});" title="Удалить позицию"><i class="fa fa-times"></i></a>
+                  </td>
+                </tr>
+              {{/each}}
+              <tr>
+                <td class="order-total" colspan="2">Итого:</td>
+                <td class="order-product" colspan="3"><b>{{ getTotalPrice() }}</b></td>
+              </tr>
+          </tbody>
+        </table>
+      {{/if}}
+    </script>
+  {% endverbatim %}
 
-			ractiveOrder.on('updateCount', function (event) {
-				var product = this.get(event.keypath);
+  <h2>Контактная информация</h2>
+  <form action="{{ path('app_catalog_order') }}" method="post" {{ form_enctype(form) }} id="shop-order-form">
+      {{ form_errors(form) }}
+    <table class="shop-order-table">
+      <tr>
+        <td>Ваше имя:<sup>*</sup></td>
+        <td>
+          {{ form_widget(form.person) }}
+          <div class="form-error">{{ form_errors(form.person) }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Контактный телефон:<sup>*</sup></td>
+        <td>
+          {{ form_widget(form.phone) }}
+          <div class="form-error">{{ form_errors(form.phone) }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Электронный адрес (Е-mail):<sup>*</sup></td>
+        <td>
+          {{ form_widget(form.email) }}
+          <div class="form-error">{{ form_errors(form.email) }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Полное название организации:<sup>*</sup></td>
+        <td>
+          {{ form_widget(form.company) }}
+          <div class="form-error">{{ form_errors(form.company) }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Адрес поставки:</td>
+        <td>{{ form_widget(form.deliveryAddress) }}</td>
+      </tr>
+      <tr>
+        <td>Комментарий к заказу:</td>
+        <td>{{ form_widget(form.comment) }}</td>
+      </tr>
+      <tr>
+        <td>Прикрепить файл:</td>
+        <td class="td-submit">
+          <div>{{ form_widget(form.files) }}</div>
+          <input type="submit" name="submit" class="button btn btn-red btn-order-send" id="btn-order-send"
+                 value="Отправить заказ">
+          <div class="form-error">{{ form_errors(form.files) }}</div>
+          <p class="muted">Максимальный размер файла - 25 Мб</p>
+          <p class="muted js-error-count">Вы можете прикрепить не более 10 вложений одновременно</p>
+          <p class="muted js-error-large-file hide">Один из файлов превышает допустимый размер в 25 Мб</p>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="form-order order-warning shipping">
+          <div class="dostavka-gbi">
+            <p>Варианты поставки</p>
+            <ul>
+              <li>Доставка автотранспортом компании</li>
+              <li>Доставка по железной дороге</li>
+              <li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>
+            </ul>
+          </div>
+          <div class="dostavka-gbi">
+            <p>Стоимость доставки</p>
+            <ul>
+              <li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>
+              <li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>
+              <li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+{% endblock %}
 
-				if (product.count < 1) {
-					product.count = 1;
-					this.set(event.keypath, product);
-				}
+{% block footerjs %}
+  {{ parent() }}
 
-				Cart.update(product.id, product.count);
-			});
-
-			/**
-			 * Логика работы с файлами в форме:
-			 */
-			var $btnSend = $('#btn-order-send'),
-					$fileCountNotifyTag = $('#order-file-notify'),
-					$fileCountErrorTag = $('.js-error-count'),
-					$fileSizeErrorTag = $('.js-error-large-file'),
-					maxFileSize = 25550000; // ~25 Mb
-
-			$('#order_files').change(function() {
-				var fileCount = parseInt($(this).get(0).files.length);
-
-				if ( fileCount > 0 ) {
-					$fileCountNotifyTag.html('Число файлов: ' + fileCount);
-				} else {
-					$fileCountNotifyTag.html('Файлы не выбраны');
-				}
-
-				if ( fileCount > 10 ) {
-					$fileCountErrorTag.css('color', '#C90000');
-					$btnSend.attr('disabled', true);
-				} else {
-					$fileCountErrorTag.css('color', '#999');
-					$btnSend.attr('disabled', false);
-				}
-
-				if ( checkFilesSize() === false ) {
-					$fileSizeErrorTag.removeClass('hide').css('color', '#C90000');
-					$btnSend.attr('disabled', true);
-				} else {
-					$fileSizeErrorTag.addClass('hide');
-					$btnSend.attr('disabled', false);
-				}
-			});
-
-			$btnSend.on('click', function() {
-				localStorage.setItem('userEmailForOrder', $('#order_email').val());
-				localStorage.setItem('userPhoneForOrder', $('#order_phone').val());
-			});
-
-			function checkFilesSize() {
-				var $input = document.getElementById("order_files");
-
-				// сначала - проверка на поддержку в браузерах
-				if ($input.files && $input.files.length > 0) {
-					for (var i = 0, len = $input.files.length; i < len; i++) {
-						if ($input.files[i].size > maxFileSize) {
-							return false;
-						}
-					}
-				}
-
-				return true;
-			}
-		});
-	</script>
-
-	<h1>Оформление заказа на ЖБИ продукцию</h1>
-
-	{% verbatim %}
-	 <div id="order-table"></div>
-		<script id='ractive-order' type='text/ractive'>
-			{{#if products.length == 0}}
-				<h2 class="text-center">Нет выбранных позиций</h2>
-				<p class="text-center">Если вы не нашли изделие <a href="/gbi/visual/">в каталоге</a>,
-				<br>мы изготовим его <a href="/order-drawing/">по вашим чертежам</a>. Отправьте их
-				через форму ниже или на почту <a href="mailto:{{ stb_email }}">{{ stb_email }}</a>.</p>
-			{{else}}
-				<h2>Ваш заказ</h2>
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="order-product" width="15%">Код</th>
-							<th class="order-product">Наименование и марка</th>
-							<th class="order-product">Цена</th>
-							<th class="order-product" colspan="2">Количество</th>
-						</tr>
-					</thead>
-
-				<tbody>
-					{{#each products}}
-						<tr>
-							<td class="order-product">
-								{{#if nomen}}
-									{{nomen}}
-								{{else}}
-									-
-								{{/if}}
-							</td>
-							<td class="order-product">
-								<a href="{{url}}">{{ name }}</a>
-							</td>
-							<td class="order-product" nowrap>
-								{{#if price}}
-									{{price}} руб.
-								{{else}}
-									По запросу
-								{{/if}}
-							</td>
-							<td class="order-product">
-								<input id="count-{{ id }}" class="input-switcher js-touchspin" on-change="updateCount" type="number" min="1" value="{{ count }}" lazy="5000"/> шт.
-							</td>
-							<td class="order-product">
-								<a onclick="return Cart.remove({{ id }}, {{ count }});" title="Удалить"><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-					{{/each}}
-					<tr>
-						<td class="order-total" colspan="2">Итого:</td>
-						<td class="order-product" colspan="3">
-						   {{ getTotalPrice() }}
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			{{/if}}
-		</script>
-	{% endverbatim %}
-
-	<h2>Контактная информация</h2>
-	<form action="{{ path('app_catalog_order') }}" method="post" {{ form_enctype(form) }} id="shop-order-form">
-		{{ form_errors(form) }}
-		<table class="shop-order-table">
-			<tr>
-				<td>Ваше имя:<sup>*</sup></td>
-				<td>
-					{{ form_widget(form.person) }}
-					<div class="form-error">
-						{{ form_errors(form.person) }}
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>Контактный телефон:<sup>*</sup></td>
-				<td>
-					{{ form_widget(form.phone) }}
-					<div class="form-error">
-						{{ form_errors(form.phone) }}
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>Электронный адрес (Е-mail):<sup>*</sup></td>
-				<td>
-					{{ form_widget(form.email) }}
-					<div class="form-error">
-						{{ form_errors(form.email) }}
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>Полное название организации:<sup>*</sup></td>
-				<td>
-					{{ form_widget(form.company) }}
-					<div class="form-error">
-						{{ form_errors(form.company) }}
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>Адрес поставки:</td>
-				<td>{{ form_widget(form.deliveryAddress) }}</td>
-			</tr>
-			<tr>
-				<td>Комментарий к заказу:</td>
-				<td>{{ form_widget(form.comment) }}</td>
-			</tr>
-			<tr>
-				<td>Прикрепить файл:</td>
-				<td class="td-submit">
-					<div>
-						{{ form_widget(form.files) }}
-					</div>
-					<input type="submit" name="submit" class="button btn btn-red btn-order-send" id="btn-order-send"
-						   value="Отправить заказ">
-					<div class="form-error">
-						{{ form_errors(form.files) }}
-					</div>
-					<p class="muted">Максимальный размер файла - 25 Мб</p>
-					<p class="muted js-error-count">Вы можете прикрепить не более 10 вложений одновременно</p>
-					<p class="muted js-error-large-file hide">Один из файлов превышает допустимый размер в 25 Мб</p>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td class="form-order order-warning shipping">
-					<div class="dostavka-gbi">
-						<p>
-							Варианты поставки
-						</p>
-						<ul>
-							<li>Доставка автотранспортом компании</li>
-							<li>Доставка по железной дороге</li>
-							<li>Самовывоз со склада в Санкт-Петербурге и Ленинградской области</li>
-						</ul>
-					</div>
-					<div class="dostavka-gbi">
-						<p>
-							Стоимость доставки
-						</p>
-						<ul>
-							<li>Цена доставки по Санкт-Петербургу <span class="price">от 6000 руб.</span></li>
-							<li>Цена доставки по Ленинградской области <span class="price">от 10000 руб.</span></li>
-							<li>Цена доставки в другие регионы России <span class="price">от 20000 руб.</span></li>
-						</ul>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</form>
-
+  <script src="{{ asset('bundles/main/js/orderPage.js') }}"></script>
 {% endblock %}

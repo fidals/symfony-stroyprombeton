@@ -3,97 +3,97 @@
 {% set page_title = 'Список Изделий' %}
 
 {% block actions %}
-	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Действия <b class="caret"></b></a>
-	<ul class="dropdown-menu" role="menu">
-		<li>
-			<a href="{{ path('admin_product_edit') }}">
-				<i class="fa fa-plus-circle"></i>
-				Добавить новый товар
-			</a>
-		</li>
-	</ul>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Действия <b class="caret"></b></a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="{{ path('admin_product_edit') }}">
+        <i class="fa fa-plus-circle"></i>
+        Добавить новый товар
+      </a>
+    </li>
+  </ul>
 {% endblock %}
 
 {% block table %}
-	<th class="">
-		<input id="checkbox-switcher" type="checkbox">
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Id', 'p.id') }}
-	</th>
-	<th class="table-title">
-		{{ knp_pagination_sortable(page, 'Артикул', 'p.nomen') }}
-	</th>
-	<th class="table-title">
-		{{ knp_pagination_sortable(page, 'Название', 'p.name') }}
-	</th>
-	<th class="table-title">
-		Родитель
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Марка', 'p.mark') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Длина', 'p.length') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Ширина', 'p.width') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Высота', 'p.height') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Масса', 'p.weight') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Диаметр внутр.', 'p.diameterOut') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Диаметр внеш.', 'p.diameterIn') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Цена', 'p.price') }}
-	</th>
-	<th class="table-title text-center">
-		{{ knp_pagination_sortable(page, 'Активен', 'p.isActive') }}
-	</th>
+  <th class="">
+    <input id="checkbox-switcher" type="checkbox">
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Id', 'p.id') }}
+  </th>
+  <th class="table-title">
+    {{ knp_pagination_sortable(page, 'Артикул', 'p.nomen') }}
+  </th>
+  <th class="table-title">
+    {{ knp_pagination_sortable(page, 'Название', 'p.name') }}
+  </th>
+  <th class="table-title">
+    Родитель
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Марка', 'p.mark') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Длина', 'p.length') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Ширина', 'p.width') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Высота', 'p.height') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Масса', 'p.weight') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Диаметр внутр.', 'p.diameterOut') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Диаметр внеш.', 'p.diameterIn') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Цена', 'p.price') }}
+  </th>
+  <th class="table-title text-center">
+    {{ knp_pagination_sortable(page, 'Активен', 'p.isActive') }}
+  </th>
 {% endblock %}
 
 {% block list %}
-	{% for product in page %}
-		<tr>
-			<td class="table-cell">
-				<input type="checkbox" value="{{ product.id }}">
-			</td>
-			<td class="table-cell">{{ product.id }}</td>
-			<td class="table-cell">{{ product.nomen }}</td>
-			<td class="table-cell">
+  {% for product in page %}
+    <tr>
+      <td class="table-cell">
+        <input type="checkbox" value="{{ product.id }}">
+      </td>
+      <td class="table-cell">{{ product.id }}</td>
+      <td class="table-cell">{{ product.nomen }}</td>
+      <td class="table-cell">
                 <a href="{{ path('admin_product_edit', {'id': product.id}) }}">{{ product.name }}</a>
             </td>
-			<td class="table-cell">
-				<a class="item-link" href="#">
-					{{ product.category.name }}
-				</a>
-			</td>
-			<td class="table-cell">{{ product.mark }}</td>
-			<td class="table-cell">{{ product.length }}</td>
-			<td class="table-cell">{{ product.width }}</td>
-			<td class="table-cell">{{ product.height }}</td>
-			<td class="table-cell">{{ product.weight }}</td>
-			<td class="table-cell">{{ product.diameterIn }}</td>
-			<td class="table-cell">{{ product.diameterOut }}</td>
-			<td class="table-cell">{{ product.price }}</td>
-			<td class="table-cell item-label text-center">
-				{% if product.isActive %}
-					<span class="label label-success">Да</span>
-				{% else %}
-					<span class="label label-danger">Нет</span>
-				{% endif %}
-			</td>
-		</tr>
-	{% endfor %}
+      <td class="table-cell">
+        <a class="item-link" href="#">
+          {{ product.category.name }}
+        </a>
+      </td>
+      <td class="table-cell">{{ product.mark }}</td>
+      <td class="table-cell">{{ product.length }}</td>
+      <td class="table-cell">{{ product.width }}</td>
+      <td class="table-cell">{{ product.height }}</td>
+      <td class="table-cell">{{ product.weight }}</td>
+      <td class="table-cell">{{ product.diameterIn }}</td>
+      <td class="table-cell">{{ product.diameterOut }}</td>
+      <td class="table-cell">{{ product.price }}</td>
+      <td class="table-cell item-label text-center">
+        {% if product.isActive %}
+          <span class="label label-success">Да</span>
+        {% else %}
+          <span class="label label-danger">Нет</span>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
 {% endblock %}
 
 {% block filter %}
-	{{ include('AppAdminBundle:Product:filter.html.twig') }}
+  {{ include('AppAdminBundle:Product:filter.html.twig') }}
 {% endblock %}

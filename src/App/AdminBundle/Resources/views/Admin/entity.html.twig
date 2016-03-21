@@ -1,54 +1,50 @@
-{% extends "AppAdminBundle:Admin:new.layout.html.twig" %}
+{% extends "AppAdminBundle:Admin:layout.html.twig" %}
 
 {# Шаблон для создания абстрактной сущности. От него наследуются шаблоны для создания конкретных сущностей. #}
-
 {% block title %}Админка | {{ page_title }}{% endblock %}
 
-{% block breadcrumbs %}{% endblock %}
-
 {% block content %}
-	<h1 class="entity-title text-center">{{ page_title }}</h1>
-	{% block form %}
-		{{ form_start(form, {'attr': {'class': 'form-inline form-entity'}}) }}
-			<div class="entity-wrapper">
-				<h4 class="entity-form-title">Основные характеристики</h4>
-					{% block main_properties %} {% endblock %}
-					{% block wysiwyg %}
-						<i class="fa fa-star" style="display: none;"> Не забудьте сохранить изменения!</i>
-						{{ form_widget(form.text) }}
-					{% endblock %}
-			</div>
+  <h1 class="entity-title text-center">{{ page_title }}</h1>
+  {% block form %}
+    {{ form_start(form, {'attr': {'class': 'form-inline form-entity'}}) }}
+      <div class="entity-wrapper">
+        <h4 class="entity-form-title">Основные характеристики</h4>
+        {% block main_properties %}{% endblock %}
+        {% block wysiwyg %}
+          <i class="fa fa-star" style="display: none;"></i>
+          <span style="display: none;"> Не забудьте сохранить изменения!</span>
+          {{ form_widget(form.text) }}
+        {% endblock %}
+      </div>
 
-			<div class="chars-wrapper">
-				<h4 class="entity-form-title">Дополнительные характеристики</h4>
-				{% block additional_properties %} {% endblock %}
-			</div>
+      <div class="chars-wrapper">
+        <h4 class="entity-form-title">Дополнительные характеристики</h4>
+        {% block additional_properties %} {% endblock %}
+      </div>
 
-			<div class="seo-wrapper">
-				{% block seo %} {{ include('AppAdminBundle:Admin:seo.html.twig') }} {% endblock %}
-				{% if fileList is defined %}
-					<div class="btn-wrapper">
-						<input class="btn-primary js-file-input" type="file" data-filename-placement="inside" name="file" onchange="CatalogAdmin.uploadFile(event, '{{ entity_name }}', '{{ entity_id }}')">
-					</div>
-					<div class="assets">
-						{{ fileList|raw }}
-					</div>
-				{% endif %}
-				{% block actions %} {{ include('AppAdminBundle:Admin:actions.html.twig') }} {% endblock %}
-			</div>
-		{{ form_end(form) }}
-	{% endblock %}
+      <div class="seo-wrapper">
+        {% block seo %}{{ include('AppAdminBundle:Admin:seo.html.twig') }}{% endblock %}
+        {% if fileList is defined %}
+          <div class="btn-wrapper">
+            <input class="btn-primary js-file-input" type="file" data-filename-placement="inside" name="file" onchange="CatalogAdmin.uploadFile(event, '{{ entity_name }}', '{{ entity_id }}')">
+          </div>
+          <div class="assets">{{ fileList|raw }}</div>
+        {% endif %}
+        {% block actions %}
+          {{ include('AppAdminBundle:Admin:actions.html.twig') }}
+        {% endblock %}
+      </div>
+    {{ form_end(form) }}
+  {% endblock %}
 
-	<div class="modal-wrapper js-modal-wrapper" id="confirm-modal">
-		<div class="modal-box">
-			{% block delete_modal %} {% endblock %}
-		</div>
-	</div>
-	<div class="modal-overlay"></div>
+  <div class="modal-wrapper js-modal-wrapper" id="confirm-modal">
+    <div class="modal-box">{% block delete_modal %} {% endblock %}</div>
+  </div>
+  <div class="modal-overlay"></div>
 {% endblock %}
 
 {% block footerjs %}
-    {{ parent() }}
+  {{ parent() }}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
 {% endblock %}

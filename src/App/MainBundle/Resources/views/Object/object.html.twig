@@ -1,46 +1,40 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
-{% block title %}
-	{{ object.getTitle() }}
-{% endblock %}
-
+{% block title %}{{ object.getTitle() }}{% endblock %}
 {% block description %}
-	{% if object.getDescription() is empty %}
-		{{ object.getTitle() }}
-	{% else %}
-		{{ object.getDescription() }}
-	{% endif %}
+  {% if object.getDescription() is empty %}
+    {{ object.getTitle() }}
+  {% else %}
+    {{ object.getDescription() }}
+  {% endif %}
 {% endblock %}
-
-{% block  keywords %}
-	{{ object.getKeywords() }}
-{% endblock %}
+{% block  keywords %}{{ object.getKeywords() }}{% endblock %}
 
 {% block content %}
-	<div class="location">
-		<span class="location section">
-			<a href="/">Главная</a>
-		</span>
-		<span class="location separate">»</span>
-		<span class="location section">
-			<a href="/obekty/">Регионы</a>
-		</span>
-		<span class="location separate">»</span>
-		<span class="location section">
-			<a href="/rus-area-item/{{ object.getTerritory().getId() }}">{{ object.getTerritory() }}</a>
-		</span>
-	</div>
+  <div class="location">
+    <span class="location section">
+      <a href="/">Главная</a>
+    </span>
+    <span class="location separate">»</span>
+    <span class="location section">
+      <a href="{{ path('app_main_territory_map') }}">Регионы</a>
+    </span>
+    <span class="location separate">»</span>
+    <span class="location section">
+      <a href="{{ path('app_main_territory_map', {'territoryId': object.getTerritory().getId()}) }}">{{ object.getTerritory() }}</a>
+    </span>
+  </div>
 
-	<h1>
-		{% if object.getH1() is empty %}
-			{{ object.getTitle() }}
-		{% else %}
-			{{ object.getH1() }}
-		{% endif %}
-	</h1>
-	{% if object.getText() %}
-		{% autoescape false %}
-			{% include template_from_string(object.getText()) %}
-		{% endautoescape %}
-	{% endif %}
+  <h1>
+    {% if object.getH1() is empty %}
+      {{ object.getTitle() }}
+    {% else %}
+      {{ object.getH1() }}
+    {% endif %}
+  </h1>
+  {% if object.getText() %}
+    {% autoescape false %}
+      {% include template_from_string(object.getText()) %}
+    {% endautoescape %}
+  {% endif %}
 {% endblock %}

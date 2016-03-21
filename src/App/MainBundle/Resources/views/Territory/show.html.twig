@@ -1,43 +1,32 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
-{% block title %}
-	{{ territory.getTitle() }}
-{% endblock %}
-
-{% block description %}
-	{{ territory.getDescription() }}
-{% endblock %}
-
-{% block keywords %}
-	{{ territory.getKeywords() }}
-{% endblock %}
+{% block title %}{{ territory.getTitle() }}{% endblock %}
+{% block description %}{{ territory.getDescription() }}{% endblock %}
+{% block keywords %}{{ territory.getKeywords() }}{% endblock %}
 
 {% block content %}
-	<div class="location">
-		<span class="location section">
-			<a href="/">Главная</a>
-		</span>
-		<span class="location separate">»</span>
-		<span class="location section">
-			<a href="/obekty/">Регионы</a>
-		</span>
-	</div>
+  <div class="location">
+    <span class="location section">
+      <a href="/">Главная</a>
+    </span>
+    <span class="location separate">»</span>
+    <span class="location section">
+      <a href="{{ path('app_main_territory_map') }}">Регионы</a>
+    </span>
+  </div>
 
-	<h1>
-		Объекты, построенные с использованием продукции «СТК-ПромБетон».
-		<br>
-		{% if territory.getH1() is empty %}
-			{{ territory.getTitle() }}
-		{% else %}
-			{{ territory.getH1() }}
-		{% endif %}
-	</h1>
-	<ul class="gbi_map_list">
-		{% for object in territory.getObjects() %}
-			<li>
-				<a href="{{ path('app_main_object', {id: object.getId()}) }}">{{ object.getTitle() }}</a>
-			</li>
-		{% endfor %}
-	</ul>
-
+  <h1>
+    Объекты, построенные с использованием продукции «СТК-ПромБетон».
+    <br>
+    {% if territory.getH1() is empty %}
+      {{ territory.getTitle() }}
+    {% else %}
+      {{ territory.getH1() }}
+    {% endif %}
+  </h1>
+  <ul class="gbi_map_list">
+    {% for object in territory.getObjects() %}
+      <li><a href="{{ path('app_main_object', {id: object.getId()}) }}">{{ object.getTitle() }}</a></li>
+    {% endfor %}
+  </ul>
 {% endblock %}

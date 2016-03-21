@@ -21,7 +21,7 @@ class DashboardAdminController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppAdminBundle:Admin:new.layout.html.twig');
+        return $this->render('AppAdminBundle:Admin:layout.html.twig');
     }
 
     /**

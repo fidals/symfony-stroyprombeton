@@ -20,7 +20,9 @@ class ObjectType extends AbstractType
             ->add('name', TextType::class)
             ->add('id', NumberType::class, array('read_only' => true))
             ->add('alias', TextType::class, array('required' => false))
-            ->add('isTextPublished', CheckboxType::class, array('required' => false))
+            ->add('isTextPublished', CheckboxType::class, array(
+                'required' => false
+            ))
             ->add('text', CKEditorType::class, array('config_name' => 'standard'))
             ->add('territory', EntityType::class, array(
                 'class' => 'AppMainBundle:Territory',

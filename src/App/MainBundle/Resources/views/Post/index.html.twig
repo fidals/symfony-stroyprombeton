@@ -1,28 +1,24 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
 
 {% block content %}
-	<div class="primary-content">
-		<strong><i></i></strong>
-
-		<h1>Новости компании</h1>
-		<ul class="informer">
-			{% for post in pagination %}
-				{% set postUrl = path('app_main_post', { id: post.getId() }) %}
-				<li>
-					<div class="news_img">
-						<a href="{{ postUrl }}">
-							<img src="/assets/images/news/{{ post.getDate() | date('d_m_y') }}/{{ post.getDate() | date('d_m_y') }}_tn.jpg" alt=""/>
-						</a>
-					</div>
-					<i>{{ post.getDate() | date('d.m.Y') }}</i><br>
-					<a href="{{ postUrl }}">{{ post.getName() }}</a>
-					<div class="inf_intro">{{ post.getIntroText() }}</div>
-				</li>
-			{% endfor %}
-		</ul>
-		<p>
-			Страницы:
-			{{ knp_pagination_render(pagination) }}
-		</p>
-	</div>
+  <div class="primary-content">
+    <h1>Новости компании</h1>
+    <ul class="informer">
+      {% for post in pagination %}
+        {% set postUrl = path('app_main_post', { id: post.getId() }) %}
+        <li>
+          <div class="news_img">
+            <a href="{{ postUrl }}">
+              <img src="/assets/images/news/{{ post.getDate() | date('d_m_y') }}/{{ post.getDate() | date('d_m_y') }}_tn.jpg" alt=""/>
+            </a>
+          </div>
+          <i>{{ post.getDate() | date('d.m.Y') }}</i><br>
+          <a href="{{ postUrl }}">{{ post.getName() }}</a>
+          <div class="inf_intro">{{ post.getIntroText() }}</div>
+        </li>
+      {% endfor %}
+    </ul>
+    <p>Страницы:</p>
+    <div class="pagination">{{ knp_pagination_render(pagination) }}</div>
+  </div>
 {% endblock %}

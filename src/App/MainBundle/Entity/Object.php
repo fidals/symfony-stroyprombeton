@@ -12,97 +12,97 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Object
 {
-	use PageTrait;
+    use PageTrait;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
-	 * @ORM\Column(name="id", type="integer")
-	 */
-	private $id;
+    /**
+     * @var integer
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="id", type="integer")
+     */
+    private $id;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="alias", type="string", length=500, nullable=true)
-	 */
-	private $alias;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="alias", type="string", length=500, nullable=true)
+     */
+    private $alias;
 
-	/**
-	 * @ORM\ManyToOne(targetEntity="Territory", inversedBy="objects")
-	 * @ORM\JoinColumn(name="territory_id", referencedColumnName="id", onDelete="CASCADE")
-	 */
-	protected $territory;
+    /**
+     * @ORM\ManyToOne(targetEntity="Territory", inversedBy="objects")
+     * @ORM\JoinColumn(name="territory_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $territory;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 0})
+     * @ORM\Column(name="is_text_published", type="boolean", options={"default" = 1})
      */
     private $isTextPublished = true;
 
-	/**
-	 * @return int
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @param string $alias
-	 */
-	public function setAlias($alias)
-	{
-		$this->alias = $alias;
-	}
+    /**
+     * @param string $alias
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+    }
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getAlias()
-	{
-		return $this->alias;
-	}
+    /**
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
 
-	/**
-	 * @param $territory
-	 */
-	public function setTerritory($territory)
-	{
-		$this->territory = $territory;
-	}
+    /**
+     * @param $territory
+     */
+    public function setTerritory($territory)
+    {
+        $this->territory = $territory;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getTerritory()
-	{
-		return $this->territory;
-	}
+    /**
+     * @return mixed
+     */
+    public function getTerritory()
+    {
+        return $this->territory;
+    }
 
-	public function getRouteName()
-	{
-		return 'app_main_object';
-	}
+    public function getRouteName()
+    {
+        return 'app_main_object';
+    }
 
-	public function getRouteParameters()
-	{
-		if (empty($this->getId())){
-			return null;
-		}
+    public function getRouteParameters()
+    {
+        if (empty($this->getId())) {
+            return null;
+        }
 
-		$parameters = array('id' => $this->getId());
+        $parameters = array('id' => $this->getId());
 
-		return $parameters;
-	}
+        return $parameters;
+    }
 
     /**
      * @return boolean

@@ -1,4 +1,9 @@
 $(function () {
+    Shadowbox.init({
+        animate: false,
+        animateFade: false
+    });
+    
 	$("#order_phone, #price_list_booking_phone, #order_drawing_phone").mask("+9(999) 999-9999", {
 		placeholder: "+_(___) ___-____"
 	});

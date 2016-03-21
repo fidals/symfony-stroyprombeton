@@ -1,9 +1,9 @@
 app_main_price_list_booking:
-    path: /order_price/
+    path: /order-price/
     defaults: { _controller: AppMainBundle:PriceList:booking }
 
 app_main_price_list_booking_success:
-    path: /order_price_success/
+    path: /order-price-success/
     defaults: { _controller: AppMainBundle:PriceList:bookingSuccess }
 
 app_main_object:
@@ -37,11 +37,11 @@ app_main_index:
     defaults: { _controller: AppMainBundle:StaticPage:showIndex }
 
 app_build_category_tree:
-    path: /buildCategoryTree/
+    path: /build-category-tree/
     defaults: { _controller: AppMainBundle:AdminTree:buildCategoryTree }
 
 app_get_category_tree_products:
-    path: /getTreeProducts/
+    path: /get-tree-products/
     defaults: { _controller: AppMainBundle:AdminTree:getProductsByCategoryId }
 
 app_catalog_cart_add:

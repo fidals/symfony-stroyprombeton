@@ -1,137 +1,126 @@
 <div class="row">
-	<div class="col-lg-6">
-		<div class="box">
-			<h3 class="box-title">Другое</h3>
-			<div class="box-body">
-				<table class="table table-hover">
-					<tbody>
-					<tr>
-						<td class="admin-list-label" width="40%">
-							Территории
-						</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-link btn-flat new-territory" href="{{ path('admin_territory_edit') }}">
-									<i class="fa fa-plus-circle"></i>
-									Добавить новый
-								</a>
-								<a class="btn btn-link btn-flat list-territory" href="{{ path('admin_territory_list') }}">
-									<i class="glyphicon glyphicon-list"></i>
-									Список
-								</a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="admin-list-label" width="40%">
-							Объекты
-						</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-link btn-flat" href="{{ path('admin_object_edit') }}">
-									<i class="fa fa-plus-circle"></i>
-									Добавить новый
-								</a>
-								<a class="btn btn-link btn-flat list-object" href="{{ path('admin_object_list') }}">
-									<i class="glyphicon glyphicon-list"></i>
-									Список
-								</a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="admin-list-label" width="40%">
-							Новости
-						</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-link btn-flat" href="{{ path('admin_post_edit') }}">
-									<i class="fa fa-plus-circle"></i>
-									Добавить новый
-								</a>
-								<a class="btn btn-link btn-flat list-post" href="{{ path('admin_post_list') }}">
-									<i class="glyphicon glyphicon-list"></i>
-									Список
-								</a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="admin-list-label" width="40%">
-							Страницы
-						</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-link btn-flat" href="{{ path('admin_staticpage_edit') }}">
-									<i class="fa fa-plus-circle"></i>
-									Добавить новый
-								</a>
-								<a class="btn btn-link btn-flat list-staticpage" href="{{ path('admin_staticpage_list') }}">
-									<i class="glyphicon glyphicon-list"></i>
-									Список
-								</a>
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+  <div class="col-lg-6">
+    <div class="box">
+      <h3 class="box-title">Другое</h3>
+      <div class="box-body">
+        <table class="table table-hover">
+          <tbody>
+          <tr>
+            <td class="admin-list-label" width="40%">
+              Территории
+            </td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-link btn-flat new-territory" href="{{ path('admin_territory_edit') }}">
+                  <i class="fa fa-plus-circle"></i>
+                  Добавить новый
+                </a>
+                <a class="btn btn-link btn-flat list-territory" href="{{ path('admin_territory_list') }}">
+                  <i class="glyphicon glyphicon-list"></i>
+                  Список
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="admin-list-label" width="40%">Объекты</td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-link btn-flat" href="{{ path('admin_object_edit') }}">
+                  <i class="fa fa-plus-circle"></i>
+                  Добавить новый
+                </a>
+                <a class="btn btn-link btn-flat list-object" href="{{ path('admin_object_list') }}">
+                  <i class="glyphicon glyphicon-list"></i>
+                  Список
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="admin-list-label" width="40%">Новости</td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-link btn-flat" href="{{ path('admin_post_edit') }}">
+                  <i class="fa fa-plus-circle"></i>
+                  Добавить новый
+                </a>
+                <a class="btn btn-link btn-flat list-post" href="{{ path('admin_post_list') }}">
+                  <i class="glyphicon glyphicon-list"></i>
+                  Список
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="admin-list-label" width="40%">Страницы</td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-link btn-flat" href="{{ path('admin_staticpage_edit') }}">
+                  <i class="fa fa-plus-circle"></i>
+                  Добавить новый
+                </a>
+                <a class="btn btn-link btn-flat list-staticpage" href="{{ path('admin_staticpage_list') }}">
+                  <i class="glyphicon glyphicon-list"></i>
+                  Список
+                </a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-		<div class="box">
-			<h3 class="box-title">Каталог</h3>
-			<div class="box-body">
-				<table class="table table-hover">
-					<tbody>
-					<tr>
-						<td class="admin-list-label" width="40%">
-							Категории
-						</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-link btn-flat" href="{{ path('admin_category_edit') }}">
-									<i class="fa fa-plus-circle"></i>
-									Добавить новый
-								</a>
-								<a class="btn btn-link btn-flat list-category" href="{{ path('admin_category_list') }}">
-									<i class="glyphicon glyphicon-list"></i>
-									Список
-								</a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="admin-list-label" width="40%">
-							Изделия
-						</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-link btn-flat new-product" href="{{ path('admin_product_edit') }}">
-									<i class="fa fa-plus-circle"></i>
-									Добавить новый
-								</a>
-								<a class="btn btn-link btn-flat list-product" href="{{ path('admin_product_list') }}">
-									<i class="glyphicon glyphicon-list"></i>
-									Список
-								</a>
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+    <div class="box">
+      <h3 class="box-title">Каталог</h3>
+      <div class="box-body">
+        <table class="table table-hover">
+          <tbody>
+          <tr>
+            <td class="admin-list-label" width="40%">Категории</td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-link btn-flat" href="{{ path('admin_category_edit') }}">
+                  <i class="fa fa-plus-circle"></i>
+                  Добавить новый
+                </a>
+                <a class="btn btn-link btn-flat list-category" href="{{ path('admin_category_list') }}">
+                  <i class="glyphicon glyphicon-list"></i>
+                  Список
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="admin-list-label" width="40%">Изделия</td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-link btn-flat new-product" href="{{ path('admin_product_edit') }}">
+                  <i class="fa fa-plus-circle"></i>
+                  Добавить новый
+                </a>
+                <a class="btn btn-link btn-flat list-product" href="{{ path('admin_product_list') }}">
+                  <i class="glyphicon glyphicon-list"></i>
+                  Список
+                </a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-	<div class="col-lg-6">
-		<div class="box">
-			<h3 class="box-title">Табличный редактор продуктов</h3>
-			<div class="box-body text-center">
-				<a href="/admin/editproducts" class="tablegear-link" target="_blank">
-					<i class="fa fa-plus-square fa-fw"></i>
-					Открыть
-				</a>
-			</div>
-		</div>
-	</div>
+  <div class="col-lg-6">
+    <div class="box">
+      <h3 class="box-title">Табличный редактор продуктов</h3>
+      <div class="box-body text-center">
+        <a href="/admin/editproducts" class="tablegear-link">
+          <i class="fa fa-plus-square fa-fw"></i> Открыть
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

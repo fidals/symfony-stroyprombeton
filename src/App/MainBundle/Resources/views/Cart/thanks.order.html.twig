@@ -1,26 +1,22 @@
 {% extends "AppMainBundle:Default:layout.html.twig" %}
-{% block title %}
-	Оформление заказа на ЖБИ продукцию
-{% endblock %}
 
-{% block description %}
-{% endblock %}
+{% block title %}Оформление заказа на ЖБИ продукцию{% endblock %}
 
 {% block content %}
-	<script>
-		$(function () {
-			$('#user-email')
-				.text( localStorage.getItem( 'userEmailForOrder' ) )
-				.attr( 'href', 'mailto:' + localStorage.getItem( 'userEmailForOrder' ) );
-			$('#user-phone').text( localStorage.getItem( 'userPhoneForOrder' ) );
-		});
-	</script>
+  <script>
+    $(function () {
+      $('#user-email')
+        .text(localStorage.getItem('userEmailForOrder'))
+        .attr('href', 'mailto:' + localStorage.getItem('userEmailForOrder'));
+      $('#user-phone').text(localStorage.getItem('userPhoneForOrder'));
+    });
+  </script>
 
-	<h1>Ваш заказ принят</h1>
+  <h1>Ваш заказ принят</h1>
 
-	<p>
-		Ваш email: <a id="user-email" href="mailto:example@example.ru"></a>. Для уточнения деталей заказа менеджер свяжется с вами по номеру <span id="user-phone"></span>.
-	</p>
+  <p>
+    Ваш email: <a id="user-email" href="mailto:example@example.ru"></a>. Для уточнения деталей заказа менеджер свяжется с вами по номеру <span id="user-phone"></span>.
+  </p>
 
-	<a href="/">Вернуться на главную</a>
+  <a href="/">Вернуться на главную</a>
 {% endblock %}

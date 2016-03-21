@@ -2,40 +2,38 @@
 {% set documents = ['docx', 'doc', 'xls', 'xlsx', 'pdf'] %}
 
 <div class="entity-assets">
-	<div class="images">
-		{% set images_count = 0 %}
-		{% for file in files %}
-			{% if file.info.getExtension() in images %}
-				{% if images_count < 3 %}
-					{% set images_count = images_count + 1 %}
-					<div class="entity-image">
-						<i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
-						<a href="{{ file.path }}" data-toggle="lightbox" data-gallery="productimages">
-							<img class="img-responsive" src="{{ file.path }}">
-						</a>
-					</div>
-				{% else %}
-					<div class="entity-image-name">
-						<i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
-						<a href="{{ file.path }}" data-toggle="lightbox" data-gallery="productimages">
-							{{ file.info.getFilename()|slice(0, 20) }}
-						</a>
-					</div>
-				{% endif %}
-			{% endif %}
-		{% endfor %}
-	</div>
+  <div class="images">
+    {% set images_count = 0 %}
+    {% for file in files %}
+      {% if file.info.getExtension() in images %}
+        {% if images_count < 3 %}
+          {% set images_count = images_count + 1 %}
+          <div class="entity-image">
+            <i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
+            <a href="{{ file.path }}" data-toggle="lightbox" data-gallery="productimages">
+              <img class="img-responsive" src="{{ file.path }}">
+            </a>
+          </div>
+        {% else %}
+          <div class="entity-image-name">
+            <i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
+            <a href="{{ file.path }}" data-toggle="lightbox" data-gallery="productimages">
+              {{ file.info.getFilename()|slice(0, 20) }}
+            </a>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
 
-	<div class="documents">
-		{% for file in files %}
-			{% if file.info.getExtension() in documents %}
-				<div class="entity-document">
-					<a href="{{ file.path }}">
-						{{ file.info.getFilename()|slice(0, 20) }}
-					</a>
-					<i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
-				</div>
-			{% endif %}
-		{% endfor %}
-	</div>
+  <div class="documents">
+    {% for file in files %}
+      {% if file.info.getExtension() in documents %}
+        <div class="entity-document">
+          <a href="{{ file.path }}">{{ file.info.getFilename()|slice(0, 20) }}</a>
+          <i class="fa fa-times" title="Удалить" onclick="CatalogAdmin.deleteFile('{{ entity }}', '{{ id }}', '{{ file.info.getFilename() }}')"></i>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>

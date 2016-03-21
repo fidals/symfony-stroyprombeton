@@ -1,58 +1,56 @@
 {% extends "AppMainBundle:Admin:entity.html.twig" %}
 
-{# Variables #}
 {% set page_title = 'Категория' %}
 
 {% block admin_breadcrumbs %}
-	<div class="header-links navbar-left">
-		<ol class="header-links-breadcrumbs breadcrumb">
-			<li><a href="/admin">Dashboard</a></li>
-			<li><a href="#">CategoryPage</a></li>
-			<li class="active">Общегражданское и промышленное строительство</li>
-		</ol>
-
-		<span class="header-entity-link">
-			Ссылка на сущность: <a href="/gbi/category/637/" target="_blank">/gbi/category/637/</a>
-		</span>
-	</div>
+  <div class="header-links navbar-left">
+    <ol class="header-links-breadcrumbs breadcrumb">
+      <li><a href="{{ path(app_admin }}">Dashboard</a></li>
+      <li><a href="#">CategoryPage</a></li>
+      <li class="active">Общегражданское и промышленное строительство</li>
+    </ol>
+    <span class="header-entity-link">
+      Ссылка на сущность: <a href="/gbi/category/637/" target="_blank">/gbi/category/637/</a>
+    </span>
+  </div>
 {% endblock %}
 
 {% block chars_secondary %}
-	<h4 class="entity-form-title">Дополнительные характеристики</h4>
+  <h4 class="entity-form-title">Дополнительные характеристики</h4>
 
-	<div class="form-group">
-		<label class="control-label sr-only" for="input-price">Цена</label>
-		<div class="input-group">
-			<div class="input-group-addon">Link to STK-Metal</div>
-			<input class="form-control" id="input-price" type="text">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label sr-only" for="input-price-date">Дата цены</label>
-		<div class="input-group">
-			<div class="input-group-addon">Ord</div>
-			<input class="form-control" id="input-price-date" type="text">
-		</div>
-	</div>
+  <div class="form-group">
+    <label class="control-label sr-only" for="input-price">Цена</label>
+    <div class="input-group">
+      <div class="input-group-addon">Link to STK-Metal</div>
+      <input class="form-control" id="input-price" type="text">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label sr-only" for="input-price-date">Дата цены</label>
+    <div class="input-group">
+      <div class="input-group-addon">Ord</div>
+      <input class="form-control" id="input-price-date" type="text">
+    </div>
+  </div>
 
-	<div class="form-group">
-		<label class="control-label sr-only" for="select-parent">Родитель</label>
-		<div class="input-group">
-			<div class="input-group-addon">Родитель</div>
-			<select class="form-control" id="select-parent">
-				<option value="" disabled selected style="display: none;">Выберите родителя</option>
-				<option>Фундаментные блоки</option>
-				<option>Коллоны</option>
-				<option>Лестничные марши</option>
-			</select>
-		</div>
-	</div>
+  <div class="form-group">
+    <label class="control-label sr-only" for="select-parent">Родитель</label>
+    <div class="input-group">
+      <div class="input-group-addon">Родитель</div>
+      <select class="form-control" id="select-parent">
+        <option value="" disabled selected style="display: none;">Выберите родителя</option>
+        <option>Фундаментные блоки</option>
+        <option>Коллоны</option>
+        <option>Лестничные марши</option>
+      </select>
+    </div>
+  </div>
 
-	<div class="btn-wrapper">
-		<button class="btn btn-primary" type="button">Добавить новый</button>
-	</div>
+  <div class="btn-wrapper">
+    <button class="btn btn-primary" type="button">Добавить новый</button>
+  </div>
 {% endblock %}
 
 {% block marking %}
-	{% include 'AppMainBundle:Admin:marking.html.twig' %}
+  {% include 'AppMainBundle:Admin:marking.html.twig' %}
 {% endblock %}

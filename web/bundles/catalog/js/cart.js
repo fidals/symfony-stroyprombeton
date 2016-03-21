@@ -37,11 +37,8 @@ var ractiveDropdown = new Ractive({
         }
     },
 
-
-
     lazy: true
 });
-
 
 /**
  * Метод для апдейта данных на беке.
@@ -71,16 +68,16 @@ var Cart = {
 
     view: {
         container: '.menu-basket',
-
         update: function (products) {
             ractiveDropdown.set({products: products});
         }
     },
 
     add: function (id, quantity) {
-        if(quantity < 1) {
+        if (quantity < 1) {
             return false;
         }
+
         $.post(
             Cart.url.add,
             {
@@ -90,6 +87,7 @@ var Cart = {
             Cart.view.update,
             'json'
         );
+
         return false;
     },
 
@@ -103,6 +101,7 @@ var Cart = {
             Cart.view.update,
             'json'
         );
+
         return false;
     },
 
@@ -113,6 +112,7 @@ var Cart = {
             Cart.view.update,
             'json'
         );
+
         return false;
     },
 
@@ -146,12 +146,12 @@ var Cart = {
             Cart.view.update,
             'json'
         );
+
         return false;
     }
 };
 
 $(function () {
-
     /**
      * Инициализация корзины при загрузке страницы.
      */
@@ -202,7 +202,6 @@ $(function () {
         })
         .on('click', function () {
             var currentTooltip = $(this).attr('id');
-
 
             $('#darktooltip-' + currentTooltip)
                 .css({
