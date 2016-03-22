@@ -5,7 +5,6 @@ app/cache/*
 app/logs/*
 vendor/
 bin/
-composer.lock
 .idea
 app/config/parameters.yml
 app/indexation
