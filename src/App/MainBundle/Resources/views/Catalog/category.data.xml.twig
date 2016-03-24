@@ -1,0 +1,8 @@
+<section>
+    <name>{{ category.name }}</name>
+    <title>{{ category.name }}</title>
+    <is_active>{{ category.isActive }}</is_active>
+    <work_doc>{{ category.mark }}</work_doc>
+    <img_url>{{ url('app_main_index')|trim('/') ~ category.getPicturePath() }}</img_url>
+    <url>{{ url('app_catalog_category', {'id': category.getId()}) }}</url>
+</section>

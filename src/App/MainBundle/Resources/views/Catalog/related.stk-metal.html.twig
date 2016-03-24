@@ -1,0 +1,25 @@
+<div class="metal-info">
+    <div class="metal-link">
+        <div class="metal-logo" onclick="window.open('{{ category.getLinkToStkMetal() }}','_blank');return false;">
+            <img class src="{{ asset('/bundles/main/images/metall.png') }}">
+            <span class="metal-title">CTK-Металл</span>
+        </div>
+    </div>
+    <p>Предлагаем сопутствующую продукцию с нашего завода металлоконструкций</p>
+
+    {% set metalXml = category.getMetalXml() %}
+
+    <div class="metal-related">
+        <div class="related-product" onclick="window.open('{{ metalXml.url }}','_blank');return false;">
+            <div class="link-prod-img" >
+                <img src="{{ metalXml.img_url }}">
+            </div>
+            <div class="link-prod-info">
+                <p class="link-prod-info-name">{{ metalXml.name }}</p>
+                <p class="link-prod-description">
+                    {{ metalXml.work_doc }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

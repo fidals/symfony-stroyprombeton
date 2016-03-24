@@ -24,6 +24,7 @@ class Category
     const WEB_DIR_PATH = '/../../../../web';
     const IMG_DIR_PATH = '/assets/category';
     const EMPTY_THUMB_NAME = 'logo-prozr/logo-prozr.png';
+    const STK_METAL_URL = 'http://www.stk-metal.ru/metallokonstruktsii/';
 
     /**
      * @var integer
@@ -245,5 +246,19 @@ class Category
         $parameters = array('id' => $this->getId());
 
         return $parameters;
+    }
+
+    /**
+     * Геттер для XML с линкованной категорией с Металла.
+     *
+     * @return null|\SimpleXMLElement
+     */
+    public function getMetalXML()
+    {
+        if ($this->linkToStkMetal) {
+            return new \SimpleXMLElement(self::STK_METAL_URL . $this->getLinkToStkMetal() . '/get-xml-data/', null, true);
+        }
+
+        return null;
     }
 }

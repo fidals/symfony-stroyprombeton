@@ -141,3 +141,4 @@ ivory_ck_editor:
     configs:
         standard:
             toolbar: standard
+            allowedContent: true

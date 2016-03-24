@@ -213,13 +213,16 @@ $(function () {
 	 * Показывает напоминание "не забудьте сохранить изменения", при изменении инстанса CKEditor.
 	 * @param editor
 	 */
-	function showEditorNotification (editor) {
+	var showEditorNotification = function (editor) {
 		CKEDITOR.instances[editor].on('change', function () {
 			$('.fa-star').show()
 		});
-	}
+	};
 
 	if (typeof CKEDITOR !== 'undefined') {
+		CKEDITOR.config.protectedSource.push(/<(style)[^>]*>.*<\/style>/ig);
+		CKEDITOR.config.protectedSource.push(/<(script)[^>]*>.*<\/script>/ig);
+
 		for (var editor in CKEDITOR.instances) {
 			showEditorNotification(editor);
 		}

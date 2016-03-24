@@ -140,6 +140,23 @@ class CatalogController extends Controller
 	}
 
 	/**
+	 * Отдает xml с информацией о категории Металлу.
+	 *
+	 * @param int $categoryId
+	 * @return mixed
+	 */
+	public function getCategoryXmlAction($categoryId)
+	{
+		$response = new Response();
+		$response->headers->set('Content-Type', 'text/xml');
+
+		return $this->render(
+			"AppMainBundle:Catalog:category.data.xml.twig",
+			array('category' => $this->getDoctrine()->getRepository('AppMainBundle:Category')->find($categoryId)
+		), $response);
+	}
+
+	/**
 	 * Обрабатывает поисковые запросы с автокомплита
 	 * @return Response
 	 */

@@ -48,6 +48,7 @@ class ProductType extends AbstractType
             ->add('weight', NumberType::class, array('required' => false))
             ->add('height', NumberType::class, array('required' => false))
             ->add('width', NumberType::class, array('required' => false))
+            ->add('volume', NumberType::class, array('required' => false))
             ->add('diameterIn', NumberType::class, array('required' => false))
             ->add('diameterOut', NumberType::class, array('required' => false))
             ->add('mark', TextType::class)
