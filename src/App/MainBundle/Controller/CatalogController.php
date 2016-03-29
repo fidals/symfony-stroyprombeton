@@ -219,20 +219,34 @@ class CatalogController extends Controller
 		}
 		$responseText = $this->container->get('templating')->render(
 			'AppMainBundle:Catalog:csv.categories.html.twig', array('categories' => $categories));
-		return $this->getResponseAsFile($responseText);
+		return $this->getResponseAsFile($responseText, 'categories');
+	}
+
+	/**
+	 * Список всех продуктов в формте csv.
+	 *
+	 * @return Response
+	 */
+	public function productsCsvFileAction() {
+
+		$products = $this->get('doctrine')->getRepository('AppMainBundle:Product')->findAll();
+		$responseText = $this->container->get('templating')->render(
+			'AppMainBundle:Catalog:csv.products.html.twig', array('products' => $products));
+		return $this->getResponseAsFile($responseText, 'products');
 	}
 
 	/**
 	 * Говорит браузеру, что ответ будет файлом, не страницей
 	 * @param string $text - содержимое ответа
+	 * @param string $filename - имя файла
 	 * @return Response
 	 */
-	private function getResponseAsFile($text) {
+	private function getResponseAsFile($text, $filename = 'data') {
 		//
 		$response = new Response($text);
 		$disposition = $response->headers->makeDisposition(
 			ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-			'categories.csv'
+			(string)$filename . '.csv'
 		);
 		$response->headers->set('Content-Disposition', $disposition);
 		return $response;

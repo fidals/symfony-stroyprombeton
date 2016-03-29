@@ -1,0 +1,3 @@
+{% for product in products %}
+{{  url('app_catalog_product', { 'id': product.getId() }) }};{{ product.getName() }};{{ product.getMark() }}
+{% endfor %}
