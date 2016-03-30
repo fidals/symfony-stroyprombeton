@@ -7,33 +7,36 @@
   <h1 class="entity-title text-center">{{ page_title }}</h1>
   {% block form %}
     {{ form_start(form, {'attr': {'class': 'form-inline form-entity'}}) }}
-      <div class="entity-wrapper">
-        <h4 class="entity-form-title">Основные характеристики</h4>
-        {% block main_properties %}{% endblock %}
-        {% block wysiwyg %}
-          <i class="fa fa-star" style="display: none;"></i>
-          <span style="display: none;"> Не забудьте сохранить изменения!</span>
-          {{ form_widget(form.text) }}
-        {% endblock %}
+      <div class="all-chars-wrapper">
+        <div class="entity-wrapper">
+          <h4 class="entity-form-title">Основные характеристики</h4>
+          {% block main_properties %}{% endblock %}
+          {% block wysiwyg %}
+            <i class="fa fa-star" style="display: none;"></i>
+            <span style="display: none;"> Не забудьте сохранить изменения!</span>
+            {{ form_widget(form.text) }}
+          {% endblock %}
+        </div>
+
+        <div class="chars-wrapper">
+          <h4 class="entity-form-title">Дополнительные характеристики</h4>
+          {% block additional_properties %} {% endblock %}
+        </div>
+
+        <div class="seo-wrapper">
+          {% block seo %}{{ include('AppAdminBundle:Admin:seo.html.twig') }}{% endblock %}
+          {% if fileList is defined %}
+            <div class="btn-wrapper">
+              <input class="btn-primary js-file-input" type="file" data-filename-placement="inside" name="file" onchange="CatalogAdmin.uploadFile(event, '{{ entity_name }}', '{{ entity_id }}')">
+            </div>
+            <div class="assets">{{ fileList|raw }}</div>
+          {% endif %}
+        </div>
       </div>
 
-      <div class="chars-wrapper">
-        <h4 class="entity-form-title">Дополнительные характеристики</h4>
-        {% block additional_properties %} {% endblock %}
-      </div>
-
-      <div class="seo-wrapper">
-        {% block seo %}{{ include('AppAdminBundle:Admin:seo.html.twig') }}{% endblock %}
-        {% if fileList is defined %}
-          <div class="btn-wrapper">
-            <input class="btn-primary js-file-input" type="file" data-filename-placement="inside" name="file" onchange="CatalogAdmin.uploadFile(event, '{{ entity_name }}', '{{ entity_id }}')">
-          </div>
-          <div class="assets">{{ fileList|raw }}</div>
-        {% endif %}
-        {% block actions %}
-          {{ include('AppAdminBundle:Admin:actions.html.twig') }}
-        {% endblock %}
-      </div>
+      {% block actions %}
+        {{ include('AppAdminBundle:Admin:actions.html.twig') }}
+      {% endblock %}
     {{ form_end(form) }}
   {% endblock %}
 

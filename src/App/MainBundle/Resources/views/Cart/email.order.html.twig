@@ -16,7 +16,7 @@
   <span style="font-size: 18px;">Здравствуйте!</span>
   <br>
   <br>
-  <span>Здравствуйте, {{ person }}!, <b>Ваш заказ:</b></span>
+  <span>{% if person %}Уважаемый(ая) {{ person }}. {% endif %}<b>Ваш заказ:</b></span>
 </p>
 
 {% if cart.products %}
@@ -93,10 +93,6 @@
 {% if form.vars.value.comment %}
   <span>Сообщение: </span>
   <span><b>{{ form.vars.value.comment }}</b></span>
-  <br>
-{% endif %}
-{% if form.vars.value.files.0 %}
-  <span>Приложения: </span>
   <br>
 {% endif %}
 

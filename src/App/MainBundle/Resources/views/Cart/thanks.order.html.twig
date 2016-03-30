@@ -3,6 +3,18 @@
 {% block title %}Оформление заказа на ЖБИ продукцию{% endblock %}
 
 {% block content %}
+  <h1>Ваш заказ принят</h1>
+
+  <p>
+    Ваш email: <a id="user-email" href="mailto:example@example.ru"></a>. Для уточнения деталей заказа менеджер свяжется с вами по номеру <span id="user-phone"></span>.
+  </p>
+
+  <a href="/">Вернуться на главную</a>
+{% endblock %}
+
+{% block footerjs %}
+  {{ parent() }}
+
   <script>
     $(function () {
       $('#user-email')
@@ -11,12 +23,4 @@
       $('#user-phone').text(localStorage.getItem('userPhoneForOrder'));
     });
   </script>
-
-  <h1>Ваш заказ принят</h1>
-
-  <p>
-    Ваш email: <a id="user-email" href="mailto:example@example.ru"></a>. Для уточнения деталей заказа менеджер свяжется с вами по номеру <span id="user-phone"></span>.
-  </p>
-
-  <a href="/">Вернуться на главную</a>
 {% endblock %}

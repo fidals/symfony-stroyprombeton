@@ -3,7 +3,7 @@ $(function () {
     el: '#order-table',
     template: '#ractive-order',
     data: ractiveDropdown,
-    adapt: ['Ractive']
+    adapt: ['Ractive'],
   });
 
   ractiveOrder.on('productCountPlus', function (event) {
@@ -30,22 +30,24 @@ $(function () {
   /**
    * Логика работы с файлами в форме:
    */
-  var $btnSend = $('#btn-order-send'),
-    $fileCountNotifyTag = $('#order-file-notify'),
-    $fileCountErrorTag = $('.js-error-count'),
-    $fileSizeErrorTag = $('.js-error-large-file'),
-    maxFileSize = 25550000; // ~25 Mb
+  var $btnSend = $('#btn-order-send');
+  var $fileCountNotifyTag = $('#order-file-notify');
+  var $fileCountErrorTag = $('.js-error-count');
+  var $fileSizeErrorTag = $('.js-error-large-file');
+  var maxFileSize = 25550000; // ~25 Mb
 
-  $('#order_files').change(function() {
+  $('#order_files').change(function () {
     var fileCount = parseInt($(this).get(0).files.length);
 
-    if ( fileCount > 0 ) {
-      $fileCountNotifyTag.html('Число файлов: ' + fileCount);
+    if (fileCount === 1) {
+      $fileCountNotifyTag.html('Выбран файл: ' + $(this).get(0).files[0].name);
+    } else if (fileCount > 1) {
+      $fileCountNotifyTag.html('Выбрано файлов: ' + fileCount + ' .шт');
     } else {
       $fileCountNotifyTag.html('Файлы не выбраны');
     }
 
-    if ( fileCount > 10 ) {
+    if (fileCount > 10) {
       $fileCountErrorTag.css('color', '#C90000');
       $btnSend.attr('disabled', true);
     } else {
@@ -53,7 +55,7 @@ $(function () {
       $btnSend.attr('disabled', false);
     }
 
-    if ( checkFilesSize() === false ) {
+    if (checkFilesSize() === false) {
       $fileSizeErrorTag.removeClass('hide').css('color', '#C90000');
       $btnSend.attr('disabled', true);
     } else {
@@ -62,13 +64,13 @@ $(function () {
     }
   });
 
-  $btnSend.on('click', function() {
+  $btnSend.on('click', function () {
     localStorage.setItem('userEmailForOrder', $('#order_email').val());
     localStorage.setItem('userPhoneForOrder', $('#order_phone').val());
   });
 
   function checkFilesSize() {
-    var $input = document.getElementById("order_files");
+    var $input = document.getElementById('order_files');
 
     // сначала - проверка на поддержку в браузерах
     if ($input.files && $input.files.length > 0) {

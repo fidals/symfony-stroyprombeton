@@ -108,6 +108,7 @@
         <td>Прикрепить файл:</td>
         <td class="td-submit">
           <div>{{ form_widget(form.files) }}</div>
+          <span id="order-file-notify">Файлы не выбраны</span>
           <input type="submit" name="submit" class="button btn btn-red btn-order-send" id="btn-order-send"
                  value="Отправить заказ">
           <div class="form-error">{{ form_errors(form.files) }}</div>

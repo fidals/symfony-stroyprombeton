@@ -7,6 +7,8 @@ use App\MainBundle\Entity\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class ProductAdminController.
@@ -16,8 +18,8 @@ class ProductAdminController extends AbstractEntityController
     const ENTITY = 'AppMainBundle:Product';
     const ENTITY_NAME = 'product';
     const ENTITY_FORM = ProductType::class;
-
     const PARENT_ENTITY = 'AppMainBundle:Category';
+
     const LIST_TEMPLATE = 'AppAdminBundle:Product:list.html.twig';
     const EDIT_TEMPLATE = 'AppAdminBundle:Product:new.html.twig';
 
@@ -32,7 +34,7 @@ class ProductAdminController extends AbstractEntityController
      * @param int     $page
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function listAction($page, Request $request)
     {
@@ -45,7 +47,7 @@ class ProductAdminController extends AbstractEntityController
      * @param Request $request
      * @param int     $id
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, $id)
     {
@@ -58,7 +60,7 @@ class ProductAdminController extends AbstractEntityController
      *
      * @param Product $product
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Product $product)
     {

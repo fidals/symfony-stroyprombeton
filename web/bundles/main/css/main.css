@@ -785,16 +785,17 @@ div.search-form table td.search-form-input {
     width: 100%;
 }
 
-.search-form-input .ui-autocomplete-input {
+.search-input {
     border: 1px solid #999;
     border-radius: 5px;
-    padding: 3px;
     color: #999;
+    margin-bottom: 0 !important;
+    padding: 3px;
     text-indent: 6px;
     width: 100%;
 }
 
-.search-form-input .ui-autocomplete-input:focus {
+.search-input:focus {
     color: #000;
 }
 
@@ -1875,6 +1876,18 @@ div.external-section table td.data p {
 }
 
 /* -------------------------------- */
+.autocomplete-anchor {
+    border: 1px solid transparent;
+    margin: 0 !important;
+}
+
+.autocomplete-pretext {
+    color: #808080;
+}
+
+.autocomplete-show-all {
+    color: #C90000 !important;
+}
 
 .ui-autocomplete-loading {
     background: #FFF url('../images/ui-anim_basic_16x16.gif') no-repeat right center;
@@ -1882,7 +1895,8 @@ div.external-section table td.data p {
 
 .ui-autocomplete {
     max-height: 510px;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
+    width: 860px !important;
     z-index: 999 !important;
 }
 
@@ -2485,13 +2499,9 @@ div.map {
     height: 100% !important;
 }
 
-#search_condition {
-    margin: 0;
-}
-
 .gbi_map {
-    width: 850px !important;
     height: 485px !important;
+    width: 850px !important;
 }
 
 .pb_partners {
@@ -2502,7 +2512,8 @@ div.map {
     background-color: #ffbd8d;
 }
 
-.pb_partners td, .pb_partners th {
+.pb_partners td,
+.pb_partners th {
     border: 1px solid #c90000;
     padding: 7px;
 }

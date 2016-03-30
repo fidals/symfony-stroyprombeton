@@ -3,6 +3,10 @@ app_catalog_suggest:
     path: /suggest/
     defaults: { _controller: AppMainBundle:Catalog:suggest }
 
+app_catalog_suggest_only_categories:
+    path: /suggest-admin/
+    defaults: { _controller: AppMainBundle:Catalog:suggestAdmin }
+
 app_catalog_search:
     path: /search/
     defaults: { _controller: AppMainBundle:Catalog:searchResults }

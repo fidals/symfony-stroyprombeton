@@ -15,13 +15,9 @@
 </div>
 
 <p style="margin: 0 0 1.15em; font-family: Arial, sans-serif;">
-    <span style="font-size: 18px;">Здравствуйте!</span>
-    <br>
-    <br>
-    <span>Уважаемый(ая) {{ person }}, <b>направляем Вам наше комерческое предложение:</b></span>
+    Здравствуйте! Уважаемый(ая) {{ person }}, в ближайшее время наш менеджер свяжется с Вами и уточнит детали вашей заявки.
 </p>
 
-<p>В ближайшее время наш менеджер свяжется с Вами и уточнит детали заказа:</p>
 {% if form.vars.value.person %}
     <span>Ваше имя: </span>
     <span><b>{{ form.vars.value.person }}</b></span>
@@ -40,10 +36,6 @@
 {% if form.vars.value.comment %}
     <span>Сообщение: </span>
     <span><b>{{ form.vars.value.comment }}</b></span>
-    <br>
-{% endif %}
-{% if form.vars.value.files.0 %}
-    <span>Приложения: </span>
     <br>
 {% endif %}
 

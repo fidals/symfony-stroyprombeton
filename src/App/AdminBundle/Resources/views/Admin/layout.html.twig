@@ -3,15 +3,22 @@
 {% block title %}Админка{% endblock %}
 
 {% block headercss %}
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ asset('bundles/main/css/jquery.ui.all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bundles/main/plugins/bootstrap/css/bootstrap-3.3.6.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bundles/main/plugins/font-awesome-4/font-awesome.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bundles/main/plugins/jstree/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('bundles/catalog/plugins/tablegear/stylesheets/tablegear.css') }}">
+  <link rel="stylesheet" href="{{ asset('bundles/admin/css/ekko-lightbox.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
-  <link rel="stylesheet" href="/bundles/main/plugins/font-awesome-4/font-awesome.min.css">
-  <link rel="stylesheet" href="/bundles/main/plugins/jstree/style.css">
-  <link rel="stylesheet" href="/bundles/catalog/plugins/tablegear/stylesheets/tablegear.css">
-  <link rel="stylesheet" href="/bundles/main/plugins/summernote/summernote.css">
-  <link rel="stylesheet" href="/bundles/admin/css/admin.css">
-  <link rel="stylesheet" href="/bundles/admin/css/ekko-lightbox.min.css">
+  <link rel="stylesheet" href="{{ asset('bundles/admin/css/admin.css') }}">
+{% endblock %}
+
+{% block headerjs %}
+  <script src="http://yandex.st/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.core.min.js"></script>
+  <script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.widget.min.js"></script>
+  <script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.position.min.js"></script>
+  <script src="http://yandex.st/jquery-ui/1.8.23/jquery.ui.autocomplete.min.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -66,7 +73,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Выйти из админки?</h4>
           </div>
           <div class="modal-footer">
@@ -90,12 +98,14 @@
 {% endblock %}
 
 {% block footerjs %}
-  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-  <script src="/bundles/main/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/bundles/main/plugins/jstree/jstree.min.js"></script>
-  <script src="/bundles/main/plugins/jquery.slimscroll.js"></script>
-  <script src="/bundles/main/plugins/bootstrap.file-input.js"></script>
-  <script src="/bundles/admin/js/ekko-lightbox.min.js"></script>
-  <script src="/bundles/admin/js/admin.js"></script>
+  <script src="{{ asset('bundles/main/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('bundles/main/plugins/jstree/jstree.min.js') }}"></script>
+  <script src="{{ asset('bundles/main/plugins/jquery.slimscroll.js') }}"></script>
+  <script src="{{ asset('bundles/main/plugins/bootstrap.file-input.js') }}"></script>
+  <script src="{{ asset('bundles/admin/js/ekko-lightbox.min.js') }}"></script>
+  <script src="{{ asset('bundles/main/js/jquery.mousewheel.js') }}"></script>
+  <script src="{{ asset('bundles/main/js/jquery.history.js') }}"></script>
+  <script src="{{ asset('bundles/main/js/jquery.jcarousel.min.js') }}"></script>
+  <script src="{{ asset('bundles/admin/js/admin.js') }}"></script>
+  <script src="{{ asset('bundles/main/js/engine-gbi.js') }}"></script>
 {% endblock %}

@@ -5,89 +5,90 @@
 {% set entity_id = form.vars.value.id ?: null %}
 
 {% block breadcrumbs %}
-	<div class="header-links navbar-left">
-		<ol class="header-links-breadcrumbs breadcrumb">
-			<li><a href="{{ path('admin_index') }}">Dashboard</a></li>
-			<li><a href="{{ path('admin_category_list') }}">CategoryList</a></li>
-			<li class="active">{{ form.vars.value.name ?: 'Новая категория' }}</li>
-		</ol>
+  <div class="header-links navbar-left">
+    <ol class="header-links-breadcrumbs breadcrumb">
+      <li><a href="{{ path('admin_index') }}">Dashboard</a></li>
+      <li><a href="{{ path('admin_category_list') }}">CategoryList</a></li>
+      <li class="active">{{ form.vars.value.name ?: 'Новая категория' }}</li>
+    </ol>
 
 		<span class="header-entity-link">
 			{% if form.vars.value.id %}
-				Ссылка на сущность: <a href="{{ path('app_catalog_category', {'id': form.vars.value.id }) }}" target="_blank">{{ path('app_catalog_category', {'id': form.vars.value.id }) }}</a>
-			{% endif %}
+        Ссылка на сущность: <a href="{{ path('app_catalog_category', {'id': form.vars.value.id }) }}"
+                               target="_blank">{{ path('app_catalog_category', {'id': form.vars.value.id }) }}</a>
+      {% endif %}
 		</span>
-	</div>
+  </div>
 {% endblock %}
 
 {% block main_properties %}
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-addon">Название</div>
-			{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">Название</div>
+      {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
 
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-addon">ID</div>
-			{{ form_widget(form.id, {'attr': {'class': 'form-control'}}) }}
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">ID</div>
+      {{ form_widget(form.id, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
 
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-addon">Mark</div>
-			{{ form_widget(form.mark, {'attr': {'class': 'form-control'}}) }}
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">Mark</div>
+      {{ form_widget(form.mark, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
 
-	<div class="form-group">
-		<div class="checkbox">
-			<label>
-				{{ form_widget(form.isTextPublished) }} Текст опубликован
-			</label>
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="checkbox">
+      <label>
+        {{ form_widget(form.isTextPublished) }} Текст опубликован
+      </label>
+    </div>
+  </div>
 {% endblock %}
 
 {% block additional_properties %}
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-addon">LinkToStkMetal</div>
-			{{ form_widget(form.linkToStkMetal, {'attr': {'class': 'form-control'}}) }}
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">LinkToStkMetal</div>
+      {{ form_widget(form.linkToStkMetal, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
 
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-addon">Ord</div>
-			{{ form_widget(form.ord, {'attr': {'class': 'form-control'}}) }}
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">Ord</div>
+      {{ form_widget(form.ord, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
 
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-addon">Родитель</div>
-			{{ form_widget(form.parent, {'attr': {'class': 'form-control'}}) }}
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">Родитель</div>
+      {{ form_widget(form.parent, {'attr': {'class': 'form-control js-autocomplete js-autocomplete-type-value'}}) }}
+    </div>
+  </div>
 
-	<div class="btn-wrapper">
-		<a href="{{ path('admin_category_edit') }}" target="_blank">
-			<button class="btn btn-primary" type="button">Добавить новый</button>
-		</a>
-	</div>
+  <div class="btn-wrapper">
+    <a href="{{ path('admin_category_edit') }}" target="_blank">
+      <button class="btn btn-primary" type="button">Добавить новый</button>
+    </a>
+  </div>
 {% endblock %}
 
 {% block delete_modal %}
-	{% if form.vars.value.id %}
-		<h3 class="text-center">Вы действительно хотите удалить {{ form.vars.value.name }}?</h3>
-		<div>
-			<a href="{{ path('admin_category_delete', {'id': form.vars.value.id }) }}">
-				<button class="modal-delete btn btn-danger js-modal-delete">Удалить</button>
-			</a>
-			<button class="modal-delete-cancel btn btn-primary js-modal-delete-cancel">Отменить</button>
-		</div>
-	{% endif %}
+  {% if form.vars.value.id %}
+    <h3 class="text-center">Вы действительно хотите удалить {{ form.vars.value.name }}?</h3>
+    <div>
+      <a href="{{ path('admin_category_delete', {'id': form.vars.value.id }) }}">
+        <button class="modal-delete btn btn-danger js-modal-delete">Удалить</button>
+      </a>
+      <button class="modal-delete-cancel btn btn-primary js-modal-delete-cancel">Отменить</button>
+    </div>
+  {% endif %}
 {% endblock %}

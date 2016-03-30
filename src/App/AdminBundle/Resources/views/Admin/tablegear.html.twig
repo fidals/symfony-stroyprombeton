@@ -2,6 +2,13 @@
 
 {% block title %}Админка | Табличный редактор{% endblock %}
 
+{% block headerjs %}
+  {{ parent() }}
+
+  <script src="{{ asset('bundles/catalog/plugins/tablegear/javascripts/TableGear1.6.1-jQuery.js') }}"></script>
+  <script src="{{ asset('bundles/catalog/plugins/tablegear/javascripts/tablegear-jquery_bootstrap.js') }}"></script>
+{% endblock %}
+
 {% block admin_breadcrumbs %}
   <div class="header-links navbar-left">
     <ol class="header-links-breadcrumbs breadcrumb">
@@ -16,7 +23,5 @@
 {% block footerjs %}
   {{ parent() }}
 
-  <script src="{{ asset('bundles/catalog/plugins/tablegear/javascripts/TableGear1.6.1-jQuery.js') }}"></script>
-  <script src="{{ asset('bundles/catalog/plugins/tablegear/javascripts/tablegear-jquery_bootstrap.js') }}"></script>
   <script src="{{ asset('bundles/admin/js/tableGear.js') }}"></script>
 {% endblock %}

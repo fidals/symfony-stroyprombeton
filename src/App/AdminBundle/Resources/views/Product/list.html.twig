@@ -71,7 +71,7 @@
                 <a href="{{ path('admin_product_edit', {'id': product.id}) }}">{{ product.name }}</a>
             </td>
       <td class="table-cell">
-        <a class="item-link" href="#">
+        <a class="item-link" href="{{ path('admin_category_edit', {'id': product.category.id}) }}">
           {{ product.category.name }}
         </a>
       </td>

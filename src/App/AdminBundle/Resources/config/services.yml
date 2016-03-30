@@ -1,4 +1,16 @@
 services:
+  app.form.type.category:
+    class: App\AdminBundle\Form\CategoryType
+    arguments: ["@doctrine.orm.entity_manager"]
+    tags:
+        - { name: form.type }
+
+  app.form.type.product:
+    class: App\AdminBundle\Form\ProductType
+    arguments: ["@doctrine.orm.entity_manager"]
+    tags:
+        - { name: form.type }
+
   std.symfony_finder:
     class: Symfony\Component\Finder\Finder
     public: false

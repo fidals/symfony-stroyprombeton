@@ -83,14 +83,12 @@ $(function () {
       'core': {
         'data': {
           'url': function (node) {
-            return node.id === '#' ?
-              '/buildCategoryTree/' :
-              '/getTreeProducts/';
+            return node.id === '#' ? '/build-category-tree/' : '/get-tree-products/';
           },
 
           'dataType': 'json',
           'data': function (node) {
-            return {'id': node.id};
+            return { 'id': node.id };
           },
         },
         'check_callback': true,
@@ -184,7 +182,7 @@ $(function () {
    * Инициализируем плагин полосы прокрутки.
    */
   function initializeSlimScroll() {
-    $sideBar.slimScroll({
+    $treeTarget.slimScroll({
       destroy: true,
     });
 
@@ -250,4 +248,20 @@ $(function () {
   });
 
   deleteConfirmationModal.init();
+
+  // Toggle SEO section:
+  var seoSectionState = parseInt(localStorage.getItem('closedSEO'));
+  var $toggleTrigger = $('.js-toggle-trigger');
+
+  if (!seoSectionState) {
+    $('.js-toggle-target').slideDown('200');
+    $toggleTrigger.addClass('active');
+  }
+
+  $toggleTrigger.on('click', function () {
+    $(this).toggleClass('active')
+      .next().slideToggle();
+
+    localStorage.setItem('closedSEO', seoSectionState ? 0 : 1);
+  });
 });

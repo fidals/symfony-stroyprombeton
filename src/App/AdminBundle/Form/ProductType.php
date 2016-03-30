@@ -1,28 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: egor
- * Date: 10.02.16
- * Time: 12:54.
- */
 namespace App\AdminBundle\Form;
 
+use App\AdminBundle\Form\DataTransformer\ParentTransformer;
+use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class ProductType.
  */
 class ProductType extends AbstractType
 {
+    private $entityManager;
+
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -52,20 +55,16 @@ class ProductType extends AbstractType
             ->add('diameterIn', NumberType::class, array('required' => false))
             ->add('diameterOut', NumberType::class, array('required' => false))
             ->add('mark', TextType::class)
-            ->add('category', EntityType::class, array(
-                'class' => 'AppMainBundle:Category',
-                'choice_label' => function ($category) {
-                    $categoryName = $category->getH1();
-                    return (strlen($categoryName) > 25) ? mb_strimwidth($categoryName, 0, 28, "...") : $categoryName;
-                },
-            ))
+            ->add('category', TextType::class, array('required' => true))
             ->add('title', TextType::class, array('required' => false))
             ->add('isActive', CheckboxType::class, array('required' => false))
             ->add('H1', TextType::class, array('required' => false))
             ->add('keywords', TextType::class, array('required' => false))
             ->add('description', TextType::class, array('required' => false))
             ->add('save', SubmitType::class)
-            ->add('delete', ButtonType::class)
-        ;
+            ->add('delete', ButtonType::class);
+
+        $builder->get('category')
+            ->addModelTransformer(new ParentTransformer($this->entityManager));
     }
 }

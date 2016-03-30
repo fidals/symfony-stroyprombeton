@@ -1,3 +1,26 @@
+.autocomplete-anchor {
+    border: 1px solid transparent;
+    margin: 0 !important;
+}
+
+.autocomplete-pretext {
+    color: #808080;
+}
+
+.autocomplete-show-all {
+    color: #C90000 !important;
+}
+
+.ui-autocomplete {
+    max-height: 450px;
+    overflow-y: auto !important;
+    z-index: 999 !important;
+}
+
+.ui-widget {
+    font-size: 14px !important;
+}
+
 html > body div.page {
     height: auto;
     min-height: 100%;
@@ -347,6 +370,25 @@ ul {
     border: none !important;
 }
 
+.toggle-section {
+    display: none;
+}
+
+.toggle-block {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.toggle-block .fa {
+    -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+}
+
+.toggle-block.active .fa {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+}
+
 .control-label {
     font-weight: 400;
 }
@@ -687,6 +729,7 @@ td {
 
 @media screen and (max-width: 1400px) {
     .sidebar,
+    .sidebar-links,
     .header-logo {
         width: 350px;
     }
@@ -713,21 +756,21 @@ td {
 }
 
 @media (min-width: 1600px) {
-    .form-entity > div {
-        border-right: 1px solid #EEE;
-        flex-grow:1;
-        flex-basis: 0;
-        margin-right: 21px;
-        padding-right: 20px;
-    }
-
     .header-links-breadcrumbs {
         float: left;
         margin: 0 20px 0 0;
     }
 
-    .form-entity {
+    .all-chars-wrapper {
         display: flex;
+    }
+
+    .all-chars-wrapper > div {
+        border-right: 1px solid #EEE;
+        flex-grow: 1;
+        flex-basis: 0;
+        margin: 0 21px 30px 0;
+        padding-right: 20px;
     }
 }
 
