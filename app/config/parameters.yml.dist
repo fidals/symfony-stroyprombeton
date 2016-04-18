@@ -13,8 +13,8 @@ parameters:
     locale:            ru
     base_url:          www.stroyprombeton.ru
     email_order:       order@stroyprombeton.ru
-    email_info:        inf2o@stroyprombeton.ru
-    email_as:          as@stkmail.ru
+    email_info:        info@stroyprombeton.ru
+    email_as:          as@stkmail.ruсек
     stb_phone_01:      '8 (812) 655-73-60'
     stb_phone_link_01: 'tel:+78126557360'
     stb_phone_02:      '8 (812) 655-72-95'

@@ -104,9 +104,9 @@ class CatalogController extends Controller
         $page = $request->get('page', 1);
         $limit = 150;
 
-		if (empty($condition)) {
-			return new Response();
-		}
+        if (empty($condition)) {
+            return new Response();
+        }
 
         $searchResults = $this->get('catalog.search')->search($condition, $limit * $page);
 

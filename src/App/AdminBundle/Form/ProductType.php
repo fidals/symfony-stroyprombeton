@@ -38,7 +38,7 @@ class ProductType extends AbstractType
             ->add('introtext', TextType::class, array('required' => false))
             ->add('isTextPublished', CheckboxType::class, array('required' => false))
             ->add('text', CKEditorType::class, array('required' => false, 'config_name' => 'standard'))
-            ->add('price', NumberType::class)
+            ->add('price', NumberType::class, array('required' => false))
             ->add('datePriceUpdated', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
